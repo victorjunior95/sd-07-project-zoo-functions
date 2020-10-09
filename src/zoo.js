@@ -70,8 +70,25 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push(newGuy);
 }
 
+const namesReducer = (acc, currAnimal) => acc.concat(currAnimal.name);
+const popReducer = (acc, currAnimal) => acc.concat(currAnimal.residents.length);
+
+function createAnimalsObj() {
+  const returnedObj = {};
+  const animalsNames = data.animals.reduce(namesReducer, []);
+  const animalspopulation = data.animals.reduce(popReducer, []);
+  for (index = 0; index < animalsNames.length; index += 1) {
+    returnedObj[animalsNames[index]] = animalspopulation[index];
+  }
+  return returnedObj;
+}
+
 function animalCount(species) {
-  // seu código aqui
+  const animalsObj = createAnimalsObj();
+  if (species) {
+    return animalsObj[species];
+  }
+  return animalsObj;
 }
 
 function entryCalculator(entrants) {
