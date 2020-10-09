@@ -122,8 +122,14 @@ function oldestFromFirstSpecies(id) {
   return [name, sex, age];
 }
 
+const twoDecimalPlaces = (value, percent) => Math.round(value * percent * 100) / 100;
+
 function increasePrices(percentage) {
-  // seu código aqui
+  const { Adult, Senior, Child } = data.prices;
+  const percent = 1 + (percentage / 100);
+  data.prices.Adult = parseFloat(twoDecimalPlaces(Adult, percent));
+  data.prices.Senior = parseFloat(twoDecimalPlaces(Senior, percent));
+  data.prices.Child = parseFloat(twoDecimalPlaces(Child, percent));
 }
 
 function employeeCoverage(idOrName) {
