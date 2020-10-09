@@ -13,8 +13,8 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   const out = [];
-  ids.forEach((element) => {
-    out.push(data.animals.find((animal) => animal.id === element));
+  ids.forEach(element => {
+    out.push(data.animals.find(animal => animal.id === element));
   });
   return out;
 }
@@ -26,8 +26,13 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  const out = {}
-  Object.assign(out, data.employees.find(employee => employee.firstName === employeeName || employee.lastName === employeeName));
+  const out = {};
+  Object.assign(
+    out,
+    data.employees.find(
+      employee => employee.firstName === employeeName || employee.lastName === employeeName
+    )
+  );
   return out;
 }
 
