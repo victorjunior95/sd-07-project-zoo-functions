@@ -77,8 +77,12 @@ function animalCount(species) {
     .reduce((acc, { name, residents }) => ({ ...acc, [name]: residents.length }), {});
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(entries = {}) {
+  if (Object.keys(entries).length) {
+    return Object.entries(entries)
+      .reduce((acc, [key, value]) => (acc += data.prices[key] * value), 0);
+  }
+  return 0;
 }
 
 function animalMap(options) {
