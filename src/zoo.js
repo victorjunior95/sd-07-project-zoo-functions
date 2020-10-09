@@ -13,15 +13,8 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  const idsa = [...ids];
-  const scanId = [];
-  for (let animal = 0; animal < animals.length; animal += 1) {
-    for (let id = 0; id < idsa.length; id += 1) {
-      if (animals[animal].id === idsa[id]) {
-        scanId.push(animals[animal]);
-      }
-    }
-  }
+  const id = [...ids];
+  const scanId = animals.filter((animal) => animal.id === id[0] || animal.id === id[1]);
   return scanId;
 }
 
