@@ -12,11 +12,10 @@ eslint no-unused-vars: [
 const data = require("./data");
 
 function animalsByIds(...ids) {
-  let out = [];
-  for (let i in ids) {
-    console.log(ids[i]);
-    out.push(data.animals.find((element) => element.id === ids[i]));
-  }
+  const out = [];
+  ids.forEach((element) => {
+    out.push(data.animals.find((animal) => animal.id === element));
+  });
   return out;
 }
 
