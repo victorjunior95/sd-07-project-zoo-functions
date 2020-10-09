@@ -32,19 +32,31 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  let manager = false;
-  console.log(data.employees);
-  data.employees.map(element => element.managers.map((director) => {
-    if (director === id) {
-      manager = true;
-      return true;
-    }
-    return false;
-  }));
-  return manager;
+  return data.employees.some(element => element.managers.some(director => director === id));
 }
+
+function manager(managers) {
+  if (managers === undefined) return [];
+  return managers;
+}
+
+function responsible(responsibleFor) {
+  if (responsibleFor === undefined) return [];
+  return responsibleFor;
+}
+
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  const manager2 = manager(managers);
+  const responsible2 = responsible(responsibleFor);
+  const employee =
+    {
+      id,
+      firstName,
+      lastName,
+      managers: manager2,
+      responsibleFor: responsible2,
+    };
+  data.employees.push(employee);
 }
 
 function animalCount(species) {
