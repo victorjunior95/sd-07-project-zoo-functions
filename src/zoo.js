@@ -1,4 +1,5 @@
-const { animals } = require('./data');
+// const { animals } = require('./data'); lembrar de usar depois ?
+
 /*
 eslint no-unused-vars: [
   "error",
@@ -13,8 +14,8 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  if(typeof id === undefined) return []
-  return data['animals'].filter((busca, indice) => busca['id'] == ids[indice])
+  if (typeof id === undefined) return [];
+  return data.animals.filter((busca, indice) => busca.id === ids[indice]);
 }
 
 function animalsOlderThan(animal, age) {
@@ -80,5 +81,3 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
-
-console.log(animalsByIds(data.animals))
