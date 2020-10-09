@@ -40,7 +40,10 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const { firstName, id, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  const newEmployee = { firstName, id, lastName, managers, responsibleFor };
+  return newEmployee;
 }
 
 function isManager(id) {
