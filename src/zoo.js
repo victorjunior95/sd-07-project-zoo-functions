@@ -46,16 +46,12 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  let result;
-  const verify = (iten) => {
-    result = id.every(idsVerify => idsVerify === iten);
-  };
-  data.employees.id.forEach(verify);
-  return result;
+  return data.employees.some(person => person.managers.includes(id));
 }
 
+
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+
 }
 
 function animalCount(species) {
