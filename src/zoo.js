@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees } = data;
+const { animals, employees, prices } = data;
 
 function animalsByIds(...ids) {
   const resp = [];
@@ -77,13 +77,68 @@ function animalCount(species) {
 
   return animalsAmount;
 }
-function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(entrants = 0) {
+  const { Adult = false, Child = false, Senior = false } = entrants;
+  return Adult || Child || Senior
+    ? Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior
+    : 0;
+}
+console.log(entryCalculator({}));
+//-------------------------------------------------------------------------------------
+function filterAnimals(region) {
+  return animals.filter((animal) => animal.location === region);
 }
 
-function animalMap(options) {
-  // seu código aqui
+function defaultInput(region) {
+  return filterAnimals(region).map((animal) => animal.name);
 }
+function residentsInput(region) {
+  const fn = filterAnimals(region);
+  const resp = [];
+  fn.forEach((animal) => {
+    resp.push({ [animal.name]: animal.residents.map(({ name }) => name) });
+  });
+  return resp;
+}
+
+function residentsSortInput(region) {
+  const fn = filterAnimals(region);
+  const resp = [];
+  fn.forEach((animal) => {
+    const arr = animal.residents.map(({ name }) => name);
+    resp.push({ [animal.name]: arr.sort() });
+  });
+  return resp;
+}
+
+function animalMap({ includeNames = false, sorted = false }) {
+  let objResp = {
+    NE: defaultInput('NE'),
+    NW: defaultInput('NW'),
+    SE: defaultInput('SE'),
+    SW: defaultInput('SW'),
+  };
+
+  if (includeNames) {
+    objResp = {
+      NE: residentsInput('NE'),
+      NW: residentsInput('NW'),
+      SE: residentsInput('SE'),
+      SW: residentsInput('SW'),
+    };
+  }
+  if (includeNames && sorted) {
+    objResp = {
+      NE: residentsSortInput('NE'),
+      NW: residentsSortInput('NW'),
+      SE: residentsSortInput('SE'),
+      SW: residentsSortInput('SW'),
+    };
+  }
+  return objResp;
+}
+//console.log(animalMap({ includeNames: true, sorted: true }));
+//-------------------------------------------------------------------------------------
 
 function schedule(dayName) {
   // seu código aqui
