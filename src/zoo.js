@@ -44,7 +44,7 @@ function employeeByName(employeeName) {
   }
 }
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+
 }
 
 function isManager(id) {
