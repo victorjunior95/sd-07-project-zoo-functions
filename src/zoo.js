@@ -22,7 +22,9 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const thisBuddy = animals.find(an => an.name === animal);
+  const oldBuddy = thisBuddy.residents.every(they => they.age > age);
+  return oldBuddy;
 }
 
 function employeeByName(employeeName) {
