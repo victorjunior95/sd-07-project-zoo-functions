@@ -30,11 +30,12 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return ({...personalInfo, ...associatedWith});
+  return ({ ...personalInfo, ...associatedWith });
 }
 
 function isManager(id) {
-  // seu código aqui
+  const getId = (data.employees.map(item => item.managers)).flat();
+  return getId.some(item => item === id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
