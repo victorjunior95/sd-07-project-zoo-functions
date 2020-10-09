@@ -12,10 +12,10 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(ids) {
+function animalsByIds(...ids) {
     let arr = [];
-    let idAnimals = animals.filter(animals => (
-        animals.id === ids));
+    let idAnimals = animals.filter((animals, i) => (
+        animals.id === ids[i]));
     if (idAnimals !== undefined) {
         arr = (idAnimals);
     }
