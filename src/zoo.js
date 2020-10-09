@@ -41,11 +41,12 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
 }
 
 function isManager(id) {
-  // seu código aqui
+  const managerIds = employees.map(currentEmployee => currentEmployee.managers).flat();
+  return managerIds.some(currentId => currentId === id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+
 }
 
 function animalCount(species) {
