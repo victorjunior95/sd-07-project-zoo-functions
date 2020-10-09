@@ -18,11 +18,11 @@ function animalsByIds(...ids) {
   return ids.map(id => data.animals.find(animal => animal.id === id));
 }
 
-function animalsOlderThan(name, age) {
+function animalsOlderThan(name, minimalAge) {
   return data.animals
     .find(animal => animal.name === name)
     .residents.reduce(
-      (allIsOlder, { age: animalAge }) => allIsOlder && animalAge > age, true,
+      (allIsOlder, { age }) => allIsOlder && age > minimalAge, true,
     );
 }
 
