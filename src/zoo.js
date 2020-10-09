@@ -27,9 +27,7 @@ function employeeByName(employeeName) {
   const out = {};
   Object.assign(
     out,
-    data.employees.find(
-      employee => employee.firstName === employeeName || employee.lastName === employeeName,
-    ),
+    data.employees.find(employee => employee.firstName === employeeName || employee.lastName === employeeName)
   );
   return out;
 }
@@ -39,7 +37,7 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
 }
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some(employee => employee.managers.some(manager => manager === id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
