@@ -61,7 +61,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   if (responsibleFor === undefined) {
     responsibleFor = [];
   }
-  data.employees.push(createEmployee({id, firstName, lastName}, {managers, responsibleFor}));
+  data.employees.push(createEmployee({ id, firstName, lastName }, { managers, responsibleFor }));
 }
 
 function animalCount(species) {
