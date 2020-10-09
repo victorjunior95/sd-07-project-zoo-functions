@@ -9,18 +9,31 @@ eslint no-unused-vars: [
 ]
 */
 
+// Funcao animalsByIds: Para implementar esta funcao, consultei o repositorio do colega Ygor Fonseca.
+
+const { animals, employees } = require('./data');
 const data = require('./data');
 
-function animalsByIds(ids) {
-  // seu código aqui
+function animalsByIds(...ids) {
+  const animalsId = [];
+  ids.forEach((id) => {
+    animalsId.push(animals.find(animal => animal.id === id));
+  });
+  return animalsId;
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  return animals.find(specie => specie.name === animal).residents.every(resident => resident.age > age);
 }
 
+// Funcao animalsByIds: Para implementar esta funcao, consultei o repositorio do colega Pedro Marques.
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) {
+    return {};
+  }
+  
+  return employees.find(({firstName, lastName}) => firstName === employeeName || lastName === employeeName);
+
 }
 
 function createEmployee(personalInfo, associatedWith) {
