@@ -9,10 +9,13 @@ eslint no-unused-vars: [
 ]
 */
 
+
+const { TestScheduler } = require('jest');
 const data = require('./data');
 
-function animalsByIds(ids) {
 
+function animalsByIds(...ids) {
+  return data.animals.filter((animal) => ids.includes(animal.id));
 }
 
 function animalsOlderThan(animal, age) {
