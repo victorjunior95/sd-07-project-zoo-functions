@@ -8,7 +8,7 @@ eslint no-unused-vars: [
   }
 ]
 */
-
+// só pra dizer que logo, logo estaremos começando o zoo functions.
 const data = require('./data');
 
 function animalsByIds(ids) {
