@@ -29,11 +29,15 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const { firstName, id, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return { firstName, id, lastName, managers, responsibleFor };
 }
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some(
+    (employee) => employee.id === id && employee.responsibleFor.length >= 4
+  );
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
