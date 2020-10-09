@@ -8,12 +8,20 @@ eslint no-unused-vars: [
   }
 ]
 */
-// só pra dizer que logo, logo estaremos começando o zoo functions.
+
 const data = require('./data');
 
-function animalsByIds(ids) {
-  // seu código aqui
+function animalsByIds(...ids) {
+  if (ids === undefined) { return []; }
+  const result = data.animals.filter(element => ids.find((item) => {
+    if (element.id === item) {
+      return element;
+    }
+  }));
+  return result;
 }
+
+console.log(animalsByIds());
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
