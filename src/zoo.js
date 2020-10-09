@@ -14,9 +14,7 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   const paramIds = ids.map((id) => {
-    const comparingIds = animals.find((animalById) => {
-      return animalById.id === id;
-    }, []);
+    const comparingIds = animals.find((animalById) => animalById.id === id);
     return comparingIds;
   });
   return paramIds;
@@ -35,9 +33,7 @@ function employeeByName(employeeName) {
     if (employeeName === undefined) {
       return {};
     }
-    const allemployeeInfos = data.employees.find(infosEmployee => {
-      return infosEmployee.firstName === employeeName || infosEmployee.lastName === employeeName;
-    });
+    const allemployeeInfos = data.employees.find(infosEmployee => infosEmployee.firstName === employeeName || infosEmployee.lastName === employeeName);
     return allemployeeInfos;
   }
   return conditions();
