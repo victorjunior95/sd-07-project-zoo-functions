@@ -12,9 +12,7 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  const allByIds = data.animals.filter(({ id: animalId }) => {
-    return ids.find((id) => id === animalId);
-  });
+  const allByIds = data.animals.filter(({ id: animalId }) => ids.find(id => id === animalId));
 
   return ids ? allByIds : [];
 }
