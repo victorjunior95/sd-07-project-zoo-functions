@@ -28,19 +28,19 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return { ...personalInfo, ...associatedWith }
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
-  
+  return employees.some(maneger => maneger.managers.includes(id))
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  
+  // seu código aqui
 }
 
 function animalCount(species) {
-  
+  // seu código aqui
 }
 
 function entryCalculator(entrants) {
