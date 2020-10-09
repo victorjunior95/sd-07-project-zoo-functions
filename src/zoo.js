@@ -43,8 +43,13 @@ function createEmployee(personalInfo, associatedWith) {
   return Object.assign(personalInfo, associatedWith);
 }
 
+// Funcao isManager:
+// Para implementar esta funcao, consultei o repositorio do colega Pedro Marques.
 function isManager(id) {
-  // seu código aqui
+  return employees.some(({ managers }) => {
+    managers.includes(id);
+    return managers.includes(id);
+  });
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
