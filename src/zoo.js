@@ -55,7 +55,9 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+    // seu código aqui
+  const gerente = data.employees.filter(item => item.managers.includes(id));
+  return (gerente.length > 0);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
