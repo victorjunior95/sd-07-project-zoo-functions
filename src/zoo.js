@@ -100,9 +100,13 @@ function entryCalculator(entrants) {
 
 //   // - Com a opção `includeNames: true` especificada, retorna nomes de animais
 //   // - Com a opção `sorted: true` especificada, retorna nomes de animais ordenados
-//   // - Com a opção `sex: 'female'` ou `sex: 'male'` especificada, retorna somente nomes de animais macho/fêmea
-//   // - Com a opção `sex: 'female'` ou `sex: 'male'` especificada e a opção `sort: true` especificada, retorna somente nomes de animais macho/fêmea com os nomes dos animais ordenados
-//   // - Só retorna informações ordenadas e com sexo se a opção `includeNames: true` for especificada
+//   // - Com a opção `sex: 'female'` ou `sex: 'male'` especificada,
+// retorna somente nomes de animais macho/fêmea
+//   // - Com a opção `sex: 'female'` ou `sex: 'male'` especificada e
+// a opção `sort: true` especificada, retorna somente nomes de animais macho/fêmea
+// com os nomes dos animais ordenados
+//   // - Só retorna informações ordenadas e com sexo se a opção `includeNames: true` for
+// especificada
 //   const local = {
 //     NE: [],
 //     NW: [],
@@ -124,7 +128,7 @@ function entryCalculator(entrants) {
 //       let item ={}
 //       item[animal.name] = animal.residents
 //       .filter((sexo) => {if (sex !== undefined) {return (sexo.sex === 'male')} return true})
-//       .filter((sexo) => {if (sex !== undefined) {return (sexo.sex === 'female')}return true}) 
+//       .filter((sexo) => {if (sex !== undefined) {return (sexo.sex === 'female')}return true})
 //       .map (um => um.name)
 //       console.log(item)
 //       local[animal.location].push(item);
@@ -136,10 +140,10 @@ function entryCalculator(entrants) {
 //     data.animals.forEach((animal) => {
 //       let item ={}
 //       item[animal.name] = animal.residents
-//       // .filter((sexo) => { if (sex !== undefined) {return (sexo.sex === 'male')} return true })
-//       // .filter((sexo) => { if (sex !== undefined) {return (sexo.sex === 'female')}return true }) 
-//       // .map (um => um.name)
-//       // .sort()
+// // .filter((sexo) => { if (sex !== undefined) {return (sexo.sex === 'male')} return true })
+// // .filter((sexo) => { if (sex !== undefined) {return (sexo.sex === 'female')}return true})
+// // .map (um => um.name)
+// // .sort()
 //       local[animal.location].push(item);
 //     })
 //     return local;
@@ -167,7 +171,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
