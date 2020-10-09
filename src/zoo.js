@@ -16,7 +16,7 @@ function animalsByIds(...ids) {
   if (typeof ids === 'undefined') {
     return [];
   }
-  const animalId = data.animals.filter( (animal) => { return animal.id === `${ids}`; } );
+  const animalId = data.animals.filter((animal) => animal.id === `${ids}`);
   return animalId;
 }
 
