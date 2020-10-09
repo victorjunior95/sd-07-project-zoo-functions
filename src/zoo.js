@@ -1,10 +1,10 @@
 /*
 eslint no-unused-vars: [
-  "error",
+  'error',
   {
-    "args": "none",
-    "vars": "local",
-    "varsIgnorePattern": "data"
+    'args': 'none',
+    'vars': 'local',
+    'varsIgnorePattern': 'data'
   }
 ]
 */
@@ -18,8 +18,12 @@ function animalsByIds(...ids) {
   return ids.map(id => data.animals.find(animal => animal.id === id));
 }
 
-function animalsOlderThan(animal, age) {
-  // seu código aqui
+function animalsOlderThan(name, age) {
+  return data.animals
+    .find(animal => animal.name === name)
+    .residents.reduce(
+      (allIsOlder, { age: animalAge }) => allIsOlder && animalAge > age, true
+    );
 }
 
 function employeeByName(employeeName) {
