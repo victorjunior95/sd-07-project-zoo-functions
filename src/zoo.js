@@ -29,9 +29,9 @@ function animalsOlderThan(animal, age) {
   // seu código aqui
   const animalList = data.animals.find(element => element.name === animal).residents;
 
-  const ageCheck = animalList.reduce((acc, currentValue) => currentValue.age < age ? acc + 1 : acc, 0);
+  const ageVer = animalList.reduce((acc, curr) => curr.age < age ? acc + 1 : acc, 0);
 
-  if (ageCheck > 0) {
+  if (ageVer > 0) {
     return false;
   }
 
