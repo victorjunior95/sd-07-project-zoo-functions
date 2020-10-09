@@ -16,8 +16,8 @@ function animalsByIds(...ids) {
   if (typeof ids === 'undefined') {
     return [];
   }
-  const animal = data.animals.filter((animal) => {return animal.id === `${ids}`});
-  return animal;
+  const animalId = data.animals.filter( (animal) => { return animal.id === `${ids}`; } );
+  return animalId;
 }
 
 function animalsOlderThan(animal, age) {
