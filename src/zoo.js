@@ -42,7 +42,13 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  if (data.employees
+    .find(({ managers }) =>
+      managers
+      .find(managersId => managersId === id) !== undefined)) {
+    return true;
+  }
+  return false;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
