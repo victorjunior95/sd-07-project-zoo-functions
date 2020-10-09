@@ -13,12 +13,14 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   if (ids === undefined) { return []; }
-  const result = data.animals.filter(element => ids.find((item) => {
-    if (element.id === item) {
-      return element;
-    }
-  }));
-  return result;
+  return ids.map(id => data.animals.find(animal => animal.id === id));
+  // const result = data.animals.filter(element => ids.find((item) => {
+  //   // if (element.id === item) {
+  //   //   return element;
+  //   // }
+  //   // return undefined;
+  //   return element.id === item;
+  // }));
 }
 
 console.log(animalsByIds());
