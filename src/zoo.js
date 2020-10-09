@@ -23,7 +23,7 @@ function animalsOlderThan(animal, age) {
   const result = animalsList.filter((age) => animals.age > 5);
   return filterByIds;
 }
-}
+
 
 function employeeByName(employeeName) {
   // seu código aqui
