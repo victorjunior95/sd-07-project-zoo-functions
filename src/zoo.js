@@ -32,9 +32,17 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  let manager = false;
+  console.log(data.employees);
+  data.employees.map(element => element.managers.map((director) => {
+    if (director === id) {
+      manager = true;
+      return true;
+    }
+    return false;
+  }));
+  return manager;
 }
-
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
