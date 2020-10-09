@@ -127,13 +127,14 @@ function animalMap(...options) {
     const sw = animals
       .filter(element => element.location === 'SW')
       .map(element => element.name);
-    let obj = {};
+    const obj = {};
     obj.NE = ne;
     obj.NW = nw;
     obj.SE = se;
     obj.SW = sw;
     return obj;
   }
+  return 0;
 }
 
 function schedule(dayName) {
