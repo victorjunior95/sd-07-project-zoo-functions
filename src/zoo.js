@@ -46,7 +46,12 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  let result;
+  const verify = (iten) => {
+    result = id.every(idsVerify => idsVerify === iten);
+  };
+  data.employees.id.forEach(verify);
+  return result;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
