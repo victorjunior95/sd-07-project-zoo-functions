@@ -18,7 +18,7 @@ function animalsByIds(...ids) {
     return [];
   }
   ids.forEach(numRef =>
-    retorno.push(animals.find(animal => animal.id === numRef))
+    retorno.push(animals.find(animal => animal.id === numRef)),
   );
   return retorno;
 }
