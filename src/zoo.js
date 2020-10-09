@@ -72,8 +72,10 @@ function animalCount(species) {
   return animalQuantities;
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(entrants = 0) {
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const totalPrice = (Adult * 49.99) + (Child * 20.99) + (Senior * 24.99);
+  return totalPrice;
 }
 
 function animalMap(options) {
