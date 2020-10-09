@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(...arguments) {
+function animalsByIds(arguments) {
   // seu código aqui
   if (arguments.length === 0) {
     return [];
