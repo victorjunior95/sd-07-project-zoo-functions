@@ -20,7 +20,7 @@ function animalsByIds(...rest) {
     return [];
   }
   rest.forEach((id) => {
-      animalList.push(data.animals.find((element) => element.id === id));
+    animalList.push(data.animals.find(element => element.id === id));
   });
   return animalList;
 }
