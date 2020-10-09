@@ -1,3 +1,4 @@
+const { animals } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -11,8 +12,17 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(ids) {
-  // seu código aqui
+function animalsByIds(...ids) {
+  let animalsList = [];
+  if (ids === []) {
+    animalsList = [];
+  } else {
+    ids.forEach( (id) => {
+      const animalByIdList = data.animals.filter( (animal) => animal.id === id);
+      animalsList = animalsList.concat(animalByIdList);
+    });    
+  }
+  return animalsList;
 }
 
 function animalsOlderThan(animal, age) {
