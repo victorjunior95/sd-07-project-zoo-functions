@@ -13,16 +13,16 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   const out = [];
-  ids.forEach(element => {
-    out.push(data.animals.find(animal => animal.id === element));
+  ids.forEach((element) => {
+    out.push(data.animals.find((animal) => animal.id === element));
   });
   return out;
 }
 
 function animalsOlderThan(animal, age) {
   return data.animals
-    .find(element => element.name === animal)
-    .residents.every(resident => resident.age > age);
+    .find((element) => element.name === animal)
+    .residents.every((resident) => resident.age > age);
 }
 
 function employeeByName(employeeName) {
@@ -30,7 +30,7 @@ function employeeByName(employeeName) {
   Object.assign(
     out,
     data.employees.find(
-      employee => employee.firstName === employeeName || employee.lastName === employeeName
+      (employee) => employee.firstName === employeeName || employee.lastName === employeeName
     )
   );
   return out;
