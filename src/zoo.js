@@ -1,3 +1,4 @@
+const { animals } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -12,7 +13,13 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(ids) {
-  // seu código aqui
+  const animalObj = animals;
+  const arrOfIds = [...ids];
+  const animalsById = arrOfIds.map((id) => {
+    const animalSearch = animalObj.filter(animal => animal.id === id);
+    return animalSearch;
+  });
+  return animalsById;
 }
 
 function animalsOlderThan(animal, age) {
