@@ -1,4 +1,3 @@
-// const { animals } = require('./data'); lembrar de usar depois ?
 
 /*
 eslint no-unused-vars: [
@@ -11,15 +10,19 @@ eslint no-unused-vars: [
 ]
 */
 
+const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  if (typeof id === 'undefined') return [];
-  return data.animals.filter((busca, indice) => busca.id === ids[indice]);
+  if (ids.length === 0) return [];
+  return animals.filter((busca, index) => busca.id === ids[index]);
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+ // return animals.reduce((acc , item) => {
+    // if (item.name === animal)
+      // acc = item.residents.every(anos => anos.age) 
+  // });
 }
 
 function employeeByName(employeeName) {
@@ -27,7 +30,9 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return {...personalInfo , ... associatedWith}
+  // vai criar um objeto, cada um contendo as informaçoes passadas
+  // se tiver n informaçoes iram ser criados n objetos contendo essas informaçoes  
 }
 
 function isManager(id) {
@@ -81,3 +86,4 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
+console.log(animalsOlderThan('otters', 7))
