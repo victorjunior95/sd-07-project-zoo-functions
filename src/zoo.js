@@ -13,8 +13,11 @@ const data = require('./data');
 
 function animalsByIds(ids) {
   // seu código aqui
+  let CatchId = ids ;
+  return comparaPId = data.animals.filter(grupo => grupo.id === CatchId );
+  
 }
-
+console.table(animalsByIds());
 function animalsOlderThan(animal, age) {
   // seu código aqui
 }
