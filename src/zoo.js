@@ -13,6 +13,13 @@ const data = require('./data');
 
 function animalsByIds(ids) {
   // seu código aqui
+  
+  // retornar array vazio caso ids esteja vazio
+  
+  // ao receber um único id retornar animal com este id
+
+  // ao receber mais de um id retornar os animais que têm esses ids
+  
 }
 
 function animalsOlderThan(animal, age) {
