@@ -18,12 +18,13 @@ function animalsByIds(ids) {
 
 // support animalsOlderThan
 const countAnimals = (allResidents, idade) => {
-  return allResidents.reduce((count, { age }) => {
+  const final = allResidents.reduce((count, { age }) => {
     if (age >= idade) {
       count += 1;
     }
     return count;
   }, 0);
+  return final;
 };
 
 function animalsOlderThan(animal, age) {
@@ -34,8 +35,8 @@ function animalsOlderThan(animal, age) {
   if (countAnimals(allResidents, age) === allResidents.length) {
     return true;
   }
-    return false;
-};
+  return false;
+}
 
 
 function employeeByName(employeeName) {
