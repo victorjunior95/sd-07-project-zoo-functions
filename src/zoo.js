@@ -18,8 +18,8 @@ function animalsByIds(ids) {
 
 
 function animalsOlderThan(animal, age) {
-  const findAnimal = data.animals.find((element) => element.name === `${animal}`);
-  return findAnimal.residents.every ((element) => element.age >= age);
+  const findAnimal = data.animals.find(element => element.name === `${animal}`);
+  return findAnimal.residents.every(element => element.age >= age);
 }
 
 function employeeByName(employeeName) {
@@ -31,7 +31,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-
+}
 
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
