@@ -105,18 +105,18 @@ Utilize as novas funcionalidades do ES6 como arrow functions, template literals,
 Antes de começar analise o arquivo `src/data.js`, para ver os dados que serão usados.
 
 ### 1- Implemente a função animalsByIds:
-  - [ ] Caso receba nenhum parâmetro, necessário retornar um array vazio
-  - [ ] Ao receber como parâmetro um único id, retorna os animais com este id
-  - [ ] Ao receber mais de um id, retorna os animais que têm um desses ids
+  - [X] Caso receba nenhum parâmetro, necessário retornar um array vazio
+  - [X] Ao receber como parâmetro um único id, retorna os animais com este id
+  - [X] Ao receber mais de um id, retorna os animais que têm um desses ids
 
 ### 2- Implemente a função animalsOlderThan:
-  - [ ] Ao passar o nome de uma espécie e uma idade, testa se todos os animais desta
+  - [X] Ao passar o nome de uma espécie e uma idade, testa se todos os animais desta
  espécie possuem a idade mínima especificada
 
 ### 3- Implemente a função employeeByName:
-  - [ ] Sem parâmetros, retorna um objeto vazio
-  - [ ] Quando provido o primeiro nome do funcionário, retorna o objeto do funcionário
-  - [ ] Quando provido o último nome do funcionário, retorna o objeto do funcionário
+  - [X] Sem parâmetros, retorna um objeto vazio
+  - [X] Quando provido o primeiro nome do funcionário, retorna o objeto do funcionário
+  - [X] Quando provido o último nome do funcionário, retorna o objeto do funcionário
 
 ### 4- Implemente a função createEmployee:
   - [ ] Cria um novo colaborador a partir de objetos contendo `informações pessoais` e `gerentes e animais gerenciados`.
