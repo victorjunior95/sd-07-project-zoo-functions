@@ -15,7 +15,7 @@ const { animals, employees } = data;
 
 function animalsByIds(...ids) {
   const resp = [];
-  ids.forEach(currentid => {
+  ids.forEach((currentid) => {
     resp.push(animals.find(({ id }) => id === currentid));
   });
   return resp;
@@ -23,18 +23,17 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   const choosedAnimal = animals.find(({ name }) => name === animal);
-  return choosedAnimal.residents.every(obj => obj.age > age);
+  return choosedAnimal.residents.every((obj) => obj.age > age);
 }
-8;
+
 function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
-  } else {
-    return employees.find(
-      ({ firstName, lastName }) =>
-        firstName === employeeName || lastName === employeeName
-    );
   }
+  return employees.find(
+    ({ firstName, lastName }) =>
+      firstName === employeeName || lastName === employeeName
+  );
 }
 
 function createEmployee(personalInfo, associatedWith) {
