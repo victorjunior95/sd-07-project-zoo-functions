@@ -65,9 +65,9 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
     firstName,
     lastName,
     managers,
-    responsibleFor
-  }
-  return newEmployee
+    responsibleFor,
+  };
+  return newEmployee;
 }
 
 function isManager(id) {
