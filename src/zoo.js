@@ -14,8 +14,8 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
     let arr = [];
-    let idAnimals = animals.filter((animals, i) => (
-        animals.id === ids[i]));
+    const idAnimals = animals.filter((zoo, i) => (
+        zoo.id === ids[i]));
     if (idAnimals !== undefined) {
         arr = (idAnimals);
     }
