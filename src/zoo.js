@@ -14,7 +14,7 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   const paramIds = ids.map((id) => {
-    const comparingIds = animals.find( animalById => {
+    const comparingIds = animals.find((animalById) => {
       return animalById.id === id;
     }, []);
     return comparingIds;
@@ -27,15 +27,14 @@ function animalsOlderThan(animal, age) {
     animalParam.name === animal;
     return animalParam;
   });
-  return getingParamAnimal.residents.every( animalsAges => animalsAges.age >= age);
+  return getingParamAnimal.residents.every(animalsAges => animalsAges.age >= age);
 }
 
 function employeeByName(employeeName) {
   function conditions() {
-    // (!employeeName) - 
     if (employeeName === undefined) {
       return {};
-    } 
+    }
     const allemployeeInfos = data.employees.find(infosEmployee => {
       return infosEmployee.firstName === employeeName || infosEmployee.lastName === employeeName;
     });
