@@ -64,9 +64,17 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (species === undefined) {
+    const animalQtds = data.animals.map(({ name, residents }) => {
+      const animal = {};
+      animal[name] = residents.reduce(sum => sum + 1, 0);
+      return animal;
+    });
+    return Object.assign({}, ...animalQtds);
+  }
+  return data.animals.find(({ name }) => name === species).residents.reduce(sum => sum + 1, 0);
 }
-
+console.log(animalCount());
 function entryCalculator(entrants) {
   // seu código aqui
 }
