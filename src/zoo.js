@@ -90,23 +90,27 @@ function animalMap(options) {
   return locationObject;
 }
 
-
-function schedule(dayName) {
-  const keys = Object.keys(data.hours);
+const mountLegibleSchedule = (keys) => {
   const returnObject = {};
-  
   for (let index = 0; index < keys.length; index += 1) {
-    const {open, close} = data.hours[keys[index]];
+    const { open, close } = data.hours[keys[index]];
     if (open === 0 && close === 0) {
       returnObject[keys[index]] = 'CLOSED';
     } else {
       returnObject[keys[index]] = `Open from ${open}am until ${close - 12}pm`;
     }
   }
-  if(dayName === undefined) return returnObject;
+  return returnObject;
+};
+
+function schedule(dayName) {
+  const objectsKeys = Object.keys(data.hours);
+  const scheduleObject = mountLegibleSchedule(objectsKeys);
+
+  if (dayName === undefined) return scheduleObject;
 
   const oneDayObject = {};
-  oneDayObject[dayName] = returnObject[dayName];
+  oneDayObject[dayName] = scheduleObject[dayName];
   return oneDayObject;
 }
 
