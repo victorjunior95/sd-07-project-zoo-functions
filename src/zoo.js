@@ -109,6 +109,24 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   // seu código aqui
+  const { prices } = data;
+  let result = 0;
+  if (entrants === undefined) {
+    return result;
+  }
+  if (entrants.hasOwnProperty('Adult')) {
+    const adultsNumber = entrants.Adult * 49.99;
+    result += adultsNumber;
+  }
+  if (entrants.hasOwnProperty('Senior')) {
+    const seniorsNumber = entrants.Senior * 24.99;
+    result += seniorsNumber;
+  }
+  if (entrants.hasOwnProperty('Child')) {
+    const childsNumber = entrants.Child * 20.99;
+    result += childsNumber;
+  }
+  return result;
 }
 
 function animalMap(options) {
