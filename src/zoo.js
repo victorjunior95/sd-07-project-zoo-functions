@@ -96,55 +96,56 @@ function entryCalculator(entrants) {
   return total;
 }
 
-function animalMap(options) {
+// function animalMap(options) {
 
-  // - Com a opção `includeNames: true` especificada, retorna nomes de animais
-  // - Com a opção `sorted: true` especificada, retorna nomes de animais ordenados
-  // - Com a opção `sex: 'female'` ou `sex: 'male'` especificada, retorna somente nomes de animais macho/fêmea
-  // - Com a opção `sex: 'female'` ou `sex: 'male'` especificada e a opção `sort: true` especificada, retorna somente nomes de animais macho/fêmea com os nomes dos animais ordenados
-  // - Só retorna informações ordenadas e com sexo se a opção `includeNames: true` for especificada
-  const local = {
-    NE: [],
-    NW: [],
-    SE: [],
-    SW: [],
-  };
- console.log ('options entrada' +options)
-  if (options === undefined) {
-     data.animals.forEach((item) => {
-    local[item.location].push(item.name);
-  });
-  return local;
-  }
-  const { includesNames, sorted, sex } = options;
-  console.log ('passou 1')
-  if (includesNames && sorted !== true){
-    console.log ('passou 2')
-    data.animals.forEach((animal) => {
-      let item ={}
-      item[animal.name] = animal.residents
-      .filter((sexo) => {if (sex !== undefined) {return (sexo.sex === 'male')} return true})
-      .filter((sexo) => {if (sex !== undefined) {return (sexo.sex === 'female')}return true}) 
-      .map (um => um.name)
-      local[animal.location].push(item);
-    })
-    console.log(local)
-    return local;
-  } else if (includesNames && sorted){
-    console.log ('passou 3')
-    data.animals.forEach((animal) => {
-      let item ={}
-      item[animal.name] = animal.residents
-      .filter((sexo) => { if (sex !== undefined) {return (sexo.sex === 'male')} return true })
-      .filter((sexo) => { if (sex !== undefined) {return (sexo.sex === 'female')}return true }) 
-      .map (um => um.name)
-      .sort()
-      local[animal.location].push(item);
-    })
-    return local;
-  }
-}
-console.log (animalMap({includesNames: true}))
+//   // - Com a opção `includeNames: true` especificada, retorna nomes de animais
+//   // - Com a opção `sorted: true` especificada, retorna nomes de animais ordenados
+//   // - Com a opção `sex: 'female'` ou `sex: 'male'` especificada, retorna somente nomes de animais macho/fêmea
+//   // - Com a opção `sex: 'female'` ou `sex: 'male'` especificada e a opção `sort: true` especificada, retorna somente nomes de animais macho/fêmea com os nomes dos animais ordenados
+//   // - Só retorna informações ordenadas e com sexo se a opção `includeNames: true` for especificada
+//   const local = {
+//     NE: [],
+//     NW: [],
+//     SE: [],
+//     SW: [],
+//   };
+//  console.log ('options entrada' +options)
+//   if (options === undefined) {
+//      data.animals.forEach((item) => {
+//     local[item.location].push(item.name);
+//   });
+//   return local;
+//   }
+//   const { includesNames, sorted, sex } = options;
+//   console.log ('passou 1')
+//   if (includesNames && sorted !== true){
+//     console.log ('passou 2')
+//     data.animals.forEach((animal) => {
+//       let item ={}
+//       item[animal.name] = animal.residents
+//       .filter((sexo) => {if (sex !== undefined) {return (sexo.sex === 'male')} return true})
+//       .filter((sexo) => {if (sex !== undefined) {return (sexo.sex === 'female')}return true}) 
+//       .map (um => um.name)
+//       console.log(item)
+//       local[animal.location].push(item);
+//     })
+//     console.log(local)
+//     return local;
+//   } else if (includesNames && sorted){
+//     console.log ('passou 3')
+//     data.animals.forEach((animal) => {
+//       let item ={}
+//       item[animal.name] = animal.residents
+//       // .filter((sexo) => { if (sex !== undefined) {return (sexo.sex === 'male')} return true })
+//       // .filter((sexo) => { if (sex !== undefined) {return (sexo.sex === 'female')}return true }) 
+//       // .map (um => um.name)
+//       // .sort()
+//       local[animal.location].push(item);
+//     })
+//     return local;
+//   }
+// }
+// console.log (animalMap({includesNames: true, sex: 'male'}))
 // animalMap({includesNames: true});
 function schedule(dayName) {
   // seu código aqui
