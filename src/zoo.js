@@ -26,13 +26,17 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   const getAnimal = specie => specie.name === animal;
-  const findAnimal = animals.find((getAnimal));
+  const findAnimal = data.animals.find((getAnimal));
   const analyzeAge = findAnimal.residents.every(resident => resident.age > age);
   return analyzeAge;
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  const personName = employeeName;
+  if (typeof employeeName === 'undefined') { return {}; }
+  const getPerson = person => (personName === person.firstName || personName === person.lastName);
+  const findPerson = data.employees.find(getPerson);
+  return findPerson;
 }
 
 function createEmployee(personalInfo, associatedWith) {
