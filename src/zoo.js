@@ -11,8 +11,14 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(ids) {
-
+function animalsByIds(...ids) {
+  return ids.reduce(function (acc, idCurrent) {
+    const items = data.animals.filter(function (element) {
+      return element.id === idCurrent;
+    });
+    acc.push(...items);
+    return acc;
+  }, []);
 }
 
 function animalsOlderThan(animal, age) {
