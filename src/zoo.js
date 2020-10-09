@@ -91,11 +91,10 @@ function animalCount(species) {
     const obj = {};
     animals.forEach(element => (obj[element.name] = element.residents.length));
     return obj;
-  } else {
-    let obj = {};
-    obj = animals.find(element => element.name === species);
-    return obj.residents.length;
   }
+  let obj = {};
+  obj = animals.find(element => element.name === species);
+  return obj.residents.length;
 }
 
 //-------------------------------------------------------------------------------------
@@ -103,17 +102,38 @@ function animalCount(species) {
 function entryCalculator(entrants) {
   if (entrants === undefined || entrants === {}) {
     return 0;
-  } else {
-    const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-    let price = 0;
-    price =
-      Adult * prices.Adult + Senior * prices.Senior + Child * prices.Child;
-    return price;
   }
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  let price = 0;
+  price = Adult * prices.Adult;
+  price += Senior * prices.Senior;
+  price += Child * prices.Child;
+  return price;
 }
 
-function animalMap(options) {
-  // seu código aqui
+//-------------------------------------------------------------------------------------
+
+function animalMap(...options) {
+  if (options.length === 0) {
+    const ne = animals
+      .filter(element => element.location === 'NE')
+      .map(element => element.name);
+    const nw = animals
+      .filter(element => element.location === 'NW')
+      .map(element => element.name);
+    const se = animals
+      .filter(element => element.location === 'SE')
+      .map(element => element.name);
+    const sw = animals
+      .filter(element => element.location === 'SW')
+      .map(element => element.name);
+    let obj = {};
+    obj.NE = ne;
+    obj.NW = nw;
+    obj.SE = se;
+    obj.SW = sw;
+    return obj;
+  }
 }
 
 function schedule(dayName) {
