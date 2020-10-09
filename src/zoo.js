@@ -11,22 +11,35 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(ids) {
-  if (ids === undefined) {
-    return [];
-  } else {
-    for (let i in data.animals) {
-      if (ids === data.animals[i].id) {
-        return [data.animals[i]];
-      }
-    }
-  }
-}
-console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
-function animalsOlderThan(animal, age) {
+function animalsByIds(...ids) {
   // seu código aqui
-}
+  return data.animals	
+  .filter(animal => animal.id === ids[0]) // retorno []
+  .concat(data.animals.filter(animal => animal.id === ids[1])); //vai concatenar quantos ids eu passar
 
+  // if (ids === undefined) {
+  //   return [];
+  // } else {
+  //   for (let i in data.animals) {
+  //     if (ids === data.animals[i].id) { //desta maneira só retornava 1 objeto
+  //       return [data.animals[i]];
+  //     }
+  //   }
+  // }
+}
+// console.log(animalsByIds('e8481c1d-42ea-4610-8e11-1752cfc05a46', '0938aa23-f153-4937-9f88-4858b24d6bce'));//
+function animalsOlderThan(animal, age) {
+  // for (let i in data.animals) {
+  //   if (data.animals[i].name === animal) {
+  //     if (data.animals[i].residents[i].age > age) {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   }
+  // }
+}
+// console.log(animalsOlderThan('lions', 6));
 function employeeByName(employeeName) {
   // seu código aqui
 }
