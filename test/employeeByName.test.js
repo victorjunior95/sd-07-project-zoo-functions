@@ -9,7 +9,7 @@ describe('Implemente a função employeeByName', () => {
   });
 
   it('Quando provido o primeiro nome do funcionário, retorna o objeto do funcionário', () => {
-    const actual = zoo.employeeByName('Emery');
+    const actual = zoo.employeeByName('Elser');
     const expected = {
       id: 'b0dc644a-5335-489b-8a2c-4e086c7819a2',
       firstName: 'Emery',
