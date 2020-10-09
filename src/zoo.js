@@ -72,6 +72,7 @@ function animalCount(species) {
     }
   });
   return result;
+  
 }
 
 function entryCalculator(entrants) {
