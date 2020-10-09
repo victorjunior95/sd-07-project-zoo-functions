@@ -19,10 +19,7 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
- // return animals.reduce((acc , item) => {
-    // if (item.name === animal)
-      // acc = item.residents.every(anos => anos.age) 
-  // });
+ 
 }
 
 function employeeByName(employeeName) {
@@ -30,7 +27,7 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return {...personalInfo , ... associatedWith}
+  return { ...personalInfo, ...associatedWith };
   // vai criar um objeto, cada um contendo as informaçoes passadas
   // se tiver n informaçoes iram ser criados n objetos contendo essas informaçoes  
 }
@@ -86,4 +83,3 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
-console.log(animalsOlderThan('otters', 7))
