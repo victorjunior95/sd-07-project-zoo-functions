@@ -87,7 +87,15 @@ function addEmployee(
 //------------------------------------------------------------------------------------
 
 function animalCount(species) {
-  // seu código aqui
+  if (species === undefined) {
+    const obj = {};
+    animals.forEach(element => (obj[element.name] = element.residents.length));
+    return obj;
+  } else {
+    let obj = {};
+    obj = animals.find(element => element.name === species);
+    return obj.residents.length;
+  }
 }
 
 function entryCalculator(entrants) {
