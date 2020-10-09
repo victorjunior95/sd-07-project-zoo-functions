@@ -69,10 +69,10 @@ function animalCount(species) {
     animals.forEach(element => (animal[element.name] = element.residents.length));
     return animal;
   }
-    let animal = {};
-    animal = animals.find(element => (element.name) = element.name = species);
-    return animal.residents.length;
-  }
+  let animal = {};
+  animal = animals.find(element => (element.name) = element.name = species);
+  return animal.residents.length;
+}
 
 function entryCalculator(entrants) {
   // seu código aqui
