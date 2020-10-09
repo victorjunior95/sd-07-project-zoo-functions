@@ -14,11 +14,15 @@ const data = require('./data');
 
 function animalsByIds(...rest) {
   // seu código aqui
-  // const animalListFunction = (...rest) => {
+
   const animalList = [];
+  // Caso receba nenhum parâmetro, necessário retornar um array vazio
   if (rest === undefined) {
-    return [];
+    return []; 
   }
+
+  // Ao receber como parâmetro um único id, retorna os animais com este id
+  // Ao receber mais de um id, retorna os animais que têm um desses ids
   rest.forEach((id) => {
     animalList.push(data.animals.find(element => element.id === id));
   });
@@ -27,6 +31,16 @@ function animalsByIds(...rest) {
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
+
+  // Ao passar o nome de uma espécie e uma idade, testa se todos os animais desta espécie possuem a idade mínima especificada
+
+  const animalList = data.animals.find(element => element.name = animal).residents.reduce((acc, currentValue) => currentValue.age < age ? acc + 1 : acc, 0);
+
+  if (animalList > 0) {
+    return false;
+  }
+
+  return true;
 }
 
 function employeeByName(employeeName) {
