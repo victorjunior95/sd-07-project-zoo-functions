@@ -1,3 +1,4 @@
+const { animals } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -11,9 +12,20 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(ids) {
-  
+function animalsByIds(...ids) {
+  const idsa = [...ids];
+  const scanId = [];
+  for (let animal = 0; animal < animals.length; animal += 1) {
+    for (let id = 0; id < idsa.length; id += 1) {
+      if (animals[animal].id === idsa[id]) {
+        scanId.push(animals[animal]);
+      }
+    }
+  }
+  return scanId;
 }
+console.log(animalsByIds());
+console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'e8481c1d-42ea-4610-8e11-1752cfc05a46'));
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
