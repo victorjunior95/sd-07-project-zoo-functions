@@ -14,8 +14,8 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
     let arr = [];
-    const idAnimals = animals.filter((zoo, i) => (
-        zoo.id === ids[i]));
+    const idAnimals = animals.filter((animal, i) => (
+        animal.id === ids[i]));
     if (idAnimals !== undefined) {
         arr = (idAnimals);
     }
@@ -24,24 +24,18 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-    // seu código aqui
+    return animals.some(animalName => animalName.name === animal &&
+        animalName.residents.every(residents => residents.age >= age));
 }
 
-function employeeByName(employeeName) {
-    // seu código aqui
-}
 
-function createEmployee(personalInfo, associatedWith) {
-    // seu código aqui
-}
+function employeeByName(employeeName) {}
 
-function isManager(id) {
-    // seu código aqui
-}
+function createEmployee(personalInfo, associatedWith) {}
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-    // seu código aqui
-}
+function isManager(id) {}
+
+function addEmployee(id, firstName, lastName, managers, responsibleFor) {}
 
 function animalCount(species) {
     // seu código aqui
