@@ -65,8 +65,77 @@ function entryCalculator(entrants) {
   return Object.entries(entrants).reduce((acc, curr) => acc + (prices[curr[0]] * curr[1]), 0);
 }
 
-function animalMap(options) {
-  // seu código aqui
+const animalMapClean = () => ({
+  NE: [],
+  NW: [],
+  SE: [],
+  SW: [],
+});
+
+const animalMapUndefined = () => {
+  const { animals } = data;
+  const animalsByRegion = animalMapClean();
+
+  animals.forEach(({ location, name }) => {
+    animalsByRegion[location].push(name);
+  });
+  return animalsByRegion;
+};
+
+const animalMapIncludeNames = (_) => {
+  const { animals } = data;
+  const animalsByRegion = animalMapClean();
+
+  animals.forEach(({ location, name, residents }) => {
+    const animalObject = {};
+    animalObject[name] = residents.map(resident => resident.name);
+    animalsByRegion[location].push(animalObject);
+  });
+  return animalsByRegion;
+};
+
+const animalMapSex = (_, options) => {
+  if (!Object.prototype.hasOwnProperty.call(options, 'includeNames')) {
+    return animalMapUndefined();
+  }
+  const { animals } = data;
+  const animalsByRegion = animalMapClean();
+
+  animals.forEach(({ location, name, residents }) => {
+    const animalObject = {};
+    animalObject[name] = residents.filter(resident => resident.sex === options.sex)
+    .map(resident => resident.name);
+    animalsByRegion[location].push(animalObject);
+  });
+
+  return animalsByRegion;
+};
+
+const animalMapSorted = (animalsByRegion, options) => {
+  if (!Object.prototype.hasOwnProperty.call(options, 'includeNames')) {
+    return animalMapUndefined();
+  }
+
+  Object.values(animalsByRegion).forEach((region) => {
+    region.forEach((animal) => {
+      animal[Object.keys(animal)[0]].sort();
+    });
+  });
+  return animalsByRegion;
+};
+
+function animalMap(options = {}) {
+  const possibleOptions = ['includeNames', 'sex', 'sorted'];
+  const optionsFunctions = [animalMapIncludeNames, animalMapSex, animalMapSorted];
+  let animalsByRegion = animalMapUndefined();
+
+  possibleOptions.forEach((opt, index) => {
+    if (Object.prototype.hasOwnProperty.call(options, opt)) {
+      animalsByRegion = optionsFunctions[index](animalsByRegion, options);
+    }
+  });
+
+  return animalsByRegion;
 }
 
 function schedule(dayName) {
