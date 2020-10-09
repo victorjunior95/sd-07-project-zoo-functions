@@ -34,17 +34,16 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some(manager =>manager.id === id);
+  return data.employees.some(manager => manager.id === id);
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   return data.employees.push({
-      id,
-      firstName,
-      lastName,
-      managers,
-      responsibleFor
- });
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor });
 }
 
 function animalCount(species) {
