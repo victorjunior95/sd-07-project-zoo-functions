@@ -15,7 +15,6 @@ function animalsByIds(...ids) {
   return ids.map((id) => data.animals.find((animal) => animal.id === id));
 }
 
-console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'baa6e93a-f295-44e7-8f70-2bcdc6f6948d'));
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
