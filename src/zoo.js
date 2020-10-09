@@ -40,12 +40,20 @@ function isManager(id) {
   );
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  return { id, firstName, lastName, managers, responsibleFor };
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (!species)
+    return Object.fromEntries(
+      data.animals.map((animal) => {
+        const { name, residents } = animal;
+        return [name, residents.length];
+      })
+    );
+  const specieData = data.animals.find((animal) => animal.name === species);
+  return specieData.residents.length;
 }
 
 function entryCalculator(entrants) {
