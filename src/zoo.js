@@ -48,8 +48,13 @@ function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  const employeeObject = data.employees.find(element => element.firstName === employeeName || element.lastName === employeeName);
-  
+
+  const empName = employeeName;
+
+  const empData = data.employees;
+
+  const employeeObject = empData.find(emp => emp.firstName === employeeName || emp.lastName === employeeName);
+
   return employeeObject;
 }
 
