@@ -19,11 +19,11 @@ function animalsByIds(...ids) {
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/contains
 
 function animalsOlderThan(animal, age) {
-  // const olders = animals.every((element, index) =>
-  //   element.name === animal && element.residents[index].age >= age)
-  // return olders;
+  const theAnimal = animals.find(element => element.name === animal);
+  const aboutAge = theAnimal.residents.every(older => older.age >= age);
+  return aboutAge;
 }
-// console.log(animalsOlderThan('otters', 7))
+
 function employeeByName(employeeName) {
   // seu código aqui
 }
