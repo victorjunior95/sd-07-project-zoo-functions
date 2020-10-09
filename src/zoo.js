@@ -9,26 +9,83 @@ eslint no-unused-vars: [
 ]
 */
 
+const { animals } = require('./data');
 const data = require('./data');
 
-function animalsByIds(ids) {
-  // seu código aqui.
+/*
+
+1- Implemente a função animalsByIds:
+
+  Caso receba nenhum parâmetro, necessário retornar um array vazio
+  Ao receber como parâmetro um único id, retorna os animais com este id
+  Ao receber mais de um id, retorna os animais que têm um desses ids
+
+*/
+
+// HoF includes = (Murilo Wolf);
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
+
+function animalsByIds(...rest) {
+  return animals.filter((objects) => rest.includes(objects.id));
 }
+
+/*
+
+2- Implemente a função animalsOlderThan:
+
+Ao passar o nome de uma espécie e uma idade, testa se todos os animais desta espécie possuem a idade mínima especificada
+
+*/
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const currentAnimal = animals.find((animalsObject) => animalsObject.name === animal);
+  const {residents} = currentAnimal;
+  return residents.every((item) => item.age > age);
 }
+
+/*
+
+3- Implemente a função employeeByName:
+
+Sem parâmetros, retorna um objeto vazio
+
+Quando provido o primeiro nome do funcionário, retorna o objeto do funcionário
+
+Quando provido o último nome do funcionário, retorna o objeto do funcionário
+
+*/
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  const {employees} = data;
+  const [expectedObject = {}] = employees.filter((item) => item.firstName === employeeName|| item.lastName === employeeName);
+  return expectedObject;
 }
+
+/*
+
+4- Implemente a função createEmployee:
+
+Cria um novo colaborador a partir de objetos contendo informações pessoais e gerentes e animais gerenciados.
+
+*/
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const {id, firstName, lastName} = personalInfo;
+  const {managers, responsibleFor} = associatedWith;
+  const expectedObject = {id, firstName, lastName, managers, responsibleFor};
+  return expectedObject;
 }
 
+/*
+
+5- Implemente a função isManager:
+
+Testa se o id passado é de um gerente
+
+*/
+
 function isManager(id) {
-  // seu código aqui
+  
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
