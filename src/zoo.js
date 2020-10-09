@@ -22,12 +22,19 @@ function animalsOlderThan(name, minimalAge) {
   return data.animals
     .find(animal => animal.name === name)
     .residents.reduce(
-      (allIsOlder, { age }) => allIsOlder && age > minimalAge, true,
+      (allIsOlder, { age }) => allIsOlder && age > minimalAge,
+      true,
     );
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) {
+    return {};
+  }
+  return data.employees.find(
+    ({ firstName, lastName }) =>
+      firstName === employeeName || lastName === employeeName,
+  );
 }
 
 function createEmployee(personalInfo, associatedWith) {
