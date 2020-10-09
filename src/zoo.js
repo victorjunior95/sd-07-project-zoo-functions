@@ -13,8 +13,8 @@ const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  if (ids.length === 0) return [];
-  return animals.filter((busca, index) => busca.id === ids[index]);
+  if (ids.length === undefined) return [];
+  return animals.filter((search, index) => search.id === ids[index]);
 }
 
 function animalsOlderThan(animal, age) {
@@ -26,7 +26,7 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
