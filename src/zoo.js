@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-// Funcao animalsByIds: 
+// Funcao animalsByIds:
 // Para implementar esta funcao, consultei o repositorio do colega Ygor Fonseca.
 
 const { animals, employees } = require('./data');
@@ -28,15 +28,15 @@ function animalsOlderThan(animal, age) {
   residents.every(resident => resident.age > age);
 }
 
-// Funcao animalsByIds: 
+// Funcao animalsByIds:
 // Para implementar esta funcao, consultei o repositorio do colega Pedro Marques.
 
 function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  return employees.find(({ firstName, lastName })
-   => firstName === employeeName || lastName === employeeName);
+  return employees.find
+  (({ firstName, lastName }) => firstName === employeeName || lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
