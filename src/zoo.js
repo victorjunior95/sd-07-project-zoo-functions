@@ -40,7 +40,7 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  // seu código aqui!
 }
 
 function animalMap(options) {
