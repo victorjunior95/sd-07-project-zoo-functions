@@ -85,7 +85,20 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  let priceTotal = 0;
+
+  if (entrants && entrants !== {}) {
+    const entrantsKey = Object.keys(entrants);
+    const entrantsValue = Object.values(entrants);
+
+    entrantsKey.forEach((key, index) => {
+      Object.entries(data.prices).forEach(([description, price]) => {
+        if (description === key) priceTotal += entrantsValue[index] * price;
+      });
+    });
+  }
+
+  return priceTotal;
 }
 
 function animalMap(options) {
