@@ -13,12 +13,30 @@ const data = require('./data');
 
 function animalsByIds(ids) {
   // seu código aqui
-  return []
+
 }
+
+// support animalsOlderThan
+const countAnimals = (allResidents, idade) => {
+  return allResidents.reduce((count, { age }) => {
+    if (age >= idade) {
+      count += 1;
+    }
+    return count;
+  }, 0);
+};
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
-}
+  const chosenAnimal = data.animals.filter(({ name }) => name === animal);
+  const allResidents = chosenAnimal[0].residents;
+
+  if (countAnimals(allResidents, age) === allResidents.length) {
+    return true;
+  }
+    return false;
+};
+
 
 function employeeByName(employeeName) {
   // seu código aqui
