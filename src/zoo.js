@@ -58,8 +58,15 @@ function createEmployee(
 //------------------------------------------------------------------------------------
 
 function isManager(id) {
-  // seu código aqui
+  const array = [];
+  employees.map(element =>
+    element.managers.forEach(element2 => array.push(element2)),
+  );
+
+  return array.some(element => element === id);
 }
+
+//------------------------------------------------------------------------------------
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
