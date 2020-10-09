@@ -32,12 +32,12 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return employees.some(maneger => maneger.managers.includes(id))
+  return employees.some(maneger => maneger.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const employeeAdd = { id, firstName, lastName, managers, responsibleFor }
-  data.employees.push(employeeAdd)
+  const employeeAdd = { id, firstName, lastName, managers, responsibleFor };
+  data.employees.push(employeeAdd);
 }
 
 function animalCount(species) {
