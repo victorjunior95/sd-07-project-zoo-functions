@@ -15,7 +15,7 @@ const data = require('./data');
 function animalsByIds(...ids) {
   if(ids.length === 0) return [];
   const filterByIds = animals.filter(objAni => ids.includes(objAni.id));
-  return filterByIds; 
+  return filterByIds;
 }
 
 
