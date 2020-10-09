@@ -22,10 +22,13 @@ function animalsOlderThan(animal, age) {
     .every(animalResident => animalResident.age >= age));
 }
 
-console.log(animalsOlderThan('penguins', 10));
-
 function employeeByName(employeeName) {
-  // seu código aqui
+  return data.employees.reduce((employeeRegistration, employee) => {
+    if (employee.firstName === employeeName || employee.lastName === employeeName) {
+      employeeRegistration = employee;
+    }
+    return employeeRegistration;
+  }, {});
 }
 
 function createEmployee(personalInfo, associatedWith) {
