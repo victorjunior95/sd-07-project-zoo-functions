@@ -19,12 +19,12 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  let nomes =  animals.find(busca => busca.name === animal);
+  const nomes = animals.find(busca => busca.name === animal);
   // o metodo find vai me retornar o objeto correspondente a condição
   return nomes.residents.every(idade => idade.age >= age);
   // every vai aplicar para todos os elementos dentro daquele objeto a seguinte condição
   // e se todos os elementos cumprirem aquela condiçao me retorna true se nao false
-  /* 
+  /*
    OUTRA FORMA
    let v = true DEVE SE ATRIBUIR PARA INCREMNTAR NO FOR EACH
    nomes.residents.forEach((element) => {
@@ -43,8 +43,8 @@ function employeeByName(employeeName) {
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
   // vai criar um objeto,  contendo as informaçoes passadas
-  // para cada duas informaços forma um objeto , 
-  // essas duas informaços nao precisao ter um tamanho especificado e irao formar 
+  // para cada duas informaços forma um objeto,
+  // essas duas informaços nao precisao ter um tamanho especificado e irao formar
   // um unico objeto contendo as duas informaçoes juntas
 }
 
