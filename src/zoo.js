@@ -12,12 +12,14 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 const { animals, employees, hours, prices } = data;
+const [lions, tigers, bears, penguins, otters, frogs, snakes, elephants, giraffes] = animals;
 
 function animalsByIds(...ids) {
   // seu código aqui
+  const { animals } = data;
   const result = [];
   ids.forEach((idCode) => {
-    let search = animals.find((id, index) => animals[index].id === idCode);
+    const search = animals.find((id, index) => animals[index].id === idCode);
     if (search !== undefined) {
       result.push(search);
     }
@@ -28,6 +30,11 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
+  const { animals } = data;
+  const searchAnimal = animals.find((name, index) => animals[index].name === animal);
+  const { residents } = searchAnimal;
+  const result = residents.every((resident) => resident.age > age);
+  return result;
 }
 
 function employeeByName(employeeName) {
