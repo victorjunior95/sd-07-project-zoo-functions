@@ -49,11 +49,11 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   const arr = [];
-  employees.map( element => element.managers.forEach(otherElement => arr.push(otherElement)),);
+  employees.map(element => element.managers.forEach(otherElement => arr.push(otherElement)), );
   return arr.some(element => element === id);
 }
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = [],) {  
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = [], ) {
   const employee = {};
   employee.firstName = firstName;
   employee.lastName = lastName;
@@ -61,7 +61,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employee.responsibleFor = responsibleFor;
   employee.managers = managers;
   employees.push(employee);
-
 }
 
 function animalCount(species) {
@@ -69,11 +68,10 @@ function animalCount(species) {
     const animal = {};
     animals.forEach(element => (animal[element.name] = element.residents.length));
     return animal;
-  } else {
+  } 
     let animal = {};
     animal = animals.find(element => (element.name) = element.name = species);
-    return animal.residents.length;
-  }
+    return animal.residents.length;  
 }
 
 function entryCalculator(entrants) {
