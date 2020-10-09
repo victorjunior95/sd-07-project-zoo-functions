@@ -37,8 +37,7 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee({id,firstName,lastName}, {managers,responsibleFor}) {
-  const out = {}
-  return Object.assign(out, {id,firstName,lastName,managers,responsibleFor})
+  return Object.assign({}, {id,firstName,lastName,managers,responsibleFor})
 }
 
 function isManager(id) {
