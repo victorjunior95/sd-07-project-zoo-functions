@@ -15,16 +15,15 @@ const data = require('./data');
 function animalsByIds(identifyer, ...ids) {
   if (identifyer === undefined) {
     return [];
-  };
-  if (ids.length === 0) {
-    return data.animals.filter(animal => animal.id === identifyer);
-  } else {
-   //return data.animals.filter(animal => animal.id === identifyer);
   }
+  if (ids.length === 0) {
+    return animals.filter(animal => animal.id === identifyer);
+  }
+  return null;
 }
 
 function animalsOlderThan(animal, age) {
-  const species = data.animals.find((species) => species.name === animal);
+  const species = animals.find(specie => specie.name === animal);
   return species.residents.every(resident => resident.age > age);
 }
 
