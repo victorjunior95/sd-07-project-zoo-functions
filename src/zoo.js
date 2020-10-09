@@ -29,10 +29,7 @@ function employeeByName(employeeName) {
   return employeeName === undefined ? {} : nameOrLast(employeeName);
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  // Cria um novo colaborador a partir de objetos contendo informações pessoais e gerentes e animais gerenciados.
- return { ...personalInfo, ...associatedWith};
-}
+const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 
 function isManager(id) {
   // seu código aqui
