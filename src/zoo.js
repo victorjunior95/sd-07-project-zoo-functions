@@ -65,7 +65,15 @@ function addEmployee(
 }
 
 function animalCount(species) {
-  // seu código aqui
+  const noParameter = {};
+  data.animals.forEach((animal) => {
+    noParameter[animal.name] = animal.residents.length;
+  });
+  const animalSpecieFound = data.animals.find(
+    animal => animal.name === species,
+  );
+  const result = species ? animalSpecieFound.residents.length : noParameter;
+  return result;
 }
 
 function entryCalculator(entrants) {
