@@ -19,9 +19,7 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  const animalsList = animals.filter(anl => animal.includes(anl.name));
-  const result = animalsList.filter((age) => animals.age > 5);
-  return filterByIds;
+  
 }
 
 
