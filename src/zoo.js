@@ -12,7 +12,7 @@ eslint no-unused-vars: [
 const { animals, employees } = require('./data');
 const data = require('./data');
 
-//------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
 
 function animalsByIds(...ids) {
   const array = [];
@@ -20,14 +20,14 @@ function animalsByIds(...ids) {
   return array;
 }
 
-//------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
 
 function animalsOlderThan(animal, age) {
   const array = animals.find(element => element.name === animal);
   return array.residents.every(element => element.age > age);
 }
 
-//------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
 
 function employeeByName(employeeName) {
   let obj = {};
@@ -40,7 +40,7 @@ function employeeByName(employeeName) {
   return obj;
 }
 
-//------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
 
 function createEmployee(
   { id, firstName, lastName },
@@ -55,7 +55,7 @@ function createEmployee(
   return obj;
 }
 
-//------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
 
 function isManager(id) {
   const array = [];
@@ -66,7 +66,7 @@ function isManager(id) {
   return array.some(element => element === id);
 }
 
-//------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
 
 function addEmployee(
   id,
@@ -84,7 +84,7 @@ function addEmployee(
   employees.push(obj);
 }
 
-//------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
 
 function animalCount(species) {
   if (species === undefined) {
@@ -97,6 +97,8 @@ function animalCount(species) {
     return obj.residents.length;
   }
 }
+
+//-------------------------------------------------------------------------------------
 
 function entryCalculator(entrants) {
   // seu código aqui
