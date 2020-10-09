@@ -36,17 +36,19 @@ function employeeByName(employeeName) {
   return employees.find(nome => nome.firstName === employeeName || nome.lastName === employeeName);
 }
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  // seu código aqui pedi ajuda do Bruno Sordi para entender como o assign funcionava;
   const colaborador = Object.assign(personalInfo, associatedWith);
   return colaborador;
 }
 
 function isManager(id) {
   // seu código aqui
+  return employees.some(isso => isso.managers.some(numero => numero === id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
+  
 }
 
 function animalCount(species) {
