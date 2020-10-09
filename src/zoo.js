@@ -79,66 +79,63 @@ function animalCount(species) {
 }
 function entryCalculator(entrants = 0) {
   const { Adult = false, Child = false, Senior = false } = entrants;
-  return Adult || Child || Senior
-    ? Adult * prices.Adult + Child * prices.Child + Senior * prices.Senior
-    : 0;
+  const a = Adult * prices.Adult;
+  const c = Child * prices.Child;
+  const s = Senior * prices.Senior;
+  return Adult || Child || Senior ? a + c + s : 0;
 }
 console.log(entryCalculator({}));
 //-------------------------------------------------------------------------------------
-function filterAnimals(region) {
-  return animals.filter((animal) => animal.location === region);
-}
+// const filterAnimals = (region) =>
+//   animals.filter((animal) => animal.location === region);
 
-function defaultInput(region) {
-  return filterAnimals(region).map((animal) => animal.name);
-}
-function residentsInput(region) {
-  const fn = filterAnimals(region);
-  const resp = [];
-  fn.forEach((animal) => {
-    resp.push({ [animal.name]: animal.residents.map(({ name }) => name) });
-  });
-  return resp;
-}
+// const defaultInput = (region) =>
+//   filterAnimals(region).map((animal) => animal.name);
 
-function residentsSortInput(region) {
-  const fn = filterAnimals(region);
-  const resp = [];
-  fn.forEach((animal) => {
-    const arr = animal.residents.map(({ name }) => name);
-    resp.push({ [animal.name]: arr.sort() });
-  });
-  return resp;
-}
+// function residentsInput(region) {
+//   const fn = filterAnimals(region);
+//   const resp = [];
+//   fn.forEach((animal) => {
+//     resp.push({ [animal.name]: animal.residents.map(({ name }) => name) });
+//   });
+//   return resp;
+// }
+
+// function residentsSortInput(region) {
+//   const fn = filterAnimals(region);
+//   const resp = [];
+//   fn.forEach((animal) => {
+//     const arr = animal.residents.map(({ name }) => name);
+//     resp.push({ [animal.name]: arr.sort() });
+//   });
+//   return resp;
+// }
 
 function animalMap({ includeNames = false, sorted = false }) {
-  let objResp = {
-    NE: defaultInput('NE'),
-    NW: defaultInput('NW'),
-    SE: defaultInput('SE'),
-    SW: defaultInput('SW'),
-  };
-
-  if (includeNames) {
-    objResp = {
-      NE: residentsInput('NE'),
-      NW: residentsInput('NW'),
-      SE: residentsInput('SE'),
-      SW: residentsInput('SW'),
-    };
-  }
-  if (includeNames && sorted) {
-    objResp = {
-      NE: residentsSortInput('NE'),
-      NW: residentsSortInput('NW'),
-      SE: residentsSortInput('SE'),
-      SW: residentsSortInput('SW'),
-    };
-  }
-  return objResp;
+  // let objResp = {
+  //   NE: defaultInput('NE'),
+  //   NW: defaultInput('NW'),
+  //   SE: defaultInput('SE'),
+  //   SW: defaultInput('SW'),
+  // };
+  // if (includeNames) {
+  //   objResp = {
+  //     NE: residentsInput('NE'),
+  //     NW: residentsInput('NW'),
+  //     SE: residentsInput('SE'),
+  //     SW: residentsInput('SW'),
+  //   };
+  // }
+  // if (sorted) {
+  //   objResp = {
+  //     NE: residentsSortInput('NE'),
+  //     NW: residentsSortInput('NW'),
+  //     SE: residentsSortInput('SE'),
+  //     SW: residentsSortInput('SW'),
+  //   };
+  // }
+  // return objResp;
 }
-//console.log(animalMap({ includeNames: true, sorted: true }));
-//-------------------------------------------------------------------------------------
 
 function schedule(dayName) {
   // seu código aqui
