@@ -52,7 +52,9 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   const manager = data.employees.some(({ managers }) => {
-    return managers.some(idManager => idManager === id);
+    const existId = managers.some(idManager => idManager === id);
+
+    return existId;
   });
 
   return manager;
