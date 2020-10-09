@@ -23,21 +23,38 @@ function animalsByIds(...ids) {
   });
   return result;
 }
-// animalsByIds('e8481c1d-42ea-4610-8e11-1752cfc05a46', '0938aa23-f153-4937-9f88-4858b24d6bce')
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
   const someAnimal = data.animals.find(element => element.name === animal);
-  const validation = someAnimal.residents.every(resident => resident.age >= age);
+  const validation = someAnimal.residents.every(
+    resident => resident.age >= age
+  );
   return validation;
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) {
+    const error = [];
+    return error;
+  }
+  const result = data.employees.find(
+    element =>
+      element.firstName === employeeName || element.lastName === employeeName
+  );
+  return result;
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return {
+    id: id,
+    firstName: firstName,
+    lastName: lastName,
+    managers: managers,
+    responsibleFor: responsibleFor,
+  };
 }
 
 function isManager(id) {
