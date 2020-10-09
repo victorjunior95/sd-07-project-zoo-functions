@@ -53,7 +53,7 @@ function isManager(id) {
   return arr.some(element => element === id);
 }
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = [], ) {
+function addEmployee(id, firstName, lastName, managers=[], responsibleFor=[] ) {
   const employee = {};
   employee.firstName = firstName;
   employee.lastName = lastName;
@@ -68,11 +68,11 @@ function animalCount(species) {
     const animal = {};
     animals.forEach(element => (animal[element.name] = element.residents.length));
     return animal;
-  } 
+  }
     let animal = {};
     animal = animals.find(element => (element.name) = element.name = species);
-    return animal.residents.length;  
-}
+    return animal.residents.length;
+  }
 
 function entryCalculator(entrants) {
   // seu código aqui
