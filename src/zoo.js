@@ -49,11 +49,11 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   const arr = [];
-  employees.map(element => element.managers.forEach(otherElement => arr.push(otherElement)), );
+  employees.map(element => element.managers.forEach(otherElement => arr.push(otherElement)));
   return arr.some(element => element === id);
 }
 
-function addEmployee(id, firstName, lastName, managers=[], responsibleFor=[] ) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const employee = {};
   employee.firstName = firstName;
   employee.lastName = lastName;
