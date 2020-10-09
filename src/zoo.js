@@ -1,5 +1,5 @@
+const { animals } = require('./data');
 /*
-
 eslint no-unused-vars: [
   "error",
   {
@@ -8,13 +8,13 @@ eslint no-unused-vars: [
     "varsIgnorePattern": "data"
   }
 ]
-
 */
 
 const data = require('./data');
 
-function animalsByIds(ids) {
-  // seu código aqui
+function animalsByIds(...ids) {
+  // https://stackoverflow.com/questions/57861821/how-to-return-specific-values-from-a-filter-in-javascript
+  return animals.filter(animal => ids.includes(animal.id));
 }
 
 function animalsOlderThan(animal, age) {
