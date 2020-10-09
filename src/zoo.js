@@ -22,7 +22,7 @@ function animalsOlderThan(name, age) {
   return data.animals
     .find(animal => animal.name === name)
     .residents.reduce(
-      (allIsOlder, { age: animalAge }) => allIsOlder && animalAge > age, true
+      (allIsOlder, { age: animalAge }) => allIsOlder && animalAge > age, true,
     );
 }
 
