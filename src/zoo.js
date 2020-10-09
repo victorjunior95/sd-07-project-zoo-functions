@@ -1,3 +1,4 @@
+const { animals } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -11,8 +12,9 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(ids) {
-  // seu código aqui
+function animalsByIds(...ids) {
+  if(typeof id === undefined) return []
+  return data['animals'].filter((busca, indice) => busca['id'] == ids[indice])
 }
 
 function animalsOlderThan(animal, age) {
@@ -78,3 +80,5 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
+
+console.log(animalsByIds(data.animals))
