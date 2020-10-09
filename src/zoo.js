@@ -19,7 +19,7 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
- 
+  // 
 }
 
 function employeeByName(employeeName) {
@@ -29,7 +29,7 @@ function employeeByName(employeeName) {
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
   // vai criar um objeto, cada um contendo as informaçoes passadas
-  // se tiver n informaçoes iram ser criados n objetos contendo essas informaçoes  
+  // se tiver n informaçoes iram ser criados n objetos contendo essas informaçoes
 }
 
 function isManager(id) {
