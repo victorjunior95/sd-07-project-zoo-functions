@@ -47,14 +47,12 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const allManagersIds = data.employees.reduce((acc, employee) => {
-    return [...acc, ...employee.managers]
-  }, []);
-
-  const verifyId = (managerId) => managerId === id
-  return allManagersIds.some((verifyId))
-
-  }
+  const allManagersIds = data.employees.reduce((acc, employee) => (
+    [...acc, ...employee.managers]
+  ), []);
+  const verifyId = managerId => managerId === id;
+  return allManagersIds.some((verifyId));
+}
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
