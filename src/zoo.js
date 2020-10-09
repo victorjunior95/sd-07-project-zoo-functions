@@ -44,11 +44,14 @@ function animalsOlderThan(nameAnimal, ageAnimal) {
   //   }
   // }
 }
-console.log(animalsOlderThan('lions', 15));
-function employeeByName(employeeName) {
-  // seu código aqui
-}
+// console.log(animalsOlderThan('lions', 15));
 
+function employeeByName(...employeeName) {
+  return data.employees	
+  .filter(employee => employee.id === employeeName[0]) // retorno []
+  
+}
+console.log(employeeByName());
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
