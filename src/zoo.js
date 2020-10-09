@@ -48,6 +48,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
+  //teste climate
   const arr = [];
   employees.map( element => element.managers.forEach(otherElement => arr.push(otherElement)),);
   return arr.some(element => element === id);
