@@ -38,8 +38,8 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  const {id, firstName, lastName} = personalInfo;
-  const {managers, responsibleFor} = associatedWith;
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
   return {
     id,
     firstName,
@@ -50,7 +50,13 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  const managersReduce = (acc, element) => acc.concat(element.managers);
+  const allManagers = data.employees.reduce(managersReduce, []);
+  let managerStatus = false;
+  allManagers.forEach(element => {
+    if (element === id) managerStatus = true;
+  });
+  return managerStatus;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
