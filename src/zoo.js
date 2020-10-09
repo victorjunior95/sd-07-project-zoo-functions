@@ -27,7 +27,9 @@ function employeeByName(employeeName) {
   const out = {};
   Object.assign(
     out,
-    data.employees.find(employee => employee.firstName === employeeName || employee.lastName === employeeName)
+    data.employees.find(
+      employee => employee.firstName === employeeName || employee.lastName === employeeName,
+    ),
   );
   return out;
 }
