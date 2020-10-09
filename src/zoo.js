@@ -53,9 +53,9 @@ function employeeByName(employeeName) {
 
   const empData = data.employees;
 
-  const employeeObject = empData.find(emp => emp.firstName === employeeName || emp.lastName === employeeName);
+  const empObj = empData.find(emp => emp.firstName === empName || emp.lastName === empName);
 
-  return employeeObject;
+  return empObj;
 }
 
 function createEmployee(personalInfo, associatedWith) {
