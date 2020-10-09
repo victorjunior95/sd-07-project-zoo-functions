@@ -60,7 +60,37 @@ function entryCalculator(entrants = 0) {
 }
 
 function animalMap(options) {
-  // seu código aqui
+  const animals = data.animals;
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  const genres = ['male', 'female'];
+  if (!options || !options.includeNames) {
+    const finalLocations = locations.map((location) => {
+      return [
+        location,
+        animals.filter((animal) => animal.location === location).map((animal) => animal.name),
+      ];
+    });
+    return Object.fromEntries(finalLocations);
+  }
+  const finalLocations = locations.map((location) => {
+    return [
+      location,
+      animals
+        .filter((animal) => animal.location === location)
+        .map((animal) => {
+          let baseReturn = animal.residents.map((resident) => resident.name);
+          genres.forEach((genre) => {
+            if (options.sex === genre) {
+              const filteredGenre = animal.residents.filter((resident) => resident.sex === genre);
+              baseReturn = filteredGenre.map((names) => names.name);
+            }
+            if (options.sorted === true) baseReturn.sort();
+          });
+          return { [animal.name]: baseReturn };
+        }),
+    ];
+  });
+  return Object.fromEntries(finalLocations);
 }
 
 function schedule(dayName) {
