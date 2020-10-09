@@ -9,28 +9,34 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require("./data");
+const data = require('./data');
 
 function animalsByIds(id1, id2) {
   return data.animals.filter(
-    (animal) => animal.id === id1 || animal.id === id2);
+    animal => animal.id === id1 || animal.id === id2);
 }
 
 function animalsOlderThan(animal, age) {
   return data.animals.some(
-    (animalName) =>
+    animalName =>
       animalName.name === animal &&
-      animalName.residents.every((animalAge) => animalAge.age > age));
+      animalName.residents.every(animalAge => animalAge.age > age));
 }
 
 function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
   return data.employees.find(
-    (name) => name.firstName === employeeName || name.lastName === employeeName);
+    name => name.firstName === employeeName || name.lastName === employeeName);
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+function createEmployee({id,firstName, lastName} = personalInfo, {managers, responsibleFor} = associatedWith) {
+  return {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor
+  };
 }
 
 function isManager(id) {
