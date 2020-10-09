@@ -10,15 +10,17 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const dAnimals = require('./data').animals;
+const dEmployees = require('./data').employees;
 
 function animalsByIds(...ids) {
   const out = [];
-  ids.forEach(element => out.push(data.animals.find(animal => animal.id === element)));
+  ids.forEach(element => out.push(dAnimals.find(animal => animal.id === element)));
   return out;
 }
 
 function animalsOlderThan(animal, age) {
-  return data.animals
+  return dAnimals
     .find(element => element.name === animal)
     .residents.every(resident => resident.age > age);
 }
@@ -27,7 +29,7 @@ function employeeByName(employeeName) {
   const out = {};
   Object.assign(
     out,
-    data.employees.find(
+    dEmployees.find(
       employee => employee.firstName === employeeName || employee.lastName === employeeName,
     ),
   );
@@ -39,7 +41,7 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
 }
 
 function isManager(id) {
-  return data.employees.some(employee => employee.managers.some(manager => manager === id));
+  return dEmployees.some(employee => employee.managers.some(manager => manager === id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
