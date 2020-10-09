@@ -14,17 +14,14 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   const paramIds = ids.map((id) => {
-    const comparingIds = animals.find((animalById) => animalById.id === id);
+    const comparingIds = animals.find(animalById => animalById.id === id);
     return comparingIds;
   });
   return paramIds;
 }
 
 function animalsOlderThan(animal, age) {
-  const getingParamAnimal = animals.find((animalParam) => {
-    animalParam.name === animal;
-    return animalParam;
-  });
+  const getingParamAnimal = animals.find(animalParam => animalParam.name === animal);
   return getingParamAnimal.residents.every(animalsAges => animalsAges.age >= age);
 }
 
