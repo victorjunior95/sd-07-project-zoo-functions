@@ -1,4 +1,3 @@
-const { animals } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -17,17 +16,17 @@ function animalsByIds(...ids) {
   if (ids === []) {
     animalsList = [];
   } else {
-    ids.forEach( (id) => {
-      const animalByIdList = data.animals.filter( (animal) => animal.id === id);
+    ids.forEach((id) => {
+      const animalByIdList = data.animals.filter(animal => animal.id === id);
       animalsList = animalsList.concat(animalByIdList);
-    });    
+    });
   }
   return animalsList;
 }
 
 function animalsOlderThan(animal, age) {
-  const animals = data.animals.find((animalObject) => animalObject.name === animal);
-  return animals.residents.every( (resident) => resident.age > age);
+  const animals = data.animals.find(animalObject => animalObject.name === animal);
+  return animals.residents.every(resident => resident.age > age);
 }
 
 function employeeByName(employeeName) {
