@@ -13,6 +13,7 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   // seu código aqui
+  return ids.map(string => data.animals.find(object => object.id === string));
 }
 
 function animalsOlderThan(animal, age) {
