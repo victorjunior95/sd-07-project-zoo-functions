@@ -19,7 +19,9 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const jaula = animals.find((animalo) => animalo.name === animal);
+  const idades = jaula.residents.every((bixos) => bixos.age >= age);
+  return idades;
 }
 
 function employeeByName(employeeName) {
