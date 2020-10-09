@@ -1,4 +1,3 @@
-const { employees } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -30,14 +29,17 @@ function animalsOlderThan(animal, age) {
   return animals.residents.every(resident => resident.age > age);
 }
 
+
 function employeeByName(employeeName) {
-  let employeeObject = null;
+  let employeeObj = null;
   if (employeeName === undefined) {
-    employeeObject = {};
+    employeeObj = {};
   } else {
-    employeeObject = data.employees.find(employee => employee.firstName === employeeName || employee.lastName === employeeName);
+    employeeObj = data.employees.find(employee => {
+      employee.firstName === employeeName || employee.lastName === employeeName
+    });
   }
-  return employeeObject;
+  return employeeObj;
 }
 
 function createEmployee(personalInfo, associatedWith) {
