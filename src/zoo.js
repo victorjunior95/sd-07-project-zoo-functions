@@ -19,7 +19,7 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  
+    //seu codigo aqui
 }
 
 
