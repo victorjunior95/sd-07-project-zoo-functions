@@ -53,14 +53,21 @@ function isManager(id) {
   const managersReduce = (acc, element) => acc.concat(element.managers);
   const allManagers = data.employees.reduce(managersReduce, []);
   let managerStatus = false;
-  allManagers.forEach(element => {
+  allManagers.forEach((element) => {
     if (element === id) managerStatus = true;
   });
   return managerStatus;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newGuy = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  data.employees.push(newGuy);
 }
 
 function animalCount(species) {
