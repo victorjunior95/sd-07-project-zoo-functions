@@ -29,9 +29,7 @@ function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  const allemployeeInfos = data.employees.find((infosEmployee) => {
-    return infosEmployee.firstName === employeeName || infosEmployee.lastName === employeeName;
-  });
+  const allemployeeInfos = data.employees.find((allInfos) => allInfos.firstName === employeeName || allInfos.lastName === employeeName);
   return allemployeeInfos;
 }
 
