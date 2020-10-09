@@ -42,9 +42,20 @@ function employeeByName(employeeName) {
 
 //------------------------------------------------------------------------------------
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+function createEmployee(
+  { id, firstName, lastName },
+  { managers, responsibleFor },
+) {
+  const obj = {};
+  obj.id = id;
+  obj.firstName = firstName;
+  obj.lastName = lastName;
+  obj.managers = managers;
+  obj.responsibleFor = responsibleFor;
+  return obj;
 }
+
+//------------------------------------------------------------------------------------
 
 function isManager(id) {
   // seu código aqui
