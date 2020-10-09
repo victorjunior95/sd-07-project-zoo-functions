@@ -101,7 +101,7 @@ function animalCount(species) {
 //   return true;
 // }
 
-// function entryCalculator(entrants) {
+function entryCalculator(entrants) {
 //   if (!checkEntrants(entrants)) {
 //     return 0;
 //   }
@@ -111,7 +111,7 @@ function animalCount(species) {
 //       return acc += entrants[elem] * data.prices[elem];
 //     }
 //   }, 0);
-// }
+}
 
 function animalMap(options) {
   // seu código aqui
@@ -126,7 +126,8 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const multiplier = 1 + (percentage / 100);
+  Object.keys(data.prices).forEach(consumer => data.prices[consumer] *= multiplier);
 }
 
 function employeeCoverage(idOrName) {
