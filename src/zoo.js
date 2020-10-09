@@ -31,6 +31,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
+  return data.employees.some(employee => employee.managers.includes(`${id}`));
 }
 
 
