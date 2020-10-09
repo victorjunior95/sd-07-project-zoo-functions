@@ -57,8 +57,17 @@ function employeeByName(employeeName) {
   return message[0];
 }
 
-function createEmployee(personalInfo, associatedWith) {
+
+function createEmployee({ id, firstName, lastName }, { managers, responsibleFor }) {
   // seu código aqui
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor
+  }
+  return newEmployee
 }
 
 function isManager(id) {
