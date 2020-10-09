@@ -17,12 +17,13 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  let animalsAge = animals.find(zooAnimal => zooAnimal.name === animal);
+  const animalsAge = animals.find(zooAnimal => zooAnimal.name === animal);
   return animalsAge.residents.every(ages => ages.age >= age);
 }
-console.log(animalsOlderThan('otters', 7));
+
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) return {};
+  return data.employees.find(n => n.firstName === employeeName || n.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
