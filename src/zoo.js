@@ -41,8 +41,19 @@ function animalsOlderThan(animal, age) {
   return isMinimumAge;
 }
 
-function employeeByName(employeeName) {
+function employeeByName(employeeName = {}) {
   // seu código aqui
+  const nameOrSurname = employeeName;
+
+  if (Object.keys(nameOrSurname).length === 0) {
+    return {};
+  }
+
+  const employee = data.employees.filter(info =>
+    (info.firstName === nameOrSurname) || (info.lastName === nameOrSurname),
+  );
+
+  return employee[0];
 }
 
 function createEmployee(personalInfo, associatedWith) {
