@@ -77,7 +77,7 @@ function createAnimalsObj() {
   const returnedObj = {};
   const animalsNames = data.animals.reduce(namesReducer, []);
   const animalspopulation = data.animals.reduce(popReducer, []);
-  for (index = 0; index < animalsNames.length; index += 1) {
+  for (let index = 0; index < animalsNames.length; index += 1) {
     returnedObj[animalsNames[index]] = animalspopulation[index];
   }
   return returnedObj;
@@ -91,9 +91,27 @@ function animalCount(species) {
   return animalsObj;
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
-}
+// const checkEntrants = (entrants) => {
+//   if (!entrants) {
+//     return false;
+//   }
+//   if (Object.keys(entrants).length === 0) {
+//     return false;
+//   }
+//   return true;
+// }
+
+// function entryCalculator(entrants) {
+//   if (!checkEntrants(entrants)) {
+//     return 0;
+//   }
+//   const keys = ['Adult', 'Child', 'Senior'];
+//   return keys.reduce((acc, elem) => {
+//     if (entrants[elem]) {
+//       return acc += entrants[elem] * data.prices[elem];
+//     }
+//   }, 0);
+// }
 
 function animalMap(options) {
   // seu código aqui
