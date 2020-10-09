@@ -66,9 +66,9 @@ function entryCalculator(entrants = {}) {
 function animalMap(options) {}
 
 function schedule(dayName) {
-  let out = {};
+  const out = {};
 
-  Object.keys(data.hours).forEach(hour => {
+  Object.keys(data.hours).forEach((hour) => {
     if (data.hours[hour].open === data.hours[hour].close) {
       out[hour] = 'CLOSED';
     } else {
