@@ -22,7 +22,7 @@ function animalsOlderThan(animal, age) {
 
   const olderNotThan = animalThan.residents.some(resident => resident.age < age);
 
-  return olderNotThan ? false : true;
+  return !olderNotThan;
 }
 
 function employeeByName(employeeName) {
