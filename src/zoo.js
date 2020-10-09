@@ -49,7 +49,9 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
 }
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees
+    .find(({ managers }) =>
+    managers.indexOf(id) >= 0) !== undefined;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
