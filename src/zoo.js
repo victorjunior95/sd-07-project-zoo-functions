@@ -30,7 +30,11 @@ function animalsOlderThan(animal, age) {
 // retorna o objeto do funcionário
 function employeeByName(employeeName) {
   // seu código aqui
+  const { employees } = data;
+  const employee = employees.find((item) => item.firstName === employeeName || item.lastName === employeeName);
+  return (typeof employeeName !== 'undefined' ? employee : {});
 }
+console.log(employeeByName());
 
 // Cria um novo colaborador a partir de objetos
 // contendo 'informações pessoais' e 'gerentes
