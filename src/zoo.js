@@ -20,7 +20,7 @@ function animalsByIds(...ids) {
 function animalsOlderThan(animal, age) {
   const animalThan = data.animals.find(({ name }) => animal === name);
 
-  const olderNotThan = animalThan.residents.some((resident) => resident.age < age);
+  const olderNotThan = animalThan.residents.some(resident => resident.age < age);
 
   return olderNotThan ? false : true;
 }
