@@ -31,15 +31,16 @@ function employeeByName(employeeName) {
     justName.firstName === employeeName || justName.lastName === employeeName);
   return employee;
 }
-employeeByName('Stephanie');
+
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
 
 function isManager(id) {
-  // seu código aqui
+  const manager = employees.some((justManager, index) => justManager.managers[index] === id);
+  return manager;
 }
-
+isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1');
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
