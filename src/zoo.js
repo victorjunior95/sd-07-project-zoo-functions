@@ -44,8 +44,15 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // Cria um novo colaborador a partir de objetos contendo
-  // informações pessoais e gerentes e animais gerenciados.
+  const { firstName, id, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return {
+    firstName,
+    id,
+    lastName,
+    managers,
+    responsibleFor,
+  };
 }
 
 function isManager(id) {
