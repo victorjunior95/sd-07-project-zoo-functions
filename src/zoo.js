@@ -15,28 +15,29 @@ const [animals, employees] = [data.animals, data.employees];
 
 const animalsByIds = (...ids) => ids.map(id => animals.find(animal => id === animal.id));
 
-function animalsOlderThan(animal, age) {
-  return animals.find(element =>
-    element.name === animal).residents.every(element => element.age >= age);
-}
+const animalsOlderThan = (animal, age) => animals.find(element =>
+  element.name === animal).residents.every(element => element.age >= age);
 
 const nameOrLast = nam => employees.find(element =>
   element.firstName === nam || element.lastName === nam);
 
-function employeeByName(employeeName) {
-  return employeeName === undefined ? {} : nameOrLast(employeeName);
-}
+const employeeByName = employeeName => (employeeName === undefined ? {} : nameOrLast(employeeName));
 
 const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 
 const isManager = id => employees.some(element => element.managers.includes(id));
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
+  const obj = { id, firstName, lastName, managers, responsibleFor };
+  Object.entries(obj).forEach((element) => { obj[element[0]] = element[1]; });
+  // for (let nam in obj) { nam = obj[nam] };
+  employees.push(obj);
+};
 
 function animalCount(species) {
-  // seu código aqui
+  /** Sem parâmetros, retorna animais e suas quantidades
+Com o nome de uma espécie de animal, retorna somente a quantidade */
+
 }
 
 function entryCalculator(entrants) {
