@@ -9,8 +9,6 @@ eslint no-unused-vars: [
 ]
 */
 
-// const { TestScheduler } = require('jest');
-const { employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -24,7 +22,7 @@ function animalsOlderThan(animal, ageAnimal) {
 
 function employeeByName(...employeeName) {
   const person = data.employees.filter(employee => employeeName.includes(employee.firstName)|| employeeName.includes(employee.lastName));
-  if (person.length > 0) return person[0]
+  if (person.length > 0) return person[0];
   return {};
 }
 
