@@ -102,7 +102,7 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  let maped = {};
+  const maped = {};
 
   data.animals.forEach(({ name, location }) => {
     if (!maped[location]) maped[location] = [name];
@@ -117,13 +117,13 @@ function schedule(dayName) {
 
   Object.entries(data.hours).forEach((day) => {
     scheduled[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
-    if (day[1].open === 0 && day[1].close === 0) scheduled[day[0]] = "CLOSED";
+    if (day[1].open === 0 && day[1].close === 0) scheduled[day[0]] = 'CLOSED';
   });
 
   if (dayName) {
     scheduled = {};
     scheduled[dayName] = `Open from ${data.hours[dayName].open}am until ${data.hours[dayName].close - 12}pm`;
-    if (data.hours[dayName].open === 0) scheduled[dayName] = "CLOSED";
+    if (data.hours[dayName].open === 0) scheduled[dayName] = 'CLOSED';
   }
 
   return scheduled;
