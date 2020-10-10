@@ -68,7 +68,7 @@ function animalCount(species) {
       const count = animal.residents.length;
       acc[name] = count;
       return acc;
-    }
+    };
     return allAnimals.reduce(getAnimal, {});
   };
   if (typeof species === 'undefined') {
