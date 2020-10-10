@@ -1,4 +1,4 @@
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -76,7 +76,7 @@ function animalCount(species) {
   return amountSpecie;
 }
 
-// requisito entendido com ajuda do Vanderson Benedito
+// requisito entendido com ajuda e código do Vanderson Benedito
 function entryCalculator(entrants) {
   if (entrants === undefined || entrants === {}) {
     return 0;
@@ -92,9 +92,24 @@ function animalMap(options) {
   // seu código aqui
 }
 
+// requisito entendido com ajuda e código do Vanderson Benedito
 function schedule(dayName) {
-  // seu código aqui
+  const arrayHours = Object.entries(hours);
+  return arrayHours.reduce((allDays, currentDay) => {
+    const answer = `Open from ${currentDay[1].open}am until ${(currentDay[1].close) - 12}pm`;
+    if (dayName === undefined && currentDay[1].open === 0){
+        allDays[currentDay[0]] = 'CLOSED';
+    } else if (dayName === undefined && currentDay[1].open !== 0) {
+      allDays[currentDay[0]] = answer;
+    } else if (currentDay[0] === dayName && currentDay[1].open !== 0) {
+      allDays[currentDay[0]] = answer;
+    } else if (currentDay[0] === dayName && currentDay[1].open === 0) {
+      allDays[currentDay[0]] = `CLOSED`;
+    }
+    return allDays
+  }, {})
 }
+// && currentDay[0] === dayName
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
