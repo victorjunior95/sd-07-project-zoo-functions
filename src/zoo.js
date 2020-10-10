@@ -13,7 +13,7 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   const {
-    animals
+    animals,
   } = data;
 
   return ids.map(id => animals.find(animal => animal.id === id));
@@ -22,7 +22,7 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   const {
-    animals
+    animals,
   } = data;
 
   const animalSpecie = animals.find(species => species.name === animal);
@@ -32,7 +32,7 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(employeeName) {
   const {
-    employees
+    employees,
   } = data;
   if (!employeeName) return {};
 
@@ -45,14 +45,14 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   const {
-    employees
+    employees,
   } = data;
   return employees.some(manager => manager.managers.some(mana => mana === id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const {
-    employees
+    employees,
   } = data;
   const newEmployer = {
     id,
@@ -100,34 +100,34 @@ function animalMap(options) {
   // seu código aqui
 }
 
-function checkSpindleUS(hour){
-  if(hour > 12) return hour - 12;
+function checkSpindleUS(hour) {
+  if (hour > 12) return hour - 12;
   return hour;
 }
 
 function schedule(dayName) {
   const {
-    hours
+    hours,
   } = data;
   const obj = {};
 
   if (dayName) {
     if (dayName === 'Monday') {
-      obj[dayName] = `CLOSED`;
+      obj[dayName] = 'CLOSED';
     } else {
       obj[dayName] = `Open from ${hours[dayName].open}am until ${checkSpindleUS(hours[dayName].close)}pm`;
     }
     return obj;
   }
 
-  Object.keys(hours).forEach(day => {
+  Object.keys(hours).forEach((day) => {
     if (day === 'Monday') {
-      obj[day] = `CLOSED`;
+      obj[day] = 'CLOSED';
     } else {
-      let hour = hours[day].close;
+      const hour = hours[day].close;
       obj[day] = `Open from ${hours[day].open}am until ${checkSpindleUS(hour)}pm`;
     }
-  })
+  });
   return obj;
 }
 
