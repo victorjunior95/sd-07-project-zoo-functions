@@ -49,6 +49,7 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // Testa se o id passado é de um gerente
+  return data.employees.some(manager => manager.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {

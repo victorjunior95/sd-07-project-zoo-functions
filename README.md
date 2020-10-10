@@ -122,7 +122,7 @@ Antes de começar analise o arquivo `src/data.js`, para ver os dados que serão 
   - [ ] Cria um novo colaborador a partir de objetos contendo `informações pessoais` e `gerentes e animais gerenciados`.
 
 ### 5- Implemente a função isManager:
-  - [ ] Testa se o id passado é de um gerente
+  - [X] Testa se o id passado é de um gerente
 
 ### 6- Implemente a função addEmployee:
   - [ ] Adiciona um funcionário no fim da lista
