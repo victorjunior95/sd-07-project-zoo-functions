@@ -39,8 +39,12 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(employeeName) {
   if (typeof employeeName === 'undefined') return {};
-  return employees.filter(nome =>
+  return employees.find(nome =>
     (nome.firstName === employeeName) || (nome.lastName === employeeName));
+  // find encontra os elementos que atendem à expressão solicitada que sejam descendentes do seletor.
+  // filter, por outro lado, filtra e devolve todos os elementos que coincidam com o seletor e também a expressão filtrada.
+  // outra diferençaa é que o filter me retorna um  objeto dentro de um array
+  // e o find me devolve uma copia identica do objeto selecionado
 }
 
 function createEmployee(personalInfo, associatedWith) {
