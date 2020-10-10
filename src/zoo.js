@@ -122,7 +122,7 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   const filteredId = employees.filter(employee => employee.id === id);
-  const filteredIdAnimal = filteredId.map(animals => animals.responsibleFor).pop()[0];
+  const filteredIdAnimal = filteredId.map(animalInfo => animalInfo.responsibleFor).pop()[0];
   const filteredAnimals = animals.find(animal => animal.id === filteredIdAnimal).residents;
   const oldest = filteredAnimals.reduce((previousAnimal, currentAnimal) => {
     const { age: ageP } = previousAnimal;
@@ -136,7 +136,6 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  const { prices } = data;
   const persons = Object.keys(prices);
   const values = Object.values(prices);
   const increased = values.map((value) => {
@@ -158,9 +157,7 @@ function employeeCoverage(idOrName) {
 
   if (!idOrName) return Object.fromEntries(employeesInCharge);
   if (idOrName.length < 15) {
-    const byName = employeesInCharge.find(
-      name => name[0].startsWith(idOrName) || name[0].endsWith(idOrName)
-    );
+    const byName = employeesInCharge.find(name => name[0].startsWith(idOrName) || name[0].endsWith(idOrName));
 
     return Object.fromEntries([byName]);
   }
