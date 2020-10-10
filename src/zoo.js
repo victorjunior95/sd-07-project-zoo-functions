@@ -102,10 +102,24 @@ function entryCalculator(entrants) {
   return priceTotal;
 }
 
+const filterResidents = (sex, name, residents ) => {
+  const residentsNames = {};
+
+  residents.filter((resident) => {
+    if (sex) return sex === resident.sex;
+    return true;
+  }).forEach((resident) => {
+    if (!residentsNames[name]) residentsNames[name] = [resident.name];
+    else residentsNames[name].push(resident.name);
+  });
+
+  return residentsNames;
+}
+
 function animalMap(options) {
   const maped = {};
 
-  const residentsNames = {};
+  let residentsNames = {};
 
   data.animals.forEach(({ name, location, residents }) => {
     if (!maped[location]) maped[location] = [name];
@@ -113,13 +127,7 @@ function animalMap(options) {
 
     if (options) {
       if (options.includeNames) {
-        residents.filter((resident) => {
-          if (options.sex) return options.sex === resident.sex;
-          return true;
-        }).forEach((resident) => {
-          if (!residentsNames[name]) residentsNames[name] = [resident.name];
-          else residentsNames[name].push(resident.name);
-        });
+        residentsNames = filterResidents(options.sex, name, residents);
 
         maped[location] = maped[location].map((animal) => {
           const novo = {};
