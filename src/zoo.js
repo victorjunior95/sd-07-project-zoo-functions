@@ -129,7 +129,7 @@ function employeeCoverage(idOrName) {
         (out[
           `${employeeSelected.firstName} ${employeeSelected.lastName}`
         ] = employeeSelected.responsibleFor.map(
-          responsible => animals.find(animal => animal.id === responsible).name,
+          isresponsible => animals.find(animal => animal.id === isresponsible).name,
         )),
     );
     return out;
