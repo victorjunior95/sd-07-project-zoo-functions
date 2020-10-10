@@ -61,14 +61,17 @@ const associatedWith = {
 };
 
 function createEmployee(personalInfo, associatedWith) {
-  let object = {};
-  for(i in personalInfo) {
-    object[i] = personalInfo[i];
-  }
-  for(i in associatedWith) {
-    object[i] = associatedWith[i];
-  }
-  return object;
+  // let object = {};
+  // for(i in personalInfo) {
+  //   object[i] = personalInfo[i];
+  // }
+  // for(i in associatedWith) {
+  //   object[i] = associatedWith[i];
+  // }
+  // return object;
+  const {id, firstName, lastName} = personalInfo;
+  const {managers, responsibleFor} = associatedWith;
+  return {id, firstName, lastName, managers, responsibleFor};
 }
 // console.log(createEmployee(personalInfo, associatedWith));
 
@@ -79,9 +82,14 @@ function isManager(id) {
 }
 // console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'))
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const {employees} = data;
+  const newEmployee = {id, firstName, lastName, managers, responsibleFor};
+  employees.push(newEmployee);
+  return employees;
 }
+// console.log(addEmployee('4141da1c-a6ed-4cf7-90c4-99c657ba4ef3', 'Jane', 'Doe'));
+// console.log(data.employees.length);
 
 function animalCount(species) {
   // seu código aqui
