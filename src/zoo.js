@@ -40,9 +40,7 @@ const createEmployee = (personalInfo, associatedWith) => {
   };
 };
 
-const isManager = (id) => {
-  return employees.some(({ managers }) => managers.some(ids => ids === id));
-};
+const isManager = (id) => employees.some(({ managers }) => managers.some(ids => ids === id));
 
 const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
   const newEmployee = {
@@ -56,7 +54,7 @@ const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(newEmployee);
 };
 
-function animalCount(species) {
+const animalCount = (species) => {
   let animalCurrent = {};
 
   data.animals.forEach(({ name, residents }) => {
