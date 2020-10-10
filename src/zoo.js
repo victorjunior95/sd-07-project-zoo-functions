@@ -34,8 +34,11 @@ function employeeByName(employeeName) {
   return allemployeeInfos;
 }
 
-function createEmployee(...personalInfo, ...associatedWith) {
-  const newEmployee = {`${personalInfo}  ${associatedWith}`}
+function createEmployee(personalInfo, associatedWith) {
+  const newEmployee = {
+    ...personalInfo,
+    ...associatedWith
+  }
   return newEmployee
 }
 
@@ -45,6 +48,8 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  const arrayEmployees = employees;
+  console.loga(arrayEmployees);
   // seu código aqui
 }
 
