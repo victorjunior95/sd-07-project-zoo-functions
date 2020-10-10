@@ -34,22 +34,15 @@ function employeeByName(employeeName) {
   return allemployeeInfos;
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  // FAZER DEPOIS
-
+function createEmployee(...personalInfo, ...associatedWith) {
+  const newEmployee = {`${personalInfo}  ${associatedWith}`}
+  return newEmployee
 }
 
 function isManager(id) {
   const managerId = employees.some(({managers}) => managers.some(manager => manager === id));
   return managerId
 }
-
-// function isManager(id) {
-//   const managerId = employees.every(({managers}) => {
-//     return managers.every(manager => manager !== id)
-//   })
-//   return managerId
-// }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
