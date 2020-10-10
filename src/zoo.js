@@ -63,11 +63,11 @@ function entryCalculator(entrants) {
   if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0;
   }
-  return Object.entries(entrants).reduce((acc, arr) => data.prices[arr[0]] * arr[1], 0);
+  return Object.entries(entrants).reduce((acc, arr) => acc + (data.prices[arr[0]] * arr[1]), 0);
 }
 
 function animalMap(options) {
-  // seu código aqu
+  // seu código aqui
 }
 
 function schedule(dayName) {
