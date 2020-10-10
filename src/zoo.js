@@ -41,23 +41,22 @@ function employeeByName(employeeName) {
 }
 // console.log(employeeByName());
 
-
 const personalInfo = {
-  id: '7ed1c9bb-8570-44f6-b718-0666b869573a',
-  firstName: 'John',
-  lastName: 'Doe',
+  id: "7ed1c9bb-8570-44f6-b718-0666b869573a",
+  firstName: "John",
+  lastName: "Doe",
 };
 
 const associatedWith = {
   managers: [
-    'c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1',
-    '9e7d4524-363c-416a-8759-8aa7e50c0992'
+    "c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1",
+    "9e7d4524-363c-416a-8759-8aa7e50c0992",
   ],
   responsibleFor: [
-    '0938aa23-f153-4937-9f88-4858b24d6bce',
-    '89be95b3-47e4-4c5b-b687-1fabf2afa274',
-    'bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5'
-  ]
+    "0938aa23-f153-4937-9f88-4858b24d6bce",
+    "89be95b3-47e4-4c5b-b687-1fabf2afa274",
+    "bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5",
+  ],
 };
 
 function createEmployee(personalInfo, associatedWith) {
@@ -69,22 +68,27 @@ function createEmployee(personalInfo, associatedWith) {
   //   object[i] = associatedWith[i];
   // }
   // return object;
-  const {id, firstName, lastName} = personalInfo;
-  const {managers, responsibleFor} = associatedWith;
-  return {id, firstName, lastName, managers, responsibleFor};
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return { id, firstName, lastName, managers, responsibleFor };
 }
 // console.log(createEmployee(personalInfo, associatedWith));
 
-
 function isManager(id) {
-  const {employees} = data;
+  const { employees } = data;
   return employees.some((employer, index) => employer.managers[index] === id);
 }
 // console.log(isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'))
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const {employees} = data;
-  const newEmployee = {id, firstName, lastName, managers, responsibleFor};
+function addEmployee(
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = []
+) {
+  const { employees } = data;
+  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   employees.push(newEmployee);
   return employees;
 }
@@ -92,8 +96,12 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // console.log(data.employees.length);
 
 function animalCount(species) {
-  // seu código aqui
+  const { animals } = data;
+  let object = {};
+  animals.forEach((animal) => (object[animal.name] = animal.residents.length));
+  return species === undefined ? object : object[species];
 }
+console.log(animalCount("lions"));
 
 function entryCalculator(entrants) {
   // seu código aqui
