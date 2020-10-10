@@ -49,15 +49,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     firstName,
     lastName,
     managers,
-    responsibleFor
-  }
+    responsibleFor,
+  };
   employees.push(newEmployer);
 
   return employees;
 }
 
 function animalCount(species) {
-  // seu código aqui
+  const { animals } = data;
 }
 
 function entryCalculator(entrants) {
