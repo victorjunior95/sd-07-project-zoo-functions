@@ -138,8 +138,34 @@ function animalMap(options = {}) {
   return animalsByRegion;
 }
 
+const formatTime = hour => (((hour + 11) % 12) + 1);
+
+const fullSchedule = () => {
+  const { hours } = data;
+  const scheduleObject = {};
+  Object.entries(hours).forEach((hour) => {
+    const [day, { open, close }] = hour;
+    scheduleObject[day] = `Open from ${open}am until ${formatTime(close)}pm`;
+  });
+  return scheduleObject;
+};
+
+const scheduleDay = (dayName) => {
+  const { hours } = data;
+  const scheduleObject = {};
+  const [day, { open, close }] = Object.entries(hours).find(hour => hour[0] === dayName);
+  scheduleObject[day] = `Open from ${open}am until ${formatTime(close)}pm`;
+  return scheduleObject;
+};
+
 function schedule(dayName) {
-  // seu código aqui
+  let scheduleObject = {};
+  if (dayName === undefined) scheduleObject = fullSchedule();
+  else scheduleObject = scheduleDay(dayName);
+  if (Object.prototype.hasOwnProperty.call(scheduleObject, 'Monday')) {
+    scheduleObject.Monday = 'CLOSED';
+  }
+  return scheduleObject;
 }
 
 function oldestFromFirstSpecies(id) {
