@@ -60,8 +60,26 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   };
 }
 
-function animalCount(species) {
 
+function animalCount(species) {
+  if (species === undefined) {
+    const result = {};
+    const verify = (iten, index) => {
+      const animals = data.animals;
+      result[animals[index].name] = iten.residents.length;
+    };
+    data.animals.forEach(verify);
+    return result;
+  }
+  let count;
+  const verifyAnimal = (iten) => {
+    if (iten.name === species) {
+      count = iten.residents.length;
+    }
+  };
+  data.animals.forEach(verifyAnimal);
+
+  return count;
 }
 
 
