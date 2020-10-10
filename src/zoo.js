@@ -57,11 +57,10 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  const { animals } = data;
-  if(species) return (animals.find((item) => item.name === species)).residents.length;
+  if(species) return (data.animals.find((item) => item.name === species)).residents.length;
 
   let exitObj= {};
-  animals.forEach((animal) => {
+  data.animals.forEach((animal) => {
     let obj = {};
     obj[`${animal.name}`] = animal.residents.length;    
     exitObj = Object.assign(exitObj, obj)    
