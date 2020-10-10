@@ -60,21 +60,21 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   };
 }
 
-
 function animalCount(species) {
-  // seu código aqui
+
 }
 
+
 function entryCalculator(entrants) {
-  // seu código aqui
+
 }
 
 function animalMap(options) {
-  // seu código aqui
+
 }
 
 function schedule(dayName) {
-  // seu código aqui
+
 }
 
 function oldestFromFirstSpecies(id) {
@@ -82,7 +82,15 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const adult = Object.values(data.prices)[0] * Number(`0.${percentage}`);
+  const resultAdult = Object.values(data.prices)[0] + adult + 0.001;
+  const senior = Object.values(data.prices)[1] * Number(`0.${percentage}`);
+  const resultSenior = Object.values(data.prices)[1] + senior + 0.001;
+  const child = Object.values(data.prices)[2] * Number(`0.${percentage}`);
+  const resultChild = Object.values(data.prices)[2] + child + 0.001;
+  data.prices.Adult = parseFloat(resultAdult.toFixed(2));
+  data.prices.Senior = parseFloat(resultSenior.toFixed(2));
+  data.prices.Child = parseFloat(resultChild.toFixed(2));
 }
 
 function employeeCoverage(idOrName) {
