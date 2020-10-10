@@ -102,7 +102,7 @@ function entryCalculator(entrants) {
   return priceTotal;
 }
 
-const filterResidents = (sex, name, residents ) => {
+const filterResidents = (sex, name, residents) => {
   const residentsNames = {};
 
   residents.filter((resident) => {
@@ -114,7 +114,7 @@ const filterResidents = (sex, name, residents ) => {
   });
 
   return residentsNames;
-}
+};
 
 function animalMap(options) {
   const maped = {};
