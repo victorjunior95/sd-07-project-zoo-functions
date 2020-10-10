@@ -116,7 +116,13 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const decimalPercentage = 1 + (percentage / 100);
+  const { Adult, Senior, Child } = data.prices;
+  Object.assign(data.prices = {
+    Adult: Number(((Adult * decimalPercentage) + 0.001).toFixed(2)),
+    Senior: Number(((Senior * decimalPercentage) + 0.001).toFixed(2)),
+    Child: Number(((Child * decimalPercentage) + 0.001).toFixed(2)),
+  });
 }
 
 function employeeCoverage(idOrName) {
@@ -138,5 +144,3 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
-
-schedule('Sunday');
