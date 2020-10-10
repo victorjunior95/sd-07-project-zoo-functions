@@ -30,7 +30,8 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  
+  // https://www.tutorialspoint.com/object-assign-in-javascript
+  return Object.assign({}, personalInfo, associatedWith);
 }
 
 function isManager(id) {
