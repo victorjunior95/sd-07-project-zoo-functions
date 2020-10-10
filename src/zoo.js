@@ -22,13 +22,13 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   return animals.find(species => species.name === animal)
-  .residents.every(resident => resident.age > age);
+    .residents.every(resident => resident.age > age);
 }
 
 function employeeByName(employeeName) {
   const employeeObject = {};
   Object.assign(employeeObject, employees
-  .find(employee => employee.firstName === employeeName || employee.lastName === employeeName));
+    .find(employee => employee.firstName === employeeName || employee.lastName === employeeName));
   return employeeObject;
 }
 
@@ -65,9 +65,9 @@ function animalCount(species) {
   };
   if (species !== undefined) {
     animalQuantities = animals
-    .find(animal => animal.name === species)
-    .residents
-    .length;
+      .find(animal => animal.name === species)
+      .residents
+      .length;
   }
   return animalQuantities;
 }
@@ -99,8 +99,20 @@ function schedule(dayName) {
   return scheduleForHuman;
 }
 
+const getTheBiggest = arr => arr.reduce((acc, curr) => {
+  if (acc.age > curr.age) {
+    return acc;
+  }
+  return curr;
+});
+
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const firstSpecieResponsible = employees.find(employee => employee.id === id)
+    .responsibleFor[0];
+  let oldestAnimal = animals.find(animal => animal.id === firstSpecieResponsible)
+    .residents;
+  oldestAnimal = getTheBiggest(oldestAnimal);
+  return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
 
 function increasePrices(percentage) {
