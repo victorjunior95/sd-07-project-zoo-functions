@@ -28,7 +28,7 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(employeeName) {
   if (!employeeName) return {};
-  const employeed = data.employees.find(({ firstName, lastName }) => {
+  const employeed = employees.find(({ firstName, lastName }) => {
     const verified = employeeName === firstName || employeeName === lastName;
 
     return verified;
@@ -52,7 +52,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const manager = data.employees.some(({ managers }) => {
+  const manager = employees.some(({ managers }) => {
     const existId = managers.some(idManager => idManager === id);
 
     return existId;
@@ -70,7 +70,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     responsibleFor,
   };
 
-  data.employees.push(newEmployee);
+  employees.push(newEmployee);
 }
 
 function animalCount(species) {
@@ -131,9 +131,9 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  const employee = data.employees.find(employee => id === employee.id);
+  const employeed = employees.find(employee => id === employee.id);
 
-  const firstAnimal = data.animals.find(animal => employee.responsibleFor[0] === animal.id);
+  const firstAnimal = data.animals.find(animal => employeed.responsibleFor[0] === animal.id);
 
   const animalOlder = firstAnimal.residents.sort((first, second) => second.age - first.age)[0];
 
