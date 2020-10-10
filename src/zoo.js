@@ -17,24 +17,16 @@ function animalsByIds(...ids) {
   return animals.filter(animal => ids.includes(animal.id));
 }
 
-// function animalsOlderThan(animal, age) {
-//   const { animals } = data;
-//   animals.forEach(specie => {
-//     if(specie === animal) {
-//       return animals.every(animal =>animal.residents.age > age);
-//     }
-//   });
-// }
 function animalsOlderThan(animal, age) {
   const { animals } = data;
   return animals.find(({ name }) => name === animal)
   .residents.every(({ age: ageSpecie }) => ageSpecie > age);
 }
-// console.log(animalsOlderThan('otters', 7));
-// console.log(animalsOlderThan('pinguins', 10));
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  const { employees } = data;
+  if (!employeeName) return {};
+  return employees.find(pers => pers.firstName === employeeName || pers.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
