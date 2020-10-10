@@ -129,7 +129,7 @@ Antes de começar analise o arquivo `src/data.js`, para ver os dados que serão 
 
 ### 7- Implemente a função animalCount:
   - [ ] Sem parâmetros, retorna animais e suas quantidades
-  - [ ] Com o nome de uma espécie de animal, retorna somente a quantidade
+  - [X] Com o nome de uma espécie de animal, retorna somente a quantidade
 
 ### 8- Implemente a função entryCalculator:
   - [ ] Retorna 0 se nenhum argumento for passado

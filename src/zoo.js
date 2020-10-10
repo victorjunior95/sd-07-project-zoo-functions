@@ -59,6 +59,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 function animalCount(species) {
   // Sem parâmetros, retorna animais e suas quantidades
   // Com o nome de uma espécie de animal, retorna somente a quantidade
+  return data.animals.find(name => name.name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
