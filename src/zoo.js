@@ -1,4 +1,5 @@
 const { animals } = require('./data');
+const { employees } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -14,10 +15,9 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
     let arr = [];
-    const idAnimals = animals.filter((animal, i) => (
-        animal.id === ids[i]));
+    const idAnimals = animals.filter((animal, i) => (animal.id === ids[i]));
     if (idAnimals !== undefined) {
-        arr = (idAnimals);
+        arr = idAnimals;
     }
 
     return arr;
@@ -29,11 +29,25 @@ function animalsOlderThan(animal, age) {
 }
 
 
-function employeeByName(employeeName) {}
+function employeeByName(employeeName) {
+    let obj = {};
 
-function createEmployee(personalInfo, associatedWith) {}
+    const employInput = employees.find(employ => employ.firstName === employeeName ||
+        employ.lastName === employeeName);
 
-function isManager(id) {}
+    if (employInput !== undefined) {
+        obj = employInput;
+    }
+    return obj;
+}
+
+function createEmployee(personalInfo, associatedWith) {
+    return {...personalInfo, ...associatedWith }
+}
+
+function isManager(id) {
+
+}
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {}
 
