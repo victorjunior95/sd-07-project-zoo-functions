@@ -161,7 +161,11 @@ function employeeCoverage(idOrName) {
 
   if (idOrName) {
     employeesUsed = employeesUsed.filter(({ id, firstName, lastName }) => {
-      return id === idOrName || firstName === idOrName || lastName === idOrName;
+      const isId = id === idOrName;
+      const isFirstName = firstName === idOrName;
+      const isLastName = lastName === idOrName;
+      
+      return isId || isFirstName || isLastName;
     });
   }
 
