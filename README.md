@@ -104,12 +104,12 @@ Utilize as novas funcionalidades do ES6 como arrow functions, template literals,
 
 Antes de começar analise o arquivo `src/data.js`, para ver os dados que serão usados.
 
-### [ ] 1- Implemente a função animalsByIds:
+### 1- Implemente a função animalsByIds:
   - [X] Caso receba nenhum parâmetro, necessário retornar um array vazio
   - [X] Ao receber como parâmetro um único id, retorna os animais com este id
   - [X] Ao receber mais de um id, retorna os animais que têm um desses ids
 
-### [ ] 2- Implemente a função animalsOlderThan:
+### 2- Implemente a função animalsOlderThan:
   - [X] Ao passar o nome de uma espécie e uma idade, testa se todos os animais desta
  espécie possuem a idade mínima especificada
 
