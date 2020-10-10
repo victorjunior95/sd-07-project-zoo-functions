@@ -41,7 +41,8 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  return { id, firstName, lastName, managers, responsibleFor };
+  const { employees } = data;
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
@@ -60,36 +61,38 @@ function entryCalculator(entrants = 0) {
 }
 
 function animalMap(options) {
-  const animals = data.animals;
+  const { animals } = data;
   const locations = ['NE', 'NW', 'SE', 'SW'];
   const genres = ['male', 'female'];
+
   if (!options || !options.includeNames) {
     const finalLocations = locations.map((location) => {
-      return [
-        location,
-        animals.filter((animal) => animal.location === location).map((animal) => animal.name),
-      ];
+      const animalsLocation = animals.filter((animal) => animal.location === location);
+      const animalsInfo = animalsLocation.map((animal) => animal.name);
+      return [location, animalsInfo];
     });
+
     return Object.fromEntries(finalLocations);
   }
+
   const finalLocations = locations.map((location) => {
-    return [
-      location,
-      animals
-        .filter((animal) => animal.location === location)
-        .map((animal) => {
-          let baseReturn = animal.residents.map((resident) => resident.name);
-          genres.forEach((genre) => {
-            if (options.sex === genre) {
-              const filteredGenre = animal.residents.filter((resident) => resident.sex === genre);
-              baseReturn = filteredGenre.map((names) => names.name);
-            }
-            if (options.sorted === true) baseReturn.sort();
-          });
-          return { [animal.name]: baseReturn };
-        }),
-    ];
+    const animalsLocation = animals.filter((animal) => animal.location === location);
+
+    const formatedAnimals = animalsLocation.map((animalsInfo) => {
+      const { name: specie, residents: infos } = animalsInfo;
+      let names = infos.map((animalInfo) => animalInfo.name);
+
+      genres.forEach((sex) => {
+        const filteredSex = infos.filter((animal) => animal.sex === sex);
+        if (options.sex === sex) names = filteredSex.map((animalInfo) => animalInfo.name);
+      });
+
+      if (options.sorted === true) names.sort();
+      return { [specie]: names };
+    });
+    return [location, formatedAnimals];
   });
+
   return Object.fromEntries(finalLocations);
 }
 
@@ -105,24 +108,26 @@ function schedule(dayName) {
   const days = Object.keys(data.hours);
   const hours = timeConverter();
 
-  const zoo = Object.fromEntries(
-    days.map((day, index) => {
-      const hour = hours[index];
-      if (hour.open !== '0am') {
-        return [day, `Open from ${hour.open} until ${hour.close}`];
-      }
-      return [day, `CLOSED`];
-    })
-  );
+  const daysInfo = days.map((day, index) => {
+    const { open, close } = hours[index];
+
+    if (open !== '0am') return [day, `Open from ${open} until ${close}`];
+    return [day, `CLOSED`];
+  });
+
+  const zoo = Object.fromEntries(daysInfo);
+
   if (!dayName) return zoo;
   return { [dayName]: zoo[dayName] };
 }
 
 function oldestFromFirstSpecies(id) {
-  const filteredId = data.employees.filter((employee) => employee.id === id);
+  const { animals, employees } = data;
+
+  const filteredId = employees.filter((employee) => employee.id === id);
   const filteredIdAnimal = filteredId.map((animals) => animals.responsibleFor).pop()[0];
-  const animals = data.animals.find((animal) => animal.id === filteredIdAnimal).residents;
-  const oldest = animals.reduce((previousAnimal, currentAnimal) => {
+  const filteredAnimals = animals.find((animal) => animal.id === filteredIdAnimal).residents;
+  const oldest = filteredAnimals.reduce((previousAnimal, currentAnimal) => {
     const { age: ageP } = previousAnimal;
     const { age: ageC } = currentAnimal;
 
