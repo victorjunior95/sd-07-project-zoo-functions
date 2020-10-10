@@ -14,11 +14,11 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   // https://stackoverflow.com/questions/57861821/how-to-return-specific-values-from-a-filter-in-javascript
-  return animals.filter(animal => ids.includes(animal.id));
+  return data.animals.filter(animal => ids.includes(animal.id));
 }
 
 function animalsOlderThan(animal, age) {
-  const specie = animals.find(specieName => animal === specieName.name);
+  const specie = data.animals.find(specieName => animal === specieName.name);
   return !(specie.residents.some(specieAge => age > specieAge.age));
 }
 
@@ -38,8 +38,16 @@ function isManager(id) {
   return data.employees.some(employee => employee.managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  return data.employees.push(
+    {
+      id,
+      firstName,
+      lastName,
+      managers,
+      responsibleFor
+    }
+  )
 }
 
 function animalCount(species) {
