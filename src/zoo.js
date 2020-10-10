@@ -167,6 +167,17 @@ function animalMap(options) {
 
 function schedule(dayName) {
   // seu código aqui
+  const { hours } = data;
+  // const { Tuesday, Wednesday, Thursday, Friday, Saturday, Monday } = hours;
+  const workingPeriod = {};
+  Object.entries(hours).forEach((day) => workingPeriod[`${day[0]}`] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`)
+  workingPeriod.Monday = 'CLOSED';
+  if (dayName === undefined) {
+    return workingPeriod;
+  }
+  const weekDayWorkingPeriod = {};
+  weekDayWorkingPeriod[`${dayName}`] = workingPeriod[`${dayName}`];
+  return weekDayWorkingPeriod;
 }
 
 function oldestFromFirstSpecies(id) {
