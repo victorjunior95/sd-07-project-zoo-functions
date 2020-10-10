@@ -60,10 +60,10 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   // find me retorna o objeto todo
   // com o map eu consigo buscar todos os arrays managers
-  const funcionario = employees.find((busca) => busca.id === id)
+  const funcionario = employees.find(busca => busca.id === id);
   if (funcionario.managers.length > 0) return true;
   return false;
-  }
+}
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
