@@ -19,7 +19,8 @@ function animalsOlderThan(animal, age) {
   return data.animals.find(species => species.name === animal).residents.every(i => i.age >= age);
 }
 
-function employeeByName(emp = '{}') {
+function employeeByName(emp) {
+  if (!emp) return {};
   return data.employees.find(({ firstName, lastName }) => firstName === emp || lastName === emp);
 }
 
