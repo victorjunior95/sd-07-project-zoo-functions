@@ -47,7 +47,11 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (!entrants || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  return Object.keys(entrants).reduce((acc, current) =>
+    acc + (entrants[current] * data.prices[current]), 0);
 }
 
 function animalMap(options) {
@@ -72,7 +76,7 @@ function increasePrices(percentage) {
   return prices;
 }
 
-console.log(increasePrices(50));
+// console.log(increasePrices(50));
 
 function employeeCoverage(idOrName) {
   // seu código aqui
