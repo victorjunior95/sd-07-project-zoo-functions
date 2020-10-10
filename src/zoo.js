@@ -41,7 +41,7 @@ possuem a idade mínima especificada
 function animalsOlderThan(animal, age) {
   const currentAnimal = animals.find(animalsObject => animalsObject.name === animal);
   const { residents } = currentAnimal;
-  return residents.every((item) => item.age > age);
+  return residents.every(item => item.age > age);
 }
 
 /*
@@ -58,8 +58,8 @@ Quando provido o último nome do funcionário, retorna o objeto do funcionário
 
 function employeeByName(employeeName) {
   const { employees } = data;
-  const [expectedObject = {}] = employees.filter(item => item.
-    firstName === employeeName || item.lastName === employeeName);
+  const [expectedObject = {}] = employees.filter(item => item
+    .firstName === employeeName || item.lastName === employeeName);
   return expectedObject;
 }
 
@@ -88,7 +88,7 @@ Testa se o id passado é de um gerente
 */
 
 function isManager(id) {
-  const {employees} = data;
+  const { employees } = data;
   return employees.find(item => item.id === id);
 }
 
