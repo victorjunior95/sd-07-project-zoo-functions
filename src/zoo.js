@@ -136,9 +136,10 @@ function oldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   const calc = percentage / 100;
 
-  for (let price in data.prices) {
+  for (const price in data.prices) {
+    const current = data.prices[price];
     if (calc) {
-      data.prices[price] = Math.round(parseFloat((data.prices[price] + (data.prices[price] * calc)) * 100).toPrecision(4)) / 100;
+      data.prices[price] = Math.round(parseFloat((current + (current * calc)) * 100).toPrecision(4)) / 100;
     }
   }
 
