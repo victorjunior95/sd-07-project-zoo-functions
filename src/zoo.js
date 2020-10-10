@@ -131,6 +131,38 @@ function entryCalculator(entrants) {
 
 function animalMap(options) {
   // seu código aqui
+  const { animals } = data;
+  const result = {};
+  result.NE = [];
+  result.NW = [];
+  result.SE = [];
+  result.SW = [];
+  if (typeof options === 'object') {
+    if (options.includeNames === true) {
+      animals.forEach((animal) => {
+        const obj = {}
+        result[`${animal.location}`].push(obj);
+        obj[`${animal.name}`] = [];
+        let residentsArray = animal.residents;
+        if (options.sex === 'female') {
+          residentsArray = residentsArray.filter((resident) => resident.sex === 'female');
+        }
+        residentsArray.forEach((resident) => obj[`${animal.name}`].push(resident.name));
+        if (options.sorted === true) {
+          obj[`${animal.name}`].sort();
+        }
+      })
+    } else {
+      animals.forEach((animal) => {
+        result[`${animal.location}`].push(animal.name);
+      })  
+    }
+  } else {
+    animals.forEach((animal) => {
+      result[`${animal.location}`].push(animal.name);
+    })
+  }
+  return result;
 }
 
 function schedule(dayName) {
