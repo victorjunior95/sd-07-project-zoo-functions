@@ -66,7 +66,7 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  employees.push({ id, firstName, lastName, managers, responsibleFor });
+ employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
@@ -112,4 +112,3 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
-console.log(addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe'));
