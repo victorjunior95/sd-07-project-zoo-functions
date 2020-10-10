@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 // const { animals } = require('./data');
+// const { employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -34,16 +35,25 @@ function employeeByName(employeeName) {
   return data.employees.filter(e => e.firstName === employeeName || e.lastName === employeeName)[0];
 }
 
-console.log(employeeByName());
-console.log(employeeByName('Nigel'));
-console.log(employeeByName('Nelson'));
-
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
 
 function isManager(id) {
   // seu código aqui
+  const managerList = [];
+
+  for (let i = 0; i < data.employees.length; i += 1) {
+    for (let k = 0; k < data.employees[i].managers.length; k += 1) {
+      managerList.push(data.employees[i].managers[k]);
+    }
+  }
+
+  return managerList.some(e => e === id);
+}
+
+for (let i = 0; i < data.employees.length; i += 1) {
+  console.log(isManager(data.employees[i].id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
