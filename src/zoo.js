@@ -1,3 +1,4 @@
+const { employees } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -130,7 +131,13 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  //
+  const employee = data.employees.find(employee => id === employee.id);
+
+  const firstAnimal = data.animals.find(animal => employee.responsibleFor[0] === animal.id);
+
+  const animalOlder = firstAnimal.residents.sort((first, second) => second.age - first.age)[0];
+
+  return [animalOlder.name, animalOlder.sex, animalOlder.age];
 }
 
 function increasePrices(percentage) {
