@@ -33,14 +33,19 @@ function employeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  data.animals = { ...personalInfo, ...associatedWith };
+  const newArray = data.animals;
+  return newArray;
 }
 
 function isManager(id) {
   // seu código aqui
+  return data.employees.some(({ managers }) => managers[0] === id || managers[1] === id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
+
 }
 
 function animalCount(species) {
