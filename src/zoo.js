@@ -64,35 +64,30 @@ function entryCalculator(entrants = {}) {
   return price;
 }
 
-
 function animalMap(options = {}) {
   const out = { NE: [], NW: [], SE: [], SW: [] };
-  if (options.includeNames) {
-    if (options.sex !== undefined) {
-      sexDefined();
-    } else {
-      animals.forEach(({ name, location, residents }) =>
-        out[location].push({ [name]: residents.map(resident => resident.name) }),
-      );
-    }
-    if (options.sorted) {
-      Object.keys(out).forEach(key =>
-        out[key].forEach(element => element[Object.keys(element)].sort()),
-      );
-    }
-  } else {
-    animals.forEach(({ location, name }) => out[location].push(name));
+  if (!options.includeNames) {
+    return animals.forEach(({ location, name }) => out[location].push(name));
   }
-  return out;
-
-  function sexDefined() {
-    animals.forEach(({ name, location, residents }) => out[location].push({
-      [name]: residents
-        .filter(resident => resident.sex === options.sex)
-        .map(resident => resident.name),
-    })
+  if (options.sex !== undefined) {
+    animals.forEach(({ name, location, residents }) =>
+      out[location].push({
+        [name]: residents
+          .filter(resident => resident.sex === options.sex)
+          .map(resident => resident.name),
+      }),
+    );
+  } else {
+    animals.forEach(({ name, location, residents }) =>
+      out[location].push({ [name]: residents.map(resident => resident.name) }),
     );
   }
+  if (options.sorted) {
+    Object.keys(out).forEach(key =>
+      out[key].forEach(element => element[Object.keys(element)].sort()),
+    );
+  }
+  return out;
 }
 
 function schedule(dayName) {
