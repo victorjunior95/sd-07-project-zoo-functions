@@ -10,8 +10,8 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const animals = require('./data').animals;
-const employees = require('./data').employees;
+const { animals } = data;
+const { employees } = data;
 
 function animalsByIds(...ids) {
   const out = [];
@@ -63,12 +63,33 @@ function entryCalculator(entrants = {}) {
   return price;
 }
 
-function animalMap(options) {}
+function animalMap(options) {
+  let out = { NE: [], NW: [], SE: [], SW: [] };
+  if (options.includeNames === true) {
+    if (options.sex !== undefined) {
+      animals.forEach(
+        ({ name, location, residents }) =>
+          (out[location][name] = residents
+            .filter(resident => resident.sex === options.sex)
+            .map(resident => resident.name)),
+      );
+    } else {
+      animals.forEach(
+        ({ name, location, residents }) =>
+          (out[location][name] = residents.map(resident => resident.name)),
+      );
+    }
+  } else {
+    animals.forEach(({ location, name }) => out[location].push(name));
+  }
+  console.log(out);
+  return out;
+}
+animalMap({includeNames:true, sex: 'female' });
 
 function schedule(dayName) {
   const out = {};
-
-  Object.keys(data.hours).forEach((hour) => {
+  Object.keys(data.hours).forEach(hour => {
     if (data.hours[hour].open === data.hours[hour].close) {
       out[hour] = 'CLOSED';
     } else {
@@ -80,7 +101,6 @@ function schedule(dayName) {
   }
   return out;
 }
-console.log(schedule());
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
