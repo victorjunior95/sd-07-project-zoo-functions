@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees, prices } = data;
+const { animals, employees, prices, hours } = data;
 
 function animalsByIds(...ids) {
   const resp = [];
@@ -84,7 +84,6 @@ function entryCalculator(entrants = 0) {
   const s = Senior * prices.Senior;
   return Adult || Child || Senior ? a + c + s : 0;
 }
-console.log(entryCalculator({}));
 //-------------------------------------------------------------------------------------
 // const filterAnimals = (region) =>
 //   animals.filter((animal) => animal.location === region);
@@ -136,13 +135,36 @@ function animalMap({ includeNames = false, sorted = false }) {
   // }
   // return objResp;
 }
+//----------------------------------------------------------------------------
+const convertHour = (hour = 0) => (hour > 12 ? `${hour - 12}pm` : `${hour}am`);
+
+const modifier = (hr) => {
+  if (hr[1].open === 0 && hr[1].close === 0) {
+    hours[hr[0]] = 'CLOSED';
+  } else {
+    hours[hr[0]] = `Open from ${convertHour(hr[1].open)} until ${convertHour(
+      hr[1].close,
+    )}`;
+  }
+};
 
 function schedule(dayName) {
-  // seu código aqui
+  if (dayName === undefined) {
+    const arrHours = Object.entries(hours);
+    arrHours.forEach(modifier);
+    return hours;
+  }
+  return { [dayName]: hours[dayName] };
 }
+//----------------------------------------------------------------------------
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const choosed = employees.find(({ id: empId }) => empId === id);
+  const animalChoosed = animals.find(
+    ({ id: animId }) => animId === choosed.responsibleFor[0],
+  );
+  animalChoosed.residents.sort((a, b) => b.age - a.age);
+  return Object.values(animalChoosed.residents[0]);
 }
 
 function increasePrices(percentage) {
