@@ -22,16 +22,21 @@ function animalsByIds(...ids) {
   return animalsId;
 }
 
-console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'));
-
 function animalsOlderThan(animal, age) {
   // seu código aqui
   return data.animals.find(an => an.name === animal).residents.every(ag => ag.age >= age);
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) {
+    return { };
+  }
+  return data.employees.filter(e => e.firstName === employeeName || e.lastName === employeeName)[0];
 }
+
+console.log(employeeByName());
+console.log(employeeByName('Nigel'));
+console.log(employeeByName('Nelson'));
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
