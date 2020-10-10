@@ -68,7 +68,7 @@ function animalCount(species) {
   let animalsCont = null;
   if (species === undefined) {
     animalsCont = {};
-    data.animals.forEach(animal => {
+    data.animals.forEach((animal) => {
       animalsCont = Object.assign(animalsCont, { [animal.name]: animal.residents.length });
       return animalsCont;
     });
