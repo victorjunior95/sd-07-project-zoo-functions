@@ -125,8 +125,8 @@ function entryCalculator(entrants) {
   if (entrants === undefined) {
     return result;
   }
-  clients.forEach(client => {
-    result += checkKey(entrants, client)
+  clients.forEach((client) => {
+    result += checkKey(entrants, client);
   });
   return result;
 }
@@ -240,7 +240,6 @@ const searchEmployee = (identification, obj) => {
   if (identification.length === 36) {
     const employer = employees.find(employee => employee.id === identification);
     implementObject(employer, obj);
-    return obj;
   }
   if (identification.length < 36) {
     let employer = employees.find(employee => employee.firstName === identification);
@@ -248,9 +247,9 @@ const searchEmployee = (identification, obj) => {
       employer = employees.find(employee => employee.lastName === identification);
     }
     implementObject(employer, obj);
-    return obj;
   }
-}
+  return obj;
+};
 
 function employeeCoverage(idOrName) {
   // seu código aqui
