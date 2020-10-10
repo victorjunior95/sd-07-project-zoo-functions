@@ -64,33 +64,36 @@ function entryCalculator(entrants = {}) {
   return price;
 }
 
-function animalMap(options) {
-  const out = { NE: [], NW: [], SE: [], SW: [] };
+function animalMap(options = {}) {
+  let out = { NE: [], NW: [], SE: [], SW: [] };
   if (options.includeNames) {
     if (options.sex !== undefined) {
-      animals.forEach(
-        ({ name, location, residents }) =>
-          (out[location][name] = residents
+      animals.forEach(({ name, location, residents }) =>
+        out[location].push({
+          [name]: residents
             .filter(resident => resident.sex === options.sex)
-            .map(resident => resident.name)),
+            .map(resident => resident.name),
+        }),
       );
     } else {
-      animals.forEach(
-        ({ name, location, residents }) =>
-          (out[location][name] = residents.map(resident => resident.name)),
+      animals.forEach(({ name, location, residents }) =>
+        out[location].push({ [name]: residents.map(resident => resident.name) }),
       );
     }
-  } else {
+    if (options.sorted) {
+      for (let i in out) {
+        out[i].forEach(element => element[Object.keys(element)].sort());
+      }
+    }
+  } else if (options.includeNames === undefined || options.includeNames === false) {
     animals.forEach(({ location, name }) => out[location].push(name));
   }
   return out;
 }
-const options = { includeNames: true, sex: 'female', sorted: true };
-animalMap(options);
 
 function schedule(dayName) {
   const out = {};
-  Object.keys(data.hours).forEach((hour) => {
+  Object.keys(data.hours).forEach(hour => {
     if (data.hours[hour].open === data.hours[hour].close) {
       out[hour] = 'CLOSED';
     } else {
