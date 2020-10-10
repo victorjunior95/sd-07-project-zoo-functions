@@ -66,8 +66,9 @@ function entryCalculator(entrants = {}) {
 
 function animalMap(options = {}) {
   const out = { NE: [], NW: [], SE: [], SW: [] };
-  if (!options.includeNames) {
-    return animals.forEach(({ location, name }) => out[location].push(name));
+  if (options.includeNames !== true) {
+    animals.forEach(({ location, name }) => out[location].push(name));
+    return out;
   }
   if (options.sex !== undefined) {
     animals.forEach(({ name, location, residents }) =>
@@ -110,11 +111,20 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.keys(data.prices).map(
+    key => (data.prices[key] = parseFloat(data.prices[key] * (percentage / 100 + 1)).toFixed(2)),
+  );
+  console.log(data.prices);
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const employee = employees.find(
+    employee =>
+      employee.name === idOrName || employee.lastName === idOrName || employee.id === idOrName,
+  );
+  const responsible = [];
+
+  return {};
 }
 
 module.exports = {
