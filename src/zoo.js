@@ -65,7 +65,7 @@ function entryCalculator(entrants = {}) {
 }
 
 function animalMap(options = {}) {
-  let out = { NE: [], NW: [], SE: [], SW: [] };
+  const out = { NE: [], NW: [], SE: [], SW: [] };
   if (options.includeNames) {
     if (options.sex !== undefined) {
       animals.forEach(({ name, location, residents }) =>
@@ -81,8 +81,10 @@ function animalMap(options = {}) {
       );
     }
     if (options.sorted) {
-      for (let i in out) {
-        out[i].forEach(element => element[Object.keys(element)].sort());
+      for (const i in out) {
+        if(out[i]!==undefined){
+          out[i].forEach(element => element[Object.keys(element)].sort());
+        }
       }
     }
   } else if (options.includeNames === undefined || options.includeNames === false) {
@@ -93,7 +95,7 @@ function animalMap(options = {}) {
 
 function schedule(dayName) {
   const out = {};
-  Object.keys(data.hours).forEach(hour => {
+  Object.keys(data.hours).forEach((hour) => {
     if (data.hours[hour].open === data.hours[hour].close) {
       out[hour] = 'CLOSED';
     } else {
