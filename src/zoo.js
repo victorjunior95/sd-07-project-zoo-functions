@@ -114,10 +114,7 @@ function animalMap(options) {
     if (options) {
       if (options.includeNames) {
         residents.filter((resident) => {
-          if (options.sex) {
-            if (options.sex === resident.sex) return true;
-            return false;
-          }
+          if (options.sex) return options.sex === resident.sex;
           return true;
         }).forEach((resident) => {
           if (!residentsNames[name]) residentsNames[name] = [resident.name];
@@ -130,9 +127,7 @@ function animalMap(options) {
           if (animal === name) {
             novo[name] = residentsNames[name];
             if (novo[name] === undefined) novo[name] = [];
-            else {
-              if (options.sorted) novo[name] = novo[name].sort();
-            }
+            if (options.sorted) novo[name] = novo[name].sort();
             return novo;
           }
 
