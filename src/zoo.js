@@ -1,4 +1,4 @@
-const { animals } = require('./data');
+const { animals, employees } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -35,12 +35,21 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
+  // FAZER DEPOIS
 
 }
 
 function isManager(id) {
-  // seu código aqui
+  const managerId = employees.some(({managers}) => managers.some(manager => manager === id));
+  return managerId
 }
+
+// function isManager(id) {
+//   const managerId = employees.every(({managers}) => {
+//     return managers.every(manager => manager !== id)
+//   })
+//   return managerId
+// }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
