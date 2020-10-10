@@ -85,8 +85,31 @@ function entryCalculator(entries = {}) {
   return 0;
 }
 
-function animalMap(options) {
-  // seu código aqui
+function animalMap({ includeNames = false, sorted = false, sex = '' } = {}) {
+  const result = data.animals
+    .reduce((acc, { location }) => ({ ...acc, [location]: [] }), {});
+  if (!includeNames) {
+    data.animals
+      .forEach(({ name, location }) => result[location].push(name));
+  } else {
+    data.animals
+      .forEach(({ name, location, residents }) => {
+        let animalNames = [];
+        if (sex) {
+          animalNames = residents
+            .filter(resident => resident.sex === sex)
+            .map(resident => resident.name);
+        } else {
+          animalNames = residents
+            .map(resident => resident.name);
+        }
+        if (sorted) {
+          animalNames.sort();
+        }
+        result[location].push({ [name]: animalNames });
+      });
+  }
+  return result;
 }
 
 function schedule(dayName) {
