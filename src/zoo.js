@@ -41,10 +41,10 @@ const createEmployee = (personalInfo, associatedWith) => {
 };
 
 const isManager = (id) => {
-  return employees.some(({ managers }) => managers.some(idManager => idManager === id));
+  return employees.some(({ managers }) => managers.some(ids => ids === id));
 };
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
   const newEmployee = {
     id,
     firstName,
@@ -54,7 +54,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   };
 
   employees.push(newEmployee);
-}
+};
 
 function animalCount(species) {
   let animalCurrent = {};
