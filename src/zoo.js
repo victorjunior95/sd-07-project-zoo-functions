@@ -123,7 +123,16 @@ Com o nome de uma espécie de animal, retorna somente a quantidade
 */
   // resident.length
 function animalCount(species) {
-
+  if (species) {
+    const expectedObject = animals.find(item => item.name === species);
+    return expectedObject.residents.length;
+  }
+  return animals.reduce((result, item) => {
+    const currentName = item.name;
+    const currentLength = item.residents.length;
+    result[currentName] = currentLength;
+    return result;
+  }, {});
 }
 
 function entryCalculator(entrants) {
