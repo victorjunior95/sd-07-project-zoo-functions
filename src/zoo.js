@@ -97,19 +97,18 @@ function schedule(dayName) {
   const arrayHours = Object.entries(hours);
   return arrayHours.reduce((allDays, currentDay) => {
     const answer = `Open from ${currentDay[1].open}am until ${(currentDay[1].close) - 12}pm`;
-    if (dayName === undefined && currentDay[1].open === 0){
-        allDays[currentDay[0]] = 'CLOSED';
+    if (dayName === undefined && currentDay[1].open === 0) {
+      allDays[currentDay[0]] = 'CLOSED';
     } else if (dayName === undefined && currentDay[1].open !== 0) {
       allDays[currentDay[0]] = answer;
     } else if (currentDay[0] === dayName && currentDay[1].open !== 0) {
       allDays[currentDay[0]] = answer;
     } else if (currentDay[0] === dayName && currentDay[1].open === 0) {
-      allDays[currentDay[0]] = `CLOSED`;
+      allDays[currentDay[0]] = 'CLOSED';
     }
-    return allDays
-  }, {})
+    return allDays;
+  }, {});
 }
-// && currentDay[0] === dayName
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
