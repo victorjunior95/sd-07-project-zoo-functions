@@ -117,7 +117,31 @@ function increasePrices(percentage) {
   console.log(data.prices);
 }
 
-function employeeCoverage(idOrName) {}
+function employeeCoverage(idOrName) {
+  if (idOrName === undefined) {
+    const out = {};
+    employees.forEach(
+      employeeSelected =>
+        (out[
+          `${employeeSelected.firstName} ${employeeSelected.lastName}`
+        ] = employeeSelected.responsibleFor.map(
+          responsible => animals.find(animal => animal.id === responsible).name,
+        )),
+    );
+    return out;
+  }
+  const employeer = employees.find(
+    employeeSelected =>
+      employeeSelected.firstName === idOrName ||
+      employeeSelected.lastName === idOrName ||
+      employeeSelected.id === idOrName,
+  );
+  const responsible = employeer.responsibleFor.map(
+    responsible => animals.find(animal => animal.id === responsible).name,
+  );
+
+  return { [`${employeer.firstName} ${employeer.lastName}`]: responsible };
+}
 
 module.exports = {
   entryCalculator,
