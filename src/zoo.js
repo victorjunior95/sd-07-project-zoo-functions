@@ -38,9 +38,9 @@ function isManager(id) {
   return employees.some(({ managers }) => managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
+};
 
 function animalCount(species) {
   // seu código aqui
@@ -67,16 +67,12 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  percentage /= 100;
-  const calc = (type, perc) => type * perc;
-  const { Adult, Senior, Child } = prices;
-  prices.Adult = parseFloat(calc(Adult, percentage) + Adult).toFixed(2);
-  prices.Senior = parseFloat(calc(Senior, percentage) + Senior).toFixed(2);
-  prices.Child = parseFloat(calc(Child, percentage) + Senior).toFixed(2);
+  Object.keys(prices).forEach((key) => {
+    prices[key] += (prices[key] * percentage) / 100.00;
+    prices[key] = Math.round(prices[key] * 100) / 100;
+  });
   return prices;
 }
-
-// console.log(increasePrices(50));
 
 function employeeCoverage(idOrName) {
   // seu código aqui
