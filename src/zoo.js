@@ -105,9 +105,41 @@ function entryCalculator(entrants) {
 function animalMap(options) {
   const maped = {};
 
-  data.animals.forEach(({ name, location }) => {
+  const residentsNames = {};
+
+  data.animals.forEach(({ name, location, residents }) => {
     if (!maped[location]) maped[location] = [name];
     else maped[location].push(name);
+
+    if (options) {
+      if (options.includeNames) {
+        residents.filter((resident) => {
+          if (options.sex) {
+            if (options.sex === resident.sex) return true;
+            return false;
+          }
+          return true;
+        }).forEach((resident) => {
+          if (!residentsNames[name]) residentsNames[name] = [resident.name];
+          else residentsNames[name].push(resident.name);
+        });
+
+        maped[location] = maped[location].map((animal) => {
+          const novo = {};
+
+          if (animal === name) {
+            novo[name] = residentsNames[name];
+            if (novo[name] === undefined) novo[name] = [];
+            else {
+              if (options.sorted) novo[name] = novo[name].sort();
+            }
+            return novo;
+          }
+
+          return animal;
+        });
+      }
+    }
   });
 
   return maped;
