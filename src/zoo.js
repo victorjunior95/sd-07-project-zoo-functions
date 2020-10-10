@@ -43,10 +43,12 @@ function employeeByName(employeeName) {
   });
   return employeeLocalized;
 }
-console.log(employeeByName('Wilburn'));
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const newEmployee = {
+    ...personalInfo, ...associatedWith,
+  };
+  return newEmployee;
 }
 
 function isManager(id) {
