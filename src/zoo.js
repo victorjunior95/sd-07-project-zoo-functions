@@ -107,9 +107,11 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  const { residents } = animals.find(name => name.id === employees.find(element => element.id === id).responsibleFor[0]);
+  const { residents } = animals.find(
+    name => name.id === employees.find(element => element.id === id).responsibleFor[0],
+  );
   const animal = residents.reduce((acc, animal) => (acc.age > animal.age ? acc : animal));
-  return [animal.name,animal.sex,animal.age]
+  return [animal.name, animal.sex, animal.age];
 }
 
 function increasePrices(percentage) {
