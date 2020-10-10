@@ -101,7 +101,7 @@ Adiciona um funcionário no fim da lista
 */
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const { employees } = data;  
+  const { employees } = data;
   const newEmployee = {
     id,
     firstName,
