@@ -64,6 +64,13 @@ function entryCalculator(entrants = {}) {
   return price;
 }
 
+
+function sort(out) {
+  Object.keys(out).forEach(key =>
+    out[key].forEach(element => element[Object.keys(element)].sort()),
+  );
+}
+
 function animalMap(options = {}) {
   const out = { NE: [], NW: [], SE: [], SW: [] };
   if (options.includeNames) {
@@ -81,9 +88,7 @@ function animalMap(options = {}) {
       );
     }
     if (options.sorted) {
-      Object.keys(out).forEach(key =>
-        out[key].forEach(element => element[Object.keys(element)].sort()),
-      );
+      sort(out);
     }
   } else {
     animals.forEach(({ location, name }) => out[location].push(name));
