@@ -1,4 +1,4 @@
-const { employees } = require('./data');
+const { employees, animals, hours, prices } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -12,27 +12,18 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(...ids) {
-  const allByIds = data.animals.filter(({ id: animalId }) => ids.find(id => id === animalId));
+const animalsByIds = (...ids) => animals.filter(({ id }) => ids.includes(id));
 
-  return ids ? allByIds : [];
-}
+const animalsOlderThan = (animal, age) => {
+  const { residents } = animals.find(({ name }) => animal === name);
 
-function animalsOlderThan(animal, age) {
-  const animalThan = data.animals.find(({ name }) => animal === name);
-
-  const olderNotThan = animalThan.residents.some(resident => resident.age < age);
-
-  return !olderNotThan;
+  return residents.every(resident => resident.age > age);
 }
 
 function employeeByName(employeeName) {
   if (!employeeName) return {};
-  const employeed = employees.find(({ firstName, lastName }) => {
-    const verified = employeeName === firstName || employeeName === lastName;
 
-    return verified;
-  });
+  const employeed = employees.find(({ firstName, lastName }) => employeeName === firstName || employeeName === lastName);
 
   return employeed;
 }
@@ -102,7 +93,7 @@ function entryCalculator(entrants) {
   return priceTotal;
 }
 
-const filterResidents = (sex, name, residents) => {
+const filterResidentsNames = (sex, name, residents) => {
   const residentsNames = {};
 
   residents.filter((resident) => {
@@ -127,7 +118,7 @@ function animalMap(options) {
 
     if (options) {
       if (options.includeNames) {
-        residentsNames = filterResidents(options.sex, name, residents);
+        residentsNames = filterResidentsNames(options.sex, name, residents);
 
         maped[location] = maped[location].map((animal) => {
           const novo = {};
