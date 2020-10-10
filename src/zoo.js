@@ -130,15 +130,20 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  //
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const calc = percentage / 100;
+  data.prices['Adult'] = Math.round(parseFloat((data.prices['Adult'] + (data.prices['Adult'] * calc)) * 100).toPrecision(4)) / 100;
+  data.prices['Senior'] = Math.round(parseFloat((data.prices['Senior'] + (data.prices['Senior'] * calc)) * 100).toPrecision(4)) / 100;
+  data.prices['Child'] = Math.round(parseFloat((data.prices['Child'] + (data.prices['Child'] * calc)) * 100).toPrecision(4)) / 100;
+
+  return data.prices;
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  //
 }
 
 module.exports = {
