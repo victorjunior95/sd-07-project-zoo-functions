@@ -144,7 +144,7 @@ const schedule = (dayName) => {
   }
 
   return scheduled;
-}
+};
 
 const oldestFromFirstSpecies = (id) => {
   const { responsibleFor } = employees.find(employee => id === employee.id);
@@ -156,18 +156,16 @@ const oldestFromFirstSpecies = (id) => {
   return [animalOlder.name, animalOlder.sex, animalOlder.age];
 };
 
-function increasePrices(percentage) {
+const increasePrices = (percentage) => {
   const calc = percentage / 100;
 
-  Object.keys(data.prices).forEach((price) => {
-    const current = data.prices[price];
-
-    data.prices[price] = Math.round(
-      parseFloat((current + (current * calc)) * 100).toPrecision(4),
+  Object.keys(prices).forEach((price) => {
+    prices[price] = Math.round(
+      parseFloat((prices[price] + (prices[price] * calc)) * 100).toPrecision(4),
     ) / 100;
   });
 
-  return data.prices;
+  return prices;
 }
 
 function employeeCoverage(idOrName) {
