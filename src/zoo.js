@@ -40,7 +40,7 @@ const createEmployee = (personalInfo, associatedWith) => {
   };
 };
 
-const isManager = (id) => employees.some(({ managers }) => managers.some(ids => ids === id));
+const isManager = id => employees.some(({ managers }) => managers.some(ids => ids === id));
 
 const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
   const newEmployee = {
@@ -57,14 +57,14 @@ const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []
 const animalCount = (species) => {
   let animalCurrent = {};
 
-  data.animals.forEach(({ name, residents }) => {
+  animals.forEach(({ name, residents }) => {
     if (!species) animalCurrent[name] = residents.length;
 
     if (species === name) animalCurrent = residents.length;
   });
 
   return animalCurrent;
-}
+};
 
 function entryCalculator(entrants) {
   let priceTotal = 0;
