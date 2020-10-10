@@ -80,13 +80,12 @@ function animalMap(options = {}) {
         out[location].push({ [name]: residents.map(resident => resident.name) }),
       );
     }
-
     if (options.sorted) {
-      Object.keys(out).forEach(element =>
-        out[element].forEach(element => element[Object.keys(element)].sort()),
+      Object.keys(out).forEach(key =>
+        out[key].forEach(element => element[Object.keys(element)].sort()),
       );
     }
-  } else if (options.includeNames === undefined || options.includeNames === false) {
+  } else {
     animals.forEach(({ location, name }) => out[location].push(name));
   }
   return out;
