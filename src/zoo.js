@@ -166,12 +166,12 @@ const increasePrices = (percentage) => {
   });
 
   return prices;
-}
+};
 
-function employeeCoverage(idOrName) {
+const employeeCoverage = (idOrName) => {
   const employeeCoveraged = {};
 
-  let employeesUsed = data.employees;
+  let employeesUsed = employees;
 
   if (idOrName) {
     employeesUsed = employeesUsed.filter(({ id, firstName, lastName }) => {
@@ -200,7 +200,7 @@ function employeeCoverage(idOrName) {
   });
 
   return employeeCoveraged;
-}
+};
 
 module.exports = {
   entryCalculator,
