@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+
 const { animals } = data;
 const { employees } = data;
 
@@ -64,7 +65,7 @@ function entryCalculator(entrants = {}) {
 }
 
 function animalMap(options) {
-  let out = { NE: [], NW: [], SE: [], SW: [] };
+  const out = { NE: [], NW: [], SE: [], SW: [] };
   if (options.includeNames) {
     if (options.sex !== undefined) {
       animals.forEach(
@@ -79,11 +80,6 @@ function animalMap(options) {
           (out[location][name] = residents.map(resident => resident.name)),
       );
     }
-    if (options.sorted) {
-      for (i in out) {
-        out[i].forEach(animal => animal.name.sort());
-      }
-    }
   } else {
     animals.forEach(({ location, name }) => out[location].push(name));
   }
@@ -94,7 +90,7 @@ animalMap(options);
 
 function schedule(dayName) {
   const out = {};
-  Object.keys(data.hours).forEach(hour => {
+  Object.keys(data.hours).forEach((hour) => {
     if (data.hours[hour].open === data.hours[hour].close) {
       out[hour] = 'CLOSED';
     } else {
