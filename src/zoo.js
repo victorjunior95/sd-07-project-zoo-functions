@@ -50,9 +50,16 @@ function isManager(id) {
 }
 
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  data.employees[data.employees.length] = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
 }
+
 
 function animalCount(species) {
   // seu código aqui
