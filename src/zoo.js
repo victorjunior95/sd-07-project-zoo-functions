@@ -65,7 +65,7 @@ function entryCalculator(entrants = {}) {
 
 function animalMap(options) {
   let out = { NE: [], NW: [], SE: [], SW: [] };
-  if (options.includeNames === true) {
+  if (options.includeNames) {
     if (options.sex !== undefined) {
       animals.forEach(
         ({ name, location, residents }) =>
@@ -79,13 +79,19 @@ function animalMap(options) {
           (out[location][name] = residents.map(resident => resident.name)),
       );
     }
+    if (options.sorted) {
+      for (i in out) {
+        out[i].forEach(animal => animal.name.sort());
+      }
+    }
   } else {
     animals.forEach(({ location, name }) => out[location].push(name));
   }
   console.log(out);
   return out;
 }
-animalMap({includeNames:true, sex: 'female' });
+const options = { includeNames: true, sex: 'female', sorted: true };
+animalMap(options);
 
 function schedule(dayName) {
   const out = {};
