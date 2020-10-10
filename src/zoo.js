@@ -16,9 +16,17 @@ const employees = data.employees;
 const prices = data.prices;
 const hours = data.hours;
 
-function animalsByIds(ids) {
+function animalsByIds(...ids) {
   // seu código aqui
-
+  const message = [];
+  let result = [];
+  if (ids) {
+    ids.forEach((element) => {
+      result = animals.find(animal => element === animal.id);
+      message.push(result);
+    });
+  }
+  return message;
 }
 
 // support animalsOlderThan
@@ -188,17 +196,26 @@ function oldestFromFirstSpecies(id) {
   const animalsChosen = animals.find(animal => animal.id === animalId).residents;
 
   const final = oldestSupport(animalsChosen);
-
   return final;
 }
 
 function increasePrices(percentage) {
   // seu código aqui
+  const increase = 1 + (percentage / 100);
+  const { Adult, Senior, Child } = prices;
+  prices.Adult = Math.round(Adult * increase).toPrecision(4);
+
+  prices.Senior = (Senior * increase).toPrecision(4);
+  prices.Child = (Child * increase).toPrecision(4);
+
+  return prices;
 }
+
 
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
+
 
 module.exports = {
   entryCalculator,
