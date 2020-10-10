@@ -155,7 +155,33 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  //
+  const employeeCoveraged = {};
+
+  let employeesUsed = data.employees;
+
+  if (idOrName) {
+    employeesUsed = employeesUsed.filter(({ id, firstName, lastName }) => {
+      return id === idOrName || firstName === idOrName || lastName === idOrName;
+    });
+  }
+
+  employeesUsed.forEach(({ firstName, lastName, responsibleFor }) => {
+    const name = `${firstName} ${lastName}`;
+
+    const animalsName = [];
+
+    const animalsResponsiblesFor = responsibleFor.map(id => id);
+
+    animalsResponsiblesFor.forEach(identify => {
+      data.animals.forEach(({ id, name }) => {
+        if (id === identify) animalsName.push(name);
+      });
+    });
+
+    employeeCoveraged[name] = animalsName;
+  });
+
+  return employeeCoveraged;
 }
 
 module.exports = {
