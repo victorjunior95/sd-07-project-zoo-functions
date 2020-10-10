@@ -40,15 +40,9 @@ const createEmployee = (personalInfo, associatedWith) => {
   };
 };
 
-function isManager(id) {
-  const manager = employees.some(({ managers }) => {
-    const existId = managers.some(idManager => idManager === id);
-
-    return existId;
-  });
-
-  return manager;
-}
+const isManager = (id) => {
+  return employees.some(({ managers }) => managers.some(idManager => idManager === id));
+};
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const newEmployee = {
