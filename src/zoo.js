@@ -26,7 +26,7 @@ const employeeByName = (name) => {
   return employees.find(({ firstName, lastName }) => name === firstName || name === lastName);
 };
 
-function createEmployee(personalInfo, associatedWith) {
+const createEmployee = (personalInfo, associatedWith) => {
   const { id, firstName, lastName } = personalInfo;
 
   const { managers, responsibleFor } = associatedWith;
@@ -38,7 +38,7 @@ function createEmployee(personalInfo, associatedWith) {
     managers,
     responsibleFor,
   };
-}
+};
 
 function isManager(id) {
   const manager = employees.some(({ managers }) => {
