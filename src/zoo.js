@@ -128,7 +128,27 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const allCoverage = {};
+  data.employees.forEach((employee) => {
+    const { firstName, lastName } = employee;
+    allCoverage[`${firstName} ${lastName}`] = employee.responsibleFor.map(
+      idAnimal => data.animals.find(animal => animal.id === idAnimal).name,
+    );
+  });
+
+  if (idOrName) {
+    const { firstName, lastName } = data.employees.find(
+      employee =>
+        idOrName === employee.id ||
+        idOrName === employee.firstName ||
+        idOrName === employee.lastName,
+    );
+    const fullName = `${firstName} ${lastName}`;
+
+    return { [fullName]: allCoverage[fullName] };
+  }
+
+  return allCoverage;
 }
 
 module.exports = {
