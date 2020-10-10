@@ -46,7 +46,7 @@ const searchNameEspecies = (species) => data.animals.find(({ name }) => name ===
 
 const listOfAnimals = () => {
   const speciesZoo = {};
-  data.animals.forEach(({ name, residents }) => {
+  data.animals.forEach(({ name, residents, }) => {
     speciesZoo[name] = residents.length;
   });
   return speciesZoo;
