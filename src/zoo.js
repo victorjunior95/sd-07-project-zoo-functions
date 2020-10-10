@@ -177,7 +177,13 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { prices } = data;
+  const { Adult, Senior, Child } = prices;
+  const per = 1 + (percentage / 100);
+  const increase = (value, percent) => parseFloat(Math.round(value * percent * 100) / 100);
+  prices.Adult = increase(Adult, per);
+  prices.Senior = increase(Senior, per);
+  prices.Child = increase(Child, per);
 }
 
 function employeeCoverage(idOrName) {
