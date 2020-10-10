@@ -99,8 +99,28 @@ function animalCount(...species) {
   return numberOfAnimals;
 }
 
-function entryCalculator(entrants) {
+function entryCalculator(entrants = 0) {
   // seu código aqui
+  if (entrants === 0) {
+    return 0;
+  } else if (Object.keys(entrants).length === 0) {
+    return 0;
+  }
+
+  const { Adult, Senior, Child } = data.prices;
+  let sum = 0;
+
+  Object.keys(entrants).forEach((key) => {
+    if (key === 'Adult') {
+      sum += (Adult * entrants[key]);
+    } else if (key === 'Senior') {
+      sum += (Senior * entrants[key]);
+    } else if (key === 'Child') {
+      sum += (Child * entrants[key]);
+    }
+  });
+
+  return sum;
 }
 
 function animalMap(options) {
