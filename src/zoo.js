@@ -20,7 +20,7 @@ function animalsOlderThan(animal, age) {
   // filtrar o animal ceto (by name)
   // verificar a idade de cada animal residente
   // retornar true ou false
-  return data.animals.filter((animal) => { animal === data.animals.name; }).forEach((age) => { data.animals.residents.age === age });
+  data.animals.filter(() => animal === name).every(() => age >= animal.age);
 }
 
 function employeeByName(employeeName) {
