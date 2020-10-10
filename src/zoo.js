@@ -112,13 +112,12 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   Object.keys(data.prices).map(
-    key => (data.prices[key] = Math.round(data.prices[key] * (((percentage / 100) + 1)) * 100) / 100),
+    key => (data.prices[key] = Math.round(data.prices[key] * (percentage / 100 + 1) * 100) / 100),
   );
   console.log(data.prices);
 }
 
-function employeeCoverage(idOrName) {
-}
+function employeeCoverage(idOrName) {}
 
 module.exports = {
   entryCalculator,
