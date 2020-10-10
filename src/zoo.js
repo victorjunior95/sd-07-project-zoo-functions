@@ -110,33 +110,33 @@ function animalCount(species) {
 
 const checkKey = (obj, key) => {
   let sum = 0;
-  const check = obj.hasOwnProperty(`${key}`);
+  const check = Object.prototype.hasOwnProperty.call(obj, `${key}`);
   if (check === true) {
     const numbers = obj[`${key}`] * prices[`${key}`];
     sum += numbers;
   }
   return sum;
-}
+};
 
 function entryCalculator(entrants) {
   // seu código aqui
-  const clients = ['Adult', 'Senior', 'Child']
+  const clients = ['Adult', 'Senior', 'Child'];
   let result = 0;
   if (entrants === undefined) {
     return result;
   }
-  clients.forEach(client => result += checkKey(entrants, client))
+  clients.forEach(client => {
+    result += checkKey(entrants, client)
+  });
   return result;
 }
-
-console.log(entryCalculator({ 'Child': 1, 'Senior': 1 }))
 
 const implementMapKeys = (obj) => {
   obj.NE = [];
   obj.NW = [];
   obj.SE = [];
   obj.SW = [];
-}
+};
 
 const mapWithNames = (map, details) => {
   const { animals } = data;
@@ -154,7 +154,7 @@ const mapWithNames = (map, details) => {
     }
   });
   return map;
-}
+};
 
 const implementMapValues = (map) => {
   const { animals } = data;
@@ -162,7 +162,7 @@ const implementMapValues = (map) => {
     map[`${animal.location}`].push(animal.name);
   });
   return map;
-}
+};
 
 function animalMap(options) {
   // seu código aqui
@@ -172,10 +172,10 @@ function animalMap(options) {
     if (options.includeNames === true) {
       mapWithNames(result, options);
     } else {
-      implementMapValues(result)
+      implementMapValues(result);
     }
   } else {
-    implementMapValues(result)
+    implementMapValues(result);
   }
   return result;
 }
@@ -184,8 +184,8 @@ function schedule(dayName) {
   // seu código aqui
   const { hours } = data;
   const workingPeriod = {};
-  Object.entries(hours).forEach(day => {
-    workingPeriod[`${day[0]}`] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`
+  Object.entries(hours).forEach((day) => {
+    workingPeriod[`${day[0]}`] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
   });
   workingPeriod.Monday = 'CLOSED';
   if (dayName === undefined) {
@@ -199,8 +199,8 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {
   // seu código aqui
   const { animals, employees } = data;
-  const employee = employees.find(employee => employee.id === id);
-  const employeeFirstAnimal = animals.find(animal => employee.responsibleFor[0] === animal.id);
+  const employer = employees.find(employee => employee.id === id);
+  const employeeFirstAnimal = animals.find(animal => employer.responsibleFor[0] === animal.id);
   let oldestAnimal;
   let oldestAnimalAge = 0;
   employeeFirstAnimal.residents.forEach((resident) => {
@@ -225,35 +225,43 @@ function increasePrices(percentage) {
 }
 
 const implementObject = (parameter, obj) => {
- const animalsArray = [];
+  const { animals } = data;
+  const animalsArray = [];
   obj[`${parameter.firstName} ${parameter.lastName}`] = animalsArray;
   parameter.responsibleFor.forEach((animalId) => {
-  const search = animals.find(animal => animal.id === animalId);
-  animalsArray.push(search.name);
+    const search = animals.find(animal => animal.id === animalId);
+    animalsArray.push(search.name);
   });
   return obj;
+};
+
+const searchEmployee = (identification, obj) => {
+  const { employees } = data;
+  if (identification.length === 36) {
+    const employer = employees.find(employee => employee.id === identification);
+    implementObject(employer, obj);
+    return obj;
+  }
+  if (identification.length < 36) {
+    let employer = employees.find(employee => employee.firstName === identification);
+    if (employer === undefined) {
+      employer = employees.find(employee => employee.lastName === identification);
+    }
+    implementObject(employer, obj);
+    return obj;
+  }
 }
 
 function employeeCoverage(idOrName) {
   // seu código aqui
-  const { animals, employees } = data;
-  const result = {}
+  const { employees } = data;
+  const result = {};
   if (idOrName === undefined) {
-    employees.forEach(employee => {
+    employees.forEach((employee) => {
       implementObject(employee, result);
     });
   } else {
-    if (idOrName.length === 36) {
-      const employer = employees.find(employee => employee.id === idOrName);
-      implementObject(employer, result);
-    }
-    if (idOrName.length < 36) {
-      let employer = employees.find((employee) => employee.firstName === idOrName);
-      if (employer === undefined) {
-        employer = employees.find((employee) => employee.lastName === idOrName);
-      }
-      implementObject(employer, result);
-    }
+    searchEmployee(idOrName, result);
   }
 
   return result;
