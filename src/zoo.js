@@ -37,14 +37,14 @@ function employeeByName(employeeName) {
 function createEmployee(personalInfo, associatedWith) {
   const newEmployee = {
     ...personalInfo,
-    ...associatedWith
-  }
-  return newEmployee
+    ...associatedWith,
+  };
+  return newEmployee;
 }
 
 function isManager(id) {
-  const managerId = employees.some(({managers}) => managers.some(manager => manager === id));
-  return managerId
+  const managerId = employees.some(( {managers} ) => managers.some(manager => manager === id));
+  return managerId;
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -54,17 +54,16 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     lastName,
     managers,
     responsibleFor,
-  }
-  
+  };
   employees.push(newEmployee);
 }
 
 function animalCount(species) {
   if (species === undefined) {
-    const allAnimalsObject = animals.reduce((allAnimals, animals) => {
-      allAnimals[animals.name] = animals.residents.length;
+    const allAnimalsObject = animals.reduce((allAnimals, animal) => {
+      allAnimals[animal.name] = animal.residents.length;
       return allAnimals;
-    }, {}) 
+    }, {});
     return allAnimalsObject;
   }
 
@@ -78,9 +77,9 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  if (entrants === undefined || entrants === {}) {
-    return 0;
-  }
+  // if (entrants === undefined || entrants === {}) {
+  //   return 0;
+  // }
 }
 
 function animalMap(options) {
