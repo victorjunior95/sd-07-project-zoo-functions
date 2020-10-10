@@ -110,8 +110,8 @@ function oldestFromFirstSpecies(id) {
   const { residents } = animals.find(
     name => name.id === employees.find(element => element.id === id).responsibleFor[0],
   );
-  const animal = residents.reduce((acc, animal) => (acc.age > animal.age ? acc : animal));
-  return [animal.name, animal.sex, animal.age];
+  const myAnimal = residents.reduce((acc, animal) => (acc.age > animal.age ? acc : animal));
+  return [myAnimal.name, myAnimal.sex, myAnimal.age];
 }
 
 function increasePrices(percentage) {
@@ -141,7 +141,7 @@ function employeeCoverage(idOrName) {
       employeeSelected.id === idOrName,
   );
   const responsible = employeer.responsibleFor.map(
-    responsible => animals.find(animal => animal.id === responsible).name,
+    isresponsible => animals.find(animal => animal.id === isresponsible).name,
   );
 
   return { [`${employeer.firstName} ${employeer.lastName}`]: responsible };
