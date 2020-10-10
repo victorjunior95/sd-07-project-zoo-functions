@@ -54,8 +54,9 @@ function employeeByName(employeeName) {
     || employee.lastName === employeeName);
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+function createEmployee(personalInfo, ...associatedWith) {
+  const newEmployee = {}
+  return Object.assign(newEmployee, personalInfo, ...associatedWith);
 }
 
 function isManager(id) {
