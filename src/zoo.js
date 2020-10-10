@@ -89,15 +89,41 @@ Testa se o id passado é de um gerente
 
 function isManager(id) {
   const { employees } = data;
-  return employees.find(item => item.id === id);
+  return employees.some(item => item['managers'].includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+/*
+
+6- Implemente a função addEmployee:
+
+Adiciona um funcionário no fim da lista
+
+*/
+
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const { employees } = data;  
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  employees.push(newEmployee);
 }
 
+/*
+
+7- Implemente a função animalCount:
+
+Sem parâmetros, retorna animais e suas quantidades
+
+Com o nome de uma espécie de animal, retorna somente a quantidade
+
+*/
+//resident.length
 function animalCount(species) {
-  // seu código aqui
+  if (species) console.log('TESTANDO')
 }
 
 function entryCalculator(entrants) {
