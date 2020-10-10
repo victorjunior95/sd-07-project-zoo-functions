@@ -57,9 +57,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  if (species) return (data.animals.find((item) => item.name === species)).residents.length;
+  if (species) return (data.animals.find(item => item.name === species)).residents.length;
 
-  let exitObj= { };
+  let exitObj = { };
   data.animals.forEach((animal) => {
     const obj = { };
     obj[`${animal.name}`] = animal.residents.length;
@@ -68,7 +68,7 @@ function animalCount(species) {
 
   return exitObj;
 }
-console.log(animalCount())
+
 function entryCalculator(entrants) {
   // seu código aqui
 }
