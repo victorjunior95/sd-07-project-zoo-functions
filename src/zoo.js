@@ -42,8 +42,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
-const searchNameEspecies = species => {
-  return data.animals.find(({ name }) => name === species);
+const searchNameEspecies = (species) => data.animals.find(({ name }) => name === species;
 };
 
 const listOfAnimals = () => {
@@ -55,10 +54,11 @@ const listOfAnimals = () => {
 };
 
 function animalCount(species) {
-  if(species) {
+  if (species) {
     const { residents } = searchNameEspecies(species);
     return residents.length;
-  } else return listOfAnimals();
+  }
+  return listOfAnimals();
 }
 
 function entryCalculator(entrants) {
