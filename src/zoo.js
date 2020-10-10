@@ -20,8 +20,10 @@ function animalsOlderThan(animal, ageAnimal) {
   return residents.every(({ age }) => age >= ageAnimal);
 }
 
-function includesNames(name, { firstName, lastName }) {
-  return name.includes(firstName) || name.includes(lastName) };
+function includesNames(name, { firstName, lastName })
+{
+  return name.includes(firstName) || name.includes(lastName);
+}
 
 function employeeByName(...employeeName) {
   const person = data.employees.filter(employee => includesNames(employeeName, employee));
