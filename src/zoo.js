@@ -58,8 +58,12 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
-}
+  // find me retorna o objeto todo
+  // com o map eu consigo buscar todos os arrays managers
+  const funcionario = employees.find((busca) => busca.id === id)
+  if (funcionario.managers.length > 0) return true;
+  return false;
+  }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
@@ -108,4 +112,4 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
-console.log(employeeByName('Wishart'));
+console.log(isManager('9e7d4524-363c-416a-8759-8aa7e50c0992'));
