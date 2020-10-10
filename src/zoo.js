@@ -157,9 +157,11 @@ function employeeCoverage(idOrName) {
 
   if (!idOrName) return Object.fromEntries(employeesInCharge);
   if (idOrName.length < 15) {
-    const byName = employeesInCharge.find(name => name[0].startsWith(idOrName) || name[0].endsWith(idOrName));
-
-    return Object.fromEntries([byName]);
+    const byFirstName = employeesInCharge.find(name => name[0].startsWith(idOrName));
+    const byLastName = employeesInCharge.find(name => name[0].endsWith(idOrName));
+    
+    if(!byFirstName) return Object.fromEntries([byLastName]);
+    return Object.fromEntries([byFirstName]);
   }
   const employeeInfo = employees.find(employee => employee.id === idOrName);
   const { firstName, lastName, responsibleFor: animalId } = employeeInfo;
