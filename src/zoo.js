@@ -52,17 +52,25 @@ function isManager(id) {
   return managerList.some(e => e === id);
 }
 
-for (let i = 0; i < data.employees.length; i += 1) {
-  console.log(isManager(data.employees[i].id));
-}
-
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
 
 function animalCount(species) {
   // seu código aqui
+  if (species === undefined) {
+    const list = { };
+    for (let i = 0; i < data.animals.length; i += 1) {
+      list[data.animals[i].name] = data.animals[i].residents.length;
+    }
+    return list;
+  }
+  return data.animals.find(e => e.name === species).residents.length;
 }
+
+console.log(animalCount());
+console.log(animalCount('lions'));
+console.log(animalCount('snakes'));
 
 function entryCalculator(entrants) {
   // seu código aqui
