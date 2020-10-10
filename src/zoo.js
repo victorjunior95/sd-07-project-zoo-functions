@@ -135,8 +135,15 @@ function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
+/** FONTE (arredondamento): https://stackoverflow.com/questions/11832914/round-to-at-most-2-decimal-places-only-if-necessary */
 function increasePrices(percentage) {
-  // seu código aqui
+  const { prices } = data;
+
+  Object.keys(prices).forEach((key) => {
+    let newValue = prices[key] * (percentage/100 + 1);
+    prices[key] = Math.round(newValue * 100) / 100;
+  });
+  return prices;
 }
 
 function employeeCoverage(idOrName) {
