@@ -50,6 +50,20 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   // seu código aqui
+  const animais = [];
+  const residentes = [];
+  const newObject = {};
+  data.animals.forEach(element => animais.push(element.name));
+  data.animals.forEach(element => residentes.push(element.residents.length));
+  animais.forEach((element, index) => {
+    Object.assign(newObject, { [element]: residentes[index] });
+  });
+  for (let count = 0; count < animais.length; count += 1) {
+    if (animais[count] === species) {
+      return residentes[count];
+    }
+  }
+  return newObject;
 }
 
 function entryCalculator(entrants) {
