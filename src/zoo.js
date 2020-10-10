@@ -19,14 +19,14 @@ function animalsByIds(...ids) {
 function animalsOlderThan(animal, age) {
   // seu código aqui
   return data.animals.find(object => object.name === animal)
-  .residents.every(object => object.age >= age);
+    .residents.every(object => object.age >= age);
 }
 
 function employeeByName(employeeName) {
   // seu código aqui
   if (typeof (employeeName) === 'undefined') return {};
   return data.employees.find(object =>
-  object.firstName === employeeName || object.lastName === employeeName);
+    object.firstName === employeeName || object.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -53,6 +53,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
+  // seu código aqui
+  // créditos MDN Web Docs pelo Object.fromEntries
+  let result;
+  const array = data.animals.map(object => [object.name, object.residents.length]);
+  result = Object.fromEntries(array);
+  if (typeof (species) !== 'undefined') {
+    result = data.animals
+      .find(object => object.name === species)
+      .residents
+      .length;
+  }
+  return result;
 }
 
 function entryCalculator(entrants) {
