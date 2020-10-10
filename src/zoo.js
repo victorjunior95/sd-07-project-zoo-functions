@@ -41,7 +41,7 @@ function employeeByName(employeeName) {
   if (typeof employeeName === 'undefined') return {};
   return employees.find(nome =>
     (nome.firstName === employeeName) || (nome.lastName === employeeName));
-  // find encontra os elementos que atendem à expressão solicitada que 
+  // find encontra os elementos que atendem à expressão solicitada que
   // sejam descendentes do seletor.
   // filter, por outro lado, filtra e devolve todos
   // os elementos que coincidam com o seletor e também a expressão filtrada.
