@@ -87,9 +87,13 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
-
+const twoDecimal = (value, percent) => Math.round(value * percent * 100) / 100;
 function increasePrices(percentage) {
-
+  const { Adult, Senior, Child } = data.prices;
+  const percent = 1 + (percentage / 100);
+  data.prices.Adult = parseFloat(twoDecimal(Adult, percent));
+  data.prices.Senior = parseFloat(twoDecimal(Senior, percent));
+  data.prices.Child = parseFloat(twoDecimal(Child, percent));
 }
 
 function employeeCoverage(idOrName) {
