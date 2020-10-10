@@ -186,8 +186,29 @@ function increasePrices(percentage) {
   prices.Child = increase(Child, per);
 }
 
+const getAnimalsNameArray = (employee) => {
+  const { animals } = data;
+  return employee.responsibleFor.map(animalId =>
+    animals.find(animal => animal.id === animalId).name);
+};
+
+const fullEmployeeCoverage = () => {
+  const { employees } = data;
+  const result = {};
+  employees.forEach((employee) => {
+    result[`${employee.firstName} ${employee.lastName}`] = getAnimalsNameArray(employee);
+  });
+  return result;
+};
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) return fullEmployeeCoverage();
+  const { employees } = data;
+  const result = {};
+  const employee = employees.find(({ firstName, id, lastName }) =>
+    firstName === idOrName || id === idOrName || lastName === idOrName);
+  result[`${employee.firstName} ${employee.lastName}`] = getAnimalsNameArray(employee);
+  return result;
 }
 
 module.exports = {
