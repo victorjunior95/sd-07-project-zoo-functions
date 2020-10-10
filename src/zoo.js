@@ -1,4 +1,4 @@
-const { animals, employees } = require('./data');
+const { animals, employees, prices } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -76,10 +76,16 @@ function animalCount(species) {
   return amountSpecie;
 }
 
+// requisito entendido com ajuda do Vanderson Benedito
 function entryCalculator(entrants) {
-  // if (entrants === undefined || entrants === {}) {
-  //   return 0;
-  // }
+  if (entrants === undefined || entrants === {}) {
+    return 0;
+  }
+  const entrantsAndPrices = Object.entries(entrants);
+  return entrantsAndPrices.reduce((totalValues, entrant) => {
+    totalValues += entrant[1] * data.prices[entrant[0]];
+    return totalValues;
+  }, 0);
 }
 
 function animalMap(options) {
