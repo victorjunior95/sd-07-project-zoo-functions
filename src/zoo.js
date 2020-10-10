@@ -159,8 +159,8 @@ function employeeCoverage(idOrName) {
   if (idOrName.length < 15) {
     const byFirstName = employeesInCharge.find(name => name[0].startsWith(idOrName));
     const byLastName = employeesInCharge.find(name => name[0].endsWith(idOrName));
-    
-    if(!byFirstName) return Object.fromEntries([byLastName]);
+
+    if (!byFirstName) return Object.fromEntries([byLastName]);
     return Object.fromEntries([byFirstName]);
   }
   const employeeInfo = employees.find(employee => employee.id === idOrName);
