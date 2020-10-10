@@ -112,19 +112,12 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   Object.keys(data.prices).map(
-    key => (data.prices[key] = parseFloat(data.prices[key] * (percentage / 100 + 1)).toFixed(2)),
+    key => (data.prices[key] = Math.round(data.prices[key] * (((percentage / 100) + 1)) * 100) / 100),
   );
   console.log(data.prices);
 }
 
 function employeeCoverage(idOrName) {
-  const employee = employees.find(
-    employee =>
-      employee.name === idOrName || employee.lastName === idOrName || employee.id === idOrName,
-  );
-  const responsible = [];
-
-  return {};
 }
 
 module.exports = {
