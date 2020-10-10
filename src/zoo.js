@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 // const { animals } = require('./data');
+// const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -57,8 +58,27 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  // Sem parâmetros, retorna animais e suas quantidades
-  // Com o nome de uma espécie de animal, retorna somente a quantidade
+  if (species === undefined) {
+    let counter = {};
+    const numbers = [];
+    data.animals.map((animal) => {
+      const { residents } = animal;
+      numbers.push(residents.length);
+      counter = {
+        bears: numbers[2],
+        elephants: numbers[7],
+        frogs: numbers[5],
+        giraffes: numbers[8],
+        lions: numbers[0],
+        otters: numbers[4],
+        penguins: numbers[3],
+        snakes: numbers[6],
+        tigers: numbers[1],
+      };
+      return counter;
+    });
+    return counter;
+  }
   return data.animals.find(name => name.name === species).residents.length;
 }
 
