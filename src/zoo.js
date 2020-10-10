@@ -28,17 +28,17 @@ function animalsOlderThan(animal, age) {
   const animalType = data.animals.find(element => element.name === animal);
   return animalType.residents.every(elem => elem.age >= age);
 }
-
+//  suporte para a função employeeByName(), diminuindo assim sua complexidade.
 const fname = employeeName => data.employees.find(name => name.firstName === employeeName);
 const lname = employeeName => data.employees.find(name => name.lastName === employeeName);
 function employeeByName(employeeName) {
   if (employeeName === undefined) { return {}; }
   return fname(employeeName) || lname(employeeName);
 }
-// console.log(employeeByName('Burl'));
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const newEmployee = Object.assign(personalInfo, associatedWith);
+  return newEmployee;
 }
 
 function isManager(id) {
