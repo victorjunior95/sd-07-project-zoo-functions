@@ -168,7 +168,6 @@ function animalMap(options) {
 function schedule(dayName) {
   // seu código aqui
   const { hours } = data;
-  // const { Tuesday, Wednesday, Thursday, Friday, Saturday, Monday } = hours;
   const workingPeriod = {};
   Object.entries(hours).forEach((day) => workingPeriod[`${day[0]}`] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`)
   workingPeriod.Monday = 'CLOSED';
@@ -182,6 +181,20 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+  const { animals, employees } = data;
+  const employee = employees.find((employee) => employee.id === id);
+  const employeeFirstAnimal = animals.find((animal) => employee.responsibleFor[0] === animal.id)
+  let oldestAnimal = undefined;
+  let oldestAnimalAge = 0;
+  employeeFirstAnimal.residents.forEach((resident) => {
+    if (resident.age > oldestAnimalAge) {
+      oldestAnimalAge = resident.age;
+      oldestAnimal = resident;
+    }
+  })
+  const { name, sex, age } = oldestAnimal;
+  const result = [name, sex, age];
+  return result;
 }
 
 function increasePrices(percentage) {
