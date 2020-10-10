@@ -80,12 +80,11 @@ function animalMap(options = {}) {
         out[location].push({ [name]: residents.map(resident => resident.name) }),
       );
     }
+
     if (options.sorted) {
-      for (const i in out) {
-        if(out[i]!==undefined){
-          out[i].forEach(element => element[Object.keys(element)].sort());
-        }
-      }
+      Object.keys(out).forEach(element =>
+        out[element].forEach(element => element[Object.keys(element)].sort()),
+      );
     }
   } else if (options.includeNames === undefined || options.includeNames === false) {
     animals.forEach(({ location, name }) => out[location].push(name));
@@ -95,7 +94,7 @@ function animalMap(options = {}) {
 
 function schedule(dayName) {
   const out = {};
-  Object.keys(data.hours).forEach((hour) => {
+  Object.keys(data.hours).forEach(hour => {
     if (data.hours[hour].open === data.hours[hour].close) {
       out[hour] = 'CLOSED';
     } else {
