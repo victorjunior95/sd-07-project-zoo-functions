@@ -55,7 +55,7 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, ...associatedWith) {
-  const newEmployee = {}
+  const newEmployee = {};
   return Object.assign(newEmployee, personalInfo, ...associatedWith);
 }
 
@@ -65,18 +65,18 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  return employees.push({id, firstName, lastName, managers, responsibleFor});
+  return employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
-  let result = {}
+  let result = {};
   if (species === undefined) {
     data.animals.forEach((animal) => {
-      const {name, residents} = animal;
-      result[name] = residents.length
+      const { name, residents } = animal;
+      result[name] = residents.length;
     });
   } else {
-    result = data.animals.find(animal => animal.name === species).residents.length
+    result = data.animals.find(animal => animal.name === species).residents.length;
   }
   return result;
 }
