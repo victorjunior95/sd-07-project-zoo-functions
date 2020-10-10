@@ -102,9 +102,24 @@ function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
+function arred(num) {
+  if (((num * 100) - parseInt(num * 100, 10)) >= 0.5) {
+    return ((parseInt(num * 100, 10) + 1) / 100);
+  }
+  return (parseInt(num * 100, 10) / 100);
 }
+
+function increasePrices(percentage) {
+  data.prices.Adult = arred(data.prices.Adult * (1 + (percentage / 100)));
+  data.prices.Child = arred(data.prices.Child * (1 + (percentage / 100)));
+  data.prices.Senior = arred(data.prices.Senior * (1 + (percentage / 100)));
+}
+
+// console.log(data.prices);
+// increasePrices(50);
+// console.log(data.prices);
+// increasePrices(30);
+// console.log(data.prices);
 
 function employeeCoverage(idOrName) {
   // seu código aqui
