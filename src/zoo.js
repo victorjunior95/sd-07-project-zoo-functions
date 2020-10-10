@@ -125,8 +125,31 @@ function increasePrices(percentage) {
   });
 }
 
+const getAnimalsById = ids => animals.filter(animal => ids.includes(animal.id))
+.map(animal => animal.name);
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  let employeesResponsibility = {
+    'Nigel Nelson': ['lions', 'tigers'],
+    'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+    'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+    'Wilburn Wishart': ['snakes', 'elephants'],
+    'Stephanie Strauss': ['giraffes', 'otters'],
+    'Sharonda Spry': ['otters', 'frogs'],
+    'Ardith Azevado': ['tigers', 'bears'],
+    'Emery Elser': ['elephants', 'bears', 'lions'],
+  };
+  if (idOrName !== undefined) {
+    const employee = employees
+    .find(employeeObject => employeeObject.id === idOrName ||
+      employeeObject.firstName === idOrName ||
+      employeeObject.lastName === idOrName);
+    employeesResponsibility = [
+      [`${employee.firstName} ${employee.lastName}`, getAnimalsById(employee.responsibleFor)],
+    ];
+    employeesResponsibility = Object.fromEntries(employeesResponsibility);
+  }
+  return employeesResponsibility;
 }
 
 module.exports = {
