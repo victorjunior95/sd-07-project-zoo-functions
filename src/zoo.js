@@ -12,14 +12,18 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  const { animals } = data;
+  const {
+    animals
+  } = data;
 
   return ids.map(id => animals.find(animal => animal.id === id));
 }
 
 
 function animalsOlderThan(animal, age) {
-  const { animals } = data;
+  const {
+    animals
+  } = data;
 
   const animalSpecie = animals.find(species => species.name === animal);
 
@@ -27,7 +31,9 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  const { employees } = data;
+  const {
+    employees
+  } = data;
   if (!employeeName) return {};
 
   return employees.find(emp => emp.firstName === employeeName || emp.lastName === employeeName);
@@ -38,12 +44,16 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const { employees } = data;
+  const {
+    employees
+  } = data;
   return employees.some(manager => manager.managers.some(mana => mana === id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const { employees } = data;
+  const {
+    employees
+  } = data;
   const newEmployer = {
     id,
     firstName,
@@ -59,10 +69,10 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(species) {
   if (species) return (data.animals.find(item => item.name === species)).residents.length;
 
-  let exitObj = { };
+  let exitObj = {};
   data.animals.forEach((animal) => {
-    const obj = { };
-    obj[`${animal.name}`] = animal.residents.length;
+    const obj = {};
+    obj[animal.name] = animal.residents.length;
     exitObj = Object.assign(exitObj, obj);
   });
 
@@ -70,7 +80,9 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  const { prices } = data;
+  const {
+    prices
+  } = data;
 
   if (!entrants || Object.keys(entrants).length === 0) return 0;
 
@@ -78,7 +90,7 @@ function entryCalculator(entrants) {
   const keys = Object.keys(entrants);
 
   for (let i = 0; i < keys.length; i += 1) {
-    exit += entrants[`${keys[i]}`] * prices[`${keys[i]}`];
+    exit += entrants[keys[i]] * prices[keys[i]];
   }
 
   return exit;
@@ -88,8 +100,35 @@ function animalMap(options) {
   // seu código aqui
 }
 
+function checkSpindleUS(hour){
+  if(hour > 12) return hour - 12;
+  return hour;
+}
+
 function schedule(dayName) {
-  // seu código aqui
+  const {
+    hours
+  } = data;
+  const obj = {};
+
+  if (dayName) {
+    if (dayName === 'Monday') {
+      obj[dayName] = `CLOSED`;
+    } else {
+      obj[dayName] = `Open from ${hours[dayName].open}am until ${checkSpindleUS(hours[dayName].close)}pm`;
+    }
+    return obj;
+  }
+
+  Object.keys(hours).forEach(day => {
+    if (day === 'Monday') {
+      obj[day] = `CLOSED`;
+    } else {
+      let hour = hours[day].close;
+      obj[day] = `Open from ${hours[day].open}am until ${checkSpindleUS(hour)}pm`;
+    }
+  })
+  return obj;
 }
 
 function oldestFromFirstSpecies(id) {
