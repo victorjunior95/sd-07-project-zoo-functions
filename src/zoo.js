@@ -79,18 +79,14 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   const { prices } = data;
-  let total = 0;
   if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0;
   }
   const keys = Object.keys(entrants);
-  for (let index = 0; index < keys.length; index += 1) {
-    if ({}.hasOwnProperty.call(entrants, keys[index])) {
-      const number = entrants[keys[index]];
-      total += number * prices[keys[index]];
-    }
-  }
-  return total;
+  return keys.reduce((total, key) => {
+    const number = entrants[key];
+    return total + (number * prices[key]);
+  }, 0);
 }
 
 function animalMap(options) {
