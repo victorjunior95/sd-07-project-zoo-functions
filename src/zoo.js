@@ -87,7 +87,6 @@ function animalMap(options) {
   } else {
     animals.forEach(({ location, name }) => out[location].push(name));
   }
-  console.log(out);
   return out;
 }
 const options = { includeNames: true, sex: 'female', sorted: true };
