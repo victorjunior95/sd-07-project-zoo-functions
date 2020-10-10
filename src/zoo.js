@@ -199,10 +199,55 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  prices.Adult = prices.Adult + (prices.Adult * percentage/100);
+  prices.Adult = parseFloat((Math.round(prices.Adult * 100)/100).toFixed(2));
+  prices.Senior = prices.Senior + (prices.Senior * percentage/100);
+  prices.Senior = parseFloat((Math.round(prices.Senior * 100)/100).toFixed(2));
+  prices.Child = prices.Child + (prices.Child * percentage/100);
+  prices.Child = parseFloat((Math.round(prices.Child * 100)/100).toFixed(2));
 }
 
 function employeeCoverage(idOrName) {
   // seu código aqui
+  const { animals, employees } = data;
+  const result = {};
+  if (idOrName === undefined) {
+    employees.forEach((employee) => {
+      const animalsArray = [];
+      result[`${employee.firstName} ${employee.lastName}`] = animalsArray;
+      employee.responsibleFor.forEach((animalId) => {
+        const search = animals.find((animal) => animal.id === animalId)
+        animalsArray.push(search.name)
+      });
+    });
+  } else {
+    if (idOrName.length === 36) {
+      const employer = employees.find((employee) => employee.id === idOrName);
+      const animalsArray = [];
+      result[`${employer.firstName} ${employer.lastName}`] = animalsArray;
+      employer.responsibleFor.forEach((animalId) => {
+        const search = animals.find((animal) => animal.id === animalId)
+        animalsArray.push(search.name)
+      });
+    }
+    if (idOrName.length < 36) {
+      let employer = employees.find((employee) => employee.firstName === idOrName);
+      if (employer === undefined) {
+        employer = employees.find((employee) => employee.lastName === idOrName);
+      }
+      const animalsArray = [];
+      result[`${employer.firstName} ${employer.lastName}`] = animalsArray;
+      employer.responsibleFor.forEach((animalId) => {
+        const search = animals.find((animal) => animal.id === animalId)
+        animalsArray.push(search.name)
+      });
+    }
+  }
+
+  // id do funcionário e animais
+  // primeiro nome do funcionário e animais
+  // último nome do funcionário e animais
+  return result;
 }
 
 module.exports = {
