@@ -164,7 +164,7 @@ function employeeCoverage(idOrName) {
       const isId = id === idOrName;
       const isFirstName = firstName === idOrName;
       const isLastName = lastName === idOrName;
-      
+
       return isId || isFirstName || isLastName;
     });
   }
@@ -176,9 +176,9 @@ function employeeCoverage(idOrName) {
 
     const animalsResponsiblesFor = responsibleFor.map(id => id);
 
-    animalsResponsiblesFor.forEach(identify => {
-      data.animals.forEach(({ id, name }) => {
-        if (id === identify) animalsName.push(name);
+    animalsResponsiblesFor.forEach((identify) => {
+      data.animals.forEach(({ id, name: named }) => {
+        if (id === identify) animalsName.push(named);
       });
     });
 
