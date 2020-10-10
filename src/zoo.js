@@ -70,7 +70,18 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  const { prices } = data;
+
+  if(!entrants || Object.keys(entrants).length === 0) return 0;
+
+  let exit = 0;
+  const keys = Object.keys(entrants);
+  
+  for(let i = 0; i < keys.length; i += 1){
+    exit += entrants[`${keys[i]}`] * prices[`${keys[i]}`];
+  }
+
+  return exit;
 }
 
 function animalMap(options) {
