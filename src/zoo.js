@@ -47,13 +47,22 @@ function isManager(id) {
   return managerId
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  const arrayEmployees = employees;
-  console.loga(arrayEmployees);
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  }
+  
+  employees.push(newEmployee);
 }
 
 function animalCount(species) {
+  if (species === undefined) {
+    return animals.
+  }
   // seu código aqui
 }
 
