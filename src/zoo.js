@@ -46,17 +46,19 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
+  const { animals } = data;
   if (!species)
-    return Object.fromEntries(data.animals.map((animal) => [animal.name, animal.residents.length]));
-  const specieData = data.animals.find((animal) => animal.name === species);
+    return Object.fromEntries(animals.map((animal) => [animal.name, animal.residents.length]));
+  const specieData = animals.find((animal) => animal.name === species);
   return specieData.residents.length;
 }
 
 function entryCalculator(entrants = 0) {
+  const { prices } = data;
   let finalValue = 0;
-  if (entrants.Adult) finalValue += data.prices.Adult * entrants.Adult;
-  if (entrants.Senior) finalValue += data.prices.Senior * entrants.Senior;
-  if (entrants.Child) finalValue += data.prices.Child * entrants.Child;
+  if (entrants.Adult) finalValue += prices.Adult * entrants.Adult;
+  if (entrants.Senior) finalValue += prices.Senior * entrants.Senior;
+  if (entrants.Child) finalValue += prices.Child * entrants.Child;
   return finalValue;
 }
 
@@ -139,7 +141,17 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { prices } = data;
+  const persons = Object.keys(prices);
+  const values = Object.values(prices);
+  const increased = values.map((value, index) => {
+    const calculating = value + value * (percentage / 100);
+    return Math.ceil(calculating * 100) / 100;
+  });
+
+  persons.forEach((person, index) => {
+    prices[person] = increased[index];
+  });
 }
 
 function employeeCoverage(idOrName) {
