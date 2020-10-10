@@ -22,10 +22,12 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
+  const { employees } = data;
   if (!employeeName) return {};
-  return data.employees.find(
-    (employee) => employee.firstName === employeeName || employee.lastName === employeeName
-  );
+  return employees.find((employee) => {
+    const { firstName, lastName } = employee;
+    return firstName === employeeName || lastName === employeeName;
+  });
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -35,9 +37,8 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some(
-    (employee) => employee.id === id && employee.responsibleFor.length >= 4
-  );
+  const { employees } = data;
+  return employees.some((employee) => employee.id === id && employee.responsibleFor.length >= 4);
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -92,6 +93,7 @@ function animalMap(options) {
       if (options.sorted === true) names.sort();
       return { [specie]: names };
     });
+
     return [location, formatedAnimals];
   });
 
@@ -144,7 +146,7 @@ function increasePrices(percentage) {
   const { prices } = data;
   const persons = Object.keys(prices);
   const values = Object.values(prices);
-  const increased = values.map((value, index) => {
+  const increased = values.map((value) => {
     const calculating = value + value * (percentage / 100);
     return Math.ceil(calculating * 100) / 100;
   });
@@ -155,7 +157,26 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const { employees, animals } = data;
+
+  const employeesInCharge = employees.map((employee) => {
+    const { firstName, lastName, responsibleFor: animalId } = employee;
+    const animalsName = animalId.map((id) => animals.find((animal) => animal.id === id).name);
+    return [`${firstName} ${lastName}`, animalsName];
+  });
+
+  if (!idOrName) return Object.fromEntries(employeesInCharge);
+  if (idOrName.length < 15) {
+    const byName = employeesInCharge.find((name) => {
+      return name[0].startsWith(idOrName) || name[0].endsWith(idOrName);
+    });
+
+    return Object.fromEntries([byName]);
+  }
+  const employeeInfo = employees.find((employee) => employee.id === idOrName);
+  const { firstName, lastName, responsibleFor: animalId } = employeeInfo;
+  const animalsName = animalId.map((id) => animals.find((animal) => animal.id === id).name);
+  return { [`${firstName} ${lastName}`]: animalsName };
 }
 
 module.exports = {
