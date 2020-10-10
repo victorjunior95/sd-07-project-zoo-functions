@@ -89,7 +89,7 @@ Testa se o id passado é de um gerente
 
 function isManager(id) {
   const { employees } = data;
-  return employees.some(item => item['managers'].includes(id));
+  return employees.some(item => item.managers.includes(id));
 }
 
 /*
@@ -101,7 +101,7 @@ Adiciona um funcionário no fim da lista
 */
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const { employees } = data;  
+  const {employees} = data;  
   const newEmployee = {
     id,
     firstName,
@@ -121,9 +121,9 @@ Sem parâmetros, retorna animais e suas quantidades
 Com o nome de uma espécie de animal, retorna somente a quantidade
 
 */
-//resident.length
+  //resident.length
 function animalCount(species) {
-  if (species) console.log('TESTANDO')
+  
 }
 
 function entryCalculator(entrants) {
