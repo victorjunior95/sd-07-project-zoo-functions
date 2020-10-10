@@ -55,6 +55,7 @@ function isManager(id) {
 }
 
 function addEmployee(id = '', firstName = '', lastName = '', managers = [], responsibleFor = []) {
+  const employees = data.employees;
   return employees.push({
     id,
     firstName,
