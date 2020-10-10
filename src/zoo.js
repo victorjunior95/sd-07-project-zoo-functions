@@ -83,7 +83,7 @@ function entryCalculator(entrants) {
   }
   const entrantsAndPrices = Object.entries(entrants);
   return entrantsAndPrices.reduce((totalValues, entrant) => {
-    totalValues += entrant[1] * data.prices[entrant[0]];
+    totalValues += entrant[1] * prices[entrant[0]];
     return totalValues;
   }, 0);
 }
