@@ -42,11 +42,21 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  return data.employees.push({id, firstName, lastName, managers, responsibleFor});
+  return data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
-  // seu código aqui
+  const nameAnimals = data.animals.map(({ name }) => name);
+  const countAnimals = data.animals.map(({ residents }) => residents.length);
+  const obj = {};
+  if (species === undefined) {
+    for (let index = 0; index < nameAnimals.length; index += 1) {
+      obj[nameAnimals[index]] = countAnimals[index];
+    }
+    return obj;
+  }
+  return data.animals.filter(({ name }) => name === species).map(reside => reside.residents.length)
+  .reduce((acc, arr) => acc + arr, 0);
 }
 
 function entryCalculator(entrants) {
