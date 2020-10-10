@@ -26,20 +26,21 @@ const data = require('./data');
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 
 function animalsByIds(...rest) {
-  return animals.filter((objects) => rest.includes(objects.id));
+  return animals.filter(objects => rest.includes(objects.id));
 }
 
 /*
 
 2- Implemente a função animalsOlderThan:
 
-Ao passar o nome de uma espécie e uma idade, testa se todos os animais desta espécie possuem a idade mínima especificada
+Ao passar o nome de uma espécie e uma idade, testa se todos os animais desta espécie
+possuem a idade mínima especificada
 
 */
 
 function animalsOlderThan(animal, age) {
-  const currentAnimal = animals.find((animalsObject) => animalsObject.name === animal);
-  const {residents} = currentAnimal;
+  const currentAnimal = animals.find(animalsObject => animalsObject.name === animal);
+  const { residents } = currentAnimal;
   return residents.every((item) => item.age > age);
 }
 
@@ -56,8 +57,9 @@ Quando provido o último nome do funcionário, retorna o objeto do funcionário
 */
 
 function employeeByName(employeeName) {
-  const {employees} = data;
-  const [expectedObject = {}] = employees.filter((item) => item.firstName === employeeName|| item.lastName === employeeName);
+  const { employees } = data;
+  const [expectedObject = {}] = employees.filter(item => item.
+    firstName === employeeName || item.lastName === employeeName);
   return expectedObject;
 }
 
@@ -65,14 +67,15 @@ function employeeByName(employeeName) {
 
 4- Implemente a função createEmployee:
 
-Cria um novo colaborador a partir de objetos contendo informações pessoais e gerentes e animais gerenciados.
+Cria um novo colaborador a partir de objetos contendo informações pessoais
+e gerentes e animais gerenciados.
 
 */
 
 function createEmployee(personalInfo, associatedWith) {
-  const {id, firstName, lastName} = personalInfo;
-  const {managers, responsibleFor} = associatedWith;
-  const expectedObject = {id, firstName, lastName, managers, responsibleFor};
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  const expectedObject = { id, firstName, lastName, managers, responsibleFor };
   return expectedObject;
 }
 
@@ -85,7 +88,8 @@ Testa se o id passado é de um gerente
 */
 
 function isManager(id) {
-  
+  const {employees} = data;
+  return employees.find(item => item.id === id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
