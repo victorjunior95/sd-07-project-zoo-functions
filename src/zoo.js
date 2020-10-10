@@ -20,7 +20,7 @@ function animalsOlderThan(animal, ageAnimal) {
   return residents.every(({ age }) => age >= ageAnimal);
 }
 
-const includesNames = (employeeName, { firstName, lastName }) => employeeName.includes(firstName)|| employeeName.includes(lastName);
+const includesNames = (employeeName, { firstName, lastName }) => employeeName.includes(firstName) || employeeName.includes(lastName);
 
 function employeeByName(...employeeName) {
   const person = data.employees.filter(employee => includesNames(employeeName, employee));
