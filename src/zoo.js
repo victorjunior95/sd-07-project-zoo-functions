@@ -29,14 +29,13 @@ function animalsOlderThan(animal, age) {
   return animalType.residents.every(elem => elem.age >= age);
 }
 
+const fname = employeeName => data.employees.find(name => name.firstName === employeeName);
+const lname = employeeName => data.employees.find(name => name.lastName === employeeName);
 function employeeByName(employeeName) {
   if (employeeName === undefined) { return {}; }
-  const lnames = data.employees.find(element => element.lastName === employeeName ? element:undefined)
-  const fnames = data.employees.find(element => element.firstName === employeeName ? element:undefined)
-  return lnames || fnames;
+  return fname(employeeName) || lname(employeeName);
 }
-
-console.log(employeeByName())
+// console.log(employeeByName('Burl'));
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
