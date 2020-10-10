@@ -13,6 +13,7 @@ const data = require('./data');
 
 const animals = data.animals;
 const employees = data.employees;
+const prices = data.prices;
 
 function animalsByIds(ids) {
   // seu código aqui
@@ -115,8 +116,15 @@ function animalCount(species) {
   return message;
 }
 
-function entryCalculator(entrants) {
+function entryCalculator(entrants = 0) {
   // seu código aqui
+  if (Object.values(entrants).length === 0) {
+    entrants = 0;
+  } else if (Object.values(entrants).length > 0) {
+    const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+    entrants = (Adult * prices.Adult) + (Senior * prices.Senior) + (Child * prices.Child);
+  }
+  return entrants;
 }
 
 function animalMap(options) {
