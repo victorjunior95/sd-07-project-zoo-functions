@@ -125,16 +125,16 @@ Antes de começar analise o arquivo `src/data.js`, para ver os dados que serão 
   - [X] Testa se o id passado é de um gerente
 
 ### 6- Implemente a função addEmployee:
-  - [ ] Adiciona um funcionário no fim da lista
+  - [X] Adiciona um funcionário no fim da lista
 
 ### 7- Implemente a função animalCount:
   - [X] Sem parâmetros, retorna animais e suas quantidades
   - [X] Com o nome de uma espécie de animal, retorna somente a quantidade
 
 ### 8- Implemente a função entryCalculator:
-  - [ ] Retorna 0 se nenhum argumento for passado
-  - [ ] Retorna 0 se um objeto vazio for passado
-  - [ ] Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
+  - [X] Retorna 0 se nenhum argumento for passado
+  - [X] Retorna 0 se um objeto vazio for passado
+  - [X] Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
 
 ### 9- Implemente a função animalMap:
   - [ ] Sem parâmetros, retorna animais categorizados por localização
