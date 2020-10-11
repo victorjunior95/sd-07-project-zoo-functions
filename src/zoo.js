@@ -90,8 +90,29 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu código aqui
+  const { animals } = data;
+  const animalMap = {};
+  if (options === undefined) {
+    animals
+      .map(({ location }) => location)
+      .forEach((location) => {
+        if (!{}.hasOwnProperty.call(animalMap, location)) {
+          animalMap[location] = [];
+        }
+      });
+    const keys = Object.keys(animalMap);
+    const array = keys.map((key) => {
+      const object = {};
+      object[key] = animals
+        .filter(({ location }) => location === key)
+        .map(({ name }) => name);
+      return object;
+    });
+    return Object.assign({}, ...array);
+  }
+  // return animalMap;
 }
+console.log(animalMap());
 
 function schedule(dayName) {
   // seu código aqui
