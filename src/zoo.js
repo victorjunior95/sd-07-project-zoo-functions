@@ -15,9 +15,9 @@ const { animals, employees, hours, prices } = data;
 
 function animalsByIds(...ids) {
   const resp = [];
-  ids.forEach((currentid) => {
-    resp.push(animals.find(({ id }) => id === currentid));
-  });
+  ids.forEach(currentid =>
+    resp.push(animals.find(({ id }) => id === currentid)),
+  );
   return resp;
 }
 
@@ -154,7 +154,7 @@ function animalMap(obj = { includeNames: false, sorted: false, sex: false }) {
 //----------------------------------------------------------------------------
 const convertHour = (hour = 0) => (hour > 12 ? `${hour - 12}pm` : `${hour}am`);
 
-const modifier = (hr) => {
+function modifier(hr) {
   if (hr[1].open === 0 && hr[1].close === 0) {
     hours[hr[0]] = 'CLOSED';
   } else {
@@ -162,7 +162,7 @@ const modifier = (hr) => {
       hr[1].close,
     )}`;
   }
-};
+}
 
 function schedule(dayName) {
   if (dayName === undefined) {
@@ -192,14 +192,30 @@ function increasePrices(percentage) {
   return true;
 }
 
-// console.log(data);
-// console.log(increasePrices(50));
-// console.log(data);
-// console.log(increasePrices(30));
-// console.log(data);
-
-function employeeCoverage(idOrName) {
-  // seu código aqui
+const ARR_EMPLOYEES_RESP = {};
+const emplo = ({ firstName, lastName, responsibleFor }) => {
+  ARR_EMPLOYEES_RESP[`${firstName} ${lastName}`] = responsibleFor.map(
+    id => animals.find(({ id: animalId }) => animalId === id).name,
+  );
+};
+function employeeCoverage(idOrName = null) {
+  employees.forEach(emplo);
+  const arrEmployeesResp = Object.entries(ARR_EMPLOYEES_RESP);
+  if (idOrName === null) {
+    return ARR_EMPLOYEES_RESP;
+  }
+  if (idOrName.length < 10) {
+    const arr = arrEmployeesResp.find(lol => lol[0].includes(idOrName));
+    return {
+      [arr[0]]: arr[1],
+    };
+  }
+  const empName = employees.find(({ id }) => id === idOrName);
+  console.log(arrEmployeesResp);
+  const arr = arrEmployeesResp.find(lol => lol[0].includes(empName.firstName));
+  return {
+    [arr[0]]: arr[1],
+  };
 }
 
 module.exports = {
