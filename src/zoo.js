@@ -105,8 +105,10 @@ function animalMap(options) {
   if (options !== undefined) {
     const { includeNames = false, sorted = false, sex } = options;
     if (includeNames) {
-      generalMap.map(element => element[1] = element[1]
-        .map(animal => Object.fromEntries([[animal, getAnimalsName(animal, sorted, sex)]])));
+      generalMap.forEach((element) => {
+        element[1] = element[1]
+        .map(animal => Object.fromEntries([[animal, getAnimalsName(animal, sorted, sex)]]));
+      });
     }
   }
   return Object.fromEntries(generalMap);
