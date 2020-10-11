@@ -152,8 +152,9 @@ function entryCalculator(entrants = {}) {
   const { prices } = data;
   const keysOfEntrants = Object.keys(entrants);
   return keysOfEntrants.reduce((result, item) => {
-    const valueByAge = entrants[item] * prices[item]
-    return result += valueByAge;
+    const valueByAge = entrants[item] * prices[item];
+    result += valueByAge;
+    return result;
   }, 0);
 }
 
