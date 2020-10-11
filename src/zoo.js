@@ -17,34 +17,13 @@ function animalsByIds(...ids) {
   return data.animals
   .filter(animal => animal.id === ids[0]) // retorno []
   .concat(data.animals.filter(animal => animal.id === ids[1]));
-
-  // if (ids === undefined) {
-  //   return [];
-  // } else {
-  //   for (let i in data.animals) {
-  //     if (ids === data.animals[i].id) { //desta maneira só retornava 1 objeto
-  //       return [data.animals[i]];
-  //     }
-  //   }
-  // }
 }
 
 function animalsOlderThan(nameAnimal, ageAnimal) {
   return data.animals
   .find(animal => animal.name === nameAnimal).residents
   .every(animal => animal.age > ageAnimal);
-
-  // for (let i in data.animals) {
-  //   if (data.animals[i].name === animal) {
-  //     if (data.animals[i].residents[i].age > age) {
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   }
-  // }
 }
-// console.log(animalsOlderThan('lions', 15));
 
 function employeeByName(employeeName) {
   if (employeeName === undefined) {
@@ -81,10 +60,26 @@ function animalCount(species) {
   return result;
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
-}
 
+// function isEmptyObject(obj) {
+//   if (Object.keys(obj).length === 0) {
+//     return 0;
+//   } else {
+//     obj.forEach((entrant) => {
+//       const { Adult, Child, Senior } = entrant;
+//       return Adult, Child, Senior
+//       // console.log(Adult, Child, Senior);      
+//     });
+//   }
+// }
+
+function entryCalculator(entrants) {
+  if (!entrants || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+    return Object.keys(entrants).reduce((acc, element) => acc + (entrants[element] * data.prices[element]),0);
+}
+// console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }))
 function animalMap(options) {
   // seu código aqui
 }
