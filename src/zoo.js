@@ -34,11 +34,16 @@ const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(obj);
 };
 
-function animalCount(species) {
-  /** Sem parâmetros, retorna animais e suas quantidades
-Com o nome de uma espécie de animal, retorna somente a quantidade */
+const getLengthList = () =>
+  animals.reduce((acc, str) => {
+    acc[str.name] = str.residents.length;
+    return acc;
+  }, {});
 
-}
+const animalCount = (species = getLengthList()) => {
+  if (typeof species !== 'string') return species;
+  return animals.find(element => element.name === species).residents.length;
+};
 
 function entryCalculator(entrants) {
   // seu código aqui
