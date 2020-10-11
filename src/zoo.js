@@ -70,7 +70,24 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // seu código aqui
+/*
+const vazio = {}
+animals.forEach(elemento => {
+  vazio[elemento.name] = elemento.residents.length
+})
+*/
+if (typeof species === 'undefined') {
+  return animals.reduce((acumulador, item) => {
+    acumulador[item.name] = item.residents.length;
+    // desta forma o acumulador recebe os nomes dos animais
+    // desta forma acumulador.item.name ele tenta buscar os nomes mais ainda
+    // nao tem nada no acumulador para ser buscado
+    // o acumulador sempre recebe ele mesmo e o proximo item
+    return acumulador;
+    }, {});
+}
+let umaEspecie = animals.find(busca => busca.name === species);
+return umaEspecie.residents.length; 
 }
 
 function entryCalculator(entrants) {
@@ -112,3 +129,4 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
+console.log(animalCount('lions'));
