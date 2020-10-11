@@ -51,7 +51,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (!species) {
+    // https://www.digitalocean.com/community/tutorials/js-finally-understand-reduce
+    return data.animals.reduce((acc, curr) => { acc[curr.name] = curr.residents.length;
+      return acc;
+    }, {});
+    // 1a iteração: acc = {} e curr = animals[0] :: acc = {'lions': 4}
+    // 2a iteração: acc = {'lions': 4} e curr = animals[1] :: acc = {'lions': 4, 'tigers': 2}
+  }
+  return data.animals.find(curr => species === curr.name).residents.length;
 }
 
 function entryCalculator(entrants) {
