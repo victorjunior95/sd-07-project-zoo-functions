@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees, prices, hours } = data;
+const { animals, employees, hours, prices } = data;
 
 function animalsByIds(...ids) {
   const resp = [];
@@ -85,11 +85,11 @@ function entryCalculator(entrants = 0) {
   return Adult || Child || Senior ? a + c + s : 0;
 }
 //-------------------------------------------------------------------------------------
-// const filterAnimals = (region) =>
-//   animals.filter((animal) => animal.location === region);
+// const filterAnimals = (region = 'default') =>
+//   animals.filter(({ location }) => location === region);
 
-// const defaultInput = (region) =>
-//   filterAnimals(region).map((animal) => animal.name);
+// const defaultInput = (region = 'default') =>
+//   filterAnimals(region).map(({ name }) => name);
 
 // function residentsInput(region) {
 //   const fn = filterAnimals(region);
@@ -100,7 +100,7 @@ function entryCalculator(entrants = 0) {
 //   return resp;
 // }
 
-// function residentsSortInput(region) {
+// function sortInput(region) {
 //   const fn = filterAnimals(region);
 //   const resp = [];
 //   fn.forEach((animal) => {
@@ -110,31 +110,47 @@ function entryCalculator(entrants = 0) {
 //   return resp;
 // }
 
-function animalMap({ includeNames = false, sorted = false }) {
-  // let objResp = {
-  //   NE: defaultInput('NE'),
-  //   NW: defaultInput('NW'),
-  //   SE: defaultInput('SE'),
-  //   SW: defaultInput('SW'),
-  // };
-  // if (includeNames) {
-  //   objResp = {
-  //     NE: residentsInput('NE'),
-  //     NW: residentsInput('NW'),
-  //     SE: residentsInput('SE'),
-  //     SW: residentsInput('SW'),
-  //   };
-  // }
-  // if (sorted) {
-  //   objResp = {
-  //     NE: residentsSortInput('NE'),
-  //     NW: residentsSortInput('NW'),
-  //     SE: residentsSortInput('SE'),
-  //     SW: residentsSortInput('SW'),
-  //   };
+// const sexInput = (region, sex) => {
+//   const fn = filterAnimals(region);
+//   const resp = [];
+//   fn.forEach((animal) => {
+//     const residents = animal.residents.map(({ name, sex }) => {
+//       name, sex;
+//     });
+//     residents = residents.filter((resident) => resident.sex === sex);
+//     resp.push({ [animal.name]: residents.name });
+//   });
+//   return resp;
+// };
+
+// const carai = (callBackFunc) => {
+//   const regions = ['NE', 'NW', 'SE', 'SW'];
+//   const objResp = {};
+//   regions.forEach((location) => {
+//     objResp[location] = callBackFunc(location);
+//   });
+//   return objResp;
+// };
+
+function animalMap(obj = { includeNames: false, sorted: false, sex: false }) {
+  // let objResp = carai(defaultInput);
+  // if (obj.includeNames) {
+  //   objResp = carai(residentsInput);
+  //   if (obj.sorted) {
+  //     objResp = carai(sortInput);
+  //   }
+  //   if (obj.sex) {
+  //     objResp = {
+  //       NE: sexInput('NE', obj.sex),
+  //       NW: sexInput('NW', obj.sex),
+  //       SE: sexInput('SE', obj.sex),
+  //       SW: sexInput('SW', obj.sex),
+  //     };
+  //   }
   // }
   // return objResp;
 }
+
 //----------------------------------------------------------------------------
 const convertHour = (hour = 0) => (hour > 12 ? `${hour - 12}pm` : `${hour}am`);
 
@@ -168,8 +184,19 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { Adult, Senior, Child } = prices;
+  const multiplier = (percentage + 100.001) / 100;
+  prices.Adult = (Adult * multiplier).toFixed(2);
+  prices.Senior = (Senior * multiplier).toFixed(2);
+  prices.Child = (Child * multiplier).toFixed(2);
+  return true;
 }
+
+// console.log(data);
+// console.log(increasePrices(50));
+// console.log(data);
+// console.log(increasePrices(30));
+// console.log(data);
 
 function employeeCoverage(idOrName) {
   // seu código aqui
