@@ -66,7 +66,11 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (Object.keys(entrants).length === 0 || !entrants) {
+    return 0;
+  } else {
+    
+  }
 }
 
 function animalMap(options) {
