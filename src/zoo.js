@@ -84,10 +84,10 @@ if (typeof species === 'undefined') {
     // nao tem nada no acumulador para ser buscado
     // o acumulador sempre recebe ele mesmo e o proximo item
     return acumulador;
-    }, {});
+  }, {});
 }
-let umaEspecie = animals.find(busca => busca.name === species);
-return umaEspecie.residents.length; 
+  const umaEspecie = animals.find(busca => busca.name === species);
+    return umaEspecie.residents.length;
 }
 
 function entryCalculator(entrants) {
