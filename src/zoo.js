@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const [animals, employees, prices] = [data.animals, data.employees, data.prices];
+const [animals, employees, prices, hours] = [data.animals, data.employees, data.prices, data.hours];
 
 const animalsByIds = (...ids) => ids.map(id => animals.find(animal => id === animal.id));
 
@@ -63,12 +63,31 @@ const entryCalculator = (entrants = 0) =>
     acc + (current[1] * whatValue(current[0])), 0);
 
 function animalMap(options) {
-  // seu código aqui
+  /** Sem parâmetros, retorna animais categorizados por localização
+   * Com a opção includeNames: true especificada, retorna nomes de animais
+   * Com a opção sorted: true especificada, retorna nomes de animais ordenados
+   * Com a opção sex: 'female' ou sex: 'male' especificada, retorna somente
+   nomes de animais macho/fêmea
+   * Com a opção sex: 'female' ou sex: 'male' especificada e a opção sort:
+   true especificada,
+   retorna somente nomes de animais macho/fêmea com os nomes dos animais ordenados
+   * Só retorna informações ordenadas e com sexo se a opção includeNames:
+   true for especificada */
 }
 
-function schedule(dayName) {
-  // seu código aqui
-}
+const listHours = (input = Object.keys(hours)) => input.reduce((acc, curr) => {
+  if (hours[curr].close !== 0) {
+    acc[curr] = `Open from ${hours[curr].open}am until ${(hours[curr].close - 12)}pm`;
+  } else {
+    acc[curr] = 'CLOSED';
+  }
+  return acc;
+}, {});
+
+const schedule = (dayName = listHours()) => {
+  if (typeof dayName === 'string') return listHours([dayName]);
+  return dayName;
+};
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
