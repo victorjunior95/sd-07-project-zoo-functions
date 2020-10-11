@@ -184,14 +184,19 @@ function increasePrices(percentage) {
 
 function getWorkerForCoverage(idOrName) {
   return data.employees
-  .find((worker => worker.firstName === idOrName || worker.lastName === idOrName || worker.id === idOrName));
+  .find((worker) => {
+    if (worker.firstName === idOrName || worker.lastName === idOrName || worker.id === idOrName) {
+      return true;
+    }
+    return false;
+  });
 }
 
 function createCoverageObj(namesArr, requestedWorkers) {
   const coverageInfo = {};
   requestedWorkers.forEach(((worker, index) => {
-    let elementsUnderCare = animalsByIds(...worker.responsibleFor);
-    speciesUnderCare = elementsUnderCare.map(element => element.name);
+    const elementsUnderCare = animalsByIds(...worker.responsibleFor);
+    let speciesUnderCare = elementsUnderCare.map(element => element.name);
     coverageInfo[namesArr[index]] = speciesUnderCare;
   }));
   return coverageInfo;
@@ -204,7 +209,7 @@ function employeeCoverage(idOrName) {
     requestedWorkers = [getWorkerForCoverage(idOrName)];
     namesArr = [`${requestedWorkers[0].firstName} ${requestedWorkers[0].lastName}`];
   } else {
-    namesArr = data.employees.map((worker) => `${worker.firstName} ${worker.lastName}`);
+    namesArr = data.employees.map(worker => `${worker.firstName} ${worker.lastName}`);
     requestedWorkers = data.employees;
   }
   return createCoverageObj(namesArr, requestedWorkers);
