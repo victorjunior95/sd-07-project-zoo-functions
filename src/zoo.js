@@ -13,6 +13,7 @@ const data = require('./data');
 
 const { animals } = data;
 const { employees } = data;
+const { prices } = data;
 
 function animalsByIds(...ids) {
   const localeByAnimalid = ids.map((idFind) => {
@@ -68,18 +69,22 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  const animalLocale = {};
+  const allAnimals = {};
   if (typeof (species) === 'undefined') {
     animals.forEach(({ name, residents }) => {
-      animalLocale[name] = residents.length;
+      allAnimals[name] = residents.length;
     });
-    return animalLocale;
+    return allAnimals;
   }
-  return animals.find(({ name }) => name === species).residents.length;
+  const animalLocale = animals.find(({ name }) => name === species).residents.length;
+  return animalLocale;
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (typeof (entrants) === 'undefined' || Object.keys(entrants).length === 0) return 0;
+  const valueAllEntrants = Object.entries(entrants)
+  .reduce((accumulator, valueActual) => accumulator + (prices[valueActual[0]] * valueActual[1]), 0);
+  return valueAllEntrants;
 }
 
 function animalMap(options) {
