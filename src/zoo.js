@@ -52,8 +52,19 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   });
 }
 
+function getAllAnimalNamesAndQuantity() {
+  return data.animals.reduce((acc, current) => {
+    acc[current.name] = current.residents.length;
+    return acc;
+  }, {});
+}
+
 function animalCount(species) {
-  // seu código aqui
+  if (species === undefined) {
+    return getAllAnimalNamesAndQuantity();
+  }
+  return data.animals.find(animal =>
+    animal.name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
