@@ -116,7 +116,7 @@ function entryCalculator(entrants) {
 
 const regionMapper = () => {};
 
-function SpeciesByRegion () {
+function SpeciesByRegion() {
   const mapObj = {};
   const regions = ['NE', 'NW', 'SE', 'SW'];
   data.animals.map(regionMapper);
@@ -132,7 +132,7 @@ function animalMap(options) {
 const everyDaySchedule = () => {
   const scheduleInfo = {};
   Object.keys(data.hours).forEach((day) => {
-    let closingHour = data.hours[day].close - 12;
+    const closingHour = data.hours[day].close - 12;
     scheduleInfo[day] = `Open from ${data.hours[day].open}am until ${closingHour}pm`;
     if (data.hours[day].close === 0) {
       scheduleInfo[day] = 'CLOSED';
@@ -142,8 +142,8 @@ const everyDaySchedule = () => {
 };
 
 const todaySchedule = (dayName) => {
-  let scheduleInfo = {};
-  let closingHour = data.hours[dayName].close - 12;
+  const scheduleInfo = {};
+  const closingHour = data.hours[dayName].close - 12;
   scheduleInfo[dayName] = `Open from ${data.hours[dayName].open}am until ${closingHour}pm`;
   if (data.hours[dayName].close === 0) {
     scheduleInfo[dayName] = 'CLOSED';
@@ -158,8 +158,18 @@ function schedule(dayName) {
   return everyDaySchedule();
 }
 
+function getOldest(managedSpecie) {
+  const higherAge = managedSpecie.residents.reduce((acc, element) => {
+    if (acc > element.age) return acc;
+    return element.age;
+  }, 0);
+  return managedSpecie.residents.find(element => element.age === higherAge);
+}
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const speciesId = data.employees.find(element => element.id === id).responsibleFor[0];
+  const managedSpecie = data.animals.find(animal => animal.id === speciesId);
+  const oldestResident = getOldest(managedSpecie);
+  return [oldestResident.name, oldestResident.sex, oldestResident.age];
 }
 
 function increasePrices(percentage) {
