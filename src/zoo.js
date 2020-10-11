@@ -114,19 +114,19 @@ function entryCalculator(entrants) {
   }, 0);
 }
 
-const regionMapper = () => {};
+// const regionMapper = () => {};
 
 function SpeciesByRegion() {
-  const mapObj = {};
-  const regions = ['NE', 'NW', 'SE', 'SW'];
-  data.animals.map(regionMapper);
+  // const mapObj = {};
+  // const regions = ['NE', 'NW', 'SE', 'SW'];
+  // data.animals.map(regionMapper);
 }
-console.log(SpeciesByRegion());
+
 function animalMap(options) {
-  if (options.includenames) {
-    return namedMap();
-  }
-  return SpeciesByRegion();
+  // if (options.includenames) {
+  //   return namedMap();
+  // }
+  // return SpeciesByRegion();
 }
 
 const everyDaySchedule = () => {
@@ -183,7 +183,7 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  
 }
 
 module.exports = {
