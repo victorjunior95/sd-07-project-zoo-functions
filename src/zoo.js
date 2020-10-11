@@ -114,19 +114,19 @@ function entryCalculator(entrants) {
   }, 0);
 }
 
-const regionMapper = () => {};
+// const regionMapper = () => {};
 
-function SpeciesByRegion() {
-  const mapObj = {};
-  const regions = ['NE', 'NW', 'SE', 'SW'];
-  data.animals.map(regionMapper);
-}
+// function SpeciesByRegion() {
+//   // const mapObj = {};
+//   // const regions = ['NE', 'NW', 'SE', 'SW'];
+//   // data.animals.map(regionMapper);
+// }
 
 function animalMap(options) {
-  if (options.includenames) {
-    return namedMap();
-  }
-  return SpeciesByRegion();
+  // if (options.includenames) {
+  //   return namedMap();
+  // }
+  // return SpeciesByRegion();
 }
 
 const everyDaySchedule = () => {
@@ -198,9 +198,11 @@ function createCoverageObj(namesArr, requestedWorkers) {
 }
 
 function employeeCoverage(idOrName) {
+  let namesArr;
+  let requestedWorkers;
   if (idOrName) {
-    const requestedWorkers = [getWorkerForCoverage(idOrName)];
-    let namesArr = [`${requestedWorkers[0].firstName} ${requestedWorkers[0].lastName}`];
+    requestedWorkers = [getWorkerForCoverage(idOrName)];
+    namesArr = [`${requestedWorkers[0].firstName} ${requestedWorkers[0].lastName}`];
   } else {
     namesArr = data.employees.map((worker) => `${worker.firstName} ${worker.lastName}`);
     requestedWorkers = data.employees;
