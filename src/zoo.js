@@ -101,11 +101,20 @@ function animalCount(species) {
   animals.forEach((animal) => (object[animal.name] = animal.residents.length));
   return species === undefined ? object : object[species];
 }
-console.log(animalCount("lions"));
+// console.log(animalCount("lions"));
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  const { prices } = data;
+  let value = 0;
+  for(i in entrants) {
+    // console.log(i)
+    // console.log(entrants[i])
+    value += entrants[i] * prices[i];
+  }
+  return value;
 }
+// console.log(entryCalculator({}));
+console.log(entryCalculator({ 'Child': 1, 'Senior': 1 }));
 
 function animalMap(options) {
   // seu código aqui
