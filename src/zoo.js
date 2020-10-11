@@ -16,10 +16,9 @@ function animalsByIds(...ids) {
   return animals.filter(animal => ids.includes(animal.id));
 }// Requisito feito com ajuda do instrutor Murilo Wolf em aula
 
-//Ao passar o nome de uma espécie e uma idade, testa se todos os animais desta espécie possuem a idade mínima especificada
 function animalsOlderThan(names, age) {
   const nomeEIdade = animals.filter(animal => animal.name === names);
-  const ageAll = nomeEIdade[0].residents.every(animal => animal.age >= age)
+  const ageAll = nomeEIdade[0].residents.every(animal => animal.age >= age);
   return ageAll
 }
 
