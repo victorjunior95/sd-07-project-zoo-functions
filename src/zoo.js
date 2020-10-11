@@ -34,12 +34,8 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  const { id, firstName, lastName } = personalInfo;
-  const { managers, responsibleFor } = associatedWith;
-  const newObj = { id, firstName, lastName, managers, responsibleFor };
-  return newObj;
+  return { ...personalInfo, ...associatedWith };
 }
-
 function isManager(id) {
   return employees.some(({ managers }) => managers.includes(id));
 }
