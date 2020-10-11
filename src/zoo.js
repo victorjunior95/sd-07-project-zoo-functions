@@ -50,7 +50,7 @@ function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-    return data.employees.find(employee => employee.firstName === employeeName)
+  return data.employees.find(employee => employee.firstName === employeeName)
     || data.employees.find(employee => employee.lastName === employeeName);
 }
 
