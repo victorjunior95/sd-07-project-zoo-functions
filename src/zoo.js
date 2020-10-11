@@ -91,26 +91,27 @@ function animalCount(species) {
   return animalsObj;
 }
 
-// const checkEntrants = (entrants) => {
-//   if (!entrants) {
-//     return false;
-//   }
-//   if (Object.keys(entrants).length === 0) {
-//     return false;
-//   }
-//   return true;
-// }
+const checkEntrants = (entrants) => {
+  if (!entrants) {
+    return false;
+  }
+  if (Object.keys(entrants).length === 0) {
+    return false;
+  }
+  return true;
+}
 
 function entryCalculator(entrants) {
-//   if (!checkEntrants(entrants)) {
-//     return 0;
-//   }
-//   const keys = ['Adult', 'Child', 'Senior'];
-//   return keys.reduce((acc, elem) => {
-//     if (entrants[elem]) {
-//       return acc += entrants[elem] * data.prices[elem];
-//     }
-//   }, 0);
+  if (!checkEntrants(entrants)) {
+    return 0;
+  }
+  const keys = ['Adult', 'Child', 'Senior'];
+  return keys.reduce((acc, elem) => {
+    if (typeof entrants[elem] === 'number') {
+      return acc += entrants[elem] * data.prices[elem];
+    }
+    return acc;
+  }, 0);
 }
 
 function animalMap(options) {
@@ -128,7 +129,7 @@ function oldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   const multiplier = 1 + (percentage / 100);
   Object.keys(data.prices)
-  .forEach(consumer => {
+  .forEach((consumer) => {
     let newValue = data.prices[consumer] * multiplier;
     newValue = Math.round(newValue * 100) / 100;
     data.prices[consumer] = newValue;
