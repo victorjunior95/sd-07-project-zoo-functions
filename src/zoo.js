@@ -66,11 +66,18 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  if (Object.keys(entrants).length === 0 || !entrants) {
-    return 0;
-  } else {
-    
+  if (entrants) {
+    if (Object.keys(entrants).length === 0) {
+      return 0;
+    }
+    return Object.entries(entrants).reduce((acc, [key, value], index) => {
+      if (key === 'Adult') return acc + (value * 49.99);
+      if (key === 'Senior') return acc + (value * 24.99);
+      if (key === 'Child') return acc + (value * 20.99);
+      return acc;
+    }, 0);
   }
+  return 0;
 }
 
 function animalMap(options) {
