@@ -130,14 +130,36 @@ function schedule(dayName) {
   });
   return obj;
 }
+/** Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado pelo funcionário, e retorna um array com nome, sexo e idade do animal mais velho dessa espécie */
+function olderAnimal(obj) {
+  let olderAge = obj.residents[0];
+
+  obj.residents.forEach(older => {
+    if (olderAge.age < older.age) {
+      olderAge = older;
+    }
+  })
+  return olderAge;
+}
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const {
+    employees,
+    animals
+  } = data;
+  const idAnimal = (employees.find((employer) => id === employer.id)).responsibleFor[0];
+  const animal = animals.find((animal) => idAnimal === animal.id);
+  const olderAgeAnimal = Object.values(olderAnimal(animal));
+
+  return olderAgeAnimal;
 }
+oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad')
 
 /** FONTE (arredondamento): https://stackoverflow.com/questions/11832914/round-to-at-most-2-decimal-places-only-if-necessary */
 function increasePrices(percentage) {
-  const { prices } = data;
+  const {
+    prices
+  } = data;
 
   Object.keys(prices).forEach((key) => {
     const newValue = prices[key] * ((percentage / 100) + 1);
