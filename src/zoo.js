@@ -113,8 +113,21 @@ function animalCount(species) {
 
 
 function entryCalculator(entrants) {
-    // seu código aqui
+    let sum = 0;
+    if (entrants !== undefined) {
+        let keys = Object.keys(entrants);
+        let values = Object.values(entrants);
+
+        for (let i = 0; i <= keys.length - 1; i += 1) {
+            if (entrants === {} || entrants === undefined) {
+                return 0;
+            }
+            sum += values[i]
+        }
+        return sum
+    }
 }
+
 
 function animalMap(options) {
     // seu código aqui
