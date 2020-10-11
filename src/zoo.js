@@ -130,24 +130,24 @@ function schedule(dayName) {
   });
   return obj;
 }
-/** Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado pelo funcionário, e retorna um array com nome, sexo e idade do animal mais velho dessa espécie */
+
 function olderAnimal(obj) {
   let olderAge = obj.residents[0];
 
-  obj.residents.forEach(older => {
+  obj.residents.forEach((older) => {
     if (olderAge.age < older.age) {
       olderAge = older;
     }
-  })
+  });
   return olderAge;
 }
 
 function oldestFromFirstSpecies(id) {
   const {
     employees,
-    animals
+    animals,
   } = data;
-  const idAnimal = (employees.find((employer) => id === employer.id)).responsibleFor[0];
+  const idAnimal = employees.find((employer) => id === employer.id).responsibleFor[0];
   const animal = animals.find((animal) => idAnimal === animal.id);
   const olderAgeAnimal = Object.values(olderAnimal(animal));
 
