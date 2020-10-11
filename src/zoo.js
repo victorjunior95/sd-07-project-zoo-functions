@@ -34,7 +34,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some(manager => manager.id === id);
+  return data.employees.some(employee => employee.managers.some(manager => manager === id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -63,7 +63,10 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  // for (day in data.hours){
+  //   if (dayName === day){
+  //   }
+  // }
 }
 
 function oldestFromFirstSpecies(id) {
@@ -72,7 +75,11 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  // let {Adult, Senior, Child} = data.prices
+  // Adult = parseFloat((Adult + Math.ceil((Adult * (percentage / 100)))).toFixed(2))
+  // Senior = parseFloat((Senior + (Math.round(Senior * (percentage / 100)))).toFixed(2))
+  // Child = parseFloat((Child + Math.ceil((Child * (percentage / 100)))).toFixed(2))
+  // data.prices = {Adult, Senior, Child}
 }
 
 function employeeCoverage(idOrName) {
