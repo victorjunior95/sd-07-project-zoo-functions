@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { animals } = require('./data');
+const { animals, prices } = require('./data');
 const { employees } = require('./data');
 
 function animalsByIds(...ids) {
@@ -27,8 +27,10 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
-  const employee = employees.find(justName =>
-    justName.firstName === employeeName || justName.lastName === employeeName);
+  const employee = employees.find(
+    justName =>
+      justName.firstName === employeeName || justName.lastName === employeeName,
+  );
   return employee;
 }
 
@@ -40,7 +42,9 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const manager = employees.some((justManager, index) => justManager.managers[index] === id);
+  const manager = employees.some(
+    (justManager, index) => justManager.managers[index] === id,
+  );
   return manager;
 }
 
@@ -62,11 +66,24 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  // seu código aqui
+  /* const justObject = {};
+  let justOne = '';
+
+  animals.forEach(({ name, residents }) => justObject[name] = residents.length);
+  justOne = animals.find(speciesName => species === speciesName.name);
+  if (species === undefined) return justObject;
+  return justOne.residents.length;
+  NÃO TA PASSANDO NO CC */
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (entrants === undefined || entrants === {}) return 0;
+  const justKeys = Object.keys(entrants);
+  const sum = justKeys.reduce((acc, keys) => {
+    acc += entrants[keys] * prices[keys];
+    return acc;
+  }, 0); // pra indicar que inicia em 0
+  return sum;
 }
 
 function animalMap(options) {
