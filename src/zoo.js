@@ -121,7 +121,7 @@ function SpeciesByRegion () {
   const regions = ['NE', 'NW', 'SE', 'SW'];
   data.animals.map(regionMapper);
 }
-console.log(SpeciesByRegion())
+console.log(SpeciesByRegion());
 function animalMap(options) {
   if (options.includenames) {
     return namedMap();
@@ -132,14 +132,25 @@ function animalMap(options) {
 const everyDaySchedule = () => {
   const scheduleInfo = {};
   Object.keys(data.hours).forEach((day) => {
-    scheduleInfo[day] = `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
+    let closingHour = data.hours[day].close - 12;
+    scheduleInfo[day] = `Open from ${data.hours[day].open}am until ${closingHour}pm`;
     if (data.hours[day].close === 0) {
       scheduleInfo[day] = 'CLOSED';
     }
   });
   return scheduleInfo;
 };
-console.log(everyDaySchedule())
+
+const todaySchedule = (dayName) => {
+  let scheduleInfo = {};
+  let closingHour = data.hours[dayName].close - 12;
+  scheduleInfo[dayName] = `Open from ${data.hours[dayName].open}am until ${closingHour}pm`;
+  if (data.hours[dayName].close === 0) {
+    scheduleInfo[dayName] = 'CLOSED';
+  }
+  return scheduleInfo;
+};
+
 function schedule(dayName) {
   if (dayName) {
     return todaySchedule(dayName);
