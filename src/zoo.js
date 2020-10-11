@@ -33,7 +33,7 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  const { id, firstName, lastName } = personalInfo; 
+  const { id, firstName, lastName } = personalInfo;
   // cria as propriedades e acrescenta os valores associados a elas;
   const { managers, responsibleFor } = associatedWith;
   return { id, firstName, lastName, managers, responsibleFor }; // une todas as informações;
