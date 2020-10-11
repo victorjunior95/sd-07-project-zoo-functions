@@ -70,11 +70,23 @@ function addEmployee(...information) {
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (species === null || species === undefined) {
+    const animalList = data.animals;
+    const objAnimalCount = animalList.reduce(function (acc, it) {
+      acc[it.name] = it.residents.length;
+      return acc;
+    }, {});
+    return objAnimalCount;
+  }
+  {
+    const animalFound = data.animals.find(function (element) {
+      return element.name === species;
+    });
+    return animalFound.residents.length;
+  }
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
 }
 
 function animalMap(options) {
