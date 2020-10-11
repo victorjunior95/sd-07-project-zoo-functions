@@ -76,7 +76,7 @@ animals.forEach(elemento => {
   vazio[elemento.name] = elemento.residents.length
 })
 */
-if (typeof species === 'undefined') {
+  if (typeof species === 'undefined') {
   return animals.reduce((acumulador, item) => {
     acumulador[item.name] = item.residents.length;
     // desta forma o acumulador recebe os nomes dos animais
@@ -87,7 +87,7 @@ if (typeof species === 'undefined') {
   }, {});
 }
   const umaEspecie = animals.find(busca => busca.name === species);
-    return umaEspecie.residents.length;
+  return umaEspecie.residents.length;
 }
 
 function entryCalculator(entrants) {
