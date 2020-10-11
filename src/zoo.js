@@ -50,8 +50,15 @@ function isManager(id) {
   return managerList.some(e => e === id);
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = {
+    id: id,
+    firstName: firstName,
+    lastName: lastName,
+    managers: managers,
+    responsibleFor: responsibleFor,
+  };
+  data.employees.push(newEmployee);
 }
 
 function animalCount(species) {
@@ -138,11 +145,6 @@ function employeeCoverage(idOrName) {
   obj[key] = value;
   return obj;
 }
-
-console.log(employeeCoverage());
-console.log(employeeCoverage('Nigel'));
-console.log(employeeCoverage('Nelson'));
-console.log(employeeCoverage('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 module.exports = {
   entryCalculator,
