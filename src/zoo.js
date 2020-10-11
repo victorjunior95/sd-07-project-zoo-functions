@@ -87,6 +87,14 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
+  if (entrants === null || entrants === undefined || Object.values(entrants).length === 0) {
+    return 0;
+  }
+  {
+    const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+    const priceTotal = (Adult * 49.99) + (Child * 20.99) + (Senior * 24.99);
+    return priceTotal;
+  }
 }
 
 function animalMap(options) {
