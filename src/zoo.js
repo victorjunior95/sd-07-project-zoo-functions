@@ -33,14 +33,17 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const { id, firstName, lastName } = personalInfo; 
+  // cria as propriedades e acrescenta os valores associados a elas;
+  const { managers, responsibleFor } = associatedWith;
+  return { id, firstName, lastName, managers, responsibleFor }; // une todas as informações;
 }
 
 function isManager(id) {
   const manager = employees.some((justManager, index) => justManager.managers[index] === id);
   return manager;
 }
-isManager('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1');
+
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
