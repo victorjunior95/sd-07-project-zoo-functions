@@ -78,8 +78,38 @@ function entryCalculator(entrants = 0) {
   return totalPrice;
 }
 
+const filterBySex = (arr, sex) => {
+  if (sex !== undefined) {
+    return arr.filter(name => name.sex === sex);
+  }
+  return arr;
+};
+
+const getAnimalsName = (specie, sorted, sex) => {
+  let animalsName = animals.find(animal => animal.name === specie).residents;
+  animalsName = filterBySex(animalsName, sex);
+  animalsName = animalsName.map(name => name.name);
+  if (sorted) {
+    animalsName.sort();
+  }
+  return animalsName;
+};
+
 function animalMap(options) {
-  // seu código aqui
+  const generalMap = [
+    ['NE', ['lions', 'giraffes']],
+    ['NW', ['tigers', 'bears', 'elephants']],
+    ['SE', ['penguins', 'otters']],
+    ['SW', ['frogs', 'snakes']],
+  ];
+  if (options !== undefined) {
+    const { includeNames = false, sorted = false, sex } = options;
+    if (includeNames) {
+      generalMap.map(element => element[1] = element[1]
+        .map(animal => Object.fromEntries([[animal, getAnimalsName(animal, sorted, sex)]])));
+    }
+  }
+  return Object.fromEntries(generalMap);
 }
 
 function schedule(dayName) {
@@ -126,7 +156,7 @@ function increasePrices(percentage) {
 }
 
 const getAnimalsById = ids => animals.filter(animal => ids.includes(animal.id))
-.map(animal => animal.name);
+  .map(animal => animal.name);
 
 function employeeCoverage(idOrName) {
   let employeesResponsibility = {
@@ -141,9 +171,9 @@ function employeeCoverage(idOrName) {
   };
   if (idOrName !== undefined) {
     const employee = employees
-    .find(employeeObject => employeeObject.id === idOrName ||
-      employeeObject.firstName === idOrName ||
-      employeeObject.lastName === idOrName);
+      .find(employeeObject => employeeObject.id === idOrName ||
+        employeeObject.firstName === idOrName ||
+        employeeObject.lastName === idOrName);
     employeesResponsibility = [
       [`${employee.firstName} ${employee.lastName}`, getAnimalsById(employee.responsibleFor)],
     ];
