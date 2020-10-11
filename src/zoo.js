@@ -14,7 +14,7 @@ const { animals, employees } = require('./data');
 
 function animalsByIds(...ids) {
   return animals.filter(animal => ids.includes(animal.id));
-}// Requisito feito com ajuda do instrutor Murilo Wolf em aula
+} // Requisito feito com ajuda do instrutor Murilo Wolf em aula
 
 function animalsOlderThan(names, age) {
   const nomeEIdade = animals.filter(animal => animal.name === names);
@@ -23,21 +23,30 @@ function animalsOlderThan(names, age) {
 }
 
 function employeeByName(employeeName) {
-  const employers = employeeName === undefined ? {} : employees.find(funcionario => funcionario
-    .firstName === employeeName || funcionario.lastName === employeeName);
+  const employers =
+    employeeName === undefined
+      ? {}
+      : employees.find(
+          funcionario =>
+            funcionario.firstName === employeeName || funcionario.lastName === employeeName,
+        );
   return employers;
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  const newObj = { id, firstName, lastName, managers, responsibleFor };
+  return newObj;
 }
 
 function isManager(id) {
-  // seu código aqui
+  return employees.some(({ managers }) => managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const addNewEmployee = createEmployee({ id, firstName, lastName }, { managers, responsibleFor });
+  employees.push(addNewEmployee);
 }
 
 function animalCount(species) {
