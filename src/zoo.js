@@ -24,16 +24,28 @@ function employeeByName(emp) {
   return data.employees.find(({ firstName, lastName }) => firstName === emp || lastName === emp);
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  return Object.assign({}, personalInfo, associatedWith);
+function createEmployee({ id, firstName, lastName }, { managers, responsibleFor }) {
+  return {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
 }
 
 function isManager(id) {
   return data.employees.some(sereal => sereal.managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  return data.employees.push({
+  id,
+  firstName,
+  lastName,
+  managers,
+  responsibleFor,
+});
 }
 
 function animalCount(species) {
