@@ -135,8 +135,26 @@ function animalCount(species) {
   }, {});
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
+/*
+
+8- Implemente a função entryCalculator:
+
+Retorna 0 se nenhum argumento for passado
+
+Retorna 0 se um objeto vazio for passado
+
+Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
+
+*/
+
+function entryCalculator(entrants = {}) {
+  if (Object.keys(entrants).length === 0) return 0;
+  const { prices } = data;
+  const keysOfEntrants = Object.keys(entrants);
+  return keysOfEntrants.reduce((result, item) => {
+    const valueByAge = entrants[item] * prices[item]
+    return result += valueByAge;
+  }, 0);
 }
 
 function animalMap(options) {
