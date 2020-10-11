@@ -117,20 +117,11 @@ function oldestFromFirstSpecies(id) {
   const oldestAnimal = residentsSpecies.reduce((animal, currentAnimal) => {
     if (animal.age < currentAnimal.age) {
       animal = currentAnimal;
-    };
+    }
     return animal;
   });
   return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
-
-// console.log(animal)
-// // console.log(currentAnimal);
-// if (ageAnimal < currentAnimal.age) {
-//   ageAnimal = currentAnimal.age;
-//   animal = currentAnimal;
-// }
-// console.log(animal);
-// return animal;
 
 function increasePrices(percentage) {
   // seu código aqui
