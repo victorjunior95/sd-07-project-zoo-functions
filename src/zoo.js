@@ -12,14 +12,8 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 
-/* PRIMEIRO COMMIT */
 function animalsByIds(...ids) {
-  const animalById = animalId => data.animals.filter(({ id }) => id === animalId);
-  let animalsList = [];
-  if (ids.length > 0) {
-    animalsList = ids.reduce((acc, id) => [...acc, ...animalById(id)], []);
-  }
-  return animalsList;
+  return data.animals.filter( ({ id }) => ids.includes(id));
 }
 
 function animalsOlderThan(animal, age) {
@@ -164,10 +158,6 @@ function employeeCoverage(idOrName = '') {
   }
   return result;
 }
-/* console.log(employeeCoverage());
-console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
-console.log(employeeCoverage('Stephanie'));
-console.log(employeeCoverage('Azevado')); */
 
 module.exports = {
   entryCalculator,
