@@ -196,7 +196,7 @@ function createCoverageObj(namesArr, requestedWorkers) {
   const coverageInfo = {};
   requestedWorkers.forEach(((worker, index) => {
     const elementsUnderCare = animalsByIds(...worker.responsibleFor);
-    let speciesUnderCare = elementsUnderCare.map(element => element.name);
+    const speciesUnderCare = elementsUnderCare.map(element => element.name);
     coverageInfo[namesArr[index]] = speciesUnderCare;
   }));
   return coverageInfo;
