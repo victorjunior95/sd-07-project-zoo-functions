@@ -14,7 +14,6 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  // seu código aqui
   const animalsId = [];
   if (ids.length === 0) {
     return [];
@@ -24,7 +23,6 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
   return data.animals.find(an => an.name === animal).residents.every(ag => ag.age >= age);
 }
 
@@ -115,15 +113,36 @@ function increasePrices(percentage) {
   data.prices.Senior = arred(data.prices.Senior * (1 + (percentage / 100)));
 }
 
-// console.log(data.prices);
-// increasePrices(50);
-// console.log(data.prices);
-// increasePrices(30);
-// console.log(data.prices);
-
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const obj = { };
+  const i = idOrName;
+  const e3 = data.employees.filter(e => e.firstName === i || e.lastName === i || e.id === i);
+  let key;
+  let value;
+  if (idOrName === undefined) {
+    data.employees.forEach((element) => {
+      key = `${element.firstName} ${element.lastName}`;
+      value = [];
+      element.responsibleFor.forEach((element2) => {
+        value.push(animalsByIds(element2)[0].name);
+      });
+      obj[key] = value;
+    });
+    return obj;
+  }
+  key = `${e3[0].firstName} ${e3[0].lastName}`;
+  value = [];
+  e3[0].responsibleFor.forEach((element4) => {
+    value.push(animalsByIds(element4)[0].name);
+  });
+  obj[key] = value;
+  return obj;
 }
+
+console.log(employeeCoverage());
+console.log(employeeCoverage('Nigel'));
+console.log(employeeCoverage('Nelson'));
+console.log(employeeCoverage('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
 
 module.exports = {
   entryCalculator,
