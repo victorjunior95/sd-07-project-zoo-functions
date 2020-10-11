@@ -47,18 +47,17 @@ function isManager(id) {
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   let addManagers = managers;
   let addResponsible = responsibleFor;
-  if(managers === undefined || responsibleFor === undefined) {
+  if (managers === undefined || responsibleFor === undefined) {
     addManagers = [];
     addResponsible = [];
+  }
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers: addManagers,
+    responsibleFor: addResponsible,
   };
-  const newEmployee = { 
-    id, 
-    firstName, 
-    lastName, 
-    managers: addManagers, 
-    responsibleFor: addResponsible
-  };
-  
   return employees.push(newEmployee);
 }
 
