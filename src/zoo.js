@@ -114,19 +114,19 @@ function entryCalculator(entrants) {
   }, 0);
 }
 
-// const regionMapper = () => {};
+const regionMapper = () => {};
 
 function SpeciesByRegion() {
-  // const mapObj = {};
-  // const regions = ['NE', 'NW', 'SE', 'SW'];
-  // data.animals.map(regionMapper);
+  const mapObj = {};
+  const regions = ['NE', 'NW', 'SE', 'SW'];
+  data.animals.map(regionMapper);
 }
 
 function animalMap(options) {
-  // if (options.includenames) {
-  //   return namedMap();
-  // }
-  // return SpeciesByRegion();
+  if (options.includenames) {
+    return namedMap();
+  }
+  return SpeciesByRegion();
 }
 
 const everyDaySchedule = () => {
@@ -182,8 +182,30 @@ function increasePrices(percentage) {
   });
 }
 
+function getWorkerForCoverage(idOrName) {
+  return data.employees
+  .find((worker => worker.firstName === idOrName || worker.lastName === idOrName || worker.id === idOrName));
+}
+
+function createCoverageObj(namesArr, requestedWorkers) {
+  const coverageInfo = {};
+  requestedWorkers.forEach(((worker, index) => {
+    let elementsUnderCare = animalsByIds(...worker.responsibleFor);
+    speciesUnderCare = elementsUnderCare.map(element => element.name);
+    coverageInfo[namesArr[index]] = speciesUnderCare;
+  }));
+  return coverageInfo;
+}
+
 function employeeCoverage(idOrName) {
-  
+  if (idOrName) {
+    const requestedWorkers = [getWorkerForCoverage(idOrName)];
+    let namesArr = [`${requestedWorkers[0].firstName} ${requestedWorkers[0].lastName}`];
+  } else {
+    namesArr = data.employees.map((worker) => `${worker.firstName} ${worker.lastName}`);
+    requestedWorkers = data.employees;
+  }
+  return createCoverageObj(namesArr, requestedWorkers);
 }
 
 module.exports = {
