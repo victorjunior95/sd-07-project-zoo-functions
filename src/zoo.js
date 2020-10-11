@@ -127,8 +127,12 @@ function schedule(dayName = '') {
   return newSchedule;
 }
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
+function oldestFromFirstSpecies(employeeId) {
+  const animalId = data.employees.find(employee => employee.id === employeeId)
+    .responsibleFor.shift();
+  return Object.values(data.animals.find(({ id }) => id === animalId).residents
+    .sort((a, b) => b.age - a.age)
+    .shift());
 }
 
 function increasePrices(percentage) {
