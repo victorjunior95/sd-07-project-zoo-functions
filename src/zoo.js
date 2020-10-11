@@ -25,10 +25,7 @@ function employeeByName(emp) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // juntar as informações no msm obj
-  // da um push no employeer
-  const emp = Object.assign({}, personalInfo, associatedWith);
-  return data.employees.push(emp);
+  return Object.assign({}, personalInfo, associatedWith);
 }
 
 function isManager(id) {
