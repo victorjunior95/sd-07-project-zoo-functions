@@ -123,8 +123,32 @@ function entryCalculator(entrants = 0) {
   return sum;
 }
 
-function animalMap(options) {
+function animalMap(options = false) {
   // seu código aqui
+  const { includeNames = false, sex = false, sorted = false } = options;
+  const { animals } = data;
+  const objAnimals = { NE: [], NW: [], SE: [], SW: [] };
+  Object.keys(objAnimals).forEach((key) => {
+    const animalPlaces = animals.filter(animal => animal.location === key).map(ab => ab.name);
+    if ((!options) || (!includeNames)) { objAnimals[key] = animalPlaces; } else {
+      Object.keys(animalPlaces).forEach((keyAnimal) => {
+        const animalNames = []; const objAnimal = {};
+        const arrayOfNames = animals.filter(item => item.name === animalPlaces[keyAnimal]);
+        arrayOfNames[0].residents.forEach((names) => {
+          if (!sex) {
+            animalNames.push(names.name);
+          } else if (names.sex === sex) {
+            animalNames.push(names.name);
+          }
+        });
+        if (sorted) { objAnimal[animalPlaces[keyAnimal]] = animalNames.sort(); } else {
+          objAnimal[animalPlaces[keyAnimal]] = animalNames;
+        }
+        objAnimals[key].push(objAnimal);
+      });
+    }
+  });
+  return objAnimals;
 }
 
 function schedule(dayName) {
