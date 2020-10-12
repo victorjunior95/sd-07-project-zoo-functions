@@ -95,7 +95,6 @@ function schedule(dayName) {
   }
   return { [dayName]: resultado[dayName] };
 }
-console.log(schedule('Sunday'));
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
