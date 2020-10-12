@@ -79,11 +79,32 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  let totalCost = null;
+  if (entrants === undefined || Object.entries(entrants).length === 0) {
+    totalCost = 0;
+  } else {
+    const {Adult = 0, Child = 0, Senior = 0} = entrants;
+    const prices = data.prices;
+    totalCost = (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
+  }
+  return totalCost;
 }
 
+const animalZone = (zone) => {
+  return data.animals.filter((animal) => animal.location === zone).map(animal => `${animal.name}`);
+}
+
+console.log(animalMap());
+
 function animalMap(options) {
-  // seu código aqui
+  const animalsList = data.animals;
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  if (options === undefined) {
+    const animalsObj = locations.map((zone) => ({[zone]: animalZone(zone)}));
+    let animalObj = {};
+    animalsObj.forEach((obj) => animalObj = Object.assign(animalObj, obj));
+    return animalObj;
+  }
 }
 
 function schedule(dayName) {
