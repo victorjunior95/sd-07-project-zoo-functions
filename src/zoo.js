@@ -114,8 +114,13 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const { residents } = data.animals.find(
+    name => name.id === data.employees.find(element => element.id === id).responsibleFor[0],
+  );
+  const OlderAnimal = residents.reduce((acc, animal) => (acc.age > animal.age ? acc : animal));
+  return [OlderAnimal.name, OlderAnimal.sex, OlderAnimal.age];
 }
+
 function increasePrices(percentage) {
   Object.keys(data.prices).map(
     element => (data.prices[element] = Math.round(data.prices[element]
@@ -125,7 +130,28 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (idOrName === undefined) {
+    const all = {};
+    data.employees.forEach(
+      employeeSelected =>
+        (all[
+          `${employeeSelected.firstName} ${employeeSelected.lastName}`
+        ] = employeeSelected.responsibleFor.map(
+          isresponsible => data.animals.find(animal => animal.id === isresponsible).name,
+        )),
+        );
+    return all;
+  }
+  const employeer = data.employees.find(
+    employeeSelected =>
+      employeeSelected.firstName === idOrName ||
+      employeeSelected.lastName === idOrName ||
+      employeeSelected.id === idOrName,
+  );
+  const responsible = employeer.responsibleFor.map(
+    isresponsible => data.animals.find(animal => animal.id === isresponsible).name,
+  );
+  return { [`${employeer.firstName} ${employeer.lastName}`]: responsible };
 }
 
 module.exports = {
@@ -143,3 +169,5 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
+//  Referência bibliográfica.
+//  https://github.com/tryber/sd-07-project-zoo-functions/pull/17/files
