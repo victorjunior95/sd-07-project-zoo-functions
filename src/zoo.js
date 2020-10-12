@@ -67,8 +67,15 @@ function animalCount(species) {
     animal.name === species).residents.length;
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(entrants = 0) {
+  const price = Object.keys(entrants)
+  .map(lifestage => data.prices[lifestage]);
+  const parametersValues = Object.values(entrants);
+
+  return price.reduce((acc, currentValue, index) => {
+    acc += currentValue * parametersValues[index];
+    return acc;
+  }, 0);
 }
 
 function animalMap(options) {
