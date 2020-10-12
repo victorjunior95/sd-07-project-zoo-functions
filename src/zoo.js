@@ -15,7 +15,7 @@ function animalsByIds(...ids) {
   return data.animals.filter(animal => ids.includes(animal.id));
 }
 
-function animalsOlderThan(animal, age) {
+function animalsOlderThan(animalName, ageAnimal) {
   return data.animals
     .find(animal => animal.name === animalName).residents.every(animal => animal.age > ageAnimal);
 }
@@ -30,11 +30,12 @@ function employeeByName(...employeeName) {
 
 function createEmployee(personalInfo, ...associatedWith) {
   const newObt = {};
-    return Object.assign(newObt, personalInfo, ...associatedWith);
+  return Object.assign(newObt, personalInfo, ...associatedWith);
 }
 
 function isManager(id) {
-  // seu código aqui
+  const checkIdManager = data.employees.map(manager => manager.checkIdManager).toString();
+  return checkIdManager.includes(id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
