@@ -24,8 +24,12 @@ function animalsOlderThan(animal, age) {
     .residents.every(({ age: ageRes }) => ageRes >= age);
 }
 
+// prettier-ignore
 function employeeByName(employeeName) {
-  // seu código aqui
+  return (
+    data.employees.find(
+      ({ firstName, lastName }) => employeeName === firstName || employeeName === lastName) || {}
+  );
 }
 
 function createEmployee(personalInfo, associatedWith) {
