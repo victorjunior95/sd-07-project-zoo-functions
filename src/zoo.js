@@ -140,8 +140,31 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-}
+  let emp = employees;
+  if (idOrName) {
+    emp = emp.filter(({id, firstName, lastName}) => id === idOrName || firstName == idOrName || lastName == idOrName);
+  }
 
+  const findAnimalsName = (responsibleFor) => (
+    responsibleFor.map((currentId) => {
+      const animalSelected = animals.find(({id}) => id === currentId);
+      return animalSelected.name;
+    })
+  )
+
+  return emp
+    .map(({firstName, lastName, responsibleFor}) => {
+      obj = {};
+      obj[`${firstName} ${lastName}`] = findAnimalsName(responsibleFor);
+      return obj;
+    })
+    .reduce((acc, currentEmployee) => {
+      return {
+      ...acc,
+      ...currentEmployee
+      }
+    }, {})
+}
 
 module.exports = {
   entryCalculator,
