@@ -73,6 +73,7 @@ function animalMap(options) {
    retorna somente nomes de animais macho/fêmea com os nomes dos animais ordenados
    * Só retorna informações ordenadas e com sexo se a opção includeNames:
    true for especificada */
+
 }
 
 const listHours = (input = Object.keys(hours)) => input.reduce((acc, curr) => {
@@ -106,9 +107,31 @@ const increasePrices = percentage => Object.entries(prices).forEach(function (it
   prices[item[0]] = calculatorPrecision(item[1], percentage);
 });
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+const getEmployee = (idOrName) => {
+  const employee = employees.find(employeeDates =>
+    Object.values(employeeDates).includes(idOrName));
+
+  const employeeResponsibility = employee.responsibleFor.map(animalId =>
+    animals.find(animal => animal.id === animalId).name,
+  );
+  return [employee, employeeResponsibility];
+};
+
+const creatObjectEmployee = input =>
+  input.reduce((cc, crr) => {
+    const [employee, employeeResponsibility] = getEmployee(crr);
+    cc[`${employee.firstName} ${employee.lastName}`] = employeeResponsibility;
+    return cc;
+  }, {});
+
+const employeesList = () => employees.map(employee => employee.id);
+
+const employeeCoverage = (idOrName = employeesList()) => {
+  if (typeof idOrName === 'string') return creatObjectEmployee([idOrName]);
+  return creatObjectEmployee(idOrName);
+};
+
+console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   entryCalculator,
