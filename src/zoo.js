@@ -66,14 +66,15 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  /* const justObject = {};
-  let justOne = '';
-
-  animals.forEach(({ name, residents }) => justObject[name] = residents.length);
-  justOne = animals.find(speciesName => species === speciesName.name);
+  const justObject = animals.reduce((theObject, element) => { // referência: Moisés Santana
+    theObject[element.name] = element.residents.length; // colchetes indicam a key
+    return theObject; // = para atribuir valor à key
+  }, {}); // inicia como um objeto vazio
+  // pode usar o reduce, porque no final o resultado é 1 objeto só, com várias keys
   if (species === undefined) return justObject;
+
+  const justOne = animals.find(speciesName => species === speciesName.name);
   return justOne.residents.length;
-  NÃO TA PASSANDO NO CC */
 }
 
 function entryCalculator(entrants) {
@@ -110,11 +111,10 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  // seu código aqui - NÃO ENTENDI O QUE É PARA SER FEITO
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
 }
 
 module.exports = {
