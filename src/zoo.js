@@ -97,8 +97,8 @@ function animalMap(options) {
   let animalObj = {};
   if (options === undefined) {
     const animalsObj = locations.map(zone => ({ [zone]: animalZone(zone) }));
-    animalsObj.forEach(obj => {
-      animalObj = Object.assign(animalObj, obj)
+    animalsObj.forEach((obj) => {
+      animalObj = Object.assign(animalObj, obj);
       return animalObj;
     });
   }
