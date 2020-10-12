@@ -90,12 +90,20 @@ const schedule = (dayName = listHours()) => {
 };
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  /** Passado o id de um funcionário,
+   * encontra a primeira espécie de animal gerenciado pelo funcionário,
+   * e retorna um array com nome, sexo e idade do animal mais velho dessa espécie */
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+const calculatorPrecision = (value, percent) => {
+  const valuePrecision = value * 100;
+  const percentPrecision = percent / 100;
+  return (Math.round((valuePrecision * percentPrecision) + valuePrecision)) / 100;
+};
+
+const increasePrices = percentage => Object.entries(prices).forEach(function (item) {
+  prices[item[0]] = calculatorPrecision(item[1], percentage);
+});
 
 function employeeCoverage(idOrName) {
   // seu código aqui
