@@ -124,46 +124,46 @@ function oldestFromFirstSpecies(id) {
 }
 
 function calculateNewPrice(price, percentage) {
-  const newPrice = price + price * percentage / 100;
-  const roundedNewPrice = Math.round(newPrice * 100) / 100
-  
+  const newPrice = price + (price * percentage / 100);
+  const roundedNewPrice = Math.round(newPrice * 100) / 100;  
   return roundedNewPrice;
 }
 
 
 function increasePrices(percentage) {
-  let {Adult, Child, Senior} = prices;
-  
-  prices.Adult = calculateNewPrice(Adult, percentage)
-  prices.Child = calculateNewPrice(Child, percentage)
-  prices.Senior = calculateNewPrice(Senior, percentage)
+  const { Adult, Child, Senior } = prices;
+  prices.Adult = calculateNewPrice(Adult, percentage);
+  prices.Child = calculateNewPrice(Child, percentage);
+  prices.Senior = calculateNewPrice(Senior, percentage);
 }
 
 function employeeCoverage(idOrName) {
   let emp = employees;
   if (idOrName) {
-    emp = emp.filter(({id, firstName, lastName}) => id === idOrName || firstName == idOrName || lastName == idOrName);
+    emp = emp.filter(({ id, firstName, lastName }) => (
+      id === idOrName || firstName === idOrName || lastName === idOrName)
+    );
   }
 
-  const findAnimalsName = (responsibleFor) => (
+  const findAnimalsName = responsibleFor => (
     responsibleFor.map((currentId) => {
-      const animalSelected = animals.find(({id}) => id === currentId);
+      const animalSelected = animals.find(({ id }) => id === currentId);
       return animalSelected.name;
     })
-  )
+  );
 
   return emp
-    .map(({firstName, lastName, responsibleFor}) => {
-      obj = {};
+    .map(({ firstName, lastName, responsibleFor }) => {
+      const obj = {};
       obj[`${firstName} ${lastName}`] = findAnimalsName(responsibleFor);
       return obj;
     })
-    .reduce((acc, currentEmployee) => {
-      return {
-      ...acc,
-      ...currentEmployee
+    .reduce((acc, currentEmployee) => (
+      {
+        ...acc,
+        ...currentEmployee,
       }
-    }, {})
+    ), {});
 }
 
 module.exports = {
