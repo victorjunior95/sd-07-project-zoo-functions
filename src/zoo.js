@@ -12,13 +12,13 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  return data.animals.filter((item, count) => item.id === ids[count]);
+  return data.animals.filter((animal, count) => animal.id === ids[count]);
 }
 
 function animalsOlderThan(animal, age) {
-  const selectedAnimal = data.animals.filter(item => item.name === animal);
+  const selectedAnimal = data.animals.filter(anim => anim.name === animal);
   const selectedAnimalContent = selectedAnimal[0].residents;
-  return selectedAnimalContent.every(item => item.age > age);
+  return selectedAnimalContent.every(anim => item.age > age);
 }
 
 function employeeByName(employeeName) {
@@ -84,9 +84,7 @@ function buildSchedule() {
   return calendar;
 }
 function schedule(dayName) {
-  if (dayName === undefined) {
-    return buildSchedule();
-  }
+  if (dayName === undefined) return buildSchedule();
   return { [dayName]: buildSchedule()[dayName] };
 }
 
