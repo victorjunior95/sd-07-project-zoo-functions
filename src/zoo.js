@@ -141,6 +141,14 @@ function oldestFromFirstSpecies(id) {
   // Passado o id de um funcionário, encontra a primeira espécie de animal
   // gerenciado pelo funcionário, e retorna um array com nome, sexo e idade do
   // animal mais velho dessa espécie
+  const animalId =
+  data.employees.find(employee => employee.id === id)
+  .responsibleFor.find(animal => animal);
+
+  return Object.values(data.animals
+    .find(animal => animal.id === animalId).residents
+    .sort((a, b) => b.age - a.age)
+    .find(list => list.name));
 }
 
 function increasePrices(percentage) {
