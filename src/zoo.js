@@ -66,8 +66,60 @@ function entryCalculator(entrants) {
   return Object.entries(entrants).reduce((acc, arr) => acc + (data.prices[arr[0]] * arr[1]), 0);
 }
 
+/* function animalMapEmpty() {
+  let arr = [];
+  data.animals.forEach(loc => arr.push(loc.location));
+  let animal = [];
+  const objLocation = {};
+  arr = arr.filter((array, index) => arr.indexOf(array) === index);
+  for (let index = 0; index < arr.length; index += 1) {
+    animal = [];
+    data.animals.forEach((loc) => {
+      if (arr[index] === loc.location) {
+        animal.push(loc.name);
+        objLocation[arr[index]] = animal;
+      }
+    });
+  }
+  return objLocation;
+} */
+
+/* function animalMapSortedSex(orderName, sorted, sexParameter) {
+  if (sorted === true) {
+    return orderName.sort();
+  }
+  return orderName;
+} */
+
+/* function animalMapIncludeSorted(sorted, sexParameter) {
+  const obj1 = {};
+  let obj2 = {};
+  const keys = Object.keys(animalMapEmpty());
+  const values = Object.values(animalMapEmpty());
+  for (let index = 0; index < keys.length; index += 1) {
+    obj2 = {};
+    values[index].forEach((val) => {
+      data.animals.map(({ name, residents }) => {
+        if (val === name) {
+          obj2[val] = animalMapSortedSex(residents.map(({ name }) => name), sorted, sexParameter);
+          obj1[keys[index]] = [obj2];
+        }
+      });
+    });
+  }
+  return obj1;
+} */
+
 function animalMap(options) {
-  // seu código aqui
+/*   if (options === undefined) {
+    return animalMapEmpty();
+  }
+  const obj = options;
+  if (obj.includeNames === true) {
+    console.log(animalMapIncludeSorted(obj.sorted, obj.sex));
+    return animalMapIncludeSorted(obj.sorted, obj.sex);
+  }
+  return animalMapEmpty(); */
 }
 
 function scheduleClean() {
@@ -96,7 +148,27 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  let arrayId;
+  let arrayId2;
+  let ageAnimal = 0;
+  data.employees.forEach(({ id: employ, responsibleFor }) => {
+    if (id === employ) {
+      arrayId = responsibleFor.find(resp => resp);
+    }
+    return data.animals.map(({ id: animal, residents }) => {
+      if (arrayId === animal) {
+        residents.filter(({ age }) => {
+          if (ageAnimal < age) {
+            ageAnimal = age;
+          }
+          return ageAnimal;
+        });
+        arrayId2 = residents.filter(({ age }) => age === ageAnimal);
+      }
+      return arrayId2;
+    });
+  });
+  return Object.values(...arrayId2);
 }
 
 function increasePrices(percentage) {
