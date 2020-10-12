@@ -108,24 +108,18 @@ function animalMap(options) {
   // seu código aqui
 }
 
-function schedule(dayName) {
+function schedule(...dayName) {
   // map reduce e filter so funcionam com arrays e não objetos
   let objeto = {};
-  if (typeof dayName === 'undefined') {
-    Object.keys(hours).forEach(elemento => {
-      objeto[elemento] =  `Open from ${hours[elemento].open}am until ${hours[elemento].close - 12}pm`;
-      if (elemento === 'Monday'){
-        objeto[elemento] = 'CLOSED'
-      }
-    });
-  }else
-  Object.keys(hours).forEach(elemento => {
-    objeto[dayName] =  `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
-    if (dayName === 'Monday'){
-      objeto[dayName] = 'CLOSED'
+  if (dayName.length === 0) {
+    dayName = Object.keys(hours);
+  }
+  dayName.forEach((elemento) => {
+    objeto[elemento] = `Open from ${hours[elemento].open}am until ${hours[elemento].close - 12}pm`;
+    if (elemento === 'Monday'){
+      objeto[elemento] = 'CLOSED';
     }
   });
- 
   return objeto;
 }
 
@@ -156,4 +150,4 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
-console.log(schedule());
+console.log(schedule('Tuesday'));
