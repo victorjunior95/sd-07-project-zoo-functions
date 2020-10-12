@@ -90,9 +90,10 @@ const schedule = (dayName = listHours()) => {
 };
 
 function oldestFromFirstSpecies(id) {
-  /** Passado o id de um funcionário,
-   * encontra a primeira espécie de animal gerenciado pelo funcionário,
-   * e retorna um array com nome, sexo e idade do animal mais velho dessa espécie */
+  const specieId = employees.find(employee => employee.id === id).responsibleFor[0];
+  const animalsArr = animals.find(specie => specie.id === specieId).residents;
+  const animal = animalsArr.reduce((cc, crr) => (crr.age < cc.age ? cc : crr));
+  return Object.values(animal);
 }
 
 const calculatorPrecision = (value, percent) => {
