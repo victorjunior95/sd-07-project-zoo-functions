@@ -52,11 +52,11 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // seu código aqui
+  // const { animals } = data;
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  // const { prices } = data;
 }
 
 function animalMap(options) {
@@ -64,7 +64,26 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  const hoursTable = { Tuesday: 'Open from 8am until 6pm', Wednesday: 'Open from 8am until 6pm', Thursday: 'Open from 10am until 8pm', Friday: 'Open from 10am until 8pm', Saturday: 'Open from 8am until 10pm', Sunday: 'Open from 8am until 8pm', Monday: 'CLOSED' };
+  if (!dayName) return hoursTable;
+  switch (dayName) {
+    case 'Tuesday':
+      return { Tuesday: 'Open from 8am until 6pm' };
+    case 'Wednesday':
+      return { Wednesday: 'Open from 8am until 6pm' };
+    case 'Thursday':
+      return { Thursday: 'Open from 8am until 6pm' };
+    case 'Friday':
+      return { Friday: 'Open from 8am until 6pm' };
+    case 'Saturday':
+      return { Saturday: 'Open from 8am until 6pm' };
+    case 'Sunday':
+      return { Sunday: 'Open from 8am until 6pm' };
+    case 'Monday':
+      return { Monday: 'CLOSED' };
+    default :
+      return hoursTable;
+  }
 }
 
 function oldestFromFirstSpecies(id) {
@@ -72,7 +91,7 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  // const { prices } = data;
 }
 
 function employeeCoverage(idOrName) {

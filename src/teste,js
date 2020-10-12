@@ -1,0 +1,35 @@
+
+function animalCount(species) {
+  // const { animals } = data;
+  // let sum = 0;
+  // let count = 0;
+  // if(species){
+  //   return animals.filter(animal => animal.name === species)
+  //   .map(animal => animal.name && animal.residents.length)
+  //   .reduce(animal => animal.residents.length);
+  //   } else {
+  //   animals.forEach(animal => { 
+  //     // sum = animals.map(animal => animal.name && animal.residents.length)
+  //     // .reduce(animal => animal.residents.length);
+  //     sum = animal.residents.length;
+  //     count.push(`${animal.name}: sum`);    
+  //   }) 
+  //   return count;
+  // };
+//console.log(animalCount('frogs'))
+}
+
+function entryCalculator(entrants) {
+  // const { prices } = data;
+  // const sum = [];
+  // const arrPrices = Object.key(prices); console.log(arrPrices.key.name);
+  // const arrEntrants = Object(entrants); console.log(arrEntrants);
+  // if(!entrants) return 0;   
+  // for(let i = 0; i > entrants.length; i += 1) {
+  //   if(entrants[i].name === 'Adult') sum.push(entrants.value * 49,99);
+  //   if(entrants[i].name === 'Child') sum.push(entrants.value * 20,99);
+  //   if(entrants[i].name === 'Senior') sum.push(entrants.value * 24,99);
+  // }
+  //return sum.reduce((previousValue, currentValue) => previousValue + currentValue); 
+}   
+//console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
