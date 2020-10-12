@@ -49,13 +49,10 @@ function employeeByName(employeeName) {
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
   if (personalInfo && associatedWith) {
-    data.employees.push({
-      ...personalInfo,
-      ...associatedWith
-    });
+    data.employees.push({...personalInfo,...associatedWith});
   }
-  let lastEmployee = data.employees.length - 1;
-  let newEmployee = data.employees[lastEmployee];
+  const lastEmployee = data.employees.length - 1;
+  const newEmployee = data.employees[lastEmployee];
   return newEmployee;
 }
 
