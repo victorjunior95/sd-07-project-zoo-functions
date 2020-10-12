@@ -95,8 +95,7 @@ animals.forEach(elemento => {
 function entryCalculator(entrants) {
   if (typeof entrants === 'undefined') return 0;
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  // desse modo eu preciso passar os mesmos nomes das variaveis internas 
-  // de entrants
+  // desse modo eu preciso passar os mesmos nomes das variaveis internas
   const precoAdulto = prices.Adult * Adult;
   const precoIdoso = prices.Senior * Senior;
   const precoCrianca = prices.Child * Child;
@@ -110,13 +109,13 @@ function animalMap(options) {
 
 function schedule(...dayName) {
   // map reduce e filter so funcionam com arrays e não objetos
-  let objeto = {};
+  const objeto = {};
   if (dayName.length === 0) {
     dayName = Object.keys(hours);
   }
   dayName.forEach((elemento) => {
     objeto[elemento] = `Open from ${hours[elemento].open}am until ${hours[elemento].close - 12}pm`;
-    if (elemento === 'Monday'){
+    if (elemento === 'Monday') {
       objeto[elemento] = 'CLOSED';
     }
   });
