@@ -109,17 +109,16 @@ function animalMap(options) {
 
 function schedule(...dayName) {
   // map reduce e filter so funcionam com arrays e não objetos
-  const objeto = {};
   if (dayName.length === 0) {
     dayName = Object.keys(hours);
   }
-  dayName.forEach((elemento) => {
-    objeto[elemento] = `Open from ${hours[elemento].open}am until ${hours[elemento].close - 12}pm`;
+  return dayName.reduce((acc, elemento) => {
+    acc[elemento] = `Open from ${hours[elemento].open}am until ${hours[elemento].close - 12}pm`;
     if (elemento === 'Monday') {
-      objeto[elemento] = 'CLOSED';
+      acc[elemento] = 'CLOSED';
     }
-  });
-  return objeto;
+    return acc
+  }, {});
 }
 
 function oldestFromFirstSpecies(id) {
@@ -149,4 +148,4 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
-console.log(schedule('Tuesday'));
+console.log(schedule('Sunday'));
