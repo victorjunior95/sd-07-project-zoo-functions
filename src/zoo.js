@@ -38,8 +38,10 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some(isHimOrHerManager => isHimOrHerManager
+    .managers.includes(id)); // usamos o include para checar se há o item ID dentro de managers
 }
+console.log(isManager('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
