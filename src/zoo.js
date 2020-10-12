@@ -89,30 +89,86 @@ function entryCalculator(entrants) {
   }, 0);
 }
 
-function animalMap(options) {
+const createEmptyAnimalMap = () => {
   const { animals } = data;
-  const animalMap = {};
-  if (options === undefined) {
-    animals
-      .map(({ location }) => location)
-      .forEach((location) => {
-        if (!{}.hasOwnProperty.call(animalMap, location)) {
-          animalMap[location] = [];
-        }
-      });
-    const keys = Object.keys(animalMap);
-    const array = keys.map((key) => {
-      const object = {};
-      object[key] = animals
-        .filter(({ location }) => location === key)
-        .map(({ name }) => name);
-      return object;
+  const emptyAnimalMap = {};
+  animals
+    .map(({ location }) => location)
+    .forEach((location) => {
+      if (!{}.hasOwnProperty.call(emptyAnimalMap, location)) {
+        emptyAnimalMap[location] = [];
+      }
     });
-    return Object.assign({}, ...array);
+  return emptyAnimalMap;
+};
+
+const listWithoutNames = ({ name }) => name;
+const listWithNames = ({ name: species, residents }) => {
+  const object = {};
+  object[species] = residents.map(({ name }) => name);
+  return object;
+};
+
+const generateMapWithoutOptions = (directions, func) => {
+  const { animals } = data;
+  const arrayAnimalMap = directions.map((direction) => {
+    const object = {};
+    object[direction] = animals
+      .filter(({ location }) => location === direction)
+      .map(func);
+    return object;
+  });
+  return arrayAnimalMap;
+};
+
+const sortAnimalMap = (arrayAnimalMap) => {
+  const species = arrayAnimalMap.map(animal => Object.keys(animal));
+  for (let index = 0; index < arrayAnimalMap.length; index += 1) {
+    arrayAnimalMap[index][species[index]].sort();
   }
-  // return animalMap;
+  return arrayAnimalMap;
+};
+const generateMapWithOptions = (directions, func, sex, sorted) => {
+  const { animals } = data;
+  const arrayAnimalMap = directions.map((direction) => {
+    const object = {};
+    let animalsInThisLocation = animals
+      .filter(({ location }) => location === direction);
+    if (sex === 'female' || sex === 'male') {
+      animalsInThisLocation = animalsInThisLocation.map(({ name, residents }) => ({
+        name,
+        residents: residents.filter(resident => resident.sex === sex),
+      }));
+    }
+    object[direction] = animalsInThisLocation.map(func);
+
+    if (sorted) {
+      object[direction] = sortAnimalMap(object[direction]);
+    }
+    return object;
+  });
+  return arrayAnimalMap;
+};
+function animalMap(options) {
+  const animalsPerLocation = createEmptyAnimalMap();
+  const directions = Object.keys(animalsPerLocation);
+  let arrayAnimalMap = [];
+  let func = () => {};
+  if (options === undefined) {
+    func = listWithoutNames;
+    arrayAnimalMap = generateMapWithoutOptions(directions, func);
+  } else {
+    const { includeNames = false, sex = 'both', sorted = false } = options;
+    if (!includeNames) {
+      func = listWithoutNames;
+      arrayAnimalMap = generateMapWithoutOptions(directions, func);
+    } else {
+      func = listWithNames;
+      arrayAnimalMap = generateMapWithOptions(directions, func, sex, sorted);
+    }
+  }
+  return Object.assign({}, ...arrayAnimalMap);
 }
-console.log(animalMap());
 
 function schedule(dayName) {
   // seu código aqui
