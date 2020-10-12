@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -123,6 +124,17 @@ function animalMap(options) {
 function schedule(dayName) {
   // Sem parâmetros, retorna um cronograma legível para humanos
   // Se um único dia for passado, retorna somente este dia em um formato legível para humanos
+  let days = {};
+  Object.entries(hours).forEach((day) => {
+    days[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+    if (day[1].open === 0 && day[1].close === 0) days[day[0]] = 'CLOSED';
+  });
+  if (dayName) {
+    days = {};
+    days[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
+    if (hours[dayName].open === 0) days[dayName] = 'CLOSED';
+  }
+  return days;
 }
 
 function oldestFromFirstSpecies(id) {
