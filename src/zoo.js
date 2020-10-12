@@ -123,13 +123,25 @@ function oldestFromFirstSpecies(id) {
   return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
 
+function calculateNewPrice(price, percentage) {
+  const newPrice = price + price * percentage / 100;
+  const roundedNewPrice = Math.round(newPrice * 100) / 100
+  
+  return roundedNewPrice;
+}
+
+
 function increasePrices(percentage) {
-  // seu código aqui
+  let {Adult, Child, Senior} = prices;
+  
+  prices.Adult = calculateNewPrice(Adult, percentage)
+  prices.Child = calculateNewPrice(Child, percentage)
+  prices.Senior = calculateNewPrice(Senior, percentage)
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
 }
+
 
 module.exports = {
   entryCalculator,
