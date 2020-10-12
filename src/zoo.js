@@ -10,10 +10,11 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals } = require('./data');
-const data = require('./data');
+const { animals, hours } = require('./data');
 const { employees } = require('./data');
 const { prices } = require('./data');
+const { data } = require('./data');
+
 
 function animalsByIds(...ids) {
   if (ids.length === 0) return [];
@@ -93,16 +94,14 @@ animals.forEach(elemento => {
 
 function entryCalculator(entrants) {
   if (typeof entrants === 'undefined') return 0;
-  let entrada = Object.values(entrants);
-  let precos = Object.values(prices);
-  let cha = Object.keys(entrants);
-  let soma = 0
-  for(let i in entrada){
-    if (cha[i] === 'Adult')  soma += precos[0] * entrada[i];
-    if (cha[i] === 'Senior')  soma += precos[1] * entrada[i];
-    if (cha[i] === 'Child')  soma += precos[2] * entrada[i];
-  };
- return soma;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  // desse modo eu preciso passar os mesmos nomes das variaveis internas 
+  // de entrants
+  const precoAdulto = prices.Adult * Adult;
+  const precoIdoso = prices.Senior * Senior;
+  const precoCrianca = prices.Child * Child;
+  const total = precoAdulto + precoIdoso + precoCrianca;
+  return total;
 }
 
 function animalMap(options) {
@@ -110,7 +109,24 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  // map reduce e filter so funcionam com arrays e não objetos
+  let objeto = {};
+  if (typeof dayName === 'undefined') {
+    Object.keys(hours).forEach(elemento => {
+      objeto[elemento] =  `Open from ${hours[elemento].open}am until ${hours[elemento].close - 12}pm`;
+      if (elemento === 'Monday'){
+        objeto[elemento] = 'CLOSED'
+      }
+    });
+  }else
+  Object.keys(hours).forEach(elemento => {
+    objeto[dayName] =  `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
+    if (dayName === 'Monday'){
+      objeto[dayName] = 'CLOSED'
+    }
+  });
+ 
+  return objeto;
 }
 
 function oldestFromFirstSpecies(id) {
@@ -140,4 +156,4 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
-console.log(entryCalculator());
+console.log(schedule());
