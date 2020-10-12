@@ -16,9 +16,6 @@ function animalsByIds(...ids) {
   return data.animals.filter(item => ids.includes(item.id));
 }
 
-// Ao passar o nome de uma espécie e uma idade,
-// testa se todos os animais desta espécie possuem a
-// idade mínima especificada
 function animalsOlderThan(animal, age) {
   // seu código aqui
   const { animals: myAnimals } = data;
@@ -26,13 +23,8 @@ function animalsOlderThan(animal, age) {
   animals = myAnimals[0].residents.every(old => old.age >= age);
   return animals;
 }
-console.log(animalsOlderThan());
+// console.log(animalsOlderThan());
 
-// Sem parâmetros, retorna um objeto vazio
-// Quando provido o primeiro nome do funcionário,
-// retorna o objeto do funcionário
-// Quando provido o último nome do funcionário,
-// retorna o objeto do funcionário
 function employeeByName(employeeName) {
   // seu código aqui
   const { employees } = data;
@@ -42,11 +34,12 @@ function employeeByName(employeeName) {
 }
 // console.log(employeeByName());
 
-// Cria um novo colaborador a partir de objetos
-// contendo 'informações pessoais' e 'gerentes
-// e animais gerenciados'.
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
+  return newEmployee;
 }
 
 // Testa se o id passado é de um gerente
