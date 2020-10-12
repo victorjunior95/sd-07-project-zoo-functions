@@ -126,7 +126,7 @@ function oldestFromFirstSpecies(id) {
   const animalComMesmoID = animals.find(busca => busca.id === funcionario.responsibleFor[0]);
   const maisVelho = animalComMesmoID.residents.reduce((acc, item) => {
     if (acc.age < item.age) { // vai comparar o acumulador com todos os itens e retornar sempre
-    // o maior item e se esse item for maior que todos os outros 
+    // o maior item e se esse item for maior que todos os outros
     // ele é retornado se nao o acc retorna
       return item;
     }
