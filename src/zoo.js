@@ -23,7 +23,6 @@ function animalsOlderThan(animal, age) {
   animals = myAnimals[0].residents.every(old => old.age >= age);
   return animals;
 }
-// console.log(animalsOlderThan());
 
 function employeeByName(employeeName) {
   // seu código aqui
@@ -32,7 +31,6 @@ function employeeByName(employeeName) {
   const employee = employees.find(getEmployee);
   return (typeof employeeName !== 'undefined' ? employee : {});
 }
-// console.log(employeeByName());
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
@@ -42,18 +40,19 @@ function createEmployee(personalInfo, associatedWith) {
   return newEmployee;
 }
 
-// Testa se o id passado é de um gerente
 function isManager(id) {
   // seu código aqui
   const { employees } = data;
   const manager = employees.some(item => item.managers.includes(id));
   return manager;
 }
-console.log(isManager('whatever'));
 
 // Adiciona um funcionário no fim da lista
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
+  const { employees } = data;
+  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
+  return employees.push(newEmployee);
 }
 
 // Sem parâmetros, retorna animais e suas quantidades
