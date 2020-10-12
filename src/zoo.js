@@ -136,10 +136,91 @@ function entryCalculator(entrants = 0) {
   return entrants;
 }
 
+// support
+/*
+const consolidateObject = (arrayOfKey, arrayOfAnimal, arrayOfResidents) => {
+  const bigObject = []
+  let counter = 0
+  let innerObject = {}
+  arrayOfAnimal.forEach(animal => {
+    let innerArray = []
+    animal.forEach(resident => {
+      innerObject[resident] = arrayOfResidents[counter]
+      innerArray.push(innerObject)
+
+      counter += 1
+      innerObject = {}
+    })
+    bigObject.push(innerArray)
+  })
+  const finalObject = {}
+    arrayOfKey.forEach((location, index) => {
+      finalObject[location] = bigObject[index]
+    })
+  return finalObject
+}
+const includingNames = (objectNoParameter, options) => {
+  const arrayOfAnimal = Object.values(objectNoParameter)
+  const arrayOfKey = Object.keys(objectNoParameter)
+  const arrayOfResidents = []
+  arrayOfAnimal.forEach(animal => {
+    animal.forEach(item => {
+      animals.find(element => {
+        if (element.name === item) {
+          arrayOfResidents.push(element.residents)
+        }
+      })
+    })
+  })
+  const finalResidents =  arrayOfResidents.map(array => array.map(innerArray => innerArray.name))
+  if (options.includeNames && options.sorted) {
+    return consolidateObject(arrayOfKey,
+      arrayOfAnimal,
+      finalResidents.map(element => element.sort()))
+  } else if (options.includeNames && (options.sex === 'male' || options.sex === 'female')) {
+    return finalResidents.map((element))
+  }
+    return consolidateObject(arrayOfKey, arrayOfAnimal, finalResidents)
+}
+const locationObjectTemplate = (location) => {
+  const arrayOfAnimals = []
+  animals.find((animal => {
+    if (animal.location === location) {
+      arrayOfAnimals.push(animal.name)
+    }
+  }))
+  return arrayOfAnimals
+}
+const noParameter = () => {
+  const locationObject = []
+
+  const finalObject = {}
+  animals.forEach(({ location }) => {
+    locationObject.push(location)
+  })
+  locationObject.forEach(location => {
+    finalObject[location] = locationObjectTemplate(location)
+  })
+  return finalObject
+}
+function animalMap(options) {
+    let message = ''
+  if (!options) {
+    message = noParameter()
+  } else if (options.includeNames && options.sorted) {
+    message = includingNames(noParameter(), options)
+  } else if (options.includeNames && (options.sex === 'male' || options.sex === 'female')) {
+    message = includingNames(noParameter(), options)
+  } else if (options.includeNames) {
+    message = includingNames(noParameter(), options)
+  }
+  return message
+}
+*/
 function animalMap(options) {
   // seu código aqui
-}
 
+}
 // support schedule
 const scheduleWithDay = (dayName) => {
   const finalObject = {};
@@ -203,10 +284,10 @@ function increasePrices(percentage) {
   // seu código aqui
   const increase = 1 + (percentage / 100);
   const { Adult, Senior, Child } = prices;
-  prices.Adult = Math.round(Adult * increase).toPrecision(4);
+  prices.Adult = (Math.round((Adult * increase) * 100)) / 100;
 
-  prices.Senior = (Senior * increase).toPrecision(4);
-  prices.Child = (Child * increase).toPrecision(4);
+  prices.Senior = (Math.round((Senior * increase) * 100)) / 100;
+  prices.Child = (Math.round((Child * increase) * 100)) / 100;
 
   return prices;
 }
