@@ -48,6 +48,15 @@ function employeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  if (personalInfo && associatedWith) {
+    data.employees.push({
+      ...personalInfo,
+      ...associatedWith
+    });
+  }
+  let lastEmployee = data.employees.length - 1;
+  let newEmployee = data.employees[lastEmployee];
+  return newEmployee;
 }
 
 function isManager(id) {
