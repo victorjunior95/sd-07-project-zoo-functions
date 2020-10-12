@@ -34,8 +34,8 @@ function createEmployee(personalInfo, ...associatedWith) {
 }
 
 function isManager(id) {
-  const checkIdManager = data.employees.map(manager => manager.checkIdManager).toString();
-  return checkIdManager.includes(id);
+  const checkIdManager = data.employees.map(manager => manager.managers).toString();
+    return checkIdManager.includes(id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
