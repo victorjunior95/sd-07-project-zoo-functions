@@ -68,10 +68,53 @@ function entryCalculator(entrants) {
   .reduce((acc, element) => acc + (entrants[element] * data.prices[element]), 0);
 }
 
-function animalMap(options) {
-  // seu código aqui
-}
 
+//pequenas funções para localização
+
+const getLocation = local => local.location
+//metodo filter para retirar duplicidade
+const locationAnimals = data.animals.map(getLocation)
+.filter((element,index, array) => index === array.indexOf(element));
+
+
+function animalMap(options) {
+let result = {};
+  if (options === undefined) {
+// destruturação de array
+const [NE, NW, SE, SW] = locationAnimals;
+// declaração de variaveis
+let regionNE = [];
+let regionNW = [];
+let regionSE = [];
+let regionSW = [];
+  data.animals.map((animal) => {
+    if (animal.location === locationAnimals[0]) {
+        return regionNE.push(animal.name);
+    }
+  });
+  data.animals.map((animal) => {
+    if (animal.location === locationAnimals[1]) {
+        return regionNW.push(animal.name);
+    }
+  });
+  data.animals.map((animal) => {
+    if (animal.location === locationAnimals[2]) {
+        return regionSE.push(animal.name);
+    }
+  });
+  data.animals.map((animal) => {
+    if (animal.location === locationAnimals[3]) {
+        return regionSW.push(animal.name);
+    }
+  }); 
+  result.NE = regionNE;
+  result.NW = regionNW;
+  result.SE = regionSE;
+  result.SW = regionSW;
+  }
+  return result;
+}
+console.log(animalMap());
 function schedule(dayName) {
   // seu código aqui
 }
