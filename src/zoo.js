@@ -94,10 +94,13 @@ const animalZone = zone => data.animals.filter(animal => animal.location === zon
 
 function animalMap(options) {
   const locations = ['NE', 'NW', 'SE', 'SW'];
+  let animalObj = {};
   if (options === undefined) {
     const animalsObj = locations.map(zone => ({ [zone]: animalZone(zone) }));
-    let animalObj = {};
-    animalsObj.forEach(obj => animalObj = Object.assign(animalObj, obj));
+    animalsObj.forEach(obj => {
+      animalObj = Object.assign(animalObj, obj)
+      return animalObj;
+    });
   }
   return animalObj;
 }
