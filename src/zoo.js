@@ -173,35 +173,29 @@ function animalMap(options) {
 const convert24to12 = (hour) => {
   if (hour <= 12) {
     return `${hour}am`;
-  } 
-  return `${hour-12}pm`;
-}
+  }
+  return `${hour - 12}pm`;
+};
+
+const toHumanReadable = ([weekDay, { open, close }]) => {
+  const weekDayHumanReadable = {};
+  if (open === close) {
+    weekDayHumanReadable[weekDay] = 'CLOSED';
+  } else {
+    weekDayHumanReadable[weekDay] = `Open from ${convert24to12(open)} until ${convert24to12(close)}`;
+  }
+  return weekDayHumanReadable;
+};
 function schedule(dayName) {
-  const {hours} = data;
+  const { hours } = data;
   const weekDaysAndHours = Object.entries(hours);
   if (dayName === undefined) {
-    const arrayHours = weekDaysAndHours.map(([weekDay, {open, close}]) => {
-      const weekDayHumanReadable = {};
-      if (open === close) {
-        weekDayHumanReadable[weekDay] = 'CLOSED';
-      } else {
-        weekDayHumanReadable[weekDay] = `Open from ${convert24to12(open)} until ${convert24to12(close)}`
-      }
-      return weekDayHumanReadable;
-    })
+    const arrayHours = weekDaysAndHours.map(toHumanReadable);
     return Object.assign({}, ...arrayHours);
-  } else {
-    const [weekDay, {open, close}] = weekDaysAndHours.find(([weekDay, {open, close}]) => weekDay === dayName);
-      const weekDayHumanReadable = {};
-      if (open === close) {
-        weekDayHumanReadable[weekDay] = 'CLOSED';
-      } else {
-        weekDayHumanReadable[weekDay] = `Open from ${convert24to12(open)} until ${convert24to12(close)}`
-      }
-      return weekDayHumanReadable;
   }
+  const robotReadable = weekDaysAndHours.find(([weekDay]) => weekDay === dayName);
+  return toHumanReadable(robotReadable);
 }
-schedule('Monday')
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
