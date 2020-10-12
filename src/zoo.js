@@ -103,8 +103,23 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const firstSpecies = data.employees.find(element => element.id === id).responsibleFor[0];
+  let search = data.animals.filter(element2 => element2.id === firstSpecies)[0];
+  search = Object.values(search.residents.sort(function (a, b) {
+    if (a.age > b.age) {
+      return -1;
+    }
+    if (a.age < b.age) {
+      return 1;
+    }
+    return 0;
+  })[0]);
+  return search;
 }
+
+console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
+
+console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 function arred(num) {
   if (((num * 100) - parseInt(num * 100, 10)) >= 0.5) {
