@@ -60,10 +60,7 @@ function animalCount(species) {
 
 function entryCalculator(entrants = 0) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-  const adultTotal = prices.Adult * Adult;
-  const seniorTotal = prices.Senior * Senior;
-  const childTotal = prices.Child * Child;
-  const total = adultTotal + seniorTotal + childTotal;
+  const total = (prices.Adult * Adult) + (prices.Senior * Senior) + (prices.Child * Child);
   return total;
 }
 
