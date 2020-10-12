@@ -25,6 +25,8 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
+  return data.employees.find(({ firstName }) => employeeName.forEach(firstName));
+
   // seu código aqui
 }
 
