@@ -28,9 +28,8 @@ function employeeByName(...employeeName) {
         employeeName.includes(employee.firstName) || employeeName.includes(employee.lastName));
 }
 
-function createEmployee(personalInfo, ...associatedWith) {
-  const newObt = {};
-  return Object.assign(newObt, personalInfo, ...associatedWith);
+function createEmployee(personalInfo, associatedWith) {
+  return {...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
