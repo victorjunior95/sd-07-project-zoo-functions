@@ -13,10 +13,10 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   const coleted = [];
-  const verify = (idResearched) => {
+  const check = (idResearched) => {
     coleted.push((data.animals.find(animals => animals.id === idResearched)));
   };
-  ids.forEach(verify);
+  ids.forEach(check);
   return coleted;
 }
 
@@ -64,27 +64,40 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(species) {
   if (species === undefined) {
     const result = {};
-    const verify = (iten, index) => {
+    const check = (iten, index) => {
       const animals = data.animals;
       result[animals[index].name] = iten.residents.length;
     };
-    data.animals.forEach(verify);
+    data.animals.forEach(check);
     return result;
   }
   let count;
-  const verifyAnimal = (iten) => {
+  const checkAnimals = (iten) => {
     if (iten.name === species) {
       count = iten.residents.length;
     }
   };
-  data.animals.forEach(verifyAnimal);
+  data.animals.forEach(checkAnimals);
 
   return count;
 }
 
 
 function entryCalculator(entrants) {
-
+  if (entrants === undefined || entrants === []) {
+    return 0;
+  }
+  let sum = 0;
+  const checkEntrants = (iten) => {
+    const checkPrices = (people) => {
+      if (people === iten) {
+        sum += entrants[iten] * data.prices[iten];
+      }
+    };
+    Object.keys(data.prices).forEach(checkPrices);
+  };
+  Object.keys(entrants).forEach(checkEntrants);
+  return sum;
 }
 
 function animalMap(options) {
