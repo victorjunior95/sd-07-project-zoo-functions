@@ -21,7 +21,12 @@ function animalsByIds(...ids) {
 // idade mínima especificada
 function animalsOlderThan(animal, age) {
   // seu código aqui
+  const { animals: myAnimals } = data;
+  let animals = myAnimals.filter(item => item.name === animal);
+  animals = myAnimals[0].residents.every(old => old.age >= age);
+  return animals;
 }
+console.log(animalsOlderThan());
 
 // Sem parâmetros, retorna um objeto vazio
 // Quando provido o primeiro nome do funcionário,
@@ -31,10 +36,11 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   // seu código aqui
   const { employees } = data;
-  const employee = employees.find((item) => item.firstName === employeeName || item.lastName === employeeName);
+  const getEmployee = item => item.firstName === employeeName || item.lastName === employeeName;
+  const employee = employees.find(getEmployee);
   return (typeof employeeName !== 'undefined' ? employee : {});
 }
-console.log(employeeByName());
+// console.log(employeeByName());
 
 // Cria um novo colaborador a partir de objetos
 // contendo 'informações pessoais' e 'gerentes
