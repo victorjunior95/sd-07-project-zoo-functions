@@ -292,11 +292,42 @@ function increasePrices(percentage) {
   return prices;
 }
 
+// support employee Coverage
+const employeeAnimal = (responsibleFor) => {
+  const arrayOfAnimal = [];
+  responsibleFor.forEach((animalId) => {
+    animals.filter(({ id, name }) => {
+      if (id === animalId) {
+        arrayOfAnimal.push(name);
+      }
+      return false;
+    });
+  });
+  return arrayOfAnimal;
+};
 
+const withNameId = (idOrname) => {
+  const newObject = {};
+  employees.filter(({ id, firstName, lastName, responsibleFor }) => {
+    if (idOrname === id || idOrname === firstName || idOrname === lastName) {
+      newObject[`${firstName} ${lastName}`] = employeeAnimal(responsibleFor);
+    }
+    return false;
+  });
+  return newObject;
+};
 function employeeCoverage(idOrName) {
   // seu código aqui
+  const newObject = {};
+  if (!idOrName) {
+    employees.forEach(({ firstName, lastName, responsibleFor }) => {
+      newObject[`${firstName} ${lastName}`] = employeeAnimal(responsibleFor);
+    });
+  } else {
+    return withNameId(idOrName);
+  }
+  return newObject;
 }
-
 
 module.exports = {
   entryCalculator,
