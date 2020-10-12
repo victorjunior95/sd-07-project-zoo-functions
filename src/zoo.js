@@ -69,13 +69,15 @@ function entryCalculator(entrants) {
 }
 
 
-//pequenas funções para localização
+// pequenas funções para localização
 
-const getLocation = local => local.location
-//metodo filter para retirar duplicidade
+const getLocation = local => local.location;
+// metodo filter para retirar duplicidade
 const locationAnimals = data.animals.map(getLocation)
-.filter((element,index, array) => index === array.indexOf(element));
-// function nameResidents(param) { //retorna array com os nomes dos residents, porém está trazendo quantidade de nomes errado.
+.filter((element, index, array) => index === array.indexOf(element));
+
+// function nameResidents(param) { 
+// retorna array com os nomes dos residents, porém está trazendo quantidade de nomes errado.
 //   let result = [];
 //   for (let i in param){
 //       for (let j in param){
@@ -86,55 +88,51 @@ const locationAnimals = data.animals.map(getLocation)
 // }
 
 function animalMap(options) {
-let result = {};
-let resultIntern = {}
+  const result = {};
+// const resultIntern = {};
   if (options === undefined) {
-// destruturação de array
-const [NE, NW, SE, SW] = locationAnimals;
-// declaração de variaveis
-let regionNE = [];
-let regionNW = [];
-let regionSE = [];
-let regionSW = [];
-  data.animals.map((animal) => {
-    if (animal.location === locationAnimals[0]) {
-        return regionNE.push(animal.name);
-    }
+    const [NE, NW, SE, SW] = locationAnimals;
+    const regionNE = [];
+    const regionNW = [];
+    const regionSE = [];
+    const regionSW = [];
+    data.animals.map((animal) => {
+      if (animal.location === locationAnimals[0]) {
+       return regionNE.push(animal.name);
+      }
+    });
+    data.animals.map((animal) => {
+      if (animal.location === locationAnimals[1]) {
+       return regionNW.push(animal.name);
+      }
+    });
+    data.animals.map((animal) => {
+      if (animal.location === locationAnimals[2]) {
+       return regionSE.push(animal.name);
+      }
+    });
+    data.animals.map((animal) => {
+      if (animal.location === locationAnimals[3]) {
+       return regionSW.push(animal.name);
+      }
   });
-  data.animals.map((animal) => {
-    if (animal.location === locationAnimals[1]) {
-        return regionNW.push(animal.name);
-    }
-  });
-  data.animals.map((animal) => {
-    if (animal.location === locationAnimals[2]) {
-        return regionSE.push(animal.name);
-    }
-  });
-  data.animals.map((animal) => {
-    if (animal.location === locationAnimals[3]) {
-        return regionSW.push(animal.name);
-    }
-  }); 
-  result.NE = regionNE;
-  result.NW = regionNW;
-  result.SE = regionSE;
-  result.SW = regionSW;
-  } //else {
-  //else if (options.includeNames === true){bloco de construção
+    result.NE = regionNE;
+    result.NW = regionNW;
+    result.SE = regionSE;
+    result.SW = regionSW;
+  } // else {
+  // else if (options.includeNames === true){bloco de construção
   // = {
   //   NE: [
   //     { lions: ['Zena', 'Maxwell', 'Faustino', 'Dee'] },
   //     { giraffes: ['Gracia', 'Antone', 'Vicky', 'Clay', 'Arron', 'Bernard'] }
   //   ]
-  //     }
-  
+  //  }
   // let residentsNE = data.animals.filter((animal) => { //array de objetos residentes
   //   return animal.location === 'NE';
   // }).map((animal) => {
   //   return animal.residents;
   // });
-
   // let residentsNW = data.animals.filter((animal) => { //array de objetos residentes
   //   return animal.location === 'NE';
   // }).map((animal) => {
@@ -157,7 +155,7 @@ let regionSW = [];
   // Object.assign(namesNE, result.NE);
   return result;
 }
-  
+
 // const options = { includeNames: true };
 console.log(animalMap());
 function schedule(dayName) {
