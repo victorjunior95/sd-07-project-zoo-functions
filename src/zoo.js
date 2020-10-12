@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 const { animals, prices } = require('./data');
-const { employees } = require('./data');
+const { employees, hours } = require('./data');
 
 function animalsByIds(...ids) {
   const idAnimal = animals.filter(justId => ids.includes(justId.id));
@@ -90,9 +90,20 @@ function entryCalculator(entrants) {
 function animalMap(options) {
   // seu código aqui
 }
-
-function schedule(dayName) {
-  // seu código aqui
+// referência: Thiago Pederzolli
+function schedule(...dayName) { // usando spread vira array
+  if (dayName.length === 0) { // se é array tem length
+    dayName = Object.keys(hours); // se veio vazio, recebe as keys e vira array
+  }
+  let theObject = {};
+  dayName.forEach((element) => { // forEach se usa em array e não em objeto
+    if (element === 'Monday') { // é o último a ser acrescentado
+      theObject = { ...theObject, [element]: 'CLOSED' };
+    } else {
+      theObject = { ...theObject, [element]: `Open from ${hours[element].open}am until ${hours[element].close - 12}pm` };
+    } // o spread aqui funciona como += para objeto, para acrescentar e não substituir os valores
+  });
+  return theObject; // retorno tudo o que estiver nele
 }
 
 function oldestFromFirstSpecies(id) {
@@ -115,6 +126,7 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
+  // seu código aqui
 }
 
 module.exports = {
