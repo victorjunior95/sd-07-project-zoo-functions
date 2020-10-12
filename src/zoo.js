@@ -117,7 +117,7 @@ function schedule(...dayName) {
     if (elemento === 'Monday') {
       acc[elemento] = 'CLOSED';
     }
-    return acc
+    return acc;
   }, {});
 }
 
