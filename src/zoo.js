@@ -83,7 +83,7 @@ function entryCalculator(entrants) {
   const sum = justKeys.reduce((acc, keys) => {
     acc += entrants[keys] * prices[keys];
     return acc;
-  }, 0); // pra indicar que inicia em 0
+  }, 0); // pra indicar que sum inicia em 0
   return sum;
 }
 
@@ -122,11 +122,36 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui - NÃO ENTENDI O QUE É PARA SER FEITO
+  Object.keys(prices).forEach((element) => { // se guia pelas keys
+    prices[element] = Math.ceil((prices[element] * (100 + percentage))) / 100;
+    // 49.99 * (100 + 50) / 100 = 74.985; Math.ceil para arredondar para cima
+  });
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  // // let theObject = {};
+  // const findingEmployee = employees.find(({ id, firstName, lastName }) => 
+  // idOrName === id || idOrName === firstName || idOrName === lastName);
+  // // para encontrar um funcionário específico
+  // const allEmployees = employees.map((name) => `${name.firstName} ${name.lastName}`);
+  // // nome completo de todos os funcionários
+  // const findingSpecie = animals.filter((specie, index) => 
+  // {findingEmployee.responsibleFor[index] === specie.id
+  //   return specie.name;
+  // });
+  // const findingAnimal = animals.filter((name, index) => 
+  // {names.push(employees[index].responsibleFor[0] === name.id || 
+  //   employees[index].responsibleFor[1] === name.id);
+  //   return names;
+  // });
+  // if (idOrName === undefined) {
+  //   employees.forEach((element) => {
+  //     // theObject = { ...theObject, [`${element.firstName} ${element.lastName}`]:  }
+  //     console.log(findingAnimal);
+  //   })
+  // }
+  // console.log(findingAnimal);
+  // return findingSpecie;
 }
 
 module.exports = {
