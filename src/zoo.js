@@ -45,7 +45,11 @@ function createEmployee(personalInfo, associatedWith) {
 // Testa se o id passado é de um gerente
 function isManager(id) {
   // seu código aqui
+  const { employees } = data;
+  const manager = employees.some(item => item.managers.includes(id));
+  return manager;
 }
+console.log(isManager('whatever'));
 
 // Adiciona um funcionário no fim da lista
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
