@@ -170,10 +170,29 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
+function returnAnimals(array) {
+  const result = [];
+  array.forEach((one) => {
+    result.push(data.animals.find(um => um.id === one).name);
+  });
+  return result;
+}
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
-
-
+  const wholeCoverage = {};
+  data.employees.forEach((item) => {
+    const fullName = `${item.firstName} ${item.lastName}`;
+    wholeCoverage[fullName] = returnAnimals(item.responsibleFor);
+  });
+  if (idOrName === undefined) return wholeCoverage;
+  let result = {};
+  data.employees.forEach((item) => {
+    if (item.id === idOrName || item.firstName === idOrName || item.lastName === idOrName) {
+      const fullName = `${item.firstName} ${item.lastName}`;
+      result = { [fullName]: wholeCoverage[fullName] };
+    }
+  });
+  return result;
 }
 
 module.exports = {
