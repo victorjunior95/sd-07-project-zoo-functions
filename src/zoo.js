@@ -98,9 +98,36 @@ function animalMap(options) {
   // seu código aqui
 }
 
-function schedule(dayName) {
-  // seu código aqui
+let test2 = { };
+
+function simple1(dayName) {
+  test2 = { };
+  const test = Object.entries(data.hours);
+  const test3 = test.filter(element => element[0] === dayName);
+  if (dayName !== 'Monday') {
+    test2[test3[0][0]] = `Open from ${test[0][1].open}am until ${test[0][1].close - 12}pm`;
+  } else {
+    test2.Monday = 'CLOSED';
+  }
 }
+
+function schedule(dayName) {
+  const test = Object.entries(data.hours);
+
+  if (dayName === undefined) {
+    for (let i = 0; i < 6; i += 1) {
+      test2[test[i][0]] = `Open from ${test[i][1].open}am until ${test[i][1].close - 12}pm`;
+    }
+    test2.Monday = 'CLOSED';
+  } else {
+    simple1(dayName);
+  }
+  return test2;
+}
+
+console.log(schedule());
+console.log(schedule('Tuesday'));
+console.log(schedule('Monday'));
 
 function oldestFromFirstSpecies(id) {
   const firstSpecies = data.employees.find(element => element.id === id).responsibleFor[0];
@@ -116,10 +143,6 @@ function oldestFromFirstSpecies(id) {
   })[0]);
   return search;
 }
-
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-
-console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 function arred(num) {
   if (((num * 100) - parseInt(num * 100, 10)) >= 0.5) {
