@@ -55,12 +55,12 @@ function animalCount(species) {
   return data.animals.find(animal => animal.name === species).residents.length;
 }
 
-function entryCalculator(entrants) {
-  // const { Adult, Senior, Child } = data.prices
-  // const prices = Object.keys(entrants)
-  // const actualValue = prices.find(value => value === data.prices)
-  // return prices.reduce((total, currentValue) => {
-  // }, 0)
+function entryCalculator(entrants = {}) {
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const QtdAdult = Adult * data.prices.Adult;
+  const QtdSenior = Senior * data.prices.Senior;
+  const QtdChild = Child * data.prices.Child;
+  return QtdAdult + QtdSenior + QtdChild;
 }
 
 function animalMap(options) {
@@ -88,7 +88,7 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  // 
 }
 
 module.exports = {
