@@ -36,7 +36,9 @@ function createEmployee(personalInfo, associatedWith) {
 
 
 function isManager(id) {
-  return data.employees.some(({ managers }) => managers[0] === id || managers[1] === id);
+  return data.employees
+  .some(({ managers }) =>
+  managers[0] === id || managers[1] === id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
