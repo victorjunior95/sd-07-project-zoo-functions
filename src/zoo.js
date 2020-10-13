@@ -155,12 +155,25 @@ function animalMap(options) {
   // Object.assign(namesNE, result.NE);
   return result;
 }
-
 // const options = { includeNames: true };
-console.log(animalMap());
+// console.log(animalMap());
+
+
 function schedule(dayName) {
-  // seu código aqui
+  const workingDays = Object.assign({}, data.hours); 
+  const openingHours = (key => workingDays[key] =
+    `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
+  Object.keys(workingDays).forEach(openingHours)
+  workingDays.Monday = 'CLOSED'
+  if (dayName === undefined) {
+    return workingDays
+  } else {
+    return {
+    [dayName]: workingDays[dayName] //workingDays[dayName] possui o valor para o respectivo dia.
+    }
+  }
 }
+console.log(schedule());
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
