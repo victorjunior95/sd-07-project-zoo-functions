@@ -111,7 +111,7 @@ function animalMap(options) {
 
 function schedule(dayName) {
   const workingDays = Object.assign({}, data.hours);
-    const openingHours = (key => workingDays[key] =
+  const openingHours = (key => workingDays[key] =
     `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`);
   Object.keys(workingDays).forEach(openingHours);
   workingDays.Monday = 'CLOSED';
@@ -124,7 +124,7 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  const firstSpecieForEmployee = employees
+  const firstSpecieForEmployee = data.employees
   .find(select => select.id === id).responsibleFor[0];
   const specie = data.animals
   .find(select => select.id === firstSpecieForEmployee).residents;
@@ -135,18 +135,18 @@ function oldestFromFirstSpecies(id) {
 }
 
 const round = (num, places) => { // ref https://metring.com.br/arredondar-numero-em-javascript
-  if (!('' + num).includes('e')) {
+  if (!('' + `${num}`).includes('e')) {
     return +(Math.round(`${num}  e  ${places})  e- ${places}`));
-  } else {
-    const arr = ('' + num).split('e');
-    let sig = '';
-    if (+arr[1] + places > 0) {
-      sig = '+';
+  } 
+  const arr = ('' + `${num}`).split('e');
+  let sig = '';
+  if (+arr[1] + places > 0) {
+    sig = '+';
   }
-  return +(Math.round(+`${arr[0]} e sig (+${arr[1]} ${places})) e- ${places}`));
-  }
+  return +(Math.round(+`${arr[0]} e ${sig} (+${arr[1]} ${places})) e- ${places}`));
+  
 };
-
+// corrigir
 function increasePrices(percentage) {
   const tax = (1 + (percentage / 100));
   const newArray = ['Adult', 'Senior', 'Child'];
@@ -170,17 +170,16 @@ function fnEmployeeAllSpecies(idOrName) {
   const result = {};
   if (idOrName === undefined) {
     return fnWithoutParameter();
-  } 
-    data.employees
-    .forEach((ids) => {
-      if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
-        result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-        .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
-      }
-    });
+}
+  data.employees
+  .forEach((ids) => {
+    if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
+      result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+      .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
+    }
+  });
   return result;
 }
-
 
 function employeeCoverage(idOrName) {
   return fnEmployeeAllSpecies(idOrName);
