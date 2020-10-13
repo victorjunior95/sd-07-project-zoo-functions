@@ -86,11 +86,11 @@ function entryCalculator(entrants) {
   }
   let total = 0;
   const { Adult, Child, Senior } = entrants;
-  if (Adult !== undefined) { 
+  if (Adult !== undefined) {
     total += (Adult * 49.99) };
-  if (Child !== undefined) { 
+  if (Child !== undefined) {
     total += (Child * 20.99) };
-  if (Senior !== undefined) { 
+  if (Senior !== undefined) {
     total += (Senior * 24.99) };
   return total;
 }
