@@ -100,12 +100,12 @@ function animalMap(options = {}) {
   }
   if (options.sex !== undefined) {
     animals.forEach(({ name, location, residents }) => out[location].push({ [name]: residents
-    .filter(resident => resident.sex === options.sex).map(resident => resident.name)
+    .filter(resident => resident.sex === options.sex).map(resident => resident.name),
     }),
     );
   } else {
     animals.forEach(({ name, location, residents }) =>
-    out[location].push({ [name]: residents.map(resident => resident.name) } ),
+    out[location].push({ [name]: residents.map(resident => resident.name)} ),
     );
   }
   if (options.sorted) {
