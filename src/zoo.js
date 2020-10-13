@@ -118,7 +118,18 @@ function animalMap({ includeNames, sorted, sex } = {}) {
 // ---------------------------------------------------------------------------
 
 function schedule(dayName) {
-  // seu código aqui
+  const schedules = Object.entries(data.hours); // [ 'Tuesday', { open: 8, close: 18 } ], ...
+  const viewSchedules = schedules.reduce((acc, curr) => {
+    if (curr[0] === 'Monday' ? acc[curr[0]] = 'CLOSED' : 
+      acc[curr[0]] = `Open from ${curr[1].open}am until ${curr[1].close - 12}pm`)
+      // [ 0: 'Tuesday', 1: { open: 8, close: 18 } ], ...
+    return acc;
+  }, {});
+
+  if (!dayName) {
+    return viewSchedules;
+  }
+  return { [dayName]: viewSchedules[dayName] };
 }
 
 function oldestFromFirstSpecies(id) {
