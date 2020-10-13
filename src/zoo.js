@@ -73,16 +73,14 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // Acha o primeira espécie que o ID é responsável
   const speciesResponsable = employees.find(employee => employee.id === id).responsibleFor[0];
-  // Acha os residentes dessa espécie
   const animalsResidents = animals.find(animal => animal.id === speciesResponsable).residents;
-  // Sort para achar o animal mais velho da espécie
   const oldAnimal = animalsResidents.sort(
     (animalAge, animalAge2) => animalAge2.age - animalAge.age,
   );
   return [oldAnimal[0].name, oldAnimal[0].sex, oldAnimal[0].age];
 }
+
 function increasePrices(percentage) {
   // seu código aqui
 }
