@@ -22,9 +22,13 @@ const animalsOlderThan = (animal, age) => {
   return animalsResidents.every(resident => resident.age >= age);
 };
 
-function employeeByName(employeeName) {
-  // seu código aqui
-}
+const employeeByName = (employeeName) => {
+  let employeeObj = {};
+  if (employeeName !== undefined) {
+    employeeObj = data.employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
+  }
+  return employeeObj;
+};
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
