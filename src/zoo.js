@@ -99,13 +99,13 @@ function animalMap(options = {}) {
     return out;
   }
   if (options.sex !== undefined) {
-    animals.forEach(({ name, location, residents }) => out[location].push({[name]: residents
+    animals.forEach(({ name, location, residents }) => out[location].push({ [name]: residents
     .filter(resident => resident.sex === options.sex).map(resident => resident.name)
     }),
     );
   } else {
     animals.forEach(({ name, location, residents }) =>
-    out[location].push({[name]: residents.map(resident => resident.name) }),
+    out[location].push({ [name]: residents.map(resident => resident.name) } ),
     );
   }
   if (options.sorted) {
@@ -167,7 +167,7 @@ function employeeCoverage(idOrName) {
   const responsible = employeer.responsibleFor.map(
     isresponsible => animals.find(animal => animal.id === isresponsible).name,
   );
-  return { [`${employeer.firstName} ${employeer.lastName}`]: responsible};
+  return { [`${employeer.firstName} ${employeer.lastName}`]: responsible };
 }
 
 module.exports = {
