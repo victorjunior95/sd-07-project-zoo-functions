@@ -62,7 +62,7 @@ function isManager(id) {
     const findEmployees = data.employees.find(employees => employees.id === id);
     return findEmployees.managers.includes('9e7d4524-363c-416a-8759-8aa7e50c0992');
   }
-  return;
+  return false;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
