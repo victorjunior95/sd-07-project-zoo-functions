@@ -93,18 +93,19 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options = {}) {
-  const out = {NE: [], NW: [], SE: [], SW: [] };
+  const out = { NE: [], NW: [], SE: [], SW: [] };
   if (options.includeNames !== true) {
-    animals.forEach(({location, name }) => out[location].push(name));
-    return out;  
+    animals.forEach(({ location, name }) => out[location].push(name));
+    return out;
   }
   if (options.sex !== undefined) {
-    animals.forEach(({name, location, residents}) => out[location].push({[name]: residents
-    .filter(resident => resident.sex === options.sex).map(resident => resident.name) 
-      }),
+    animals.forEach(({ name, location, residents }) => out[location].push({[name]: residents
+    .filter(resident => resident.sex === options.sex).map(resident => resident.name)
+    }),
     );
   } else {
-    animals.forEach(({name, location, residents}) => out[location].push({[name]: residents.map(resident => resident.name) }),
+    animals.forEach(({ name, location, residents }) =>
+    out[location].push({[name]: residents.map(resident => resident.name) }),
     );
   }
   if (options.sorted) {
@@ -121,7 +122,7 @@ function schedule(dayName) {
   const timeTable = {};
   days.map((item, i) => {
     timeTable[item] = `Open from ${times[i].open}am until ${times[i].close - 12}pm`;
-    timeTable.Monday = `CLOSED`;
+    timeTable.Monday = 'CLOSED';
     return 0;
   });
   if (dayName === undefined) {
