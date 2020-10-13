@@ -135,18 +135,17 @@ function oldestFromFirstSpecies(id) {
 }
 
 const round = (num, places) => { // ref https://metring.com.br/arredondar-numero-em-javascript
-  if (!('' + `${num}`).includes('e')) {
+  if (!(`   ${num}`).includes('e')) {
     return +(Math.round(`${num}  e  ${places})  e- ${places}`));
-  } 
-  const arr = ('' + `${num}`).split('e');
+  }
+  const arr = (`  ${num}`).split('e');
   let sig = '';
   if (+arr[1] + places > 0) {
     sig = '+';
   }
   return +(Math.round(+`${arr[0]} e ${sig} (+${arr[1]} ${places})) e- ${places}`));
-  
 };
-// corrigir
+
 function increasePrices(percentage) {
   const tax = (1 + (percentage / 100));
   const newArray = ['Adult', 'Senior', 'Child'];
@@ -170,7 +169,7 @@ function fnEmployeeAllSpecies(idOrName) {
   const result = {};
   if (idOrName === undefined) {
     return fnWithoutParameter();
-}
+  }
   data.employees
   .forEach((ids) => {
     if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
