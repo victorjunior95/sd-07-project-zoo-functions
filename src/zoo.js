@@ -66,60 +66,73 @@ function entryCalculator(entrants) {
   return Object.entries(entrants).reduce((acc, arr) => acc + (data.prices[arr[0]] * arr[1]), 0);
 }
 
-/* function animalMapEmpty() {
-  let arr = [];
-  data.animals.forEach(loc => arr.push(loc.location));
+function animalMapEmpty() {
+  let arrLocation = [];
+  data.animals.forEach(loc => arrLocation.push(loc.location));
   let animal = [];
   const objLocation = {};
-  arr = arr.filter((array, index) => arr.indexOf(array) === index);
-  for (let index = 0; index < arr.length; index += 1) {
+  arrLocation = arrLocation.filter((array, index) => arrLocation.indexOf(array) === index);
+  arrLocation.forEach((arr) => {
     animal = [];
     data.animals.forEach((loc) => {
-      if (arr[index] === loc.location) {
+      if (arr === loc.location) {
         animal.push(loc.name);
-        objLocation[arr[index]] = animal;
+        objLocation[arr] = animal;
       }
     });
-  }
+  });
   return objLocation;
-} */
+}
 
-/* function animalMapSortedSex(orderName, sorted, sexParameter) {
+function animalMapSex(includeSex, sexParameter, sorted) {
   if (sorted === true) {
-    return orderName.sort();
+    return includeSex.filter(sexAnimal =>
+      sexAnimal.sex === sexParameter).map(({ name }) => name).sort();
   }
-  return orderName;
-} */
+  return includeSex.filter(sexAnimal =>
+    sexAnimal.sex === sexParameter).map(({ name }) => name);
+}
 
-/* function animalMapIncludeSorted(sorted, sexParameter) {
+function animalMapSorted(includeNamesSex, sorted, sexParameter) {
+  if (sexParameter !== undefined) {
+    return animalMapSex(includeNamesSex, sexParameter, sorted);
+  } else if (sorted === true) {
+    return includeNamesSex.map(({ name }) => name).sort();
+  }
+  return includeNamesSex.map(({ name }) => name);
+}
+
+function animalMapIncludeSorted(sorted, sexParameter) {
   const obj1 = {};
   let obj2 = {};
+  let arrayAnimals = [];
   const keys = Object.keys(animalMapEmpty());
   const values = Object.values(animalMapEmpty());
-  for (let index = 0; index < keys.length; index += 1) {
-    obj2 = {};
-    values[index].forEach((val) => {
-      data.animals.map(({ name, residents }) => {
-        if (val === name) {
-          obj2[val] = animalMapSortedSex(residents.map(({ name }) => name), sorted, sexParameter);
-          obj1[keys[index]] = [obj2];
+  keys.forEach((key, index) => {
+    arrayAnimals = [];
+    values[index].forEach((value) => {
+      data.animals.forEach(({ name, residents }) => {
+        obj2 = {};
+        if (name === value) {
+          obj2[value] = animalMapSorted(residents, sorted, sexParameter);
+          arrayAnimals.push(obj2);
+          obj1[key] = arrayAnimals;
         }
       });
     });
-  }
+  });
   return obj1;
-} */
+}
 
 function animalMap(options) {
-/*   if (options === undefined) {
+  if (options === undefined) {
     return animalMapEmpty();
   }
   const obj = options;
   if (obj.includeNames === true) {
-    console.log(animalMapIncludeSorted(obj.sorted, obj.sex));
     return animalMapIncludeSorted(obj.sorted, obj.sex);
   }
-  return animalMapEmpty(); */
+  return animalMapEmpty();
 }
 
 function scheduleClean() {
