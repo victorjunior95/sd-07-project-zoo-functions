@@ -55,7 +55,12 @@ function animalCount(species) {
   return data.animals.find(animal => animal.name === species).residents.length;
 }
 
-function entryCalculator(entrants = {}) {
+function entryCalculator(entrants) {
+  // const { Adult, Senior, Child } = data.prices
+  // const prices = Object.keys(entrants)
+  // const actualValue = prices.find(value => value === data.prices)
+  // return prices.reduce((total, currentValue) => {
+  // }, 0)
 }
 
 function animalMap(options) {
@@ -63,15 +68,15 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // for (day in data.hours){
-  //   if (dayName === day){
-  //   }
-  // }
+  // const values = Object.keys(data.hours)
+  // return values.find(value => value === dayName)
 }
 
 function oldestFromFirstSpecies(id) {
-  // const responsibleFor = data.employees.find((employee) => employee === id).responsibleFor[0]
-  // const animal = data.animals.find((elements) => elements.id === responsibleFor).residents.map()
+  const responsibleFor = data.employees.find(employee => employee.id === id).responsibleFor[0];
+  const animal = data.animals.find(elements => elements.id === responsibleFor).residents
+                              .sort((a, b) => b.age - a.age)[0];
+  return [animal.name, animal.sex, animal.age];
 }
 
 function increasePrices(percentage) {
