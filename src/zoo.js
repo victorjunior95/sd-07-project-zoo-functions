@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { prices } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -47,7 +48,6 @@ function isManager(id) {
   return manager;
 }
 
-// Adiciona um funcionário no fim da lista
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
   const { employees } = data;
@@ -55,8 +55,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return employees.push(newEmployee);
 }
 
-// Sem parâmetros, retorna animais e suas quantidades
-// Com o nome de uma espécie de animal, retorna somente a quantidade
 function animalCount(species) {
   // seu código aqui
   const { animals } = data;
@@ -69,14 +67,15 @@ function animalCount(species) {
   }
   return getAllAnimals;
 }
-console.log(animalCount('giraffes'));
 
-// Retorna 0 se nenhum argumento for passado
-// Retorna 0 se um objeto vazio for passado
-// Retorna o preço total a ser cobrado dado o número de adultos,
-// crianças e idosos
 function entryCalculator(entrants) {
   // seu código aqui
+  if (typeof entrants !== 'object' || entrants.length === 0) return 0;
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+  const priceAdult = prices.Adult * Adult;
+  const priceSenior = prices.Senior * Senior;
+  const priceChild = prices.Child * Child;
+  return priceAdult + priceSenior + priceChild;
 }
 
 // Sem parâmetros, retorna animais categorizados por localização
