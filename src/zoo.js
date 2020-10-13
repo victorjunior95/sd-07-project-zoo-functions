@@ -8,20 +8,25 @@ eslint no-unused-vars: [
   }
 ]
 */
-
+const { animals } = require('./data');
 const data = require('./data');
 
-function animalsByIds(...ids) {
-  const resultado = ids.map(indice => data.animals.find(animal => animal.id === indice));
-  return resultado;
-}
+const animalsByIds = (...ids) => animals.filter((animal) => ids.includes(animal.id));
 
-function animalsOlderThan(animal, age) {
-  // seu código aqui
-}
+const animalsOlderThan = (animal, age) => {
+  return data.animals.find(especie => especie.name === animal).residents.every(indice => indice.age > age);
+  //return value.residents.every(indice => indice.age > age);
+ }
 
-function employeeByName(employeeName) {
-  // seu código aqui
+const employeeByName = (employeeName) => {
+  if(employeeName === undefined){
+      return {};
+  }
+  return data.employees.find(indice => {
+    if(indice.firstName === employeeName || indice.lastName === employeeName){
+       return indice;
+     }
+ });
 }
 
 function createEmployee(personalInfo, associatedWith) {
