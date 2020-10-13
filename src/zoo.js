@@ -88,7 +88,7 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // 
+  //
 }
 
 module.exports = {
