@@ -13,8 +13,7 @@ const { employees, animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  // seu código aqui
-  return data.animals
+return data.animals
   .filter((animal) => ids.includes(animal.id));
 }
 
@@ -67,7 +66,6 @@ function entryCalculator(entrants) {
   .reduce((acc, element) => acc + (entrants[element] * data.prices[element]), 0);
 }
 
-
 // pequenas funções para localização
 
 const getLocation = local => local.location;
@@ -75,20 +73,8 @@ const getLocation = local => local.location;
 const locationAnimals = data.animals.map(getLocation)
 .filter((element, index, array) => index === array.indexOf(element));
 
-// function nameResidents(param) { 
-// retorna array com os nomes dos residents, porém está trazendo quantidade de nomes errado.
-//   let result = [];
-//   for (let i in param){
-//       for (let j in param){
-//           result.push(param[i][j].name);
-//       }
-//   }
-//   return result;
-// }
-
 function animalMap(options) {
   const result = {};
-// const resultIntern = {};
   if (options === undefined) {
     const [NE, NW, SE, SW] = locationAnimals;
     const regionNE = [];
@@ -119,44 +105,9 @@ function animalMap(options) {
     result.NW = regionNW;
     result.SE = regionSE;
     result.SW = regionSW;
-  } // else {
-  // else if (options.includeNames === true){bloco de construção
-  // = {
-  //   NE: [
-  //     { lions: ['Zena', 'Maxwell', 'Faustino', 'Dee'] },
-  //     { giraffes: ['Gracia', 'Antone', 'Vicky', 'Clay', 'Arron', 'Bernard'] }
-  //   ]
-  //  }
-  // let residentsNE = data.animals.filter((animal) => { //array de objetos residentes
-  //   return animal.location === 'NE';
-  // }).map((animal) => {
-  //   return animal.residents;
-  // });
-  // let residentsNW = data.animals.filter((animal) => { //array de objetos residentes
-  //   return animal.location === 'NE';
-  // }).map((animal) => {
-  //   return animal.residents;
-  // });
-
-  // let residentsSE = data.animals.filter((animal) => {
-  //   return animal.location === 'NE';
-  // }).map((animal) => {
-  //   return animal.residents;
-  // });
-
-  // let residentsSW = data.animals.filter((animal) => {
-  //   return animal.location === 'NE';
-  // }).map((animal) => {
-  //   return animal.residents;
-  // });
-  // result.NE = nameResidents(residentsNE);
-  // Object.assign(resultIntern, namesNE);
-  // Object.assign(namesNE, result.NE);
+  } 
   return result;
 }
-// const options = { includeNames: true };
-// console.log(animalMap());
-
 
 function schedule(dayName) {
   const workingDays = Object.assign({}, data.hours); 
@@ -172,7 +123,6 @@ function schedule(dayName) {
     }
   }
 }
-// console.log(schedule());
 
 function oldestFromFirstSpecies(id) {
   const firstSpecieForEmployee = employees
@@ -194,13 +144,9 @@ const round = (num, places) => { //ref https://metring.com.br/arredondar-numero-
 		if (+arr[1] + places > 0) {
 			sig = "+";
 		}
-
 		return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + places)) + "e-" + places);
 	}
 }
-
-// console.log(round(37.485, 2)); expected 37,49 
-
 
 function increasePrices(percentage) {
   let tax  = (1+(percentage/100));
@@ -230,7 +176,6 @@ function employeeCoverage(idOrName) {
   }
   return result;
 }
-console.log(employeeCoverage('Azevado'));
 
 module.exports = {
   entryCalculator,
