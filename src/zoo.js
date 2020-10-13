@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data');
+const { animals, employees, hours, prices } = require('./data');
 const data = require('./data');
 
 const animalsByIds = (...ids) => animals.filter(animal => ids.includes(animal.id));
@@ -48,11 +48,11 @@ const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(species) {
   if (!species) {
     return animals.reduce((acc, item) => {
-      acc[item.name] = item.residents.length
+      acc[item.name] = item.residents.length;
       return acc;
     }, {});
   }
-  return animals.find((animal) => animal.name === species).residents.length;
+  return animals.find(animal => animal.name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
@@ -68,18 +68,33 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  const { Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday } = hours;
+  const daySchedule = {};
+  const weekSchedule = {
+    Tuesday: `Open from ${Tuesday.open}am until ${((Tuesday.close + 11) % 12) + 1}pm`,
+    Wednesday: `Open from ${Wednesday.open}am until ${((Wednesday.close + 11) % 12) + 1}pm`,
+    Thursday: `Open from ${Thursday.open}am until ${((Thursday.close + 11) % 12) + 1}pm`,
+    Friday: `Open from ${Friday.open}am until ${((Friday.close + 11) % 12) + 1}pm`,
+    Saturday: `Open from ${Saturday.open}am until ${((Saturday.close + 11) % 12) + 1}pm`,
+    Sunday: `Open from ${Sunday.open}am until ${((Sunday.close + 11) % 12) + 1}pm`,
+    Monday: 'CLOSED',
+  };
+  if (!dayName) {
+    return weekSchedule;
+  }
+  daySchedule[dayName] = weekSchedule[dayName];
+  return daySchedule;
 }
 
+console.log(schedule('Tuesday'));
+
 function oldestFromFirstSpecies(id) {
-  const findEmployee = employees.find((employee) => employee.id === id);
+  const findEmployee = employees.find(employee => employee.id === id);
   const searchAnimal = findEmployee.responsibleFor[0];
-  const findAnimal = animals.find((animal) => animal.id === searchAnimal);
+  const findAnimal = animals.find(animal => animal.id === searchAnimal);
   const oldestAnimal = findAnimal.residents.sort((a, b) => b.age - a.age)[0];
   return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
-
-console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 function increasePrices(percentage) {
   Object.keys(prices).forEach((key) => {
