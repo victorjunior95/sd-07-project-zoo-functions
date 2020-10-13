@@ -12,7 +12,7 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  // Murilo Wolf no fechamento do dia 09/10/2020
+  // Murilo Wolf no fechamento do dia 09/10/2020 e
   // https://stackoverflow.com/questions/57861821/how-to-return-specific-values-from-a-filter-in-javascript
   return data.animals.filter(animal => ids.includes(animal.id));
 }
@@ -74,10 +74,10 @@ function entryCalculator(entrants) {
 }
 
 /* O requisito 9 é do tipo que eu não desenvolveria por conta própria em pouco tempo.
-   Além disso, tive problemas pra interpretar adequadamente as solicitações do mesmo
+   Além disso, tive problemas para interpretar adequadamente as solicitações do mesmo
    e resolvi analisar projetos de colegas. Abaixo o que julguei o de melhor entendimento.
    Efetuei mínimas alterações. */
-// https://github.com/tryber/sd-04-block9-project-zoo-functions/pull/26/files
+// Ronan Fernandes: https://github.com/tryber/sd-04-block9-project-zoo-functions/pull/26/files
 const includeResidents = (animalName, residents, sorted, sex) => {
   const obj = {};
   obj[animalName] = residents.map(resident => resident.name);
@@ -121,9 +121,12 @@ function animalMap({ includeNames, sorted, sex } = {}) {
 function schedule(dayName) {
   const schedules = Object.entries(data.hours); // [ 'Tuesday', { open: 8, close: 18 } ], ...
   const viewSchedules = schedules.reduce((acc, curr) => {
-    if (curr[0] === 'Monday' ? acc[curr[0]] = 'CLOSED' : 
-      acc[curr[0]] = `Open from ${curr[1].open}am until ${curr[1].close - 12}pm`)
+    if (curr[0] === 'Monday') {
+      acc[curr[0]] = 'CLOSED';
+    } else {
+      acc[curr[0]] = `Open from ${curr[1].open}am until ${curr[1].close - 12}pm`;
       // [ 0: 'Tuesday', 1: { open: 8, close: 18 } ], ...
+    }
     return acc;
   }, {});
 
@@ -147,9 +150,28 @@ function increasePrices(percentage) {
   });
 }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
+// Lógica desenvolvida por Daniel Pantalena:
+// https://github.com/tryber/sd-04-block9-project-zoo-functions/pull/22/files
+function auxEmployeeCoverage() {
+  return data.employees.reduce((acc, { firstName, lastName, responsibleFor }) => {
+    acc[`${firstName} ${lastName}`] = responsibleFor.map(idAnimal =>
+      data.animals.find(({ id }) => idAnimal === id).name);
+    return acc;
+  }, {});
 }
+
+// https://github.com/tryber/sd-04-block9-project-zoo-functions/pull/22/files
+function employeeCoverage(idOrName) {
+  const acc = auxEmployeeCoverage();
+  if (!idOrName) return acc;
+  const employee = data.employees.find(({ id, firstName, lastName }) =>
+    id === idOrName || firstName === idOrName || lastName === idOrName);
+  return {
+    [`${employee.firstName} ${employee.lastName}`]:
+    acc[`${employee.firstName} ${employee.lastName}`],
+  };
+}
+// ---------------------------------------------------------------------------
 
 module.exports = {
   entryCalculator,
