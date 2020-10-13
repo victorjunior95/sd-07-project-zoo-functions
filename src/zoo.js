@@ -223,10 +223,36 @@ function increasePrices(percentage) {
   data.prices = Object.assign({}, ...arrayPrices);
 }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
 
+const idToAnimalName = (idArray) => {
+  const { animals } = data;
+  return idArray.map(idAnimal => animals
+    .find(({ id }) => id === idAnimal))
+    .map(({ name }) => name);
+};
+
+const responsibleForAssign = (employee) => {
+  const { firstName, lastName } = employee;
+  const animalsNames = idToAnimalName(employee.responsibleFor);
+  const object = {};
+  object[`${firstName} ${lastName}`] = animalsNames;
+  return object;
+};
+
+function employeeCoverage(idOrName) {
+  const { employees } = data;
+  if (idOrName === undefined) {
+    const arrayEmployee = employees.map(employee => responsibleForAssign(employee));
+    return Object.assign({}, ...arrayEmployee);
+  }
+  const findEmployee = ({
+    id,
+    firstName,
+    lastName,
+  }) => idOrName === id || idOrName === firstName || idOrName === lastName;
+  const employee = employees.find(findEmployee);
+  return responsibleForAssign(employee);
+}
 module.exports = {
   entryCalculator,
   schedule,
