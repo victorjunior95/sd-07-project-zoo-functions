@@ -176,10 +176,17 @@ function schedule(dayName) {
 // console.log(schedule());
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const firstSpecieForEmployee = employees.find((select) => select.id === id).responsibleFor[0];  
+    // for (let i in data.employees) {
+    // if (data.employees[i].id === id) {
+    //   return data.employees[i].responsibleFor
+    // }
+    return firstSpecieForEmployee;
 }
+console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
-const round = (num, places) => {
+
+const round = (num, places) => { //ref https://metring.com.br/arredondar-numero-em-javascript
 	if (!("" + num).includes("e")) {
 		return +(Math.round(num + "e+" + places)  + "e-" + places);
 	} else {
@@ -193,7 +200,7 @@ const round = (num, places) => {
 	}
 }
 
-// console.log(round(37.485, 2)); expected 37,49 https://metring.com.br/arredondar-numero-em-javascript
+// console.log(round(37.485, 2)); expected 37,49 
 
 
 function increasePrices(percentage) {
