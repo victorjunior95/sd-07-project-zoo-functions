@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { employees } = require('./data');
+const { employees, animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -219,10 +219,18 @@ function employeeCoverage(idOrName) {
       result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
     .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name)
     });
+  } else {
+    employees
+    .forEach((ids) => {
+      if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
+        result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+        .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name)
+      }
+    });
   }
   return result;
 }
-console.log(employeeCoverage());
+console.log(employeeCoverage('Azevado'));
 
 module.exports = {
   entryCalculator,
