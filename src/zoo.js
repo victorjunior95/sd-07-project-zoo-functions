@@ -9,12 +9,12 @@ eslint no-unused-vars: [
 ]
 */
 
-const { employees, animals } = require('./data');
+//const { employees, animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-return data.animals
-  .filter((animal) => ids.includes(animal.id));
+  return data.animals
+  .filter(animal => ids.includes(animal.id));
 }
 
 function animalsOlderThan(nameAnimal, ageAnimal) {
@@ -74,103 +74,103 @@ const locationAnimals = data.animals.map(getLocation)
 .filter((element, index, array) => index === array.indexOf(element));
 
 function animalMap(options) {
-  const result = {};
-  if (options === undefined) {
-    const [NE, NW, SE, SW] = locationAnimals;
-    const regionNE = [];
-    const regionNW = [];
-    const regionSE = [];
-    const regionSW = [];
-    data.animals.map((animal) => {
-      if (animal.location === locationAnimals[0]) {
-       return regionNE.push(animal.name);
-      }
-    });
-    data.animals.map((animal) => {
-      if (animal.location === locationAnimals[1]) {
-       return regionNW.push(animal.name);
-      }
-    });
-    data.animals.map((animal) => {
-      if (animal.location === locationAnimals[2]) {
-       return regionSE.push(animal.name);
-      }
-    });
-    data.animals.map((animal) => {
-      if (animal.location === locationAnimals[3]) {
-       return regionSW.push(animal.name);
-      }
-  });
-    result.NE = regionNE;
-    result.NW = regionNW;
-    result.SE = regionSE;
-    result.SW = regionSW;
-  } 
-  return result;
+  // const result = {};
+  // if (options === undefined) {
+  //   const [NE, NW, SE, SW] = locationAnimals;
+  //   const regionNE = [];
+  //   const regionNW = [];
+  //   const regionSE = [];
+  //   const regionSW = [];
+  //   data.animals.map((animal) => {
+  //     if (animal.location === locationAnimals[0]) {
+  //      return regionNE.push(animal.name);
+  //     }
+  //   });
+  //   data.animals.map((animal) => {
+  //     if (animal.location === locationAnimals[1]) {
+  //      return regionNW.push(animal.name);
+  //     }
+  //   });
+  //   data.animals.map((animal) => {
+  //     if (animal.location === locationAnimals[2]) {
+  //      return regionSE.push(animal.name);
+  //     }
+  //   });
+  //   data.animals.map((animal) => {
+  //     if (animal.location === locationAnimals[3]) {
+  //      return regionSW.push(animal.name);
+  //     }
+  // });
+  //   result.NE = regionNE;
+  //   result.NW = regionNW;
+  //   result.SE = regionSE;
+  //   result.SW = regionSW;
+  // } 
+  // return result;
 }
 
 function schedule(dayName) {
-  const workingDays = Object.assign({}, data.hours); 
-  const openingHours = (key => workingDays[key] =
-    `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`)
-  Object.keys(workingDays).forEach(openingHours)
-  workingDays.Monday = 'CLOSED'
+  const workingDays = Object.assign({}, data.hours);
+    const openingHours = (key => workingDays[key] =
+    `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`);
+  Object.keys(workingDays).forEach(openingHours);
+  workingDays.Monday = 'CLOSED';
   if (dayName === undefined) {
-    return workingDays
-  } else {
-    return {
-    [dayName]: workingDays[dayName] //workingDays[dayName] possui o valor para o respectivo dia.
-    }
+    return workingDays;
   }
+  return {
+    [dayName]: workingDays[dayName] // workingDays[dayName] possui o valor para o respectivo dia.
+    };
+  
 }
 
 function oldestFromFirstSpecies(id) {
   const firstSpecieForEmployee = employees
-  .find((select) => select.id === id).responsibleFor[0];  
+  .find((select) => select.id === id).responsibleFor[0];
   const specie = data.animals
-  .find(select => select.id === firstSpecieForEmployee).residents
-  let newList = [...specie].sort((a,b) => a.age - b.age)
-  const {name, sex, age} = newList[newList.length - 1]
+  .find(select => select.id === firstSpecieForEmployee).residents;
+  const newList = [...specie].sort((a, b) => a.age - b.age);
+  const { name, sex, age } = newList[newList.length - 1];
   const list = [name, sex, age];
   return list;
 }
 
-const round = (num, places) => { //ref https://metring.com.br/arredondar-numero-em-javascript
-	if (!("" + num).includes("e")) {
-		return +(Math.round(num + "e+" + places)  + "e-" + places);
-	} else {
-		let arr = ("" + num).split("e");
-		let sig = ""
-		if (+arr[1] + places > 0) {
-			sig = "+";
-		}
-		return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + places)) + "e-" + places);
-	}
-}
+const round = (num, places) => { // ref https://metring.com.br/arredondar-numero-em-javascript
+  if (!('' + num).includes('e')) {
+    return +(Math.round(num + 'e+' + places)  + 'e-' + places);
+  } else {
+    const arr = ('' + num).split('e');
+    let sig = '';
+    if (+arr[1] + places > 0) {
+      sig = '+';
+  }
+  return +(Math.round(+arr[0] + 'e' + sig + (+arr[1] + places)) + 'e-' + places);
+  }
+};
 
 function increasePrices(percentage) {
-  let tax  = (1+(percentage/100));
+  const tax = (1 + (percentage / 100));
   const newArray = ['Adult', 'Senior', 'Child'];
   for (let i = 0; i < newArray.length; i += 1) {
     data.prices[newArray[i]] = round((data.prices[newArray[i]] * tax), 2);
   }
-  return data.prices
+  return data.prices;
 }
 
 function employeeCoverage(idOrName) {
-  const result = {}
+  const result = {};
   if (idOrName === undefined) {
     employees
     .forEach((ids) => {
       result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-    .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name)
+    .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
     });
   } else {
     employees
     .forEach((ids) => {
       if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
         result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-        .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name)
+        .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
       }
     });
   }
