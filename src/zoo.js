@@ -10,6 +10,8 @@ eslint no-unused-vars: [
 */
 
 const { animals } = require('./data');
+const { prices } = require('./data');
+const { hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -76,14 +78,12 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  const { prices } = require('./data');
   if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0;
-  } else {
-    const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-    somaTotal = (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
-    return somaTotal;
   }
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const somaTotal = (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
+  return somaTotal;
 }
 
 function animalMap(options) {
@@ -91,7 +91,25 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  const agenda = {};
+  if (dayName === undefined) {
+    agenda.Tuesday = `Open from ${hours.Tuesday.open}am until ${(hours.Tuesday.close) - 12}pm`;
+    agenda.Wednesday = `Open from ${hours.Wednesday.open}am until ${(hours.Wednesday.close) - 12}pm`;
+    agenda.Thursday = `Open from ${hours.Thursday.open}am until ${(hours.Thursday.close) - 12}pm`;
+    agenda.Friday = `Open from ${hours.Friday.open}am until ${(hours.Friday.close) - 12}pm`;
+    agenda.Saturday = `Open from ${hours.Saturday.open}am until ${(hours.Saturday.close) - 12}pm`;
+    agenda.Sunday = `Open from ${hours.Sunday.open}am until ${(hours.Sunday.close) - 12}pm`;
+    agenda.Monday = 'CLOSED';
+    return agenda;
+  }
+  const horas = Object.entries(hours);
+  const diaEncontrado = horas.find(diaAtual => diaAtual[0] === dayName);
+  if (diaEncontrado[0] === 'Monday') {
+    agenda[diaEncontrado[0]] = 'CLOSED';
+  } else {
+    agenda[diaEncontrado[0]] = `Open from ${diaEncontrado[1].open}am until ${(diaEncontrado[1].close) - 12}pm`;
+  }
+  return agenda;
 }
 
 function oldestFromFirstSpecies(id) {
