@@ -52,7 +52,15 @@ function addEmployee(
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (species === undefined) {
+    const animalsAndQuatities = {};
+    data.animals.forEach((animal) => {
+      animalsAndQuatities[animal.name] = animal.residents.length;
+    })
+    return animalsAndQuatities;
+  }
+  const givenSpecies = data.animals.find(animal => animal.name.includes(species));
+  return givenSpecies.residents.length;
 }
 
 function entryCalculator(entrants) {
