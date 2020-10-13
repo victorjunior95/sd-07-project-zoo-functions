@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-//const { employees, animals } = require('./data');
+// const { employees, animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -42,7 +42,7 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  return employees.push({ id, firstName, lastName, managers, responsibleFor });
+  return data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
@@ -70,7 +70,7 @@ function entryCalculator(entrants) {
 
 const getLocation = local => local.location;
 // metodo filter para retirar duplicidade
-const locationAnimals = data.animals.map(getLocation)
+data.animals.map(getLocation)
 .filter((element, index, array) => index === array.indexOf(element));
 
 function animalMap(options) {
@@ -105,7 +105,7 @@ function animalMap(options) {
   //   result.NW = regionNW;
   //   result.SE = regionSE;
   //   result.SW = regionSW;
-  // } 
+// }
   // return result;
 }
 
@@ -119,14 +119,13 @@ function schedule(dayName) {
     return workingDays;
   }
   return {
-    [dayName]: workingDays[dayName] // workingDays[dayName] possui o valor para o respectivo dia.
-    };
-  
+    [dayName]: workingDays[dayName], // workingDays[dayName] possui o valor para o respectivo dia.
+  };
 }
 
 function oldestFromFirstSpecies(id) {
   const firstSpecieForEmployee = employees
-  .find((select) => select.id === id).responsibleFor[0];
+  .find(select => select.id === id).responsibleFor[0];
   const specie = data.animals
   .find(select => select.id === firstSpecieForEmployee).residents;
   const newList = [...specie].sort((a, b) => a.age - b.age);
@@ -137,14 +136,14 @@ function oldestFromFirstSpecies(id) {
 
 const round = (num, places) => { // ref https://metring.com.br/arredondar-numero-em-javascript
   if (!('' + num).includes('e')) {
-    return +(Math.round(num + 'e+' + places)  + 'e-' + places);
+    return +(Math.round(`${num}  e  ${places})  e- ${places}`));
   } else {
     const arr = ('' + num).split('e');
     let sig = '';
     if (+arr[1] + places > 0) {
       sig = '+';
   }
-  return +(Math.round(+arr[0] + 'e' + sig + (+arr[1] + places)) + 'e-' + places);
+  return +(Math.round(+`${arr[0]} e sig (+${arr[1]} ${places})) e- ${places}`));
   }
 };
 
@@ -160,13 +159,13 @@ function increasePrices(percentage) {
 function employeeCoverage(idOrName) {
   const result = {};
   if (idOrName === undefined) {
-    employees
+    data.employees
     .forEach((ids) => {
       result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
     .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
     });
   } else {
-    employees
+    data.employees
     .forEach((ids) => {
       if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
         result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
