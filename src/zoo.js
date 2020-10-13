@@ -70,13 +70,14 @@ function animalMap(options) {
 function schedule(dayName) {
   const { Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday } = hours;
   const daySchedule = {};
+  const convertHour = (hour) => hour > 12 ? hour - 12 : hour;
   const weekSchedule = {
-    Tuesday: `Open from ${Tuesday.open}am until ${((Tuesday.close + 11) % 12) + 1}pm`,
-    Wednesday: `Open from ${Wednesday.open}am until ${((Wednesday.close + 11) % 12) + 1}pm`,
-    Thursday: `Open from ${Thursday.open}am until ${((Thursday.close + 11) % 12) + 1}pm`,
-    Friday: `Open from ${Friday.open}am until ${((Friday.close + 11) % 12) + 1}pm`,
-    Saturday: `Open from ${Saturday.open}am until ${((Saturday.close + 11) % 12) + 1}pm`,
-    Sunday: `Open from ${Sunday.open}am until ${((Sunday.close + 11) % 12) + 1}pm`,
+    Tuesday: `Open from ${Tuesday.open}am until ${convertHour(Tuesday.close)}pm`,
+    Wednesday: `Open from ${Wednesday.open}am until ${convertHour(Wednesday.close)}pm`,
+    Thursday: `Open from ${Thursday.open}am until ${convertHour(Thursday.close)}pm`,
+    Friday: `Open from ${Friday.open}am until ${convertHour(Friday.close)}pm`,
+    Saturday: `Open from ${Saturday.open}am until ${convertHour(Saturday.close)}pm`,
+    Sunday: `Open from ${Sunday.open}am until ${convertHour(Sunday.close)}pm`,
     Monday: 'CLOSED',
   };
   if (!dayName) {
