@@ -96,38 +96,35 @@ function entryCalculator(entrants) {
   return total;
 }
 
-// function animalMap(options) {
-//   const local = { NE: [], NW: [], SE: [], SW: [] };
-//   if (options === undefined) {
-//      data.animals.forEach((item) => {
-//     local[item.location].push(item.name);
-//   });
-//   return local;
-//   }
-//   const { includesNames, sorted, sex } = options;
-//     data.animals.forEach((animal) => {
-//       let item = {};
-//        if (includesNames){
-//          item[animal.name] = animal.residents
-//         if (sex === 'male'){
-//         item[animal.name] = item[animal.name].filter((sexo) => {
-  // if (sex !== undefined) {return (sexo.sex === 'male') } return true });
-//     } else if (sex === 'female') {
-//       item[animal.name] = item[animal.name].filter((sexo) => {
-  // if (sex !== undefined) {return (sexo.sex === 'female') }return true });
-//     }
-//     item[animal.name] = item[animal.name].map (um => um.name);
-//     if (sorted === true){
-//     item[animal.name] = item[animal.name].sort();
-//   }
-//   }
-//       local[animal.location].push(item);
-//       // console.log(item)
-//     })
-//     console.table(local)
-//     return local;
-// }
-// console.log (animalMap({includesNames: true, sorted: true}))
+function animalMap(options) {
+  const local = { NE: [], NW: [], SE: [], SW: [] };
+  if (options === undefined) {
+    data.animals.forEach((item) => {
+    local[item.location].push(item.name);
+    });
+    return local;
+  }
+  const { includeNames, sorted, sex } = options;
+  data.animals.forEach((animal) => {
+  let item = {};
+        if (includeNames) {
+          item[animal.name] = animal.residents;
+        if (sex === 'male'){
+          item[animal.name] = item[animal.name].filter((sexo) => {
+    if (sex !== undefined) {return (sexo.sex === 'male') } return true });
+            } else if (sex === 'female') {
+      item[animal.name] = item[animal.name].filter((sexo) => {
+        if (sex !== undefined) {return (sexo.sex === 'female'); } return true; });
+      }
+    item[animal.name] = item[animal.name].map(um => um.name);
+    if (sorted === true) {
+    item[animal.name] = item[animal.name].sort();
+  }
+  } else{ item = animal.name; }
+      local[animal.location].push(item);
+    })
+return local;
+}
 
 function schedule(dayName) {
   // seu código aqui
@@ -199,7 +196,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
