@@ -75,11 +75,12 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // let {Adult, Senior, Child} = data.prices
-  // Adult = parseFloat((Adult + Math.ceil((Adult * (percentage / 100)))).toFixed(2))
-  // Senior = parseFloat((Senior + (Math.round(Senior * (percentage / 100)))).toFixed(2))
-  // Child = parseFloat((Child + Math.ceil((Child * (percentage / 100)))).toFixed(2))
-  // data.prices = {Adult, Senior, Child}
+  let {Adult, Senior, Child} = data.prices;
+  console.log(typeof(Adult));
+  Adult = Math.round((Adult + (Adult * (percentage / 100))) * 100) / 100;
+  Senior = Math.round((Senior + (Senior * (percentage / 100))) * 100) / 100;
+  Child = Math.round((Child + (Child * (percentage / 100))) * 100) / 100;
+  data.prices = {Adult, Senior, Child};
 }
 
 function employeeCoverage(idOrName) {
