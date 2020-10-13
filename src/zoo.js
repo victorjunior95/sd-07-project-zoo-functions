@@ -15,8 +15,7 @@ const data = require('./data');
 function animalsByIds(...ids) {
   // seu código aqui
   return data.animals
-  .filter(animal => animal.id === ids[0]) // retorno []
-  .concat(data.animals.filter(animal => animal.id === ids[1]));
+  .filter((animal) => ids.includes(animal.id));
 }
 
 function animalsOlderThan(nameAnimal, ageAnimal) {
@@ -185,8 +184,6 @@ function oldestFromFirstSpecies(id) {
   const list = [name, sex, age];
   return list;
 }
-console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
-
 
 const round = (num, places) => { //ref https://metring.com.br/arredondar-numero-em-javascript
 	if (!("" + num).includes("e")) {
