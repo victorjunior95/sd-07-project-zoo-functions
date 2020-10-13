@@ -50,7 +50,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
       managers,
       responsibleFor,
     },
-  );
+  )
 }
 
 function animalCount(species) {
