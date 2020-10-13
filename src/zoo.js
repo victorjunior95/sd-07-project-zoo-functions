@@ -34,7 +34,7 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return Object.assign(personalInfo, associatedWith);
 }
 
 function isManager(id) {
@@ -124,10 +124,6 @@ function schedule(dayName) {
   }
   return test2;
 }
-
-console.log(schedule());
-console.log(schedule('Tuesday'));
-console.log(schedule('Monday'));
 
 function oldestFromFirstSpecies(id) {
   const firstSpecies = data.employees.find(element => element.id === id).responsibleFor[0];
