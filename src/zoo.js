@@ -105,7 +105,7 @@ function animalMap(options = {}) {
     );
   } else {
     animals.forEach(({ name, location, residents }) =>
-    out[location].push({ [name]: residents.map(resident => resident.name)} ),
+    out[location].push({ [name]: residents.map(resident => resident.name) }),
     );
   }
   if (options.sorted) {
