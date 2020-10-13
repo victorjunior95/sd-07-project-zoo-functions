@@ -28,7 +28,7 @@ const employeeByName = (employeeName) => {
     employeeObj = data.employees.find((employee) => employee.firstName === employeeName || employee.lastName === employeeName);
   }
   return employeeObj;
-  //teste
+  //teste2
 };
 
 function createEmployee(personalInfo, associatedWith) {
