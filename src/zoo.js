@@ -12,6 +12,7 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
+  // Murilo Wolf no fechamento do dia 09/10/2020
   // https://stackoverflow.com/questions/57861821/how-to-return-specific-values-from-a-filter-in-javascript
   return data.animals.filter(animal => ids.includes(animal.id));
 }
@@ -133,7 +134,10 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const firstSpecie = data.employees.find(employee => employee.id === id).responsibleFor[0];
+  const getResidents = data.animals.find(animal => animal.id === firstSpecie).residents;
+  const oldResident = getResidents.sort((ageA, ageB) => ageB.age - ageA.age)[0];
+  return Object.values(oldResident);
 }
 
 function increasePrices(percentage) {
