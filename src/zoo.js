@@ -56,9 +56,12 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // const { prices } = data;
+  if (!entrants || entrants === {} || entrants === null) return 0;
+  if (!entrants.Adult) entrants.Adult = 0;
+  if (!entrants.Child) entrants.Child = 0;
+  if (!entrants.Senior) entrants.Senior = 0;
+  return (entrants.Adult * 49.99) + (entrants.Child * 20.99) + (entrants.Senior * 24.99);
 }
-
 function animalMap(options) {
   // seu código aqui
 }
