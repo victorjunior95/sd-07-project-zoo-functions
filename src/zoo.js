@@ -54,7 +54,7 @@ function addEmployee(
 function animalCount(species) {
   if (species === undefined) {
     const animalsAndQuatities = {};
-    data.animals.forEach((animal) => {
+    data.animals.forEach(animal => {
       animalsAndQuatities[animal.name] = animal.residents.length;
     });
     return animalsAndQuatities;
@@ -66,7 +66,13 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (entrants === undefined || entrants.length === 0) return 0;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const adultPrice = data.prices.Adult * Adult;
+  const childPrice = data.prices.Child * Child;
+  const seniorPrice = data.prices.Senior * Senior;
+  const total = adultPrice + childPrice + seniorPrice;
+  return total;
 }
 
 function animalMap(options) {
