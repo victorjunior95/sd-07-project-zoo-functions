@@ -141,13 +141,13 @@ function increasePrices(percentage) {
     return acc[chaves[index]] = (Math.round(item*percentage)/100 + item).toPrecision(4)
   }, {})
   */
- // o for each acrescenta no objeto diretamente
- const modificaValor = Object.values(prices);
- const chaves = Object.keys(prices)
- modificaValor.forEach((elemento , indice) => {
-   const novoValor = elemento + (elemento * (percentage / 100));
-   prices[chaves[indice]] = Math.round(novoValor * 100) / 100;
- });
+  // o for each acrescenta no objeto diretamente
+  const modificaValor = Object.values(prices);
+  const chaves = Object.keys(prices)
+  modificaValor.forEach((elemento , indice) => {
+    const novoValor = elemento + (elemento * (percentage / 100));
+    prices[chaves[indice]] = Math.round(novoValor * 100) / 100;
+  });
 }
 
 function employeeCoverage(idOrName) {
