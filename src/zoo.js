@@ -173,15 +173,55 @@ function schedule(dayName) {
     }
   }
 }
-console.log(schedule());
+// console.log(schedule());
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
+const round = (num, places) => {
+	if (!("" + num).includes("e")) {
+		return +(Math.round(num + "e+" + places)  + "e-" + places);
+	} else {
+		let arr = ("" + num).split("e");
+		let sig = ""
+		if (+arr[1] + places > 0) {
+			sig = "+";
+		}
+
+		return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + places)) + "e-" + places);
+	}
 }
+
+// console.log(round(37.485, 2)); expected 37,49 https://metring.com.br/arredondar-numero-em-javascript
+
+
+function increasePrices(percentage) {
+  const addPrice = percentage / 100;
+  const newArray = ['Adult', 'Senior', 'Child'];
+  for (let i = 0; i < newArray.length; i += 1) {
+    data.prices[newArray[i]] =
+    Math.round((prices[newArray[i]] + (prices[newArray[i]] * addPrice)) * 100) / 100;
+  }
+
+  // // const newPrices = Object.assign({}, data.prices);
+  // let tax  = (1+(percentage/100));
+  // // const update = (key => newPrices[key] = round((newPrices[key] * tax), 2));
+  // const update = (key => data.prices[key] = round((data.prices[key] * tax), 2));
+  // // Object.keys(newPrices).forEach(update);
+  // Object.keys(data.prices).forEach(update)
+  // // Object.assign(data.prices, newPrices)
+  // // return newPrices
+  // return data.prices
+}
+
+console.log(increasePrices(50));
+console.log(data.prices);
+
+console.log(increasePrices(30));
+console.log(data.prices);
+
+
 
 function employeeCoverage(idOrName) {
   // seu código aqui
