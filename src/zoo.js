@@ -96,42 +96,20 @@ function entryCalculator(entrants) {
   return total;
 }
 
-function animalMap(options) {
-  const local = { NE: [], NW: [], SE: [], SW: [] };
-  if (options === undefined) {
-     data.animals.forEach((item) => {
-    local[item.location].push(item.name);
-  });
-  return local;
-  }
-  const { includesNames, sorted, sex } = options;
-
-    data.animals.forEach((animal) => {
-      let item ={};
-       if (includesNames){
-         item[animal.name] = animal.residents
-        if (sex === 'male'){
-        item[animal.name] = item[animal.name].filter((sexo) => {if (sex !== undefined) {return (sexo.sex === 'male')} return true});
-     
-    } else if (sex === 'female'){
-      item[animal.name] = item[animal.name].filter((sexo) => {if (sex !== undefined) {return (sexo.sex === 'female')}return true});
-    }
-    item[animal.name] = item[animal.name].map (um => um.name);
-    
-    if (sorted === true){
-    item[animal.name] = item[animal.name].sort();
-  } 
-  }
-      local[animal.location].push(item);
-      // console.log(item)
-    })
-    console.table(local)
-    return local;
-}
-console.log (animalMap({includesNames: true, sorted: true}))
-
 function schedule(dayName) {
   // seu código aqui
+  const days = Object.keys(data.hours);
+  const times = Object.values(data.hours);
+  const timeTable = {};
+  days.map((item, i) => {
+    timeTable[item] = `Open from ${times[i].open}am until ${times[i].close - 12}pm`;
+    timeTable.Monday = 'CLOSED';
+    return 0;
+  });
+  if (dayName === undefined) {
+    return timeTable;
+  }
+    return { [dayName]: timeTable[dayName] };
 }
 
 function oldestFromFirstSpecies(id) {
@@ -150,7 +128,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  animalMap,
+  // animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,
