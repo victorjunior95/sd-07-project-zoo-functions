@@ -10,10 +10,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, hours } = require('./data');
-const { employees } = require('./data');
-const { prices } = require('./data');
-const { data } = require('./data');
+const { animals, hours, employees, prices } = require('./data');
 
 
 function animalsByIds(...ids) {
@@ -113,7 +110,7 @@ function schedule(...dayName) {
     dayName = Object.keys(hours);
   }
   return dayName.reduce((acc, elemento) => {
-    acc[elemento] = `Open from ${hours[elemento].open}am until ${hours[elemento].close - 12}pm`;
+    acc[elemento] = `Open from ${hours['Tuesday'].open}am until ${hours[elemento].close - 12}pm`;
     if (elemento === 'Monday') {
       acc[elemento] = 'CLOSED';
     }
@@ -137,7 +134,20 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  /*
+  const valores = Object.values(prices)
+  const chaves = Object.keys(prices)
+  return valores.reduce((acc, item, index) => {
+    return acc[chaves[index]] = (Math.round(item*percentage)/100 + item).toPrecision(4)
+  }, {})
+  */
+ // o for each acrescenta no objeto diretamente
+ const modificaValor = Object.values(prices);
+ const chaves = Object.keys(prices)
+ modificaValor.forEach((elemento , indice) => {
+   const novoValor = elemento + (elemento * (percentage / 100));
+   prices[chaves[indice]] = Math.round(novoValor * 100) / 100;
+ });
 }
 
 function employeeCoverage(idOrName) {
@@ -159,4 +169,3 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
