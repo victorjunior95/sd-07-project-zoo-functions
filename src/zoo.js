@@ -40,8 +40,9 @@ function createEmployee(personalInfo, associatedWith) {
   };
 }
 
+// prettier-ignore
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some(({ managers }) => managers.some(idManage => id === idManage));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
