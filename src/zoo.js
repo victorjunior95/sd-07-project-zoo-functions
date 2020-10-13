@@ -65,7 +65,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   if (species === undefined) {
-    const allAnimalsObj = animals.reduce((allAnimals, animal)=> {
+    const allAnimalsObj = animals.reduce((allAnimals, animal) => {
       allAnimals[animal.name] = animal.residents.length;
       return allAnimals;
     }, {});
