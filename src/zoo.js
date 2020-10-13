@@ -176,12 +176,14 @@ function schedule(dayName) {
 // console.log(schedule());
 
 function oldestFromFirstSpecies(id) {
-  const firstSpecieForEmployee = employees.find((select) => select.id === id).responsibleFor[0];  
-    // for (let i in data.employees) {
-    // if (data.employees[i].id === id) {
-    //   return data.employees[i].responsibleFor
-    // }
-    return firstSpecieForEmployee;
+  const firstSpecieForEmployee = employees
+  .find((select) => select.id === id).responsibleFor[0];  
+  const specie = data.animals
+  .find(select => select.id === firstSpecieForEmployee).residents
+  let newList = [...specie].sort((a,b) => a.age - b.age)
+  const {name, sex, age} = newList[newList.length - 1]
+  const list = [name, sex, age];
+  return list;
 }
 console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
