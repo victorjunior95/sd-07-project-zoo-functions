@@ -121,11 +121,15 @@ function oldestFromFirstSpecies(employeeId) {
   return [animalOlder.name, animalOlder.sex, animalOlder.age];
 }
 
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-// ['Vicky', 'female', 12]
-
 function increasePrices(percentage) {
-  // seu código aqui
+  const { Adult, Senior, Child } = prices;
+  const adultNewPrice = Math.round(Adult * (1 + (percentage / 100)) * 100) / 100;
+  const seniorNewPrice = Math.round(Senior * (1 + (percentage / 100)) * 100) / 100;
+  const childNewPrice = Math.round(Child * (1 + (percentage / 100)) * 100) / 100;
+  prices.Adult = adultNewPrice;
+  prices.Senior = seniorNewPrice;
+  prices.Child = childNewPrice;
+  return prices;
 }
 
 function employeeCoverage(idOrName) {
