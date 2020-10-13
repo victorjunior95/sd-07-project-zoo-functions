@@ -124,8 +124,8 @@ function oldestFromFirstSpecies(id) {
 }
 
 function calculateNewPrice(price, percentage) {
-  const newPrice = price + (price * percentage / 100);
-  const roundedNewPrice = Math.round(newPrice * 100) / 100;  
+  const newPrice = price + ((price * percentage) / 100);
+  const roundedNewPrice = Math.round(newPrice * 100) / 100;
   return roundedNewPrice;
 }
 
@@ -141,8 +141,8 @@ function employeeCoverage(idOrName) {
   let emp = employees;
   if (idOrName) {
     emp = emp.filter(({ id, firstName, lastName }) => (
-      id === idOrName || firstName === idOrName || lastName === idOrName)
-    );
+      id === idOrName || firstName === idOrName || lastName === idOrName
+    ));
   }
 
   const findAnimalsName = responsibleFor => (
