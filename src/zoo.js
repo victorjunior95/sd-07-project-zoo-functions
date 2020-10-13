@@ -96,6 +96,39 @@ function entryCalculator(entrants) {
   return total;
 }
 
+// function animalMap(options) {
+//   const local = { NE: [], NW: [], SE: [], SW: [] };
+//   if (options === undefined) {
+//      data.animals.forEach((item) => {
+//     local[item.location].push(item.name);
+//   });
+//   return local;
+//   }
+//   const { includesNames, sorted, sex } = options;
+//     data.animals.forEach((animal) => {
+//       let item = {};
+//        if (includesNames){
+//          item[animal.name] = animal.residents
+//         if (sex === 'male'){
+//         item[animal.name] = item[animal.name].filter((sexo) => {
+  // if (sex !== undefined) {return (sexo.sex === 'male') } return true });
+//     } else if (sex === 'female') {
+//       item[animal.name] = item[animal.name].filter((sexo) => {
+  // if (sex !== undefined) {return (sexo.sex === 'female') }return true });
+//     }
+//     item[animal.name] = item[animal.name].map (um => um.name);
+//     if (sorted === true){
+//     item[animal.name] = item[animal.name].sort();
+//   }
+//   }
+//       local[animal.location].push(item);
+//       // console.log(item)
+//     })
+//     console.table(local)
+//     return local;
+// }
+// console.log (animalMap({includesNames: true, sorted: true}))
+
 function schedule(dayName) {
   // seu código aqui
   const days = Object.keys(data.hours);
@@ -109,13 +142,22 @@ function schedule(dayName) {
   if (dayName === undefined) {
     return timeTable;
   }
-    return { [dayName]: timeTable[dayName] };
+  return { [dayName]: timeTable[dayName] };
 }
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+  const especie = data.employees
+  .find(item => (item.id === id))
+  .responsibleFor[0];
+  const resultado = data.animals
+  .find(item => item.id === especie)
+  .residents
+  .sort((a, b) => b.age - a.age)[0];
+  return Object.values(resultado);
 }
 
+console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 function increasePrices(percentage) {
   // seu código aqui
 }
