@@ -197,31 +197,13 @@ const round = (num, places) => {
 
 
 function increasePrices(percentage) {
-  const addPrice = percentage / 100;
+  let tax  = (1+(percentage/100));
   const newArray = ['Adult', 'Senior', 'Child'];
   for (let i = 0; i < newArray.length; i += 1) {
-    data.prices[newArray[i]] =
-    Math.round((prices[newArray[i]] + (prices[newArray[i]] * addPrice)) * 100) / 100;
+    data.prices[newArray[i]] = round((data.prices[newArray[i]] * tax), 2);
   }
-
-  // // const newPrices = Object.assign({}, data.prices);
-  // let tax  = (1+(percentage/100));
-  // // const update = (key => newPrices[key] = round((newPrices[key] * tax), 2));
-  // const update = (key => data.prices[key] = round((data.prices[key] * tax), 2));
-  // // Object.keys(newPrices).forEach(update);
-  // Object.keys(data.prices).forEach(update)
-  // // Object.assign(data.prices, newPrices)
-  // // return newPrices
-  // return data.prices
+  return data.prices
 }
-
-console.log(increasePrices(50));
-console.log(data.prices);
-
-console.log(increasePrices(30));
-console.log(data.prices);
-
-
 
 function employeeCoverage(idOrName) {
   // seu código aqui
