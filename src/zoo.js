@@ -25,7 +25,7 @@ function employeeByName(...employeeName) {
     return {};
   }
   return data.employees.find(employee =>
-        employeeName.includes(employee.firstName) || employeeName.includes(employee.lastName));
+    employeeName.includes(employee.firstName) || employeeName.includes(employee.lastName));
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -65,9 +65,19 @@ function animalMap(options) {
   // seu código aqui
 }
 
-function schedule(dayName) {
-  // seu código aqui
+function schedule(...dayName) {
+  if (dayName.length === 0) {
+    dayName = Object.keys(data.hours);
+  }
+  return dayName.reduce((accumulator, current) => {
+    accumulator[current] = `Open from ${data.hours[current].open}am until ${data.hours[current].close - 12}pm`;
+    if (current === 'Monday') {
+      accumulator[current] = 'CLOSED';
+    }
+    return accumulator;
+  }, {});
 }
+
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
