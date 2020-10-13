@@ -212,8 +212,17 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const result = {}
+  if (idOrName === undefined) {
+    employees
+    .forEach((ids) => {
+      result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+    .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name)
+    });
+  }
+  return result;
 }
+console.log(employeeCoverage());
 
 module.exports = {
   entryCalculator,
