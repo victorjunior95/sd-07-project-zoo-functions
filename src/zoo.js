@@ -11,9 +11,9 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-let animalsByIds = (...ids) => {
+const animalsByIds = (...ids) => {
   let arrReturned = [];
-  arrReturned = ids.map((id) => data.animals.find((animal) => animal.id === id));
+  arrReturned = ids.map(id => data.animals.find(animal => animal.id === id));
   return arrReturned;
 };
 
