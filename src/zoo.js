@@ -110,7 +110,7 @@ function schedule(...dayName) {
     dayName = Object.keys(hours);
   }
   return dayName.reduce((acc, elemento) => {
-    acc[elemento] = `Open from ${hours['Tuesday'].open}am until ${hours[elemento].close - 12}pm`;
+    acc[elemento] = `Open from ${hours[elemento].open}am until ${hours[elemento].close - 12}pm`;
     if (elemento === 'Monday') {
       acc[elemento] = 'CLOSED';
     }
@@ -143,8 +143,8 @@ function increasePrices(percentage) {
   */
   // o for each acrescenta no objeto diretamente
   const modificaValor = Object.values(prices);
-  const chaves = Object.keys(prices)
-  modificaValor.forEach((elemento , indice) => {
+  const chaves = Object.keys(prices);
+  modificaValor.forEach((elemento, indice) => {
     const novoValor = elemento + (elemento * (percentage / 100));
     prices[chaves[indice]] = Math.round(novoValor * 100) / 100;
   });
