@@ -20,10 +20,15 @@ function animalsOlderThan(animal, age) {
   return animals.residents.every(resident => resident.age >= age);
 }
 
-console.log(animalsOlderThan('lions', 5));
-
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) {
+    return {};
+  }
+  return data.employees.find(
+    employee =>
+      employeeName.includes(employee.firstName) ||
+      employeeName.includes(employee.lastName),
+  );
 }
 
 function createEmployee(personalInfo, associatedWith) {
