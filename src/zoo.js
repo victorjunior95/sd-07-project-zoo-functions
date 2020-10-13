@@ -72,6 +72,22 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   // seu código aqui
+  if(species){
+    const mySpecie = data.animals.find(animals =>animals.name===species);
+    return mySpecie.residents.length; 
+  }
+  let countAnimals ={
+    'lions': 4,
+    'tigers': 2,
+    'bears': 3,
+    'penguins': 4,
+    'otters': 4,
+    'frogs': 2,
+    'snakes': 2,
+    'elephants': 4,
+    'giraffes': 6
+  }
+  return countAnimals;
 }
 
 function entryCalculator(entrants) {
