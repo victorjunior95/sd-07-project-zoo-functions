@@ -157,13 +157,23 @@ function oldestFromFirstSpecies(id) {
   return Object.values(resultado);
 }
 
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 function increasePrices(percentage) {
   // seu código aqui
+  // - Ao passar uma porcentagem, incrementa todos os preços, arrendondados em duas casas decimais
+  const chaves = Object.keys(data.prices);
+  const precos = Object.values(data.prices);
+  const porCento = percentage / 100;
+  chaves.forEach((item, i) => {
+    data.prices[item] =
+    parseFloat((Math.round((precos[i] += precos[i] * porCento) * 100) / 100).toFixed(2));
+  });
+  return data.prices;
 }
 
 function employeeCoverage(idOrName) {
   // seu código aqui
+
+
 }
 
 module.exports = {
