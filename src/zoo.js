@@ -59,7 +59,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // Com o nome de uma espécie de animal, retorna somente a quantidade
 function animalCount(species) {
   // seu código aqui
+  const { animals } = data;
+  const getAllAnimals = {};
+  animals.forEach((animal) => {
+    getAllAnimals[animal.name] = animal.residents.length;
+  });
+  if (species !== undefined) {
+    return animals.find(animal => species === animal.name).residents.length;
+  }
+  return getAllAnimals;
 }
+console.log(animalCount('giraffes'));
 
 // Retorna 0 se nenhum argumento for passado
 // Retorna 0 se um objeto vazio for passado
