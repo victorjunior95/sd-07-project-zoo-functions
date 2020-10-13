@@ -31,7 +31,10 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  const newEmployee = ({ id, firstName, lastName, managers, responsibleFor });
+  return newEmployee;
 }
 
 function isManager(id) {
@@ -51,8 +54,6 @@ function animalCount(species) {
   }
   return animals.find((animal) => animal.name === species).residents.length;
 }
-
-console.log(animalCount());
 
 function entryCalculator(entrants) {
   if (!entrants || Object.keys(entrants).length === 0) {
