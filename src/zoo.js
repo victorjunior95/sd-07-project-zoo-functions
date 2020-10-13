@@ -156,21 +156,21 @@ function increasePrices(percentage) {
   return data.prices;
 }
 
-function fnEmployeeAllSpecies(idOrName) {
+function fnWithoutParameter() {
   const result = {};
-  if (idOrName === undefined) {
-    data.employees
+  data.employees
     .forEach((ids) => {
       result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
     .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
     });
-  }
   return result;
 }
 
-function fnEmployeeForSpecies(idOrName) {
+function fnEmployeeAllSpecies(idOrName) {
   const result = {};
-  if (idOrName !== undefined) {
+  if (idOrName === undefined) {
+    return fnWithoutParameter();
+  } 
     data.employees
     .forEach((ids) => {
       if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
@@ -178,16 +178,12 @@ function fnEmployeeForSpecies(idOrName) {
         .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
       }
     });
-  }
   return result;
 }
 
+
 function employeeCoverage(idOrName) {
-  if (idOrName === undefined) {
-    return fnEmployeeAllSpecies(idOrName);
-  } else {
-    return fnEmployeeForSpecies(idOrName);
-  }
+  return fnEmployeeAllSpecies(idOrName);
 }
 
 module.exports = {
