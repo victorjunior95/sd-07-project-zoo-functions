@@ -213,7 +213,14 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { prices } = data;
+  const arrayPrices = Object.entries(prices).map(([key, price]) => {
+    const object = {};
+    const newPrice = (price * (1 + (percentage / 100))) + 0.005;
+    object[key] = parseFloat(newPrice.toFixed(2));
+    return object;
+  });
+  data.prices = Object.assign({}, ...arrayPrices);
 }
 
 function employeeCoverage(idOrName) {
