@@ -130,7 +130,7 @@ function increasePrices(percentage) {
   Senior = Senior.toFixed(2);
   Child = (Child * percentage) + 0.001;
   Child = Child.toFixed(2);
-  data.prices = { Adult, Senior, Child} ;
+  data.prices = { Adult, Senior, Child };
 }
 
 function employeeCoverage(idOrName) {
