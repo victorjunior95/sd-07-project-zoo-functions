@@ -19,15 +19,15 @@ function animalsByIds(...rest) {
   if (rest === undefined) {
     return [];
   }
-  rest.forEach((id) => {
-    animalList.push(data.animals.find(element => element.id === id));
+  rest.forEach((idRec) => {
+    animalList.push(data.animals.find(({ id }) => id === idRec));
   });
   return animalList;
 }
 // Requisito 2 - OK
 function animalsOlderThan(animal, age) {
   // seu código aqui
-  const animalList = data.animals.find(element => element.name === animal).residents;
+  const animalList = data.animals.find(({ name }) => name === animal).residents;
 
   const ageVer = animalList.reduce((acc, curr) => {
     if (curr.age < age) {
@@ -51,9 +51,9 @@ function employeeByName(employeeName) {
 
   const empName = employeeName;
 
-  const empData = data.employees;
+  // const empData = data.employees;
 
-  const empObj = empData.find(emp => emp.firstName === empName || emp.lastName === empName);
+  const empObj = data.employees.find(({ firstName, lastName}) => firstName === empName || lastName === empName);
 
   return empObj;
 }
@@ -68,8 +68,8 @@ function isManager(id) {
   // seu código aqui
   let managerCheck = 0;
 
-  data.employees.forEach((element) => {
-    element.managers.forEach((idElement) => {
+  data.employees.forEach(({ managers }) => {
+    managers.forEach((idElement) => {
       if (idElement === id) {
         managerCheck += 1;
       }
