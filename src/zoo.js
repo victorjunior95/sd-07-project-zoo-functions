@@ -86,13 +86,55 @@ function entryCalculator(entrants = 0) {
   return calculatePrice;
 }
 
-function animalMap(options) {
-  // seu código aqui
+function animalMap(options = { includeNames: false, sorted: true, sex: '' }) {
+  // const locations = data.animals
+  //   .reduce((acc, { location }) => ({...acc, [location] : []}), {})
+  // if (options.includeNames === false) {
+  //   data.animals
+  //     .forEach(animal => locations[animal.location].push(animal.name))
+  //   return locations
+  // } else {
+  //   data.animals
+  //   .forEach((animal) => {
+  //     let { residents } = animal;
+  //     const { name, location } = animal;
+  //     if(options.sex) { residents = residents.filter(resident =>resident.sex === options.sex) };
+  //     let arrayOfResidentsNames = []
+  //     residents.forEach(resident => {
+  //       arrayOfResidentsNames.push(resident.name)
+  //     });
+  //     if(options.sorted === true) { arrayOfResidentsNames = arrOfResidentsNames.sort() };
+  //     console.log(arrayOfResidentsNames.sort())
+  //     const speciesInLocation = locations[location]
+  //     const residentsReduce = residents.reduce((acc, resident) => {
+  //       const arrayOfResidentsNames = [...acc, resident]
+  //       locations[location][name] = arrayOfResidentsNames
+  //       return arrayOfResidentsNames
+  //     }, {})
+  //      locations[location].push(Object.fromEntries([[name, arrayOfResidentsNames.]]))
+
+  //   })
+  //   }
+  // return locations
 }
 
-function schedule(dayName) {
-  // seu código aqui
+function schedule(dayName = '') {
+  const hours = data.hours;
+  const hoursKeys = Object.keys(hours);
+  const scheduleObj = {};
+  hoursKeys
+    .forEach((element) => {
+      scheduleObj[element] = `Open from ${data.hours[element].open}am until ${data.hours[element].close - 12}pm`;
+      if (element === 'Monday') {
+        scheduleObj[element] = 'CLOSED';
+      }
+    });
+  if (dayName !== '') {
+    return { [dayName]: scheduleObj[dayName] };
+  }
+  return scheduleObj;
 }
+
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
