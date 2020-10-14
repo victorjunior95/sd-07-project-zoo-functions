@@ -50,7 +50,12 @@ const animalCount = (animal) => {
 };
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  return Object.entries(entrants)
+    .reduce((acumulator, [person, elementPrice]) =>
+    (acumulator += prices[person] * elementPrice), 0);
 }
 
 function animalMap(options) {
