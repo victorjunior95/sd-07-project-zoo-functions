@@ -100,14 +100,14 @@ function animalCount(species) {
   // seu código aqui
   if (species === undefined) {
     const animals = {};
-    data.animals.forEach(({name, residents} = element) => {
+    data.animals.forEach(({ name, residents }) => {
       animals[name] = residents.length;
     });
 
     return animals;
   }
 
-  return data.animals.find(({name} = element) => name === species).residents.length;
+  return data.animals.find(({ name }) => name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
