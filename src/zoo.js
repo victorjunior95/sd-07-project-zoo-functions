@@ -32,8 +32,11 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   employees.forEach((param) => {
     if (id === employees.managers) {
-      return true;
-    };
+      const result = true;
+    } else {
+      result = false;
+    }
+    return result;
   });
 }
 
