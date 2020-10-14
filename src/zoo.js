@@ -79,31 +79,23 @@ function animalMap(options) {
   // seu código aqui
 }
 
+function userReadableSchedule(dayName) {
+  if (dayName === 'Monday') {
+    return 'CLOSED';
+  }
+  return `Open from ${data.hours[dayName].open}am until ${
+    data.hours[dayName].close - 12
+  }pm`;
+}
+
 function schedule(dayName) {
   const userSchedule = {};
   if (dayName === undefined) {
-    const keys = Object.keys(data.hours);
-    keys.forEach(key => {
-      if (key === 'Monday') {
-        userSchedule[key] = 'CLOSED';
-      } else {
-        const closingHour = Object.values(data.hours[key])[1];
-        const closingHourTwelve = closingHour - 12;
-        userSchedule[key] = `Open from ${
-          Object.values(data.hours[key])[0]
-        }am until ${closingHourTwelve}pm`;
-      }
+    Object.keys(data.hours).forEach((key) => {
+      userSchedule[key] = userReadableSchedule(key);
     });
   } else {
-    if (dayName === 'Monday') {
-      userSchedule[dayName] = 'CLOSED';
-    } else {
-      const closingHour = Object.values(data.hours[dayName])[1];
-      const closingHourTwelve = closingHour - 12;
-      userSchedule[dayName] = `Open from ${
-        Object.values(data.hours[dayName])[0]
-      }am until ${closingHourTwelve}pm`;
-    }
+    userSchedule[dayName] = userReadableSchedule(dayName);
   }
   return userSchedule;
 }
