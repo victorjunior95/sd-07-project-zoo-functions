@@ -121,7 +121,7 @@ function entryCalculator(entrants) {
   const totalValue = (AdultQtd * Adult) + (SeniorQtd * Senior) + (ChildQtd * Child);
   return totalValue;
 }
-// Requisito 9 - On Going
+// Requisito 9 - OK
 function animalMap(options) {
   // seu código aqui
 
