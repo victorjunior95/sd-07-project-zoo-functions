@@ -95,7 +95,7 @@ function addEmployee(id = '', firstName = '', lastName = '', managers = [], resp
 
   data.employees.push(newAddedEmployee);
 }
-// Requisito 7 - On Going
+// Requisito 7 - OK
 function animalCount(species) {
   // seu código aqui
   if (species === undefined) {
@@ -109,9 +109,17 @@ function animalCount(species) {
 
   return data.animals.find(({ name }) => name === species).residents.length;
 }
-
+// Requisito 8 - On Going
 function entryCalculator(entrants) {
   // seu código aqui
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+
+  const { Adult: AdultQtd = 0, Senior: SeniorQtd = 0, Child: ChildQtd = 0 } = entrants;
+  const { Adult, Senior, Child } = data.prices;
+  const totalValue = AdultQtd * Adult + SeniorQtd * Senior + ChildQtd * Child;
+  return totalValue;
 }
 
 function animalMap(options) {
