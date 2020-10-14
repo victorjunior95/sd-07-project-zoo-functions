@@ -113,15 +113,21 @@ function listAnimalNames(animal, sort, sex) {
   return resultado;
 }
 
-function animalMap(options) {
+function simpleList(locationList) {
   const resultado = {};
+  locationList.forEach((localAtual) => {
+    const animalList = listAnimalsByLocation(localAtual);
+    resultado[localAtual] = animalList;
+  });
+  return resultado;
+}
+
+function animalMap(options) {
+  let resultado = {};
   let animalList;
   const locationList = createLocationList();
   if (options === undefined) {
-    locationList.forEach((localAtual) => {
-      animalList = listAnimalsByLocation(localAtual);
-      resultado[localAtual] = animalList;
-    });
+    resultado = simpleList(locationList);
   } else {
     const { includeNames = false, sorted = false, sex = undefined } = options;
     let animaisDaRegiao = [];
@@ -134,32 +140,14 @@ function animalMap(options) {
         resultado[localAtual] = animaisDaRegiao;
         animaisDaRegiao = [];
       });
+    } else {
+      resultado = simpleList(locationList);
     }
   }
   return resultado;
 }
 
-const options = { includeNames: true, sex: 'female' };
-console.log(animalMap(options));
-// {
-//   NE: [
-//     { lions: ['Zena', 'Dee'] },
-//     { giraffes: ['Gracia', 'Vicky'] }
-//   ],
-//   NW: [
-//     { tigers: ['Shu', 'Esther'] },
-//     { bears: [] },
-//     { elephants: ['Ilana', 'Bea'] }
-//   ],
-//   SE: [
-//     { penguins: ['Keri'] },
-//     { otters: ['Mercedes', 'Margherita'] }
-//   ],
-//   SW: [
-//     { frogs: ['Cathey', 'Annice'] },
-//     { snakes: ['Paulette'] }
-//   ]
-// };
+console.log(animalMap());
 
 function schedule(dayName) {
   const agenda = {};
