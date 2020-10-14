@@ -122,13 +122,14 @@ function schedule(dayName) {
   return scheduleObj;
 }
 
+const getOldest = (previous, current) => (current.age >= previous.age) ? current : previous;
+
 function oldestFromFirstSpecies(id) {
   const listOfResponsible = data.animals.filter(animal =>
     data.employees.find(employee => employee.id === id).responsibleFor.includes(animal.id));
   const oldestAnimal = listOfResponsible.map(animal =>
-    animal.residents.reduce((old, current) =>
-      (current.age >= old.age) ? current : old)).reduce((old, current) =>
-        (current.age >= old.age) ? current : old);
+    animal.residents.reduce((previous, current) =>
+      getOldest(previous, current))).reduce((previous, current) => getOldest(previous, current));
   const { name, sex, age } = oldestAnimal;
   return [name, sex, age];
 }
