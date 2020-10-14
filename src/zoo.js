@@ -95,14 +95,12 @@ function addEmployee(id = '', firstName = '', lastName = '', managers = [], resp
 
   data.employees.push(newAddedEmployee);
 }
-
+// Requisito 7 - On Going
 function animalCount(species) {
   // seu código aqui
   if (species === undefined) {
     const animals = {};
-    data.animals.forEach((element) => {
-      animals[element.name] = element.residents.length;
-    });
+    data.animals.forEach(element => animals[element.name] = element.residents.length);
 
     return animals;
   }
