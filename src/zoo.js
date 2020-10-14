@@ -9,11 +9,11 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require("./data");
+const data = require('./data');
 
 function animalsByIds(...ids) {
   if (ids.length === 0) return [];
-  const animais = data.animals.filter((animal) => ids.includes(animal.id));
+  const animais = data.animals.filter(animal => ids.includes(animal.id));
   return animais;
 }
 
