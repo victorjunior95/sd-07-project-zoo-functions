@@ -63,7 +63,7 @@ function createEmployee(personalInfo, associatedWith) {
 
   return newEmployee;
 }
-// Requisito 5 - On Going
+// Requisito 5 - OK
 function isManager(id) {
   // seu código aqui
   let managerCheck = 0;
@@ -82,8 +82,18 @@ function isManager(id) {
   return false;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id='', firstName='', lastName='', managers=[], responsibleFor=[]) {
   // seu código aqui
+
+  const newAddedEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor
+  };
+
+  data.employees.push(newAddedEmployee);
 }
 
 function animalCount(species) {
