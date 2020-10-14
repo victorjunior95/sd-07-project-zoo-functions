@@ -14,8 +14,7 @@ const { prices, animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  return animals
-  .filter(animal => ids.includes(animal.id));
+  return animals.filter(animal => ids.includes(animal.id));
 }
 
 function animalsOlderThan(nameAnimal, ageAnimal) {
@@ -107,8 +106,8 @@ function animalMap(options) {
 
 function schedule(dayName) {
   const workingDays = Object.assign({}, data.hours);
-  const openingHours = (key => workingDays[key] =
-    `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`);
+  const openingHours = (key => (workingDays[key] =
+    `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`));
   Object.keys(workingDays).forEach(openingHours);
   workingDays.Monday = 'CLOSED';
   if (dayName === undefined) {
