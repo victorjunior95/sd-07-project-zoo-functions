@@ -30,7 +30,10 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  employees.forEach(param => {
+    if (id === employees.managers)
+    return;
+  })
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
