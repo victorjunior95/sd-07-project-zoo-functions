@@ -84,25 +84,25 @@ function animalMapEmpty() {
   return objLocation;
 }
 
-function animalMapSex(includeSex, sexParameter, sorted) {
+function animalMapSex(includeNames, sexParameter, sorted) {
   if (sorted === true) {
-    return includeSex.filter(sexAnimal =>
+    return includeNames.filter(sexAnimal =>
       sexAnimal.sex === sexParameter).map(({ name }) => name).sort();
   }
-  return includeSex.filter(sexAnimal =>
+  return includeNames.filter(sexAnimal =>
     sexAnimal.sex === sexParameter).map(({ name }) => name);
 }
 
-function animalMapSorted(includeNamesSex, sorted, sexParameter) {
+function animalMapSorted(includeNames, sorted, sexParameter) {
   if (sexParameter !== undefined) {
-    return animalMapSex(includeNamesSex, sexParameter, sorted);
+    return animalMapSex(includeNames, sexParameter, sorted);
   } else if (sorted === true) {
-    return includeNamesSex.map(({ name }) => name).sort();
+    return includeNames.map(({ name }) => name).sort();
   }
-  return includeNamesSex.map(({ name }) => name);
+  return includeNames.map(({ name }) => name);
 }
 
-function animalMapIncludeSorted(sorted, sexParameter) {
+function animalMapInclude(sorted, sexParameter) {
   const obj1 = {};
   let obj2 = {};
   let arrayAnimals = [];
@@ -130,7 +130,7 @@ function animalMap(options) {
   }
   const obj = options;
   if (obj.includeNames === true) {
-    return animalMapIncludeSorted(obj.sorted, obj.sex);
+    return animalMapInclude(obj.sorted, obj.sex);
   }
   return animalMapEmpty();
 }
