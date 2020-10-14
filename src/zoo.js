@@ -177,11 +177,11 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {}
 
 function increasePrices(percentage) {
-    data.prices.Adult += (data.prices.Adult * percentage / 100);
+    data.prices.Adult += Math.round(data.prices.Adult * percentage / 100);
     data.prices.Adult = data.prices.Adult.toFixed(2);
-    data.prices.Senior += (data.prices.Senior * percentage / 100);
+    data.prices.Senior += Math.round(data.prices.Senior * percentage / 100);
     data.prices.Senior = data.prices.Senior.toFixed(2)
-    data.prices.Child += (data.prices.Child * percentage / 100)
+    data.prices.Child += Math.round(data.prices.Child * percentage / 100)
     data.prices.Child = data.prices.Child.toFixed(2)
 
     return prices;
