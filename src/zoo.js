@@ -79,45 +79,33 @@ function animalMap(options) {
   // seu código aqui
 }
 
-function userReadableSchedule(dayName) {
-  const userSchedule = {};
-  const closingHour = Object.values(data.hours[dayName])[1];
-  const closingHourTwelve = closingHour - 12;
-  userSchedule[dayName] = `Open from ${
-    Object.values(data.hours[dayName])[0]
-  }am until ${closingHourTwelve}pm`;
-  return userSchedule;
-}
-
-function fullSchedule() {
-  const userSchedule = {};
-  const keys = Object.keys(data.hours);
-  keys.forEach((key) => {
-    if (key === 'Monday') {
-      userSchedule[key] = 'CLOSED';
-    } else {
-      userSchedule[key] = userReadableSchedule(key);
-    }
-  });
-  return userSchedule;
-}
-
-function daySchedule(dayName) {
-  const userSchedule = {};
-  if (dayName === 'Monday') {
-    userSchedule[dayName] = 'CLOSED';
-  } else {
-    userReadableSchedule(dayName);
-  }
-  return userSchedule;
-}
-
 function schedule(dayName) {
   const userSchedule = {};
   if (dayName === undefined) {
-    return fullSchedule();
+    const keys = Object.keys(data.hours);
+    keys.forEach(key => {
+      if (key === 'Monday') {
+        userSchedule[key] = 'CLOSED';
+      } else {
+        const closingHour = Object.values(data.hours[key])[1];
+        const closingHourTwelve = closingHour - 12;
+        userSchedule[key] = `Open from ${
+          Object.values(data.hours[key])[0]
+        }am until ${closingHourTwelve}pm`;
+      }
+    });
+  } else {
+    if (dayName === 'Monday') {
+      userSchedule[dayName] = 'CLOSED';
+    } else {
+      const closingHour = Object.values(data.hours[dayName])[1];
+      const closingHourTwelve = closingHour - 12;
+      userSchedule[dayName] = `Open from ${
+        Object.values(data.hours[dayName])[0]
+      }am until ${closingHourTwelve}pm`;
+    }
   }
-  return daySchedule(dayName);
+  return userSchedule;
 }
 
 function oldestFromFirstSpecies(id) {
