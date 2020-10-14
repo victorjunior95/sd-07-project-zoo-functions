@@ -50,7 +50,12 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-
+  if (managers === undefined || responsibleFor === undefined) {
+    employees.push({ id, firstName, lastName, managers: [], responsibleFor: [] });
+    return employees;
+  }
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
+  return employees;
 }
 
 function animalCount(species) {
@@ -100,7 +105,7 @@ function schedule(dayName) {
   return cronogramaLegivel;
 }
 
-console.log(schedule('Friday'));
+// console.log(schedule('Friday'));
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
