@@ -143,6 +143,20 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  const { Adult, Senior, Child } = data.prices;
+  if (percentage) {
+    const indice = 1 + (percentage / 100);
+    const pAdult = ((Adult * indice) + 0.001).toFixed(2);
+    const pSenior = ((Senior * indice) + 0.001).toFixed(2);
+    const pChild = ((Child * indice) + 0.001).toFixed(2);
+    const newPrices = {};
+    newPrices.Adult = pAdult;
+    newPrices.Senior = pSenior;
+    newPrices.Child = pChild;
+    Object.assign(data.prices, newPrices);
+    return data.prices;
+  }
+  return 0;
 }
 
 function employeeCoverage(idOrName) {
