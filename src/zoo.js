@@ -58,7 +58,7 @@ function employeeByName(employeeName) {
   return empObj;
 }
 // Requisito 4 - On Going
-function createEmployee (personalInfo, associatedWith) {
+function createEmployee(personalInfo, associatedWith) {
   const newEmployee = Object.assign(personalInfo, associatedWith);
 
   return newEmployee;
