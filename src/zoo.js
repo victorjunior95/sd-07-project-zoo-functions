@@ -31,10 +31,11 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   employees.forEach((param) => {
+    let result;
     if (id === employees.managers) {
-      const result = true;
+      result = true;
     } else {
-      result = false;
+        result = false;
     }
     return result;
   });
