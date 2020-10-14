@@ -19,7 +19,7 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   const specie = data.animals.find(specieName => animal === specieName.name);
-  return specie.residents.every(specieAge => age < specieAge.age);
+  return (specie.residents.every(specieAge => age < specieAge.age));
   // return !(specie.residents.some(specieAge => age > specieAge.age));
 }
 
@@ -145,23 +145,24 @@ function increasePrices(percentage) {
   });
 }
 
-// Daniel Pantalena: // https://github.com/tryber/sd-04-block9-project-zoo-functions/pull/22/files
+// Pedro Pires: // https://github.com/tryber/sd-04-block9-project-zoo-functions/pull/39/files
 function auxEmployeeCoverage() {
-  return data.employees.reduce((acc, { firstName, lastName, responsibleFor }) => {
-    acc[`${firstName} ${lastName}`] = responsibleFor.map(idAnimal =>
-      data.animals.find(({ id }) => idAnimal === id).name);
-    return acc;
-  }, {});
+  const employeesList = {};
+  data.employees.forEach(employee => {
+    const name = `${employee.firstName} ${employee.lastName}`;
+    const animals = employee.responsibleFor.map(idAnimal =>
+      data.animals.find(animal => animal.id === idAnimal).name);
+    employeesList[name] = animals});
+    return employeesList;
 }
 
 function employeeCoverage(idOrName) {
-  const acc = auxEmployeeCoverage();
-  if (!idOrName) return acc;
+  if (!idOrName) return auxEmployeeCoverage();
   const employee = data.employees.find(({ id, firstName, lastName }) =>
     id === idOrName || firstName === idOrName || lastName === idOrName);
   return {
     [`${employee.firstName} ${employee.lastName}`]:
-    acc[`${employee.firstName} ${employee.lastName}`],
+    auxEmployeeCoverage()[`${employee.firstName} ${employee.lastName}`],
   };
 }
 // ---------------------------------------------------------------------------
