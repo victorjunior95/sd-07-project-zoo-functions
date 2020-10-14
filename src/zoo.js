@@ -12,14 +12,15 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  // Murilo Wolf no fechamento do dia 09/10/2020 e
+  // Murillo Wolf no fechamento do dia 09/10/2020 e
   // https://stackoverflow.com/questions/57861821/how-to-return-specific-values-from-a-filter-in-javascript
   return data.animals.filter(animal => ids.includes(animal.id));
 }
 
 function animalsOlderThan(animal, age) {
   const specie = data.animals.find(specieName => animal === specieName.name);
-  return !(specie.residents.some(specieAge => age > specieAge.age));
+  return specie.residents.every(specieAge => age < specieAge.age);
+  // return !(specie.residents.some(specieAge => age > specieAge.age));
 }
 
 function employeeByName(employeeName) {
@@ -73,15 +74,11 @@ function entryCalculator(entrants) {
   return (data.prices.Adult * Adult) + (data.prices.Senior * Senior) + (data.prices.Child * Child);
 }
 
-/* O requisito 9 é do tipo que eu não desenvolveria por conta própria em pouco tempo.
-   Além disso, tive problemas para interpretar adequadamente as solicitações do mesmo
-   e resolvi analisar projetos de colegas. Abaixo o que julguei o de melhor entendimento.
-   Efetuei mínimas alterações. */
 // Ronan Fernandes: https://github.com/tryber/sd-04-block9-project-zoo-functions/pull/26/files
 const includeResidents = (animalName, residents, sorted, sex) => {
   const obj = {};
   obj[animalName] = residents.map(resident => resident.name);
-  // {"NE": [{"lions": ["Zena", "Maxwell", "Faustino", "Dee"]}, {"giraffes": ...}
+  // {"NE": [{"lions": ["Zena", "Maxwell", "Faustino", "Dee"]}, {"giraffes": ...
   if (sex) {
     obj[animalName] = [];
     residents.forEach((resident) => {
@@ -98,7 +95,6 @@ const includeResidents = (animalName, residents, sorted, sex) => {
   return obj;
 };
 
-// https://github.com/tryber/sd-04-block9-project-zoo-functions/pull/26/files
 function animalMap({ includeNames, sorted, sex } = {}) {
   const result = data.animals.reduce((acc, curr) => {
     if (!acc[curr.location]) {
@@ -107,8 +103,7 @@ function animalMap({ includeNames, sorted, sex } = {}) {
     }
     if (!includeNames) {
       acc[curr.location].push(curr.name);
-      // {"NE": ["lions", "giraffes"], "NW": ["tigers", "bears", "elephants"],
-      // "SE": ["penguins", "otters"], "SW": ["frogs", "snakes"]}
+      // {"NE": ["lions", "giraffes"], "NW": ["tigers", "bears", "elephants"], ...
     } else { // includeNames = true
       acc[curr.location].push(includeResidents(curr.name, curr.residents, sorted, sex));
     }
@@ -150,8 +145,7 @@ function increasePrices(percentage) {
   });
 }
 
-// Lógica desenvolvida por Daniel Pantalena:
-// https://github.com/tryber/sd-04-block9-project-zoo-functions/pull/22/files
+// Daniel Pantalena: // https://github.com/tryber/sd-04-block9-project-zoo-functions/pull/22/files
 function auxEmployeeCoverage() {
   return data.employees.reduce((acc, { firstName, lastName, responsibleFor }) => {
     acc[`${firstName} ${lastName}`] = responsibleFor.map(idAnimal =>
@@ -160,7 +154,6 @@ function auxEmployeeCoverage() {
   }, {});
 }
 
-// https://github.com/tryber/sd-04-block9-project-zoo-functions/pull/22/files
 function employeeCoverage(idOrName) {
   const acc = auxEmployeeCoverage();
   if (!idOrName) return acc;
