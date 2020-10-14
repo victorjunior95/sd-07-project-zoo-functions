@@ -70,8 +70,62 @@ function animalCount(species) {
   return specie.residents.length;
 }
 
-function entryCalculator(entrants) {
+function entryCalculator(...entrants) {
   // seu código aqui
+  if (typeof entrants === 'undefined') {
+    return 0;
+  }
+  if (Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const {Adult, Child, Senior} = data.prices;
+  let totalValue = 0;
+  return entrants.map(value => {
+    if(value.Adult) {
+      totalValue += value.Adult * Adult;
+    }
+    if(value.Child) {
+      totalValue += value.Child * Child;
+    }
+    if(value.Senior) {
+      totalValue += value.Senior * Senior;
+    }
+    return totalValue;
+  });
+  
+  /* const adult = Object.keys(entrants).find(item => item === 'Adult');
+  const child = Object.keys(entrants).find(item => item === 'Child');
+  const senior = Object.keys(entrants).find(item => item === 'Senior');
+  
+  if (adult === true && child === true && senior === true) {
+    const {Adult, Child, Senior} = entrants;
+    return Adult * 49.99 + Child * 20.99 + Senior * 24.99;
+  }
+  
+  if (child === true && senior === true) {
+    const {Child, Senior} = entrants;
+    return Child * 20.99 + Senior * 24.99;
+  }
+  if (child === true && adult === true) {
+    const {Child, Adult} = entrants;
+    return Adult * 49.99 + Child * 20.99;
+  }
+  if (senior === true && adult === true) {
+    const {Senior, Adult} = entrants;
+    return Adult * 49.99 + Senior * 24.99;
+  }
+  if (senior === true) {
+    const {Senior} = entrants;
+    return Senior * 24.99;
+  }
+  if (adult === true) {
+    const {Adult} = entrants;
+    return Adult * 49.99;
+  }
+  if (child === true) {
+    const {Child} = entrants;
+    return Child * 20.99;
+  }   */
 }
 
 function animalMap(options) {
