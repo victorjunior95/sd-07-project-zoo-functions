@@ -30,10 +30,13 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  employees.forEach(param => {
-    if (id === employees.managers)
-    return;
-  })
+  employees.forEach((param) => {
+    if (id === employees.managers) {
+      return true;
+    } else {
+      return false;
+    }
+  });
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
