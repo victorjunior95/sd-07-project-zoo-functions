@@ -93,15 +93,15 @@ function schedule(dayName = 'total') {
   if (dayName !== 'total' && dayName !== 'Monday') {
     lista[dayName] = 'Open from 8am until 6pm';
   } else if (dayName === 'Monday') {
-    lista['Monday'] = 'CLOSED';
+    lista = { 'Monday': 'CLOSED' };
   } else {
-    lista = {'Tuesday': 'Open from 8am until 6pm',
-    'Wednesday': 'Open from 8am until 6pm',
-    'Thursday': 'Open from 10am until 8pm',
-    'Friday': 'Open from 10am until 8pm',
-    'Saturday': 'Open from 8am until 10pm',
-    'Sunday': 'Open from 8am until 8pm',
-    'Monday': 'CLOSED'}
+    lista = { 'Tuesday': 'Open from 8am until 6pm',
+      'Wednesday': 'Open from 8am until 6pm',
+      'Thursday': 'Open from 10am until 8pm',
+      'Friday': 'Open from 10am until 8pm',
+      'Saturday': 'Open from 8am until 10pm',
+      'Sunday': 'Open from 8am until 8pm',
+      'Monday': 'CLOSED' };
   }
   return lista;
 }
@@ -111,13 +111,13 @@ function oldestFromFirstSpecies(id) {
   let animalVelho = {};
   const pessoa = data.employees.find(find => find.id === id);
   const animal = data.animals.find(find => find.id === pessoa.responsibleFor[0]);
-  for (let bixo = 0; bixo < animal.residents.length; bixo++) {
+  for (let bixo = 0; bixo < animal.residents.length; bixo += 1) {
     if (animal.residents[bixo].age > idade) {
       idade = animal.residents[bixo].age;
       animalVelho = animal.residents[bixo];
     }
   }
-  const {name, sex, age} = animalVelho;
+  const { name, sex, age } = animalVelho;
   return [name, sex, age];
 }
 
