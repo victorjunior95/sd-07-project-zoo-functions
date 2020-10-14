@@ -134,12 +134,12 @@ function animalMap(options) {
       data.animals.forEach(({ name: specieName, location, residents }) => {
         const specie = {};
         specie[specieName] = [];
-        if (sex === 'nd' ) {
-            specie[specieName] = residents.map(({ name }) => name);
+        if (sex === 'nd') {
+          specie[specieName] = residents.map(({ name }) => name);
         } else {
-            specie[specieName] = residents
-            .filter(({ sex: gender }) => gender === sex)
-            .map(({ name }) => name);
+          specie[specieName] = residents
+          .filter(({ sex: gender }) => gender === sex)
+          .map(({ name }) => name);
         }
         if (sorted) {
           specie[specieName].sort();
