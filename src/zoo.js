@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 // const { employees, animals } = require('./data');
+const { prices } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -134,26 +135,21 @@ function oldestFromFirstSpecies(id) {
   return list;
 }
 
-const round = (num, places) => { // ref https://metring.com.br/arredondar-numero-em-javascript
-  if (!(`   ${num}`).includes('e')) {
-    return +(Math.round(`${num}  e  ${places})  e- ${places}`));
-  }
-  const arr = (`  ${num}`).split('e');
-  let sig = '';
-  if (+arr[1] + places > 0) {
-    sig = '+';
-  }
-  return +(Math.round(+`${arr[0]} e ${sig} (+${arr[1]} ${places})) e- ${places}`));
-};
-
 function increasePrices(percentage) {
-  const tax = (1 + (percentage / 100));
-  const newArray = ['Adult', 'Senior', 'Child'];
-  for (let i = 0; i < newArray.length; i += 1) {
-    data.prices[newArray[i]] = round((data.prices[newArray[i]] * tax), 2);
-  }
-  return data.prices;
+  const prices = data.prices
+  let pricePercentage = percentage
+  pricePercentage /= 100
+  const increasedAdultPrice = prices.Adult + (prices.Adult * pricePercentage)
+  const increasedChildPrice = prices.Child + (prices.Child * pricePercentage)
+  const increasedSeniorPrice = prices.Senior + (prices.Senior * pricePercentage)
+
+  prices.Adult = Math.round(increasedAdultPrice * 100) / 100
+  prices.Child = Math.round(increasedChildPrice * 100) / 100
+  prices.Senior = Math.round(increasedSeniorPrice * 100) / 100
 }
+// increasePrices(50);
+// console.log(prices);
+
 
 function fnWithoutParameter() {
   const result = {};
