@@ -32,7 +32,7 @@ const employeeByName = (employeeName) => {
 };
 
 const createEmployee = (personalInfo, associatedWith) => {
-  return { ...personalInfo, ...associatedWith };
+  return {...personalInfo, ...associatedWith};
 };
 
 function isManager(id) {
