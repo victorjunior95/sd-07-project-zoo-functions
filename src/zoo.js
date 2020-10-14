@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 // const { employees, animals } = require('./data');
-const { prices } = require('./data');
+const { prices, animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -67,47 +67,46 @@ function entryCalculator(entrants) {
   .reduce((acc, element) => acc + (entrants[element] * data.prices[element]), 0);
 }
 
-// pequenas funções para localização
 
+// pequenas funções para localização
 const getLocation = local => local.location;
 // metodo filter para retirar duplicidade
-data.animals.map(getLocation)
+const region = data.animals.map(getLocation)
 .filter((element, index, array) => index === array.indexOf(element));
+//
 
+
+
+// if (options === undefined) ok
+function nameSpecieForRegion() {
+  const result = {};
+  region.forEach((region) => {
+  const animalsForlocation = data.animals
+  .map((animal) => {
+    if (region === animal.location) {
+      return animal.name;
+    }
+  }).filter((specie) => {
+    return specie !== undefined
+  });
+  result[region] = animalsForlocation;
+  }); 
+  return result;
+}
+
+
+const options = { includeNames: true };
 function animalMap(options) {
-  // const result = {};
-  // if (options === undefined) {
-  //   const [NE, NW, SE, SW] = locationAnimals;
-  //   const regionNE = [];
-  //   const regionNW = [];
-  //   const regionSE = [];
-  //   const regionSW = [];
-  //   data.animals.map((animal) => {
-  //     if (animal.location === locationAnimals[0]) {
-  //      return regionNE.push(animal.name);
-  //     }
-  //   });
-  //   data.animals.map((animal) => {
-  //     if (animal.location === locationAnimals[1]) {
-  //      return regionNW.push(animal.name);
-  //     }
-  //   });
-  //   data.animals.map((animal) => {
-  //     if (animal.location === locationAnimals[2]) {
-  //      return regionSE.push(animal.name);
-  //     }
-  //   });
-  //   data.animals.map((animal) => {
-  //     if (animal.location === locationAnimals[3]) {
-  //      return regionSW.push(animal.name);
-  //     }
-  // });
-  //   result.NE = regionNE;
-  //   result.NW = regionNW;
-  //   result.SE = regionSE;
-  //   result.SW = regionSW;
-// }
-  // return result;
+  // const animals = data.animals;
+  const result = {};
+  if (options === undefined) {
+    return nameSpecieForRegion();
+  }
+  if (options.includeNames === true) {
+    // result["estou conseguindo!"] = 'gloria!'
+
+  }
+  return result;
 }
 
 function schedule(dayName) {
@@ -145,9 +144,6 @@ function increasePrices(percentage) {
   prices.Child = Math.round(increasedChildPrice * 100) / 100;
   prices.Senior = Math.round(increasedSeniorPrice * 100) / 100;
 }
-// increasePrices(50);
-// console.log(prices);
-
 
 function fnWithoutParameter() {
   const result = {};
