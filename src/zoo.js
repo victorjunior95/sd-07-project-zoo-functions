@@ -57,8 +57,8 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     firstName,
     lastName,
     managers,
-    responsibleFor
-    });
+    responsibleFor,
+  });
 }
 
 function animalCount(species) {
