@@ -23,11 +23,10 @@ const animalsOlderThan = (animal, age) => {
 };
 
 const employeeByName = (employeeName) => {
+  const {employees: arr} = data;
   let employeeObj = {};
   if (employeeName !== undefined) {
-    employeeObj = data.employees.find(employee => {
-      employee.firstName === employeeName || employee.lastName === employeeName
-    });
+    employeeObj = arr.find(({firstName: a, lastName: b}) => a === employeeName || b === employeeName);
   }
   return employeeObj;
 };
