@@ -109,7 +109,7 @@ function animalCount(species) {
 
   return data.animals.find(({ name }) => name === species).residents.length;
 }
-// Requisito 8 - On Going
+// Requisito 8 - OK
 function entryCalculator(entrants) {
   // seu código aqui
   if (entrants === undefined || Object.keys(entrants).length === 0) {
@@ -121,9 +121,51 @@ function entryCalculator(entrants) {
   const totalValue = (AdultQtd * Adult) + (SeniorQtd * Senior) + (ChildQtd * Child);
   return totalValue;
 }
-
+// Requisito 9 - On Going
 function animalMap(options) {
   // seu código aqui
+
+  const animalLocale = {};
+  data.animals.forEach(({ location }) => animalLocale[location] = []);
+
+  if (options !== undefined) {
+
+    const { includeNames = '', sorted = '', sex = 'nd' } = options;
+    
+    if (includeNames) {
+      data.animals.forEach(({ name: specieName, location, residents }) => 
+      {
+        const specie = {};
+        specie[specieName] = [];
+        animalLocale[location].push(specie);
+
+        switch (sex) {
+          case 'nd':
+            specie[specieName] = residents.map(({ name }) => name);
+            break;
+          default:
+            specie[specieName] = residents.filter(({ sex: gender }) => gender === sex).map(({ name }) => name);
+            break;
+        }
+
+        if (sorted){
+          specie[specieName].sort();
+        }
+
+      });
+
+      return animalLocale;
+    }
+
+    data.animals.forEach(({name, location}) => animalLocale[location].push(name));
+    console.log(animalLocale);
+    
+    return animalLocale;
+  }
+
+  data.animals.forEach(({name, location}) => animalLocale[location].push(name));
+  
+  return animalLocale;
 }
 
 function schedule(dayName) {
