@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-
+// Requisito 1 - OK
 function animalsByIds(...rest) {
   // seu código aqui
 
@@ -24,7 +24,7 @@ function animalsByIds(...rest) {
   });
   return animalList;
 }
-
+// Requisito 2 - OK
 function animalsOlderThan(animal, age) {
   // seu código aqui
   const animalList = data.animals.find(element => element.name === animal).residents;
@@ -42,7 +42,7 @@ function animalsOlderThan(animal, age) {
 
   return true;
 }
-
+// Requisito 3 - OK
 function employeeByName(employeeName) {
   // seu código aqui
   if (employeeName === undefined) {
@@ -57,10 +57,8 @@ function employeeByName(employeeName) {
 
   return empObj;
 }
-
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
+// Requisito 4 - On Going
+const createEmployee = (personalInfo, associatedWith) => Object.assign(personalInfo, associatedWith);
 
 function isManager(id) {
   // seu código aqui
