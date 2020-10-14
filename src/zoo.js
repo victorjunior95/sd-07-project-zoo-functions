@@ -90,7 +90,7 @@ function entryCalculator(entrants) {
   return totalCost;
 }
 
-const animalZone = zone => 
+const animalZone = zone =>
   data.animals.filter(animal => animal.location === zone).map(animal => `${animal.name}`);
 
 function animalMap(options) {
@@ -107,7 +107,7 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  let scheduleObj = {}
+  const scheduleObj = {};
   let daysAndHours = Object.entries(data.hours);
   if (typeof dayName === 'string') {
     daysAndHours = [daysAndHours.find(day => day[0] === dayName)];
@@ -120,7 +120,6 @@ function schedule(dayName) {
     }
   });
   return scheduleObj;
-  
 }
 
 function oldestFromFirstSpecies(id) {
