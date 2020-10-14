@@ -99,8 +99,15 @@ function listAnimalsByLocation(localAtual) {
   return animals.filter(animal => localAtual === animal.location).map(atual => atual.name);
 }
 
-function listAnimalNames(animal, sort) {
-  const nomes = animals.find(animalA => animalA.name === animal).residents.map(atual => atual.name);
+function listAnimalNames(animal, sort, sex) {
+  let nomes = [];
+  if (sex === undefined) {
+    nomes = animals.find(animalA => animalA.name === animal).residents.map(atual => atual.name);
+  } else {
+    nomes = animals.find(animalA => animalA.name === animal).residents.filter(function (resAtual) {
+      return resAtual.sex === sex;
+    }).map(atual => atual.name);
+  }
   const resultado = {};
   resultado[`${animal}`] = sort === true ? nomes.sort() : nomes;
   return resultado;
@@ -116,13 +123,13 @@ function animalMap(options) {
       resultado[localAtual] = animalList;
     });
   } else {
-    const { includeNames = false, sorted = false } = options;
+    const { includeNames = false, sorted = false, sex = undefined } = options;
     let animaisDaRegiao = [];
     if (includeNames === true) {
       locationList.forEach((localAtual) => {
         animalList = listAnimalsByLocation(localAtual);
         animalList.forEach((atual) => {
-          animaisDaRegiao.push(listAnimalNames(atual, sorted));
+          animaisDaRegiao.push(listAnimalNames(atual, sorted, sex));
         });
         resultado[localAtual] = animaisDaRegiao;
         animaisDaRegiao = [];
@@ -132,24 +139,25 @@ function animalMap(options) {
   return resultado;
 }
 
-const options = { includeNames: true, sorted: true };
+const options = { includeNames: true, sex: 'female' };
 console.log(animalMap(options));
 // {
 //   NE: [
-//     { lions: ['Dee', 'Faustino', 'Maxwell', 'Zena'] },
-//     { giraffes: ['Antone', 'Arron', 'Bernard', 'Clay', 'Gracia', 'Vicky'] }
+//     { lions: ['Zena', 'Dee'] },
+//     { giraffes: ['Gracia', 'Vicky'] }
 //   ],
 //   NW: [
-//     { tigers: ['Esther', 'Shu'] },
-//     { bears: ['Edwardo', 'Hiram', 'Milan'] },
-//     { elephants: ['Bea', 'Ilana', 'Jefferson', 'Orval'] }
+//     { tigers: ['Shu', 'Esther'] },
+//     { bears: [] },
+//     { elephants: ['Ilana', 'Bea'] }
 //   ],
 //   SE: [
-//     { penguins: ['Joe', 'Keri', 'Nicholas', 'Tad'] },
-//     { otters: ['Lloyd', 'Margherita', 'Mercedes', 'Neville'] }
+//     { penguins: ['Keri'] },
+//     { otters: ['Mercedes', 'Margherita'] }
 //   ],
 //   SW: [
-//     { frogs: ['Annice', 'Cathey'] }, { snakes: ['Bill', 'Paulette'] }
+//     { frogs: ['Cathey', 'Annice'] },
+//     { snakes: ['Paulette'] }
 //   ]
 // };
 
