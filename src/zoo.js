@@ -1,3 +1,4 @@
+// const util = require('util');
 /*
 eslint no-unused-vars: [
   "error",
@@ -73,9 +74,67 @@ function entryCalculator(entrants) {
   return totalAdult + totalSenior + totalChild;
 }
 
-function animalMap(options) {
-  // seu código aqui
+/* ----------------------------------------------- */
+
+function filterTheAnimalBySex(sexName, residents) {
+  const genderFilteredByName = residents
+    .filter(({ sex }) => sex === sexName)
+    .map(({ name }) => name);
+  const sexNameEmpty = residents.map(({ name }) => name);
+
+  return sexName ? genderFilteredByName : sexNameEmpty;
 }
+
+function getTheAnimalBySexOrNot(sex, residents) {
+  const noGenderSpecified = filterTheAnimalBySex(sex, residents);
+  const sexAnimals = {
+    female: filterTheAnimalBySex(sex, residents),
+    male: filterTheAnimalBySex(sex, residents),
+  };
+  return sex ? sexAnimals[sex] : noGenderSpecified;
+}
+
+function emptyParameters() {
+  return data.animals.reduce((acc, { name, location }) => {
+    if (acc[location] === undefined) {
+      acc[location] = [name];
+    } else acc[location].push(name);
+    return acc;
+  }, {});
+}
+
+function getAnimals(residents, specie, sorted, sex) {
+  if (!sorted) {
+    return {
+      [specie]: getTheAnimalBySexOrNot(sex, residents),
+    };
+  }
+  return {
+    [specie]: getTheAnimalBySexOrNot(sex, residents).sort(),
+  };
+}
+
+function outputAnimalMap(includeNames, sorted, sex) {
+  if (includeNames) {
+    return data.animals.reduce((acc, { name: specie, location, residents }) => {
+      if (acc[location] === undefined) {
+        acc[location] = [getAnimals(residents, specie, sorted, sex)];
+      } else {
+        acc[location].push(getAnimals(residents, specie, sorted, sex));
+      }
+      return acc;
+    }, {});
+  }
+  return emptyParameters();
+}
+
+function animalMap(options) {
+  if (options === undefined) return emptyParameters();
+  const { includeNames = false, sorted = false, sex = '' } = options;
+  return outputAnimalMap(includeNames, sorted, sex);
+}
+
+/* ----------------------------------------------- */
 
 function schedule(dayName) {
   // seu código aqui
