@@ -98,16 +98,17 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
-  const { employees, animals} = require('./data');
-  let firstSpecie = employees.find((element) =>  element.id === id).responsibleFor[0];
+  const { employees, animals } = data;
+  const firstSpecie = employees.find(element => element.id === id).responsibleFor[0];
   let animalFound = [];
-  animals.filter(element => {
+  animals.filter((element) => {
     if (element.id === firstSpecie) {
       animalFound = element.residents;
     }
+    return true;
   });
-  const byAge = animalFound.sort((a,b) => b.age - a.age);
-  return [ byAge[0].name, byAge[0].sex, byAge[0].age];
+  const byAge = animalFound.sort((a, b) => b.age - a.age);
+  return [byAge[0].name, byAge[0].sex, byAge[0].age];
 }
 
 function increasePrices(percentage) {
