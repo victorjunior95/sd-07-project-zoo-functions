@@ -131,9 +131,9 @@ function animalMap(options) {
   if (options !== undefined) {
 
     const { includeNames = '', sorted = '', sex = 'nd' } = options;
-    
+
     if (includeNames) {
-      data.animals.forEach(({ name: specieName, location, residents }) => 
+      data.animals.forEach(({ name: specieName, location, residents }) =>
       {
         const specie = {};
         specie[specieName] = [];
@@ -148,7 +148,7 @@ function animalMap(options) {
             break;
         }
 
-        if (sorted){
+        if (sorted) {
           specie[specieName].sort();
         }
 
@@ -157,14 +157,14 @@ function animalMap(options) {
       return animalLocale;
     }
 
-    data.animals.forEach(({name, location}) => animalLocale[location].push(name));
+    data.animals.forEach(({ name, location }) => animalLocale[location].push(name));
     console.log(animalLocale);
-    
+
     return animalLocale;
   }
 
-  data.animals.forEach(({name, location}) => animalLocale[location].push(name));
-  
+  data.animals.forEach(({ name, location }) => animalLocale[location].push(name));
+
   return animalLocale;
 }
 
