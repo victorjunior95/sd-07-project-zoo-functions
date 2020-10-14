@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 
 function animalsByIds(...ids) {
   return animals.filter(animal => ids.includes(animal.id));
@@ -67,9 +67,28 @@ function entryCalculator(entrants = 0) {
 function animalMap(options) {
   // seu código aqui
 }
+// Sem parâmetros, retorna um cronograma legível para humanos
+// Se um único dia for passado, retorna somente este dia em um formato legível para humanos
 
-function schedule(dayName) {
-  // seu código aqui
+const readHuman = Object.keys(hours); // Sem parametros retorna conograma legível para humanos
+// Refatoração feita com ajuda do Thiago Perdezolli
+function schedule(...dayName) {
+  let itsOpened = {}; // Usado um rest
+  if (dayName.length === 0) {
+    dayName = readHuman;
+  }
+  dayName.forEach((dayOfWeek) => {
+    if (dayOfWeek === 'Monday') {
+      itsOpened = { ...itsOpened, [dayOfWeek]: 'CLOSED' };
+    } else {
+      itsOpened = {
+        ...itsOpened,
+        [dayOfWeek]: `Open from ${hours[dayOfWeek].open}am until ${hours[dayOfWeek].close - 12}pm`,
+      };
+    }
+  });
+
+  return itsOpened;
 }
 
 function oldestFromFirstSpecies(id) {
@@ -82,7 +101,7 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  const roundPrice = num => (Math.round(num * 100) / 100);
+  const roundPrice = num => Math.round(num * 100) / 100;
   prices.Adult = roundPrice(prices.Adult * (1 + (percentage / 100)));
   prices.Child = roundPrice(prices.Child * (1 + (percentage / 100)));
   prices.Senior = roundPrice(prices.Senior * (1 + (percentage / 100)));
