@@ -13,6 +13,98 @@ eslint no-unused-vars: [
 // const { employees } = require('./data');
 const data = require('./data');
 
+let test2 = { };
+
+const obj2 = { };
+
+let names = [];
+
+function animallocation() {
+  const aux = data.animals.sort(function (a, b) {
+    if (a.location > b.location) {
+      return 1;
+    }
+    if (a.location < b.location) {
+      return -1;
+    }
+    return 0;
+  });
+  return aux;
+}
+
+function namess() {
+  let nam;
+  const search = animallocation();
+  const obj = {};
+  for (let i = 0; i < search.length; i += 1) {
+    const loc = search[i].location;
+    if (obj[loc] === undefined) {
+      nam = [search[i].name];
+    } else {
+      nam.push(search[i].name);
+    }
+    obj[loc] = nam;
+  }
+  return obj;
+}
+
+function namessorted(options) {
+  if (options.sorted) {
+    names.sort();
+  }
+  return names;
+}
+
+function name23(j, k, options, aux) {
+  const sexMale = (options.sex === 'male' && aux[j].residents[k].sex === 'male');
+  const sexFemale = (options.sex === 'female' && aux[j].residents[k].sex === 'female');
+  const sexTest = options.sex === undefined || sexMale || sexFemale;
+  if (sexTest) {
+    names.push(aux[j].residents[k].name);
+  }
+}
+
+function name22(options, aux) {
+  const vetoraux = [];
+  for (let j = 0; j < aux.length; j += 1) {
+    names = [];
+    const objaux = {};
+    for (let k = 0; k < aux[j].residents.length; k += 1) {
+      name23(j, k, options, aux);
+    }
+    objaux[aux[j].name] = namessorted(options, names);
+    vetoraux.push(objaux);
+  }
+  return vetoraux;
+}
+
+function namesss(options) {
+  const locations = Object.keys(namess());
+  for (let i = 0; i < locations.length; i += 1) {
+    const aux = data.animals.filter(element => element.location === locations[i]);
+    // const vetoraux = [];
+    // for (let j = 0; j < aux.length; j += 1) {
+    //   const names = [];
+    //   const objaux = {};
+    //   for (let k = 0; k < aux[j].residents.length; k += 1) {
+    //     const sexMale = (options.sex === 'male' && aux[j].residents[k].sex === 'male');
+    //     const sexFemale = (options.sex === 'female' && aux[j].residents[k].sex === 'female');
+    //     const sexTest = options.sex === undefined || sexMale || sexFemale;
+    //     if (sexTest) {
+    //       names.push(aux[j].residents[k].name);
+    //     }
+    //   }
+    //   if (options.sorted) {
+    //     names.sort();
+    //   }
+    //   objaux[aux[j].name] = names;
+    //   vetoraux.push(objaux);
+    // }
+    obj2[locations[i]] = name22(options, aux);
+  }
+  return obj2;
+}
+
 function animalsByIds(...ids) {
   const animalsId = [];
   if (ids.length === 0) {
@@ -95,10 +187,16 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu código aqui
+  if (options === undefined || (!options.includeNames && (options.sex === 'male' || options.sex === 'female'))) {
+    return namess();
+  }
+  if (options.includeNames) {
+    return namesss(options);
+  }
+  return namess();
 }
 
-let test2 = { };
+animalMap({ includeNames: true });
 
 function simple1(dayName) {
   test2 = { };
@@ -115,6 +213,7 @@ function schedule(dayName) {
   const test = Object.entries(data.hours);
 
   if (dayName === undefined) {
+    test2 = { };
     for (let i = 0; i < 6; i += 1) {
       test2[test[i][0]] = `Open from ${test[i][1].open}am until ${test[i][1].close - 12}pm`;
     }
