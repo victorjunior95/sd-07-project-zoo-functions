@@ -88,11 +88,10 @@ function schedule(...dayName) {
   }, {});
 }
 
-
 const idEmployees = (idEmployee) => {
-  const id = data.employees.filter(emplpoyee => emplpoyee.id === idEmployee)
-    .find(element => element).responsibleFor;
-  return id;
+  const id = data.employees.filter(emplpoyee => emplpoyee.id === idEmployee);
+  const animalsCare = id.find(element => element).responsibleFor;
+  return animalsCare;
 };
 // queria fazer com reduce mas o codeclimate não aprovou ;(
 const getBigger = (array) => {
@@ -110,11 +109,11 @@ function oldestFromFirstSpecies(id) {
   let finalResult;
   const arrayIds = idEmployees(id);
   const firstIdAnimal = arrayIds[0];
-  const arrayObjAnimals = firstIdAnimal.data.animals.filter(inimalId =>
+  const arrayObjAnimals = data.animals.filter(inimalId =>
     inimalId.id === firstIdAnimal)
     .find(element => element).residents;
   const arrayOfAges = arrayObjAnimals.map(item => item.age);
-  const bigger = arrayOfAges.reduce(getBigger, 0);
+  const bigger = getBigger(arrayOfAges);
   const arrayObjResult = arrayObjAnimals.filter(bicho => (bicho.age === bigger));
   arrayObjResult.forEach((element) => {
     finalResult = Object.values(element);
