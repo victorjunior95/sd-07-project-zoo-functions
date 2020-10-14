@@ -65,7 +65,7 @@ function animalCount(species) {
       return acc;
     }, {});
     return newObj;
-  };
+  }
   const specie = data.animals.find(animal => animal.name === species);
   return specie.residents.length;
 }
