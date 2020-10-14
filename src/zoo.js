@@ -23,12 +23,12 @@ const animalsOlderThan = (animal, age) => {
 };
 
 const employeeByName = (employeeName) => {
-  const {employees: arr} = data;
-  let employeeObj = {};
-  if (employeeName !== undefined) {
-    employeeObj = arr.find(({firstName: a, lastName: b}) => a === employeeName || b === employeeName);
+  let obj = {};
+  if (typeof employeeName === 'string') {
+    const { employees: arr } = data;
+    obj = arr.find(({ firstName: a, lastName: b }) => a === employeeName || b === employeeName);
   }
-  return employeeObj;
+  return obj;
 };
 
 function createEmployee(personalInfo, associatedWith) {
