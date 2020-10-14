@@ -132,8 +132,35 @@ function increasePrices(percentage) {
   return prices;
 }
 
+function listAnimals(responsavelPor) {
+  const listaDeAnimais = [];
+  responsavelPor.forEach((idAtual) => {
+    const animalNome = animals.find(animalAtual => animalAtual.id === idAtual).name;
+    listaDeAnimais.push(animalNome);
+  });
+  return listaDeAnimais;
+}
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const empregadoAnimais = {};
+  if (idOrName === undefined) {
+    let listaDeAnimais = [];
+    data.employees.forEach((empregadoAtual) => {
+      const responsavelPor = empregadoAtual.responsibleFor;
+      listaDeAnimais = listAnimals(responsavelPor);
+      empregadoAnimais[`${empregadoAtual.firstName} ${empregadoAtual.lastName}`] = listaDeAnimais;
+    });
+  } else {
+    let listaDeAnimais = [];
+    let nomeSobrenome = '';
+    const responsavelPor = data.employees.find((Atual) => {
+      nomeSobrenome = `${Atual.firstName} ${Atual.lastName}`;
+      return Atual.id === idOrName || Atual.firstName === idOrName || Atual.lastName === idOrName;
+    }).responsibleFor;
+    listaDeAnimais = listAnimals(responsavelPor);
+    empregadoAnimais[`${nomeSobrenome}`] = listaDeAnimais;
+  }
+  return empregadoAnimais;
 }
 
 module.exports = {
