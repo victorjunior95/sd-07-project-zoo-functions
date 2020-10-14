@@ -29,7 +29,10 @@ function employeeByName(...employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return { ...personalInfo, ...associatedWith };
+  return {
+    ...personalInfo,
+    ...associatedWith
+  };
 }
 
 function isManager(id) {
@@ -38,7 +41,13 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor
+  };
   data.employees.push(newEmployee);
   return newEmployee;
 }
@@ -50,7 +59,9 @@ function animalCount(species) {
   } else {
     amountAni = {};
     data.animals.forEach((animal) => {
-      amountAni = Object.assign(amountAni, { [animal.name]: animal.residents.length });
+      amountAni = Object.assign(amountAni, {
+        [animal.name]: animal.residents.length
+      });
       return amountAni;
     });
   }
@@ -79,8 +90,31 @@ function schedule(...dayName) {
 }
 
 
+const getIdEmployees = (idEmployee) => {
+  const id = data.employees.filter(emplpoyee => emplpoyee.id === idEmployee).find(element => element).responsibleFor;
+  return id;
+}
+
+const getAnimalsArray = (animalId) => {
+  return data.animals.filter(inimalId => inimalId.id === animalId).find(element => element).residents;
+}
+
+const getBigger = (bigger, number) => (bigger > number) ? bigger : number;
+
+
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  let finalResult;
+  const arrayIds = getIdEmployees(id);
+  const firstIdAnimal = arrayIds[0];
+  const arrayObjAnimals = getAnimalsArray(firstIdAnimal);
+  const arrayOfAges = arrayObjAnimals.map(item => item.age);
+  const bigger = arrayOfAges.reduce(getBigger, 0);
+  const arrayObjResult = arrayObjAnimals.filter(bicho => (bicho.age === bigger));
+  arrayObjResult.forEach((element) => {
+    finalResult = Object.values(element);
+  });
+
+  return finalResult;
 }
 
 function increasePrices(percentage) {
