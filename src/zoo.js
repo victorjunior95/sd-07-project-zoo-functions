@@ -114,19 +114,34 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
     let sum = 0;
-    if (entrants !== undefined) {
-        let keys = Object.keys(entrants);
-        let values = Object.values(entrants);
-
-        for (let i = 0; i <= keys.length - 1; i += 1) {
-            if (entrants === {} || entrants === undefined) {
-                return 0;
-            }
-            sum += values[i]
-        }
-        return sum
+    const prices = {
+        'Adult': 49.99,
+        'Child': 20.99,
+        'Senior': 24.99,
+    };
+    if (entrants === null || entrants === undefined) {
+        return 0;
     }
+    let keys = Object.keys(entrants);
+    let values = Object.values(entrants);
+    let valuesPerType = Object.values(prices)
+    let keysPerType = Object.keys(prices)
+
+    for (let i = 0; i <= keys.length - 1; i += 1) {
+        if (entrants === {}) {
+            return 0;
+        }
+        for (let j = 0; j <= keysPerType.length - 1; j += 1) {
+            if (keys[i] === keysPerType[j]) {
+
+                sum += values[i] * valuesPerType[j]
+            }
+        }
+    }
+
+    return sum
 }
+
 
 
 function animalMap(options) {
@@ -134,8 +149,28 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-    // seu código aqui
+    const scheduleObj = {
+        'Tuesday': 'Open from 8am until 6pm',
+        'Wednesday': 'Open from 8am until 6pm',
+        'Thursday': 'Open from 10am until 8pm',
+        'Friday': 'Open from 10am until 8pm',
+        'Saturday': 'Open from 8am until 10pm',
+        'Sunday': 'Open from 8am until 8pm',
+        'Monday': 'CLOSED'
+    };
+    let keys = Object.keys(scheduleObj);
+    let values = Object.values(scheduleObj);
+    for (let i = 0; i <= keys.length - 1; i += 1) {
+        if (keys[i] === dayName) {
+            let key = keys[i];
+            let value = values[i];
+            let returnObj = { key: value }
+            return returnObj
+        }
+    }
+    return obj
 }
+
 
 function oldestFromFirstSpecies(id) {
     // seu código aqui
