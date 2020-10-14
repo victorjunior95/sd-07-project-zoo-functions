@@ -9,11 +9,11 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-
+  return animals.filter(animal => ids.includes(animal.id));
 }
 
 function animalsOlderThan(animal, age) {
@@ -28,19 +28,31 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-
+  if (!employeeName) {
+    const emptyObj = {};
+    return emptyObj;
+  }
+  return data.employees.find(e => e.firstName === employeeName || e.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
-
+  return {
+    id: personalInfo.id,
+    firstName: personalInfo.firstName,
+    lastName: personalInfo.lastName,
+    managers: associatedWith.managers,
+    responsibleFor: associatedWith.responsibleFor,
+  };
 }
 
 function isManager(id) {
-  // seu código aqui
+  return employees.some(employee =>
+    employee.managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newObject = { id, firstName, lastName, managers, responsibleFor };
+  employees.push(newObject);
 }
 
 function animalCount(species = '') {
@@ -60,8 +72,19 @@ function animalCount(species = '') {
   };
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(...entrants) { // Rest Parameter
+  let acc = 0;
+  entrants.map((type) => {
+    if (type.Adult) {
+      acc += type.Adult * prices.Adult;
+    } if (type.Senior) {
+      acc += type.Senior * prices.Senior;
+    } if (type.Child) {
+      acc += type.Child * prices.Child;
+    }
+    return acc;
+  });
+  return acc;
 }
 
 function animalMap(options) {
@@ -69,8 +92,23 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  const randomObject = {
+    Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+    Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+    Thursday: `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+    Friday: `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+    Saturday: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+    Sunday: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
+    Monday: 'CLOSED',
+  };
+
+  if (!dayName) {
+    return randomObject;
+  }
+  return 
 }
+
+console.log(schedule('x'));
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
