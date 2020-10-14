@@ -148,12 +148,13 @@ function increasePrices(percentage) {
 // Pedro Pires: // https://github.com/tryber/sd-04-block9-project-zoo-functions/pull/39/files
 function auxEmployeeCoverage() {
   const employeesList = {};
-  data.employees.forEach(employee => {
+  data.employees.forEach((employee) => {
     const name = `${employee.firstName} ${employee.lastName}`;
     const animals = employee.responsibleFor.map(idAnimal =>
       data.animals.find(animal => animal.id === idAnimal).name);
-    employeesList[name] = animals});
-    return employeesList;
+    employeesList[name] = animals;
+  });
+  return employeesList;
 }
 
 function employeeCoverage(idOrName) {
