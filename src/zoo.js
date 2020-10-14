@@ -177,15 +177,14 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {}
 
 function increasePrices(percentage) {
-    data.prices.Adult += Math.round(data.prices.Adult * percentage / 100);
-    data.prices.Adult = data.prices.Adult.toFixed(2);
-    data.prices.Senior += Math.round(data.prices.Senior * percentage / 100);
-    data.prices.Senior = data.prices.Senior.toFixed(2)
-    data.prices.Child += Math.round(data.prices.Child * percentage / 100)
-    data.prices.Child = data.prices.Child.toFixed(2)
-
-    return prices;
+    const increase = 1 + (percentage / 100);
+    data.prices.Adult = (Math.round((data.prices.Adult * increase) * 100)) / 100;
+    data.prices.Senior = (Math.round((data.prices.Senior * increase) * 100)) / 100;
+    data.prices.Child = (Math.round((data.prices.Child * increase) * 100)) / 100;
 }
+// consultei o repositório de Kramer para a refatoração desta função.
+// https://github.com/tryber/sd-07-project-zoo-functions/blob/544898ad4e7bca13bb04afc1dfabe4c7ee1da3ca/src/zoo.js
+
 
 function employeeCoverage(idOrName) {
 
