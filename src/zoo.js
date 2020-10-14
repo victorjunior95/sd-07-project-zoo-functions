@@ -131,8 +131,7 @@ function animalMap(options) {
   if (options !== undefined) {
     const { includeNames = '', sorted = '', sex = 'nd' } = options;
     if (includeNames) {
-      data.animals.forEach(({ name: specieName, location, residents }) =>
-      {
+      data.animals.forEach(({ name: specieName, location, residents }) => {
         const specie = {};
         specie[specieName] = [];
         animalLocale[location].push(specie);
