@@ -301,7 +301,7 @@ function animalMap(options) {
 // console.log(animalMap({ includeNames: true }).NE);
 // console.log(animalMap({ includeNames: true, sorted: true }).NE);
 // console.log(animalMap({ includeNames: true, sex: 'female', sorted: false}).NE);
-console.log(animalMap({ sex: 'female' }).NE[0]);
+// console.log(animalMap({ sex: 'female' }).NE[0]);
 
 function schedule(dayName) {
   // seu código aqui
