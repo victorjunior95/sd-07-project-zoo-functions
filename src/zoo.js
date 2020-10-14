@@ -65,11 +65,13 @@ function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
-function increasePrices(percentage) {
-  const result = Object.keys(prices).map(elementPrice => prices[elementPrice] =
-      Math.ceil((prices[elementPrice] * (100 + percentage))) / 100);
-  return result;
-}
+const increasePrices = (percentage) => {
+  Object.keys(prices)
+  .forEach((elementPrice) => {
+    prices[elementPrice] =
+    Math.ceil((prices[elementPrice] * (100 + percentage))) / 100;
+  });
+};
 
 function employeeCoverage(idOrName) {
   // seu código aqui
