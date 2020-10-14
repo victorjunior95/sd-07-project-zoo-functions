@@ -30,10 +30,19 @@ function employeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  const { firstName, lastName, id } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  const addEmployee = { firstName, id, lastName, managers, responsibleFor };
+  return addEmployee;
 }
 
 function isManager(id) {
-  // seu código aqui
+ /*  let CatchId = id ;
+  return compareId = data.employees.filter(grup => grup.id === CatchId ); */
+  const compareId = [] ; 
+  data.employees.map(grup => grup.managers.forEach(grupElement => compareId.push(grupElement)));
+  const cathId = compareId.some(grup => grup === id);
+  return cathId;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
