@@ -57,8 +57,14 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-function animalCount(species) {
-  // seu código aqui
+function animalCount(species = 'total') {
+  let contagem = {};
+  if (species != 'total') {
+    data.animals.map (anima => { if (anima.name === species) { contagem = anima.popularity } });
+  } else {
+    data.animals.map(animal => contagem[animal.name] = animal.popularity);
+  }
+  return contagem;
 }
 
 function entryCalculator(entrants) {
