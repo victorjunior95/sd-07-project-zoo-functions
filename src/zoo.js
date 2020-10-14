@@ -59,10 +59,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species = 'total') {
   let contagem = {};
-  if (species != 'total') {
-    data.animals.map (anima => { if (anima.name === species) { contagem = anima.popularity } });
+  if (species !== 'total') {
+    data.animals.map((A) => {
+      if (A.name === species) {
+        contagem = A.popularity
+      }
+      return contagem;
+    });
   } else {
-    data.animals.map(animal => contagem[animal.name] = animal.popularity);
+    data.animals.map((animal) => {
+      contagem[animal.name] = animal.popularity;
+      return contagem;
+    });
   }
   return contagem;
 }
