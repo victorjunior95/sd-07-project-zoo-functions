@@ -63,12 +63,14 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
+  const { prices } = data;
   if (!entrants || entrants === {}) return 0;
-  // necessário multiplicar valores do obj.
+
+  return Object.entries(entrants).reduce((rest, now) => rest + (prices[now[0]] * now[1]), 0);
 }
 
 function animalMap(options) {
-  // seu código aqui
+  // seu cod...
 }
 
 function schedule(dayName) {
@@ -80,7 +82,7 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  return data.prices.forEach( price => price * ((percentage / 100) + 1))
+  // seu cod...
 }
 
 function employeeCoverage(idOrName) {
