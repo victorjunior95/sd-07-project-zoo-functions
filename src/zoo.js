@@ -75,10 +75,15 @@ function animalCount(species = 'total') {
   return contagem;
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(entrants = {}) {
+  let valor = 0;
+  const {Adult, Child, Senior} = entrants;
+  if (Adult !== undefined) { valor += Adult * 49.99; }
+  if (Child !== undefined) { valor += Child * 20.99; }
+  if (Senior !== undefined) { valor += Senior * 24.99; }
+  return valor;
 }
-
+console.log(entryCalculator({ 'Adult': 1 }));
 function animalMap(options) {
   // seu código aqui
 }
