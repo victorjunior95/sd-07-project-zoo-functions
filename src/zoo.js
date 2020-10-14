@@ -81,8 +81,8 @@ function isManager(id) {
   }
   return false;
 }
-
-function addEmployee(id='', firstName='', lastName='', managers=[], responsibleFor=[]) {
+// Requisito 6 - On Going
+function addEmployee(id = '', firstName = '', lastName = '', managers = [], responsibleFor = []) {
   // seu código aqui
 
   const newAddedEmployee = {
@@ -90,7 +90,7 @@ function addEmployee(id='', firstName='', lastName='', managers=[], responsibleF
     firstName,
     lastName,
     managers,
-    responsibleFor
+    responsibleFor,
   };
 
   data.employees.push(newAddedEmployee);
