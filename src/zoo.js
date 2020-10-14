@@ -73,36 +73,45 @@ const getLocation = local => local.location;
 const region = data.animals.map(getLocation)
 .filter((element, index, array) => index === array.indexOf(element));
 // pegar os residents
-const getResidents = group => group.residents;
+// const getResidents = group => group.residents;
 
 // if (options === undefined) ok
-function nameSpecieForRegion() {
-  const regionAnimals = region;
-  const result = {};
-  regionAnimals.forEach((regionAnimals) => {
-    const animalsForlocation = data.animals.map(animal => {
-    if (regionAnimals === animal.location) {
-      return animal.name;
-    }
-  }).filter(specie => specie !== undefined);
-    result[regionAnimals] = animalsForlocation;
-  });
-  return result;
-}
+// function nameSpecieForRegion() {
+//   const regionAnimals = region;
+//   const result = {};
+//   regionAnimals.forEach((regAnimals) => {
+//     const animalsForlocation = data.animals.map(animal => {
+//       if (regAnimals === animal.location) {
+//       return animal.name;
+//     }
+//     }).filter(specie => specie !== undefined);
+//     result[regionAnimals] = animalsForlocation;
+//   });
+//   return result;
+// }
 
 // const options = { includeNames: true };
 function animalMap(options) {
-  // const animals = data.animals;
   const result = {};
+  const regionAnimals = region;
   if (options === undefined) {
-    return nameSpecieForRegion();
+    regionAnimals.forEach((regAnimals) => {
+      const animalsForlocation = data.animals.map(animal => {
+      if (regAnimals === animal.location) {
+        return animal.name;
+      }
+    }).filter(specie => specie !== undefined);
+    result[regAnimals] = animalsForlocation;
+  });
   }
-  if (options.includeNames === true) {
-    // result["estou conseguindo!"] = 'gloria!'
+  // if (options.includeNames === true) {
+  //   // result["estou conseguindo!"] = 'gloria!'
 
-  }
+  // }
   return result;
 }
+console.log(animalMap());
+
 
 function schedule(dayName) {
   const workingDays = Object.assign({}, data.hours);
