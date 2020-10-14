@@ -42,15 +42,9 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const pessoas = data.employees;
+  const P = data.employees;
   let resposta = false;
-  pessoas.map(pessoa => {
-    for (let index = 0; index < pessoa.managers.length; index += 1) {
-      if (pessoa.managers[index] === id) {
-      return resposta = true;
-      }
-    }
-  });
+  P.map(pessoa => pessoa.managers.find(F => { if (F === id) { return resposta = true; }}));
   return resposta;
 }
 
