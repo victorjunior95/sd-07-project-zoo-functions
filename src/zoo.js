@@ -90,7 +90,7 @@ const region = data.animals.map(getLocation)
 //   return result;
 // }
 function animalMap(options) {
-  //código aqui
+  
 }
 // corrigir
 // function animalMap(options) {
@@ -164,15 +164,15 @@ function increasePrices(percentage) {
 //     result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
 //     .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
 //   }
-// });  
+// });
 // }
 
 function primeiroBloco() {
   const result = {};
   data.employees
     .forEach((ids) => {
-      result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor //código das espécies que funcionário
-    .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
+      result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+      .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
     });
   return result;
 }
@@ -184,31 +184,31 @@ function segundoBloco(idOrName) {
       result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
       .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
     }
-  });  
+  });
   return result;
 }
 
 function employeeCoverage(idOrName) {
   const result = {};
   if (!idOrName) {
-    return primeiroBloco()
+    return primeiroBloco();
     // data.employees
     // .forEach((ids) => {
-    //   result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor //código das espécies que funcionário
+    //   result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
     // .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
     // });
-  } else {
-    return segundoBloco(idOrName);
+  }
+  return segundoBloco(idOrName);
   //   data.employees
   // .forEach((ids) => {
   //   if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
   //     result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
   //     .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
   //   }
-  // });  
-  }
-    return result;
-  }
+  // });
+  
+  // return result;
+}
 // console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
