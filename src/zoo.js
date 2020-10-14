@@ -90,7 +90,8 @@ function entryCalculator(entrants) {
   return totalCost;
 }
 
-const animalZone = zone => data.animals.filter(animal => animal.location === zone).map(animal => `${animal.name}`);
+const animalZone = zone => 
+  data.animals.filter(animal => animal.location === zone).map(animal => `${animal.name}`);
 
 function animalMap(options) {
   const locations = ['NE', 'NW', 'SE', 'SW'];
@@ -106,7 +107,20 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  let scheduleObj = {}
+  let daysAndHours = Object.entries(data.hours);
+  if (typeof dayName === 'string') {
+    daysAndHours = [daysAndHours.find(day => day[0] === dayName)];
+  }
+  daysAndHours.forEach((day) => {
+    if (day[0] !== 'Monday') {
+      scheduleObj[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+    } else {
+      scheduleObj[day[0]] = 'CLOSED';
+    }
+  });
+  return scheduleObj;
+  
 }
 
 function oldestFromFirstSpecies(id) {
