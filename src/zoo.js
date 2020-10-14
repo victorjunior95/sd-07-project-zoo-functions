@@ -63,11 +63,11 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species = ' ') {
   // seu código aqui
-  if (species === ' '){
-    let result = {};
+  if (species === ' ') {
+    const result = {};
     data.animals.map(animal => result[animal.name] = animal.residents.length).sort();
     return result;
-  } 
+  }
   const dataAnimal = data.animals.find(animal => animal.name === species);
   return dataAnimal.residents.length;
 }
