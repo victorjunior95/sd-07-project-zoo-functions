@@ -86,9 +86,73 @@ function entryCalculator(entrants) {
   return somaTotal;
 }
 
-function animalMap(options) {
-  // seu código aqui
+function createLocationList() {
+  const locations = [];
+  let unicLocations = [];
+  animals.forEach(animalAtual => locations.push(animalAtual.location));
+  locations.sort();
+  unicLocations = locations.filter((a, b) => locations.indexOf(a) === b);
+  return unicLocations;
 }
+
+function listAnimalsByLocation(localAtual) {
+  return animals.filter(animal => localAtual === animal.location).map(atual => atual.name);
+}
+
+function listAnimalNames(animal) {
+  const nomes = animals.find(animalA => animalA.name === animal).residents.map(atual => atual.name);
+  const resultado = {};
+  resultado[`${animal}`] = nomes;
+  return resultado;
+}
+
+function animalMap(options) {
+  const resultado = {};
+  let animalList;
+  const locationList = createLocationList();
+  if (options === undefined) {
+    locationList.forEach((localAtual) => {
+      animalList = listAnimalsByLocation(localAtual);
+      resultado[localAtual] = animalList;
+    });
+  } else {
+    const { includeNames = false } = options;
+    let animaisDaRegiao = [];
+    if (includeNames === true) {
+      locationList.forEach((localAtual) => {
+        animalList = listAnimalsByLocation(localAtual);
+        animalList.forEach((atual) => {
+          animaisDaRegiao.push(listAnimalNames(atual));
+        });
+        resultado[localAtual] = animaisDaRegiao;
+        animaisDaRegiao = [];
+      });
+    }
+  }
+  return resultado;
+}
+
+const options = { includeNames: true };
+console.log(animalMap(options));
+// {
+//   NE: [
+//     { lions: ['Zena', 'Maxwell', 'Faustino', 'Dee'] },
+//     { giraffes: ['Gracia', 'Antone', 'Vicky', 'Clay', 'Arron', 'Bernard'] }
+//   ],
+//   NW: [
+//     { tigers: ['Shu', 'Esther'] },
+//     { bears: ['Hiram', 'Edwardo', 'Milan'] },
+//     { elephants: ['Ilana', 'Orval', 'Bea', 'Jefferson'] }
+//   ],
+//   SE: [
+//     { penguins: ['Joe', 'Tad', 'Keri', 'Nicholas'] },
+//     { otters: ['Neville', 'Lloyd', 'Mercedes', 'Margherita'] }
+//   ],
+//   SW: [
+//     { frogs: ['Cathey', 'Annice'] },
+//     { snakes: ['Paulette', 'Bill'] }
+//   ]
+// };
 
 function schedule(dayName) {
   const agenda = {};
