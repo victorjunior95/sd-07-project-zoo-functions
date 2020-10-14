@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { hours } = require('./data');
 const data = require('./data');
 
 // filtrar pelo id é melhor o/
@@ -52,7 +53,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  if (species === undefined) {
+  if (!species) {
     return data.animals.reduce((acc, { name, residents }) => {
       acc[name] = residents.length;
       return acc;
@@ -129,7 +130,7 @@ function outputAnimalMap(includeNames, sorted, sex) {
 }
 
 function animalMap(options) {
-  if (options === undefined) return emptyParameters();
+  if (!options) return emptyParameters();
   const { includeNames = false, sorted = false, sex = '' } = options;
   return outputAnimalMap(includeNames, sorted, sex);
 }
@@ -137,7 +138,22 @@ function animalMap(options) {
 /* ----------------------------------------------- */
 
 function schedule(dayName) {
-  // seu código aqui
+  const days = Object.keys(hours);
+  const completedSchedule = {};
+
+  days.forEach((day) => {
+    if (day !== 'Monday') {
+      completedSchedule[day] = `Open from ${hours[day].open}am until ${
+        hours[day].close - 12
+      }pm`;
+    } else {
+      completedSchedule[day] = 'CLOSED';
+    }
+  });
+
+  return dayName
+    ? { [dayName]: completedSchedule[dayName] }
+    : completedSchedule;
 }
 
 function oldestFromFirstSpecies(id) {
