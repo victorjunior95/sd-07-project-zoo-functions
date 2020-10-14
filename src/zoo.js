@@ -155,15 +155,36 @@ function increasePrices(percentage) {
 const idAnimals = ids => animals.find(searchId => searchId.id === ids).name;
 // console.log(idAnimals('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
-function employeesBySpecies() {
-  const result = {};
-  data.employees
-    .forEach((ids) => {
-      result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-      .map(idAnimals);
-    });
-  return result;
-}
+// function employeesBySpecies() {
+//   const result = {};
+//   data.employees
+//     .forEach((ids) => {
+//       result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+//       .map(idAnimals);
+//     });
+//   return result;
+// }
+
+// function employeeByType(idOrName) {
+//   const result = {};
+//   data.employees
+//   .forEach((ids) => {
+//     if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
+//       result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+//       .map(idAnimals);
+//     }
+//   });
+//   return result;
+// }
+
+// function employeesBySpecies() {
+//   const result = {};
+//   data.employees
+//     .forEach((ids) => {
+      
+//     });
+//   return result;
+// }
 
 function employeeByType(idOrName) {
   const result = {};
@@ -172,17 +193,24 @@ function employeeByType(idOrName) {
     if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
       result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
       .map(idAnimals);
+    } else if (!idOrName) {
+      result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+      .map(idAnimals);
     }
   });
   return result;
 }
 
+
+
+
 function employeeCoverage(idOrName) {
-  if (!idOrName) {
-    return employeesBySpecies();
-  }
+  // if (!idOrName) {
+  //   return employeesBySpecies();
+  // }
   return employeeByType(idOrName);
 }
+console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   entryCalculator,
