@@ -151,22 +151,6 @@ function increasePrices(percentage) {
   prices.Senior = Math.round(increasedSeniorPrice * 100) / 100;
 }
 
-// if (idOrName === undefined) {
-//   data.employees
-//   .forEach((ids) => {
-//     result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-//   .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
-//   });
-// } else {
-//   data.employees
-// .forEach((ids) => {
-//   if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
-//     result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-//     .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
-//   }
-// });
-// }
-
 function primeiroBloco() {
   const result = {};
   data.employees
@@ -176,6 +160,7 @@ function primeiroBloco() {
     });
   return result;
 }
+
 function segundoBloco(idOrName) {
   const result = {};
   data.employees
@@ -192,24 +177,9 @@ function employeeCoverage(idOrName) {
   const result = {};
   if (!idOrName) {
     return primeiroBloco();
-    // data.employees
-    // .forEach((ids) => {
-    //   result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-    // .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
-    // });
   }
   return segundoBloco(idOrName);
-  //   data.employees
-  // .forEach((ids) => {
-  //   if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
-  //     result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-  //     .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
-  //   }
-  // });
-  
-  // return result;
 }
-// console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   entryCalculator,
