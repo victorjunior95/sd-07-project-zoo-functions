@@ -45,10 +45,10 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
- const result = data.employees.map((iterator) => {
-  return iterator.managers.some(element => element === id);
- })
- return result.includes(true);
+  const result = data.employees.map((iterator) => {
+   return iterator.managers.some(element => element === id);
+  });
+  return result.includes(true);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
