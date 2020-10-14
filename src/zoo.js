@@ -30,8 +30,7 @@ function employeeByName(...employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   return {
-    ...personalInfo,
-    ...associatedWith
+    ...personalInfo, ...associatedWith,
   };
 }
 
@@ -46,7 +45,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     firstName,
     lastName,
     managers,
-    responsibleFor
+    responsibleFor,
   };
   data.employees.push(newEmployee);
   return newEmployee;
@@ -60,7 +59,7 @@ function animalCount(species) {
     amountAni = {};
     data.animals.forEach((animal) => {
       amountAni = Object.assign(amountAni, {
-        [animal.name]: animal.residents.length
+        [animal.name]: animal.residents.length,
       });
       return amountAni;
     });
@@ -90,23 +89,30 @@ function schedule(...dayName) {
 }
 
 
-const getIdEmployees = (idEmployee) => {
-  const id = data.employees.filter(emplpoyee => emplpoyee.id === idEmployee).find(element => element).responsibleFor;
+const idEmployees = (idEmployee) => {
+  const id = data.employees.filter(emplpoyee => emplpoyee.id === idEmployee)
+    .find(element => element).responsibleFor;
   return id;
-}
-
-const getAnimalsArray = (animalId) => {
-  return data.animals.filter(inimalId => inimalId.id === animalId).find(element => element).residents;
-}
-
-const getBigger = (bigger, number) => (bigger > number) ? bigger : number;
+};
+// queria fazer com reduce mas o codeclimate não aprovou ;(
+const getBigger = (array) => {
+  let acc = array[0];
+  array.forEach((element) => {
+    if (acc < element) {
+      acc = element;
+    }
+  });
+  return acc;
+};
 
 
 function oldestFromFirstSpecies(id) {
   let finalResult;
-  const arrayIds = getIdEmployees(id);
+  const arrayIds = idEmployees(id);
   const firstIdAnimal = arrayIds[0];
-  const arrayObjAnimals = getAnimalsArray(firstIdAnimal);
+  const arrayObjAnimals = firstIdAnimal.data.animals.filter(inimalId =>
+    inimalId.id === firstIdAnimal)
+    .find(element => element).residents;
   const arrayOfAges = arrayObjAnimals.map(item => item.age);
   const bigger = arrayOfAges.reduce(getBigger, 0);
   const arrayObjResult = arrayObjAnimals.filter(bicho => (bicho.age === bigger));
