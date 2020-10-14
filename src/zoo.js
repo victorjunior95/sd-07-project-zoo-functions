@@ -110,22 +110,22 @@ function animalCount(species) {
     }
     return obj
 }
-
+const prices = {
+    'Adult': 49.99,
+    'Child': 20.99,
+    'Senior': 24.99,
+};
+const valuesPerType = Object.values(prices)
+const keysPerType = Object.keys(prices)
 
 function entryCalculator(entrants) {
     let sum = 0;
-    const prices = {
-        'Adult': 49.99,
-        'Child': 20.99,
-        'Senior': 24.99,
-    };
     if (entrants === null || entrants === undefined) {
         return 0;
     }
-    let keys = Object.keys(entrants);
-    let values = Object.values(entrants);
-    let valuesPerType = Object.values(prices)
-    let keysPerType = Object.keys(prices)
+    const keys = Object.keys(entrants);
+    const values = Object.values(entrants);
+
 
     for (let i = 0; i <= keys.length - 1; i += 1) {
         if (entrants === {}) {
@@ -138,7 +138,6 @@ function entryCalculator(entrants) {
             }
         }
     }
-
     return sum
 }
 
@@ -178,7 +177,14 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {}
 
 function increasePrices(percentage) {
+    data.prices.Adult += (data.prices.Adult * percentage / 100);
+    data.prices.Adult = data.prices.Adult.toFixed(2);
+    data.prices.Senior += (data.prices.Senior * percentage / 100);
+    data.prices.Senior = data.prices.Senior.toFixed(2)
+    data.prices.Child += (data.prices.Child * percentage / 100)
+    data.prices.Child = data.prices.Child.toFixed(2)
 
+    return prices;
 }
 
 function employeeCoverage(idOrName) {
