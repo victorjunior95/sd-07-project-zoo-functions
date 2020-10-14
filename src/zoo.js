@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { hours } = require('./data');
+const { hours, prices } = require('./data');
 const data = require('./data');
 
 // filtrar pelo id é melhor o/
@@ -169,8 +169,13 @@ function oldestFromFirstSpecies(id) {
   return Object.values(findAnimalById[0]);
 }
 
+// prettier-ignore
 function increasePrices(percentage) {
-  // seu código aqui
+  const calPercentage = 1 + (percentage / 100);
+  Object.keys(prices).forEach((price) => {
+    prices[price] = `${parseFloat((prices[price] * calPercentage) + 0.001).toPrecision(4)}`;
+  });
+  return prices;
 }
 
 function employeeCoverage(idOrName) {
