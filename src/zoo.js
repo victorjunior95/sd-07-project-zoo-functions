@@ -122,7 +122,13 @@ function schedule(dayName) {
   return scheduleObj;
 }
 
-const getOldest = (previous, current) => (current.age >= previous.age) ? current : previous;
+function getOldest(previous, current) {
+  let oldest = previous;
+  if (current.age >= previous.age) {
+    oldest = current;
+  }
+  return oldest;
+}
 
 function oldestFromFirstSpecies(id) {
   const listOfResponsible = data.animals.filter(animal =>
