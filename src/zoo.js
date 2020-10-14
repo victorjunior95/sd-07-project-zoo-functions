@@ -23,8 +23,9 @@ function animalsByIds(...ids) {
   return retorno;
 }
 
+// console.log(animals.find((nome)=>nome.name==='lions').residents.every(idade=>idade.age>=7));
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  return animals.find(nome=>nome.name===animal).residents.every(idade=>idade.age>=age);
 }
 
 function employeeByName(employeeName) {
