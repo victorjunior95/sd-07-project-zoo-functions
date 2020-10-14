@@ -113,8 +113,6 @@ function schedule(dayName) {
   const workingDays = Object.assign({}, data.hours);
   const openingHours = (key => workingDays[key] =
     `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`);
-  const openingHours = (key => obj[key] =
-    `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm`);
   Object.keys(workingDays).forEach(openingHours);
   workingDays.Monday = 'CLOSED';
   if (dayName === undefined) {
