@@ -36,7 +36,7 @@ function createEmployee(personalInfo, associatedWith) {
   return addEmployee;
 }
 function isManager(id) {
-  
+  // try hard my friend
   const compareId = [] ; 
   data.employees.map(grup => grup.managers.forEach(grupElement => compareId.push(grupElement)));
   const cathId = compareId.some(grup => grup === id);
