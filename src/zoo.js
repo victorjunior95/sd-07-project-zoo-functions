@@ -90,7 +90,7 @@ const region = data.animals.map(getLocation)
 //   return result;
 // }
 function animalMap(options) {
-  
+
 }
 // corrigir
 // function animalMap(options) {
@@ -151,34 +151,37 @@ function increasePrices(percentage) {
   prices.Senior = Math.round(increasedSeniorPrice * 100) / 100;
 }
 
-function primeiroBloco() {
+// retorna nome do animal por id
+const idAnimals = (ids) => animals.find(searchId => searchId.id === ids).name;
+// console.log(idAnimals('0938aa23-f153-4937-9f88-4858b24d6bce'));
+
+function employeesBySpecies() {
   const result = {};
   data.employees
     .forEach((ids) => {
       result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-      .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
+      .map(idAnimals);
     });
   return result;
 }
 
-function segundoBloco(idOrName) {
+function employeeByType(idOrName) {
   const result = {};
   data.employees
   .forEach((ids) => {
     if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
       result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-      .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
+      .map(idAnimals);
     }
   });
   return result;
 }
 
 function employeeCoverage(idOrName) {
-  const result = {};
   if (!idOrName) {
-    return primeiroBloco();
+    return employeesBySpecies();
   }
-  return segundoBloco(idOrName);
+  return employeeByType(idOrName);
 }
 
 module.exports = {
