@@ -70,8 +70,8 @@ function entryCalculator(entrants) {
 // pequenas funções para localização
 const getLocation = local => local.location;
 // metodo filter para retirar duplicidade
-const region = data.animals.map(getLocation)
-.filter((element, index, array) => index === array.indexOf(element));
+// const region = data.animals.map(getLocation)
+// .filter((element, index, array) => index === array.indexOf(element));
 // pegar os residents
 // const getResidents = group => group.residents;
 
@@ -152,7 +152,7 @@ function increasePrices(percentage) {
 }
 
 // retorna nome do animal por id
-const idAnimals = (ids) => animals.find(searchId => searchId.id === ids).name;
+const idAnimals = ids => animals.find(searchId => searchId.id === ids).name;
 // console.log(idAnimals('0938aa23-f153-4937-9f88-4858b24d6bce'));
 
 function employeesBySpecies() {
