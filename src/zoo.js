@@ -89,27 +89,29 @@ const region = data.animals.map(getLocation)
 //   });
 //   return result;
 // }
-
-// const options = { includeNames: true };
 function animalMap(options) {
-  const result = {};
-  const regionAnimals = region;
-  if (options === undefined) {
-    regionAnimals.forEach((regAnimals) => {
-      const animalsForlocation = (data.animals).map(animal => {
-        if (regAnimals === animal.location) {
-          return animal.name;
-        }
-      }).filter(specie => specie !== undefined);
-      result[regAnimals] = animalsForlocation;
-    });
-  }
-  // if (options.includeNames === true) {
-  //   // result["estou conseguindo!"] = 'gloria!'
-
-  // }
-  return result;
+  //código aqui
 }
+// corrigir
+// function animalMap(options) {
+//   const result = {};
+//   const regionAnimals = region;
+//   if (options === undefined) {
+//     regionAnimals.forEach((regAnimals) => {
+//       const animalsForlocation = (data.animals).map((animal) => {
+//         if (regAnimals === animal.location) {
+//           return animal.name;
+//         }
+//       }).filter(specie => specie !== undefined);
+//       result[regAnimals] = animalsForlocation;
+//     });
+//   }
+//   // if (options.includeNames === true) {
+//   //   // result["estou conseguindo!"] = 'gloria!'
+
+//   // }
+//   return result;
+// }
 // console.log(animalMap());
 
 
@@ -149,24 +151,65 @@ function increasePrices(percentage) {
   prices.Senior = Math.round(increasedSeniorPrice * 100) / 100;
 }
 
-function employeeCoverage(idOrName) {
+// if (idOrName === undefined) {
+//   data.employees
+//   .forEach((ids) => {
+//     result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+//   .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
+//   });
+// } else {
+//   data.employees
+// .forEach((ids) => {
+//   if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
+//     result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+//     .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
+//   }
+// });  
+// }
+
+function primeiroBloco() {
   const result = {};
-  if (idOrName === undefined) {
-    data.employees
+  data.employees
     .forEach((ids) => {
-      result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+      result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor //código das espécies que funcionário
     .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
     });
-  }
+  return result;
+}
+function segundoBloco(idOrName) {
+  const result = {};
   data.employees
   .forEach((ids) => {
     if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
       result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
       .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
     }
-  });
-return result;
+  });  
+  return result;
 }
+
+function employeeCoverage(idOrName) {
+  const result = {};
+  if (!idOrName) {
+    return primeiroBloco()
+    // data.employees
+    // .forEach((ids) => {
+    //   result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor //código das espécies que funcionário
+    // .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
+    // });
+  } else {
+    return segundoBloco(idOrName);
+  //   data.employees
+  // .forEach((ids) => {
+  //   if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
+  //     result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+  //     .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
+  //   }
+  // });  
+  }
+    return result;
+  }
+// console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   entryCalculator,
