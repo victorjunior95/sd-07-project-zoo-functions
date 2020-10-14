@@ -13,14 +13,18 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   // Versao Tunada em aula e ingles!!!
-  const compare = data.animals.filter(animal => ids.includes(animal.id));
+  const compare = data.animals.filter((animal) => ids.includes(animal.id));
   return compare;
 }
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
-  const catchAnimals = data.animals.filter(species => species.name === animal);
-  const olderThan = catchAnimals[0].residents.every(older => older.age >= age);
+  const catchAnimals = data.animals.filter(
+    (species) => species.name === animal
+  );
+  const olderThan = catchAnimals[0].residents.every(
+    (older) => older.age >= age
+  );
   return olderThan;
 }
 
@@ -35,12 +39,12 @@ function createEmployee(personalInfo, associatedWith) {
   addEmployee = { firstName, id, lastName, managers, responsibleFor };
   return addEmployee;
 }
-
 function isManager(id) {
-  
-  const compareId =[] ; 
-  data.employees.map(grup => grup.managers.forEach(grupElement => compareId.push(grupElement)));
-  const cathId = compareId.some(grup => grup === id);
+  const compareId = [];
+  data.employees.map((grup) =>
+    grup.managers.forEach((grupElement) => compareId.push(grupElement))
+  );
+  const cathId = compareId.some((grup) => grup === id);
   return cathId;
 }
 
