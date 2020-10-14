@@ -14,7 +14,7 @@ const { prices, animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  return data.animals
+  return animals
   .filter(animal => ids.includes(animal.id));
 }
 
@@ -73,29 +73,25 @@ const getLocation = local => local.location;
 // metodo filter para retirar duplicidade
 const region = data.animals.map(getLocation)
 .filter((element, index, array) => index === array.indexOf(element));
-//
-
-
+// pegar os residents
+const getResidents = group => group.residents;
 
 // if (options === undefined) ok
 function nameSpecieForRegion() {
+  const regionAnimals = region;
   const result = {};
-  region.forEach((region) => {
-  const animalsForlocation = data.animals
-  .map((animal) => {
-    if (region === animal.location) {
+  regionAnimals.forEach((regionAnimals) => {
+    const animalsForlocation = data.animals.map(animal => {
+    if (regionAnimals === animal.location) {
       return animal.name;
     }
-  }).filter((specie) => {
-    return specie !== undefined
+  }).filter(specie => specie !== undefined);
+    result[regionAnimals] = animalsForlocation;
   });
-  result[region] = animalsForlocation;
-  }); 
   return result;
 }
 
-
-const options = { includeNames: true };
+// const options = { includeNames: true };
 function animalMap(options) {
   // const animals = data.animals;
   const result = {};
