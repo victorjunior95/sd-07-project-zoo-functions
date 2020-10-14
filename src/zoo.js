@@ -100,7 +100,9 @@ function animalCount(species) {
   // seu código aqui
   if (species === undefined) {
     const animals = {};
-    data.animals.forEach(element => animals[element.name] = element.residents.length);
+    data.animals.forEach(element => {
+      animals[element.name] = element.residents.length;
+    });
 
     return animals;
   }
