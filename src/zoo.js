@@ -77,7 +77,7 @@ function animalCount(species = 'total') {
 
 function entryCalculator(entrants = {}) {
   let valor = 0;
-  const {Adult, Child, Senior} = entrants;
+  const { Adult, Child, Senior } = entrants;
   if (Adult !== undefined) { valor += Adult * 49.99; }
   if (Child !== undefined) { valor += Child * 20.99; }
   if (Senior !== undefined) { valor += Senior * 24.99; }
