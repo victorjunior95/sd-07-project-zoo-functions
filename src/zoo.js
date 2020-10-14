@@ -83,7 +83,7 @@ function entryCalculator(entrants = {}) {
   if (Senior !== undefined) { valor += Senior * 24.99; }
   return valor;
 }
-console.log(entryCalculator({ 'Adult': 1 }));
+
 function animalMap(options) {
   // seu código aqui
 }
