@@ -49,11 +49,11 @@ function employeeByName(employeeName) {
     return {};
   }
 
-  const empName = employeeName;
+  const name = employeeName;
 
-  // const empData = data.employees;
+  const dataEmp = data.employees;
 
-  const empObj = data.employees.find(({ firstName, lastName}) => firstName === empName || lastName === empName);
+  const empObj = dataEmp.find(({ firstName, lastName }) => firstName === name || lastName === name);
 
   return empObj;
 }
