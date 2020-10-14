@@ -35,7 +35,7 @@ function isManager(id) {
     if (id === employees.managers) {
       result = true;
     } else {
-        result = false;
+      result = false;
     }
     return result;
   });
