@@ -22,11 +22,17 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  if (employeeByName == '') {
-    return obj = {};
-  };
-  const firstName = employees.find((employeeName) => employeeName.firstName === employeeName);
-  const lastName = employees.find((employeeName) => employeeName.lastName === employeeName);
+  const obj = {};
+
+  if (employeeName === '') {
+    return obj;
+  } else if (employeeName === employees.firstName) {
+    const firstName = employees.find(employeeName => employeeName.firstName === employeeName);
+    return firstName;
+  } else if (employeeName === employees.lastName) {
+    const lastName = employees.find(employeeName => employeeName.lastName === employeeName);
+    return lastName;
+  }
 }
 
 function createEmployee(personalInfo, associatedWith) {
