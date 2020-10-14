@@ -31,6 +31,7 @@ function employeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
+  // Anteriormente tinha utilizado o método Object.assign, mas achei melhor com spread operator
 }
 
 function isManager(id) {
@@ -42,7 +43,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (!species) {
+    return data.animals.reduce((arrayOfAnimals, currentAnimal) => {
+      arrayOfAnimals[currentAnimal.name] = currentAnimal.residents.length;
+      return arrayOfAnimals;
+    }, {});
+  }
+  return data.animals.find(animal => animal.name === species).residents.length;
 }
 
 function entryCalculator(...entrants) {
