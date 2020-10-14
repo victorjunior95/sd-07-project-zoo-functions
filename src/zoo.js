@@ -1,3 +1,4 @@
+const { employees } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -21,7 +22,11 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (employeeByName == '') {
+    return obj = {};
+  };
+  const firstName = employees.find((employeeName) => employeeName.firstName === employeeName);
+  const lastName = employees.find((employeeName) => employeeName.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
