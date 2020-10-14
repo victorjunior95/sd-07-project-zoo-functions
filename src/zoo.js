@@ -98,12 +98,12 @@ function animalMap(options) {
     regionAnimals.forEach((regAnimals) => {
       const animalsForlocation = (data.animals).map(animal => {
         if (regAnimals === animal.location) {
-        return animal.name;
-      }
+          return animal.name;
+        }
       }).filter(specie => specie !== undefined);
       result[regAnimals] = animalsForlocation;
-  });
-    }
+    });
+  }
   // if (options.includeNames === true) {
   //   // result["estou conseguindo!"] = 'gloria!'
 
@@ -150,22 +150,22 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-    const result = {};
-    if (idOrName === undefined) {
-      data.employees
-      .forEach((ids) => {
-        result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-      .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
-      });
-    }
+  const result = {};
+  if (idOrName === undefined) {
     data.employees
     .forEach((ids) => {
-      if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
-        result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-        .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
-      }
+      result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+    .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
     });
-    return result;
+  }
+  data.employees
+  .forEach((ids) => {
+    if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
+      result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+      .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
+    }
+  });
+return result;
 }
 
 module.exports = {
