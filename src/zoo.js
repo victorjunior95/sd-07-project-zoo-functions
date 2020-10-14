@@ -110,7 +110,7 @@ function animalMap(options) {
   // }
   return result;
 }
-console.log(animalMap());
+// console.log(animalMap());
 
 
 function schedule(dayName) {
@@ -149,33 +149,23 @@ function increasePrices(percentage) {
   prices.Senior = Math.round(increasedSeniorPrice * 100) / 100;
 }
 
-function fnWithoutParameter() {
-  const result = {};
-  data.employees
-    .forEach((ids) => {
-      result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-    .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
-    });
-  return result;
-}
-
-function fnEmployeeAllSpecies(idOrName) {
-  const result = {};
-  if (idOrName === undefined) {
-    return fnWithoutParameter();
-  }
-  data.employees
-  .forEach((ids) => {
-    if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
-      result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-      .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
-    }
-  });
-  return result;
-}
-
 function employeeCoverage(idOrName) {
-  return fnEmployeeAllSpecies(idOrName);
+    const result = {};
+    if (idOrName === undefined) {
+      data.employees
+      .forEach((ids) => {
+        result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+      .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
+      });
+    }
+    data.employees
+    .forEach((ids) => {
+      if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
+        result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+        .map(idAnimal => data.animals.find(searchId => searchId.id === idAnimal).name);
+      }
+    });
+    return result;
 }
 
 module.exports = {
