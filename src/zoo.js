@@ -62,7 +62,7 @@ function animalCount(species = 'total') {
   if (species !== 'total') {
     data.animals.map((A) => {
       if (A.name === species) {
-        contagem = A.popularity
+        contagem = A.popularity;
       }
       return contagem;
     });
