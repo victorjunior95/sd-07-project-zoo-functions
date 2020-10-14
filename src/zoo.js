@@ -68,7 +68,7 @@ function entryCalculator(entrants) {
 
 
 // pequenas funções para localização
-const getLocation = local => local.location;
+// const getLocation = local => local.location;
 // metodo filter para retirar duplicidade
 // const region = data.animals.map(getLocation)
 // .filter((element, index, array) => index === array.indexOf(element));
