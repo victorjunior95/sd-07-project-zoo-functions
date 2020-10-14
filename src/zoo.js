@@ -95,15 +95,14 @@ function schedule(dayName = 'total') {
   } else if (dayName === 'Monday') {
     lista['Monday'] = 'CLOSED';
   } else {
-    lista['Tuesday'] = 'Open from 8am until 6pm';
-    lista['Wednesday'] = 'Open from 8am until 6pm';
-    lista['Thursday'] = 'Open from 10am until 8pm';
-    lista['Friday'] = 'Open from 10am until 8pm';
-    lista['Saturday'] = 'Open from 8am until 10pm';
-    lista['Sunday'] = 'Open from 8am until 8pm';
-    lista['Monday'] = 'CLOSED';
+    lista = {'Tuesday': 'Open from 8am until 6pm',
+    'Wednesday': 'Open from 8am until 6pm',
+    'Thursday': 'Open from 10am until 8pm',
+    'Friday': 'Open from 10am until 8pm',
+    'Saturday': 'Open from 8am until 10pm',
+    'Sunday': 'Open from 8am until 8pm',
+    'Monday': 'CLOSED'}
   }
-  
   return lista;
 }
 
