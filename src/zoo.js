@@ -126,40 +126,34 @@ function animalMap(options) {
   // seu código aqui
 
   const animalLocale = {};
-  data.animals.forEach(({ location }) => animalLocale[location] = []);
+  data.animals.forEach(({ location }) => { animalLocale[location] = [] });
 
   if (options !== undefined) {
-
     const { includeNames = '', sorted = '', sex = 'nd' } = options;
-
     if (includeNames) {
       data.animals.forEach(({ name: specieName, location, residents }) =>
       {
         const specie = {};
         specie[specieName] = [];
         animalLocale[location].push(specie);
-
         switch (sex) {
           case 'nd':
             specie[specieName] = residents.map(({ name }) => name);
             break;
           default:
-            specie[specieName] = residents.filter(({ sex: gender }) => gender === sex).map(({ name }) => name);
+            specie[specieName] = residents
+            .filter(({ sex: gender }) => gender === sex)
+            .map(({ name }) => name);
             break;
         }
-
         if (sorted) {
           specie[specieName].sort();
         }
-
       });
 
       return animalLocale;
     }
-
     data.animals.forEach(({ name, location }) => animalLocale[location].push(name));
-    console.log(animalLocale);
-
     return animalLocale;
   }
 
