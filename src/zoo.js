@@ -81,7 +81,7 @@ function isManager(id) {
   }
   return false;
 }
-// Requisito 6 - On Going
+// Requisito 6 - OK
 function addEmployee(id = '', firstName = '', lastName = '', managers = [], responsibleFor = []) {
   // seu código aqui
 
@@ -98,6 +98,16 @@ function addEmployee(id = '', firstName = '', lastName = '', managers = [], resp
 
 function animalCount(species) {
   // seu código aqui
+  if (species === undefined) {
+    const animals = {};
+    data.animals.forEach((element) => {
+      animals[element.name] = element.residents.length;
+    });
+
+    return animals;
+  }
+
+  return data.animals.find((element) => element.name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
