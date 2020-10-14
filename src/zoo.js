@@ -66,9 +66,8 @@ function createEmployee(personalInfo, associatedWith) {
 // Requisito 5 - On Going
 function isManager(id) {
   // seu código aqui
-  
   let managerCheck = 0;
-  
+
   data.employees.forEach((element) => {
     element.managers.forEach((idElement) => {
       if (idElement === id) {
