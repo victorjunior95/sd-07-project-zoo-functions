@@ -127,13 +127,11 @@ function oldestFromFirstSpecies(id) {
     data.employees.find(employee => employee.id === id).responsibleFor.includes(animal.id));
   const oldestAnimal = listOfResponsible.map(animal =>
     animal.residents.reduce((old, current) =>
-      (current.age > old.age) ? current : old)).reduce((old, current) =>
-        (current.age > old.age) ? current : old);
-  const {name, sex, age} = oldestAnimal;
+      (current.age >= old.age) ? current : old)).reduce((old, current) =>
+        (current.age >= old.age) ? current : old);
+  const { name, sex, age } = oldestAnimal;
   return [name, sex, age];
 }
-
-oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad')
 
 function increasePrices(percentage) {
   // seu código aqui
