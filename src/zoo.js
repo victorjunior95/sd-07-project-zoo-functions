@@ -148,36 +148,37 @@ function animalMap(options) {
     // seu código aqui
 }
 
-function schedule(dayName) {
-    const scheduleObj = {
-        'Tuesday': 'Open from 8am until 6pm',
-        'Wednesday': 'Open from 8am until 6pm',
-        'Thursday': 'Open from 10am until 8pm',
-        'Friday': 'Open from 10am until 8pm',
-        'Saturday': 'Open from 8am until 10pm',
-        'Sunday': 'Open from 8am until 8pm',
-        'Monday': 'CLOSED'
-    };
-    let keys = Object.keys(scheduleObj);
-    let values = Object.values(scheduleObj);
-    for (let i = 0; i <= keys.length - 1; i += 1) {
-        if (keys[i] === dayName) {
-            let key = keys[i];
-            let value = values[i];
-            let returnObj = { key: value }
-            return returnObj
+function scheduleAux() {
+    const obj = {};
+    Object.entries(data.hours).forEach((time) => {
+        if (time[0] === 'Monday') {
+            obj[time[0]] = 'CLOSED';
+        } else {
+            obj[time[0]] = `Open from ${time[1].open}am until ${time[1].close - 12}pm`;
         }
+    });
+    return obj;
+}
+
+function schedule(dayName) {
+    if (dayName === undefined) {
+        return scheduleAux();
     }
-    return obj
+    const obj1 = {};
+    Object.entries(scheduleAux()).forEach((week) => {
+        if (week[0] === dayName) {
+            obj1[week[0]] = week[1];
+        }
+    });
+    return obj1;
 }
+// consultei o repositório de Kramer para a refatoração desta função ( codeclimate não aceitou minha solução)
+// https://github.com/tryber/sd-07-project-zoo-functions/blob/544898ad4e7bca13bb04afc1dfabe4c7ee1da3ca/src/zoo.js
 
-
-function oldestFromFirstSpecies(id) {
-    // seu código aqui
-}
+function oldestFromFirstSpecies(id) {}
 
 function increasePrices(percentage) {
-    // seu código aqui
+
 }
 
 function employeeCoverage(idOrName) {
