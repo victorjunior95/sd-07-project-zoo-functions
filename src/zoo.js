@@ -24,8 +24,8 @@ function employeeByName(employeeName) {
     indice.firstName === employeeName || indice.lastName === employeeName));
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+function createEmployee({ id, firstName, lastName }, { managers, responsibleFor }) {
+  return { id, firstName, lastName, managers, responsibleFor };
 }
 
 function isManager(id) {
