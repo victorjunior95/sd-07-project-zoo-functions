@@ -57,15 +57,30 @@ function employeeByName(employeeName) {
 
   return empObj;
 }
-// Requisito 4 - On Going
+// Requisito 4 - OK
 function createEmployee(personalInfo, associatedWith) {
   const newEmployee = Object.assign(personalInfo, associatedWith);
 
   return newEmployee;
 }
-
+// Requisito 5 - On Going
 function isManager(id) {
   // seu código aqui
+  
+  let managerCheck = 0;
+  
+  data.employees.forEach((element) => {
+    element.managers.forEach((idElement) => {
+      if (idElement === id) {
+        managerCheck += 1;
+      }
+    });
+  });
+
+  if (managerCheck > 0) {
+    return true;
+  }
+  return false;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
