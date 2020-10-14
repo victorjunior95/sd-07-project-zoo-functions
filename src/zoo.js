@@ -33,9 +33,7 @@ function isManager(id) {
   employees.forEach((param) => {
     if (id === employees.managers) {
       return true;
-    } else {
-      return false;
-    }
+    };
   });
 }
 
