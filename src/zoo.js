@@ -30,7 +30,9 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return Object.assign(personalInfo, associatedWith);
+  // Fonte: https://www.digitalocean.com/community/tutorials/copying-objects-in-javascript
+  // Fonte: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 }
 
 function isManager(id) {
@@ -45,7 +47,7 @@ function animalCount(species) {
   // seu código aqui
 }
 
-function entryCalculator(entrants) {
+function entryCalculator(...entrants) {
   // seu código aqui
 }
 
