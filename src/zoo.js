@@ -112,6 +112,11 @@ function oldestFromFirstSpecies(id) {
 // arrendondados em duas casas decimais
 function increasePrices(percentage) {
   // seu código aqui
+  const keys = Object.keys(prices);
+  keys.forEach(key => {
+    const value = (prices[key] * percentage /100) + prices[key];
+    prices[key] = (Math.round(value * 100)) / 100;
+  });
 }
 
 // Sem parâmetros, retorna uma lista de funcionários e os
