@@ -17,7 +17,7 @@ function animalsByIds(...ids) {
   if (ids === undefined) {
     return [];
   }
-  ids.forEach((numRef) =>
+  ids.forEach(numRef =>
     retorno.push(animals.find(animal => animal.id === numRef))
   );
   return retorno;
