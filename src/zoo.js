@@ -58,7 +58,11 @@ function employeeByName(employeeName) {
   return empObj;
 }
 // Requisito 4 - On Going
-const createEmployee = (personalInfo, associatedWith) => Object.assign(personalInfo, associatedWith);
+const createEmployee = (personalInfo, associatedWith) => {
+  const newEmployee = Object.assign(personalInfo, associatedWith);
+
+  return newEmployee;
+}
 
 function isManager(id) {
   // seu código aqui
