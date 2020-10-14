@@ -46,10 +46,11 @@ function isManager(id) {
   let resposta = false;
   pessoas.map(pessoa => {
     for (let index = 0; index < pessoa.managers.length; index += 1) {
-    if (pessoa.managers[index] === id) {
-      resposta = true;
+      if (pessoa.managers[index] === id) {
+      return resposta = true;
+      }
     }
-  }});
+  });
   return resposta;
 }
 
