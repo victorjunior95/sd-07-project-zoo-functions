@@ -118,7 +118,7 @@ function entryCalculator(entrants) {
 
   const { Adult: AdultQtd = 0, Senior: SeniorQtd = 0, Child: ChildQtd = 0 } = entrants;
   const { Adult, Senior, Child } = data.prices;
-  const totalValue = AdultQtd * Adult + SeniorQtd * Senior + ChildQtd * Child;
+  const totalValue = (AdultQtd * Adult) + (SeniorQtd * Senior) + (ChildQtd * Child);
   return totalValue;
 }
 
