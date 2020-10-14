@@ -96,14 +96,14 @@ function animalMap(options) {
   const regionAnimals = region;
   if (options === undefined) {
     regionAnimals.forEach((regAnimals) => {
-      const animalsForlocation = data.animals.map(animal => {
-      if (regAnimals === animal.location) {
+      const animalsForlocation = (data.animals).map(animal => {
+        if (regAnimals === animal.location) {
         return animal.name;
       }
-    }).filter(specie => specie !== undefined);
-    result[regAnimals] = animalsForlocation;
+      }).filter(specie => specie !== undefined);
+      result[regAnimals] = animalsForlocation;
   });
-  }
+    }
   // if (options.includeNames === true) {
   //   // result["estou conseguindo!"] = 'gloria!'
 
