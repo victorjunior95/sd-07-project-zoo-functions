@@ -122,15 +122,15 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  percentage = (100 +percentage) / 100
-  let {Adult, Senior, Child} = data.prices
-  Adult = Adult * percentage + 0.001;
+  percentage = (100 + percentage) / 100;
+  let { Adult, Senior, Child } = data.prices;
+  Adult = (Adult * percentage) + 0.001;
   Adult = Adult.toFixed(2);
-  Senior = Senior * percentage + 0.001;
+  Senior = (Senior * percentage) + 0.001;
   Senior = Senior.toFixed(2);
-  Child = Child * percentage + 0.001;
+  Child = (Child * percentage) + 0.001;
   Child = Child.toFixed(2);
-  data.prices = { Adult, Senior, Child};
+  data.prices = { Adult, Senior, Child} ;
 }
 
 function employeeCoverage(idOrName) {
