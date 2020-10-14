@@ -105,7 +105,7 @@ function schedule(dayName) {
   if (!dayName) {
     return randomObject;
   }
-  return 
+  return randomObject;
 }
 
 console.log(schedule('x'));
