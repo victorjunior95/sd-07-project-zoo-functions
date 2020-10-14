@@ -81,9 +81,26 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  let cronogramaLegivel = {
+    Friday: 'Open from 10am until 8pm',
+    Monday: 'CLOSED',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Thursday: 'Open from 10am until 8pm',
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+  };
+  if (dayName === undefined) {
+    return cronogramaLegivel;
+  }
+  if (dayName !== undefined) {
+    const Entrie = [[dayName, cronogramaLegivel[dayName]]];
+    cronogramaLegivel = Object.fromEntries(Entrie);
+  }
+  return cronogramaLegivel;
 }
 
+console.log(schedule('Friday'));
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
@@ -95,11 +112,27 @@ function increasePrices(percentage) {
   data.prices.Senior = parseFloat(twoDecimal(Senior, percent));
   data.prices.Child = parseFloat(twoDecimal(Child, percent));
 }
-
+const arrayresponsibleFor = (idAnimal) => {
+  const arraynamesAnimals = [];
+  for (let index = 0; index < animals.length; index += 1) {
+    if (idAnimal[index] === animals[index].id) {
+      arraynamesAnimals.push(animals[index].name);
+    }
+  }
+  return arraynamesAnimals;
+};
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const arrayList = {};
+  if (idOrName === undefined) {
+    employees.forEach(({ firstName, lastName, responsibleFor }) => {
+      arrayList[`${firstName} ${lastName}`] = arrayresponsibleFor(responsibleFor);
+    });
+  }
+  return arrayList;
 }
-
+// console.log(arrayresponsibleFor(['0938aa23-f153-4937-9f88-4858b24d6bce',
+// 'e8481c1d-42ea-4610-8e11-1752cfc05a46']));
+// console.log(employeeCoverage());
 module.exports = {
   entryCalculator,
   schedule,
