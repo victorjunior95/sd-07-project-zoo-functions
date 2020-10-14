@@ -126,7 +126,7 @@ function animalMap(options) {
   // seu código aqui
 
   const animalLocale = {};
-  data.animals.forEach(({ location }) => { animalLocale[location] = [] });
+  data.animals.forEach(({ location }) => { animalLocale[location] = []; });
 
   if (options !== undefined) {
     const { includeNames = '', sorted = '', sex = 'nd' } = options;
@@ -134,7 +134,6 @@ function animalMap(options) {
       data.animals.forEach(({ name: specieName, location, residents }) => {
         const specie = {};
         specie[specieName] = [];
-        animalLocale[location].push(specie);
         switch (sex) {
           case 'nd':
             specie[specieName] = residents.map(({ name }) => name);
@@ -148,16 +147,12 @@ function animalMap(options) {
         if (sorted) {
           specie[specieName].sort();
         }
+        animalLocale[location].push(specie);
       });
-
       return animalLocale;
     }
-    data.animals.forEach(({ name, location }) => animalLocale[location].push(name));
-    return animalLocale;
   }
-
   data.animals.forEach(({ name, location }) => animalLocale[location].push(name));
-
   return animalLocale;
 }
 
