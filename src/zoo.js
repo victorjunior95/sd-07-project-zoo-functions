@@ -108,12 +108,12 @@ function schedule(dayName) {
     'Saturday': 'Open from 8am until 10pm',
     'Sunday': 'Open from 8am until 8pm',
     'Monday': 'CLOSED'
-    };
+  };
   const newObj2 = {};
   if (typeof dayName === 'undefined') {
     return newObj;
   }
-  function getDay () {
+  function getDay() {
     newObj2[`${dayName}`] = `${newObj[dayName]}`;
     return newObj2;
   }
