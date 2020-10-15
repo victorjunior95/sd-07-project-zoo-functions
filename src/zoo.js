@@ -202,21 +202,21 @@ const idAnimals = ids => animals.find(searchId => searchId.id === ids).name;
 // }
 
 function employeeCoverage(idOrName) {
-  const result = {}
-  data.employees.forEach((employee) => {
+  const result = {};
+  employees.forEach((employee) => {
     result[`${employee.firstName} ${employee.lastName}`] =
-      employee.responsibleFor.map(idAnimals)
-  })
+      employee.responsibleFor.map(idAnimals);
+  });
 
   const searchEmployee = (condition) => {
     const employeeDetails = data.employees.find(employee => employee.firstName === condition
       || employee.lastName === condition
-      || employee.id === condition)
-    return `${employeeDetails.firstName} ${employeeDetails.lastName}`
-  }
+      || employee.id === condition);
+    return `${employeeDetails.firstName} ${employeeDetails.lastName}`;
+  };
 
-  if (idOrName === undefined) return result
-  return { [searchEmployee(idOrName)]: result[searchEmployee(idOrName)] }
+  if (idOrName === undefined) return result;
+  return { [searchEmployee(idOrName)]: result[searchEmployee(idOrName)] };
 }
 console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
