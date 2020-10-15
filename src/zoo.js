@@ -140,10 +140,12 @@ function oldestFromFirstSpecies(id) {
   return [name, sex, age];
 }
 
-function increasePrices(percentage) {  
-  for (let key in data.prices) {
-    const percentCalc = parseFloat(data.prices[key]).toFixed(1) * (percentage / 100);
-    data.prices[key] = (parseFloat(data.prices[key]) + percentCalc).toFixed(2);
+function increasePrices(percentage) {
+  const priceEntries = Object.entries(data.prices);
+  for (let key in priceEntries) {
+    const percentCalc = parseFloat(priceEntries[key][1]).toFixed(1) * (percentage / 100);
+    const priceKey = priceEntries[key][0];
+    data.prices[priceKey] = (parseFloat(priceEntries[key][1]) + percentCalc).toFixed(2);
   }
 }
 
