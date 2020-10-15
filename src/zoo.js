@@ -145,7 +145,7 @@ function animalMap(obj = { includeNames: false, sorted: false, sex: false }) {
   //       NW: sexInput('NW', obj.sex),
   //       SE: sexInput('SE', obj.sex),
   //       SW: sexInput('SW', obj.sex),
-  //     };
+  //     } ;
   //   }
   // }
   // return objResp;
