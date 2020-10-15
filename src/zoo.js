@@ -134,49 +134,38 @@ const firstOption = () => {
   return obj;
 };
 
-const secondOption = () => {
+// prettier-ignore
+const secondOption2 = () => {
   let lions = animals.filter(element => element.name === 'lions');
-  lions.forEach(
-    element => (lions = element.residents.map(element2 => element2.name)),
-  );
+  lions.forEach(element => (lions = element.residents.map(element2 => element2.name)));
   let giraffes = animals.filter(element => element.name === 'giraffes');
-  giraffes.forEach(
-    element => (giraffes = element.residents.map(element2 => element2.name)),
-  );
+  giraffes.forEach(element => (giraffes = element.residents.map(element2 => element2.name)));
   let tigers = animals.filter(element => element.name === 'tigers');
-  tigers.forEach(
-    element => (tigers = element.residents.map(element2 => element2.name)),
-  );
+  tigers.forEach(element => (tigers = element.residents.map(element2 => element2.name)));
   let bears = animals.filter(element => element.name === 'bears');
-  bears.forEach(
-    element => (bears = element.residents.map(element2 => element2.name)),
-  );
+  bears.forEach(element => (bears = element.residents.map(element2 => element2.name)));
   let elephants = animals.filter(element => element.name === 'elephants');
-  elephants.forEach(
-    element => (elephants = element.residents.map(element2 => element2.name)),
-  );
-  let penguins = animals.filter(element => element.name === 'penguins');
-  penguins.forEach(
-    element => (penguins = element.residents.map(element2 => element2.name)),
-  );
-  let otters = animals.filter(element => element.name === 'otters');
-  otters.forEach(
-    element => (otters = element.residents.map(element2 => element2.name)),
-  );
-  let frogs = animals.filter(element => element.name === 'frogs');
-  frogs.forEach(
-    element => (frogs = element.residents.map(element2 => element2.name)),
-  );
-  let snakes = animals.filter(element => element.name === 'snakes');
-  snakes.forEach(
-    element => (snakes = element.residents.map(element2 => element2.name)),
-  );
+  elephants.forEach(element => (elephants = element.residents.map(element2 => element2.name)));
   const obj = {};
   obj.NE = [{ lions }];
   obj.NE.push({ giraffes });
   obj.NW = [{ tigers }];
   obj.NW.push({ bears });
   obj.NW.push({ elephants });
+  return obj;
+};
+
+// prettier-ignore
+const secondOption = () => {
+  let penguins = animals.filter(element => element.name === 'penguins');
+  penguins.forEach(element => (penguins = element.residents.map(element2 => element2.name)));
+  let otters = animals.filter(element => element.name === 'otters');
+  otters.forEach(element => (otters = element.residents.map(element2 => element2.name)));
+  let frogs = animals.filter(element => element.name === 'frogs');
+  frogs.forEach(element => (frogs = element.residents.map(element2 => element2.name)));
+  let snakes = animals.filter(element => element.name === 'snakes');
+  snakes.forEach(element => (snakes = element.residents.map(element2 => element2.name)));
+  const obj = secondOption2();
   obj.SE = [{ penguins }];
   obj.SE.push({ otters });
   obj.SW = [{ frogs }];
