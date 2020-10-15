@@ -236,12 +236,10 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   const employee = employees.find(element => element.id === id);
-  employeeId = employee.responsibleFor[0];
+  const employeeId = employee.responsibleFor[0];
 
-  let animal;
-  animal = animals.find(element => element.id === employeeId);
-  let resident;
-  resident = animal.residents.sort((a, b) => {
+  const animal = animals.find(element => element.id === employeeId);
+  const resident = animal.residents.sort((a, b) => {
     if (a.age < b.age) {
       return +1;
     }
@@ -252,7 +250,7 @@ function oldestFromFirstSpecies(id) {
   });
 
   const { name, sex, age } = resident[0];
-  let oldest = [];
+  const oldest = [];
   oldest.push(name, sex, age);
   return oldest;
 }
