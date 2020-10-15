@@ -18,7 +18,10 @@ function animalsByIds(...ids) {
   return ids.map(animalsId => data.animals.find(animals => animals.id === animalsId));
 }
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  // Ao passar o nome de uma espécie e uma idade, testa se todos os animais
+  // desta espécie possuem a idade mínima especificada
+  return data.animals.find(({ name }) => name === animal)
+  .residents.every(animalAge => animalAge.age > age);
 }
 
 function employeeByName(employeeName) {
