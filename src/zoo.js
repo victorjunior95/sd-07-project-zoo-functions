@@ -100,9 +100,7 @@ function animalMap(options) {
 
 function schedule(dayName) {
   // seu código aqui
-  const newObj = {};
-  if (typeof dayName === 'undefined') {
-    return {
+  const newObj = {
     'Tuesday': 'Open from 8am until 6pm',
     'Wednesday': 'Open from 8am until 6pm',
     'Thursday': 'Open from 10am until 8pm',
@@ -110,29 +108,16 @@ function schedule(dayName) {
     'Saturday': 'Open from 8am until 10pm',
     'Sunday': 'Open from 8am until 8pm',
     'Monday': 'CLOSED'
-    }
-  }
-  const {Tuesday, Thursday, Saturday, Sunday} = data.hours;
-  if (dayName === 'Tuesday' || dayName === 'Wednesday') {
-    newObj[`${dayName}`] = `Open from ${Tuesday.open}am until 6pm`;
+    };
+  const newObj2 = {};
+  if (typeof dayName === 'undefined') {
     return newObj;
   }
-  if (dayName === 'Thursday' || dayName === 'Friday') {
-    newObj[`${dayName}`] = `Open from ${Thursday.open}am until ${Thursday.close}pm`;
-    return newObj;
+  function getDay () {
+    newObj2[`${dayName}`] = `${newObj[dayName]}`;
+    return newObj2;
   }
-  if (dayName === 'Saturday') {
-    newObj[`${dayName}`] = `Open from ${Saturday.open}am until ${Saturday.close}pm`;
-    return newObj;
-  }
-  if (dayName === 'Sunday') {
-    newObj[`${dayName}`] = `Open from ${Sunday.open}am until ${Sunday.close}pm`;
-    return newObj;
-  }
-  if (dayName === 'Monday') {
-    newObj[`${dayName}`] = 'CLOSED';
-    return newObj;
-  }
+  return getDay(dayName);
 }
 
 function oldestFromFirstSpecies(id) {
