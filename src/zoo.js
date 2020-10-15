@@ -201,9 +201,7 @@ function increasePrices(percentage) {
   const keys = Object.keys(data.prices);
   const values = Object.values(data.prices);
 
-  keys.map((key, index) => {
-    data.prices[key] = Math.round(values[index] * (1 + (percentage / 100)) * 100)/100;
-  })
+  keys.map((key, index) => data.prices[key] = Math.round(values[index] * (1 + (percentage / 100)) * 100) / 100);
 
   return data.prices;
 }
