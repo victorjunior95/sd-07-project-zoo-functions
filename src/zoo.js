@@ -13,7 +13,7 @@ const { animals, employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  return data.animals.filter(animal => ids.includes(animal.id));
+  return animals.filter(animal => ids.includes(animal.id));
 }
 
 function animalsOlderThan(animal, age) {
@@ -29,7 +29,7 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return Object.assign(personalInfo, associatedWith);
 }
 
 function isManager(id) {
