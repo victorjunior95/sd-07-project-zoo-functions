@@ -210,7 +210,7 @@ function increasePrices(percentage) {
 
   return data.prices;
 }
-// Requisito 13 - On Going
+// Requisito 13 - OK
 function employeeCoverage(idOrName) {
   // seu código aqui
   const employees = {};
