@@ -17,7 +17,8 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const bichos = animals.filter(elements => elements.name === animal);
+  return bichos[0].residents.every(resident => resident.age >= age);
 }
 
 function employeeByName(employeeName) {
