@@ -1,4 +1,3 @@
-const { employees } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -215,7 +214,7 @@ function increasePrices(percentage) {
 function employeeCoverage(idOrName) {
   // seu código aqui
   const employees = {};
-  
+
   const animalsList = (firstName, lastName, responsibleFor) => {
     const employeeName = `${firstName} ${lastName}`;
     const animals = [];
@@ -224,7 +223,7 @@ function employeeCoverage(idOrName) {
         animals.push(data.animals.find(({ id }) => id === animalId).name);
       });
     employees[employeeName] = animals;
-  }
+  };
 
   if (idOrName === undefined) {
     data.employees
@@ -232,10 +231,10 @@ function employeeCoverage(idOrName) {
         animalsList(firstName, lastName, responsibleFor);
       });
   } else {
-    const employeeData = data.employees.find(({ id, firstName, lastName }) => 
-      id === idOrName || firstName === idOrName || lastName === idOrName);
-      
-    const { firstName, lastName, responsibleFor} = employeeData;
+    const employeeData = data.employees
+      .find(({ id, firstName, lastName }) => id === idOrName || firstName === idOrName || lastName === idOrName);
+
+    const { firstName, lastName, responsibleFor } = employeeData;
 
     animalsList(firstName, lastName, responsibleFor);
   }
