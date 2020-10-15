@@ -297,7 +297,7 @@ module.exports = {
     {
       id: 'b0dc644a-5335-489b-8a2c-4e086c7819a2',
       firstName: 'Emery',
-      lastName: 'Elser',
+      lastName: 'Elser)',
       managers: ['9e7d4524-363c-416a-8759-8aa7e50c0992'],
       responsibleFor: ['bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5',
         'baa6e93a-f295-44e7-8f70-2bcdc6f6948d',
