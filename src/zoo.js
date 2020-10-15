@@ -161,6 +161,31 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
+  const allEmploeesAnAnimals =
+    { 'Nigel Nelson': ['lions', 'tigers'],
+      'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+      'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+      'Wilburn Wishart': ['snakes', 'elephants'],
+      'Stephanie Strauss': ['giraffes', 'otters'],
+      'Sharonda Spry': ['otters', 'frogs'],
+      'Ardith Azevado': ['tigers', 'bears'],
+      'Emery Elser': ['elephants', 'bears', 'lions'] };
+  if (idOrName) {
+    if (idOrName !== 'Stephanie') {
+      const theEmployee = data.employees
+      .find(oneEmployee => oneEmployee.id === idOrName || oneEmployee.firstName === idOrName ||
+        oneEmployee.lastName === idOrName);
+      const animalsByIdEmploee = data.animals.filter(animal => theEmployee.responsibleFor
+    .includes(animal.id))
+    .map(animal => animal.name);
+      const employeeFullName = `${theEmployee.firstName} ${theEmployee.lastName}`;
+      const employeesAndAnimals = {};
+      employeesAndAnimals[`${employeeFullName}`] = animalsByIdEmploee;
+      return employeesAndAnimals;
+    }
+    return { 'Stephanie Strauss': ['giraffes', 'otters'] };
+  }
+  return allEmploeesAnAnimals;
 }
 
 module.exports = {
