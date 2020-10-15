@@ -97,24 +97,23 @@ function animalMap(options) {
 function schedule(dayName) {
   // seu código aqui
   const dailySchedule = {};
-  let getSchedule = {};
+  let wholeSchedule = {};
   const { hours } = data;
 
-  getSchedule = { ...hours };
-  const keys = Object.keys(getSchedule);
+  wholeSchedule = { ...hours };
+  const keys = Object.keys(wholeSchedule);
 
   keys.forEach((key) => {
     if (key === 'Monday') {
-      getSchedule[key] = 'CLOSED';
+      wholeSchedule[key] = 'CLOSED';
     } else {
-      getSchedule[key] = `Open from ${getSchedule[key].open}am until ${getSchedule[key].close - 12}pm`;
+      wholeSchedule[key] = `Open from ${wholeSchedule[key].open}am until ${wholeSchedule[key].close - 12}pm`;
     }
   });
 
-  if (dayName === undefined) return getSchedule;
+  dailySchedule[dayName] = wholeSchedule[dayName];
 
-  dailySchedule[dayName] = getSchedule[dayName];
-  return dailySchedule;
+  return (dayName === undefined) ? wholeSchedule : dailySchedule;
 }
 
 // Passado o id de um funcionário, encontra a primeira espécie
