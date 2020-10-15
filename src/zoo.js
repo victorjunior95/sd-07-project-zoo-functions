@@ -121,6 +121,19 @@ function schedule(dayName) {
 // com nome, sexo e idade do animal mais velho dessa espécie
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+  const { animals, employees } = data;
+
+  const firstAnimalId = employees.find(employee => employee.id === id).responsibleFor[0];
+
+  const getAnimal = animals.find(animal => animal.id === firstAnimalId);
+  const { residents } = getAnimal;
+  const oldestAnimal = residents.sort((animal1, animal2) => animal2.age - animal1.age)[0];
+
+  const name = oldestAnimal.name;
+  const sex = oldestAnimal.sex;
+  const age = oldestAnimal.age;
+
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
