@@ -37,7 +37,9 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  // const employee = Object.assign({}, personalInfo, associatedWith)
+  const employee = {...personalInfo, ...associatedWith}
+  return employee;
 }
 
 function isManager(id) {
@@ -48,7 +50,6 @@ function isManager(id) {
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
 }
-
 
 function animalCount(species) {
   if (species === undefined) {
