@@ -112,20 +112,21 @@ function schedule(dayName) {
     'Monday': 'CLOSED'
     }
   }
+  const {Tuesday, Thursday, Saturday, Sunday} = data.hours;
   if (dayName === 'Tuesday' || dayName === 'Wednesday') {
-    newObj[`${dayName}`] = 'Open from 8am until 6pm';
+    newObj[`${dayName}`] = `Open from ${Tuesday.open}am until 6pm`;
     return newObj;
   }
   if (dayName === 'Thursday' || dayName === 'Friday') {
-    newObj[`${dayName}`] = 'Open from 10am until 8pm';
+    newObj[`${dayName}`] = `Open from ${Thursday.open}am until ${Thursday.close}pm`;
     return newObj;
   }
   if (dayName === 'Saturday') {
-    newObj[`${dayName}`] = 'Open from 8am until 10pm';
+    newObj[`${dayName}`] = `Open from ${Saturday.open}am until ${Saturday.close}pm`;
     return newObj;
   }
   if (dayName === 'Sunday') {
-    newObj[`${dayName}`] = 'Open from 8am until 8pm';
+    newObj[`${dayName}`] = `Open from ${Sunday.open}am until ${Sunday.close}pm`;
     return newObj;
   }
   if (dayName === 'Monday') {
