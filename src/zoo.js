@@ -113,25 +113,66 @@ function entryCalculator(entrants) {
 
 //-------------------------------------------------------------------------------------
 
-function animalMap(...options) {
-  if (options.length === 0) {
-    const ne = animals
-      .filter(element => element.location === 'NE')
-      .map(element => element.name);
-    const nw = animals
-      .filter(element => element.location === 'NW')
-      .map(element => element.name);
-    const se = animals
-      .filter(element => element.location === 'SE')
-      .map(element => element.name);
-    const sw = animals
-      .filter(element => element.location === 'SW')
-      .map(element => element.name);
-    const obj = {};
-    obj.NE = ne;
-    obj.NW = nw;
-    obj.SE = se;
-    obj.SW = sw;
+const firstOption = () => {
+  const ne = animals
+    .filter(element => element.location === 'NE')
+    .map(element => element.name);
+  const nw = animals
+    .filter(element => element.location === 'NW')
+    .map(element => element.name);
+  const se = animals
+    .filter(element => element.location === 'SE')
+    .map(element => element.name);
+  const sw = animals
+    .filter(element => element.location === 'SW')
+    .map(element => element.name);
+  const obj = {};
+  obj.NE = ne;
+  obj.NW = nw;
+  obj.SE = se;
+  obj.SW = sw;
+  return obj;
+};
+
+const secondOption = () => {
+  let lions = animals.filter(element => element.name === 'lions');
+  lions.forEach(element => (lions = element.residents.map(element => element.name)));
+  let giraffes = animals.filter(element => element.name === 'giraffes');
+  giraffes.forEach(element => (giraffes = element.residents.map(element => element.name)));
+  let tigers = animals.filter(element => element.name === 'tigers');
+  tigers.forEach(element => (tigers = element.residents.map(element => element.name)));
+  let bears = animals.filter(element => element.name === 'bears');
+  bears.forEach(element => (bears = element.residents.map(element => element.name)));
+  let elephants = animals.filter(element => element.name === 'elephants');
+  elephants.forEach(element => (elephants = element.residents.map(element => element.name)));
+  let penguins = animals.filter(element => element.name === 'penguins');
+  penguins.forEach(element => (penguins = element.residents.map(element => element.name)));
+  let otters = animals.filter(element => element.name === 'otters');
+  otters.forEach(element => (otters = element.residents.map(element => element.name)));
+  let frogs = animals.filter(element => element.name === 'frogs');
+  frogs.forEach(element => (frogs = element.residents.map(element => element.name)));
+  let snakes = animals.filter(element => element.name === 'snakes');
+  snakes.forEach(element => (snakes = element.residents.map(element => element.name)));
+  const obj = {};
+  obj.NE = [{ lions: lions }];
+  obj.NE.push({ giraffes: giraffes });
+  obj.NW = [{ tigers: tigers }];
+  obj.NW.push({ bears: bears });
+  obj.NW.push({ elephants: elephants });
+  obj.SE = [{ penguins: penguins }];
+  obj.SE.push({ otters: otters });
+  obj.SW = [{ frogs: frogs }];
+  obj.SW.push({ snakes: snakes });
+  return obj;
+};
+
+function animalMap(objeto) {
+  if (objeto === undefined) {
+    const obj = firstOption();
+    return obj;
+  }
+  if (Object.keys(objeto).length === 1 && objeto.includeNames === true) {
+    const obj = secondOption();
     return obj;
   }
   return 0;
