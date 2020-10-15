@@ -152,7 +152,7 @@ function animalMap(options) {
   data.animals.forEach(({ name, location }) => animalLocale[location].push(name));
   return animalLocale;
 }
-// Requisito 10 - On Going
+// Requisito 10 - OK
 function schedule(dayName) {
   // seu código aqui
   const days = Object.keys(data.hours);
