@@ -139,7 +139,7 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
-  const {Adult, Senior, Child} = data.prices;
+  const { Adult, Senior, Child } = data.prices;
   const adultFinal = (Math.round((Adult + ((Adult * percentage) / 100)) * 100) / 100);
   const seniorFinal = (Math.round((Senior + ((Senior * percentage) / 100)) * 100) / 100);
   const childFinal = (Math.round((Child + ((Child * percentage) / 100)) * 100) / 100);
