@@ -68,7 +68,7 @@ function entryCalculator(entrants = {}) {
 }
 
 
-function animalMap({includeNames = false, sorted = false, sex = ''} = {}) {
+function animalMap({ includeNames = false, sorted = false, sex = '' } = {}) {
   const animalLocation = {};
   data.animals.forEach((animal) => {
     animalLocation[`${animal.location}`] = [];
@@ -76,21 +76,22 @@ function animalMap({includeNames = false, sorted = false, sex = ''} = {}) {
 
   if (includeNames === undefined || includeNames === false) {
     data.animals.forEach(animal => animalLocation[animal.location].push(animal.name));
-  }
-  else {
-    data.animals.forEach(animal => {
+  } else {
+    data.animals.forEach((animal) => {
       let selectedAnimals = [];
-      if (sex != ''){
-        selectedAnimals = animal.residents.filter(animalSex => animalSex.sex === sex).map(getName => getName.name);
+      if (sex !== '') {
+        selectedAnimals = animal.residents.filter(animalSex =>
+          animalSex.sex === sex).map(getName =>
+            getName.name);
       } else {
-        selectedAnimals = animal.residents.map(getName => getName.name);
+        selectedAnimals = animal.residents.map(getName =>
+          getName.name);
       }
-      if(sorted === true){
+      if (sorted === true) {
         selectedAnimals.sort();
       }
-      animalLocation[animal.location].push({[animal.name]: selectedAnimals});
+      animalLocation[animal.location].push({ [animal.name]: selectedAnimals });
     });
-    
   }
   return animalLocation;
 }
