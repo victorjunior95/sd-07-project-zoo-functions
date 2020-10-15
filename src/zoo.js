@@ -63,24 +63,34 @@ const entryCalculator = (entrants = 0) =>
     acc + (current[1] * whatValue(current[0])), 0);
 
 //Question 9
-//refatorar
-const getObjAnimalsNames = (animalName, sex) =>
-  animals.find( animal => animalName === animal.name).residents.filter(animal => {
-    if (sex !== undefined) return animal.sex === sex;
-    return animal 
-  }).reduce((acc,crr) => {
-    acc[animalName].push(crr.name);
-    return acc;
-  }, { [animalName]: [] });
-
-const createMapObj = () => animals.reduce((acc, crr) => {  
+const createMapObj = () => animals.reduce((acc, crr) => {
   acc[crr.location].push(crr.name);
   return acc;
 }, { NE: [], NW: [], SE: [], SW: [] });
 
-const animalMap = (options = {}) => Object.keys(options).map()
+const getFiltersNamesAnimal = (inputName, options = {}) => {
+  const { sorted, sex } = options;
+  let animalsNames = animals.find(animal => inputName === animal.name).residents;
+  if (sex !== undefined) { animalsNames = animalsNames.filter(animalResident => 
+    (sex === 'male' ? animalResident.sex === 'male' : animalResident.sex === 'female')
+  ) };
+  return animalsNames.reduce((animalNamArr, animalName) => {
+    animalNamArr[inputName].push(animalName.name);
+    if (sorted === true) animalNamArr[inputName].sort();
+    return animalNamArr;
+  }, { [inputName]: [] });
+};
 
-console.log(animalMap({ includeNames: true, sex: 'female', sorted: true })['NE'][0]);
+const animalMap = (options = { includeNames: false }) => {
+  let objMap = createMapObj();
+  if (options.includeNames === true) {
+     Object.keys(objMap).map(key => {
+      objMap[key] = objMap[key].map(animalName => getFiltersNamesAnimal(animalName, options))
+     })
+  } 
+  return objMap;
+};
+//Question 9
 
 const listHours = (input = Object.keys(hours)) => input.reduce((acc, curr) => {
   if (hours[curr].close !== 0) {
