@@ -121,7 +121,7 @@ function entryCalculator(entrants = 0) {
 //     resp.push({ [animal.name]: residents.name });
 //   });
 //   return resp;
-// };
+// }  ;
 
 // const carai = (callBackFunc) => {
 //   const regions = ['NE', 'NW', 'SE', 'SW'];
