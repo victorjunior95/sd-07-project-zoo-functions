@@ -178,9 +178,22 @@ function schedule(dayName) {
 
   return humanReturn;
 }
-
+// Requisito 11 - On Going
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+  const firstAnimal = data.employees
+    .find((idEmp) => idEmp.id === id).responsibleFor[0];
+  let old = 0;
+  let oldestAnimal;
+  data.animals
+    .find((idACheck) => idACheck.id === firstAnimal).residents
+      .forEach((element) => {
+        if (element.age > old) {
+          old = element.age;
+          oldestAnimal = Object.values(element);
+        }
+      });
+  return oldestAnimal;
 }
 
 function increasePrices(percentage) {
