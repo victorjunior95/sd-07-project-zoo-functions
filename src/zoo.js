@@ -186,7 +186,7 @@ function oldestFromFirstSpecies(id) {
   let old = 0;
   let oldestAnimal;
   data.animals
-    .find((idACheck) => idACheck.id === firstAnimal).residents
+    .find(idACheck => idACheck.id === firstAnimal).residents
       .forEach((element) => {
         if (element.age > old) {
           old = element.age;
