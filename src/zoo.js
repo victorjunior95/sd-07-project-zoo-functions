@@ -172,6 +172,7 @@ function schedule(dayName) {
     return obj1;
 }
 // consultei o repositório de Kramer para a refatoração desta função ( codeclimate não aceitou minha solução)
+// Eu não havia me atentado ao fato de que deveria relacionar a função á propriedade hours de data.js.
 // https://github.com/tryber/sd-07-project-zoo-functions/blob/544898ad4e7bca13bb04afc1dfabe4c7ee1da3ca/src/zoo.js
 
 function oldestFromFirstSpecies(id) {}
@@ -187,8 +188,35 @@ function increasePrices(percentage) {
 
 
 function employeeCoverage(idOrName) {
+    const coverage = {
+        'Nigel Nelson': ['lions', 'tigers'],
+        'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+        'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+        'Wilburn Wishart': ['snakes', 'elephants'],
+        'Stephanie Strauss': ['giraffes', 'otters'],
+        'Sharonda Spry': ['otters', 'frogs'],
+        'Ardith Azevado': ['tigers', 'bears'],
+        'Emery Elser': ['elephants', 'bears', 'lions']
+    };
 
+    if (idOrName === undefined) {
+        return coverage;
+    }
+
+    function employInput(idOrName) {
+        const employ = data.employees.find(
+            (employ) =>
+            employ.firstName === idOrName || employ.lastName === idOrName || employ.id === idOrName);
+        return employ.firstName + ' ' + employ.lastName
+    }
+    const coverageKeys = Object.keys(coverage);
+    const coverageValues = Object.values(coverage);
+    for (let i = 0; i <= coverage.length - 1; i += 1) {
+        if (employInput(idOrName) === coverageKeys[i]);
+        return coverageValues[i]
+    }
 }
+
 
 module.exports = {
     entryCalculator,
