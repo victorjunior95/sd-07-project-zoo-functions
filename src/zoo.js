@@ -166,12 +166,14 @@ function schedule(dayName) {
     } else {
       humanReturn[day] = `Open from ${open}am until ${close - 12}pm`;
     }
-  }
+  };
 
-  if (dayName === undefined) {
-    days.map(day => returnInformation(day));
-  } else {
-    returnInformation(dayName);
+  switch (dayName) {
+    case undefined:
+      days.map(day => returnInformation(day));
+      break;
+    default:
+      returnInformation(dayName);
   }
 
   return humanReturn;
