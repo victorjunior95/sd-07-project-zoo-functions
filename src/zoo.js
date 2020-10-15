@@ -139,9 +139,11 @@ function schedule(dayName = '') {
 function oldestFromFirstSpecies(id) {
   // seu código
 }
-
 function increasePrices(percentage) {
-  // seu código aqui
+  const percent = percentage/100 + 1
+  Object.keys(data.prices).map(key => {
+    data.prices[key] = Math.round(data.prices[key] * percent * 100) / 100
+  })
 }
 
 function employeeCoverage(idOrName) {
