@@ -134,6 +134,21 @@ const firstOption = () => {
   return obj;
 };
 
+const sortFirst = (lions, giraffes, tigers, bears, elephants) => {
+  lions = lions.sort();
+  giraffes = giraffes.sort();
+  tigers = tigers.sort();
+  bears = bears.sort();
+  elephants = elephants.sort();
+};
+
+const sortSecond = (penguins, otters, frogs, snakes) => {
+  penguins = penguins.sort();
+  otters = otters.sort();
+  frogs = frogs.sort();
+  snakes = snakes.sort();
+};
+
 // prettier-ignore
 const secondOption2 = (sort2) => {
   let lions = animals.filter(element => element.name === 'lions');
@@ -147,11 +162,7 @@ const secondOption2 = (sort2) => {
   let elephants = animals.filter(element => element.name === 'elephants');
   elephants.forEach(element => (elephants = element.residents.map(element2 => element2.name)));
   if (sort2 === true) {
-    lions = lions.sort();
-    giraffes = giraffes.sort();
-    tigers = tigers.sort();
-    bears = bears.sort();
-    elephants = elephants.sort();
+    sortFirst(lions, giraffes, tigers, bears, elephants);
   }
   const obj = {};
   obj.NE = [{ lions }];
@@ -174,10 +185,7 @@ const secondOption = (sort) => {
   let snakes = animals.filter(element => element.name === 'snakes');
   snakes.forEach(element => (snakes = element.residents.map(element2 => element2.name)));
   if (sort === true) {
-    penguins = penguins.sort();
-    otters = otters.sort();
-    frogs = frogs.sort();
-    snakes = snakes.sort();
+    sortSecond(penguins, otters, frogs, snakes);
     sort2 = true;
   }
   const obj = secondOption2(sort2);
@@ -191,21 +199,17 @@ const secondOption = (sort) => {
 // prettier-ignore
 const thirdOption2 = (sort2) => { 
   let lions = animals.filter(element => element.name === 'lions');
-  lions.forEach(element => lions = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name));
+  lions.forEach(element => (lions = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name)));
   let giraffes = animals.filter(element => element.name === 'giraffes');
-  giraffes.forEach(element => giraffes = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name));
+  giraffes.forEach(element => (giraffes = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name)));
   let tigers = animals.filter(element => element.name === 'tigers');
-  tigers.forEach(element => tigers = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name));
+  tigers.forEach(element => (tigers = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name)));
   let bears = animals.filter(element => element.name === 'bears');
-  bears.forEach(element => bears = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name));
+  bears.forEach(element => (bears = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name)));
   let elephants = animals.filter(element => element.name === 'elephants');
-  elephants.forEach(element => elephants = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name));
+  elephants.forEach(element => (elephants = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name)));
   if (sort2 === true) {
-    lions = lions.sort();
-    giraffes = giraffes.sort();
-    tigers = tigers.sort();
-    bears = bears.sort();
-    elephants = elephants.sort();
+    sortFirst(lions, giraffes, tigers, bears, elephants);
   }
   const obj = {};
   obj.NE = [{ lions }];
@@ -220,18 +224,15 @@ const thirdOption2 = (sort2) => {
 const thirdOption = (sort) => {
   let sort2;
   let penguins = animals.filter(element => element.name === 'penguins');
-  penguins.forEach(element => penguins = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name));
+  penguins.forEach(element => (penguins = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name)));
   let otters = animals.filter(element => element.name === 'otters');
-  otters.forEach(element => otters = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name));
+  otters.forEach(element => (otters = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name)));
   let frogs = animals.filter(element => element.name === 'frogs');
-  frogs.forEach(element => frogs = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name));
+  frogs.forEach(element => (frogs = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name)));
   let snakes = animals.filter(element => element.name === 'snakes');
-  snakes.forEach(element => snakes = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name));
+  snakes.forEach(element => (snakes = element.residents.filter(element3 => element3.sex === 'female' ).map(element2 => element2.name)));
   if (sort === true) {
-    penguins = penguins.sort();
-    otters = otters.sort();
-    frogs = frogs.sort();
-    snakes = snakes.sort();
+    sortSecond(penguins, otters, frogs, snakes);
     sort2 = true;
   }
   const obj = thirdOption2(sort2);
