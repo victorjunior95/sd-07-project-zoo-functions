@@ -36,16 +36,21 @@ const createEmployee = (personalInfo, associatedWith) => {
   return obj;
 };
 
-const isManager = (id) => {
-  const managersIds = data.employees.reduce((acc, curr) => acc + `${curr.managers},`, []).split(',');
-  return managersIds.some(managerId => managerId === id);
-};
-
-console.log(isManager());
-
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function isManager(id){
   // seu código aqui
 }
+
+const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []) => {
+  let newEmployeer = {
+    id: id,
+    firstName: firstName,
+    lastName: lastName,
+    managers: managers,
+    responsibleFor: responsibleFor,
+  }
+  
+  return data.employees.push(newEmployeer);
+};
 
 function animalCount(species) {
   // seu código aqui
