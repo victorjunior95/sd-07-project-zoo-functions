@@ -94,11 +94,27 @@ function animalMap(options) {
   // seu código aqui
 }
 
-// Sem parâmetros, retorna um cronograma legível para humanos
-// Se um único dia for passado, retorna somente este dia
-// em um formato legível para humanos
 function schedule(dayName) {
   // seu código aqui
+  const dailySchedule = {};
+  let getSchedule = {};
+  const { hours } = data;
+
+  getSchedule = { ...hours };
+  const keys = Object.keys(getSchedule);
+
+  keys.forEach((key) => {
+    if (key === 'Monday') {
+      getSchedule[key] = 'CLOSED';
+    } else {
+      getSchedule[key] = `Open from ${getSchedule[key].open}am until ${getSchedule[key].close - 12}pm`;
+    }
+  });
+
+  if (dayName === undefined) return getSchedule;
+
+  dailySchedule[dayName] = getSchedule[dayName];
+  return dailySchedule;
 }
 
 // Passado o id de um funcionário, encontra a primeira espécie
