@@ -231,8 +231,9 @@ function employeeCoverage(idOrName) {
         animalsList(firstName, lastName, responsibleFor);
       });
   } else {
+    const id = idOrName;
     const employeeData = data.employees
-      .find((emp) => emp.id === idOrName || emp.firstName === idOrName || emp.lastName === idOrName);
+      .find(emp => emp.id === id || emp.firstName === id || emp.lastName === id);
 
     const { firstName, lastName, responsibleFor } = employeeData;
 
