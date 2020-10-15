@@ -80,7 +80,12 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const idFirstSpecies = data.employees.find(employee => employee.id === id).responsibleFor[0];
+  const oldestResident = data.animals
+  .find(animal => animal.id === idFirstSpecies).residents
+  .sort((a, b) => b.age - a.age);
+  const { name, sex, age } = oldestResident[0];
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
