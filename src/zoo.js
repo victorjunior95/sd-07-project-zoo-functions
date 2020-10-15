@@ -232,7 +232,7 @@ function employeeCoverage(idOrName) {
       });
   } else {
     const employeeData = data.employees
-      .find(({ id, firstName, lastName }) => id === idOrName || firstName === idOrName || lastName === idOrName);
+      .find((emp) => emp.id === idOrName || emp.firstName === idOrName || emp.lastName === idOrName);
 
     const { firstName, lastName, responsibleFor } = employeeData;
 
