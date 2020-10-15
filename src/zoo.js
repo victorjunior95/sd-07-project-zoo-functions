@@ -1,4 +1,3 @@
-const { employees, animals } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
