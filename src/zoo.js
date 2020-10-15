@@ -146,7 +146,7 @@ const secondOption2 = (sort2) => {
   bears.forEach(element => (bears = element.residents.map(element2 => element2.name)));
   let elephants = animals.filter(element => element.name === 'elephants');
   elephants.forEach(element => (elephants = element.residents.map(element2 => element2.name)));
-  if(sort2 === true){
+  if (sort2 === true) {
     lions = lions.sort();
     giraffes = giraffes.sort();
     tigers = tigers.sort();
@@ -173,7 +173,7 @@ const secondOption = (sort) => {
   frogs.forEach(element => (frogs = element.residents.map(element2 => element2.name)));
   let snakes = animals.filter(element => element.name === 'snakes');
   snakes.forEach(element => (snakes = element.residents.map(element2 => element2.name)));
-  if(sort === true){
+  if (sort === true) {
     penguins = penguins.sort();
     otters = otters.sort();
     frogs = frogs.sort();
