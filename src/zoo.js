@@ -256,19 +256,21 @@ function oldestFromFirstSpecies(id) {
 }
 
 //-------------------------------------------------------------------------------------
-const format = (num, decimals) => num.toLocaleString('en-US', {
-  minimumFractionDigits: 2,      
-  maximumFractionDigits: 2,
-});
+
+const format = (num, decimals) =>
+  num.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
 function increasePrices(percentage) {
-  percentage = percentage / 100;
+  percentage /= 100;
 
   const { Adult, Senior, Child } = prices;
   const adultPercentage = Adult * percentage;
   const seniorPercentage = Senior * percentage;
   const childPercentage = Child * percentage;
-  prices.Adult =  parseFloat(format(Adult + adultPercentage));
+  prices.Adult = parseFloat(format(Adult + adultPercentage));
   prices.Senior = parseFloat(format(Senior + seniorPercentage));
   prices.Child = parseFloat(format(Child + childPercentage));
 }
