@@ -182,7 +182,7 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {
   // seu código aqui
   const firstAnimal = data.employees
-    .find((idEmp) => idEmp.id === id).responsibleFor[0];
+    .find(idEmp => idEmp.id === id).responsibleFor[0];
   let old = 0;
   let oldestAnimal;
   data.animals
