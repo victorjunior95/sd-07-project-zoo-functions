@@ -62,19 +62,25 @@ const entryCalculator = (entrants = 0) =>
   Object.entries(entrants).reduce((acc, current) =>
     acc + (current[1] * whatValue(current[0])), 0);
 
-function animalMap(options) {
-  /** Sem parâmetros, retorna animais categorizados por localização
-   * Com a opção includeNames: true especificada, retorna nomes de animais
-   * Com a opção sorted: true especificada, retorna nomes de animais ordenados
-   * Com a opção sex: 'female' ou sex: 'male' especificada, retorna somente
-   nomes de animais macho/fêmea
-   * Com a opção sex: 'female' ou sex: 'male' especificada e a opção sort:
-   true especificada,
-   retorna somente nomes de animais macho/fêmea com os nomes dos animais ordenados
-   * Só retorna informações ordenadas e com sexo se a opção includeNames:
-   true for especificada */
+//Question 9
+//refatorar
+const getObjAnimalsNames = (animalName, sex) =>
+  animals.find( animal => animalName === animal.name).residents.filter(animal => {
+    if (sex !== undefined) return animal.sex === sex;
+    return animal 
+  }).reduce((acc,crr) => {
+    acc[animalName].push(crr.name);
+    return acc;
+  }, { [animalName]: [] });
 
-}
+const createMapObj = () => animals.reduce((acc, crr) => {  
+  acc[crr.location].push(crr.name);
+  return acc;
+}, { NE: [], NW: [], SE: [], SW: [] });
+
+const animalMap = (options = {}) => Object.keys(options).map()
+
+console.log(animalMap({ includeNames: true, sex: 'female', sorted: true })['NE'][0]);
 
 const listHours = (input = Object.keys(hours)) => input.reduce((acc, curr) => {
   if (hours[curr].close !== 0) {
@@ -130,8 +136,6 @@ const employeeCoverage = (idOrName = employeesList()) => {
   if (typeof idOrName === 'string') return creatObjectEmployee([idOrName]);
   return creatObjectEmployee(idOrName);
 };
-
-console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   entryCalculator,
