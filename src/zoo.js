@@ -275,8 +275,25 @@ function increasePrices(percentage) {
   prices.Child = parseFloat(format(Child + childPercentage));
 }
 
+//-------------------------------------------------------------------------------------
+
+// prettier-ignore
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (idOrName === undefined) {
+    const obj = {};
+    employees.forEach(empregado => {
+      obj[`${empregado.firstName} ${empregado.lastName}`] = empregado.responsibleFor.map((id) => {
+        let string = '';
+        animals.forEach((animal) => {
+          if (id === animal.id) {
+            string = `${animal.name}`;
+          }
+        });
+        return string;
+      });
+    });
+    return obj;
+  }
 }
 
 module.exports = {
