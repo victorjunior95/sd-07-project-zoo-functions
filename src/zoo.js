@@ -90,13 +90,16 @@ function schedule(dayName) {
   return days;
 }
 
-
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
 function increasePrices(percentage) {
-  // seu cod...
+  const value = Object.keys(data.prices);
+  value.forEach((price) => {
+    const ajustment = Math.round((data.prices[price] * (1 + (percentage / 100))) * 100) / 100;
+    data.prices[price] = ajustment;
+  });
 }
 
 function employeeCoverage(idOrName) {
