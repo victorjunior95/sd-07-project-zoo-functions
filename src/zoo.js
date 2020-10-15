@@ -78,22 +78,15 @@ function animalMap(options) {
 
 function schedule(dayName) {
   const weekSchedule = {};
-  if (dayName === undefined) {
-    weekSchedule.Tuesday = `Open from ${data.hours.Tuesday.open}am until ${data.hours.Tuesday.close - 12}pm`;
-    weekSchedule.Wednesday = `Open from ${data.hours.Wednesday.open}am until ${data.hours.Wednesday.close - 12}pm`;
-    weekSchedule.Thursday = `Open from ${data.hours.Thursday.open}am until ${data.hours.Thursday.close - 12}pm`;
-    weekSchedule.Friday = `Open from ${data.hours.Friday.open}am until ${data.hours.Friday.close - 12}pm`;
-    weekSchedule.Saturday = `Open from ${data.hours.Saturday.open}am until ${data.hours.Saturday.close - 12}pm`;
-    weekSchedule.Sunday = `Open from ${data.hours.Sunday.open}am until ${data.hours.Sunday.close - 12}pm`;
-    weekSchedule.Monday = 'CLOSED';
-    return weekSchedule;
-  }
-  const days = Object.entries(data.hours);
-  const dayIWant = days.find(today => today[0] === dayName);
-  if (dayIWant[0] === 'Monday') {
-    weekSchedule[dayIWant[0]] = 'CLOSED';
-  } else {
-    weekSchedule[dayIWant[0]] = `Open from ${dayIWant[1].open}am until ${dayIWant[1].close - 12}pm`;
+  Object.keys(data.hours).forEach((workingDays) => {
+    if (data.hours[workingDays].open === data.hours[workingDays].close) {
+      weekSchedule[workingDays] = 'CLOSED';
+    } else {
+      weekSchedule[workingDays] = `Open from ${data.hours[workingDays].open}am until ${data.hours[workingDays].close - 12}pm`;
+    }
+  });
+  if (dayName !== undefined) {
+    return { [dayName]: weekSchedule[dayName] };
   }
   return weekSchedule;
 }
