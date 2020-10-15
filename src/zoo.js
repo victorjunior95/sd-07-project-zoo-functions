@@ -178,7 +178,7 @@ function schedule(dayName) {
 
   return humanReturn;
 }
-// Requisito 11 - On Going
+// Requisito 11 - OK
 function oldestFromFirstSpecies(id) {
   // seu código aqui
   const firstAnimal = data.employees
@@ -195,9 +195,17 @@ function oldestFromFirstSpecies(id) {
       });
   return oldestAnimal;
 }
-
+// Requisito 12 - On Going
 function increasePrices(percentage) {
   // seu código aqui
+  const keys = Object.keys(data.prices);
+  const values = Object.values(data.prices);
+
+  keys.map((key, index) => {
+    data.prices[key] = Math.round(values[index] * (1 + (percentage / 100)) * 100)/100;
+  })
+
+  return data.prices;
 }
 
 function employeeCoverage(idOrName) {
