@@ -205,7 +205,7 @@ function increasePrices(percentage) {
     data.prices[key] = Math
     .round(values[index] * (1 + (percentage / 100)) * 100) / 100;
 
-    return
+    return true;
   });
 
   return data.prices;
