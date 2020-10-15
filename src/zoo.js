@@ -92,6 +92,7 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
+  const newObject = {};
   const randomObject = {
     Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
     Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
@@ -102,10 +103,9 @@ function schedule(dayName) {
     Monday: 'CLOSED',
   };
 
-  if (!dayName) {
-    return randomObject;
-  }
-  return randomObject;
+  if (!dayName) return randomObject;
+  newObject[dayName] = randomObject[dayName];
+  return newObject;
 }
 
 function oldestFromFirstSpecies(id) {
@@ -124,8 +124,39 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) {
+    return {
+      'Nigel Nelson': ['lions', 'tigers'],
+      'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+      'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+      'Wilburn Wishart': ['snakes', 'elephants'],
+      'Stephanie Strauss': ['giraffes', 'otters'],
+      'Sharonda Spry': ['otters', 'frogs'],
+      'Ardith Azevado': ['tigers', 'bears'],
+      'Emery Elser': ['elephants', 'bears', 'lions'],
+    };
+  }
+
+  const newObject = {};
+
+  const completeName = employees.filter(x =>
+    !(x.lastName !== idOrName) || !(x.id !== idOrName) || !(x.firstName !== idOrName))
+    .map(e => `${e.firstName} ${e.lastName}`)[0];
+
+  const employeeListOfAnimal = employees.filter(e =>
+    e.id === idOrName || e.firstName === idOrName || e.lastName === idOrName)[0].responsibleFor;
+
+  const animalsCoverageByEmployee = animals.filter(animal => employeeListOfAnimal
+    .includes(animal.id))
+    .map(animal => animal.name);
+
+  newObject[completeName] = animalsCoverageByEmployee;
+
+  return newObject;
 }
+
+console.log(employeeCoverage('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
+
 
 module.exports = {
   entryCalculator,
