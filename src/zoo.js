@@ -156,28 +156,24 @@ function animalMap(options) {
 function schedule(dayName) {
   // seu código aqui
   const days = Object.keys(data.hours);
-  const time = Object.values(data.hours);
   const humanReturn = {};
 
-  if (dayName === undefined) {
-    days.map((day, index) => {
-      const { open } = time[index];
-      const { close } = time[index];
-      if (open === 0 && close === 0) {
-        humanReturn[day] = 'CLOSED';
-      } else {
-        humanReturn[day] = `Open from ${open}am until ${close - 12}pm`;
-      }
-    });
-  } else {
-    const { open } = data.hours[dayName];
-    const { close } = data.hours[dayName];
+  const returnInformation = (day) => {
+    const { open } = data.hours[day];
+    const { close } = data.hours[day];
     if (open === 0 && close === 0) {
-      humanReturn[dayName] = 'CLOSED';
+      humanReturn[day] = 'CLOSED';
     } else {
-      humanReturn[dayName] = `Open from ${open}am until ${close - 12}pm`;
+      humanReturn[day] = `Open from ${open}am until ${close - 12}pm`;
     }
   }
+
+  if (dayName === undefined) {
+    days.map(day => returnInformation(day));
+  } else {
+    returnInformation(dayName);
+  }
+
   return humanReturn;
 }
 
