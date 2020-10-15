@@ -60,7 +60,13 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (species === undefined) {
+    const animalsInZoo = data.animals.map(element => (
+      animalsInZoo[element.name] = element.popularity));
+    return animalsInZoo;
+  }
+  const animalsInZoo = data.animals.find(animal => animal.name === species);
+  return animalsInZoo.popularity;
 }
 
 function entryCalculator(entrants) {
