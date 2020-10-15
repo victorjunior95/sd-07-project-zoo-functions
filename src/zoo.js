@@ -66,54 +66,63 @@ function entryCalculator(entrants) {
   .reduce((acc, element) => acc + (entrants[element] * data.prices[element]), 0);
 }
 
-
-// pequenas funções para localização
-// const getLocation = local => local.location;
-// metodo filter para retirar duplicidade
-// const region = data.animals.map(getLocation)
-// .filter((element, index, array) => index === array.indexOf(element));
-// pegar os residents
+// pequenas funções
+//filtrar localização.
+const getLocation = local => local.location;
+// filtrar names das especies
+// const getNameSpecies = species => species.name;
+// extrair localização das espécies sem duplicidade.
+const region = data.animals.map(getLocation)
+.filter((element, index, array) => index === array.indexOf(element));
+// extrair os residents por espécie.
 // const getResidents = group => group.residents;
 
-// if (options === undefined) ok
-// function nameSpecieForRegion() {
-//   const regionAnimals = region;
-//   const result = {};
-//   regionAnimals.forEach((regAnimals) => {
-//     const animalsForlocation = data.animals.map(animal => {
-//       if (regAnimals === animal.location) {
-//       return animal.name;
-//     }
-//     }).filter(specie => specie !== undefined);
-//     result[regionAnimals] = animalsForlocation;
-//   });
-//   return result;
-// }
-function animalMap(options) {
-
+function nameSpecieForRegion(region, options) {
+  const result = {};
+  if (options === undefined) {
+    region.forEach((regAnimals) => {
+      const animalsForlocation = (data.animals).map((animal) => {
+        if (regAnimals === animal.location) {
+          return animal.name;
+        }
+      }).filter(specie => specie !== undefined);
+      result[regAnimals] = animalsForlocation;
+    });
+  }
+  return result;
 }
-// corrigir
-// function animalMap(options) {
-//   const result = {};
-//   const regionAnimals = region;
-//   if (options === undefined) {
-//     regionAnimals.forEach((regAnimals) => {
-//       const animalsForlocation = (data.animals).map((animal) => {
-//         if (regAnimals === animal.location) {
-//           return animal.name;
-//         }
-//       }).filter(specie => specie !== undefined);
-//       result[regAnimals] = animalsForlocation;
-//     });
-//   }
-//   // if (options.includeNames === true) {
-//   //   // result["estou conseguindo!"] = 'gloria!'
 
-//   // }
-//   return result;
-// }
-// console.log(animalMap());
+function nameResidents(region, sorted, sex) {
+  const animalsPerLocationWithName = {};
+  region.forEach((location) => {
+    const animals = data.animals
+      .filter(animal => animal.location === location)
+      .map((animal) => {
+        const nameKey = animal.name;
+        const nameValues = animal.residents
+          .filter((resident) => {
+            const isFilteringSex = sex !== undefined;
+            return isFilteringSex ? resident.sex === sex : true;
+          })
+          .map(resident => resident.name);
+        if (sorted) nameValues.sort();
+      //  console.log(nameValues);
+        return { [nameKey]: nameValues };
+      });
+    animalsPerLocationWithName[location] = animals;
+  });
+  return animalsPerLocationWithName;
+}
+// console.log(nameResidents(region, true));
 
+const options = { includeNames: true, sorted: true };
+function animalMap(options) {
+  const { includeNames, sorted, sex } = options;
+  if (!options) return nameSpecieForRegion(region, options);
+  if (!includeNames) return nameSpecieForRegion(region);
+  return nameResidents(region, sorted, sex);
+}
+// console.log(animalMap(options));
 
 function schedule(dayName) {
   const workingDays = Object.assign({}, data.hours);
@@ -218,7 +227,7 @@ function employeeCoverage(idOrName) {
   if (idOrName === undefined) return result;
   return { [searchEmployee(idOrName)]: result[searchEmployee(idOrName)] };
 }
-console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+// console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   entryCalculator,
