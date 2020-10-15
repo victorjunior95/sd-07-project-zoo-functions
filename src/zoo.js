@@ -1,3 +1,4 @@
+const { employees } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -195,7 +196,7 @@ function oldestFromFirstSpecies(id) {
       });
   return oldestAnimal;
 }
-// Requisito 12 - On Going
+// Requisito 12 - OK
 function increasePrices(percentage) {
   // seu código aqui
   const keys = Object.keys(data.prices);
@@ -210,9 +211,36 @@ function increasePrices(percentage) {
 
   return data.prices;
 }
-
+// Requisito 13 - On Going
 function employeeCoverage(idOrName) {
   // seu código aqui
+  const employees = {};
+  
+  const animalsList = (firstName, lastName, responsibleFor) => {
+    const employeeName = `${firstName} ${lastName}`;
+    const animals = [];
+    responsibleFor
+      .forEach((animalId) => {
+        animals.push(data.animals.find(({ id }) => id === animalId).name);
+      });
+    employees[employeeName] = animals;
+  }
+
+  if (idOrName === undefined) {
+    data.employees
+      .forEach(({ firstName, lastName, responsibleFor }) => {
+        animalsList(firstName, lastName, responsibleFor);
+      });
+  } else {
+    const employeeData = data.employees.find(({ id, firstName, lastName }) => 
+      id === idOrName || firstName === idOrName || lastName === idOrName);
+      
+    const { firstName, lastName, responsibleFor} = employeeData;
+
+    animalsList(firstName, lastName, responsibleFor);
+  }
+
+  return employees;
 }
 
 module.exports = {
