@@ -255,8 +255,22 @@ function oldestFromFirstSpecies(id) {
   return oldest;
 }
 
+//-------------------------------------------------------------------------------------
+const format = (num, decimals) => num.toLocaleString('en-US', {
+  minimumFractionDigits: 2,      
+  maximumFractionDigits: 2,
+});
+
 function increasePrices(percentage) {
-  // seu código aqui
+  percentage = percentage / 100;
+
+  const { Adult, Senior, Child } = prices;
+  const adultPercentage = Adult * percentage;
+  const seniorPercentage = Senior * percentage;
+  const childPercentage = Child * percentage;
+  prices.Adult =  parseFloat(format(Adult + adultPercentage));
+  prices.Senior = parseFloat(format(Senior + seniorPercentage));
+  prices.Child = parseFloat(format(Child + childPercentage));
 }
 
 function employeeCoverage(idOrName) {
