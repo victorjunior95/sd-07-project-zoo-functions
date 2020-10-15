@@ -110,8 +110,7 @@ function oldestFromFirstSpecies(id) {
   const arrayIds = idEmployees(id);
   const firstIdAnimal = arrayIds[0];
   const arrayObjAnimals = data.animals.filter(inimalId =>
-    inimalId.id === firstIdAnimal)
-    .find(element => element).residents;
+    inimalId.id === firstIdAnimal).find(element => element).residents;
   const arrayOfAges = arrayObjAnimals.map(item => item.age);
   const bigger = getBigger(arrayOfAges);
   const arrayObjResult = arrayObjAnimals.filter(bicho => (bicho.age === bigger));
@@ -126,8 +125,35 @@ function increasePrices(percentage) {
   // seu código aqui
 }
 
+const everyBody = () => {
+  const getNamePersonAndAnimals = {};
+  const animals = data.animals;
+  const employees = data.employees;
+  employees.forEach((personId) => {
+    getNamePersonAndAnimals[`${personId.firstName} ${personId.lastName}`] = personId
+    .responsibleFor.map(animalId => animals.find(element => element.id === animalId).name);
+  });
+  return getNamePersonAndAnimals;
+};
+
+const onlyOne = (idOrName) => {
+  const addNamePersonAndAnimals = {};
+  data.employees.forEach((employee) => {
+    if (employee.id === idOrName || employee
+      .firstName === idOrName || employee
+      .lastName === idOrName) {
+      addNamePersonAndAnimals[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor
+      .map(animalId => data.animals.find(theAnimal => theAnimal.id === animalId).name);
+    }
+  });
+  return addNamePersonAndAnimals;
+};
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (idOrName === undefined) {
+    return everyBody();
+  }
+  return onlyOne(idOrName);
 }
 
 module.exports = {
