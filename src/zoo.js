@@ -152,9 +152,33 @@ function animalMap(options) {
   data.animals.forEach(({ name, location }) => animalLocale[location].push(name));
   return animalLocale;
 }
-
+// Requisito 10 - On Going
 function schedule(dayName) {
   // seu código aqui
+  const days = Object.keys(data.hours);
+  const time = Object.values(data.hours);
+  const humanReturn = {};
+
+  if (dayName === undefined) {
+    days.map((day, index) => {
+      const { open } = time[index];
+      const { close } = time[index];
+      if (open === 0 && close === 0) {
+        humanReturn[day] = 'CLOSED';
+      } else {
+        humanReturn[day] = `Open from ${open}am until ${close - 12}pm`;
+      }
+    });
+  } else {
+    const { open } = data.hours[dayName];
+    const { close } = data.hours[dayName];
+    if (open === 0 && close === 0) {
+      humanReturn[dayName] = 'CLOSED';
+    } else {
+      humanReturn[dayName] = `Open from ${open}am until ${close - 12}pm`;
+    }
+  }
+  return humanReturn;
 }
 
 function oldestFromFirstSpecies(id) {
