@@ -135,7 +135,7 @@ const firstOption = () => {
 };
 
 // prettier-ignore
-const secondOption2 = () => {
+const secondOption2 = (sort2) => {
   let lions = animals.filter(element => element.name === 'lions');
   lions.forEach(element => (lions = element.residents.map(element2 => element2.name)));
   let giraffes = animals.filter(element => element.name === 'giraffes');
@@ -146,6 +146,13 @@ const secondOption2 = () => {
   bears.forEach(element => (bears = element.residents.map(element2 => element2.name)));
   let elephants = animals.filter(element => element.name === 'elephants');
   elephants.forEach(element => (elephants = element.residents.map(element2 => element2.name)));
+  if(sort2 === true){
+    lions = lions.sort();
+    giraffes = giraffes.sort();
+    tigers = tigers.sort();
+    bears = bears.sort();
+    elephants = elephants.sort();
+  }
   const obj = {};
   obj.NE = [{ lions }];
   obj.NE.push({ giraffes });
@@ -156,7 +163,8 @@ const secondOption2 = () => {
 };
 
 // prettier-ignore
-const secondOption = () => {
+const secondOption = (sort) => {
+  let sort2;
   let penguins = animals.filter(element => element.name === 'penguins');
   penguins.forEach(element => (penguins = element.residents.map(element2 => element2.name)));
   let otters = animals.filter(element => element.name === 'otters');
@@ -165,7 +173,14 @@ const secondOption = () => {
   frogs.forEach(element => (frogs = element.residents.map(element2 => element2.name)));
   let snakes = animals.filter(element => element.name === 'snakes');
   snakes.forEach(element => (snakes = element.residents.map(element2 => element2.name)));
-  const obj = secondOption2();
+  if(sort === true){
+    penguins = penguins.sort();
+    otters = otters.sort();
+    frogs = frogs.sort();
+    snakes = snakes.sort();
+    sort2 = true;
+  }
+  const obj = secondOption2(sort2);
   obj.SE = [{ penguins }];
   obj.SE.push({ otters });
   obj.SW = [{ frogs }];
@@ -182,6 +197,11 @@ function animalMap(objeto) {
     const obj = secondOption();
     return obj;
   }
+  if (objeto.includeNames === true && objeto.sorted === true) {
+    const obj = secondOption(true);
+    return obj;
+  }
+
   return 0;
 }
 
