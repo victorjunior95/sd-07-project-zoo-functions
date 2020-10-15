@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 // const { employees, animals } = require('./data');
-const { prices, animals } = require('./data');
+const { prices, animals, employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -151,10 +151,11 @@ function increasePrices(percentage) {
   prices.Senior = Math.round(increasedSeniorPrice * 100) / 100;
 }
 
+// primeira tentativa para função employeeCoverage
 // retorna nome do animal por id
 const idAnimals = ids => animals.find(searchId => searchId.id === ids).name;
 // console.log(idAnimals('0938aa23-f153-4937-9f88-4858b24d6bce'));
-
+// a função employeesBySpecies, retorna todos func e respectvas especies
 // function employeesBySpecies() {
 //   const result = {};
 //   data.employees
@@ -164,7 +165,7 @@ const idAnimals = ids => animals.find(searchId => searchId.id === ids).name;
 //     });
 //   return result;
 // }
-
+// a função employeeByType, retorna somente 1 funcionário e respec especie
 // function employeeByType(idOrName) {
 //   const result = {};
 //   data.employees
@@ -176,39 +177,46 @@ const idAnimals = ids => animals.find(searchId => searchId.id === ids).name;
 //   });
 //   return result;
 // }
-
+// a função employeesBySpecies, retorna o func e o id das especies
 // function employeesBySpecies() {
 //   const result = {};
 //   data.employees
 //     .forEach((ids) => {
-      
 //     });
 //   return result;
 // }
-
-function employeeByType(idOrName) {
-  const result = {};
-  data.employees
-  .forEach((ids) => {
-    if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
-      result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-      .map(idAnimals);
-    } else if (!idOrName) {
-      result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
-      .map(idAnimals);
-    }
-  });
-  return result;
-}
-
-
-
+// segunda tentativa para função employeeCoverage
+// function employeeByType(idOrName) {
+//   const result = {};
+//   data.employees
+//   .forEach((ids) => {
+//     if (ids.id === idOrName || ids.firstName === idOrName || ids.lastName === idOrName) {
+//       result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+//       .map(idAnimals);
+//     } else if (!idOrName) {
+//       result[`${ids.firstName} ${ids.lastName}`] = ids.responsibleFor
+//       .map(idAnimals);
+//     }
+//   });
+//   return result;
+// }
 
 function employeeCoverage(idOrName) {
-  // if (!idOrName) {
-  //   return employeesBySpecies();
-  // }
-  return employeeByType(idOrName);
+  const result = {}
+  data.employees.forEach((employee) => {
+    result[`${employee.firstName} ${employee.lastName}`] =
+      employee.responsibleFor.map(idAnimals)
+  })
+
+  const searchEmployee = (condition) => {
+    const employeeDetails = data.employees.find(employee => employee.firstName === condition
+      || employee.lastName === condition
+      || employee.id === condition)
+    return `${employeeDetails.firstName} ${employeeDetails.lastName}`
+  }
+
+  if (idOrName === undefined) return result
+  return { [searchEmployee(idOrName)]: result[searchEmployee(idOrName)] }
 }
 console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
