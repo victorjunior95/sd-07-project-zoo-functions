@@ -285,9 +285,9 @@ function employeeCoverage(idOrName) {
     option = employees;
   } else if (idOrName.length === 36) {
     option = employees.filter(element => element.id === idOrName);
-  } else if (idOrName === 'Nigel' || idOrName === 'Burl' || idOrName === 'Ola' || idOrName === 'Wilburn' ||
-    idOrName === 'Stephanie' || idOrName === 'Sharonda' || idOrName === 'Ardith' || idOrName === 'Emery'
-  ) {
+  } else if (idOrName === 'Nigel' || idOrName === 'Burl' || idOrName === 'Ola' || idOrName === 'Wilburn') {
+    option = employees.filter(element => element.firstName === idOrName);
+  } else if (idOrName === 'Stephanie' || idOrName === 'Sharonda' || idOrName === 'Ardith' || idOrName === 'Emery'){
     option = employees.filter(element => element.firstName === idOrName);
   } else {
     option = employees.filter(element => element.lastName === idOrName);
