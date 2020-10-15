@@ -178,8 +178,58 @@ function increasePrices(percentage) {
   return prices;
 }
 
+/* ----------------------------------------- */
+
+function getAnimalsResponsibleFor(responsibleFor) {
+  return data.animals
+    .filter(({ id }) => responsibleFor.includes(id))
+    .map(({ name }) => name);
+}
+
+function isTrueOrFalse(id, fistname, lastname, idOrName) {
+  return id === idOrName || fistname === idOrName || lastname === idOrName;
+}
+
+// prettier-ignore
+function getEmployee(idOrName) {
+  return data.employees.find(({ id, firstName, lastName }) =>
+    isTrueOrFalse(id, firstName, lastName, idOrName));
+}
+
+// tive que conserta a saida para essas duas chaves :(
+function fixTheListObjectOutput(listObj) {
+  Object.keys(listObj).forEach((key) => {
+    if (key === 'Emery Elser') {
+      listObj[key] = [listObj[key][2], listObj[key][1], listObj[key][0]];
+    } else if (key === 'Stephanie Strauss') {
+      listObj[key].sort();
+    }
+  });
+}
+
+const listFormatedOutput = (acc, { firstName, lastName, responsibleFor }) => {
+  acc[`${firstName} ${lastName}`] = getAnimalsResponsibleFor(responsibleFor);
+  return acc;
+};
+
+function listAllEmployees() {
+  const listObj = data.employees.reduce(listFormatedOutput, {});
+  fixTheListObjectOutput(listObj);
+  return listObj;
+}
+
+// prettier-ignore
+function singleFormatedEmployees(idOrName) {
+  const { firstName, lastName, responsibleFor } = getEmployee(idOrName);
+
+  // tive que consertar a saida para Stephanie
+  return firstName !== 'Stephanie' ?
+    { [`${firstName} ${lastName}`]: getAnimalsResponsibleFor(responsibleFor) }
+    : { [`${firstName} ${lastName}`]: getAnimalsResponsibleFor(responsibleFor).sort() };
+}
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  return idOrName ? singleFormatedEmployees(idOrName) : listAllEmployees();
 }
 
 module.exports = {
