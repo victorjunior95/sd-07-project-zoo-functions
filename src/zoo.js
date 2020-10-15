@@ -1,10 +1,10 @@
 /*
 eslint no-unused-vars: [
-  "error",
+  'error',
   {
-    "args": "none",
-    "vars": "local",
-    "varsIgnorePattern": "data"
+    'args': 'none',
+    'vars': 'local',
+    'varsIgnorePattern': 'data'
   }
 ]
 */
@@ -17,14 +17,20 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  const animalSelected = data.animals.filter(species => species.name === animal);
-  return animalSelected.every(resident => resident.residents
-    .every(animalResident => animalResident.age >= age));
+  const animalSelected = data.animals.filter(
+    species => species.name === animal,
+  );
+  return animalSelected.every(resident =>
+    resident.residents.every(animalResident => animalResident.age >= age),
+  );
 }
 
 function employeeByName(employeeName) {
   return data.employees.reduce((employeeRegistration, employee) => {
-    if (employee.firstName === employeeName || employee.lastName === employeeName) {
+    if (
+      employee.firstName === employeeName ||
+      employee.lastName === employeeName
+    ) {
       employeeRegistration = employee;
     }
     return employeeRegistration;
@@ -36,10 +42,18 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some(employee => employee.managers.some(idManager => idManager === id));
+  return data.employees.some(employee =>
+    employee.managers.some(idManager => idManager === id),
+  );
 }
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+function addEmployee(
+  id,
+  firstName,
+  lastName,
+  managers = [],
+  responsibleFor = [],
+) {
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
@@ -52,7 +66,7 @@ function animalCount(species) {
   }
   return data.animals.reduce((accumulator, animal) => {
     if (animal.name === species) {
-      accumulator = (animal.residents).length;
+      accumulator = animal.residents.length;
     }
     return accumulator;
   }, 0);
@@ -67,14 +81,123 @@ function entryCalculator(entrants) {
   }, 0);
 }
 
+const animalFiltred = animal =>
+      data.animals.filter(animalLocation => animal.location === animalLocation.location);
+
+const animalsInRegion = animal => animalFiltred(animal)
+  .map(objectAnimal => objectAnimal.name);
+
+const animalsNameInRegion = (animal) => {
+  return animalFiltred(animal).map(objectAnimal2 =>
+    objectAnimal2.residents.reduce((acc, resident) => {
+      acc[objectAnimal2.name] = objectAnimal2.residents.map(
+        residentAnimal => residentAnimal.name,
+      );
+      return acc;
+    }, {}),
+  );
+};
+
+const orderedAnimals = (animal) => {
+  return animalFiltred(animal).map(objectAnimal2 =>
+    objectAnimal2.residents.reduce((acc, resident1) => {
+      acc[objectAnimal2.name] = objectAnimal2.residents
+        .map(resident => resident.name)
+        .sort();
+      return acc;
+    }, {}),
+  );
+};
+
+const femaleAnimals = (animal) => {
+  return animalFiltred(animal).map(objectAnimal2 =>
+    objectAnimal2.residents.reduce((acc, resident2) => {
+      acc[objectAnimal2.name] = objectAnimal2.residents
+        .filter(female => female.sex === 'female')
+        .map(resident => resident.name);
+      return acc;
+    }, {}),
+  );
+};
+
+const maleAnimals = (animal) => {
+  return animalFiltred(animal).map(objectAnimal2 =>
+    objectAnimal2.residents.reduce((acc, resident3) => {
+      acc[objectAnimal2.name] = objectAnimal2.residents
+        .filter(female => female.sex === 'male')
+        .map(resident => resident.name);
+      return acc;
+    }, {}),
+  );
+};
+
+const orderedFemaleAnimals = (animal) => {
+  return animalFiltred(animal).map(objectAnimal2 =>
+    objectAnimal2.residents.reduce((acc, resident4) => {
+      acc[objectAnimal2.name] = objectAnimal2.residents
+        .filter(female => female.sex === 'female')
+        .map(resident => resident.name)
+        .sort();
+      return acc;
+    }, {}),
+  );
+};
+
+const orderedMaleAnimals = (animal) => {
+  animalFiltred(animal).map(objectAnimal2 =>
+    objectAnimal2.residents.reduce((acc, resident5) => {
+      acc[objectAnimal2.name] = objectAnimal2.residents
+        .filter(female => female.sex === 'male')
+        .map(resident => resident.name)
+        .sort();
+      return acc;
+    }, {}),
+  );
+};
+
 function animalMap(options) {
-  // seu código aqui
+  const animalReportByRegion = data.animals.reduce((categorized, animal) => {
+    if (options === undefined) {
+      categorized[animal.location] = animalsInRegion(animal);
+    } else if (
+      options.includeNames === undefined &&
+      (options.sex === 'female' || options.sorted === true)
+    ) {
+      categorized[animal.location] = animalsInRegion(animal);
+    } else if (
+      options.includeNames === true &&
+      options.sex === 'female' &&
+      options.sorted === true
+    ) {
+      categorized[animal.location] = orderedFemaleAnimals(animal);
+    } else if (
+      options.includeNames === true &&
+      options.sex === 'male' &&
+      options.sorted === true
+    ) {
+      categorized[animal.location] = orderedMaleAnimals(animal);
+    } else if (options.includeNames === true && options.sex === 'female') {
+      categorized[animal.location] = femaleAnimals(animal);
+    } else if (options.includeNames === true && options.sex === 'male') {
+      categorized[animal.location] = maleAnimals(animal);
+    } else if (options.includeNames === true && options.sorted === true) {
+      categorized[animal.location] = orderedAnimals(animal);
+    } else if (options.includeNames === true) {
+      categorized[animal.location] = animalsNameInRegion(animal);
+    }
+    return categorized;
+  }, {});
+  return animalReportByRegion;
 }
+
+console.log(animalMap({ includeNames: true, sex: 'female', sorted: true }));
 
 function schedule(dayName) {
   const arrayHours = Object.entries(data.hours);
   return arrayHours.reduce((report, daysHour) => {
-    const message = `Open from ${daysHour[1].open}am until ${daysHour[1].close - 12}pm`;
+    const message = `Open from ${daysHour[1].open}am until ${
+      daysHour[1].close - 12
+    }pm`;
     if (daysHour[1].open === 0 && dayName === undefined) {
       report[daysHour[0]] = 'CLOSED';
     } else if (daysHour[1].open !== 0 && dayName === undefined) {
@@ -89,8 +212,10 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  const idFirstAnimal = data.employees.find(employee => employee.id === id).responsibleFor[0];
-  const firstSpecieResident = data.animals.find(animals => animals.id === idFirstAnimal).residents;
+  const idFirstAnimal = data.employees.find(employee => employee.id === id)
+    .responsibleFor[0];
+  const firstSpecieResident = data.animals.find(
+    animals => animals.id === idFirstAnimal).residents;
   let innitialAge = 0;
   return firstSpecieResident.reduce((olderAnimal, { name, sex, age }) => {
     if (age > innitialAge) {
@@ -108,33 +233,33 @@ function increasePrices(percentage) {
     number = Math.round(number * 100) / 100;
     return number;
   };
-  data.prices.Adult = roundPrices(Adult + (Adult * (percentage / 100)));
-  data.prices.Child = roundPrices(Child + (Child * (percentage / 100)));
-  data.prices.Senior = roundPrices(Senior + (Senior * (percentage / 100)));
+  data.prices.Adult = roundPrices(Adult + Adult * (percentage / 100));
+  data.prices.Child = roundPrices(Child + Child * (percentage / 100));
+  data.prices.Senior = roundPrices(Senior + Senior * (percentage / 100));
 }
 
 function employeeCoverage(idOrName) {
-  return data.employees.reduce((report, { firstName, lastName, id, responsibleFor }) => {
-    const arrayNameAnimals = [];
-    responsibleFor.forEach((ids) => {
-      const nameAnimal = data.animals.filter(animal => ids === animal.id);
-      arrayNameAnimals.push(nameAnimal[0].name);
-    });
-    if (idOrName === undefined) {
-      report[`${firstName} ${lastName}`] = arrayNameAnimals;
-    } else if (idOrName === firstName) {
-      report[`${firstName} ${lastName}`] = arrayNameAnimals;
-    } else if (idOrName === lastName) {
-      report[`${firstName} ${lastName}`] = arrayNameAnimals;
-    } else if (idOrName === id) {
-      report[`${firstName} ${lastName}`] = arrayNameAnimals;
-    }
-    return report;
-  }, {});
+  return data.employees.reduce(
+    (report, { firstName, lastName, id, responsibleFor }) => {
+      const arrayNameAnimals = [];
+      responsibleFor.forEach((ids) => {
+        const nameAnimal = data.animals.filter((animal) => ids === animal.id);
+        arrayNameAnimals.push(nameAnimal[0].name);
+      });
+      if (idOrName === undefined) {
+        report[`${firstName} ${lastName}`] = arrayNameAnimals;
+      } else if (idOrName === firstName) {
+        report[`${firstName} ${lastName}`] = arrayNameAnimals;
+      } else if (idOrName === lastName) {
+        report[`${firstName} ${lastName}`] = arrayNameAnimals;
+      } else if (idOrName === id) {
+        report[`${firstName} ${lastName}`] = arrayNameAnimals;
+      }
+      return report;
+    },
+    {}
+  );
 }
-
-console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
-
 
 module.exports = {
   entryCalculator,
