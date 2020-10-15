@@ -108,14 +108,19 @@ function schedule(dayName) {
   return randomObject;
 }
 
-console.log(schedule('x'));
-
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const firstAnimal = employees.filter(employee => employee.id === id)[0].responsibleFor[0];
+  return Object.values(animals.filter(animal => animal.id === firstAnimal)[0].residents
+    .sort(function (a, b) { return b.age - a.age; })
+    .find(animal => animal.age !== ''));
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { Adult, Senior, Child } = data.prices;
+  data.prices.Adult = Math.round(Adult * (1 + (percentage / 100)) * 100) / 100;
+  data.prices.Senior = Math.round(Senior * (1 + (percentage / 100)) * 100) / 100;
+  data.prices.Child = Math.round(Child * (1 + (percentage / 100)) * 100) / 100;
+  return data.prices;
 }
 
 function employeeCoverage(idOrName) {
