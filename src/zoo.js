@@ -65,31 +65,31 @@ function animalCount(species = ' ') {
   // seu código aqui
   if (species === ' ') {
     const result = {};
-    data.animals.forEach((animal) => {
+      animals.forEach((animal) => {
       result[animal.name] = animal.residents.length;
       return result;
     });
     return result;
   }
-  const dataAnimal = data.animals.find(animal => animal.name === species);
+  const dataAnimal = animals.find(animal => animal.name === species);
   return dataAnimal.residents.length;
 }
 
 function entryCalculator(...entrants) {
   // seu código aqui
-  if(entrants.length === 0){
+  if (entrants.length === 0) {
     return 0;
-  } 
+  }
   const input = Object.entries(entrants[0]);
-  if(input.length === 0) {
+  if (input.length === 0) {
     return 0;
   }
   let result = 0;
-  entrants.forEach(entries => Object.keys(entries).
-  forEach(item => (result += data.prices[item] * entries[item])));
+  entrants.forEach(entries => Object.keys(entries).forEach(item =>
+  (result += prices[item] * entries[item])));
   return result;
 }
-//entryCalculator({'Adult': 1});
+
 
 function animalMap(options) {
   // seu código aqui
