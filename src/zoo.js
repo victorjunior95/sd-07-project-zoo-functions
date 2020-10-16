@@ -87,110 +87,43 @@ const animalFiltred = animal =>
 const animalsInRegion = animal => animalFiltred(animal)
   .map(objectAnimal => objectAnimal.name);
 
-const animalsNameInRegion = (animal) => {
-  return animalFiltred(animal).map(objectAnimal2 =>
-    objectAnimal2.residents.reduce((acc, resident) => {
-      acc[objectAnimal2.name] = objectAnimal2.residents.map(
-        residentAnimal => residentAnimal.name,
-      );
-      return acc;
-    }, {}),
-  );
-};
-
-const orderedAnimals = (animal) => {
-  return animalFiltred(animal).map(objectAnimal2 =>
-    objectAnimal2.residents.reduce((acc, resident1) => {
-      acc[objectAnimal2.name] = objectAnimal2.residents
-        .map(resident => resident.name)
-        .sort();
-      return acc;
-    }, {}),
-  );
-};
-
-const femaleAnimals = (animal) => {
-  return animalFiltred(animal).map(objectAnimal2 =>
-    objectAnimal2.residents.reduce((acc, resident2) => {
-      acc[objectAnimal2.name] = objectAnimal2.residents
-        .filter(female => female.sex === 'female')
-        .map(resident => resident.name);
-      return acc;
-    }, {}),
-  );
-};
-
-const maleAnimals = (animal) => {
-  return animalFiltred(animal).map(objectAnimal2 =>
-    objectAnimal2.residents.reduce((acc, resident3) => {
-      acc[objectAnimal2.name] = objectAnimal2.residents
-        .filter(female => female.sex === 'male')
-        .map(resident => resident.name);
-      return acc;
-    }, {}),
-  );
-};
-
-const orderedFemaleAnimals = (animal) => {
-  return animalFiltred(animal).map(objectAnimal2 =>
+const orderedAnimalsBySex = (animal, sex, sorted) => {
+  const orderedAnimalsBS = animalFiltred(animal).map(objectAnimal2 =>
     objectAnimal2.residents.reduce((acc, resident4) => {
+      if (sex && !sorted) {
+        acc[objectAnimal2.name] = objectAnimal2.residents
+        .filter(sexAnimal => sexAnimal.sex === sex).map(resident => resident.name);
+        return acc;
+      } else if (!sex && sorted) {
+        acc[objectAnimal2.name] = objectAnimal2.residents.map(resident => resident.name).sort();
+        return acc;
+      } else if (!sex && !sorted) {
+        acc[objectAnimal2.name] = objectAnimal2.residents.map(
+          residentAnimal => residentAnimal.name,
+        );
+        return acc;
+      }
       acc[objectAnimal2.name] = objectAnimal2.residents
-        .filter(female => female.sex === 'female')
-        .map(resident => resident.name)
-        .sort();
+        .filter(female => female.sex === sex).map(resident => resident.name).sort();
       return acc;
     }, {}),
   );
-};
-
-const orderedMaleAnimals = (animal) => {
-  animalFiltred(animal).map(objectAnimal2 =>
-    objectAnimal2.residents.reduce((acc, resident5) => {
-      acc[objectAnimal2.name] = objectAnimal2.residents
-        .filter(female => female.sex === 'male')
-        .map(resident => resident.name)
-        .sort();
-      return acc;
-    }, {}),
-  );
+  return orderedAnimalsBS;
 };
 
 function animalMap(options) {
   const animalReportByRegion = data.animals.reduce((categorized, animal) => {
-    if (options === undefined) {
+    if (options === undefined || options.includeNames === undefined) {
       categorized[animal.location] = animalsInRegion(animal);
-    } else if (
-      options.includeNames === undefined &&
-      (options.sex === 'female' || options.sorted === true)
-    ) {
-      categorized[animal.location] = animalsInRegion(animal);
-    } else if (
-      options.includeNames === true &&
-      options.sex === 'female' &&
-      options.sorted === true
-    ) {
-      categorized[animal.location] = orderedFemaleAnimals(animal);
-    } else if (
-      options.includeNames === true &&
-      options.sex === 'male' &&
-      options.sorted === true
-    ) {
-      categorized[animal.location] = orderedMaleAnimals(animal);
-    } else if (options.includeNames === true && options.sex === 'female') {
-      categorized[animal.location] = femaleAnimals(animal);
-    } else if (options.includeNames === true && options.sex === 'male') {
-      categorized[animal.location] = maleAnimals(animal);
-    } else if (options.includeNames === true && options.sorted === true) {
-      categorized[animal.location] = orderedAnimals(animal);
-    } else if (options.includeNames === true) {
-      categorized[animal.location] = animalsNameInRegion(animal);
+    } else {
+      categorized[animal.location] = orderedAnimalsBySex(animal, options.sex, options.sorted);
     }
     return categorized;
   }, {});
   return animalReportByRegion;
 }
 
-console.log(animalMap({ includeNames: true, sex: 'female', sorted: true }));
+console.log(animalMap({ includeNames: true, sex: 'male', sorted: true }));
 
 function schedule(dayName) {
   const arrayHours = Object.entries(data.hours);
@@ -233,9 +166,9 @@ function increasePrices(percentage) {
     number = Math.round(number * 100) / 100;
     return number;
   };
-  data.prices.Adult = roundPrices(Adult + Adult * (percentage / 100));
-  data.prices.Child = roundPrices(Child + Child * (percentage / 100));
-  data.prices.Senior = roundPrices(Senior + Senior * (percentage / 100));
+  data.prices.Adult = roundPrices(Adult + (Adult * (percentage / 100)));
+  data.prices.Child = roundPrices(Child + (Child * (percentage / 100)));
+  data.prices.Senior = roundPrices(Senior + (Senior * (percentage / 100)));
 }
 
 function employeeCoverage(idOrName) {
@@ -243,7 +176,7 @@ function employeeCoverage(idOrName) {
     (report, { firstName, lastName, id, responsibleFor }) => {
       const arrayNameAnimals = [];
       responsibleFor.forEach((ids) => {
-        const nameAnimal = data.animals.filter((animal) => ids === animal.id);
+        const nameAnimal = data.animals.filter(animal => ids === animal.id);
         arrayNameAnimals.push(nameAnimal[0].name);
       });
       if (idOrName === undefined) {
@@ -257,7 +190,7 @@ function employeeCoverage(idOrName) {
       }
       return report;
     },
-    {}
+    {},
   );
 }
 
