@@ -79,23 +79,21 @@ const region = data.animals.map(getLocation)
 
 function nameSpecieForRegion(region) {
   const result = {};
-  const reg = region;
-    reg.forEach((regAnimals) => {
-      const animalsForlocation = (data.animals).map((animal) => {
-        if (regAnimals === animal.location) {
-          return animal.name;
-        }
-      }).filter(specie => specie !== undefined);
-      result[regAnimals] = animalsForlocation;
-    });
+  region.forEach((regAnimals) => {
+    const animalsForlocation = (data.animals).map((animal) => {
+      if (regAnimals === animal.location) {
+        return animal.name;
+      }
+    }).filter(specie => specie !== undefined);
+    result[regAnimals] = animalsForlocation;
+  });
   return result;
 }
 // console.log(nameSpecieForRegion(region));
 
 function nameResidents(region, sorted, sex) {
   const animalsPerLocationWithName = {};
-  const reg = region;
-  reg.forEach((location) => {
+  region.forEach((location) => {
     const animalsfull = data.animals
       .filter(animal => animal.location === location)
       .map((animal) => {
@@ -121,7 +119,7 @@ function animalMap(options) {
   if (!options) return nameSpecieForRegion(region);
   const { includeNames, sorted, sex } = options;
   if (!includeNames) return nameSpecieForRegion(region);
-   return nameResidents(region, sorted, sex);
+    return nameResidents(region, sorted, sex);
 }
 console.log(animalMap());
 
