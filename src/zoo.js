@@ -80,10 +80,10 @@ const region = data.animals.map(getLocation)
 function nameSpecieForRegion(locations) {
   const result = {};
   locations.forEach((regAnimals) => {
-    const animals = data.animals
+    const animalsZoo = data.animals
       .filter(animal => animal.location === regAnimals)
       .map(animal => animal.name);
-    if (animals.length !== 0) result[regAnimals] = animals;
+    if (animals.length !== 0) result[regAnimals] = animalsZoo;
     // const animalsForlocation = data.animals.map((animal) => {
     //   if (regAnimals === animal.location) {
     //     return animal.name;
