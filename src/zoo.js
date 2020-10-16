@@ -13,16 +13,12 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  /*
-  Ao receber como parâmetro um único id, retorna um array com a espécie referente à esse id
-  Ao receber mais de um id, retorna um array com as espécies referentes aos ids
-  */
   const animalsArray = [];
 
-  if (ids != undefined) {
+  if (ids !== undefined) {
     return ids.map(selectedId => data.animals.find(animalId => animalId.id === selectedId));
   }
-  
+
   return animalsArray;
 }
 
@@ -78,10 +74,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  /*
-  Sem parâmetros, retorna animais e suas quantidades
-  Com o nome de uma espécie de animal, retorna somente a quantidade
-  */
   if (species === undefined) {
     return data.animals.reduce((accumulator, nextAnimals) => {
       accumulator[nextAnimals.name] = nextAnimals.residents.length;
@@ -92,16 +84,13 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  /*
-  Retorna 0 se nenhum argumento for passado
-  Retorna 0 se um objeto vazio for passado
-  Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
-  */
-  const ticketsPeople = Object.keys(data.prices).sort().flat();
-  const ticketsValue = ticketsPeople.reduce((accumulator, nextAge) =>
-    accumulator + (entrants[nextAge] * data.prices[nextAge]), 0);
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
 
-  return entrants === undefined || Object.entries(entrants).length === 0 ? 0 : ticketsValue;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+
+  return (Adult * data.prices.Adult + Child * data.prices.Child + Senior * data.prices.Senior);
 }
 
 function animalMap(options) {
