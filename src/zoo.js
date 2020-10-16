@@ -1,4 +1,4 @@
-const { animals } = require('./data');
+const { animals, employees } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -36,7 +36,7 @@ function employeeByName(employeeName) {
   if (employeeName === undefined) {
     response = {};
   } else {
-    response = data.employees.find((element) => {
+    response = employees.find((element) => {
       let response2;
       if (element.firstName === employeeName || element.lastName === employeeName) {
         response2 = true;
@@ -55,7 +55,7 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   let response;
-  const managers = data.employees.find(employee => employee.managers.includes(id));
+  const managers = employees.find(employee => employee.managers.includes(id));
   if (managers !== undefined) {
     response = true;
   } else {
@@ -64,12 +64,19 @@ function isManager(id) {
   return response;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
-  // seu código aqui
+  let response = {};
+  if (species === undefined) {
+    animals.forEach(animal => (response[animal.name] = animal.residents.length));
+  } else {
+    response = animals.filter(animal => animal.name === species)
+    .reduce((acc, animal) => (acc += animal.residents.length), 0);
+  }
+  return response;
 }
 
 function entryCalculator(entrants) {
