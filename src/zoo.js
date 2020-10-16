@@ -17,8 +17,8 @@ function animalsByIds(...ids) {
   if (ids === undefined) {
     return [];
   }
-  ids.forEach((numRef) =>
-    retorno.push(animals.find((animal) => animal.id === numRef)),
+  ids.forEach(numRef =>
+    retorno.push(animals.find(animal => animal.id === numRef)),
   );
   return retorno;
 }
@@ -26,8 +26,8 @@ function animalsByIds(...ids) {
 // console.log(animals.find((nome)=>nome.name==='lions').residents.every(idade=>idade.age>=7));
 function animalsOlderThan(animal, age) {
   return animals
-    .find((nome) => nome.name === animal)
-    .residents.every((idade) => idade.age >= age);
+    .find(nome => nome.name === animal)
+    .residents.every(idade => idade.age >= age);
 }
 
 function employeeByName(employeeName) {
@@ -37,7 +37,7 @@ function employeeByName(employeeName) {
   }
   return Object.assign(
     ...employees.filter(
-      (nome) =>
+      nome =>
         nome.firstName === employeeName || nome.lastName === employeeName
     )
   );
