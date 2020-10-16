@@ -77,9 +77,9 @@ const region = data.animals.map(getLocation)
 // extrair os residents por espécie.
 // const getResidents = group => group.residents;
 
-function nameSpecieForRegion(region) {
+function nameSpecieForRegion(locations) {
   const result = {};
-  region.forEach((regAnimals) => {
+  locations.forEach((regAnimals) => {
     const animalsForlocation = (data.animals).map((animal) => {
       if (regAnimals === animal.location) {
         return animal.name;
@@ -91,9 +91,9 @@ function nameSpecieForRegion(region) {
 }
 // console.log(nameSpecieForRegion(region));
 
-function nameResidents(region, sorted, sex) {
+function nameResidents(locations, sorted, sex) {
   const animalsPerLocationWithName = {};
-  region.forEach((location) => {
+  locations.forEach((location) => {
     const animalsfull = data.animals
       .filter(animal => animal.location === location)
       .map((animal) => {
@@ -116,10 +116,11 @@ function nameResidents(region, sorted, sex) {
 
 // const options = { includeNames: true, sorted: true };
 function animalMap(options) {
-  if (!options) return nameSpecieForRegion(region);
+  const locations = region;
+  if (!options) return nameSpecieForRegion(locations);
   const { includeNames, sorted, sex } = options;
-  if (!includeNames) return nameSpecieForRegion(region);
-    return nameResidents(region, sorted, sex);
+  if (!includeNames) return nameSpecieForRegion(locations);
+    return nameResidents(locations, sorted, sex);
 }
 console.log(animalMap());
 
