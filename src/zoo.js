@@ -85,70 +85,50 @@ function entryCalculator(entrants = 0) {
   return Adult || Child || Senior ? a + c + s : 0;
 }
 //-------------------------------------------------------------------------------------
-// const filterAnimals = (region = 'default') =>
-//   animals.filter(({ location }) => location === region);
+const filterAnimals = (region = 'default') =>
+  animals.filter(({ location }) => location === region);
 
-// const defaultInput = (region = 'default') =>
-//   filterAnimals(region).map(({ name }) => name);
+const animalByRegion = (region = 'default') =>
+  filterAnimals(region).map(({ name }) => name);
 
-// function residentsInput(region) {
-//   const fn = filterAnimals(region);
-//   const resp = [];
-//   fn.forEach((animal) => {
-//     resp.push({ [animal.name]: animal.residents.map(({ name }) => name) });
-//   });
-//   return resp;
-// }
+function animalNameByRegion(region, isSort = false, sex) {
+  const animalsByRegion = filterAnimals(region);
+  const resp = [];
 
-// function sortInput(region) {
-//   const fn = filterAnimals(region);
-//   const resp = [];
-//   fn.forEach((animal) => {
-//     const arr = animal.residents.map(({ name }) => name);
-//     resp.push({ [animal.name]: arr.sort() });
-//   });
-//   return resp;
-// }
+  animalsByRegion.forEach(({ name, residents }) => {
+    if (sex !== undefined) {
+      residents = residents.filter(resident => resident.sex === sex);
+    }
+    resp.push({
+      [name]: isSort
+        ? residents.map(({ name: residName }) => residName).sort()
+        : residents.map(({ name: residName }) => residName),
+    });
+  });
+  return resp;
+}
 
-// const sexInput = (region, sex) => {
-//   const fn = filterAnimals(region);
-//   const resp = [];
-//   fn.forEach((animal) => {
-//     const residents = animal.residents.map(({ name, sex }) => {
-//       name, sex;
-//     });
-//     residents = residents.filter((resident) => resident.sex === sex);
-//     resp.push({ [animal.name]: residents.name });
-//   });
-//   return resp;
-// }  ;
+function animalMap(settings = 'No Paramaters') {
+  const { includeNames, sorted, sex } = settings;
+  let RESPONSE = {};
+  console.log(includeNames, sorted, sex);
+  if (settings === 'No Paramaters' || includeNames === undefined) {
+    RESPONSE = {
+      NE: animalByRegion('NE'),
+      NW: animalByRegion('NW'),
+      SE: animalByRegion('SE'),
+      SW: animalByRegion('SW'),
+    };
+  } else {
+    RESPONSE = {
+      NE: animalNameByRegion('NE', sorted, sex),
+      NW: animalNameByRegion('NW', sorted, sex),
+      SE: animalNameByRegion('SE', sorted, sex),
+      SW: animalNameByRegion('SW', sorted, sex),
+    };
+  }
 
-// const carai = (callBackFunc) => {
-//   const regions = ['NE', 'NW', 'SE', 'SW'];
-//   const objResp = {};
-//   regions.forEach((location) => {
-//     objResp[location] = callBackFunc(location);
-//   });
-//   return objResp;
-// };
-
-function animalMap(obj = { includeNames: false, sorted: false, sex: false }) {
-  // let objResp = carai(defaultInput);
-  // if (obj.includeNames) {
-  //   objResp = carai(residentsInput);
-  //   if (obj.sorted) {
-  //     objResp = carai(sortInput);
-  //   }
-  //   if (obj.sex) {
-  //     objResp = {
-  //       NE: sexInput('NE', obj.sex),
-  //       NW: sexInput('NW', obj.sex),
-  //       SE: sexInput('SE', obj.sex),
-  //       SW: sexInput('SW', obj.sex),
-  //     } ;
-  //   }
-  // }
-  // return objResp;
+  return RESPONSE;
 }
 
 //----------------------------------------------------------------------------
