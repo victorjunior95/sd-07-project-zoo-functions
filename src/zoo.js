@@ -18,7 +18,7 @@ const animalsByIds = (...ids) => {
 };
 
 const animalsOlderThan = (animal, age) => {
-  const animalsResidents = data.animals.find(element => element.name === animal).residents;
+  const animalsResidents = data.animals.find(element => element.name === animal).residents.length;
   return animalsResidents.every(resident => resident.age >= age);
 };
 
@@ -52,9 +52,17 @@ const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []
   return data.employees.push(newEmployee);
 };
 
-function animalCount(species) {
-  // seu código aqui
-}
+const animalCount = (species) => {
+  if (species === undefined) {
+    let obj = {};
+    data.animals.forEach(({name, residents}) => obj[name] = residents.length);
+    return obj;
+  } else {
+    return data.animals.find(animal => animal.name === species).residents.length;
+  };
+};
+
+// console.log(animalCount('lions'));
 
 function entryCalculator(entrants) {
   // seu código aqui
