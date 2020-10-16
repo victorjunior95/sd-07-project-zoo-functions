@@ -136,19 +136,19 @@ const firstOption = () => {
 
 // prettier-ignore
 function animalMap(objeto) {
-  if (objeto === undefined) {
-    const obj = firstOption();
-    return obj;
-  }
-  if (Object.keys(objeto).length === 1 && objeto.includeNames === true) {
-    const obj = secondOption();
-    return obj;
-  }
-  if (objeto.includeNames === true && objeto.sorted === true && Object.keys(objeto).length === 2) {
-    const obj = secondOption(true);
-    return obj;
-  }
-  return 0;
+  // if (objeto === undefined) {
+  //   const obj = firstOption();
+  //   return obj;
+  // }
+  // if (Object.keys(objeto).length === 1 && objeto.includeNames === true) {
+  //   const obj = secondOption();
+  //   return obj;
+  // }
+  // if (objeto.includeNames === true && objeto.sorted === true && Object.keys(objeto).length === 2) {
+  //   const obj = secondOption(true);
+  //   return obj;
+  // }
+  // return 0;
 }
 
 //-------------------------------------------------------------------------------------
@@ -217,7 +217,7 @@ function increasePrices(percentage) {
 
 // prettier-ignore
 function employeeCoverage(idOrName) {
-  let array = 'Nigel Burl Ola Wilburn Stephanie Sharonda Ardith Emery';
+  const array = 'Nigel Burl Ola Wilburn Stephanie Sharonda Ardith Emery';
   const obj = {};
   let option;
   if (idOrName === undefined) {
