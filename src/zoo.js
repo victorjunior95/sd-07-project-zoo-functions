@@ -66,7 +66,7 @@ function animalCount(species = ' ') {
   if (species === ' ') {
     const result = {};
     data.animals.map((animal) => {
-      result[animal.name] = animal.residents.length
+      result[animal.name] = animal.residents.length;
     }).sort();
     return result;
   }
