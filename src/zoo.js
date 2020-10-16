@@ -87,6 +87,18 @@ const animalFiltred = animal =>
 const animalsInRegion = animal => animalFiltred(animal)
   .map(objectAnimal => objectAnimal.name);
 
+const animalsNameInRegion = (animal) => {
+  const animalsNameIR = animalFiltred(animal).map(objectAnimal2 =>
+    objectAnimal2.residents.reduce((acc, resident) => {
+      acc[objectAnimal2.name] = objectAnimal2.residents.map(
+        residentAnimal => residentAnimal.name,
+      );
+      return acc;
+    }, {}),
+  );
+  return animalsNameIR;
+};
+
 const orderedAnimalsBySex = (animal, sex, sorted) => {
   const orderedAnimalsBS = animalFiltred(animal).map(objectAnimal2 =>
     objectAnimal2.residents.reduce((acc, resident4) => {
@@ -97,14 +109,9 @@ const orderedAnimalsBySex = (animal, sex, sorted) => {
       } else if (!sex && sorted) {
         acc[objectAnimal2.name] = objectAnimal2.residents.map(resident => resident.name).sort();
         return acc;
-      } else if (!sex && !sorted) {
-        acc[objectAnimal2.name] = objectAnimal2.residents.map(
-          residentAnimal => residentAnimal.name,
-        );
-        return acc;
       }
       acc[objectAnimal2.name] = objectAnimal2.residents
-        .filter(female => female.sex === sex).map(resident => resident.name).sort();
+        .filter(sexAnimal => sexAnimal.sex === sex).map(resident => resident.name).sort();
       return acc;
     }, {}),
   );
@@ -115,6 +122,8 @@ function animalMap(options) {
   const animalReportByRegion = data.animals.reduce((categorized, animal) => {
     if (options === undefined || options.includeNames === undefined) {
       categorized[animal.location] = animalsInRegion(animal);
+    } else if (!options.sex && !options.sorted) {
+      categorized[animal.location] = animalsNameInRegion(animal);
     } else {
       categorized[animal.location] = orderedAnimalsBySex(animal, options.sex, options.sorted);
     }
