@@ -5,7 +5,7 @@ describe('Implemente a função animalsByIds', () => {
   it('Caso receba nenhum parâmetro, necessário retornar um array vazio', () => {
     const actual = zoo.animalsByIds();
     const expected = [];
-    assert.deepEqual(actual, expected);
+    assert.deepStrictEqual(actual, expected);
   });
 
   it('Ao receber como parâmetro um único id, retorna os animais com este id', () => {
@@ -23,7 +23,7 @@ describe('Implemente a função animalsByIds', () => {
       ]
     }]
 
-    assert.deepEqual(actual, expected);
+    assert.deepStrictEqual(actual, expected);
   });
 
   it('Ao receber mais de um id, retorna os animais que têm um desses ids', () => {
@@ -51,6 +51,6 @@ describe('Implemente a função animalsByIds', () => {
       ]
     }];
 
-    assert.deepEqual(actual, expected);
+    assert.deepStrictEqual(actual, expected);
   });
 });
