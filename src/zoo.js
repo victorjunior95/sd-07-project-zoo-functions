@@ -9,20 +9,25 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals } = require('./data');
+const { animals, employees } = require('./data'); // incluído todos os arrays dentro de data
 const data = require('./data');
 
-function animalsByIds(...ids) {
-  if (ids.length === undefined) return [];
+function animalsByIds(...ids) { // ... para que considere todos os elementos (IDs) do array animals
+  if (ids.length === undefined) return []; // retornando vazio caso não receba nenhum parametro
   return animals.filter((search, index) => search.id === ids[index]);
+  // utilizado filter para que retorne um array com objetos.
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const nomeAnimal = animals.find(search => search.name === animal);
+  return nomeAnimal.residents.every(search => search.age >= age);
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) return {};
+  // como nao foi usado o spread (...), nao foi necessario percorrer o tamanho com o .length
+  return employees.find(search => search.firstName === employeeName
+  || search.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -30,15 +35,28 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  let gerente = employees.map(search => search.managers);
+  gerente = gerente.reduce((acumulador, item) => {
+    item.forEach(elemento => acumulador.push(elemento));
+    return acumulador;
+  }, []).includes(id);
+  return gerente;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (species === undefined) {
+    const allAnimals = animals.map(search => search.name);
+    return allAnimals.reduce((acumulador, item, index) => {
+      acumulador[item] = animals[index].residents.length;
+      return acumulador;
+    }, {});
+  }
+  const oneAnimal = animals.find(search => search.name === species);
+  return oneAnimal.residents.length;
 }
 
 function entryCalculator(entrants) {
