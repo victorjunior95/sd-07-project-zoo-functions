@@ -80,12 +80,15 @@ const region = data.animals.map(getLocation)
 function nameSpecieForRegion(locations) {
   const result = {};
   locations.forEach((regAnimals) => {
-    const animalsForlocation = (data.animals).map((animal) => {
-      if (regAnimals === animal.location) {
-        return animal.name;
-      }
-    }).filter(specie => specie !== undefined);
-    result[regAnimals] = animalsForlocation;
+    const animals = data.animals
+      .filter(animal => animal.location === regAnimals)
+      .map(animal => animal.name);
+    if (animals.length !== 0) result[regAnimals] = animals;
+    // const animalsForlocation = data.animals.map((animal) => {
+    //   if (regAnimals === animal.location) {
+    //     return animal.name;
+    //   }
+    // }).filter(specie => specie !== undefined);
   });
   return result;
 }
@@ -120,7 +123,7 @@ function animalMap(options) {
   if (!options) return nameSpecieForRegion(locations);
   const { includeNames, sorted, sex } = options;
   if (!includeNames) return nameSpecieForRegion(locations);
-    return nameResidents(locations, sorted, sex);
+  return nameResidents(locations, sorted, sex);
 }
 console.log(animalMap());
 
