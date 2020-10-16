@@ -113,28 +113,27 @@ function entryCalculator(entrants) {
 
 //-------------------------------------------------------------------------------------
 
-const firstOption = () => {
-  const ne = animals
-    .filter(element => element.location === 'NE')
-    .map(element => element.name);
-  const nw = animals
-    .filter(element => element.location === 'NW')
-    .map(element => element.name);
-  const se = animals
-    .filter(element => element.location === 'SE')
-    .map(element => element.name);
-  const sw = animals
-    .filter(element => element.location === 'SW')
-    .map(element => element.name);
-  const obj = {};
-  obj.NE = ne;
-  obj.NW = nw;
-  obj.SE = se;
-  obj.SW = sw;
-  return obj;
-};
+// const firstOption = () => {
+//   const ne = animals
+//     .filter(element => element.location === 'NE')
+//     .map(element => element.name);
+//   const nw = animals
+//     .filter(element => element.location === 'NW')
+//     .map(element => element.name);
+//   const se = animals
+//     .filter(element => element.location === 'SE')
+//     .map(element => element.name);
+//   const sw = animals
+//     .filter(element => element.location === 'SW')
+//     .map(element => element.name);
+//   const obj = {};
+//   obj.NE = ne;
+//   obj.NW = nw;
+//   obj.SE = se;
+//   obj.SW = sw;
+//   return obj;
+// };
 
-// prettier-ignore
 function animalMap(objeto) {
   // if (objeto === undefined) {
   //   const obj = firstOption();
@@ -144,7 +143,11 @@ function animalMap(objeto) {
   //   const obj = secondOption();
   //   return obj;
   // }
-  // if (objeto.includeNames === true && objeto.sorted === true && Object.keys(objeto).length === 2) {
+  // if (
+  //   objeto.includeNames === true &&
+  //   objeto.sorted === true &&
+  //   Object.keys(objeto).length === 2
+  // ) {
   //   const obj = secondOption(true);
   //   return obj;
   // }
