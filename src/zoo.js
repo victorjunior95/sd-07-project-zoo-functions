@@ -150,7 +150,7 @@ function employeeCoverage(idOrName) {
     (employ.firstName === idOrName || employ.lastName === idOrName || employ.id === idOrName))];
   employeeList.forEach(employee =>
     (employeeObject[`${employee.firstName} ${employee.lastName}`] = data.animals.filter(animal =>
-      employee.responsibleFor.includes(animal.id)).map(animal => animal.name) ));
+      employee.responsibleFor.includes(animal.id)).map(animal => animal.name)));
   return employeeObject;
 }
 
