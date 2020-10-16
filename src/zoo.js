@@ -67,7 +67,7 @@ function entryCalculator(entrants) {
 }
 
 // pequenas funções
-//filtrar localização.
+// filtrar localização.
 const getLocation = local => local.location;
 // filtrar names das especies
 // const getNameSpecies = species => species.name;
@@ -77,10 +77,10 @@ const region = data.animals.map(getLocation)
 // extrair os residents por espécie.
 // const getResidents = group => group.residents;
 
-function nameSpecieForRegion(region, options) {
+function nameSpecieForRegion(region) {
   const result = {};
-  if (options === undefined) {
-    region.forEach((regAnimals) => {
+  const reg = region;
+    reg.forEach((regAnimals) => {
       const animalsForlocation = (data.animals).map((animal) => {
         if (regAnimals === animal.location) {
           return animal.name;
@@ -88,14 +88,15 @@ function nameSpecieForRegion(region, options) {
       }).filter(specie => specie !== undefined);
       result[regAnimals] = animalsForlocation;
     });
-  }
   return result;
 }
+// console.log(nameSpecieForRegion(region));
 
 function nameResidents(region, sorted, sex) {
   const animalsPerLocationWithName = {};
-  region.forEach((location) => {
-    const animals = data.animals
+  const reg = region;
+  reg.forEach((location) => {
+    const animalsfull = data.animals
       .filter(animal => animal.location === location)
       .map((animal) => {
         const nameKey = animal.name;
@@ -106,23 +107,23 @@ function nameResidents(region, sorted, sex) {
           })
           .map(resident => resident.name);
         if (sorted) nameValues.sort();
-      //  console.log(nameValues);
+      //  console.log(nameValues.join());
         return { [nameKey]: nameValues };
       });
-    animalsPerLocationWithName[location] = animals;
+    animalsPerLocationWithName[location] = animalsfull;
   });
   return animalsPerLocationWithName;
 }
 // console.log(nameResidents(region, true));
 
-const options = { includeNames: true, sorted: true };
+// const options = { includeNames: true, sorted: true };
 function animalMap(options) {
+  if (!options) return nameSpecieForRegion(region);
   const { includeNames, sorted, sex } = options;
-  if (!options) return nameSpecieForRegion(region, options);
   if (!includeNames) return nameSpecieForRegion(region);
-  return nameResidents(region, sorted, sex);
+   return nameResidents(region, sorted, sex);
 }
-// console.log(animalMap(options));
+console.log(animalMap());
 
 function schedule(dayName) {
   const workingDays = Object.assign({}, data.hours);
