@@ -38,8 +38,8 @@ function employeeByName(employeeName) {
   return Object.assign(
     ...employees.filter(
       nome =>
-        nome.firstName === employeeName || nome.lastName === employeeName
-    )
+        nome.firstName === employeeName || nome.lastName === employeeName,
+    ),
   );
 }
 
