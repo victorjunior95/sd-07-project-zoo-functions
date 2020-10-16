@@ -146,8 +146,9 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   const employeeCoverageObject = {};
-  data.employees.map( (employee) =>
-    ({[`${employee.firstName} ${employee.lastName}`]: employee.responsibleFor}));
+  employeeCoverageObject[name] = Daniel
+  data.employees.map(employee =>
+    ({ [`${employee.firstName} ${employee.lastName}`]: employee.responsibleFor }));
 }
 
 module.exports = {
