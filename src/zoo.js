@@ -14,21 +14,16 @@ const data = require('./data');
 
 function animalsByIds(...ids) {
   /*
-  Caso receba nenhum parâmetro, necessário retornar um array vazio
   Ao receber como parâmetro um único id, retorna um array com a espécie referente à esse id
   Ao receber mais de um id, retorna um array com as espécies referentes aos ids
   */
-/*   const arrayOfAnimalsIds = [];
+  const animalsArray = [];
 
-  ids.forEach((id) => {
-    console.log(id);
-    if (id == null) {
-      return arrayOfAnimalsIds;
-    } else if (id !== null && id == data.animals.id) {
-      arrayOfAnimalsIds.push(data.animals);
-    }
-  })
-  return arrayOfAnimalsIds; */
+  if (ids != undefined) {
+    return ids.map(selectedId => data.animals.find(animalId => animalId.id === selectedId));
+  }
+  
+  return animalsArray;
 }
 
 function animalsOlderThan(animal, age) {
