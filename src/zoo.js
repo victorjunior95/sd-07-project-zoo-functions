@@ -86,7 +86,7 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  if (!id) return  null;
+  if (!id) return null;
   const employee = data.employees.find(emp => emp.id === id);
   const { responsibleFor: [animalId] } = employee;
   const specie = data.animals.find(specime => specime.id === animalId);
