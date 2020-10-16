@@ -277,25 +277,14 @@ function increasePrices(percentage) {
 
 //-------------------------------------------------------------------------------------
 
-// prettier-ignore
-function employeeCoverage(idOrName) {
+const retornaObjeto = option => {
   const obj = {};
-  let option;
-  if (idOrName === undefined) {
-    option = employees;
-  } else if (idOrName.length === 36) {
-    option = employees.filter(element => element.id === idOrName);
-  } else if (idOrName === 'Nigel' || idOrName === 'Burl' || idOrName === 'Ola' || idOrName === 'Wilburn') {
-    option = employees.filter(element => element.firstName === idOrName);
-  } else if (idOrName === 'Stephanie' || idOrName === 'Sharonda' || idOrName === 'Ardith' || idOrName === 'Emery'){
-    option = employees.filter(element => element.firstName === idOrName);
-  } else {
-    option = employees.filter(element => element.lastName === idOrName);
-  }
-  option.forEach((empregado) => {
-    obj[`${empregado.firstName} ${empregado.lastName}`] = empregado.responsibleFor.map((id) => {
+  option.forEach(empregado => {
+    obj[
+      `${empregado.firstName} ${empregado.lastName}`
+    ] = empregado.responsibleFor.map(id => {
       let string = '';
-      animals.forEach((animal) => {
+      animals.forEach(animal => {
         if (id === animal.id) {
           string = `${animal.name}`;
         }
@@ -304,6 +293,23 @@ function employeeCoverage(idOrName) {
     });
   });
   return obj;
+};
+
+// prettier-ignore
+function employeeCoverage(idOrName) {
+  let option;
+  if (idOrName === undefined) {
+    option = employees;
+  } else if (idOrName.length === 36) {
+    option = employees.filter(element => element.id === idOrName);
+  } else if (idOrName === 'Nigel' || idOrName === 'Burl' || idOrName === 'Ola' || idOrName === 'Wilburn') {
+    option = employees.filter(element => element.firstName === idOrName);   
+  } else if (idOrName === 'Stephanie' || idOrName === 'Sharonda' || idOrName === 'Ardith' || idOrName === 'Emery') {
+    option = employees.filter(element => element.firstName === idOrName);   
+  } else {
+    option = employees.filter(element => element.lastName === idOrName);
+  }
+  return retornaObjeto(option);
 }
 
 module.exports = {
