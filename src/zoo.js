@@ -58,8 +58,9 @@ const animalCount = (species) => {
     data.animals.forEach(({ name, residents }) => obj[name] = residents.length);
     return obj;
   }
-  
-  return data.animals.find(animal => animal.name === species).residents.length;
+
+  const residents = data.animals.find(animal => animal.name === species).residents.length;
+  return residents;
 };
 
 // console.log(animalCount('lions'));
