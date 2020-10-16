@@ -13,15 +13,17 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
+  let response;
   if (ids.length > 1) {
-    return animals.filter((animal, posicao) => animal.id === ids[posicao]);
+    response = animals.filter((animal, posicao) => animal.id === ids[posicao]);
   }
   if (ids.length === 1) {
-    return [animals.find(animal => animal.id === ids[0])];
+    response = [animals.find(animal => animal.id === ids[0])];
   }
   if (ids.length === 0) {
-    return ids;
+    response = ids;
   }
+  return response;
 }
 
 function animalsOlderThan(animal, age) {
@@ -30,33 +32,36 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
+  let response;
   if (employeeName === undefined) {
-    return {};
+    response = {};
   } else {
-    return data.employees.find(element =>{
+    response = data.employees.find((element) => {
+      let response2;
       if (element.firstName === employeeName || element.lastName === employeeName) {
-        return true;
+        response2 = true;
       } else {
-        return false;
+        response2 = false;
       }
+      return response2;
     });
   }
+  return response;
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  return {
-    ...personalInfo,
-    ...associatedWith
-  };
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
+  let response;
   const managers = data.employees.find(employee => employee.managers.includes(id));
   if (managers !== undefined) {
-    return true;
+    response = true;
   } else {
-    return false;
+    response = false;
   }
+  return response;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
