@@ -38,6 +38,14 @@ function employeeByName(employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
+  const {id, firstName, lastName} = personalInfo;
+  const {managers, responsibleFor} = associatedWith;
+  const newObj = { id,
+  firstName,
+  lastName,
+  managers,
+  responsibleFor, };
+  return newObj;
 }
 
 function isManager(id) {
@@ -150,6 +158,14 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
+  /* if (typeof idOrName === 'undefined') {
+    const newObj = {};
+    const employeesAndAnimals = data.employees.forEach(person => {
+      const findAnimal = data.animals.filter((id, index) => id.id === person.responsibleFor[index]);
+      newObj[`${person.firstName} ${person.lastName}`] = findAnimal.name;
+    });
+    return newObj;
+  } */
 }
 
 module.exports = {
