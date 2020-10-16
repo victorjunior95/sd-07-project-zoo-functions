@@ -79,15 +79,10 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  let totalCost = null;
-  if (entrants === undefined || Object.entries(entrants).length === 0) {
-    totalCost = 0;
-  } else {
-    const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-    const prices = data.prices;
-    totalCost = (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
-  }
-  return totalCost;
+  entrants = (entrants === undefined) ? 0 : entrants;
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const prices = data.prices;
+  return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
 const animalZone = zone =>
@@ -150,7 +145,9 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const employeeCoverageObject = {};
+  data.employees.map( (employee) =>
+    ({[`${employee.firstName} ${employee.lastName}`]: employee.responsibleFor}));
 }
 
 module.exports = {
