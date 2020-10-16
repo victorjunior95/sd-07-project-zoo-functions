@@ -47,7 +47,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  return
+
   // seu código aqui
 }
 
@@ -64,8 +64,8 @@ function schedule(dayName) {
   // seu código aqui
 }
 
-function oldestFromFirstSpecies(id) {
-  const animalId = data.employees.find(employee => employee.id === employeeId)
+function oldestFromFirstSpecies(speciesId) {
+  const animalId = data.employees.find(employee => employee.id === speciesId)
   .responsibleFor.shift();
   return Object.values(data.animals.find(({ id }) => id === animalId).residents
   .sort((a, b) => b.age - a.age)
@@ -78,7 +78,6 @@ function increasePrices(percentage) {
       data.prices[price] =
       Math.ceil((data.prices[price] * (100 + percentage))) / 100;
     });
-
 }
 
 function employeeCoverage(idOrName) {
