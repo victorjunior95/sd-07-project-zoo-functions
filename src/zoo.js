@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -104,6 +105,7 @@ function animalMap(options) {
 
 }
 
+
 function schedule(dayName) {
   const day = {};
   const everyDays = {};
@@ -151,9 +153,52 @@ function increasePrices(percentage) {
   data.prices.Child = parseFloat(resultChild.toFixed(2));
 }
 
+const listComplete = {};
+const employee = data.employees;
+const complete = () => {
+  const every = (employe, index) => {
+    const fullName = `${employee[index].firstName} ${employee[index].lastName}`;
+    listComplete[fullName] = [];
+    employe.responsibleFor.forEach((iten) => {
+      data.animals.forEach((iten1) => {
+        if (iten === iten1.id) {
+          listComplete[fullName].push(iten1.name);
+        }
+      });
+    });
+  };
+  data.employees.forEach(every);
+  return listComplete;
+};
+
+const oneEmployee = (idOrName) => {
+  const one = {};
+  const checkOneEmployee = (employe, index) => {
+    const employeeName = employe.responsibleFor;
+    const animals = data.animals;
+    const fullName = `${employee[index].firstName} ${employee[index].lastName}`;
+    if (fullName.includes(idOrName) || employe.id === idOrName) {
+      one[fullName] = [];
+      employeeName.forEach((iten1) => {
+        animals.forEach((iten2) => {
+          if (iten1 === iten2.id) {
+            one[fullName].push(iten2.name);
+          }
+        });
+      });
+    }
+  };
+  data.employees.forEach(checkOneEmployee);
+  return one;
+};
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) {
+    return complete();
+  }
+  return oneEmployee(idOrName);
 }
+
 
 module.exports = {
   entryCalculator,
