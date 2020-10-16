@@ -31,12 +31,12 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  const newObject = {};
+  const newEmployeeObject = {};
 
   const getEmployee = data.employees.find(name => name.firstName === employeeName ||
   name.lastName === employeeName);
 
-  return employeeName == null ? newObject : getEmployee;
+  return employeeName == null ? newEmployeeObject : getEmployee;
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -90,7 +90,9 @@ function entryCalculator(entrants) {
 
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
 
-  return (Adult * data.prices.Adult + Child * data.prices.Child + Senior * data.prices.Senior);
+  return ((Adult * data.prices.Adult) +
+  (Child * data.prices.Child) +
+  (Senior * data.prices.Senior));
 }
 
 function animalMap(options) {
@@ -109,9 +111,15 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  /*
-  Ao passar uma porcentagem, incrementa todos os preços, arrendondados em duas casas decimais
-  */
+  const factor = ((percentage / 100) + 1);
+
+  const ticketValue = data.prices;
+
+  ticketValue.Adult = (Math.round(data.prices.Adult * factor * 100) / 100);
+  ticketValue.Child = (Math.round(data.prices.Child * factor * 100) / 100);
+  ticketValue.Senior = (Math.round(data.prices.Senior * factor * 100) / 100);
+
+  return ticketValue;
 }
 
 function employeeCoverage(idOrName) {
