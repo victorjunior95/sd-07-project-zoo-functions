@@ -68,17 +68,15 @@ const entryCalculator = (entrants) => {
 
   if (entrants === undefined || entrants === {}) {
     return sum;
-  };
+  }
 
   const ticketCategory = Object.keys(entrants);
   const numberOfTickets = Object.values(entrants);
 
-  ticketCategory.map((category, index) => {
-    sum += data.prices[category] * numberOfTickets[index];
-  });
+  ticketCategory.map((category, index) => sum += data.prices[category] * numberOfTickets[index]);
 
   return sum;
-}
+};
 
 function animalMap(options) {
   // seu código aqui
