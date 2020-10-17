@@ -1,4 +1,4 @@
-const { animals } = require('./data');
+const { animals, employees } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -12,6 +12,10 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+// Caso receba nenhum parâmetro, necessário retornar um array vazio
+// Ao receber como parâmetro um único id, retorna um array com a espécie referente à esse id
+// Ao receber mais de um id, retorna um array com as espécies referentes aos ids
+
 function animalsByIds(...ids) {
   return animals.filter(animal => ids.includes(animal.id));
 }
@@ -22,8 +26,15 @@ function animalsOlderThan(animal, age) {
     .residents.every(resident => resident.age >= age);
 }
 
+// Sem parâmetros, retorna um objeto vazio
+// Quando provido o primeiro nome do funcionário, retorna o objeto do funcionário
+// Quando provido o último nome do funcionário, retorna o objeto do funcionário
+
 function employeeByName(employeeName) {
-  // seu código aqui
+  return Object.assign({},
+    employees.find(
+      employee => employee.firstName === employeeName ||
+        employee.lastName === employeeName));
 }
 
 function createEmployee(personalInfo, associatedWith) {
