@@ -34,7 +34,7 @@ function employeeByName(employeeName) {
   const newEmployeeObject = {};
 
   const getEmployee = data.employees.find(name => name.firstName === employeeName ||
-  name.lastName === employeeName);
+    name.lastName === employeeName);
 
   return employeeName == null ? newEmployeeObject : getEmployee;
 }
@@ -91,15 +91,27 @@ function entryCalculator(entrants) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
 
   return ((Adult * data.prices.Adult) +
-  (Child * data.prices.Child) +
-  (Senior * data.prices.Senior));
+    (Child * data.prices.Child) +
+    (Senior * data.prices.Senior));
 }
 
 function animalMap(options) {
+
 }
 
 function schedule(dayName) {
-  /* let scheduleWeek = {}; */
+  const scheduleWeek = {};
+
+  const daysOfWeek = Object.keys(data.hours);
+  daysOfWeek.forEach((day) => {
+    if (data.hours[day].open === 0) {
+      scheduleWeek[day] = 'CLOSED';
+    } else {
+      scheduleWeek[day] = `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
+    }
+  });
+
+  return dayName === undefined ? scheduleWeek : { [dayName]: scheduleWeek[dayName] };
 }
 
 function oldestFromFirstSpecies(id) {
@@ -123,7 +135,37 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
+  if (!idOrName) {
+    /* Array de empregados */
+    const getEmployeesArray = data.employees.map(arrayOfEmployees =>
+    `${arrayOfEmployees.firstName} ${arrayOfEmployees.lastName}`);
 
+    /* Array de arrays onde temos os ids dos animais */
+    const getEmployeesAnimals = data.employees.map(arrayOfAnimals =>
+    arrayOfAnimals.responsibleFor);
+
+    /* Novo objeto */
+    const getAnimals2 = getEmployeesAnimals.map(arrayOfAnimals => arrayOfAnimals.map(animalId =>
+      data.animals.find(specie => specie.id === animalId).name));
+
+    const generateFinalObject = getEmployeesArray.reduce((exit, employeeName, index) =>
+      ({ ...exit, [employeeName]: getAnimals2[index] }), {});
+
+    return generateFinalObject;
+    /* Feito junto ao Johnatas Henrique turma 2, Lugh Walle turma 6 e Sidnei Ramos turma 5 */
+  }
+
+  const selectEmployees = data.employees.find(idName =>
+    (idOrName === idName.id ||
+    idOrName === idName.firstName ||
+    idOrName === idName.lastName),
+    );
+
+  const getAnimalsArray = selectEmployees.responsibleFor.map(
+    animalIds =>
+    data.animals.find(animalName => animalIds === animalName.id).name);
+
+  return { [`${selectEmployees.firstName} ${selectEmployees.lastName}`]: getAnimalsArray };
 }
 
 module.exports = {
