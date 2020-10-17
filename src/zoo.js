@@ -36,12 +36,13 @@ function createEmployee(personalInfo, associatedWith) {
   return { id, firstName, lastName, managers, responsibleFor };
 }
 
-// const test = createEmployee();
-// console.log(test);
-
 function isManager(id) {
-  // seu código aqui
+ const checkIfManager = data.employees.some((employee, index) => employee.managers[index] === id);
+ return checkIfManager;
 }
+
+const test = isManager('0e7b460e-acf4-4e17-bcb3-ee472265db83');
+console.log(test);
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
