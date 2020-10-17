@@ -69,10 +69,14 @@ function entryCalculator(entrants) {
     return 0;
   }
   const { Adult: adult, Child: child, Senior: senior } = data.prices;
+  const priceArray = [adult, child, senior];
   const { Adult: entryAdult, Child: entryChild, Senior: entrySenior } = entrants;
-  const array = [entryAdult, entryChild, entrySenior];
-  const eliminateUndefined = array.map(element => (element === undefined) ? element = 0 : element);
-  return eliminateUndefined[0] * adult + eliminateUndefined[1] * child + eliminateUndefined[2] * senior;
+  const entryArray = [entryAdult, entryChild, entrySenior];
+  const calculatingPrice = entryArray.map(element => {
+    (element === undefined) ? element = 0 : element
+    return element;
+  }).map((element, index) => element * priceArray[index]);
+  return calculatingPrice.reduce((acc, curr) => acc + curr);
 }
 
 // const test = entryCalculator({ 'Child': 1, 'Senior': 1 });
