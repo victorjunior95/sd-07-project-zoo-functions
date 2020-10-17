@@ -12,21 +12,20 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(ids) {
-  /*
-  Caso receba nenhum parâmetro, necessário retornar um array vazio
-Ao receber como parâmetro um único id, retorna um array com a espécie referente à esse id
-Ao receber mais de um id, retorna um array com as espécies referentes aos ids
+  /*const animals
+  return ids.map(id => animals.find(animal => animal.id === id))
   */
- return animals.filter(animal => ids.find(id => id === animal.id))
-  }
-
+}
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  return animals.find(({ name }) => name === animal).residents.every(name => name. age > age)
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  const employee;
+  if(employeeByName ===  undefined)
+  return {};
+  return employee.find(name => name.firstName === employeeName || name.lastName === employeeName)
 }
 
 function createEmployee(personalInfo, associatedWith) {
