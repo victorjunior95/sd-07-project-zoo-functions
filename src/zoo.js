@@ -20,7 +20,7 @@ function animalsByIds(...ids) {
 function animalsOlderThan(animal, age) {
   // seu código aqui
   const { animals: myAnimals } = data;
-  let getAnimal = myAnimals.find(item => item.name === animal);
+  let getAnimal = myAnimals.find(item => item.name === animal)
   getAnimal = getAnimal.residents.every(old => old.age >= age);
 
   return getAnimal;
@@ -60,13 +60,14 @@ function animalCount(species) {
   // seu código aqui
   const { animals } = data;
   const getAllAnimals = {};
+
   animals.forEach((animal) => {
     getAllAnimals[animal.name] = animal.residents.length;
   });
-  if (species !== undefined) {
-    return animals.find(animal => species === animal.name).residents.length;
-  }
-  return getAllAnimals;
+
+  const animal = animals.find(animal => species === animal.name);
+
+  return (species !== undefined) ? animal.residents.length : getAllAnimals;
 }
 
 function entryCalculator(entrants) {
@@ -153,7 +154,28 @@ function increasePrices(percentage) {
 // pelos quais o funcionário é responsável
 function employeeCoverage(idOrName) {
   // seu código aqui
+  let list = {};
+  const { animals, employees } = data;
+  // let [{ responsibleFor }] = employees;
+  // let [{ id, name }] = animals;
 
+  const employeeList = employees.map(employee => `${employee.firstName} ${employee.lastName}`);
+
+  let animalsIds = employees.map(employee => employee.responsibleFor);
+
+  // const animalsName = animalsIds.map(array => {
+  //   animals.forEach((animal => {
+  //     array.forEach(item => {
+  //       if (item == animal.id) {
+  //         item === animal.name;
+  //       }
+  //     })
+  //   }))
+  //   return array;
+  // })
+
+  list = { ...employeeList, ...animalsIds };
+  return list;
 }
 // console.log(employeeCoverage());
 
