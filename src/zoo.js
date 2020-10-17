@@ -14,10 +14,22 @@ const data = require('./data');
 function animalsByIds(...ids) {
   return data.animals.filter(animal => ids.includes(animal.id));
 }
+// const objectAnimal = data.animals.filter(animal => animal.name === 'lions');
+// console.log(objectAnimal);
+// const arrayResidents = objectAnimal[0].residents;
+// console.log(arrayResidents);
+// const arrayAges = arrayResidents.map(animal => animal.age);
+
+// const arrayAges = objectAnimal[0].residents.map(animal => animal.age);
+// console.log(arrayAges);
+// console.log(objectAnimal[0].residents.map(animal => animal.age).every(age => age >= 10));
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const objectAnimal = data.animals.filter(species => species.name === 'lions');
+  const arrayAges = objectAnimal[0].residents.map(speciesAge => speciesAge.age);
+  return arrayAges.every(animalAge => animalAge >= age);
 }
+// console.log(animalsOlderThan('otters', 7));
 
 function employeeByName(employeeName) {
   // seu código aqui
