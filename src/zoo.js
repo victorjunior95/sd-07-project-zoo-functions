@@ -100,8 +100,18 @@ function schedule(dayName) {
   return userSchedule;
 }
 
+function getOldest(species) {
+  const animals = data.animals.find(animal => animal.id === species);
+  const residents = animals.residents;
+  const oldest = residents.reduce((oldest, current) => current.age > oldest.age ? current : oldest);
+  return oldest;
+}
+
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const employee = data.employees.find((employee) => employee.id === id);
+  const species = employee.responsibleFor[0];
+  const oldest = getOldest(species);
+  return [oldest.name, oldest.sex, oldest.age];
 }
 
 function increasePrices(percentage) {
