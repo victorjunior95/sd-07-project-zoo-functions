@@ -73,9 +73,7 @@ const entryCalculator = (entrants) => {
   const ticketCategory = Object.keys(entrants);
   const numberOfTickets = Object.values(entrants);
 
-  ticketCategory.map((category, index) => { 
-    return sum += data.prices[category] * numberOfTickets[index];
-  });
+  ticketCategory.map((category, i) => sum += data.prices[category] * numberOfTickets[i]);
 
   return sum;
 };
