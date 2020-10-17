@@ -28,7 +28,7 @@ function animalsOlderThan(animal, age) {
   // seu código aqui
   const someAnimal = data.animals.find(element => element.name === animal);
   const validation = someAnimal.residents.every(
-    resident => resident.age >= age
+    resident => resident.age >= age,
   );
   return validation;
 }
@@ -40,7 +40,7 @@ function employeeByName(employeeName) {
   }
   const result = data.employees.find(
     element =>
-      element.firstName === employeeName || element.lastName === employeeName
+      element.firstName === employeeName || element.lastName === employeeName,
   );
   return result;
 }
@@ -66,14 +66,14 @@ function addEmployee(
   firstName,
   lastName,
   managers = [],
-  responsibleFor = []
+  responsibleFor = [],
 ) {
   const newEmployee = {
-    id: id,
-    firstName: firstName,
-    lastName: lastName,
-    managers: managers,
-    responsibleFor: responsibleFor,
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
   };
   const result = data.employees;
   result.push(newEmployee);
@@ -84,7 +84,7 @@ function animalCount(species) {
   if (species === undefined) {
     const result = {};
     data.animals.forEach(
-      animal => (result[animal.name] = animal.residents.length)
+      animal => (result[animal.name] = animal.residents.length),
     );
     return result;
   }
@@ -98,9 +98,9 @@ function entryCalculator(entrants) {
   }
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   return (
-    Adult * data.prices.Adult +
-    Child * data.prices.Child +
-    Senior * data.prices.Senior
+    (Adult * data.prices.Adult) +
+    (Child * data.prices.Child) +
+    (Senior * data.prices.Senior)
   );
 }
 
@@ -113,25 +113,25 @@ function schedule(dayName) {
   const hours = data.hours;
   if (dayName === undefined) {
     Object.entries(hours).forEach(([day, rotine]) => {
-      result[day] = `Open from ${rotine.open}am until ${rotine.close - 12}pm`
+      result[day] = `Open from ${rotine.open}am until ${rotine.close - 12}pm`;
       if (day === 'Monday') {
         result[day] = 'CLOSED';
       }
-    })
+    });
     return result;
   }
   if (dayName === 'Monday') {
     result[dayName] = 'CLOSED';
     return result;
   }
-  let { open, close } = hours[dayName];
+  const { open, close } = hours[dayName];
   result[dayName] = `Open from ${open}am until ${close - 12}pm`;
   return result;
 }
 
 function oldestFromFirstSpecies(id) {
   const employeeResponsableFor = data.employees.find(
-    element => element.id === id
+    element => element.id === id,
   ).responsibleFor[0];
   const older = data.animals
     .find(element => element.id === employeeResponsableFor)
@@ -141,17 +141,17 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   const copy = data.prices;
-  copy.Adult = copy.Adult * 100;
-  copy.Child = copy.Child * 100;
-  copy.Senior = copy.Senior * 100;
+  copy.Adult *= 100;
+  copy.Child *= 100;
+  copy.Senior *= 100;
   copy.Adult = Math.round(
-    (copy.Adult + (copy.Adult * percentage) / 100).toFixed(2)
+    (copy.Adult + ((copy.Adult * percentage) / 100)).toFixed(2),
   );
   copy.Child = Math.round(
-    (copy.Child + (copy.Child * percentage) / 100).toFixed(2)
+    (copy.Child + ((copy.Child * percentage) / 100)).toFixed(2),
   );
   copy.Senior = Math.round(
-    (copy.Senior + (copy.Senior * percentage) / 100).toFixed(2)
+    (copy.Senior + ((copy.Senior * percentage) / 100)).toFixed(2),
   );
   copy.Adult = (copy.Adult / 100).toFixed(2);
   copy.Child = (copy.Child / 100).toFixed(2);
@@ -162,12 +162,12 @@ function increasePrices(percentage) {
 function employeeCoverage(idOrName) {
   const result = {};
   if (idOrName === undefined) {
-    data.employees.forEach(element => {
-      let completeName = `${element.firstName} ${element.lastName}`;
+    data.employees.forEach((element) => {
+      const completeName = `${element.firstName} ${element.lastName}`;
       result[completeName] = [];
-      element.responsibleFor.forEach(idAnimal => {
+      element.responsibleFor.forEach((idAnimal) => {
         result[completeName].push(
-          data.animals.find(animal => idAnimal === animal.id).name
+          data.animals.find(animal => idAnimal === animal.id).name,
         );
       });
     });
@@ -177,13 +177,13 @@ function employeeCoverage(idOrName) {
     person =>
       idOrName === person.id ||
       idOrName === person.firstName ||
-      idOrName === person.lastName
+      idOrName === person.lastName,
   );
   const employeeName = `${employee.firstName} ${employee.lastName}`;
   result[employeeName] = [];
-  employee.responsibleFor.forEach(idAnimal => {
+  employee.responsibleFor.forEach((idAnimal) => {
     result[employeeName].push(
-      data.animals.find(animal => idAnimal === animal.id).name
+      data.animals.find(animal => idAnimal === animal.id).name,
     );
   });
   return result;
