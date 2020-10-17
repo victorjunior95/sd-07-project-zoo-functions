@@ -36,7 +36,11 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  // Cria um novo colaborador a partir de objetos contendo:
+  // informações pessoais e gerentes e animais gerenciados
+  const newEmployee = Object.assign(personalInfo, associatedWith);
+  return newEmployee;
+  // source: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 }
 
 function isManager(id) {
