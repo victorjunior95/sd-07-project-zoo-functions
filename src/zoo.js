@@ -28,8 +28,7 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
   const employee = employees.find(
-    justName =>
-      justName.firstName === employeeName || justName.lastName === employeeName,
+    justName => justName.firstName === employeeName || justName.lastName === employeeName,
   );
   return employee;
 }
@@ -66,7 +65,8 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  const justObject = animals.reduce((theObject, element) => { // referência: Moisés Santana
+  const justObject = animals.reduce((theObject, element) => {
+    // referência: Moisés Santana
     theObject[element.name] = element.residents.length; // colchetes indicam a key
     return theObject; // = para atribuir valor à key
   }, {}); // inicia como um objeto vazio
@@ -91,16 +91,21 @@ function animalMap(options) {
   // seu código aqui
 }
 // referência: Thiago Pederzolli
-function schedule(...dayName) { // usando spread vira array
-  if (dayName.length === 0) { // se é array tem length
+function schedule(...dayName) {
+  // usando spread vira array
+  if (dayName.length === 0) {
+    // se é array tem length
     dayName = Object.keys(hours); // se veio vazio, recebe as keys e vira array
   }
   let theObject = {};
-  dayName.forEach((element) => { // forEach se usa em array e não em objeto
-    if (element === 'Monday') { // é o último a ser acrescentado
+  dayName.forEach((element) => {
+    // forEach se usa em array e não em objeto
+    if (element === 'Monday') {
+      // é o último a ser acrescentado
       theObject = { ...theObject, [element]: 'CLOSED' };
     } else {
-      theObject = { ...theObject, [element]: `Open from ${hours[element].open}am until ${hours[element].close - 12}pm` };
+      theObject = { ...theObject,
+        [element]: `Open from ${hours[element].open}am until ${hours[element].close - 12}pm` };
     } // o spread aqui funciona como += para objeto, para acrescentar e não substituir os valores
   });
   return theObject; // retorno tudo o que estiver nele
@@ -117,41 +122,43 @@ function oldestFromFirstSpecies(id) {
       older = findingAnimal.residents[i].age;
     }
   }
-  const findingTheOne = findingAnimal.residents.find(theOne => theOne.age === older);
+  const findingTheOne = findingAnimal.residents.find(
+    theOne => theOne.age === older,
+  );
   return Object.values(findingTheOne);
 }
 
 function increasePrices(percentage) {
-  Object.keys(prices).forEach((element) => { // se guia pelas keys
-    prices[element] = Math.ceil((prices[element] * (100 + percentage))) / 100;
-    // 49.99 * (100 + 50) / 100 = 74.985; Math.ceil para arredondar para cima
+  Object.keys(prices).forEach((element) => {
+    // se guia pelas keys
+    prices[element] = Math.ceil(prices[element] * (100 + percentage)) / 100;
+    // exemplo: 49.99 * (100 + 50) / 100 = 74.985; Math.ceil para arredondar para cima
   });
 }
 
 function employeeCoverage(idOrName) {
-  // // let theObject = {};
-  // const findingEmployee = employees.find(({ id, firstName, lastName }) =>
-  // idOrName === id || idOrName === firstName || idOrName === lastName);
-  // // para encontrar um funcionário específico
-  // const allEmployees = employees.map((name) => `${name.firstName} ${name.lastName}`);
-  // // nome completo de todos os funcionários
-  // const findingSpecie = animals.filter((specie, index) =>
-  // {findingEmployee.responsibleFor[index] === specie.id
-  //   return specie.name;
-  // });
-  // const findingAnimal = animals.filter((name, index) =>
-  // {names.push(employees[index].responsibleFor[0] === name.id ||
-  //   employees[index].responsibleFor[1] === name.id);
-  //   return names;
-  // });
-  // if (idOrName === undefined) {
-  //   employees.forEach((element) => {
-  //     // theObject = { ...theObject, [`${element.firstName} ${element.lastName}`]:  }
-  //     console.log(findingAnimal);
-  //   })
-  // }
-  // console.log(findingAnimal);
-  // return findingSpecie;
+  // referência: Francisco Berilo
+  let theObject = {};
+  if (idOrName === undefined) {
+    employees.forEach((element) => {
+      theObject = { ...theObject,
+        [`${element.firstName} ${element.lastName}`]: element.responsibleFor.map(idNumber =>
+          animals.find(theOne => theOne.id === idNumber).name,
+        ),
+      };
+    });
+    return theObject;
+  }
+  const findingEmployee = employees.find(({ id, firstName, lastName }) =>
+      idOrName === id || idOrName === firstName || idOrName === lastName,
+  );
+  // encontra o employee e retorna o array de species que é responsável
+  const findingSpecieName = findingEmployee.responsibleFor.map(idNumber =>
+    animals.find(theOne => theOne.id === idNumber).name,
+  );
+  return {
+    [`${findingEmployee.firstName} ${findingEmployee.lastName}`]: findingSpecieName,
+  };
 }
 
 module.exports = {
