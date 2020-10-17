@@ -48,8 +48,15 @@ function isManager(id) {
   return data.employees.some((managerId, index) => managerId.managers[index] === id);
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  // Adiciona um funcionário no fim da lista
+  return data.employees.push({
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  });
 }
 
 function animalCount(species) {
