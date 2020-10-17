@@ -70,27 +70,29 @@ function entryCalculator(entrants) {
   }
   const { Adult: adult, Child: child, Senior: senior } = data.prices;
   const priceArray = [adult, child, senior];
-  const { Adult: entryAdult, Child: entryChild, Senior: entrySenior } = entrants;
+  const { Adult: entryAdult = 0, Child: entryChild = 0, Senior: entrySenior = 0 } = entrants;
   const entryArray = [entryAdult, entryChild, entrySenior];
-  const calculatingPrice = entryArray.map((element) => {
-    if (element === undefined) {
-      element = 0;
-    }
-    return element;
-  }).map((element, index) => element * priceArray[index]);
+  const calculatingPrice = entryArray.map((element, index) => element * priceArray[index]);
   return calculatingPrice.reduce((acc, curr) => acc + curr);
 }
-
-// const test = entryCalculator({ 'Child': 1, 'Senior': 1 });
-// console.log(test);
 
 function animalMap(options) {
   // seu código aqui
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  // if (dayName === undefined) {
+  //   const {Tuesday: tue, Wednesday: wed { open: 8, close: 18 },
+  //   'Thursday': { open: 10, close: 20 },
+  //   'Friday': { open: 10, close: 20 },
+  //   'Saturday': { open: 8, close: 22 },
+  //   'Sunday': { open: 8, close: 20 },
+  //   'Monday': { open: 0, close: 0 })
+  // }
 }
+
+//const test = entryCalculator({ 'Child': 1, 'Senior': 1 });
+//console.log(test);
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
