@@ -65,12 +65,17 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-//  if (entrants === undefined || entrants.length === 0) {
-//    return 0;
-//  }
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const { Adult: adult, Child: child, Senior: senior } = data.prices;
+  const { Adult: entryAdult, Child: entryChild, Senior: entrySenior } = entrants;
+  const array = [entryAdult, entryChild, entrySenior];
+  const eliminateUndefined = array.map(element => (element === undefined) ? element = 0 : element);
+  return eliminateUndefined[0] * adult + eliminateUndefined[1] * child + eliminateUndefined[2] * senior;
 }
 
-// const test = animalCount();
+// const test = entryCalculator({ 'Child': 1, 'Senior': 1 });
 // console.log(test);
 
 function animalMap(options) {
