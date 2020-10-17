@@ -52,12 +52,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   return data.employees;
 }
 
-// const test = addEmployee();
-// console.log(test.length);
-
 function animalCount(species) {
-  // seu código aqui
+  if (species === undefined) {
+    const list = {};
+    data.animals.forEach(element => list[element.name] = element.residents.length);
+    return list;
+  }
+  const foundObject = data.animals.find(element => element.name === species);
+  return foundObject.residents.length;
 }
+
+// const test = animalCount('lions');
+// console.log(test);
 
 function entryCalculator(entrants) {
   // seu código aqui
