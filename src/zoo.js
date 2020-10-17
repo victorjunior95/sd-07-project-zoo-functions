@@ -30,18 +30,17 @@ function animalsOlderThan(animal, age) {
   return arrayAges.every(animalAge => animalAge >= age);
 }
 // console.log(animalsOlderThan('otters', 7));
-
 // console.log(employee);
+
 function employeeByName(employeeName) {
   const employee = data.employees.find(
     name => name.firstName === employeeName || name.lastName === employeeName);
   if (typeof employee === 'object') return employee;
   return {};
 }
-// console.log(employeeByName('rl'));
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return Object.assign(personalInfo, associatedWith);
 }
 
 function isManager(id) {
