@@ -72,8 +72,10 @@ function entryCalculator(entrants) {
   const priceArray = [adult, child, senior];
   const { Adult: entryAdult, Child: entryChild, Senior: entrySenior } = entrants;
   const entryArray = [entryAdult, entryChild, entrySenior];
-  const calculatingPrice = entryArray.map(element => {
-    (element === undefined) ? element = 0 : element
+  const calculatingPrice = entryArray.map((element) => {
+    if (element === undefined) {
+      element = 0
+    };
     return element;
   }).map((element, index) => element * priceArray[index]);
   return calculatingPrice.reduce((acc, curr) => acc + curr);
