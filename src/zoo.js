@@ -19,10 +19,10 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
-  const { animals: myAnimals } = data;
-  let animals = myAnimals.filter(item => item.name === animal);
-  animals = myAnimals[0].residents.every(old => old.age >= age);
-  return animals;
+  let { animals: myAnimals } = data;
+  const getAnimal = myAnimals.find(item => item.name === animal).residents.every(old => old.age >= age);
+
+  return getAnimal;
 }
 
 function employeeByName(employeeName) {
@@ -116,9 +116,6 @@ function schedule(dayName) {
   return (dayName === undefined) ? wholeSchedule : dailySchedule;
 }
 
-// Passado o id de um funcionário, encontra a primeira espécie
-// de animal gerenciado pelo funcionário, e retorna um array
-// com nome, sexo e idade do animal mais velho dessa espécie
 function oldestFromFirstSpecies(id) {
   // seu código aqui
   const { animals, employees } = data;
@@ -155,7 +152,9 @@ function increasePrices(percentage) {
 // pelos quais o funcionário é responsável
 function employeeCoverage(idOrName) {
   // seu código aqui
+
 }
+// console.log(employeeCoverage());
 
 module.exports = {
   entryCalculator,
