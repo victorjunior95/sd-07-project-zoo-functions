@@ -70,7 +70,7 @@ function animalMap(options) {
 function schedule(dayName) {
   const { Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday } = hours;
   const daySchedule = {};
-  const convertHour = (hour) => hour > 12 ? hour - 12 : hour;
+  const convertHour = hour => (hour > 12 ? hour - 12 : hour);
   const weekSchedule = {
     Tuesday: `Open from ${Tuesday.open}am until ${convertHour(Tuesday.close)}pm`,
     Wednesday: `Open from ${Wednesday.open}am until ${convertHour(Wednesday.close)}pm`,
@@ -86,8 +86,6 @@ function schedule(dayName) {
   daySchedule[dayName] = weekSchedule[dayName];
   return daySchedule;
 }
-
-console.log(schedule('Tuesday'));
 
 function oldestFromFirstSpecies(id) {
   const findEmployee = employees.find(employee => employee.id === id);
@@ -105,8 +103,27 @@ function increasePrices(percentage) {
   return prices;
 }
 
+function resultName(result, employee) {
+  const fullName = `${employee.firstName} ${employee.lastName}`;
+  result[fullName] = employee.responsibleFor.map(animalId =>
+    animals.find(animal => animal.id === animalId).name);
+  return fullName;
+}
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const result = {};
+  if (!idOrName) {
+    employees.forEach((employee) => {
+      resultName(result, employee);
+    });
+    return result;
+  }
+  const employeeName = employees.find(employee =>
+    employee.firstName === idOrName ||
+    employee.lastName === idOrName ||
+    employee.id === idOrName);
+  resultName(result, employeeName);
+  return result;
 }
 
 module.exports = {
