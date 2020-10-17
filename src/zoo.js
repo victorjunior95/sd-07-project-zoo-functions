@@ -141,21 +141,16 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   const copy = data.prices;
-  copy.Adult *= 100;
-  copy.Child *= 100;
-  copy.Senior *= 100;
-  copy.Adult = Math.round(
-    (copy.Adult + ((copy.Adult * percentage) / 100)).toFixed(2),
-  );
-  copy.Child = Math.round(
-    (copy.Child + ((copy.Child * percentage) / 100)).toFixed(2),
-  );
-  copy.Senior = Math.round(
-    (copy.Senior + ((copy.Senior * percentage) / 100)).toFixed(2),
-  );
-  copy.Adult = (copy.Adult / 100).toFixed(2);
-  copy.Child = (copy.Child / 100).toFixed(2);
-  copy.Senior = (copy.Senior / 100).toFixed(2);
+  function ajustPrices(someone) {
+    copy[someone] *= 100;
+    copy[someone] = Math.round(
+      (copy[someone] + ((copy[someone] * percentage) / 100)).toFixed(2),
+    );
+    copy[someone] = (copy[someone] / 100).toFixed(2);
+  }
+  ajustPrices('Adult');
+  ajustPrices('Child');
+  ajustPrices('Senior');
   return copy;
 }
 
@@ -172,7 +167,7 @@ function employeeCoverage(idOrName) {
   }
   if (idOrName === undefined) {
     data.employees.forEach((element) => {
-      responsableFor(element)
+      responsableFor(element);
     });
     return result;
   }
@@ -182,7 +177,7 @@ function employeeCoverage(idOrName) {
       idOrName === person.firstName ||
       idOrName === person.lastName,
   );
-  responsableFor(employee)
+  responsableFor(employee);
   return result;
 }
 console.log(employeeCoverage());
