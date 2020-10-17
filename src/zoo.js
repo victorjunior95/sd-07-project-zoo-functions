@@ -55,9 +55,8 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(species) {
   if (species === undefined) {
     const list = {};
-    data.animals.forEach(element => {
-      let newObj = list[element.name] = element.residents.length;
-      return newObj;
+    data.animals.forEach((element) => {
+      list[element.name] = element.residents.length
     });
     return list;
   }
@@ -66,13 +65,13 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  if (entrants === undefined || entrants.length === 0) {
-    return 0;
-  } 
+//  if (entrants === undefined || entrants.length === 0) {
+//    return 0;
+//  }
 }
 
-const test = animalCount();
-console.log(test);
+// const test = animalCount();
+// console.log(test);
 
 function animalMap(options) {
   // seu código aqui
