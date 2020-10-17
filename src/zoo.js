@@ -29,8 +29,8 @@ function employeeByName(employeeName) {
   return arrayOfObjects[0];
 }
 
- const test = employeeByName();
- console.log(test);
+// const test = employeeByName();
+// console.log(test);
 
 
 function createEmployee(personalInfo, associatedWith) {
