@@ -55,19 +55,24 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(species) {
   if (species === undefined) {
     const list = {};
-    data.animals.forEach(element => list[element.name] = element.residents.length);
+    data.animals.forEach(element => {
+      let newObj = list[element.name] = element.residents.length;
+      return newObj;
+    });
     return list;
   }
   const foundObject = data.animals.find(element => element.name === species);
   return foundObject.residents.length;
 }
 
-// const test = animalCount('lions');
-// console.log(test);
-
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (entrants === undefined || entrants.length === 0) {
+    return 0;
+  } 
 }
+
+const test = animalCount();
+console.log(test);
 
 function animalMap(options) {
   // seu código aqui
