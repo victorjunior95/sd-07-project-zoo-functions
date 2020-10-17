@@ -107,20 +107,20 @@ function entryCalculator(entrants) {
 function animalMap(options) {
   // seu código aqui
 }
+// function scheduleWithoutDay() {
 
+// }
 function schedule(dayName) {
   const result = {};
   const hours = data.hours;
   if (dayName === undefined) {
     for (const key in hours) {
-      if (hours.hasOwnProperty(key)) {
         const element = hours[key];
         let { open, close } = element;
         result[key] = `Open from ${open}am until ${close - 12}pm`;
         if (key === 'Monday') {
           result[key] = 'CLOSED';
         }
-      }
     }
     return result;
   }
