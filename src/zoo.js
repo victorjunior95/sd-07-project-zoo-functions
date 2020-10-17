@@ -30,13 +30,14 @@ function employeeByName(employeeName) {
   return arrayOfObjects[0];
 }
 
-// const test = employeeByName();
-// console.log(test);
-
-
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const {id, firstName, lastName} = personalInfo;
+  const {managers, responsibleFor} = associatedWith;
+  return {id, firstName, lastName, managers, responsibleFor};
 }
+
+// const test = createEmployee();
+// console.log(test);
 
 function isManager(id) {
   // seu código aqui
