@@ -24,8 +24,9 @@ function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  const {employees} = data;
-  const arrayOfObjects = employees.filter(employee => employee.firstName === employeeName || employee.lastName === employeeName);
+  const { employees } = data;
+  const arrayOfObjects = employees.filter(employee =>
+     employee.firstName === employeeName || employee.lastName === employeeName);
   return arrayOfObjects[0];
 }
 
