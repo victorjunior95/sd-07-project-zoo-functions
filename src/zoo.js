@@ -63,8 +63,21 @@ const animalCount = (species) => {
   return residents;
 };
 
-function entryCalculator(entrants) {
-  // seu código aqui
+const entryCalculator = (entrants) => {
+  let sum = 0;
+
+  if (entrants === undefined || entrants === {}) {
+    return sum;
+  };
+
+  const ticketCategory = Object.keys(entrants);
+  const numberOfTickets = Object.values(entrants);
+
+  ticketCategory.map((category, index) => {
+    sum += data.prices[category] * numberOfTickets[index];
+  });
+
+  return sum;
 }
 
 function animalMap(options) {
