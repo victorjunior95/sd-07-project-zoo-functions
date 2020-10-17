@@ -49,11 +49,11 @@ function createEmployee(personalInfo, associatedWith) {
   const { id, firstName, lastName } = personalInfo;
   const { managers, responsibleFor } = associatedWith;
   return {
-    id: id,
-    firstName: firstName,
-    lastName: lastName,
-    managers: managers,
-    responsibleFor: responsibleFor,
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
   };
 }
 
@@ -161,15 +161,18 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   const result = {};
+  function responsableFor(person) {
+    const completeName = `${person.firstName} ${person.lastName}`;
+    result[completeName] = [];
+    person.responsibleFor.forEach((idAnimal) => {
+      result[completeName].push(
+        data.animals.find(animal => idAnimal === animal.id).name,
+      );
+    });
+  }
   if (idOrName === undefined) {
     data.employees.forEach((element) => {
-      const completeName = `${element.firstName} ${element.lastName}`;
-      result[completeName] = [];
-      element.responsibleFor.forEach((idAnimal) => {
-        result[completeName].push(
-          data.animals.find(animal => idAnimal === animal.id).name,
-        );
-      });
+      responsableFor(element)
     });
     return result;
   }
@@ -179,13 +182,7 @@ function employeeCoverage(idOrName) {
       idOrName === person.firstName ||
       idOrName === person.lastName,
   );
-  const employeeName = `${employee.firstName} ${employee.lastName}`;
-  result[employeeName] = [];
-  employee.responsibleFor.forEach((idAnimal) => {
-    result[employeeName].push(
-      data.animals.find(animal => idAnimal === animal.id).name,
-    );
-  });
+  responsableFor(employee)
   return result;
 }
 console.log(employeeCoverage());
