@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees } = require('./data'); // incluído todos os arrays dentro de data
+const { animals, employees, prices, hours } = require('./data'); // incluído todos os arrays dentro de data
 const data = require('./data');
 
 function animalsByIds(...ids) { // ... para que considere todos os elementos (IDs) do array animals
@@ -60,23 +60,49 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (entrants === undefined || entrants === {}) return 0;
+  const calcPrice = Object.keys(entrants);
+  return calcPrice.reduce((acumulador, item) => {
+    acumulador += entrants[item] * prices[item];
+    return acumulador;
+  }, 0);
 }
 
 function animalMap(options) {
   // seu código aqui
 }
 
-function schedule(dayName) {
-  // seu código aqui
+function schedule(...dayName) {
+  if (dayName.length === 0) {
+    dayName = Object.keys(hours);
+  }
+  return dayName.reduce((acumulador, item) => {
+    acumulador[item] = `Open from ${hours[item].open}am until ${hours[item].close - 12}pm`;
+    if (item === 'Monday') {
+      acumulador[item] = 'CLOSED';
+    }
+    return acumulador;
+  }, {});
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const funcionario = employees.find(search => search.id === id);
+  const idAnimal = funcionario.responsibleFor[0];
+  const animalVelho = animals.find(search => search.id === idAnimal);
+  const retorno = animalVelho.residents.reduce((acumulador, item) => {
+    if (acumulador.age < item.age) return item;
+    return acumulador;
+  });
+  return Object.values(retorno);
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const pessoa = Object.keys(prices);
+  pessoa.forEach((item) => {
+    prices[item] += (prices[item] * percentage) / 100;
+    prices[item] = Math.round(prices[item] * 100) / 100;
+  });
+  return prices;
 }
 
 function employeeCoverage(idOrName) {
