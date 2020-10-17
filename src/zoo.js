@@ -54,18 +54,13 @@ const addEmployee = (id, firstName, lastName, managers = [], responsibleFor = []
 
 const animalCount = (species) => {
   if (species === undefined) {
-    const obj = {};
-    data.animals.forEach(element => obj[element.name] = element.residents.length);
+    const obj = data.animals.forEach(animal => { obj[animal.name] = animal.residents.length });
     return obj;
   }
 
   const residents = data.animals.find(animal => animal.name === species).residents.length;
   return residents;
 };
-
-console.log(animalCount('lions'));
-
-// console.log(animalCount('lions'));
 
 function entryCalculator(entrants) {
   // seu código aqui
