@@ -78,7 +78,7 @@ function animalMap(options) {
   // seu código aqui
 }
 
-const formatHour = value => (value > 12) ? `${value - 12}pm` : `${value}am`;
+const formatHour = value => ((value > 12) ? `${value - 12}pm` : `${value}am`);
 
 function schedule(dayName) {
   const mensage = {};
@@ -93,7 +93,7 @@ function schedule(dayName) {
   schArray.map((element) => {
     let value = 'CLOSED';
     if (element[1].open !== 0) {
-      value = `Open from ${formatHour(element[1].open)} until ${formatHour(element[1].close)}`
+      value = `Open from ${formatHour(element[1].open)} until ${formatHour(element[1].close)}`;
     }
     return Object.assign(mensage, { [element[0]]: value });
   });
@@ -102,7 +102,12 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const requireEmployee = data.employees.find(employee => employee.id === id);
+  const animals = data.animals.filter(animal => animal.id === requireEmployee.responsibleFor[0]);
+  return (
+    Object.values(animals[0].residents.reduce(
+      (acc, current) => (acc.age > current.age ? acc : current)))
+  );
 }
 
 function increasePrices(percentage) {
