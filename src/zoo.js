@@ -35,6 +35,7 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
+  return Object.assign({}, personalInfo, associatedWith);
 
 }
 
@@ -66,6 +67,7 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
+
   // seu código aqui
 }
 
@@ -86,6 +88,7 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
+
   // seu código aqui
 }
 
