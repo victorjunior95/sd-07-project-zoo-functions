@@ -122,7 +122,7 @@ function scheduleAux() {
       obj[time[0]] = 'CLOSED';
     } else {
       obj[time[0]] = `Open from ${time[1].open}am until ${
-        time[1].close - 12 }pm`;
+        time[1].close - 12}pm`;
     }
   });
   return obj;
