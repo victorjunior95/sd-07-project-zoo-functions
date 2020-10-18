@@ -82,7 +82,13 @@ function animalMap(options) {
 
 function schedule(dayName) {
   const daysOfWeek = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday'];
-  const { Tuesday: tue, Wednesday: wed, Thursday: thu, Friday: fri, Saturday: sat, Sunday: sun, Monday: mon } = data.hours;
+  const { Tuesday: tue,
+    Wednesday: wed,
+    Thursday: thu,
+    Friday: fri,
+    Saturday: sat,
+    Sunday: sun,
+    Monday: mon } = data.hours;
   const hours = [tue, wed, thu, fri, sat, sun, mon];
   const list = {};
   if (dayName === undefined) {
@@ -90,7 +96,7 @@ function schedule(dayName) {
       if (index !== hours.length - 1) {
         list[daysOfWeek[index]] = `Open from ${element.open}am until ${element.close - 12}pm`;
       } else {
-        list[daysOfWeek[index]] = `CLOSED`;
+        list[daysOfWeek[index]] = 'CLOSED';
       }
     });
     return list;
@@ -100,12 +106,12 @@ function schedule(dayName) {
       if (index !== daysOfWeek.length - 1) {
         list[element] = `Open from ${hours[index].open}am until ${hours[index].close - 12}pm`;
       } else {
-        list[element] = `CLOSED`;
+        list[element] = 'CLOSED';
       }
       return list;
     }
   });
-    return list;
+  return list;
 }
 
 // const test = schedule('Monday');
