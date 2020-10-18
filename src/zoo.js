@@ -111,7 +111,7 @@ function animalMap(options = {}) {
       const animalResidents = specie.residents.filter(animal => (animal.sex === sex) || (!sex));
       const names = animalResidents.map(currrent => currrent.name);
       if (sorted) {
-      names.sort();
+        names.sort();
       }
       const animalsLocation = { [specie.name]: names };
       allAnimals[specie.location].push(animalsLocation);
