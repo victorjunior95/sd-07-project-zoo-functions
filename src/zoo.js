@@ -161,7 +161,7 @@ function increasePrices(percentage) {
 }
 // consultei o repositório de Kramer para a refatoração desta função.
 // https://github.com/tryber/sd-07-project-zoo-functions/blob/544898ad4e7bca13bb04afc1dfabe4c7ee1da3ca/src/zoo.js
-function employeeCoverageAuxfunction employeeCoverage() {() {
+function employeeCoverageAuxfunction() {
   const coverage = {
     'Nigel Nelson': ['lions', 'tigers'],
     'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
@@ -173,7 +173,8 @@ function employeeCoverageAuxfunction employeeCoverage() {() {
     'Emery Elser': ['elephants', 'bears', 'lions'],
   };
 return coverage;
-}
+};
+
 function employeeCoverage(idOrName) {
  if (idOrName === undefined) {
     return employeeCoverageAux()
@@ -194,7 +195,7 @@ function employeeCoverage(idOrName) {
       const final = {
         [`${returnn}`]: coverageValuesI,
       }; return final;
-    }return 
+    }return
   }
 }
 
