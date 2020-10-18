@@ -81,18 +81,35 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // if (dayName === undefined) {
-  //   const {Tuesday: tue, Wednesday: wed { open: 8, close: 18 },
-  //   'Thursday': { open: 10, close: 20 },
-  //   'Friday': { open: 10, close: 20 },
-  //   'Saturday': { open: 8, close: 22 },
-  //   'Sunday': { open: 8, close: 20 },
-  //   'Monday': { open: 0, close: 0 })
-  // }
+  const daysOfWeek = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday'];
+  const { Tuesday: tue, Wednesday: wed, Thursday: thu, Friday: fri, Saturday: sat, Sunday: sun, Monday: mon } = data.hours;
+  const hours = [tue, wed, thu, fri, sat, sun, mon];
+  const list = {};
+  if (dayName === undefined) {
+    hours.forEach((element, index) => {
+      if (index !== hours.length - 1) {
+        list[daysOfWeek[index]] = `Open from ${element.open}am until ${element.close - 12}pm`;
+      } else {
+        list[daysOfWeek[index]] = `CLOSED`;
+      }
+    });
+    return list;
+  }
+  daysOfWeek.forEach((element, index) => {
+    if (element === dayName) {
+      if (index !== daysOfWeek.length - 1) {
+        list[element] = `Open from ${hours[index].open}am until ${hours[index].close - 12}pm`;
+      } else {
+        list[element] = `CLOSED`;
+      }
+      return list;
+    }
+  });
+    return list;
 }
 
-//const test = entryCalculator({ 'Child': 1, 'Senior': 1 });
-//console.log(test);
+// const test = schedule('Monday');
+// console.log(test);
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
