@@ -130,8 +130,11 @@ function increasePrices(percentage) {
   const { Adult: adult, Child: child, Senior: senior } = data.prices;
   const priceArray = [adult, senior, child];
   const priceKeys = Object.keys(data.prices);
-  const increasedPrices = priceArray.map(element => (((element * (percentage/100 + 1))*100).toPrecision(4))/100);
-  increasedPrices.forEach((element, index) => data.prices[priceKeys[index]] = element);
+  const increasedPrices = priceArray.map(element => (
+    ((element * ((percentage / 100) + 1)) * 100).toPrecision(4)) / 100);
+  increasedPrices.forEach((element, index) => {
+    data.prices[priceKeys[index]] = element
+  });
   return data.prices;
 }
 
