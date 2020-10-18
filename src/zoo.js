@@ -126,12 +126,12 @@ function oldestFromFirstSpecies(id) {
   const { animals, employees } = data;
   let caredForAnimals;
   let residentAnimals;
-  employees.forEach(element => {
+  employees.forEach((element) => {
     if (element.id === id) {
       caredForAnimals = element.responsibleFor;
     }
   });
-  animals.forEach(element => {
+  animals.forEach((element) => {
     if (element.id === caredForAnimals[0]) {
       residentAnimals = element.residents;
     }
