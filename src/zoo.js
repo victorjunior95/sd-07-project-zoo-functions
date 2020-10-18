@@ -95,14 +95,19 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+  const animalId = data.employees.find(employee => employee.id === id).responsibleFor[0];
+  const oldest = data.animals.find(animal => animal.id === animalId)
+  .residents
+  .reduce((animal1, animal2) => (animal2.age > animal1.age ? animal2 : animal1));
+  return [oldest.name, oldest.sex, oldest.age];
 }
 
 function increasePrices(percentage) {
   // seu código aqui
   const easyPercent = 1 + (percentage / 100);
   Object.keys(prices).forEach((key) => {
-    const increasedPrices = (data.prices[key] * easyPercent);
-    data.prices[key] = Math.round(increasedPrices * 100) / 100;
+    const increasedPrices = (prices[key] * easyPercent);
+    prices[key] = Math.round(increasedPrices * 100) / 100;
   });
 }
 
