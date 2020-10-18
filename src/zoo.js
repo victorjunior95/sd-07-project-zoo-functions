@@ -58,15 +58,15 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  if (species === undefined) {
-    // const obj = {};
-    const obj = data.animals.map((animal) => {
-      obj[animal.name] = animal.residents.length;
-      return obj;
-    });
+  if (species !== undefined) {
+    const specieCount = data.animals.find(animal => animal.name === species);
+    return specieCount.residents.length;
   }
-  const specieCount = data.animals.find(animal => animal.name === species);
-  return specieCount.residents.length;
+  const speciesPopulation = {};
+  data.animals.map(animal =>
+    Object.assign(speciesPopulation, { [animal.name]: animal.residents.length }),
+  );
+  return speciesPopulation;
 }
 
 function entryCalculator(entrants = Object) {
