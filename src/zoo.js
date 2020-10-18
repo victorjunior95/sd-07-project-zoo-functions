@@ -122,16 +122,21 @@ function schedule(dayName) {
   return listIfArgument(daysOfWeek, hours, dayName);
 }
 
-// const test = schedule('Tuesday');
-// console.log(test);
-
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { Adult: adult, Child: child, Senior: senior } = data.prices;
+  const priceArray = [adult, senior, child];
+  const priceKeys = Object.keys(data.prices);
+  const increasedPrices = priceArray.map(element => (((element * (percentage/100 + 1))*100).toPrecision(4))/100);
+  increasedPrices.forEach((element, index) => data.prices[priceKeys[index]] = element);
+  return data.prices;
 }
+
+// const test = increasePrices(50);
+// console.log(test);
 
 function employeeCoverage(idOrName) {
   // seu código aqui
