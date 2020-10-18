@@ -1,3 +1,4 @@
+
 const { animals } = require('./data');
 const { employees } = require('./data');
 /*
@@ -96,7 +97,7 @@ const prices = {
 function entryCalculator(entrants = 0) {
 // entrants precisa de um valor inicial, pois nao e possivel
 // converter null ou  undefined em objeto
-// ( nao e possivel utilizar Object.values
+// ( nao e possivel utilizar Object.values)
   if (Object.values(entrants).length === 0) {
     entrants = 0;
 // para o caso de entrants ser um objeto vazio.
@@ -129,7 +130,7 @@ function scheduleAux() {
 }
 
 function schedule(dayName) {
-  if (dayName === undefined) {
+  'if (dayName === undefined) {
     return scheduleAux();
   }
   const obj1 = {};
@@ -143,7 +144,7 @@ function schedule(dayName) {
 // consultei o repositório de Kramer para a refatoração desta função
 // ( codeclimate não aceitou minha solução)
 // Eu não havia me atentado ao fato de que deveria relacionar
-//  a função á propriedade hours de data.js.
+// a função á propriedade hours de data.js.
 // https://github.com/tryber/sd-07-project-zoo-functions/blob/544898ad4e7bca13bb04afc1dfabe4c7ee1da3ca/src/zoo.js
 
 function oldestFromFirstSpecies(id) {}
@@ -181,13 +182,12 @@ const withNameId = (idOrname) => {
 };
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
   const newObject = {};
   if (!idOrName) {
     employees.forEach(({ firstName, lastName, responsibleFor }) => {
       newObject[`${firstName} ${lastName}`] = employeeAnimal(responsibleFor);
     });
-  } else {
+  } 
     return withNameId(idOrName);
   }
   return newObject;
