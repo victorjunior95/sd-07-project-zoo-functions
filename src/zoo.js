@@ -80,7 +80,7 @@ function animalMap(options) {
   // seu código aqui
 }
 
-function listIfNoArgument (week, objImport) {
+function listIfNoArgument(week, objImport) {
   const list = {};
   objImport.forEach((element, index) => {
     if (index !== objImport.length - 1) {
@@ -92,7 +92,7 @@ function listIfNoArgument (week, objImport) {
   return list;
 }
 
-function listIfArgument (week, objImport, entry) {
+function listIfArgument(week, objImport, entry) {
   const list = {};
   week.forEach((element, index) => {
     if (element === entry) {
