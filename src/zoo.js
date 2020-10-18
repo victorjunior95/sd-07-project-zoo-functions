@@ -94,26 +94,18 @@ const prices = {
 const valuesPerType = Object.values(prices);
 const keysPerType = Object.keys(prices);
 
-function entryCalculator(entrants) {
-  let sum = 0;
-  if (entrants === null || entrants === undefined) {
-    return 0;
+function entryCalculator(entrants = 0) {
+  // seu código aqui
+  if (Object.values(entrants).length === 0) {
+    entrants = 0;
+  } else if (Object.values(entrants).length > 0) {
+    const { Adult = 0, Senior = 0, Child = 0 } = entrants;
+    entrants = (Adult * prices.Adult) + (Senior * prices.Senior) + (Child * prices.Child);
   }
-  const keys = Object.keys(entrants);
-  const values = Object.values(entrants);
-
-  for (let i = 0; i <= keys.length - 1; i += 1) {
-    if (entrants === {}) {
-      return 0;
-    }
-    for (let j = 0; j <= keysPerType.length - 1; j += 1) {
-      if (keys[i] === keysPerType[j]) {
-        sum += values[i] * valuesPerType[j];
-      }
-    }
-  }
-  return sum;
+  return entrants;
 }
+// consultei o repositorio de krammer para refatoramento desta funçao
+// https://github.com/tryber/sd-07-project-zoo-functions/blob/544898ad4e7bca13bb04afc1dfabe4c7ee1da3ca/src/zoo.js
 
 function animalMap(options) {
   // seu código aqui
