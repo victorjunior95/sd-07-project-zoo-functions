@@ -192,7 +192,7 @@ function employeeCoverage(idOrName) {
       const coverageValuesI = coverageValues[i];
       return {
         [`${returnn}`]: coverageValuesI,
-      };
+      }return true;
     }
   }
 }
