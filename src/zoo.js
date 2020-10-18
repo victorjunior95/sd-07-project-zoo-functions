@@ -19,20 +19,11 @@ function animalsByIds(...ids) {
   }
 
   const babado = ids.map((animal) =>
-    data.animals.find((element) => element.id === animal)
+    data.animals.find((element) => element.id === animal);
   );
-
-  // const animal = data.animals.filter((element) => element.id === ids);
 
   return babado;
 }
-
-console.log(
-  animalsByIds(
-    '0938aa23-f153-4937-9f88-4858b24d6bce',
-    'e8481c1d-42ea-4610-8e11-1752cfc05a46'
-  )
-);
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
