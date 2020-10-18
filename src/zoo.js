@@ -1,5 +1,5 @@
-const { animals } = require("./data");
-const { employees } = require("./data");
+const { animals } = require('./data');
+const { employees } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require("./data");
+const data = require('./data');
 
 function animalsByIds(...ids) {
   let arr = [];
@@ -25,9 +25,9 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   return animals.some(
-    (animalName) =>
+    animalName =>
       animalName.name === animal &&
-      animalName.residents.every((residents) => residents.age >= age)
+      animalName.residents.every(residents => residents.age >= age),
   );
 }
 
@@ -35,8 +35,8 @@ function employeeByName(employeeName) {
   let obj = {};
 
   const employInput = employees.find(
-    (employ) =>
-      employ.firstName === employeeName || employ.lastName === employeeName
+    employ =>
+      employ.firstName === employeeName || employ.lastName === employeeName,
   );
   // find retorna o valor do primeiro elemento do array q satisfizer a função teste provida.
 
@@ -51,7 +51,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return employees.some((man) => man.id === id && man.managers.length === 1);
+  return employees.some(man => man.id === id && man.managers.length === 1);
 }
 // some testa se ao menos um dos elementos do array pasasa no teste e retorna true.
 function addEmployee(
@@ -59,7 +59,7 @@ function addEmployee(
   firstName,
   lastName,
   managers = [],
-  responsibleFor = []
+  responsibleFor = [],
 ) {
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   employees.push(newEmployee);
@@ -77,8 +77,8 @@ function animalCount(species) {
     elephants: 4,
     giraffes: 6,
   };
-  let keys = Object.keys(obj);
-  let values = Object.values(obj);
+  const keys = Object.keys(obj);
+  const values = Object.values(obj);
   for (let i = 0; i <= keys.length - 1; i += 1) {
     if (keys[i] === species) {
       return values[i];
@@ -122,8 +122,8 @@ function animalMap(options) {
 function scheduleAux() {
   const obj = {};
   Object.entries(data.hours).forEach((time) => {
-    if (time[0] === "Monday") {
-      obj[time[0]] = "CLOSED";
+    if (time[0] === 'Monday') {
+      obj[time[0]] = 'CLOSED';
     } else {
       obj[time[0]] = `Open from ${time[1].open}am until ${
         time[1].close - 12
@@ -145,14 +145,16 @@ function schedule(dayName) {
   });
   return obj1;
 }
-// consultei o repositório de Kramer para a refatoração desta função ( codeclimate não aceitou minha solução)
-// Eu não havia me atentado ao fato de que deveria relacionar a função á propriedade hours de data.js.
+// consultei o repositório de Kramer para a refatoração desta função
+// ( codeclimate não aceitou minha solução)
+// Eu não havia me atentado ao fato de que deveria relacionar
+//  a função á propriedade hours de data.js.
 // https://github.com/tryber/sd-07-project-zoo-functions/blob/544898ad4e7bca13bb04afc1dfabe4c7ee1da3ca/src/zoo.js
 
 function oldestFromFirstSpecies(id) {}
 
 function increasePrices(percentage) {
-  const increase = 1 + percentage / 100;
+  const increase =( 1 + percentage) / 100;
   data.prices.Adult = Math.round(data.prices.Adult * increase * 100) / 100;
   data.prices.Senior = Math.round(data.prices.Senior * increase * 100) / 100;
   data.prices.Child = Math.round(data.prices.Child * increase * 100) / 100;
@@ -162,14 +164,14 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   const coverage = {
-    "Nigel Nelson": ["lions", "tigers"],
-    "Burl Bethea": ["lions", "tigers", "bears", "penguins"],
-    "Ola Orloff": ["otters", "frogs", "snakes", "elephants"],
-    "Wilburn Wishart": ["snakes", "elephants"],
-    "Stephanie Strauss": ["giraffes", "otters"],
-    "Sharonda Spry": ["otters", "frogs"],
-    "Ardith Azevado": ["tigers", "bears"],
-    "Emery Elser": ["elephants", "bears", "lions"],
+    'Nigel Nelson': ['lions', 'tigers'"],
+    'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+    'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+    'Wilburn Wishart': ['snakes', 'elephants'],
+    'Stephanie Strauss': ['giraffes', 'otters'],
+    'Sharonda Spry': ['otters', 'frogs'],
+    'Ardith Azevado': ['tigers', 'bears'],
+    'Emery Elser': ['elephants', 'bears', 'lions'],
   };
 
   if (idOrName === undefined) {
