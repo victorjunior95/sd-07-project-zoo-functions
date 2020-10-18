@@ -104,6 +104,8 @@ function entryCalculator(entrants = 0) {
     const { Adult = 0, Senior = 0, Child = 0 } = entrants;
     entrants = (Adult * prices.Adult) + (Senior * prices.Senior) + (Child * prices.Child);
   }
+// uso de object destructuring:
+// https://dmitripavlutin.com/javascript-object-destructuring/
   return entrants;
 }
 // consultei o repositorio de krammer para refatoramento desta funçao
@@ -120,8 +122,7 @@ function scheduleAux() {
       obj[time[0]] = 'CLOSED';
     } else {
       obj[time[0]] = `Open from ${time[1].open}am until ${
-        time[1].close - 12
-      }pm`;
+        time[1].close - 12 }pm`;
     }
   });
   return obj;
