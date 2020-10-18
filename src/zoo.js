@@ -62,10 +62,17 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
+
   // seu código aqui
 }
 
 function schedule(dayName) {
+  if (dayName === undefined) {
+    const arrHours = Object.entries(hours);
+    arrHours.forEach(modifier);
+    return hours;
+  }
+  return { [dayName]: hours[dayName] };
 
   // seu código aqui
 }
