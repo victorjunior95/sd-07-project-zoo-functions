@@ -161,8 +161,7 @@ function increasePrices(percentage) {
 }
 // consultei o repositório de Kramer para a refatoração desta função.
 // https://github.com/tryber/sd-07-project-zoo-functions/blob/544898ad4e7bca13bb04afc1dfabe4c7ee1da3ca/src/zoo.js
-
-function employeeCoverage(idOrName) {
+function employeeCoverageAuxfunction employeeCoverage() {() {
   const coverage = {
     'Nigel Nelson': ['lions', 'tigers'],
     'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
@@ -173,16 +172,18 @@ function employeeCoverage(idOrName) {
     'Ardith Azevado': ['tigers', 'bears'],
     'Emery Elser': ['elephants', 'bears', 'lions'],
   };
-
-  if (idOrName === undefined) {
-    return coverage;
+return coverage;
+}
+function employeeCoverage(idOrName) {
+ if (idOrName === undefined) {
+    return employeeCoverageAux()
   }
 
   const employ = data.employees.find(
-    (employe) =>
+    employe =>
       employe.firstName === idOrName ||
       employe.lastName === idOrName ||
-      employe.id === idOrName
+      employe.id === idOrName,
   );
   const returnn = `${employ.firstName} ${employ.lastName}`;
   const coverageKeys = Object.keys(coverage);
@@ -192,8 +193,8 @@ function employeeCoverage(idOrName) {
       const coverageValuesI = coverageValues[i];
       const final = {
         [`${returnn}`]: coverageValuesI,
-      }; return final
-    }
+      }; return final;
+    }return 
   }
 }
 
