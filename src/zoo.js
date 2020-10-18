@@ -18,7 +18,7 @@ function animalsByIds(...ids) {
     return arrayAnimal;
   }
 
-  const babado = ids.map (animal =>
+  const babado = ids.map(animal =>
     data.animals.find(element => element.id === animal));
 
   return babado;
