@@ -90,11 +90,108 @@ function entryCalculator(...entrants) {
   return result;
 }
 
-
 function animalMap(options) {
   // seu código aqui
-}
+  const getDirections = () => {const directions = animals.map((specie) => specie.location)
+  .filter((current, index, self) => index === self.indexOf(current));
+  return directions;
+};
+const sizeInput = Object.keys(options).length;
 
+  if (options === undefined) {
+    let allAnimals = {};
+    getDirections().forEach((direction) => {
+      let inputItem = [];
+       animals.forEach((itens) => {
+         if(itens.location === direction) {
+           inputItem.push(itens.name)
+           allAnimals[direction] = inputItem;
+        }});
+    });
+    return allAnimals;
+  };
+  if (options.includeNames === true && sizeInput === 1) {
+    let allAnimals = {};
+    getDirections().forEach((direction, indexD) => {
+      let inputItem = [];
+      let animalName;
+       animals.forEach((itens) => {
+         if(itens.location === direction) {
+          const listAnimal = {}
+           animalName = itens.residents.map(animal => animal.name);
+          listAnimal[itens.name] = animalName;
+          inputItem.push(listAnimal)
+           allAnimals[direction] = inputItem;
+        }});
+        //Falta corrigir a amostragem do array
+    });
+    return allAnimals;
+  };
+  if (options.includeNames === true && options.sorted === true && sizeInput === 2) {
+    let allAnimals = {};
+    getDirections().forEach((direction) => {
+      let inputItem = [];
+      let animalName;
+       animals.forEach((itens) => {
+         if(itens.location === direction) {
+          const listAnimal = {}
+           animalName = itens.residents.map(animal => animal.name);
+           animalName.sort();
+           listAnimal[itens.name] = animalName;
+           inputItem.push(listAnimal)
+           allAnimals[direction] = inputItem;
+        }});
+    });
+    return allAnimals;
+  };
+  if (options.sex && options.includeNames && sizeInput === 2) {
+    let allAnimals = {};
+    getDirections().forEach((direction) => {
+      let inputItem = [];
+      let animalName;
+       animals.forEach((itens) => {
+         if(itens.location === direction) {
+          const listAnimal = {};
+           animalName = itens.residents.filter(animal => animal.sex === options.sex);
+           animalName = animalName.map(currentAnimal => currentAnimal.name);
+           listAnimal[itens.name] = animalName;
+           inputItem.push(listAnimal)
+           allAnimals[direction] = inputItem;
+        }});
+    });
+    return allAnimals;
+  };
+  if (options.sex && options.sorted === true && sizeInput === 3) {
+    let allAnimals = {};
+    getDirections().forEach((direction) => {
+      let inputItem = [];
+      let animalName;
+       animals.forEach((itens) => {
+         if(itens.location === direction) {
+          const listAnimal = {};
+           animalName = itens.residents.filter(animal => animal.sex === options.sex);
+           animalName = animalName.map(currentAnimal => currentAnimal.name).sort();
+           listAnimal[itens.name] = animalName;
+           inputItem.push(listAnimal);
+           allAnimals[direction] = inputItem;
+        }});
+    });
+    return allAnimals;
+  };
+  if (options.includeNames === undefined) {
+    let allAnimals = {};
+    getDirections().forEach((direction) => {
+      let inputItem = [];
+       animals.forEach((itens) => {
+         if(itens.location === direction) {
+           inputItem.push(itens.name)
+           allAnimals[direction] = inputItem;
+        }});
+    });
+    return allAnimals;
+    return result;
+  }
+}
 function schedule(dayName) {
   // seu código aqui
 }
