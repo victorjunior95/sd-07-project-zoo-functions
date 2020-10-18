@@ -78,8 +78,27 @@ function animalMap(options) {
   // seu código aqui
 }
 
+const formatHour = value => (value > 12) ? `${value - 12}pm` : `${value}am`;
+
 function schedule(dayName) {
-  // seu código aqui
+  const mensage = {};
+  let schArray = [];
+
+  if (Object.entries(data.hours).some(schDay => schDay[0] === dayName)) {
+    schArray.push([dayName, data.hours[dayName]]);
+  } else {
+    schArray = Object.entries(data.hours);
+  }
+
+  schArray.map((element) => {
+    let value = 'CLOSED';
+    if (element[1].open !== 0) {
+      value = `Open from ${formatHour(element[1].open)} until ${formatHour(element[1].close)}`
+    }
+    return Object.assign(mensage, { [element[0]]: value });
+  });
+
+  return mensage;
 }
 
 function oldestFromFirstSpecies(id) {
