@@ -156,41 +156,34 @@ function increasePrices(percentage) {
 }
 // consultei o repositório de Kramer para a refatoração desta função.
 // https://github.com/tryber/sd-07-project-zoo-functions/blob/544898ad4e7bca13bb04afc1dfabe4c7ee1da3ca/src/zoo.js
-const employeeAnimal = (responsibleFor) => {
-  const arrayOfAnimal = [];
-  responsibleFor.forEach((animalId) => {
-    animals.filter(({ id, name }) => {
-      if (id === animalId) {
-        arrayOfAnimal.push(name);
-      }
-      return false;
-    });
-  });
-  return arrayOfAnimal;
-};
-
-const withNameId = (idOrname) => {
-  const newObject = {};
-  employees.filter(({ id, firstName, lastName, responsibleFor }) => {
-    if (idOrname === id || idOrname === firstName || idOrname === lastName) {
-      newObject[`${firstName} ${lastName}`] = employeeAnimal(responsibleFor);
-    }
-    return false;
-  });
-  return newObject;
-};
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
-  const newObject = {};
-  if (!idOrName) {
-    employees.forEach(({ firstName, lastName, responsibleFor }) => {
-      newObject[`${firstName} ${lastName}`] = employeeAnimal(responsibleFor);
-    });
-  } else {
-    return withNameId(idOrName);
+  if (idOrName === undefined) {
+    const out = {};
+    employees.forEach(employeeSelected =>
+    (out[`${employeeSelected.firstName} ${employeeSelected.lastName}`]= employeeSelected.responsibleFor.map
+    (isresponsible => animals.find(animal => animal.id === isresponsible).name,)),);
+    return out;
   }
-  return newObject;
+// Este if cria o objeto com todos os nomes de empregados e respectivos animais cuidados.
+// Com o forEach, adiciona as chaves do objeto ( nomes dos empregados)
+// Com o find, encontra-se pelo id do animal o seu nome (.name)
+// Com  = ...map , adiciona valores as chaves. Os valores que eram ids (.responsibleFor)
+// sao substituidos pelos nomes encontrados pelo find.
+
+// O método map() invoca a função callback passada por argumento para cada elemento do Array e devolve um novo Array como resultado.
+// https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+  const employeer = employees.find(
+    employeeSelected =>
+      employeeSelected.firstName === idOrName ||
+      employeeSelected.lastName === idOrName ||
+      employeeSelected.id === idOrName,
+  );
+  const responsible = employeer.responsibleFor.map(
+    isresponsible => animals.find(animal => animal.id === isresponsible).name,
+  );
+
+  return { [`${employeer.firstName} ${employeer.lastName}`]: responsible };
 }
 
 module.exports = {
