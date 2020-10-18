@@ -190,11 +190,11 @@ function employeeCoverage(idOrName) {
   for (let i = 0; i <= 8; i += 1) {
     if (returnn === coverageKeys[i]) {
       const coverageValuesI = coverageValues[i];
-      return {
+      const final = {
         [`${returnn}`]: coverageValuesI,
       }
     }
-  }
+  }return final;
 }
 
 module.exports = {
