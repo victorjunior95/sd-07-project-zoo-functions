@@ -80,9 +80,8 @@ function animalMap(options) {
 
 function schedule(dayName) {
   // seu código aqui
-  const days = Object.keys(data.hours);
   const daysObject = {};
-  days.forEach((day) => {
+  Object.keys(data.hours).forEach((day) => {
     if (day === 'Monday') {
       daysObject[day] = 'CLOSED';
     } else {
