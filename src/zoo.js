@@ -67,7 +67,7 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  const {hours} = data;
+  const { hours } = data;
   if (dayName === undefined) {
     const arrHours = Object.entries(hours);
     arrHours.forEach(modifier);
