@@ -29,7 +29,8 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return Object.assign(personalInfo, associatedWith);
+  // Consulta realizada em https://www.tutorialspoint.com/object-assign-in-javascript
 }
 
 function isManager(id) {
