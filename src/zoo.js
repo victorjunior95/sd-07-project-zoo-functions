@@ -176,7 +176,7 @@ return coverage;
 };
 
 function employeeCoverage(idOrName) {
- if (idOrName === undefined) {
+  if (idOrName === undefined) {
     return employeeCoverageAux()
   }
 
