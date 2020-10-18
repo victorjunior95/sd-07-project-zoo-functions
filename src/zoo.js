@@ -192,9 +192,9 @@ function employeeCoverage(idOrName) {
       const coverageValuesI = coverageValues[i];
       const final = {
         [`${returnn}`]: coverageValuesI,
-      }
+      }; return final
     }
-  }return final;
+  }
 }
 
 module.exports = {
