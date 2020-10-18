@@ -154,49 +154,48 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {}
 
 function increasePrices(percentage) {
-  const increase = (1+percentage) / 100;
+  const increase = 1 + (percentage / 100);
   data.prices.Adult = Math.round(data.prices.Adult * increase * 100) / 100;
   data.prices.Senior = Math.round(data.prices.Senior * increase * 100) / 100;
   data.prices.Child = Math.round(data.prices.Child * increase * 100) / 100;
 }
 // consultei o repositório de Kramer para a refatoração desta função.
 // https://github.com/tryber/sd-07-project-zoo-functions/blob/544898ad4e7bca13bb04afc1dfabe4c7ee1da3ca/src/zoo.js
-function employeeCoverageAuxfunction() {
-  const coverage = {
-    'Nigel Nelson': ['lions', 'tigers'],
-    'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
-    'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
-    'Wilburn Wishart': ['snakes', 'elephants'],
-    'Stephanie Strauss': ['giraffes', 'otters'],
-    'Sharonda Spry': ['otters', 'frogs'],
-    'Ardith Azevado': ['tigers', 'bears'],
-    'Emery Elser': ['elephants', 'bears', 'lions'],
-  };
-return coverage;
+const employeeAnimal = (responsibleFor) => {
+  const arrayOfAnimal = [];
+  responsibleFor.forEach((animalId) => {
+    animals.filter(({ id, name }) => {
+      if (id === animalId) {
+        arrayOfAnimal.push(name);
+      }
+      return false;
+    });
+  });
+  return arrayOfAnimal;
+};
+
+const withNameId = (idOrname) => {
+  const newObject = {};
+  employees.filter(({ id, firstName, lastName, responsibleFor }) => {
+    if (idOrname === id || idOrname === firstName || idOrname === lastName) {
+      newObject[`${firstName} ${lastName}`] = employeeAnimal(responsibleFor);
+    }
+    return false;
+  });
+  return newObject;
 };
 
 function employeeCoverage(idOrName) {
-    if (idOrName === undefined) {
-    return employeeCoverageAux();
-  };
-
-  const employ = data.employees.find(
-    employe =>
-      employe.firstName === idOrName ||
-      employe.lastName === idOrName ||
-      employe.id === idOrName,
-  );
-  const returnn = `${employ.firstName} ${employ.lastName}`;
-  const coverageKeys = Object.keys(coverage);
-  const coverageValues = Object.values(coverage);
-  for (let i = 0; i <= 8; i += 1) {
-    if (returnn === coverageKeys[i]) {
-      const coverageValuesI = coverageValues[i];
-      const final = {
-        [`${returnn}`]: coverageValuesI,
-      }; return final;
-    } return employeeCoverage();
+  // seu código aqui
+  const newObject = {};
+  if (!idOrName) {
+    employees.forEach(({ firstName, lastName, responsibleFor }) => {
+      newObject[`${firstName} ${lastName}`] = employeeAnimal(responsibleFor);
+    });
+  } else {
+    return withNameId(idOrName);
   }
+  return newObject;
 }
 
 module.exports = {
