@@ -119,9 +119,34 @@ function animalMap(options = {}) {
   });
   return allAnimals;
 }
-
+function format(hour) {
+  if (hour > 12) {
+    return (`${hour - 12}pm`);
+  }
+  return (`${hour}am`);
+}
 function schedule(dayName) {
   // seu código aqui
+  let schedule = {};
+  const daysOfWeek = Object.keys(data.hours);
+  if (!dayName) {
+   daysOfWeek.forEach(day => {
+    let mensage =
+    data.hours[day].open === 0
+    ? 'CLOSED' 
+    : `Open from ${format(data.hours[day].open)} until ${format(data.hours[day].close)}`;
+     schedule[day] = mensage;
+   }) 
+   } else {
+     const slDay = daysOfWeek.find(current => current === dayName);
+     let message =
+     data.hours[slDay].open === 0
+     ? 'CLOSED' 
+     : `Open from ${format(data.hours[slDay].open)} until ${format(data.hours[slDay].close)}`;
+     schedule[slDay] = message;
+   }
+
+   return schedule;
 }
 
 function oldestFromFirstSpecies(id) {
