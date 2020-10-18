@@ -128,30 +128,30 @@ function increasePrices(percentage) {
   );
   console.log(data.prices);
 }
-
+const isName = () => isresponsible => data.animals.find(element =>
+element.id === isresponsible).name;
 function employeeCoverage(idOrName) {
-//   if (idOrName === undefined) {
-//     const all = {};
-//     data.employees.forEach(
-//       employeeSelected =>
-//         (all[
-//           `${employeeSelected.firstName} ${employeeSelected.lastName}`
-//         ] = employeeSelected.responsibleFor.map(
-//           isresponsible => data.animals.find(animal => animal.id === isresponsible).name,
-//         )),
-//         );
-//     return all;
-//   }
-//   const employeer = data.employees.find(
-//     employeeSelected =>
-//       employeeSelected.firstName === idOrName ||
-//       employeeSelected.lastName === idOrName ||
-//       employeeSelected.id === idOrName,
-//   );
-//   const responsible = employeer.responsibleFor.map(
-//     isresponsible => data.animals.find(animal => animal.id === isresponsible).name,
-//   );
-//   return { [`${employeer.firstName} ${employeer.lastName}`]: responsible };
+  if (idOrName === undefined) {
+    const all = {};
+    data.employees.forEach(
+      employeeSelected =>
+        (all[
+          `${employeeSelected.firstName} ${employeeSelected.lastName}`
+        ] = employeeSelected.responsibleFor.map(isName(),
+        )),
+        );
+    return all;
+  }
+  const employeer = data.employees.find(
+    employeeSelected =>
+      employeeSelected.firstName === idOrName ||
+      employeeSelected.lastName === idOrName ||
+      employeeSelected.id === idOrName,
+  );
+  const responsible = employeer.responsibleFor.map(
+    isresponsible => data.animals.find(item => item.id === isresponsible).name,
+  );
+  return { [`${employeer.firstName} ${employeer.lastName}`]: responsible };
 }
 
 module.exports = {
