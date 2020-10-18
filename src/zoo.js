@@ -195,7 +195,7 @@ function employeeCoverage(idOrName) {
       const final = {
         [`${returnn}`]: coverageValuesI,
       }; return final;
-    }return
+    } return employeeCoverage();
   }
 }
 
