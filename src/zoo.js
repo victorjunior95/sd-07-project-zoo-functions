@@ -164,7 +164,7 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   const coverage = {
-    'Nigel Nelson': ['lions', 'tigers'"],
+    'Nigel Nelson': ['lions', 'tigers'],
     'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
     'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
     'Wilburn Wishart': ['snakes', 'elephants'],
@@ -212,4 +212,3 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
-
