@@ -123,23 +123,40 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const { animals, employees } = data;
+  let caredForAnimals;
+  let residentAnimals;
+  employees.forEach(element => {
+    if (element.id === id) {
+      caredForAnimals = element.responsibleFor;
+    }
+  });
+  animals.forEach(element => {
+    if (element.id === caredForAnimals[0]) {
+      residentAnimals = element.residents;
+    }
+  });
+  const oldestAnimal = residentAnimals.reduce((oldest, animal) =>
+    ((oldest.age > animal.age) ? oldest : animal), 0);
+  const { name, sex, age } = oldestAnimal;
+  return [name, sex, age];
 }
 
+// const test = oldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1');
+// console.log(test);
+
 function increasePrices(percentage) {
-  const { Adult: adult, Child: child, Senior: senior } = data.prices;
+  const mainObject = data.prices;
+  const { Adult: adult, Child: child, Senior: senior } = mainObject;
   const priceArray = [adult, senior, child];
-  const priceKeys = Object.keys(data.prices);
+  const priceKeys = Object.keys(mainObject);
   const increasedPrices = priceArray.map(element => (
     ((element * ((percentage / 100) + 1)) * 100).toPrecision(4)) / 100);
   increasedPrices.forEach((element, index) => {
-    data.prices[priceKeys[index]] = element;
+    mainObject[priceKeys[index]] = element;
   });
-  return data.prices;
+  return mainObject;
 }
-
-// const test = increasePrices(50);
-// console.log(test);
 
 function employeeCoverage(idOrName) {
   // seu código aqui
