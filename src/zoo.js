@@ -96,9 +96,8 @@ const prices = {
 function entryCalculator(entrants = 0) {
   if (Object.values(entrants).length === 0) {
     entrants = 0;
-  } else if (Object.values(entrants).length > 0) {
-    const { Adult = 0, Senior = 0, Child = 0 } = entrants;
-    entrants = (Adult * prices.Adult) + (Senior * prices.Senior) + (Child * prices.Child);
+  }
+  entrants = (Adult * prices.Adult) + (Senior * prices.Senior) + (Child * prices.Child);
   }
   return entrants;
 }
