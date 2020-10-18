@@ -86,13 +86,6 @@ function animalCount(species) {
   }
   return obj;
 }
-const prices = {
-  Adult: 49.99,
-  Child: 20.99,
-  Senior: 24.99,
-};
-const valuesPerType = Object.values(prices);
-const keysPerType = Object.keys(prices);
 
 function entryCalculator(entrants = 0) {
   // seu código aqui
