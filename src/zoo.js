@@ -31,30 +31,30 @@ function employeeByName(employeeName) {
   let employeeObject = {};
   if (employeeName !== undefined) {
     employeeObject = data.employees.find(employee =>
-    (employee.firstName === employeeName || employee.lastName === employeeName));
+      (employee.firstName === employeeName || employee.lastName === employeeName));
   }
   return employeeObject;
 }
 
 function createEmployee(personalInfo, associatedWith) {
   // const employee = Object.assign({}, personalInfo, associatedWith)
-  const employee = {...personalInfo, ...associatedWith}
+  const employee = { ...personalInfo, ...associatedWith };
   return employee;
 }
 
 function isManager(id) {
   return data.employees.some(employee =>
-  employee.managers.some(element => element === id));
+    employee.managers.some(element => element === id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   const employee = {};
   employee.id = id;
-  employee.firstName = firstName
-  employee.lastName = lastName
+  employee.firstName = firstName;
+  employee.lastName = lastName;
   employee.managers = Array.isArray(managers) ? managers : [];
   employee.responsibleFor = Array.isArray(responsibleFor) ? responsibleFor : [];
-  return data.employees.push(employee)
+  return data.employees.push(employee);
 }
 
 function animalCount(species) {
@@ -69,8 +69,9 @@ function animalCount(species) {
   return specieCount.residents.length;
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(entrants = Object) {
+  return Object.keys(entrants).reduce((acc, currentKey) =>
+    acc + (entrants[currentKey] * data.prices[currentKey]), 0);
 }
 
 function animalMap(options) {
@@ -93,7 +94,6 @@ function increasePrices(percentage) {
   //   // parseFloat((data.prices[key] + tax).toPrecision(2))
   // }
   // return data.prices;
-
 }
 
 function employeeCoverage(idOrName) {
