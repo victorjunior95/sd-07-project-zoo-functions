@@ -133,7 +133,7 @@ function increasePrices(percentage) {
   const increasedPrices = priceArray.map(element => (
     ((element * ((percentage / 100) + 1)) * 100).toPrecision(4)) / 100);
   increasedPrices.forEach((element, index) => {
-    data.prices[priceKeys[index]] = element
+    data.prices[priceKeys[index]] = element;
   });
   return data.prices;
 }
