@@ -102,7 +102,7 @@ function animalMap(options = {}) {
   // seu código aqui
   const {includeNames = false, sorted = false, sex = false } = options;
   const allAnimals = {};
-  data.forEach((specie) => {
+  animals.forEach((specie) => {
   if (!Object.hasOwnProperty.call(allAnimals, specie.location)) {
     Object.assign(allAnimals, {[specie.location]:[]});
   }
