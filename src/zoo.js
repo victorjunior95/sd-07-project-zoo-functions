@@ -99,13 +99,13 @@ function entryCalculator(...entrants) {
 
 function animalMap(options = {}) {
   // seu código aqui
-  const {includeNames = false, sorted = false, sex = false } = options;
-    const allAnimals = {};
+  const { includeNames = false, sorted = false, sex = false } = options;
+      const allAnimals = {};
   animals.forEach((specie) => {
     if (!Object.hasOwnProperty.call(allAnimals, specie.location)) {
-    Object.assign(allAnimals, { [specie.location]: [] });
-  }
-  if (!includeNames) {
+      Object.assign(allAnimals, { [specie.location]: [] });
+    }
+    if (!includeNames) {
     allAnimals[specie.location].push(specie.name);
   } else {
     const animalResidents = specie.residents.filter(animal => (animal.sex === sex) || (!sex));
@@ -117,7 +117,7 @@ function animalMap(options = {}) {
     allAnimals[specie.location].push(animalsLocation);
   }
   });
-  return allAnimals;  
+  return allAnimals;
 }
 
 function schedule(dayName) {
