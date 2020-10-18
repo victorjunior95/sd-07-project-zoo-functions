@@ -137,13 +137,9 @@ function employeeCoverage(idOrName) {
     });
     return obj;
   }
-  let employee = data.employees.find(e => e.id === idOrName);
-  if (employee === undefined) {
-    employee = data.employees.find(e => e.firstName === idOrName);
-  }
-  if (employee === undefined) {
-    employee = data.employees.find(e => e.lastName === idOrName);
-  }
+  const employee = data.employees.find(e => e.id === idOrName) ||
+    data.employees.find(e => e.firstName === idOrName) ||
+    data.employees.find(e => e.lastName === idOrName);
   const fullName = `${employee.firstName} ${employee.lastName}`;
   obj[fullName] = animalNamesForWhichEmployeeIsResponsible(employee);
   return obj;
