@@ -66,10 +66,10 @@ const animalCount = (species) => {
 const entryCalculator = (entrants) => {
   let sum = 0;
 
-  if (typeof entrants === 'object' ) {
+  if (typeof entrants === 'object') {
     const tCategory = Object.keys(entrants);
     const numberOfTickets = Object.values(entrants);
-  
+
     tCategory.map((category, i) => {
       sum += data.prices[category] * numberOfTickets[i];
       return sum;
