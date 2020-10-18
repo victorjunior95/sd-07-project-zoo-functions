@@ -28,8 +28,8 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(employeeName) {
   // seu código aqui
-  let result = employees.find((employ) => employ.firstName === employeeName 
-  ||employ.lastName === employeeName);
+  let result = employees.find(employ => employ.firstName === employeeName
+  || employ.lastName === employeeName);
   if (result === undefined) {
     result = {};
   }
@@ -45,7 +45,7 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
-  const result = data.employees.map(iterator => iterator.managers.some((element) => element === id)
+  const result = data.employees.map(iterator => iterator.managers.some(element => element === id)
   );
   return result.includes(true);
 }
@@ -92,7 +92,7 @@ function entryCalculator(...entrants) {
   }
   let result = 0;
   entrants.forEach(entries => Object.keys(entries)
-  .forEach((item) => result += prices[item] * entries[item]));
+  .forEach(item => result += prices[item] * entries[item]));
   return result;
 }
 
@@ -104,9 +104,7 @@ function animalMap(options) {
       .filter((current, index, self) => index === self.indexOf(current));
     return directions;
   };
-  const sizeInput = Object.keys(options).length;
-
-  if (options === undefined) {
+  const getAllAnimals = () => {
     const allAnimals = {};
     getDirections().forEach((direction) => {
       const inputItem = [];
@@ -119,6 +117,10 @@ function animalMap(options) {
     });
     return allAnimals;
   }
+  if (options === undefined) {
+    return getAllAnimals();
+  }
+  const sizeInput = Object.keys(options).length;
   if (options.includeNames === true && sizeInput === 1) {
     const allAnimals = {};
     getDirections().forEach((direction, indexD) => {
@@ -166,7 +168,7 @@ function animalMap(options) {
       animals.forEach((itens) => {
         if (itens.location === direction) {
           const listAnimal = {};
-          animalName = itens.residents.filter((animal) => animal.sex === options.sex);
+          animalName = itens.residents.filter(animal => animal.sex === options.sex);
           animalName = animalName.map(currentAnimal => currentAnimal.name);
           listAnimal[itens.name] = animalName;
           inputItem.push(listAnimal);
@@ -184,7 +186,7 @@ function animalMap(options) {
       animals.forEach((itens) => {
         if (itens.location === direction) {
           const listAnimal = {};
-          animalName = itens.residents.filter((animal) => animal.sex === options.sex);
+          animalName = itens.residents.filter(animal => animal.sex === options.sex);
           animalName = animalName
             .map(currentAnimal => currentAnimal.name)
             .sort();
@@ -197,19 +199,10 @@ function animalMap(options) {
     return allAnimals;
   }
   if (options.includeNames === undefined) {
-    const allAnimals = {};
-    getDirections().forEach((direction) => {
-      const inputItem = [];
-      animals.forEach((itens) => {
-        if (itens.location === direction) {
-          inputItem.push(itens.name);
-          allAnimals[direction] = inputItem;
-        }
-      });
-    });
-    return allAnimals;
+      return getAllAnimals();
   }
 }
+animalMap();
 function schedule(dayName) {
   // seu código aqui
 }
