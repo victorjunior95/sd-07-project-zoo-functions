@@ -92,7 +92,9 @@ function entryCalculator(...entrants) {
   }
   let result = 0;
   entrants.forEach(entries => Object.keys(entries)
-  .forEach(item => result += prices[item] * entries[item]));
+  .forEach((item) => {
+    result += prices[item] * entries[item];
+  }));
   return result;
 }
 
@@ -116,10 +118,11 @@ function animalMap(options) {
       });
     });
     return allAnimals;
-  }
+  };
+
   if (options === undefined) {
     return getAllAnimals();
-  }
+  };
   const sizeInput = Object.keys(options).length;
   if (options.includeNames === true && sizeInput === 1) {
     const allAnimals = {};
@@ -137,7 +140,7 @@ function animalMap(options) {
       });
     });
     return allAnimals;
-  }
+  };
   if (
     options.includeNames === true &&
     options.sorted === true &&
@@ -159,7 +162,7 @@ function animalMap(options) {
       });
     });
     return allAnimals;
-  }
+  };
   if (options.sex && options.includeNames && sizeInput === 2) {
     const allAnimals = {};
     getDirections().forEach((direction) => {
@@ -177,7 +180,7 @@ function animalMap(options) {
       });
     });
     return allAnimals;
-  }
+  };
   if (options.sex && options.sorted === true && sizeInput === 3) {
     const allAnimals = {};
     getDirections().forEach((direction) => {
@@ -197,10 +200,10 @@ function animalMap(options) {
       });
     });
     return allAnimals;
-  }
+  };
   if (options.includeNames === undefined) {
-      return getAllAnimals();
-  }
+    getAllAnimals();
+  };
 }
 animalMap();
 function schedule(dayName) {
