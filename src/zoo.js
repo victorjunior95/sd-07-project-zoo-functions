@@ -80,6 +80,32 @@ function animalMap(options) {
   // seu código aqui
 }
 
+function listIfNoArgument (week, objImport) {
+  const list = {};
+  objImport.forEach((element, index) => {
+    if (index !== objImport.length - 1) {
+      list[week[index]] = `Open from ${element.open}am until ${element.close - 12}pm`;
+    } else {
+      list[week[index]] = 'CLOSED';
+    }
+  });
+  return list;
+}
+
+function listIfArgument (week, objImport, entry) {
+  const list = {};
+  week.forEach((element, index) => {
+    if (element === entry) {
+      if (index !== week.length - 1) {
+        list[element] = `Open from ${objImport[index].open}am until ${objImport[index].close - 12}pm`;
+      } else {
+        list[element] = 'CLOSED';
+      }
+    }
+  });
+  return list;
+}
+
 function schedule(dayName) {
   const daysOfWeek = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday'];
   const { Tuesday: tue,
@@ -90,31 +116,13 @@ function schedule(dayName) {
     Sunday: sun,
     Monday: mon } = data.hours;
   const hours = [tue, wed, thu, fri, sat, sun, mon];
-  const list = {};
   if (dayName === undefined) {
-    hours.forEach((element, index) => {
-      if (index !== hours.length - 1) {
-        list[daysOfWeek[index]] = `Open from ${element.open}am until ${element.close - 12}pm`;
-      } else {
-        list[daysOfWeek[index]] = 'CLOSED';
-      }
-    });
-    return list;
+    return listIfNoArgument(daysOfWeek, hours);
   }
-  daysOfWeek.forEach((element, index) => {
-    if (element === dayName) {
-      if (index !== daysOfWeek.length - 1) {
-        list[element] = `Open from ${hours[index].open}am until ${hours[index].close - 12}pm`;
-      } else {
-        list[element] = 'CLOSED';
-      }
-      return list;
-    }
-  });
-  return list;
+  return listIfArgument(daysOfWeek, hours, dayName);
 }
 
-// const test = schedule('Monday');
+// const test = schedule('Tuesday');
 // console.log(test);
 
 function oldestFromFirstSpecies(id) {
