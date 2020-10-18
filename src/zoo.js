@@ -42,18 +42,18 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   return employees.push({
-    id: id,
-    firstName: firstName, 
-    lastName: lastName, 
-    managers: managers, 
-    responsibleFor: responsibleFor
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
   });
 }
 
 function animalCount(species) {
   if (species === undefined) {
     const speciesInfo = {};
-    animals.map(animal => { speciesInfo[animal.name] = animal.residents.length});
+    animals.forEach((animal) => { speciesInfo[animal.name] = animal.residents.length; });
     return speciesInfo;
   }
   const speciesCount = animals.find(animal => animal.name === species);
