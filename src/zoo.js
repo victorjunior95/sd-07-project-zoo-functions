@@ -11,6 +11,7 @@ eslint no-unused-vars: [
 
 const { animals } = require('./data');
 const { employees } = require('./data');
+const { prices } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -57,8 +58,23 @@ function animalCount(species) {
   return amount.residents.length;
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(...entrants) {
+  // Referencia: Thadeu Castelo Branco Ramos
+  const { Adult, Senior, Child } = prices;
+  let total = 0;
+  entrants.map((amountOfPerson) => {
+    if (amountOfPerson.Adult) {
+      total += amountOfPerson.Adult * Adult;
+    }
+    if (amountOfPerson.Senior) {
+      total += amountOfPerson.Senior * Senior;
+    }
+    if (amountOfPerson.Child) {
+      total += amountOfPerson.Child * Child;
+    }
+    return total;
+  });
+  return total;
 }
 
 function animalMap(options) {
