@@ -45,8 +45,7 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
-  const result = data.employees.map(iterator => iterator.managers.some(element => element === id)
-  );
+  const result = data.employees.map(iterator => iterator.managers.some(element => element === id));
   return result.includes(true);
 }
 
@@ -101,27 +100,24 @@ function entryCalculator(...entrants) {
 function animalMap(options = {}) {
   // seu código aqui
   const {includeNames = false, sorted = false, sex = false } = options;
-  const allAnimals = {};
+    const allAnimals = {};
   animals.forEach((specie) => {
-  if (!Object.hasOwnProperty.call(allAnimals, specie.location)) {
-    Object.assign(allAnimals, {[specie.location]:[]});
+    if (!Object.hasOwnProperty.call(allAnimals, specie.location)) {
+    Object.assign(allAnimals, { [specie.location]: [] });
   }
   if (!includeNames) {
     allAnimals[specie.location].push(specie.name);
   } else {
     const animalResidents = specie.residents.filter(animal => (animal.sex === sex) || (!sex));
-    const names = animalResidents.map(animals => animals.name);
+    const names = animalResidents.map(currrent => currrent.name);
     if (sorted) {
       names.sort();
     }
-    const animalsLocation = {[specie.name]: names};
+    const animalsLocation = { [specie.name]: names };
     allAnimals[specie.location].push(animalsLocation);
   }
-});
-
-return allAnimals;
-
-  
+  });
+  return allAnimals;  
 }
 
 function schedule(dayName) {
