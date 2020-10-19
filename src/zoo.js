@@ -80,7 +80,7 @@ function isManager(id) {
   // e utilizando o includes eu verifico se o array pssado consta na lista e me retorna
   // true ou false
   return administradores;
-  }
+}
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   employees.push({ id, firstName, lastName, managers, responsibleFor });
@@ -121,6 +121,7 @@ function entryCalculator(entrants) {
   const total = precoAdulto + precoIdoso + precoCrianca;
   return total;
   // FOREAC NAO RETORNA NADA
+  /*
   if (entrants === undefined || Object.entries(entrants).length === 0) return 0;
   return Object.entries(entrants).map((busca) => {
     if (busca[0] === 'Adult') return busca[1] * 49.99;
@@ -129,7 +130,8 @@ function entryCalculator(entrants) {
   }).reduce((acumulador, item) => {
     acumulador += item;
     return acumulador;
-  }, 0)
+  }, 0);
+  */
 }
 
 function animalMap(options) {
@@ -188,7 +190,7 @@ function employeeCoverage(idOrName) {
     idOrName = employees.filter(busca => busca.id === idOrName);
   } else {
     idOrName = employees.filter(busca => busca.firstName === idOrName ||
-       busca.lastName === idOrName);
+    busca.lastName === idOrName);
   }
   return idOrName.reduce((acc, item) => {
     acc[`${item.firstName} ${item.lastName}`] = item.responsibleFor.map(cadaid =>
