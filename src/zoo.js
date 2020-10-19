@@ -49,12 +49,13 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const retorno;
+  const retorno = false;
   retorno = employees.some(employee=>employee.managers.includes(id));
   return retorno;
 }
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  const newEmployee = Object.assign({}, id, firstName, lastName, managers, responsibleFor);
+  employees.push(newEmployee);
 }
 
 function animalCount(species) {
