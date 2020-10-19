@@ -12,7 +12,7 @@ eslint no-unused-vars: [
 // Funcao animalsByIds:
 // Para implementar esta funcao, consultei o repositorio do colega Ygor Fonseca.
 
-const { animals, employees, hours } = require('./data');
+const { animals, employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
