@@ -68,7 +68,7 @@ function addEmployee(
 
 function animalCount(species = '') {
   // seu código aqui
-  if (species === ' ') {
+  if (species === '') {
     const result = {};
     animals.forEach((animal) => {
       result[animal.name] = animal.residents.length;
