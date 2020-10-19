@@ -28,8 +28,8 @@ function employeeByName(employeeName) {
   if (arguments.length === 0) {
     return {};
   }
-  const employee = data.employees.find(employeeAtual => {
-    employeeAtual.firstName === employeeName || employeeAtual.lastName === employeeName
+  const employee = data.employees.find((employeeAtual) => {
+    return employeeAtual.firstName === employeeName || employeeAtual.lastName === employeeName;
   });
   return employee;
 }
