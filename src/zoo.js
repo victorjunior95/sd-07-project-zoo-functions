@@ -121,18 +121,18 @@ function animalMap(options = {}) {
 }
 const format = hour => hour > 12 ? `${hour - 12}pm` : `${hour}am`;
 const msgDay = (iterator, obj) => {
-  const mensage = data.hours[iterator].open === 0 ? 'CLOSED' 
+  const mensage = data.hours[iterator].open === 0 ? 'CLOSED'
     : `Open from ${format(data.hours[iterator].open)} until ${format(data.hours[iterator].close)}`;
-    obj[iterator] = mensage;
+  obj[iterator] = mensage;
   return obj;
-}
+};
 function schedule(dayName) {
   // seu código aqui
-  let schedule = {};
+  const schedule = {};
   const daysOfWeek = Object.keys(data.hours);
   if (!dayName) {
-   daysOfWeek.forEach(day => msgDay(day,schedule));
-   } else {
+    daysOfWeek.forEach(day => msgDay(day, schedule));
+  } else {
     const slDay = daysOfWeek.find(current => current === dayName);
     msgDay(slDay, schedule);
   }
