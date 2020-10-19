@@ -24,7 +24,7 @@ function animalsOlderThan(animal, age) {
   let animalsAge;
   for (let i = 0; i < data.animals.length; i += 1) {
     if (data.animals[i].name === animal) {
-      animalsAge = data.animals[i].residents.every(animal => animal.age > age);
+      animalsAge = data.animals[i].residents.every(animalAge => animalAge.age > age);
     }
   }
   return animalsAge;
