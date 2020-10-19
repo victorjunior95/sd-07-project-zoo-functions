@@ -172,16 +172,16 @@ function increasePrices(percentage) {
   });
   return prices;
 }
-const getAnimalName = (iterator) => {
-  iterator.responsibleFor.forEach((currentID, index) => {
-    iterator.responsibleFor[index] = animals.find(iterator => iterator.id === currentID).name;
+const getAnimalName = (input) => {
+  input.responsibleFor.forEach((currentID, index) => {
+    input.responsibleFor[index] = animals.find(iterator => iterator.id === currentID).name;
   });
   return iterator.responsibleFor;
-}
+};
 const getAnimalsForEmploy = (string, objReturn) => {
   const employSl = employees.find(cEmploy => cEmploy.id === string ||
-    cEmploy.firstName === string || cEmploy.lastName === string );
-    getAnimalName(employSl);
+    cEmploy.firstName === string || cEmploy.lastName === string);
+  getAnimalName(employSl);
   const fullName = `${employSl.firstName} ${employSl.lastName}`;
   objReturn[fullName] = employSl.responsibleFor;
   return objReturn;
