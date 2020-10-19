@@ -115,8 +115,39 @@ function entryCalculator(entrants = 0) {
 // consultei o repositorio de krammer para refatoramento desta funçao
 // https://github.com/tryber/sd-07-project-zoo-functions/blob/544898ad4e7bca13bb04afc1dfabe4c7ee1da3ca/src/zoo.js
 
-function animalMap(options) {
-  // seu código aqui
+function animalMap(options = {}) {
+  const out = { NE: [], NW: [], SE: [], SW: [] };
+  if (options.includeNames !== true) {
+    animals.forEach(({ location, name }) => out[location].push(name));
+    return out;
+  }
+// Se a funçao nao recebe parametros, ou receber parametro {includeName !== true},
+// as chaves NE, NW, SE, SW receberao somente os valores com nomes das especies.
+  if (options.sex !== undefined) {
+    animals.forEach(({ name, location, residents }) =>
+      out[location].push({
+        [name]: residents
+          .filter(resident => resident.sex === options.sex)
+          .map(resident => resident.name),
+      }),
+    );
+// Se a funçao receber parametro { includeNames: true, sex: 'female' } ou
+// { includeNames: true, sex: 'male' }, retornara  os nomes dos animais da
+// especie do sexo feminino ou masculino, respectivamente.
+  } else {
+    animals.forEach(({ name, location, residents }) =>
+      out[location].push({ [name]: residents.map(resident => resident.name) }),
+    );
+// Se receber apenas {includeNames: true}, retornara todos os nomes dos animais da especie.
+  }  if (options.sorted) {
+    Object.keys(out).forEach(key =>
+      out[key].forEach(element => element[Object.keys(element)].sort()),
+    );
+  }
+// Se receber o parametro { includeNames: true, sex: 'female'|| sex: 'male', sorted: true },
+// retornara os animais femeas ou machos com os nomes organizados em ordem alfabetica
+  return out;
+}
 }
 
 function schedule(dayName) {
