@@ -10,7 +10,6 @@ eslint no-unused-vars: [
 */
 
 const data = require("./data");
-const { animals } = data;
 
 function animalsByIds(...ids) {
   const { animals } = data;
@@ -117,128 +116,7 @@ function entryCalculator(entrants) {
 // console.log(entryCalculator({}));
 // console.log(entryCalculator({ 'Child': 1, 'Senior': 1 }));
 
-// const noParamAnimalMap = () => {
-//   const { animals } = data;
-//   const location = ["NE", "NW", "SE", "SW"];
-//   let object = {};
-//   location.forEach((local) => {
-//     object[local] = animals
-//       .filter((animal) => animal.location === local)
-//       .map((animalObject) => animalObject.name);
-//   });
-//   return object;
-// };
-// // console.log(noParamAnimalMap());
-
-// // Função que define a estrutura ao ser chamado dos nomes e arrays dos animais
-// const typeAnimal = (name, animalsNames) => {
-//   let newObject = {};
-//   newObject[name] = animalsNames;
-//   return newObject;
-// };
-// // console.log(typeAnimal(0, []));
-
-// // Array filtrado pela localização contendo separadamente todas as informações dos residentes
-// const arrayResidentsAnimals = () => {
-//   const { animals } = data;
-//   const location = ["NE", "NW", "SE", "SW"];
-//   let arrayInformations = [];
-//   location.forEach((local) => {
-//     animals
-//       .filter((animal) => animal.location === local)
-//       .map((animal) => arrayInformations.push(animal.residents));
-//   });
-//   return arrayInformations;
-// };
-// // console.log(arrayResidentsAnimals());
-
-// const namesAnimals = (index, sort, sex) => {
-//   let objectNames = {};
-//   if (sort !== true && sex) {
-//     for (let i = 0; i < arrayResidentsAnimals().length; i += 1) {
-//       const names = arrayResidentsAnimals()
-//         [i].filter((name) => name.sex === sex)
-//         .map((animal) => animal.name);
-//       objectNames[i] = names;
-//     }
-//   } else if (sort === true && sex) {
-//     for (let i = 0; i < arrayResidentsAnimals().length; i += 1) {
-//       const names = arrayResidentsAnimals()
-//         [i].filter((name) => name.sex === sex)
-//         .map((animal) => animal.name);
-//       objectNames[i] = names.sort();
-//     }
-//   } else if (sort === true) {
-//     for (let i = 0; i < arrayResidentsAnimals().length; i += 1) {
-//       const names = arrayResidentsAnimals()[i].map((name) => name.name);
-//       objectNames[i] = names.sort();
-//     }
-//   } else {
-//     for (let i = 0; i < arrayResidentsAnimals().length; i += 1) {
-//       const names = arrayResidentsAnimals()[i].map((name) => name.name);
-//       objectNames[i] = names;
-//     }
-//   }
-//   return objectNames[index];
-// };
-// // console.log(sortAnimalsNames(0, false, "male"));
-
-// let count = -1;
-// const includeNames = (sort, sex) => {
-//   const { animals } = data;
-//   const location = ["NE", "NW", "SE", "SW"];
-//   let object = {};
-//   location.forEach((local) => {
-//     object[local] = animals
-//       .filter((animal) => animal.location === local)
-//       .map((animal) => typeAnimal(animal.name, namesAnimals(count += 1, sort, sex)));
-//   });
-//   return object;
-// };
-// console.log(includeNames().NE);
-// console.log(includeNames(true).NE);
-
-// function animalMap(options) {
-// let result;
-// // options === undefined ? result = noParamAnimalMap() : result = includeNames();
-// if(options === undefined) {
-//   result = noParamAnimalMap();
-// } else {
-//   if(options.includeNames) {
-//     if(options.sorted) {
-//       result = includeNames(true);
-//     }
-//     if(options.sex === 'female') {
-//       result = includeNames(true, 'female')
-//     }
-//   }
-// }
-
-// else if(options.includeNames === true && Object.keys(options).length === 1) {
-//   result = includeNames();
-// } else if(options.includeNames === true && options.sorted === true && Object.keys(options).length === 2) {
-//   result = includeNames(true);
-// } else if(options.includeNames === true && options.sex === 'female') {
-//   result = includeNames(false, 'female');
-// } else if(options.includeNames === true && options.sex === 'female' && options.sorted === true) {
-//   result = includeNames(true, 'female');
-// } else if(options.includeNames === true && options.sex === 'male') {
-//   result = includeNames(false, 'male');
-// } else if(options.includeNames === true && options.sex === 'male' && options.sorted === true) {
-//   result = includeNames(true, 'male');
-// } else {
-//   result = noParamAnimalMap();
-// }
-// return result;
-
-// }
-// console.log(animalMap().NE[0]);
-// console.log(animalMap({ includeNames: true }).NE);
-// console.log(animalMap({ includeNames: true, sorted: true }).NE);
-// console.log(animalMap({ includeNames: true, sex: 'female', sorted: true }).NE);
-// console.log(animalMap({ includeNames: true, sex: 'male', sorted: true }).NE);
-// console.log(animalMap({ sex: 'female' }).NE[0]);
-
+const { animals } = data;
 const namesResidentsLocation = (name, sex) => {
   let array = [];
   let arrayAll = [];
@@ -304,12 +182,55 @@ function animalMap(options) {
 // console.log(animalMap({ sex: 'female' }).NE[0]);
 
 function schedule(dayName) {
-  // seu código aqui
+  const { hours } = data;
+  let result = hours;
+  // return Object.values(hours.Tuesday);
+  for (i in result) {
+    result[i] = `Open from ${Object.values(result[i])[0]}am until ${
+      Object.values(result[i])[1] - 12
+    }pm`;
+
+    if (i === "Monday") {
+      result[i] = `CLOSED`;
+    }
+  }
+
+  if (dayName !== undefined) {
+    for (i in result) {
+      if (i === dayName) {
+        result = { [i]: result[i] };
+      }
+    }
+  }
+  return result;
 }
+// console.log(schedule());
+// console.log(schedule("Tuesday"));
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const { employees } = data;
+  const { animals } = data;
+
+  let arrayIdAnimals;
+  let arrayAnimal;
+  let highestAge = 0;
+  let result;
+
+  arrayIdAnimals = employees.filter((employe) => employe.id === id)[0].responsibleFor;
+  arrayAnimal = animals.filter((animal) => animal.id === arrayIdAnimals[0]);
+  
+  arrayAnimal[0].residents.forEach((info) => {
+    if (info.age > highestAge) {
+      highestAge = info.age;
+    }
+  });
+
+  result = arrayAnimal[0].residents.filter((info) => info.age === highestAge);
+
+  return Object.values(result[0]);
 }
+// console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
+console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 function increasePrices(percentage) {
   // seu código aqui
