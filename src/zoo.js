@@ -32,8 +32,8 @@ function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
   const { firstName, lastName, id } = personalInfo;
   const { managers, responsibleFor } = associatedWith;
-  const addEmployee = { firstName, id, lastName, managers, responsibleFor };
-  return addEmployee;
+  const plusEmployee = { firstName, id, lastName, managers, responsibleFor };
+  return plusEmployee;
 }
 function isManager(id) {
   // try hard my friend
