@@ -54,13 +54,13 @@ function isManager(id) {
   return retorno;
 }
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  let newEmployee = {id, firstName, lastName, managers, responsibleFor};
-  for (let index of Object.keys(newEmployee)){
-    if(newEmployee[index]===undefined){
-       newEmployee[index]=[];
+  const newEmployee = { id, firstName, lastName, managers, responsibleFor };
+  for (let index of Object.keys(newEmployee)) {
+    if (newEmployee[index] === undefined){
+       newEmployee[index] = [];
     }
   }
-  employees.push(newEmployee); 
+employees.push(newEmployee); 
 }
 
 function animalCount(species) {
