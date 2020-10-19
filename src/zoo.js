@@ -49,8 +49,8 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const retorno = false;
-  retorno = employees.some(employee=>employee.managers.includes(id));
+  let retorno = false;
+  retorno = employees.some(employee => employee.managers.includes(id));
   return retorno;
 }
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
