@@ -24,7 +24,7 @@ function animalsByIds(...ids) {
   if (ids.length === 0) {
     return IdAnimal;
   }
-  for (let item = 0; item < ids.length; item + 1) {
+  for (let item = 0; item < ids.length; item += 1) {
     IdAnimal[item] = listaAnimal.find(elemento => elemento.id === ids[item]);
   }
   return IdAnimal;
@@ -66,7 +66,7 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   const filtraManagers = listaEmployees.some((elemento) => {
     let result = false;
-    for (let key = 0; key < elemento.managers.length; key + 1) {
+    for (let key = 0; key < elemento.managers.length; key += 1) {
       if (elemento.managers[key] === id) {
         result = true;
       }
