@@ -148,7 +148,7 @@ function animalMap(options = {}) {
 // retornara os animais femeas ou machos com os nomes organizados em ordem alfabetica
   return out;
 }
-}
+
 
 function schedule(dayName) {
   const out = {};
