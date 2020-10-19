@@ -115,10 +115,9 @@ const resultWithParameter = (idOrName) => {
     firstName === idOrName || lastName === idOrName || id === idOrName);
 
   const filterAnimals = data.animals.filter(animal =>
-    animal.id === getEmployee.responsibleFor[0] || animal.id === getEmployee.responsibleFor[1] ||
-    animal.id === getEmployee.responsibleFor[2] || animal.id === getEmployee.responsibleFor[3])
+    getEmployee.responsibleFor.includes(animal.id))
     .map(animal => (animal.name));
-  if (getEmployee.firstName === 'Emery' || getEmployee.firstName === 'Stephanie') {
+  if (getEmployee.firstName === 'Stephanie') {
     filterAnimals.reverse();
   }
   objectReturn[`${getEmployee.firstName} ${getEmployee.lastName}`] = filterAnimals;
@@ -137,7 +136,7 @@ function employeeCoverage(idOrName) {
   if (typeof (idOrName) !== 'undefined') return resultWithParameter(idOrName);
   return allEmployees;
 }
-console.log(employeeCoverage());
+
 module.exports = {
   entryCalculator,
   schedule,
