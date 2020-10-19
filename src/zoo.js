@@ -144,8 +144,8 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   if (idOrName === undefined) {
-  const out = {};
-  employees.forEach(
+    const out = {};
+    employees.forEach(
       employeeSelected =>
         (out[
           `${employeeSelected.firstName} ${employeeSelected.lastName}`
@@ -153,8 +153,8 @@ function employeeCoverage(idOrName) {
           isresponsible => animals.find(animal => animal.id === isresponsible).name,
         )),
     );
-  return out;
-}
+    return out;
+  }
 // Este if cria o objeto com todos os nomes de empregados e respectivos animais cuidados.
 // Com o forEach, adiciona as chaves do objeto ( nomes dos empregados)
 // Com o find, encontra-se pelo id do animal o seu nome (.name)
@@ -170,7 +170,6 @@ function employeeCoverage(idOrName) {
       employeeSelected.lastName === idOrName ||
       employeeSelected.id === idOrName,
   );
-// cria a variavel employeer com o valor de um empregado pelo 
   const responsible = employeer.responsibleFor.map(
     isresponsible => animals.find(animal => animal.id === isresponsible).name,
   );
