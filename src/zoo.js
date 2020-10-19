@@ -39,12 +39,20 @@ function employeeByName(empName = {}) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  
 }
 
 function isManager(id) {
-  // seu código aqui
+  const isManager = employees.some((element) => {
+      for (let key in element.managers) {
+        return element.managers[key] === id
+      }
+      })
+    return isManager
 }
+
+
+
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
