@@ -7,8 +7,7 @@ eslint no-unused-vars: [
     "varsIgnorePattern": "data"
   }
 ]
-*/
- 
+*/ 
 const { employees } = require('./data');
 const data = require('./data');
 
@@ -28,9 +27,9 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
- const { id, firstName, lastName} = personalInfo;
- const { managers, responsibleFor} = associatedWith
- return `${personalInfo} ${associatedWith}`
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return {id, firstName, lastName, managers, responsibleFor};
 }
 
 function isManager(id) {
