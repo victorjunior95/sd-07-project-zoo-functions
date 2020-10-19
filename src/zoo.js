@@ -31,7 +31,7 @@ function employeeByName(employeeName) {
   const { employees } = data;
   const getEmployee = item => item.firstName === employeeName || item.lastName === employeeName;
   const employee = employees.find(getEmployee);
-  return (typeof employeeName !== 'undefined' ? employee : {});
+  return (employeeName !== undefined ? employee : {});
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -65,7 +65,7 @@ function animalCount(species) {
     getAllAnimals[animal.name] = animal.residents.length;
   });
 
-  const getAni= animals.find(animal => species === animal.name);
+  const getAni = animals.find(animal => species === animal.name);
 
   return (species !== undefined) ? getAni.residents.length : getAllAnimals;
 }
@@ -96,26 +96,37 @@ function animalMap(options) {
   // seu código aqui
 }
 
+// const validateSchedule = (array, object, property1, property2) => {
+//   array.forEach((input) => {
+//     if (input === 'Monday') {
+//       object[input] = 'CLOSED';
+//     } else {
+//       object[input] = `Open from ${object[input][property1]}am until ${object[input][property2] - 12}pm`;
+//     }
+//   });
+//   return array;
+// }
 function schedule(dayName) {
   // seu código aqui
-  const dailySchedule = {};
-  let wholeSchedule = {};
+  const dailyList = {};
+  let list = {};
   const { hours } = data;
 
-  wholeSchedule = { ...hours };
-  const keys = Object.keys(wholeSchedule);
+  list = { ...hours };
+
+  const keys = Object.keys(list);
 
   keys.forEach((key) => {
     if (key === 'Monday') {
-      wholeSchedule[key] = 'CLOSED';
+      list[key] = 'CLOSED';
     } else {
-      wholeSchedule[key] = `Open from ${wholeSchedule[key].open}am until ${wholeSchedule[key].close - 12}pm`;
+      list[key] = `Open from ${list[key].open}am until ${list[key].close - 12}pm`;
     }
   });
 
-  dailySchedule[dayName] = wholeSchedule[dayName];
+  dailyList[dayName] = list[dayName];
 
-  return (dayName === undefined) ? wholeSchedule : dailySchedule;
+  return (dayName === undefined) ? list : dailyList;
 }
 
 function oldestFromFirstSpecies(id) {
@@ -154,9 +165,60 @@ function increasePrices(percentage) {
 // pelos quais o funcionário é responsável
 function employeeCoverage(idOrName) {
   // seu código aqui
+  let listAni = {};
+  let listEmp = {};
+  const { animals, employees } = data;
 
+  // const employeeList = employees.map(employee => `${employee.firstName} ${employee.lastName}`);
+
+  // let animalsIds = employees.map(employee => employee.responsibleFor);
+
+  animals.forEach(animal => {
+    listAni[animal.name] = animal.id;
+  });
+
+  employees.forEach(employee => {
+    let emp = `${employee.firstName} ${employee.lastName}`;
+    listEmp[emp] = employee.responsibleFor;
+  });
+
+  const keysAni = Object.keys(listAni);
+  const valuesAni = Object.values(listAni);
+  const valuesEmp = Object.values(listEmp);
+
+
+  valuesEmp.forEach(array => {
+    array.forEach(id => {
+      keysAni.forEach(key => {
+        valuesAni.forEach(value => {
+          if (value === id) {
+            return id === key
+          }
+        })
+      })
+    })
+  })
+
+  // .reduce((acc, item, index, array) => {
+  //   acc +=
+  // })
+
+  // const animalsName = animalsIds.map(array => {
+  //   animals.forEach((animal => {
+  //     array.forEach(item => {
+  //       if (item == animal.id) {
+  //         item === animal.name;
+  //       }
+  //     })
+  //   }))
+  //   return array;
+  // })
+
+  // list = { ...employeeList, ...animalsIds };
+  console.log(valuesEmp)
+  return listEmp;
 }
-// console.log(employeeCoverage());
+console.log(employeeCoverage());
 
 module.exports = {
   entryCalculator,
