@@ -11,24 +11,44 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(ids) {
-  // seu código aqui
+// function animalsByIds(...ids) {
+//   return data.animals.filter(animal => ids.includes(animal.id));
+// }
+
+function animalsByIds(...ids) {
+  if (ids.length === 0) { 
+    return ids;
+  } else if (ids.length === 1){
+    return [data.animals.find(animal => animal.id === ids[0])];
+  } else {
+    const result = [];
+     ids.forEach(element => {
+      result.push(data.animals.find(animal => animal.id === element));
+    });
+    return result;
+  }
 }
+//console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce', '533bebf3-6bbe-41d8-9cdf-46f7d13b62ae'));
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  return data.animals.find(species => species.name === animal)
+  .residents.every(resident => resident.age >= age);
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) return {};
+  return employees.find(name => name.firstName === employeeName ||
+  name.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return { id, firstName, lastName, managers, responsibleFor };
 }
 
 function isManager(id) {
-  // seu código aqui
+  return employees.includes(employeId => employeId.managers === id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
