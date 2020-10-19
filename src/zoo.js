@@ -105,6 +105,7 @@ function schedule(dayName) {
     readebleSchedule = Object.fromEntries(choosedDay);
     return readebleSchedule;
   }
+  return readebleSchedule;
 }
 
 function oldestFromFirstSpecies(id) {
