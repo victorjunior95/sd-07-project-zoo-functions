@@ -122,7 +122,7 @@ function animalMap(options = {}) {
 const format = (hour) => {
   if (hour > 12) {
     return `${hour - 12}pm`;
-  } 
+  }
   return `${hour}am`;
 };
 const msgDay = (iterator, obj) => {
