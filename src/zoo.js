@@ -39,23 +39,24 @@ function employeeByName(empName = {}) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  
 }
 
 function isManager(id) {
-  const isManager = employees.some((element) => {
-      for (let key in element.managers) {
-        return element.managers[key] === id
-      }
-      })
-    return isManager
+  const isManageer = employees.some((element) => {
+    const objects = Object.values(element.managers);
+    return objects.some(elementMan => elementMan === id);
+  });
+  return isManageer;
 }
-
-
-
-
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  return employees.push(newEmployee);
 }
 
 function animalCount(species) {
