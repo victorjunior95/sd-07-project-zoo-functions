@@ -168,10 +168,7 @@ function schedule(dayName) {
   return dayName ? dayNameExist(dayName, result) : result;
 }
 // console.log(schedule());
-// console.log(schedule());
 // console.log(schedule('Tuesday'));
-// console.log(schedule('Tuesday'));
-// console.log(data.hours);
 
 function oldestFromFirstSpecies(id) {
   const { employees } = data;
