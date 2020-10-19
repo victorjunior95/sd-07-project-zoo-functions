@@ -12,7 +12,7 @@ eslint no-unused-vars: [
 // Funcao animalsByIds:
 // Para implementar esta funcao, consultei o repositorio do colega Ygor Fonseca.
 
-const { animals, employees } = require('./data');
+const { animals, employees, hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -88,7 +88,23 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  let readebleSchedule = {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED',
+  };
+  if (dayName === undefined) {
+    return readebleSchedule;
+  }
+  if (dayName !== undefined) {
+    const choosedDay = [[dayName, readebleSchedule[dayName]]];
+    readebleSchedule = Object.fromEntries(choosedDay);
+    return readebleSchedule;
+  }
 }
 
 function oldestFromFirstSpecies(id) {
