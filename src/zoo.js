@@ -1,15 +1,15 @@
 /*
 eslint no-unused-vars: [
-  "error",
+  'error',
   {
-    "args": "none",
-    "vars": "local",
-    "varsIgnorePattern": "data"
+    'args': 'none',
+    'vars': 'local',
+    'varsIgnorePattern': 'data'
   }
 ]
 */
 
-const data = require("./data");
+const data = require('./data');
 
 function animalsByIds(...ids) {
   const { animals } = data;
@@ -19,9 +19,9 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   const { animals } = data;
-  const myAnimal = animals.find((animalName) => animalName.name === animal);
+  const myAnimal = animals.find(animalName => animalName.name === animal);
   const compareResult = myAnimal.residents.every(
-    (animalGroup) => animalGroup.age > age
+    animalGroup => animalGroup.age > age
   );
   return compareResult;
 }
@@ -32,7 +32,7 @@ function employeeByName(employeeName) {
   let object = {};
   if (employeeName) {
     object = employees.filter(
-      (objectEmployer) =>
+      objectEmployer =>
         objectEmployer.firstName === employeeName ||
         objectEmployer.lastName === employeeName
     )[0];
@@ -41,33 +41,7 @@ function employeeByName(employeeName) {
 }
 // console.log(employeeByName());
 
-const personalInfo = {
-  id: "7ed1c9bb-8570-44f6-b718-0666b869573a",
-  firstName: "John",
-  lastName: "Doe",
-};
-
-const associatedWith = {
-  managers: [
-    "c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1",
-    "9e7d4524-363c-416a-8759-8aa7e50c0992",
-  ],
-  responsibleFor: [
-    "0938aa23-f153-4937-9f88-4858b24d6bce",
-    "89be95b3-47e4-4c5b-b687-1fabf2afa274",
-    "bb2a76d8-5fe3-4d03-84b7-dba9cfc048b5",
-  ],
-};
-
 function createEmployee(personalInfo, associatedWith) {
-  // let object = {};
-  // for(i in personalInfo) {
-  //   object[i] = personalInfo[i];
-  // }
-  // for(i in associatedWith) {
-  //   object[i] = associatedWith[i];
-  // }
-  // return object;
   const { id, firstName, lastName } = personalInfo;
   const { managers, responsibleFor } = associatedWith;
   return { id, firstName, lastName, managers, responsibleFor };
@@ -101,14 +75,12 @@ function animalCount(species) {
   animals.forEach((animal) => (object[animal.name] = animal.residents.length));
   return species === undefined ? object : object[species];
 }
-// console.log(animalCount("lions"));
+// console.log(animalCount('lions'));
 
 function entryCalculator(entrants) {
   const { prices } = data;
   let value = 0;
-  for (i in entrants) {
-    // console.log(i)
-    // console.log(entrants[i])
+  for (let i in entrants) {
     value += entrants[i] * prices[i];
   }
   return value;
@@ -154,10 +126,10 @@ const nameAnimals = (region, sort = false, sex) => {
 
   return array;
 };
-// console.log(nameAnimals("NE"));
+// console.log(nameAnimals('NE'));
 
 function animalMap(options) {
-  const location = ["NE", "NW", "SE", "SW"];
+  const location = ['NE', 'NW', 'SE', 'SW'];
   let object = {};
 
   location.forEach(
@@ -185,18 +157,18 @@ function schedule(dayName) {
   const { hours } = data;
   let result = {};
   
-  for (i in hours) {
+  for (let i in hours) {
     result[i] = `Open from ${Object.values(hours[i])[0]}am until ${
       Object.values(hours[i])[1] - 12
     }pm`;
 
-    if (i === "Monday") {
+    if (i === 'Monday') {
       result[i] = `CLOSED`;
     }
   }
 
   if (dayName !== undefined) {
-    for (i in result) {
+    for (let i in result) {
       if (i === dayName) {
         result = { [i]: result[i] };
       }
@@ -240,7 +212,7 @@ function increasePrices(percentage) {
   const { prices } = data;
   let result = prices;
 
-  for (i in result) {
+  for (let i in result) {
     result[i] += (result[i] * percentage) / 100;
     result[i] = Math.round(result[i] * 100) / 100;
   }
@@ -283,16 +255,16 @@ function employeeCoverage(idOrName) {
         employees.find((employe) => employe.id === idOrName).firstName
       } ${employees.find((employe) => employe.id === idOrName).lastName}`;
 
-      for (i in result) {
+      for (let i in result) {
         if (i === name) {
           result = { [i]: result[i] };
         }
       }
     }
 
-    for (i in result) {
+    for (let i in result) {
       // console.log(i);
-      name2 = i.split(" ");
+      name2 = i.split(' ');
       // console.log(name2);
       name2.forEach((name) => {
         // console.log(name);
@@ -302,7 +274,6 @@ function employeeCoverage(idOrName) {
       });
     }
   }
-
   return result;
 }
 // console.log(employeeCoverage());
