@@ -25,13 +25,17 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  // carregado na raça
+  const personName = employeeName;
+  if (typeof personName === 'undefined') { return {}; }
+  console.log(personName);
+  const getPerson = person => personName === person.firstName || personName === person.lastName;
+  const findPerson = data.employees.find(getPerson);
+  return findPerson;
 }
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
-  /* const { firstName, lastName, id } = personalInfo;
-  const { managers, responsibleFor } = associatedWith; */
   const plusEmployee = { ...personalInfo, ...associatedWith };
   return plusEmployee;
 }
@@ -49,7 +53,9 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
 function animalCount(species) {
   // seu código aqui
+ 
 }
+
 
 function entryCalculator(entrants) {
   // seu código aqui
