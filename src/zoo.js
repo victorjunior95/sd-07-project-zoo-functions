@@ -23,7 +23,7 @@ function animalsByIds(...ids) {
 function animalsOlderThan(animal, age) {
   for (let i = 0; i < data.animals.length; i += 1) {
     if (data.animals[i].name === animal) {
-     animals = data.animals[i].residents.every(animal => animal.age > age);
+      const animals = data.animals[i].residents.every(animal => animal.age > age);
     }
   }
   return animals;
