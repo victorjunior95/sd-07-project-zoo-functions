@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+
 const { animals } = data;
 
 function animalsByIds(...ids) {
@@ -55,7 +56,7 @@ function addEmployee(
   firstName,
   lastName,
   managers = [],
-  responsibleFor = []
+  responsibleFor = [],
 ) {
   const { employees } = data;
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
@@ -109,7 +110,7 @@ const nameAnimals = (region, sort = false, sex) => {
 
   animals
     .filter(animal => animal.location === region)
-    .forEach(animal => {
+    .forEach((animal) => {
       object = {};
       object[animal.name] = namesResidentsLocation(animal.name, sex);
       if (sort) {
@@ -138,12 +139,21 @@ function animalMap(options) {
         (object[local] = nameAnimals(local, options.sorted, options.sex)));
   }
   return object;
-};
+}
 // console.log(animalMap());
 // console.log(animalMap({ includeNames: true }).NE);
 // console.log(animalMap({ includeNames: true, sorted: true }).NE);
 // console.log(animalMap({ includeNames: true, sex: 'female', sorted: false}).NE);
 // console.log(animalMap({ sex: 'female' }).NE[0]);
+
+const dayNameExist = (dayName, result) => {
+  for (let i in result) {
+    if (i === dayName) {
+      result = { [i]: result[i] };
+    }
+  }
+  return result;
+}
 
 function schedule(dayName) {
   const { hours } = data;
@@ -152,18 +162,10 @@ function schedule(dayName) {
     result[i] = `Open from ${Object.values(hours[i])[0]}am until ${
       Object.values(hours[i])[1] - 12}pm`;
     if (i === 'Monday') {
-      result[i] = `CLOSED`;
+      result[i] = 'CLOSED';
     }
   }
-
-  if (dayName !== undefined) {
-    for (let i in result) {
-      if (i === dayName) {
-        result = { [i]: result[i] };
-      }
-    }
-  }
-  return result;
+  return dayName ? dayNameExist(dayName, result) : result;
 }
 // console.log(schedule());
 // console.log(schedule());
@@ -174,14 +176,12 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {
   const { employees } = data;
 
-  let arrayIdAnimals;
-  let arrayAnimal;
   let highestAge = 0;
-  let result;
 
-  arrayIdAnimals = employees.filter((employe) => employe.id === id)[0]
+  const arrayIdAnimals = employees.filter(employe => employe.id === id)[0]
     .responsibleFor;
-  arrayAnimal = animals.filter((animal) => animal.id === arrayIdAnimals[0]);
+
+  const arrayAnimal = animals.filter(animal => animal.id === arrayIdAnimals[0]);
 
   arrayAnimal[0].residents.forEach((info) => {
     if (info.age > highestAge) {
@@ -189,7 +189,7 @@ function oldestFromFirstSpecies(id) {
     }
   });
 
-  result = arrayAnimal[0].residents.filter((info) => info.age === highestAge);
+  const result = arrayAnimal[0].residents.filter(info => info.age === highestAge);
 
   return Object.values(result[0]);
 }
@@ -198,7 +198,7 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   const { prices } = data;
-  let result = prices;
+  const result = prices;
 
   for (let i in result) {
     result[i] += (result[i] * percentage) / 100;
@@ -212,13 +212,12 @@ function increasePrices(percentage) {
 const arraysId = (index) => {
   const { employees } = data;
 
-  let arrayId;
-  let result = [];
+  const result = [];
 
-  arrayId = employees.map((employe) => employe.responsibleFor);
+  const arrayId = employees.map((employe) => employe.responsibleFor);
 
   arrayId[index].forEach((id) => {
-    result.push(animals.filter((animal) => animal.id === id)[0].name);
+    result.push(animals.filter(animal => animal.id === id)[0].name);
   });
 
   return result;
@@ -237,9 +236,9 @@ function employeeCoverage(idOrName) {
   });
 
   if (idOrName !== undefined) {
-    if (employees.find((employe) => employe.id === idOrName)) {
-      name = `${employees.find((employe) => employe.id === idOrName).firstName
-      } ${employees.find((employe) => employe.id === idOrName).lastName}`;
+    if (employees.find(employe => employe.id === idOrName)) {
+      name = `${employees.find(employe => employe.id === idOrName).firstName
+      } ${employees.find(employe => employe.id === idOrName).lastName}`;
 
       for (let i in result) {
         if (i === name) {
@@ -252,9 +251,9 @@ function employeeCoverage(idOrName) {
       // console.log(i);
       name2 = i.split(' ');
       // console.log(name2);
-      name2.forEach((name) => {
+      name2.forEach((names) => {
         // console.log(name);
-        if (name === idOrName) {
+        if (names === idOrName) {
           result = { [i]: result[i] };
         }
       });
