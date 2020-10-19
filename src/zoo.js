@@ -202,10 +202,11 @@ function schedule(dayName) {
       }
     }
   }
+  // console.log(typeof result)
   return result;
 }
-// console.log(schedule());
-// console.log(schedule("Tuesday"));
+// console.log(schedule('Tuesday'));
+// console.log(schedule('Tuesday'));
 
 function oldestFromFirstSpecies(id) {
   const { employees } = data;
@@ -216,9 +217,10 @@ function oldestFromFirstSpecies(id) {
   let highestAge = 0;
   let result;
 
-  arrayIdAnimals = employees.filter((employe) => employe.id === id)[0].responsibleFor;
+  arrayIdAnimals = employees.filter((employe) => employe.id === id)[0]
+    .responsibleFor;
   arrayAnimal = animals.filter((animal) => animal.id === arrayIdAnimals[0]);
-  
+
   arrayAnimal[0].residents.forEach((info) => {
     if (info.age > highestAge) {
       highestAge = info.age;
@@ -245,9 +247,66 @@ function increasePrices(percentage) {
 }
 // console.log(increasePrices(50));
 
+const arraysId = (index) => {
+  const { employees } = data;
+  const { animals } = data;
+
+  let arrayId;
+  let result = [];
+
+  arrayId = employees.map((employe) => employe.responsibleFor);
+
+  arrayId[index].forEach((id) => {
+    result.push(animals.filter((animal) => animal.id === id)[0].name);
+  });
+
+  return result;
+};
+// console.log(arraysId())
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const { employees } = data;
+
+  let result = {};
+  let name;
+  let name2;
+
+  employees.forEach((employe, index) => {
+    result[`${employe.firstName} ${employe.lastName}`] = arraysId(index);
+  });
+
+  if (idOrName !== undefined) {
+    if (employees.find((employe) => employe.id === idOrName)) {
+      name = `${
+        employees.find((employe) => employe.id === idOrName).firstName
+      } ${employees.find((employe) => employe.id === idOrName).lastName}`;
+
+      for (i in result) {
+        if (i === name) {
+          result = { [i]: result[i] };
+        }
+      }
+    }
+
+    for (i in result) {
+      // console.log(i);
+      name2 = i.split(" ");
+      // console.log(name2);
+      name2.forEach((name) => {
+        // console.log(name);
+        if (name === idOrName) {
+          result = { [i]: result[i] };
+        }
+      });
+    }
+  }
+
+  return result;
 }
+// console.log(employeeCoverage());
+// console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+// console.log(employeeCoverage('Stephanie'));
+// console.log(employeeCoverage('Azevado'));
 
 module.exports = {
   entryCalculator,
