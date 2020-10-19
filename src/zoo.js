@@ -22,7 +22,8 @@ function animalsByIds(...ids) {
 
   return arr;
 }
-
+// https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/filtro
+// https://stackoverflow.com/questions/26468557/return-index-value-from-filter-method-javascript
 function animalsOlderThan(names, age) {
   const nomeEIdade = animals.filter(animal => animal.name === names);
 // Encontra os animais da especice desejada
