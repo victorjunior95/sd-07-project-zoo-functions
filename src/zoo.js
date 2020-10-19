@@ -1,4 +1,4 @@
-const { animals, employees, prices, hours } = require('./data');
+const { animals, employees, prices } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -80,7 +80,7 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants = {}) {
-  let totalPrice = 0
+  let totalPrice = 0;
   Object.keys(entrants).forEach(entrant => (totalPrice += prices[entrant] * entrants[entrant]));
   return totalPrice;
 }
