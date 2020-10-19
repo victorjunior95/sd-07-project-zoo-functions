@@ -26,12 +26,16 @@ function animalsOlderThan(animal, age) {
   .every((resident, index) => resident.residents[index].age > age);
 }
 function employeeByName(employeeName) {
+  const employees = {};
   const objectEmpty = {};
   if (employeeName !== undefined) {
     return employees.filter((employee, index) =>
       employee.firstName === employeeName || employee.lastName === employeeName)[0];
   }
   return objectEmpty;
+}
+function createEmployee(personalInfo, associatedWith) {
+  return Object.assign(personalInfo, associatedWith);
 }
 
 function isManager(id) {
