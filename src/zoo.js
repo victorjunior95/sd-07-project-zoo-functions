@@ -24,6 +24,7 @@ function animalsByIds(...ids) {
 }
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/filtro
 // https://stackoverflow.com/questions/26468557/return-index-value-from-filter-method-javascript
+
 function animalsOlderThan(names, age) {
   const nomeEIdade = animals.filter(animal => animal.name === names);
 // Encontra os animais da especice desejada
@@ -32,13 +33,13 @@ function animalsOlderThan(names, age) {
   return ageAll;
 }
 // O método every() testa se todos os elementos do array
-//  passam pelo teste implementado pela função fornecida
+// passam pelo teste implementado pela função fornecida
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/every
 // Consultei o repositorio de Raphael Caputo para criaçao desta funçao
 // https://github.com/tryber/sd-07-project-zoo-functions/blob/809e01e91992eaf1aacf99f4674596212278ebf1/src/zoo.js
+
 function employeeByName(employeeName) {
   let obj = {};
-
   const employInput = employees.find(
     employ =>
       employ.firstName === employeeName || employ.lastName === employeeName,
@@ -54,18 +55,14 @@ function employeeByName(employeeName) {
 function createEmployee(personalInfo, associatedWith) {
   return { ...personalInfo, ...associatedWith };
 }
+// https://medium.com/@adsonrocha/es6-usando-a-sintaxe-spread-espalhamento-e-par%C3%A2metros-rest-46b071e8a3fc
 
 function isManager(id) {
   return employees.some(man => man.id === id && man.managers.length === 1);
 }
 // some testa se ao menos um dos elementos do array pasasa no teste e retorna true.
-function addEmployee(
-  id,
-  firstName,
-  lastName,
-  managers = [],
-  responsibleFor = [],
-) {
+
+function addEmployee(id,firstName,lastName,managers = [],responsibleFor = [],){
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   employees.push(newEmployee);
 }
