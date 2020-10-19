@@ -58,13 +58,13 @@ function isManager(id) {
   return false;
 }
 function addEmployee(...information) {
-  const [id1, firstName1, lastName1, managers1 = [], responsibleFor1 = []] = information;
+  const [id, firstName, lastName, managers = [], responsibleFor = []] = information;
   const newEmployee = {
-    id: id1,
-    firstName: firstName1,
-    lastName: lastName1,
-    managers: managers1,
-    responsibleFor: responsibleFor1,
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
   };
   return data.employees.push(newEmployee);
 }
@@ -92,7 +92,7 @@ function entryCalculator(entrants) {
   }
   {
     const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-    const priceTotal = (Adult * 49.99) + (Child * 20.99) + (Senior * 24.99);
+    const priceTotal = (Adult * data.prices.Adult) + (Child * data.prices.Child) + (Senior * data.prices.Senior);
     return priceTotal;
   }
 }
