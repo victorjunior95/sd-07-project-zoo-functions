@@ -119,7 +119,13 @@ function animalMap(options = {}) {
   });
   return allAnimals;
 }
-const format = hour => hour > 12 ? `${hour - 12}pm` : `${hour}am`;
+const format = (hour) => {
+  if(hour > 12) {
+   return `${hour - 12}pm`
+  } else {
+    return  `${hour}am`
+  }  
+};
 const msgDay = (iterator, obj) => {
   const mensage = data.hours[iterator].open === 0 ? 'CLOSED'
     : `Open from ${format(data.hours[iterator].open)} until ${format(data.hours[iterator].close)}`;
@@ -128,15 +134,15 @@ const msgDay = (iterator, obj) => {
 };
 function schedule(dayName) {
   // seu código aqui
-  const schedule = {};
+  const schedules = {};
   const daysOfWeek = Object.keys(data.hours);
   if (!dayName) {
-    daysOfWeek.forEach(day => msgDay(day, schedule));
+    daysOfWeek.forEach(day => msgDay(day, schedules));
   } else {
     const slDay = daysOfWeek.find(current => current === dayName);
-    msgDay(slDay, schedule);
+    msgDay(slDay, schedules);
   }
-  return schedule;
+  return schedules;
 }
 
 function oldestFromFirstSpecies(id) {
