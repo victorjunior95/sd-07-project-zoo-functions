@@ -20,21 +20,20 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  let minAge = false;
-  const animalName = data.animals.find(species => species.name === animal);
-  animalName.residents.forEach((resident) => {
-    if (resident.age >= age) {
-      minAge = true;
-    }
-  });
-  return minAge;
+  // let minAge = false;
+  // const animalName = data.animals.find(species => species.name === animal);
+  // animalName.residents.forEach((resident) => {
+  //   if (age > resident.age) {
+  //     minAge = false;
+  //   }
+  // });
+  // console.log(minAge);
+  // return minAge;
 }
 
 function employeeByName(employeeName = '') {
   const employee = employeeName;
-  const askedEmployee = data.employees.find((eachEmployee) => {
-    return eachEmployee.firstName === employeeName || eachEmployee.lastName === employeeName;
-  });
+  const askedEmployee = data.employees.find(eachEmployee => eachEmployee.firstName === employeeName || eachEmployee.lastName === employeeName);
 
   if (employee.length === 0) {
     return {};
@@ -60,13 +59,11 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const newEmployee = {};
-  newEmployee[id] = id;
-  newEmployee[firstName] = firstName;
-  newEmployee[lastName] = lastName;
-  newEmployee[managers] = managers;
-  newEmployee[responsibleFor] = responsibleFor;
-
-  
+  // newEmployee[id] = id;
+  // newEmployee[firstName] = firstName;
+  // newEmployee[lastName] = lastName;
+  // newEmployee[managers] = managers;
+  // newEmployee[responsibleFor] = responsibleFor; 
   // const newEmployee = {
   //   id: id,
   //   firstName: firstName,
@@ -78,19 +75,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species = '') {
-  const allAnimals = {}
+  const allAnimals = {};
   if (species.length === 0) {
     data.animals.forEach((animal) => {
-      let propName = animal.name;
-      let quantityAnimals = animal.residents.length;
+      const propName = animal.name;
+      const quantityAnimals = animal.residents.length;
       allAnimals[propName] = `${quantityAnimals}`;
     });
     return allAnimals;
   }
 
-  const allResidents = data.animals.find((animal) => {
-    return animal.name === species;
-  });
+  const allResidents = data.animals.find(animal => animal.name === species);
   return allResidents.residents.length;
 }
 
