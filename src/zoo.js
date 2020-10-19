@@ -55,7 +55,7 @@ function isManager(id) {
 }
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
-  for (let index of Object.keys(newEmployee)) {
+  for (const index of Object.keys(newEmployee)) {
     if (newEmployee[index] === undefined) {
       newEmployee[index] = [];
     }
