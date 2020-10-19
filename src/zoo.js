@@ -113,14 +113,14 @@ function schedule(dayName) {
 // Funcao oldestFromFirstSpecies:
 // Para implementar esta funcao, consultei o repositorio do colega Pedro Marques.
 function oldestFromFirstSpecies(id) {
-  const employee = employees.find(({id: employeeId}) => employeeId === id);
-  const animal = animals.find(({id: animalId}) => animalId === employee.responsibleFor[0]);
+  const employee = employees.find(({ id: employeeId }) => employeeId === id);
+  const animal = animals.find(({ id: animalId }) => animalId === employee.responsibleFor[0]);
   animal.residents.sort((a, b) => b.age - a.age);
   return Object.values(animal.residents[0]);
 }
 
 function increasePrices(percentage) {
-  
+  const { Adult, Senior, Child} = prices;
 }
 
 function employeeCoverage(idOrName) {
