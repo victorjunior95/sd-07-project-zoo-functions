@@ -84,22 +84,121 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  const obj = { NE: [], NW: [], SE: [], SW: [] };
-  if (options === undefined) {
-    animals.forEach((animal) => {
-      if (animal.location === 'NE') {
-        obj.NE.push(animal.name);
-      } else if (animal.location === 'NW') {
-        obj.NW.push(animal.name);
-      } else if (animal.location === 'SE') {
-        obj.SE.push(animal.name);
-      } else if (animal.location === 'SW') {
-        obj.SW.push(animal.name);
-      }
-    });
-    return obj;
+  if (!options) {
+    return animalsByRegion();
   }
-  return null;
+  if (options.sorted && options.includeNames && options.sex === undefined) {
+    return animalsByRegionWithNameSorted();
+  }
+  if (options.sorted && options.includeNames && options.sex !== undefined) {
+    if (options.sex === 'male') {
+      return malesByRegionWithNameSorted();
+    }
+    if (options.sex === 'female') {
+      return femalesByRegionWithNameSorted();
+    }
+  }
+  if (options.includeNames) {
+    return animalsByRegionWithName();
+  }
+}
+
+function animalsByRegion () {
+  const initialObj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  }
+  return animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        specie.name
+      ]
+    }
+  }, initialObj)
+}
+
+function animalsByRegionWithName () {
+  const initialObj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  }
+  return animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        {[specie.name]: specie.residents.map(resident => resident.name)}
+      ]
+    }
+  }, initialObj)
+}
+
+function animalsByRegionWithNameSorted () {
+  const initialObj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  }
+  return animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        {[specie.name]: specie.residents.map(resident => resident.name).sort()}
+      ]
+    }
+  }, initialObj)
+}
+
+function malesByRegionWithNameSorted () {
+  const initialObj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  }
+  return animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        {[specie.name]: specie.residents.map((resident) => {
+          if (resident.sex === 'male') {
+            return resident.name;
+          }
+        }).sort()}
+      ]
+    }
+  }, initialObj)
+}
+
+function femalesByRegionWithNameSorted () {
+  const initialObj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  }
+  return animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        {[specie.name]: specie.residents.map((resident) => {
+          if (resident.sex === 'female') {
+            return resident.name;
+          }
+        }).sort()}
+      ]
+    }
+  }, initialObj)
 }
 
 function schedule(dayName) {
