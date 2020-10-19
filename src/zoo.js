@@ -158,11 +158,16 @@ function increasePrices(percentage) {
 // https://github.com/tryber/sd-07-project-zoo-functions/blob/544898ad4e7bca13bb04afc1dfabe4c7ee1da3ca/src/zoo.js
 
 function employeeCoverage(idOrName) {
-  if (idOrName === undefined) {
+if (idOrName === undefined) {
     const out = {};
-    employees.forEach(employeeSelected =>
-    (out[`${employeeSelected.firstName} ${employeeSelected.lastName}`]= employeeSelected.responsibleFor.map
-    (isresponsible => animals.find(animal => animal.id === isresponsible).name,)),);
+    employees.forEach(
+      employeeSelected =>
+        (out[
+          `${employeeSelected.firstName} ${employeeSelected.lastName}`
+        ] = employeeSelected.responsibleFor.map(
+          isresponsible => animals.find(animal => animal.id === isresponsible).name,
+        )),
+    );
     return out;
   }
 // Este if cria o objeto com todos os nomes de empregados e respectivos animais cuidados.
