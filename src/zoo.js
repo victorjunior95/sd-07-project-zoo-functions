@@ -96,7 +96,8 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.keys(prices).forEach(key =>
+  (prices[key] = Math.round((prices[key] * ((percentage / 100) + 1)) * 100) / 100));
 }
 
 function employeeCoverage(idOrName) {
