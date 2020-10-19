@@ -13,18 +13,17 @@ const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  const animalsIds = [...ids]
-  let animalArray = []
- animalsIds.forEach((element) => {
+  const animalsIds = [...ids];
+  const animalArray = [];
+  animalsIds.forEach((element) => {
     animals.forEach((animalList) => {
       if (element === animalList.id) {
-        animalArray.push(animalList)
+        animalArray.push(animalList);
       }
-    })
-  })
-  return animalArray
+    });
+  });
+  return animalArray;
 }
-  
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
