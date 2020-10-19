@@ -20,15 +20,17 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  const animalFinded = data.animals.find(courrentAnimal => courrentAnimal.name === animal );
-  return animalFinded.residents.every(courrentResident => courrentResident.age >= age );
+  const animalFinded = data.animals.find(courrentAnimal => courrentAnimal.name === animal);
+  return animalFinded.residents.every(courrentResident => courrentResident.age >= age);
 }
 
 function employeeByName(employeeName) {
   if (arguments.length === 0) {
     return {};
   }
-  const employee = data.employees.find(employeeAtual => employeeAtual.firstName === employeeName || employeeAtual.lastName === employeeName );
+  const employee = data.employees.find(employeeAtual => {
+    employeeAtual.firstName === employeeName || employeeAtual.lastName === employeeName
+  });
   return employee;
 }
 
