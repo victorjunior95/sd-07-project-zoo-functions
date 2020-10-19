@@ -75,8 +75,107 @@ function entryCalculator(entrants) {
   return total;
 }
 
+function animalsByLocation() {
+  const obj = {};
+  const northeastAnimalNames = data.animals.filter((animal) => animal.location === 'NE').map((animal) => animal.name);
+  const northwestAnimalNames = data.animals.filter((animal) => animal.location === 'NW').map((animal) => animal.name);
+  const southeastAnimalNames = data.animals.filter((animal) => animal.location === 'SE').map((animal) => animal.name);
+  const southwestAnimalNames = data.animals.filter((animal) => animal.location === 'SW').map((animal) => animal.name);
+  obj['NE'] = northeastAnimalNames;
+  obj['NW'] = northwestAnimalNames;
+  obj['SE'] = southeastAnimalNames;
+  obj['SW'] = southwestAnimalNames;
+  return obj;
+}
+
+function animalsNamesBySpecies(specifiedSpecies) {
+  const obj = {};
+  const array = [];
+  const residents = data.animals.find((animal) => animal.name === specifiedSpecies).residents;
+  residents.forEach((resident) => array.push(resident.name));
+  obj[specifiedSpecies] = array;
+  return obj;
+}
+
+function animalsNamesBySpeciesSorted(specifiedSpecies) {
+  const obj = {};
+  const array = [];
+  const residents = data.animals.find((animal) => animal.name === specifiedSpecies).residents;
+  residents.forEach((resident) => array.push(resident.name));
+  array.sort();
+  obj[specifiedSpecies] = array;
+  return obj;
+}
+
+function animalsNamesByLocation() {
+  const obj = {};
+  const northeastAnimalNames = data.animals.filter((animal) => animal.location === 'NE').map((animal) => animal.name);
+  const northwestAnimalNames = data.animals.filter((animal) => animal.location === 'NW').map((animal) => animal.name);
+  const southeastAnimalNames = data.animals.filter((animal) => animal.location === 'SE').map((animal) => animal.name);
+  const southwestAnimalNames = data.animals.filter((animal) => animal.location === 'SW').map((animal) => animal.name);
+  const neArray = [];
+  const nwArray = [];
+  const seArray = [];
+  const swArray = [];
+  northeastAnimalNames.forEach((animal) => neArray.push(animalsNamesBySpecies(animal)));
+  northwestAnimalNames.forEach((animal) => nwArray.push(animalsNamesBySpecies(animal)));
+  southeastAnimalNames.forEach((animal) => seArray.push(animalsNamesBySpecies(animal)));
+  southwestAnimalNames.forEach((animal) => swArray.push(animalsNamesBySpecies(animal)));
+  obj['NE'] = neArray;
+  obj['NW'] = nwArray;
+  obj['SE'] = seArray;
+  obj['SW'] = swArray;
+  console.log(obj);
+  return obj;
+}
+
+function animalsNamesByLocationSorted() {
+  const obj = {};
+  const northeastAnimalNames = data.animals.filter((animal) => animal.location === 'NE').map((animal) => animal.name);
+  const northwestAnimalNames = data.animals.filter((animal) => animal.location === 'NW').map((animal) => animal.name);
+  const southeastAnimalNames = data.animals.filter((animal) => animal.location === 'SE').map((animal) => animal.name);
+  const southwestAnimalNames = data.animals.filter((animal) => animal.location === 'SW').map((animal) => animal.name);
+  const neArray = [];
+  const nwArray = [];
+  const seArray = [];
+  const swArray = [];
+  northeastAnimalNames.forEach((animal) => neArray.push(animalsNamesBySpeciesSorted(animal)));
+  northwestAnimalNames.forEach((animal) => nwArray.push(animalsNamesBySpeciesSorted(animal)));
+  southeastAnimalNames.forEach((animal) => seArray.push(animalsNamesBySpeciesSorted(animal)));
+  southwestAnimalNames.forEach((animal) => swArray.push(animalsNamesBySpeciesSorted(animal)));
+  neArray.sort();
+  nwArray.sort();
+  seArray.sort();
+  swArray.sort();
+  obj['NE'] = neArray;
+  obj['NW'] = nwArray;
+  obj['SE'] = seArray;
+  obj['SW'] = swArray;
+  return obj;
+}
+
+animalsNamesByLocation();
+
 function animalMap(options) {
-  // seu código aqui
+  let obj = {};
+  if (options === undefined) {
+    obj = animalsByLocation();
+  }
+  else if (options.includeNames === true) {
+    if (options.sorted === true) {
+      obj = animalsNamesByLocationSorted();
+    }
+    else {
+      obj = animalsNamesByLocation();
+    }
+  }
+  // else if (options.sex === female || options.sex === male) {
+  //   obj = 'caso em que sex é female ou male';
+  // }
+  // else if (options.sex === female || options.sex === male && options.sort === true) {
+  //   obj = 'caso em que sex é female ou male e sort é true';
+  // }
+  return obj;
 }
 
 function userReadableSchedule(dayName) {
