@@ -14,11 +14,12 @@ const data = require('./data');
 function animalsByIds(ids) {
   // seu código aqui
   // aqui
+  const input = ids;
   const output = [];
   if (ids === null) {
     return ([]);
   }
-  ids.forEach((element) => {
+  input.forEach((element) => {
     output.push(element);
   });
   return (output);
