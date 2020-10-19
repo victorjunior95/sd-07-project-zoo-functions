@@ -79,19 +79,26 @@ function entryCalculator(entrants = 0) {
 }
 
 function animalMap(options) {
-  // seu código aqui
+
 }
 
 function schedule(dayName) {
-  // seu código aqui
+
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const keys = Object.keys(data.prices);
+  const newValues = Object.values(data.prices)
+    .map(price => ((price * 100) + Math.round(price * percentage)) / 100);
+
+  data.prices = keys.reduce((acc, currentValue, index) => {
+    acc[currentValue] = newValues[index];
+    return acc;
+  }, {});
 }
 
 function employeeCoverage(idOrName) {
