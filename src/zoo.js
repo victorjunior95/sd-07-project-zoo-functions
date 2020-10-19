@@ -16,8 +16,12 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  return data.animals
+    .find(element => element.name === animal).residents
+    .every(element => element.age >= age);
 }
+// Estava fazendo o return com animals e o every direto do residents e não estava passando no teste. Consultei o PR do colega Dilênio (PR: https://github.com/tryber/sd-06-project-zoo-functions/blob/17c91ef46c3fd1059fe8a903b6514b3a1164f551/src/zoo.js)
+
 
 function employeeByName(employeeName) {
   // seu código aqui
