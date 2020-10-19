@@ -147,14 +147,14 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {
   // seu código aqui
   let getAnimal;
-  const getEmploy = employees.find((current) => current.id === id );
+  const getEmploy = employees.find(current => current.id === id );
   animals.forEach((animal) => {
-    if(animal.id === getEmploy.responsibleFor[0]) {
+    if (animal.id === getEmploy.responsibleFor[0]) {
       const ages = animal.residents.map(resident => resident.age);
-      let ageOld = ages.reduce((pre, acc) => Math.max(pre ,acc));
+      const ageOld = ages.reduce((pre, acc) => Math.max(pre, acc));
       getAnimal = animal.residents.find(cAnimal => cAnimal.age === ageOld);
     }
-  })
+  });
 
   return [getAnimal.name, getAnimal.sex, getAnimal.age];
 }
