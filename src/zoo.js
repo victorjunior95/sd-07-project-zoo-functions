@@ -23,17 +23,19 @@ function animalsOlderThan(animal, age) {
   let minAge = false;
   const animalName = data.animals.find(species => species.name === animal);
   animalName.residents.forEach((resident) => {
-    resident.age >= age ? minAge = true : minAge = false;
+    if (resident.age >= age) {
+      minAge = true;
+    }
   });
   return minAge;
 }
 
 function employeeByName(employeeName = '') {
   const employee = employeeName;
-  const askedEmployee = data.employees.find((employee) => {
-   return employee.firstName === employeeName || employee.lastName === employeeName;
+  const askedEmployee = data.employees.find((eachEmployee) => {
+    return eachEmployee.firstName === employeeName || eachEmployee.lastName === employeeName;
   });
-  
+
   if (employee.length === 0) {
     return {}
   }
