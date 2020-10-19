@@ -54,54 +54,14 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   const { prices } = data;
-  let value = 0;
-  for (let i in entrants) {
-    value += entrants[i] * prices[i];
+  const returnZero = 0;
+
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return returnZero;
   }
-  return value;
+
+  return Object.entries(entrants).reduce((acc, curr) => acc + (prices[curr[0]] * curr[1]), 0);
 }
-// console.log(entryCalculator({}));
-// console.log(entryCalculator({ 'Child': 1, 'Senior': 1 }));
-
-const namesResidentsLocation = (name, sex) => {
-  const array = [];
-  const arrayAll = [];
-
-  animals
-    .find(animal => animal.name === name)
-    .residents.forEach((info) => {
-      arrayAll.push(info.name);
-      if (info.sex === sex) {
-        array.push(info.name);
-      }
-    });
-  if (sex) {
-    return array;
-  } else {
-    return arrayAll;
-  }
-};
-// console.log(namesResidentsLocation('lions'));
-
-const nameAnimals = (region, sort = false, sex) => {
-  const array = [];
-  let object;
-
-  animals
-    .filter(animal => animal.location === region)
-    .forEach(animal => {
-      object = {};
-      object[animal.name] = namesResidentsLocation(animal.name, sex);
-      if (sort) {
-        object[animal.name] = namesResidentsLocation(animal.name, sex).sort();
-      }
-      array.push(object);
-    });
-
-  return array;
-};
-// console.log(nameAnimals('NE'));
-
 
 function animalMap(options) {
   // seu código aqui
