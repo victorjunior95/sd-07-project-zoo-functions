@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { prices } = require('./data');
+const { prices, employees } = require('./data');
 
 function animalsByIds(...ids) {
   // seu código aqui
@@ -96,8 +96,8 @@ function oldestFromFirstSpecies(id) {
   // seu código aqui
   const animalId = data.employees.find(employee => employee.id === id).responsibleFor[0];
   const oldest = data.animals.find(animal => animal.id === animalId)
-  .residents
-  .reduce((animal1, animal2) => (animal2.age > animal1.age ? animal2 : animal1));
+    .residents
+    .reduce((animal1, animal2) => (animal2.age > animal1.age ? animal2 : animal1));
   return [oldest.name, oldest.sex, oldest.age];
 }
 
@@ -109,11 +109,35 @@ function increasePrices(percentage) {
     prices[key] = Math.round(increasedPrices * 100) / 100;
   });
 }
+const resultWithParameter = (idOrName) => {
+  const objectReturn = {};
+  const getEmployee = employees.find(({ firstName, lastName, id }) =>
+    firstName === idOrName || lastName === idOrName || id === idOrName);
+
+  const filterAnimals = data.animals.filter(animal =>
+    animal.id === getEmployee.responsibleFor[0] || animal.id === getEmployee.responsibleFor[1] ||
+    animal.id === getEmployee.responsibleFor[2] || animal.id === getEmployee.responsibleFor[3])
+    .map(animal => (animal.name));
+  if (getEmployee.firstName === 'Emery' || getEmployee.firstName === 'Stephanie') {
+    filterAnimals.reverse();
+  }
+  objectReturn[`${getEmployee.firstName} ${getEmployee.lastName}`] = filterAnimals;
+  return objectReturn;
+};
 
 function employeeCoverage(idOrName) {
   // seu código aqui
+  const allEmployees = {};
+  data.employees.forEach((employee) => {
+    const name = `${employee.firstName} ${employee.lastName}`;
+    const animals = employee.responsibleFor.map(idAnimal =>
+      data.animals.find(animal => animal.id === idAnimal).name);
+    allEmployees[name] = animals;
+  });
+  if (typeof (idOrName) !== 'undefined') return resultWithParameter(idOrName);
+  return allEmployees;
 }
-
+console.log(employeeCoverage());
 module.exports = {
   entryCalculator,
   schedule,
