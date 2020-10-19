@@ -41,9 +41,7 @@ function animalsOlderThan(names, age) {
 function employeeByName(employeeName) {
   let obj = {};
   const employInput = employees.find(
-    employ =>
-      employ.firstName === employeeName || employ.lastName === employeeName,
-  );
+    employ =>employ.firstName === employeeName || employ.lastName === employeeName,);
 // find retorna o valor do primeiro elemento do array q satisfizer a função teste provida.
 
   if (employInput !== undefined) {
@@ -62,7 +60,7 @@ function isManager(id) {
 }
 // some testa se ao menos um dos elementos do array pasasa no teste e retorna true.
 
-function addEmployee(id,firstName,lastName,managers = [],responsibleFor = [],){
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = [],){
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   employees.push(newEmployee);
 }
@@ -202,7 +200,7 @@ function employeeCoverage(idOrName) {
   }
 // Este if cria o objeto com todos os nomes de empregados e respectivos animais cuidados.
 // Com o forEach, adiciona as chaves do objeto ( nomes dos empregados)
-// Com o find, encontra-se pelo id do animal o seu nome (.name)
+// Com o find, encontra-se pelo id do animal sua especie (.name)
 // Com  = ...map , adiciona valores as chaves. Os valores que eram ids (.responsibleFor)
 // sao substituidos pelos nomes encontrados pelo find.
 
