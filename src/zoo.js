@@ -162,23 +162,14 @@ function increasePrices(percentage) {
   const resultChild = listaPreco.Child * (percentage / 100);
   const resultenior = listaPreco.Senior * (percentage / 100);
 
-  const adulto = Math.round((listaPreco.Adult + resultAdult) * 100 ) / 100;
+  const adulto = Math.round((listaPreco.Adult + resultAdult) * 100) / 100;
   const idoso = Math.round((listaPreco.Senior + resultenior) * 100) / 100;
   const crianca = Math.round((listaPreco.Child + resultChild) * 100) / 100;
 
   listaPreco.Adult = adulto;
   listaPreco.Child = crianca;
   listaPreco.Senior = idoso;
-
 }
-
-increasePrices(50);
-
-// let expected = {
-//   'Adult': 74.99,
-//   'Senior': 37.49,
-//   'Child': 31.49
-// };
 
 function employeeCoverage(idOrName) {
   // seu código aqui
