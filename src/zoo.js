@@ -92,7 +92,10 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const emplo = employees.filter(employee => employee.id === id);
+  const responsible = animals.filter(animal => animal.id === emplo[0].responsibleFor[0]);
+  const result = responsible[0].residents.reduce((acc, curr) => (acc.age > curr.age ? acc : curr));
+  return Object.values(result);
 }
 
 function increasePrices(percentage) {
