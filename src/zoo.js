@@ -12,7 +12,7 @@ eslint no-unused-vars: [
 // Funcao animalsByIds:
 // Para implementar esta funcao, consultei o repositorio do colega Ygor Fonseca.
 
-const { animals, employees } = require('./data');
+const { animals, employees, prices } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -120,7 +120,13 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { Adult, Senior, Child } = data.prices;
+  const percent = (percentage / 100) + 1;
+  Object.assign(data.prices = {
+    Adult: Number(((Adult * percent) + 0.001).toFixed(2)),
+    Senior: Number(((Senior * percent) + 0.001).toFixed(2)),
+    Child: Number(((Child * percent) + 0.001).toFixed(2)),
+  });
 }
 
 function employeeCoverage(idOrName) {
