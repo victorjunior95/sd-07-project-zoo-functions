@@ -22,14 +22,22 @@ function animalsByIds(...ids) {
 function animalsOlderThan(animal, age) {
   let minAge = false;
   const animalName = data.animals.find(species => species.name === animal);
-  animalName.residents.forEach(resident => {
+  animalName.residents.forEach((resident) => {
     resident.age >= age ? minAge = true : minAge = false;
   });
   return minAge;
 }
 
-function employeeByName(employeeName) {
-  // seu código aqui
+function employeeByName(employeeName = '') {
+  const employee = employeeName;
+  const askedEmployee = data.employees.find((employee) => {
+   return employee.firstName === employeeName || employee.lastName === employeeName;
+  });
+  
+  if (employee.length === 0) {
+    return {}
+  }
+  return askedEmployee;
 }
 
 function createEmployee(personalInfo, associatedWith) {
