@@ -1,4 +1,4 @@
-const { animals, employees } = require('./data');
+const { animals, employees, hours, prices } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -86,7 +86,7 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  const { Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday } = data.hours;
+  const { Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday } = hours;
   const theDay = {};
   const allDays = { Tuesday: `Open from ${Tuesday.open}am until ${Tuesday.close - 12}pm`,
     Wednesday: `Open from ${Wednesday.open}am until ${Wednesday.close - 12}pm`,
@@ -108,17 +108,15 @@ function oldestFromFirstSpecies(id) {
   const findAnimalById = animals.find(animal => animal.id === getAnimalId).residents;
   const sortResidents = findAnimalById.sort((a, b) => b.age - a.age);
   const { name, sex, age } = sortResidents[0];
-  const animalArray = [];
-  animalArray.push(name, sex, age);
-  return animalArray;
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
-  const { Adult, Child, Senior } = data.prices;
+  const { Adult, Child, Senior } = prices;
   const percentageNumber = percentage / 100;
-  data.prices.Adult = (Math.round((Adult + (Adult * percentageNumber)) * 100)) / 100;
-  data.prices.Child = (Math.round((Child + (Child * percentageNumber)) * 100)) / 100;
-  data.prices.Senior = (Math.round((Senior + (Senior * percentageNumber)) * 100)) / 100;
+  prices.Adult = (Math.round((Adult + (Adult * percentageNumber)) * 100)) / 100;
+  prices.Child = (Math.round((Child + (Child * percentageNumber)) * 100)) / 100;
+  prices.Senior = (Math.round((Senior + (Senior * percentageNumber)) * 100)) / 100;
 }
 
 function employeeCoverage(idOrName) {
