@@ -140,7 +140,7 @@ function animalMap(options = {}) {
       out[location].push({ [name]: residents.map(resident => resident.name) }),
     );
 // Se receber apenas {includeNames: true}, retornara todos os nomes dos animais da especie.
-  }  if (options.sorted) {
+  }if (options.sorted) {
     Object.keys(out).forEach(key =>
       out[key].forEach(element => element[Object.keys(element)].sort()),
     );
