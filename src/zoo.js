@@ -41,7 +41,7 @@ function animalsOlderThan(names, age) {
 function employeeByName(employeeName) {
   let obj = {};
   const employInput = employees.find(
-    employ =>employ.firstName === employeeName || employ.lastName === employeeName,);
+    employ => employ.firstName === employeeName || employ.lastName === employeeName);
 // find retorna o valor do primeiro elemento do array q satisfizer a função teste provida.
 
   if (employInput !== undefined) {
@@ -60,7 +60,7 @@ function isManager(id) {
 }
 // some testa se ao menos um dos elementos do array pasasa no teste e retorna true.
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = [],){
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   employees.push(newEmployee);
 }
