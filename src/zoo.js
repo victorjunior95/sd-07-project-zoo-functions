@@ -47,7 +47,7 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-    // seu código aqui
+  // seu código aqui
   const a = {
     id,
     firstName,
@@ -82,15 +82,14 @@ function entryCalculator(entrants) {
   if (Object.keys(entrants).length === 0) {
     return 0;
   }
+  let sum = 0;
   Object.keys(entrants).forEach((i) => {
-    console.log(i);
-    if (i === Object.keys(prices)) {
-      let a = 0;
-      a += Object.values(prices) * Object.values(i);
-      console.log(a);
-    }
+    const quantidade = entrants[i];
+    const preco = prices[i];
+    const resultado = preco * quantidade;
+    sum += resultado;
   });
-  return 0;
+  return sum;
 }
 
 function animalMap(options) {
@@ -114,6 +113,7 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
+
 }
 
 module.exports = {
