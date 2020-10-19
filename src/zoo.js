@@ -84,7 +84,22 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu código aqui
+  const obj = {NE: [], NW: [], SE: [], SW: []};
+  if (options === undefined) {
+    animals.forEach((animal) => {
+      if (animal.location === 'NE') {
+        obj.NE.push(animal.name);
+      } else if (animal.location === 'NW') {
+        obj.NW.push(animal.name);
+      } else if (animal.location === 'SE') {
+        obj.SE.push(animal.name);
+      } else if (animal.location === 'SW') {
+        obj.SW.push(animal.name);
+      }
+    })
+    return obj;
+  }
+  return null;
 }
 
 function schedule(dayName) {
