@@ -63,7 +63,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  let administradores = employees.find(busca => busca.managers);
+  let administradores = employees.map(busca => busca.managers);
   // tenho como retorno desse map todos os managers em um array dentro de um array
   // o filter me retorna o objeto inteiro
   // o find vai me retornar somente o primeiro
@@ -216,3 +216,4 @@ module.exports = {
   increasePrices,
   createEmployee,
 };
+console.log(isManager('9e7d4524-363c-416a-8759-8aa7e50c0992'))
