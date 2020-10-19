@@ -14,6 +14,7 @@ const data = require('./data');
 const { animals } = data;
 const { employees } = data;
 const { prices } = data;
+const { hours } = data;
 
 function animalsByIds(...ids) {
   const localeByAnimalid = ids.map((idFind) => {
@@ -92,7 +93,27 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  let scheduleForHuman = {
+    Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+    Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+    Thursday: `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+    Friday: `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+    Saturday: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+    Sunday: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
+    Monday: 'CLOSED',
+  };
+  const day = Object.entries(hours);
+  const localeDay = day.find(dayActual => dayActual[0] === dayName);
+  if (typeof (dayName) === 'undefined') {
+    return scheduleForHuman;
+  } else if (dayName === 'Monday') {
+    scheduleForHuman = {};
+    scheduleForHuman[dayName] = 'CLOSED';
+  } else {
+    scheduleForHuman = {};
+    scheduleForHuman[localeDay[0]] = `Open from ${localeDay[1].open}am until ${(localeDay[1].close) - 12}pm`;
+  }
+  return scheduleForHuman;
 }
 
 function oldestFromFirstSpecies(id) {
@@ -100,7 +121,13 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { Child, Senior, Adult } = prices;
+  // factor multiplication in const valuePercentage.
+  const valuePercentage = (percentage / 100) + 1;
+  const increase = (value, percent) => parseFloat(Math.round(value * percent * 100) / 100);
+  prices.Child = increase(Child, valuePercentage);
+  prices.Senior = increase(Senior, valuePercentage);
+  prices.Adult = increase(Adult, valuePercentage);
 }
 
 function employeeCoverage(idOrName) {
