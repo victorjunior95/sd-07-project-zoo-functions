@@ -158,12 +158,111 @@ function entryCalculator(entrants = {}) {
   }, 0);
 }
 
-function animalMap(options) {
-  // seu código aqui
+/*
+
+9- Implemente a função animalMap:
+
+-> Sem parâmetros, retorna animais categorizados por localização
+
+-> Com a opção includeNames: true especificada, retorna nomes de animais
+
+-> Com a opção sorted: true especificada, retorna nomes de animais ordenados
+
+-> Com a opção sex: 'female' ou sex: 'male' especificada, retorna
+  somente nomes de animais macho/fêmea
+
+-> Com a opção sex: 'female' ou sex: 'male' especificada e
+  a opção sort: true especificada, retorna somente nomes de
+  animais macho/fêmea com os nomes dos animais ordenados
+
+-> Só retorna informações ordenadas e com sexo se a opção includeNames: true for especificada
+
+*/
+
+const getNames = () => {
+  return animals.reduce((result, item) => {
+    result[item.location] = animals.reduce((valueResult, position) => {
+      if (item.location === position.location) valueResult.push(position.name);
+      return valueResult;
+    }, []);
+    return result;
+  }, {});
 }
 
+const includesTrue = () => {
+  const names = getNames();
+  const lions = animals.reduce((result, item) => {
+    const { residents } = animals;
+    if(item.name === 'lions') residents.forEach((position) => result.push(position.name));
+    return result;
+  }, []);
+  // const { NE, NW, SE, SW } = names
+  // const { residents } = animals;
+  // console.log(residents.);
+  // console.log(NE);
+  // console.log(NW);
+  // console.log(SE);
+  // console.log(SW);
+  // const expectedResult = animals.reduce((result, item) => {
+  //   result[item.location] = animals.reduce((valueResult, position) => {
+  //     if (item.location === position.location) valueResult.push(position.name);
+  //   }, []);
+  //   return result;
+  // }, {});
+  // console.log(expectedResult);
+}
+
+const haveOptions = (options) => {
+  if (options.includeNames) includesTrue();
+  if (options.sorted) sortedTrue();
+  if (options.sex === 'female') sexFemale();
+  if (options.sex === 'male') sexMale();
+}
+
+function animalMap(options) { 
+  if (options === undefined) return getNames();
+  return haveOptions(options);
+}
+
+/*
+
+10- Implemente a função schedule:
+
+Sem parâmetros, retorna um cronograma legível para humanos
+
+Se um único dia for passado, retorna somente este dia em um formato legível para humanos
+
+*/
+
+const withoutParameters = (hours) => {
+  const expectedValues = Object.values(hours);
+  const exepectedKeys = Object.keys(hours);
+  
+  expectedValues.forEach(({ open, close }, index) => {
+    expectedValues[index] = `Open from ${open}am until ${close - 12}pm`
+    if (open + close === 0) expectedValues[index] = 'CLOSED';
+  });
+
+  return exepectedKeys.reduce((result, keys, index) => {
+    result[keys] = expectedValues[index];
+    return result;
+  }, {});
+}
+
+
 function schedule(dayName) {
-  // seu código aqui
+  const { hours } = data;
+  if (dayName === undefined) return withoutParameters(hours);
+
+  const expectedValue = Object.values(hours[dayName]);
+  const [open, close] = expectedValue;
+  const result = {};
+
+  result[dayName] = `Open from ${open}am until ${close - 12}pm`;
+
+  if (open + close === 0) result[dayName] = 'CLOSED';
+
+  return result;
 }
 
 function oldestFromFirstSpecies(id) {
