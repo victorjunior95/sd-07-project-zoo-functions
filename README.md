@@ -15,7 +15,7 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
   * Entre na pasta do repositório que você acabou de clonar:
     * `cd sd-07-project-zoo-functions`
 
-2. Instale as dependências
+2. Instale as dependência
   * `npm install`
 
 3. Crie uma branch a partir da branch `master`
