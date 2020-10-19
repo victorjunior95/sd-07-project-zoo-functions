@@ -8,28 +8,35 @@ eslint no-unused-vars: [
   }
 ]
 */
-const { animals, employees, prices, hours, } = require('./data');
+const data = require('./data');
+
+const animals = data;
 function animalsByIds(ids) {
   return animals.filter(animal => ids.includes(animal.id));
 }
 
 function animalsOlderThan(animal, age) {
-  return animals.find(animalOfZoo => animal === animalOfZoo.name).residents.every(animalOfZoo => animalOfZoo.age > age);
+  return animals.find(animalOfZoo => animal === animalOfZoo.name)
+  .residents.every(animalOfZoo => animalOfZoo.age > age);
 }
 function employeeByName(employeeName) {
+  const employees = {};
   if (!employeeName) return {};
-  return employees.find(employee => employee.firstName === employeeName || employee.lastName === employeeName);
+  return employees.find(employee => employee.firstName ===
+  employeeName || employee.lastName === employeeName);
 }
 function createEmployee(personalInfo, associatedWith) {
   return Object.assign(personalInfo, associatedWith);
 }
 
 function isManager(id) {
+  const employees = {};
   return employees.some(employee => employee.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  const addNewEmployee = { id, firstName, lastName, managers,responsibleFor, };
+  const employees = {};
+  const addNewEmployee = { id, firstName, lastName, managers, responsibleFor };
   return employees.push(addNewEmployee);
 }
 
@@ -45,6 +52,7 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants = 0) {
+  const prices = {};
   const {
     Adult = 0, Child = 0, Senior = 0,
   } = entrants;
