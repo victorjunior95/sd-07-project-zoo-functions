@@ -28,14 +28,14 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  const animalName = animals.filter(element => element.name === animal);
-  const validate = animalName[0].residents.every(animalAge => animalAge.age >= age);
+  const animalName = animals.find(element => element.name === animal);
+  const validate = animalName.residents.every(animalAge => animalAge.age >= age);
   return validate;
 }
 
 function employeeByName(empName = {}) {
-  const empSearch = employees.filter(emp => empName === emp.firstName || empName === emp.lastName);
-  return empSearch.length === 0 ? {} : empSearch[0];
+  const empSearch = employees.find(emp => empName === emp.firstName || empName === emp.lastName);
+  return empSearch.length === 0 ? {} : empSearch;
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -60,7 +60,19 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // seu código aqui
+  const animalsList = {
+    lions: 4,
+    tigers: 2,
+    bears: 3,
+    penguins: 4,
+    otters: 4,
+    frogs: 2,
+    snakes: 2,
+    elephants: 4,
+    giraffes: 6,
+  };
+  const searchAnimal = animals.find(element => element.name === species);
+  return searchAnimal === undefined ? animalsList : searchAnimal.residents.length;
 }
 
 function entryCalculator(entrants) {
