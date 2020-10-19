@@ -20,9 +20,7 @@ function animalsByIds(...ids) {
 function animalsOlderThan(animal, age) {
   const { animals } = data;
   const myAnimal = animals.find(animalName => animalName.name === animal);
-  const compareResult = myAnimal.residents.every(
-    animalGroup => animalGroup.age > age
-  );
+  const compareResult = myAnimal.residents.every(animalGroup => animalGroup.age > age);
   return compareResult;
 }
 // console.log(animalsOlderThan('otters', 7));
@@ -156,11 +154,9 @@ function animalMap(options) {
 function schedule(dayName) {
   const { hours } = data;
   let result = {};
-  
   for (let i in hours) {
     result[i] = `Open from ${Object.values(hours[i])[0]}am until ${
-      Object.values(hours[i])[1] - 12
-    }pm`;
+      Object.values(hours[i])[1] - 12}pm`;
 
     if (i === 'Monday') {
       result[i] = `CLOSED`;
@@ -251,8 +247,7 @@ function employeeCoverage(idOrName) {
 
   if (idOrName !== undefined) {
     if (employees.find((employe) => employe.id === idOrName)) {
-      name = `${
-        employees.find((employe) => employe.id === idOrName).firstName
+      name = `${employees.find((employe) => employe.id === idOrName).firstName
       } ${employees.find((employe) => employe.id === idOrName).lastName}`;
 
       for (let i in result) {
