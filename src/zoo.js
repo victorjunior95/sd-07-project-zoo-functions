@@ -37,7 +37,7 @@ function employeeByName(employeeName = '') {
   });
 
   if (employee.length === 0) {
-    return {}
+    return {};
   }
   return askedEmployee;
 }
@@ -59,13 +59,21 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const newEmployee = {
-    id: id,
-    firstName: firstName,
-    lastName: lastName,
-    managers: managers,
-    responsibleFor: responsibleFor
-  }
+  const newEmployee = {};
+  newEmployee[id] = id;
+  newEmployee[firstName] = firstName;
+  newEmployee[lastName] = lastName;
+  newEmployee[managers] = managers;
+  newEmployee[responsibleFor] = responsibleFor;
+
+  
+  // const newEmployee = {
+  //   id: id,
+  //   firstName: firstName,
+  //   lastName: lastName,
+  //   managers: managers,
+  //   responsibleFor: responsibleFor
+  // }
   data.employees.push(newEmployee);
 }
 
