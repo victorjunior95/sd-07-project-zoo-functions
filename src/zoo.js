@@ -14,7 +14,16 @@ const data = require('./data');
 function animalsByIds(ids) {
   // seu código aqui
   // aqui
+  const output = [];
+  if (ids === null || ids.species === null) {
+    return ([]);
+  }
+  ids.forEach((element) => {
+    output.push(element.species);
+  });
+  return (output);
 }
+
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
