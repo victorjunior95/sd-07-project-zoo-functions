@@ -61,11 +61,24 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  // Object.keys(data.hours).forEach(day => data.hours[day] =
+  // `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`);
+  // data.hours.Monday = 'CLOSED';
+  // if (dayName === undefined) {
+  //   return data.hours;
+  // }
+  //  return { [dayName]: data.hours[dayName] };
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const animalId = data.employees.filter(employee => employee.id === `${id}`)
+    .map(employee => employee.responsibleFor[0]);
+  const residents = data.animals.filter(animal => animal.id === animalId[0])
+    .map(animal => animal.residents);
+  const residentsAge = residents[0].map(resident => resident.age)
+    .sort(function (a, b) { return b - a; });
+  const older = residents[0].find(resident => resident.age === residentsAge[0]);
+  return Object.values(older);
 }
 
 function increasePrices(percentage) {
