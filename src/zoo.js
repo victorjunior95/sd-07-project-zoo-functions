@@ -115,37 +115,22 @@ function animalMap(options) {
   // seu código aqui
 }
 
-function scheduleAux() {
-  const obj = {};
-  Object.entries(data.hours).forEach((time) => {
-    if (time[0] === 'Monday') {
-      obj[time[0]] = 'CLOSED';
-    } else {
-      obj[time[0]] = `Open from ${time[1].open}am until ${
-        time[1].close - 12}pm`;
-    }
-  });
-  return obj;
-}
-
 function schedule(dayName) {
-  if (dayName === undefined) {
-    return scheduleAux();
-  }
-  const obj1 = {};
-  Object.entries(scheduleAux()).forEach((week) => {
-    if (week[0] === dayName) {
-      obj1[week[0]] = week[1];
+  const out = {};
+  Object.keys(data.hours).forEach(function (hour) {
+    if (data.hours[hour].open === data.hours[hour].close) {
+      out[hour] = 'CLOSED';
+    } else {
+      out[hour] = `Open from ${data.hours[hour].open}am until ${data.hours[hour].close - 12}pm`;
     }
   });
-  return obj1;
+  if (dayName !== undefined) {
+    return { [dayName]: out[dayName] };
+  }
+  return out;
 }
-// consultei o repositório de Kramer para a refatoração desta função
-// ( codeclimate não aceitou minha solução)
-// Eu não havia me atentado ao fato de que deveria relacionar
-//  a função á propriedade hours de data.js.
-// https://github.com/tryber/sd-07-project-zoo-functions/blob/544898ad4e7bca13bb04afc1dfabe4c7ee1da3ca/src/zoo.js
-
+// Consultei o repositorio de Elano para refatoraçao desta funçao.
+// https://github.com/tryber/sd-07-project-zoo-functions/blob/cf21a6980049d60316081f5dca352d1e04a14fee/src/zoo.js
 function oldestFromFirstSpecies(id) {}
 
 function increasePrices(percentage) {
@@ -192,6 +177,8 @@ function employeeCoverage(idOrName) {
 
   return { [`${employeer.firstName} ${employeer.lastName}`]: responsible };
 }
+// consultei o repositorio de Elano para refatoraçao dest afunçao.
+// https://github.com/tryber/sd-07-project-zoo-functions/blob/cf21a6980049d60316081f5dca352d1e04a14fee/src/zoo.js
 
 module.exports = {
   entryCalculator,
