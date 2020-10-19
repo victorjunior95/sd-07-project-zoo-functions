@@ -176,7 +176,7 @@ const getAnimalName = (input) => {
   input.responsibleFor.forEach((currentID, index) => {
     input.responsibleFor[index] = animals.find(iterator => iterator.id === currentID).name;
   });
-  return iterator.responsibleFor;
+  return input.responsibleFor;
 };
 const getAnimalsForEmploy = (string, objReturn) => {
   const employSl = employees.find(cEmploy => cEmploy.id === string ||
