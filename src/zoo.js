@@ -9,10 +9,11 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals } = require('./data');
 const data = require('./data');
+const { animals } = data;
 const { employees } = data;
-
+const { prices } = data;
+const { hours } = data;
 
 /*
 
@@ -148,7 +149,6 @@ Retorna o preço total a ser cobrado dado o número de adultos, crianças e idos
 
 function entryCalculator(entrants = {}) {
   if (Object.keys(entrants).length === 0) return 0;
-  const { prices } = data;
   const keysOfEntrants = Object.keys(entrants);
   return keysOfEntrants.reduce((result, item) => {
     const valueByAge = entrants[item] * prices[item];
@@ -250,7 +250,6 @@ const withoutParameters = (hours) => {
 
 
 function schedule(dayName) {
-  const { hours } = data;
   if (dayName === undefined) return withoutParameters(hours);
 
   const expectedValue = Object.values(hours[dayName]);
@@ -274,11 +273,11 @@ e retorna um array com nome, sexo e idade do animal mais velho dessa espécie
 */
 
 const getSpecie = (id) => {
-  const employ = employees.find((objects) => objects.id === id);
-  const specie = animals.find((object) => object.id === employ.responsibleFor[0]);
+  const employ = employees.find(objects => objects.id === id);
+  const specie = animals.find(object => object.id === employ.responsibleFor[0]);
   const { residents } = specie;
   return residents;
-}
+};
 
 function oldestFromFirstSpecies(id) {
   const residents = getSpecie(id);
@@ -290,8 +289,27 @@ function oldestFromFirstSpecies(id) {
   return Object.values(expectedInfo);
 }
 
+/*
+
+12- Implemente a função increasePrices:
+
+Ao passar uma porcentagem, incrementa todos os preços, arrendondados em
+duas casas decimais
+
+*/
+
 function increasePrices(percentage) {
-  // seu código aqui
+  const arrOfPrices = Object.values(prices);
+  const arrOfType = Object.keys(prices)
+  const result = {};
+
+  arrOfPrices.forEach((currentPrice, index) => {
+    currentPrice += (currentPrice * percentage) / 100;
+    currentPrice = Math.round(currentPrice * 100) / 100;
+    result[arrOfType[index]] = currentPrice;
+  });
+
+  return result;
 }
 
 function employeeCoverage(idOrName) {
