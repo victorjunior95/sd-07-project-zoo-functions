@@ -108,7 +108,7 @@ function oldestFromFirstSpecies(id) {
   // console.log(extracting)
   return [extracting.name, extracting.sex, extracting.age];
 }
-console.log(oldestFromFirstSpecies('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
+// console.log(oldestFromFirstSpecies('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 function increasePrices(percentage) {
   // seu código aqui
