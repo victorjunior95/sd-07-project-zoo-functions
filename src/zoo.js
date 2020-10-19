@@ -55,11 +55,17 @@ function isManager(id) {
 }
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
-  for (const index of Object.keys(newEmployee)) {
-    if (newEmployee[index] === undefined) {
-      newEmployee[index] = [];
+  for (let index in newEmployee) {
+    if (newEmployee[index]===undefined) {
+      newEmployee[index]=[];
     }
   }
+ 
+  // for (const index of Object.keys(newEmployee)) {
+  //   if (newEmployee[index] === undefined) {
+  //     newEmployee[index] = [];
+  //   }
+  // }
   employees.push(newEmployee);
 }
 
