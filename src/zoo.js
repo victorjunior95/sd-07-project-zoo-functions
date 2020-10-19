@@ -37,9 +37,12 @@ function employeeByName(employeeName) {
         employee.lastName === employeeName));
 }
 
+// Adiciona um funcionário no fim da lista
+
 function createEmployee(personalInfo, associatedWith) {
-  // spread
-  // operador alternario
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return { id, firstName, lastName, managers, responsibleFor };
 }
 
 function isManager(id) {
@@ -75,9 +78,16 @@ function entryCalculator(entrants) {
   // seu código aqui
 }
 
+// Sem parâmetros, retorna animais categorizados por localização
+// Com a opção includeNames: true especificada, retorna nomes de animais
+// Com a opção sorted: true especificada, retorna nomes de animais ordenados
+// Com a opção sex: 'female' ou sex: 'male' especificada, retorna somente nomes de animais macho/fêmea
+// Com a opção sex: 'female' ou sex: 'male' especificada e a opção sort: true especificada, retorna somente nomes de animais macho/fêmea com os nomes dos animais ordenados
+// Só retorna informações ordenadas e com sexo se a opção includeNames: true for especificada
+
 function animalMap(options) {
-  // seu código aqui
-}
+  //
+  }
 
 function schedule(dayName) {
   // seu código aqui
