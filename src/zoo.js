@@ -83,19 +83,60 @@ function addEmployee(id1, firstName1, lastName1, managers1, responsibleFor1) {
 
 // const allAnimals = data.animals.map(animal => animal.name);
 // console.log(allAnimals);
-// const numberAnimals = data.animals.map(animal => animal.popularity);
+// const numberAnimals = data.animals.map(animal => animal.residents.length);
 // console.log(numberAnimals);
 // let objAnimals = {};
-// const object = allAnimals.reduce((animal, currentAnimal, index) => {animal, currentAnimal}, {});
 // console.log(object);
+// allAnimals.forEach((animal, index) => {
+//   objAnimals[animal] = numberAnimals[index];
+// });
+// console.log(objAnimals);
+
+// const mapAnimal = data.animals.map(animal => {
+//   if (animal.name === 'lions') return animal.residents.length;
+// });
+// console.log(mapAnimal);
+
+// console.log(data.animals.filter(animal => animal.name === 'lions')[0].residents.length);
+
+
 function animalCount(species) {
-  // if (species === null) {
-  //   const allAnimals = data.animals.map(animal => animal.name);
-  // }
+  const allAnimals = data.animals.map(animal => animal.name);
+  const numberAnimals = data.animals.map(animal => animal.residents.length);
+  const objAnimals = {};
+  if (species === undefined) {
+    allAnimals.forEach((animal, index) => {
+      objAnimals[animal] = numberAnimals[index];
+    });
+    return objAnimals;
+  }
+  const oneAnimal = data.animals.filter(animal => animal.name === species)[0].residents.length;
+  return oneAnimal;
 }
+// Retorna 0 se nenhum argumento for passado
+// Retorna 0 se um objeto vazio for passado
+// Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
+// let entrants = { 'Adult': 2, 'Child': 3, 'Senior': 1 };
+// let totalValue = 0;
+// const array = Object.entries(entrants);
+// console.log(array);
+// array.forEach((entry, index) => {
+//   if (entry[0] === 'Adult') totalValue += entry[1] * 49.99;
+//   if (entry[0] === 'Child') totalValue += entry[1] * 20.99;
+//   if (entry[0] === 'Senior') totalValue += entry[1] * 24.99;
+// });
+// console.log(totalValue);
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (entrants === undefined || entrants === {}) return 0;
+  let totalValue = 0;
+  const array = Object.entries(entrants);
+  array.forEach((entry, index) => {
+    if (entry[0] === 'Adult') totalValue += entry[1] * 49.99;
+    if (entry[0] === 'Child') totalValue += entry[1] * 20.99;
+    if (entry[0] === 'Senior') totalValue += entry[1] * 24.99;
+  });
+  return totalValue;
 }
 
 function animalMap(options) {
