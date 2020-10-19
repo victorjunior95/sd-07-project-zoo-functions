@@ -11,6 +11,8 @@ eslint no-unused-vars: [
 
 const { animals } = require('./data');
 const data = require('./data');
+const { employees } = data;
+
 
 /*
 
@@ -57,7 +59,6 @@ Quando provido o último nome do funcionário, retorna o objeto do funcionário
 */
 
 function employeeByName(employeeName) {
-  const { employees } = data;
   const [expectedObject = {}] = employees.filter(item => item
     .firstName === employeeName || item.lastName === employeeName);
   return expectedObject;
@@ -88,7 +89,6 @@ Testa se o id passado é de um gerente
 */
 
 function isManager(id) {
-  const { employees } = data;
   return employees.some(item => item.managers.includes(id));
 }
 
@@ -101,7 +101,6 @@ Adiciona um funcionário no fim da lista
 */
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  const { employees } = data;
   const newEmployee = {
     id,
     firstName,
@@ -265,8 +264,30 @@ function schedule(dayName) {
   return result;
 }
 
+/*
+
+11- Implemente a função oldestFromFirstSpecies:
+
+Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado pelo funcionário,
+e retorna um array com nome, sexo e idade do animal mais velho dessa espécie
+
+*/
+
+const getSpecie = (id) => {
+  const employ = employees.find((objects) => objects.id === id);
+  const specie = animals.find((object) => object.id === employ.responsibleFor[0]);
+  const { residents } = specie;
+  return residents;
+}
+
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const residents = getSpecie(id);
+
+  const expectedInfo = residents.reduce((result, object) => {
+    if (object.age > result.age) return object;
+    return result;
+  });
+  return Object.values(expectedInfo);
 }
 
 function increasePrices(percentage) {
