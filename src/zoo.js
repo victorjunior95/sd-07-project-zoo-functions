@@ -172,35 +172,36 @@ function increasePrices(percentage) {
   });
   return prices;
 }
-
-const getAnimalsForEmploy= (string, objReturn) => {
-  const employSl = employees.find(cEmploy => cEmploy.id === string ||
-    cEmploy.firstName === string || cEmploy.lastName === string ); 
-    employSl.responsibleFor.forEach((currentID, index) => {
-    employSl.responsibleFor[index] = animals.find(iterator => iterator.id === currentID).name;
-    });
-    const fullName = `${employSl.firstName} ${employSl.lastName}`;
-    objReturn[fullName] = employSl.responsibleFor;
-    return objReturn;
+const getAnimalName = (iterator) => {
+  iterator.responsibleFor.forEach((currentID, index) => {
+    iterator.responsibleFor[index] = animals.find(iterator => iterator.id === currentID).name;
+  });
+  return iterator.responsibleFor;
 }
+const getAnimalsForEmploy = (string, objReturn) => {
+  const employSl = employees.find(cEmploy => cEmploy.id === string ||
+    cEmploy.firstName === string || cEmploy.lastName === string );
+    getAnimalName(employSl);
+  const fullName = `${employSl.firstName} ${employSl.lastName}`;
+  objReturn[fullName] = employSl.responsibleFor;
+  return objReturn;
+};
 
 function employeeCoverage(idOrName) {
   // seu código aqui
   const getEmploy = {};
-  if(!idOrName) {
+  if (!idOrName) {
     employees.forEach((current) => {
-      current.responsibleFor.forEach((currentID, index) => {
-        current.responsibleFor[index] = animals.find(iterator => iterator.id === currentID).name;
-      });
+      getAnimalName(current);
       const fullName = `${current.firstName} ${current.lastName}`;
       getEmploy[fullName] = current.responsibleFor;
     });
   } else {
     getAnimalsForEmploy(idOrName, getEmploy);
-  } 
+  }
   return getEmploy;
 }
-//console.log(employeeCoverage('Azevado'));
+// console.log(employeeCoverage('Azevado'));
 
 module.exports = {
   entryCalculator,
