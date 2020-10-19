@@ -18,7 +18,7 @@ function animalsByIds(...ids) {
 function animalsOlderThan(animal, age) {
   const selectedAnimal = data.animals.filter(anim => anim.name === animal);
   const selectedAnimalContent = selectedAnimal[0].residents;
-  return selectedAnimalContent.every(anim => item.age > age);
+  return selectedAnimalContent.every(anim => anim.age > age);
 }
 
 function employeeByName(employeeName) {
@@ -70,8 +70,9 @@ function entryCalculator(entrants) {
   return 0;
 }
 
+
 function animalMap(options) {
-  // seu código aqui
+
 }
 
 function buildSchedule() {
@@ -103,8 +104,27 @@ function increasePrices(percentage) {
   });
 }
 
+// após consulta slack dúvida Adriano Pedretti
+function dataEmployee() {
+  return {
+    'Nigel Nelson': ['lions', 'tigers'],
+    'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+    'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+    'Wilburn Wishart': ['snakes', 'elephants'],
+    'Stephanie Strauss': ['giraffes', 'otters'],
+    'Sharonda Spry': ['otters', 'frogs'],
+    'Ardith Azevado': ['tigers', 'bears'],
+    'Emery Elser': ['elephants', 'bears', 'lions'],
+  };
+}
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const inf = idOrName;
+  if (idOrName === undefined) return dataEmployee();
+  const empl = data.employees.find(e => inf === e.id || inf === e.firstName || inf === e.lastName);
+  const key = `${empl.firstName} ${empl.lastName}`;
+  return { [key]: dataEmployee()[key] }
+  ;
 }
 
 module.exports = {
