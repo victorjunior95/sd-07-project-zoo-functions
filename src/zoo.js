@@ -38,7 +38,7 @@ function employeeByName(employeeName) {
     employ =>
       employ.firstName === employeeName || employ.lastName === employeeName,
   );
-  // find retorna o valor do primeiro elemento do array q satisfizer a função teste provida.
+// find retorna o valor do primeiro elemento do array q satisfizer a função teste provida.
 
   if (employInput !== undefined) {
     obj = employInput;
@@ -117,7 +117,7 @@ function animalMap(options) {
 
 function schedule(dayName) {
   const out = {};
-  Object.keys(data.hours).forEach(function (hour) {
+  Object.keys(data.hours).forEach(hour => {
     if (data.hours[hour].open === data.hours[hour].close) {
       out[hour] = 'CLOSED';
     } else {
