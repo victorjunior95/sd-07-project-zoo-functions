@@ -12,6 +12,7 @@ const data = require('./data');
 
 
 function animalsByIds(ids) {
+  const { animals } = data;
   return animals.filter((animal, index) => animal.id === ids[index]);
 }
 
@@ -42,6 +43,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
+  const { animals } = data;
   if (!species) {
     return animals
       .reduce((acc, current) => ({
