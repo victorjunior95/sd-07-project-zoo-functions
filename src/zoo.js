@@ -70,9 +70,21 @@ function entryCalculator(entrants) {
   return 0;
 }
 
+// source: https://dicasdejavascript.com.br/javascript-como-remover-valores-repetidos-de-um-array/
+
+function buildAnimalMap() {
+  let keys = data.animals.map(item => item.location);
+  keys = [...new Set(keys)];
+  const buildMap = keys.reduce((acc, key) => {
+    const animal = data.animals.filter(item => item.location === key);
+    acc[key] = animal.map(item => item.name);
+    return acc;
+  }, {});
+  return buildMap;
+}
 
 function animalMap(options) {
-
+  if (options === undefined) return buildAnimalMap();
 }
 
 function buildSchedule() {
