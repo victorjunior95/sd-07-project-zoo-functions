@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 
-function animalsByIds(ids) {
+function animalsByIds(...ids) {
   const { animals } = data;
   const arrayEmpty = [];
   if (ids !== undefined) {
@@ -29,11 +29,12 @@ function employeeByName(employeeName) {
   const employees = {};
   const objectEmpty = {};
   if (employeeName !== undefined) {
-    return employees.filter((employee, index) =>
+    return employees.find((employee, index) =>
       employee.firstName === employeeName || employee.lastName === employeeName)[0];
   }
   return objectEmpty;
 }
+
 function createEmployee(personalInfo, associatedWith) {
   return Object.assign(personalInfo, associatedWith);
 }
@@ -75,7 +76,23 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  let cronogramaLegivel = {
+    Friday: 'Open from 10am until 8pm',
+    Monday: 'CLOSED',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Thursday: 'Open from 10am until 8pm',
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+  };
+  if (dayName === undefined) {
+    return cronogramaLegivel;
+  }
+  if (dayName !== undefined) {
+    const Entrie = [[dayName, cronogramaLegivel[dayName]]];
+    cronogramaLegivel = Object.fromEntries(Entrie);
+  }
+  return cronogramaLegivel;
 }
 
 function oldestFromFirstSpecies(id) {
@@ -83,12 +100,31 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  //
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const result = Object.fromEntries(data.employees
+    .map(({ firstName, lastName, responsibleFor }) => (
+      [
+        `${firstName} ${lastName}`,
+        responsibleFor
+          .map(animalId => data.animals
+            .find(({ id }) => id === animalId).name),
+      ]
+    )));
+  if (idOrName) {
+    const employee = data.employees
+      .find(({ id, firstName, lastName }) =>
+        idOrName === id
+        || idOrName === firstName
+        || idOrName === lastName);
+
+    return { [`${employee.firstName} ${employee.lastName}`]: result[`${employee.firstName} ${employee.lastName}`] };
+  }
+  return result;
 }
+
 
 module.exports = {
   entryCalculator,
