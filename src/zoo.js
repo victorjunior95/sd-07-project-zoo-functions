@@ -24,7 +24,7 @@ function animalsByIds(...ids) {
   if (ids.length === 0) {
     return IdAnimal;
   }
-  for (const item = 0; item < ids.length; item + 1) {
+  for (let item = 0; item < ids.length; item + 1) {
     IdAnimal[item] = listaAnimal.find(elemento => elemento.id === ids[item]);
   }
   return IdAnimal;
