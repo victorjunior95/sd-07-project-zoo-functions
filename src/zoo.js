@@ -27,10 +27,11 @@ function animalsOlderThan(names, age) {
   const nomeEIdade = animals.filter(animal => animal.name === names);
 // Encontra os animais da especice desejada
   const ageAll = nomeEIdade[0].residents.every(animal => animal.age >= age);
-// testa se todos os animais da especie tem a idade minima especificada. 
+// Testa se todos os animais da especie tem a idade minima especificada.
   return ageAll;
 }
-// O método every() testa se todos os elementos do array passam pelo teste implementado pela função fornecida
+// O método every() testa se todos os elementos do array
+//  passam pelo teste implementado pela função fornecida
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/every
 // Consultei o repositorio de Raphael Caputo para criaçao desta funçao
 // https://github.com/tryber/sd-07-project-zoo-functions/blob/809e01e91992eaf1aacf99f4674596212278ebf1/src/zoo.js
@@ -120,7 +121,7 @@ function animalMap(options) {
 
 function schedule(dayName) {
   const out = {};
-  Object.keys(data.hours).forEach(hour => {
+  Object.keys(data.hours).forEach((hour) => {
     if (data.hours[hour].open === data.hours[hour].close) {
       out[hour] = 'CLOSED';
     } else {
@@ -136,16 +137,16 @@ function schedule(dayName) {
 // https://github.com/tryber/sd-07-project-zoo-functions/blob/cf21a6980049d60316081f5dca352d1e04a14fee/src/zoo.js
 function oldestFromFirstSpecies(id) {
   const speciesResponsable = employees.find(employee => employee.id === id).responsibleFor[0];
-//encontra pelo find o empregado, e seleciona a primeira especie ( .resposibleFor[0])
+// Encontra pelo find o empregado, e seleciona a primeira especie ( .resposibleFor[0])
   const animalsResidents = animals.find(animal => animal.id === speciesResponsable).residents
-// Encontra a especie com todos seus residentes 
+// Encontra a especie com todos seus residentes
   const oldAnimal = animalsResidents.sort(
     (animalAge, animalAge2) => animalAge2.age - animalAge.age,
   );
 // Organiza os residentes pela idade
   return [oldAnimal[0].name, oldAnimal[0].sex, oldAnimal[0].age];
 }
-// retorna os animal mais velho no formato desejado.
+// Retorna os animal mais velho no formato desejado.
 // Consultei o repositorio de Raphael Caputo para criaçao desta funçao.
 
 function increasePrices(percentage) {
