@@ -158,9 +158,9 @@ function increasePrices(percentage) {
 // https://github.com/tryber/sd-07-project-zoo-functions/blob/544898ad4e7bca13bb04afc1dfabe4c7ee1da3ca/src/zoo.js
 
 function employeeCoverage(idOrName) {
-if (idOrName === undefined) {
-    const out = {};
-    employees.forEach(
+  if (idOrName === undefined) {
+  const out = {};
+  employees.forEach(
       employeeSelected =>
         (out[
           `${employeeSelected.firstName} ${employeeSelected.lastName}`
@@ -168,15 +168,16 @@ if (idOrName === undefined) {
           isresponsible => animals.find(animal => animal.id === isresponsible).name,
         )),
     );
-    return out;
-  }
+  return out;
+}
 // Este if cria o objeto com todos os nomes de empregados e respectivos animais cuidados.
 // Com o forEach, adiciona as chaves do objeto ( nomes dos empregados)
 // Com o find, encontra-se pelo id do animal o seu nome (.name)
 // Com  = ...map , adiciona valores as chaves. Os valores que eram ids (.responsibleFor)
 // sao substituidos pelos nomes encontrados pelo find.
 
-// O método map() invoca a função callback passada por argumento para cada elemento do Array e devolve um novo Array como resultado.
+// O método map() invoca a função callback passada por argumento
+// para cada elemento do Array e devolve um novo Array como resultado.
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/map
   const employeer = employees.find(
     employeeSelected =>
@@ -184,6 +185,7 @@ if (idOrName === undefined) {
       employeeSelected.lastName === idOrName ||
       employeeSelected.id === idOrName,
   );
+// cria a variavel employeer com o valor de um empregado pelo 
   const responsible = employeer.responsibleFor.map(
     isresponsible => animals.find(animal => animal.id === isresponsible).name,
   );
