@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+
 const { animals } = data;
 const { employees } = data;
 const { prices } = data;
@@ -192,9 +193,9 @@ Se um único dia for passado, retorna somente este dia em um formato legível pa
 
 */
 
-const withoutParameters = hours => {
-  const expectedValues = Object.values(hours);
-  const exepectedKeys = Object.keys(hours);
+const withoutParameters = (days) => {
+  const expectedValues = Object.values(days);
+  const exepectedKeys = Object.keys(days);
 
   expectedValues.forEach(({ open, close }, index) => {
     expectedValues[index] = `Open from ${open}am until ${close - 12}pm`;
