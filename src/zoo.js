@@ -120,7 +120,7 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  const { Adult, Senior, Child} = prices;
+  // seu código aqui
 }
 
 function employeeCoverage(idOrName) {
