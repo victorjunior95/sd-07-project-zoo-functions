@@ -179,7 +179,7 @@ function entryCalculator(entrants = {}) {
 */
 
 function animalMap(options) {
-  
+
 }
 
 /*
@@ -192,7 +192,7 @@ Se um único dia for passado, retorna somente este dia em um formato legível pa
 
 */
 
-const withoutParameters = (hours) => {
+const withoutParameters = hours => {
   const expectedValues = Object.values(hours);
   const exepectedKeys = Object.keys(hours);
 
@@ -206,7 +206,6 @@ const withoutParameters = (hours) => {
     return result;
   }, {});
 };
-
 
 function schedule(dayName) {
   if (dayName === undefined) return withoutParameters(hours);
@@ -259,7 +258,7 @@ duas casas decimais
 
 function increasePrices(percentage) {
   const arrOfPrices = Object.values(prices);
-  const arrOfType = Object.keys(prices)
+  const arrOfType = Object.keys(prices);
 
   arrOfPrices.forEach((currentPrice, index) => {
     currentPrice += (currentPrice * percentage) / 100;
