@@ -148,9 +148,11 @@ function oldestFromFirstSpecies(id) {
   // seu código aqui
 
 }
+const expUp = 'e+';
+const expDown = 'e-'
 const roundDecimal = (number, decimals) => {
-  decimals = typeof decimals !== 'undefined' ? decimals : 2;
-  return +(Math.round(number + ('e+' + decimals)) + ('e-' + decimals));
+  decimals = typeof decimals !== 'undefined' ?  decimals : 2;
+  return +(Math.round(number + (expUp + decimals)) + (expDown + decimals));
 };
 
 function increasePrices(percentage) {
@@ -160,6 +162,8 @@ function increasePrices(percentage) {
   });
   return prices;
 }
+
+
 function employeeCoverage(idOrName) {
   // seu código aqui
 
