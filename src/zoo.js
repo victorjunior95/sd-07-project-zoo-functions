@@ -183,11 +183,11 @@ function animalMap(options) {
 
 function schedule(dayName) {
   const { hours } = data;
-  let result = hours;
-  // return Object.values(hours.Tuesday);
-  for (i in result) {
-    result[i] = `Open from ${Object.values(result[i])[0]}am until ${
-      Object.values(result[i])[1] - 12
+  let result = {};
+  
+  for (i in hours) {
+    result[i] = `Open from ${Object.values(hours[i])[0]}am until ${
+      Object.values(hours[i])[1] - 12
     }pm`;
 
     if (i === "Monday") {
@@ -202,11 +202,13 @@ function schedule(dayName) {
       }
     }
   }
-  // console.log(typeof result)
   return result;
 }
+// console.log(schedule());
+// console.log(schedule());
 // console.log(schedule('Tuesday'));
 // console.log(schedule('Tuesday'));
+// console.log(data.hours);
 
 function oldestFromFirstSpecies(id) {
   const { employees } = data;
