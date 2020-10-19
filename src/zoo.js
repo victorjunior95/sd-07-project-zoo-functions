@@ -70,12 +70,17 @@ function animalCount(species) {
   return animalsInZoo.residents.length;
 }
 
+function checkValue(entry) {
+  if (!entry) return 0;
+  return entry;
+}
+
 function entryCalculator(entrants) {
   if (entrants === undefined || entrants === {}) return 0;
   let sum = 0;
-  sum = ((data.prices.Adult * entrants.Adult) +
-    (data.prices.Child * entrants.Child) +
-    (data.prices.Senior * entrants.Senior));
+  sum = ((data.prices.Adult * checkValue(entrants.Adult)) +
+    (data.prices.Child * checkValue(entrants.Child)) +
+    (data.prices.Senior * checkValue(entrants.Senior)));
   return sum;
 }
 
@@ -83,8 +88,32 @@ function animalMap(options) {
   // seu código aqui
 }
 
+function printHours(day) {
+  return `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+}
+
 function schedule(dayName) {
-  // seu código aqui
+  const hour = {};
+  if (dayName === undefined) {
+    Object.entries(data.hours).map((days) => {
+      hour[days[0]] = printHours(days);
+      if (days[1].open === 0) {
+        hour[days[0]] = 'CLOSED';
+      }
+      return 0;
+    });
+    return hour;
+  }
+  Object.entries(data.hours).map((day) => {
+    if (day[0] === dayName && day[1].open !== 0) {
+      hour[day[0]] = printHours(day);
+    }
+    if (day[0] === dayName && day[1].open === 0) {
+      hour[day[0]] = 'CLOSED';
+    }
+    return 0;
+  });
+  return hour;
 }
 
 function oldestFromFirstSpecies(id) {
