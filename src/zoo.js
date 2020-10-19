@@ -63,7 +63,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   // newEmployee[firstName] = firstName;
   // newEmployee[lastName] = lastName;
   // newEmployee[managers] = managers;
-  // newEmployee[responsibleFor] = responsibleFor; 
+  // newEmployee[responsibleFor] = responsibleFor;
   // const newEmployee = {
   //   id: id,
   //   firstName: firstName,
