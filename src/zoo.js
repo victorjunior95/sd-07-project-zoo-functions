@@ -64,8 +64,6 @@ function animalCount(species = '') {
   return objectAnimal;
 }
 
-console.log(animalCount());
-
 function entryCalculator(...entrants) { // Rest Parameter
   let acc = 0;
   entrants.map((type) => {
@@ -142,20 +140,19 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  if (!idOrName) {
-    return {
-      'Nigel Nelson': ['lions', 'tigers'],
-      'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
-      'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
-      'Wilburn Wishart': ['snakes', 'elephants'],
-      'Stephanie Strauss': ['giraffes', 'otters'],
-      'Sharonda Spry': ['otters', 'frogs'],
-      'Ardith Azevado': ['tigers', 'bears'],
-      'Emery Elser': ['elephants', 'bears', 'lions'],
-    };
-  }
-
   const newObject = {};
+
+  if (!idOrName) {
+    employees.forEach(
+      employee =>
+        (newObject[
+          `${employee.firstName} ${employee.lastName}`
+        ] = employee.responsibleFor.map(
+          responsibleFor => animals.find(animal => animal.id === responsibleFor).name,
+        )),
+    );
+    return newObject;
+  }
 
   const completeName = employees.filter(x =>
     !(x.lastName !== idOrName) || !(x.id !== idOrName) || !(x.firstName !== idOrName))
