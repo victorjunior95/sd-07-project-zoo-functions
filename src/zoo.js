@@ -54,10 +54,10 @@ function isManager(id) {
   return retorno;
 }
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  if (managers===undefined){
+  if (managers === undefined) {
     managers = [];
   }
-  if(responsibleFor===undefined){
+  if (responsibleFor === undefined) {
     responsibleFor = [];
   }
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
