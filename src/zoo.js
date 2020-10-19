@@ -178,49 +178,8 @@ function entryCalculator(entrants = {}) {
 
 */
 
-// const getNames = () => {
-//   return animals.reduce((result, item) => {
-//     result[item.location] = animals.reduce((valueResult, position) => {
-//       if (item.location === position.location) valueResult.push(position.name);
-//       return valueResult;
-//     }, []);
-//     return result;
-//   }, {});
-// }
-
-// const includesTrue = () => {
-//   const names = getNames();
-//   const lions = animals.reduce((result, item) => {
-//     const { residents } = animals;
-//     if(item.name === 'lions') residents.forEach((position) => result.push(position.name));
-//     return result;
-//   }, []);
-  // const { NE, NW, SE, SW } = names
-  // const { residents } = animals;
-  // console.log(residents.);
-  // console.log(NE);
-  // console.log(NW);
-  // console.log(SE);
-  // console.log(SW);
-  // const expectedResult = animals.reduce((result, item) => {
-  //   result[item.location] = animals.reduce((valueResult, position) => {
-  //     if (item.location === position.location) valueResult.push(position.name);
-  //   }, []);
-  //   return result;
-  // }, {});
-  // console.log(expectedResult);
-// }
-
-// const haveOptions = (options) => {
-//   if (options.includeNames) includesTrue();
-//   if (options.sorted) sortedTrue();
-//   if (options.sex === 'female') sexFemale();
-//   if (options.sex === 'male') sexMale();
-// }
-
 function animalMap(options) {
-  // if (options === undefined) return getNames();
-  // return haveOptions(options);
+  
 }
 
 /*
@@ -301,15 +260,12 @@ duas casas decimais
 function increasePrices(percentage) {
   const arrOfPrices = Object.values(prices);
   const arrOfType = Object.keys(prices)
-  const result = {};
 
   arrOfPrices.forEach((currentPrice, index) => {
     currentPrice += (currentPrice * percentage) / 100;
     currentPrice = Math.round(currentPrice * 100) / 100;
-    result[arrOfType[index]] = currentPrice;
+    prices[arrOfType[index]] = currentPrice;
   });
-
-  return result;
 }
 
 function employeeCoverage(idOrName) {
