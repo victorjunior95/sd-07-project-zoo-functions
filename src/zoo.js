@@ -151,8 +151,34 @@ function animalMap(options) {
 //   'Sunday': 'Open from 8am until 8pm',
 //   'Monday': 'CLOSED'
 // };
+
+// const days = Object.entries(data.hours);
+// console.log(days);
+// const objDays = {};
+// days.forEach((day) => {
+//   if (day[0] === 'Monday') objDays[day[0]] = 'CLOSED';
+//   else objDays[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+// });
+// console.log(objDays);
+// const oneDay = days.filter(day => day[0] === 'Tuesday')[0];
+// const oneDayObj = {};
+// oneDayObj[oneDay[0]] = `Open from ${oneDay[1].open}am until ${oneDay[1].close - 12}pm`;
+// console.log(oneDayObj);
+// console.log({'Tuesday': objDays.Tuesday});
+// console.log(Object.entries(objDays).filter(day => day[0] ==='Monday')[0]);
+
 function schedule(dayName) {
-  // seu código aqui
+  const days = Object.entries(data.hours);
+  const objDays = {};
+  days.forEach((day) => {
+    if (day[0] === 'Monday') objDays[day[0]] = 'CLOSED';
+    else objDays[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+  });
+  if (dayName === undefined) return objDays;
+  const objOneDay = {};
+  const array = Object.entries(objDays).filter(day => day[0] === dayName)[0];
+  objOneDay[array[0]] = array[1];
+  return objOneDay;
 }
 
 function oldestFromFirstSpecies(id) {
