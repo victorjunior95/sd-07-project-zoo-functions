@@ -59,6 +59,8 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   employees.push(newEmployee);
 }
 
+// Funcao animalCount:
+// Para implementar esta funcao, consultei o repositorio do colega Pedro Marques.
 function animalCount(species) {
   let result = {};
   animals.forEach(({ name, residents }) => {
@@ -73,7 +75,12 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (entrants === undefined || entrants === {}) {
+    return 0;
+  } else {
+    const total = (Senior * 24.99) + (Adult * 49.99) + (Child * 20.99);
+    return total;
+  }
 }
 
 function animalMap(options) {
