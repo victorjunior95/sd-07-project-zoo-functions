@@ -42,37 +42,27 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const employees = {};
-  return employees.some(employee => employee.managers.includes(id));
 }
+
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  const employees = {};
-  const addNewEmployee = { id, firstName, lastName, managers, responsibleFor };
-  return employees.push(addNewEmployee);
-}
 
+}
 function animalCount(species) {
-  const { animals } = data;
-  if (!species) {
-    return animals
-      .reduce((acc, current) => ({
-        acc,
-        [current.name]: current.residents.length,
-      }), {});
-  }
-  return animals.find(animal => animal.name === species).residents.length;
 }
 
-function entryCalculator(entrants = 0) {
+
+function entryCalculator(entrants) {
   const prices = {};
-  const {
-    Adult = 0, Child = 0, Senior = 0,
-  } = entrants;
-  const [adultPrice, seniorPrice, childPrice] = Object.values(prices);
-  const sumOfPrices = (Adult * adultPrice) + (Senior * seniorPrice) + (Child * childPrice);
-  return sumOfPrices;
+  const returnZero = 0;
+
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return returnZero;
+  }
+
+  return Object.entries(entrants).reduce((acc, curr) => acc + (prices[curr[0]] * curr[1]), 0);
 }
+
 function animalMap(options) {
   // seu código aqui
 }
