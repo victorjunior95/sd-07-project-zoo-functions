@@ -8,44 +8,51 @@ eslint no-unused-vars: [
   }
 ]
 */
-
-const data = require('./data');
-
+const { animals, employees, prices, hours, } = require('./data');
 function animalsByIds(ids) {
-  /*const animals
-  return ids.map(id => animals.find(animal => animal.id === id))
-  */
+  return animals.filter(animal => ids.includes(animal.id));
 }
 
 function animalsOlderThan(animal, age) {
-  return animals.find(({ name }) => name === animal).residents.every(name => name. age > age)
+  return animals.find(animalOfZoo => animal === animalOfZoo.name).residents.every(animalOfZoo => animalOfZoo.age > age);
 }
-
 function employeeByName(employeeName) {
-  const employee;
-  if(employeeByName ===  undefined)
-  return {};
-  return employee.find(name => name.firstName === employeeName || name.lastName === employeeName)
+  if (!employeeName) return {};
+  return employees.find(employee => employee.firstName === employeeName || employee.lastName === employeeName);
 }
-
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return Object.assign(personalInfo, associatedWith);
 }
 
 function isManager(id) {
-  // seu código aqui
+  return employees.some(employee => employee.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  const addNewEmployee = { id, firstName, lastName, managers,responsibleFor, };
+  return employees.push(addNewEmployee);
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (!species) {
+    return animals
+      .reduce((acc, current) => ({
+        acc,
+        [current.name]: current.residents.length,
+      }), {});
+  }
+  return animals.find(animal => animal.name === species).residents.length;
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(entrants = 0) {
+  const {
+    Adult = 0, Child = 0, Senior = 0,
+  } = entrants;
+  const [adultPrice, seniorPrice, childPrice] = Object.values(prices);
+  const sumOfPrices = (Adult * adultPrice) + (Senior * seniorPrice) + (Child * childPrice);
+  return sumOfPrices;
+}
+
 }
 
 function animalMap(options) {
