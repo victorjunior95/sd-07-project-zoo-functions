@@ -38,19 +38,37 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  // spread
+  // operador alternario
 }
 
 function isManager(id) {
   return employees.some(employee => employee.managers.some(manager => manager === id));
 }
 
+// Adiciona um funcionário no fim da lista
+
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  const add = {
+    id,
+    firstName,
+    lastName,
+    managers: managers || [],
+    responsibleFor: responsibleFor || [],
+  };
+  employees.push(add);
 }
 
+// Sem parâmetros, retorna animais e suas quantidades
+// Com o nome de uma espécie de animal, retorna somente a quantidade
+
 function animalCount(species) {
-  // seu código aqui
+  if (species === undefined) {
+    const noInput = {};
+    animals.forEach(animal => (noInput[animal.name] = animal.residents.length));
+    return noInput;
+  }
+  return animals.find(animal => animal.name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
