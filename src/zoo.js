@@ -33,7 +33,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return employees.includes(employeId => employeId.managers  === id);
+  return employees.includes(employeId => employeId.managers === id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
