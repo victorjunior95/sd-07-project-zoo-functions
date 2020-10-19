@@ -26,6 +26,9 @@ Ao receber mais de um id, retorna os animais que têm um desses ids*/
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
+  const filteredAnimalByName = animals.filter(currentAnimal => currentAnimal.name === animal);
+
+  return filteredAnimalByName[0].residents.every(resident => resident.age > age);
 }
 
 function employeeByName(employeeName) {
