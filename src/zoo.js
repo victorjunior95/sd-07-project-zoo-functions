@@ -18,14 +18,17 @@ function animalsByIds(...ids) {
     return arrayAnimal;
   }
 
-  const babado = ids.map(animal =>
+  const animals = ids.map(animal =>
     data.animals.find(element => element.id === animal));
 
-  return babado;
+  return animals;
 }
-
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const specie = data.animals.find(animals => animals.name === animal);
+
+  const lifes = specie.residents.every(testAge => testAge.age >= age);
+
+  return lifes;
 }
 
 function employeeByName(employeeName) {
