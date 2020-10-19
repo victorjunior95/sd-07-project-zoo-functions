@@ -60,7 +60,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
       newEmployee[index] = [];
     }
   }
-  employees.push(newEmployee); 
+employees.push(newEmployee); 
 }
 
 function animalCount(species) {
