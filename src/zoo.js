@@ -153,14 +153,13 @@ const dayNameExist = (dayName, result) => {
     }
   }
   return result;
-}
+};
 
 function schedule(dayName) {
   const { hours } = data;
-  let result = {};
+  const result = {};
   for (let i in hours) {
-    result[i] = `Open from ${Object.values(hours[i])[0]}am until ${
-      Object.values(hours[i])[1] - 12}pm`;
+    result[i] = `Open from ${Object.values(hours[i])[0]}am until ${Object.values(hours[i])[1] - 12}pm`;
     if (i === 'Monday') {
       result[i] = 'CLOSED';
     }
@@ -211,7 +210,7 @@ const arraysId = (index) => {
 
   const result = [];
 
-  const arrayId = employees.map((employe) => employe.responsibleFor);
+  const arrayId = employees.map(employe => employe.responsibleFor);
 
   arrayId[index].forEach((id) => {
     result.push(animals.filter(animal => animal.id === id)[0].name);
@@ -221,40 +220,52 @@ const arraysId = (index) => {
 };
 // console.log(arraysId())
 
+const firstAndLastName = (idOrName, result) => {
+  let name2;
+  for (let i in result) {
+    // console.log(i);
+    name2 = i.split(' ');
+    // console.log(name2);
+    name2.forEach((names) => {
+      // console.log(name);
+      if (names === idOrName) {
+        result = { [i]: result[i] };
+      }
+    });
+  }
+  return result;
+};
+
+const idOrNameExist = (idOrName, result) => {
+  const { employees } = data;
+  let name;
+
+  if (employees.find(employe => employe.id === idOrName)) {
+    name = `${employees.find(employe => employe.id === idOrName).firstName
+      } ${employees.find(employe => employe.id === idOrName).lastName}`;
+
+    for (let i in result) {
+      if (i === name) {
+        result = { [i]: result[i] };
+      }
+    }
+  }
+
+  result = firstAndLastName(idOrName, result);
+  return result;
+}
+
 function employeeCoverage(idOrName) {
   const { employees } = data;
 
   let result = {};
-  let name;
-  let name2;
 
   employees.forEach((employe, index) => {
     result[`${employe.firstName} ${employe.lastName}`] = arraysId(index);
   });
 
   if (idOrName !== undefined) {
-    if (employees.find(employe => employe.id === idOrName)) {
-      name = `${employees.find(employe => employe.id === idOrName).firstName
-      } ${employees.find(employe => employe.id === idOrName).lastName}`;
-
-      for (let i in result) {
-        if (i === name) {
-          result = { [i]: result[i] };
-        }
-      }
-    }
-
-    for (let i in result) {
-      // console.log(i);
-      name2 = i.split(' ');
-      // console.log(name2);
-      name2.forEach((names) => {
-        // console.log(name);
-        if (names === idOrName) {
-          result = { [i]: result[i] };
-        }
-      });
-    }
+    return idOrNameExist(idOrName, result);
   }
   return result;
 }
