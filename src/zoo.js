@@ -149,14 +149,14 @@ function oldestFromFirstSpecies(id) {
 
 }
 const roundDecimal = (number, decimals) => {
-  decimals = typeof decimals !== 'undefined' ?  decimals : 2;
+  decimals = typeof decimals !== 'undefined' ? decimals : 2;
   return +(Math.round(number + ('e+' + decimals)) + ('e-' + decimals));
 };
 
 function increasePrices(percentage) {
   // seu código aqui
   Object.keys(prices).forEach((current) => {
-   prices[current] = roundDecimal((prices[current] * (percentage/100)) + prices[current], 2);
+    prices[current] = roundDecimal((prices[current] * (percentage / 100)) + prices[current], 2);
   });
   return prices;
 }
