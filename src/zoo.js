@@ -120,11 +120,10 @@ function animalMap(options = {}) {
   return allAnimals;
 }
 const format = (hour) => {
-  if(hour > 12) {
-   return `${hour - 12}pm`
-  } else {
-    return  `${hour}am`
-  }  
+  if (hour > 12) {
+    return `${hour - 12}pm`;
+  } 
+  return `${hour}am`;
 };
 const msgDay = (iterator, obj) => {
   const mensage = data.hours[iterator].open === 0 ? 'CLOSED'
