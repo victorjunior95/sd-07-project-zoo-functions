@@ -56,21 +56,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species = '') {
+  const objectAnimal = {};
   if (species !== '') {
     return animals.find(animal => animal.name === species).residents.length;
   }
-  return {
-    lions: 4,
-    tigers: 2,
-    bears: 3,
-    penguins: 4,
-    otters: 4,
-    frogs: 2,
-    snakes: 2,
-    elephants: 4,
-    giraffes: 6,
-  };
+  animals.forEach(animal => (objectAnimal[animal.name] = animal.residents.length));
+  return objectAnimal;
 }
+
+console.log(animalCount());
 
 function entryCalculator(...entrants) { // Rest Parameter
   let acc = 0;
@@ -86,8 +80,8 @@ function entryCalculator(...entrants) { // Rest Parameter
   });
   return acc;
 }
-const obj = { sex: 'female' };
 
+//  Lógica "If e Else" extraída de: https://github.com/tryber/sd-07-project-zoo-functions/pull/126/commits/cf21a6980049d60316081f5dca352d1e04a14fee
 function animalMap(options) {
   const animalsLocation = { NE: [], NW: [], SE: [], SW: [] };
   if (options === undefined || options.includeNames === undefined) {
@@ -114,8 +108,6 @@ function animalMap(options) {
   }
   return animalsLocation;
 }
-
-console.log(animalMap(obj));
 
 function schedule(dayName) {
   const newObject = {};
