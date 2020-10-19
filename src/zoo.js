@@ -146,14 +146,23 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+
 }
+const roundDecimal = (number, decimals) => {
+  decimals = typeof decimals !== 'undefined' ?  decimals : 2;
+  return +(Math.round(number + ('e+' + decimals)) + ('e-' + decimals));
+};
 
 function increasePrices(percentage) {
   // seu código aqui
+  Object.keys(prices).forEach((current) => {
+   prices[current] = roundDecimal((prices[current] * (percentage/100)) + prices[current], 2);
+  });
+  return prices;
 }
-
 function employeeCoverage(idOrName) {
   // seu código aqui
+
 }
 
 module.exports = {
