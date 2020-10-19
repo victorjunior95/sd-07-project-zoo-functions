@@ -15,7 +15,7 @@ function animalsByIds(ids) {
   // seu código aqui
   // aqui
   const output = [];
-  if (ids === null || ids.name === null) {
+  if (ids === null) {
     return ([]);
   }
   ids.forEach((element) => {
