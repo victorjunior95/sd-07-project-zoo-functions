@@ -10,15 +10,14 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const { animals } = data;
 
 function animalsByIds(...ids) {
-  const { animals } = data;
   return animals.filter((animal, index) => animal.id === ids[index]);
 }
 // console.log(animalsByIds())
 
 function animalsOlderThan(animal, age) {
-  const { animals } = data;
   const myAnimal = animals.find(animalName => animalName.name === animal);
   const compareResult = myAnimal.residents.every(animalGroup => animalGroup.age > age);
   return compareResult;
@@ -32,8 +31,7 @@ function employeeByName(employeeName) {
     object = employees.filter(
       objectEmployer =>
         objectEmployer.firstName === employeeName ||
-        objectEmployer.lastName === employeeName
-    )[0];
+        objectEmployer.lastName === employeeName)[0];
   }
   return object;
 }
@@ -68,9 +66,8 @@ function addEmployee(
 // console.log(data.employees.length);
 
 function animalCount(species) {
-  const { animals } = data;
-  let object = {};
-  animals.forEach((animal) => (object[animal.name] = animal.residents.length));
+  const object = {};
+  animals.forEach(animal => (object[animal.name] = animal.residents.length));
   return species === undefined ? object : object[species];
 }
 // console.log(animalCount('lions'));
@@ -86,13 +83,12 @@ function entryCalculator(entrants) {
 // console.log(entryCalculator({}));
 // console.log(entryCalculator({ 'Child': 1, 'Senior': 1 }));
 
-const { animals } = data;
 const namesResidentsLocation = (name, sex) => {
-  let array = [];
-  let arrayAll = [];
+  const array = [];
+  const arrayAll = [];
 
   animals
-    .find((animal) => animal.name === name)
+    .find(animal => animal.name === name)
     .residents.forEach((info) => {
       arrayAll.push(info.name);
       if (info.sex === sex) {
@@ -108,12 +104,12 @@ const namesResidentsLocation = (name, sex) => {
 // console.log(namesResidentsLocation('lions'));
 
 const nameAnimals = (region, sort = false, sex) => {
-  let array = [];
+  const array = [];
   let object;
 
   animals
-    .filter((animal) => animal.location === region)
-    .forEach((animal) => {
+    .filter(animal => animal.location === region)
+    .forEach(animal => {
       object = {};
       object[animal.name] = namesResidentsLocation(animal.name, sex);
       if (sort) {
@@ -128,23 +124,21 @@ const nameAnimals = (region, sort = false, sex) => {
 
 function animalMap(options) {
   const location = ['NE', 'NW', 'SE', 'SW'];
-  let object = {};
+  const object = {};
 
   location.forEach(
-    (local) =>
+    local =>
       (object[local] = animals
-        .filter((animal) => animal.location === local)
-        .map((objectAnimal) => objectAnimal.name))
-  );
+        .filter(animal => animal.location === local)
+        .map(objectAnimal => objectAnimal.name)));
 
   if (options !== undefined && options.includeNames !== undefined) {
     location.forEach(
-      (local) =>
-        (object[local] = nameAnimals(local, options.sorted, options.sex))
-    );
+      local =>
+        (object[local] = nameAnimals(local, options.sorted, options.sex)));
   }
   return object;
-}
+};
 // console.log(animalMap());
 // console.log(animalMap({ includeNames: true }).NE);
 // console.log(animalMap({ includeNames: true, sorted: true }).NE);
@@ -157,7 +151,6 @@ function schedule(dayName) {
   for (let i in hours) {
     result[i] = `Open from ${Object.values(hours[i])[0]}am until ${
       Object.values(hours[i])[1] - 12}pm`;
-
     if (i === 'Monday') {
       result[i] = `CLOSED`;
     }
@@ -180,7 +173,6 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   const { employees } = data;
-  const { animals } = data;
 
   let arrayIdAnimals;
   let arrayAnimal;
@@ -219,7 +211,6 @@ function increasePrices(percentage) {
 
 const arraysId = (index) => {
   const { employees } = data;
-  const { animals } = data;
 
   let arrayId;
   let result = [];
