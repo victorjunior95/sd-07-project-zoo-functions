@@ -87,6 +87,8 @@ function animalMap(options) {
   // seu código aqui
 }
 
+// Funcao schedule:
+// Para implementar esta funcao, consultei o repositorio do colega Ygor Fonseca.
 function schedule(dayName) {
   let readebleSchedule = {
     Tuesday: 'Open from 8am until 6pm',
@@ -108,8 +110,13 @@ function schedule(dayName) {
   return readebleSchedule;
 }
 
+// Funcao oldestFromFirstSpecies:
+// Para implementar esta funcao, consultei o repositorio do colega Pedro Marques.
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const employee = employees.find(({id: employeeId}) => employeeId === id);
+  const animal = animals.find(({id: animalId}) => animalId === employee.responsibleFor[0]);
+  animal.residents.sort((a, b) => b.age - a.age);
+  return Object.values(animal.residents[0]);
 }
 
 function increasePrices(percentage) {
