@@ -147,7 +147,7 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {
   // seu código aqui
   let getAnimal;
-  const getEmploy = employees.find(current => current.id === id );
+  const getEmploy = employees.find(current => current.id === id);
   animals.forEach((animal) => {
     if (animal.id === getEmploy.responsibleFor[0]) {
       const ages = animal.residents.map(resident => resident.age);
