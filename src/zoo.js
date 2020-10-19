@@ -158,7 +158,6 @@ function oldestFromFirstSpecies(id) {
 
   return [getAnimal.name, getAnimal.sex, getAnimal.age];
 }
-oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992');
 const expUp = 'e+';
 const expDown = 'e-';
 const roundDecimal = (number, decimals) => {
@@ -174,11 +173,34 @@ function increasePrices(percentage) {
   return prices;
 }
 
+const getAnimalsForEmploy= (string, objReturn) => {
+  const employSl = employees.find(cEmploy => cEmploy.id === string ||
+    cEmploy.firstName === string || cEmploy.lastName === string ); 
+    employSl.responsibleFor.forEach((currentID, index) => {
+    employSl.responsibleFor[index] = animals.find(iterator => iterator.id === currentID).name;
+    });
+    const fullName = `${employSl.firstName} ${employSl.lastName}`;
+    objReturn[fullName] = employSl.responsibleFor;
+    return objReturn;
+}
 
 function employeeCoverage(idOrName) {
   // seu código aqui
-
+  const getEmploy = {};
+  if(!idOrName) {
+    employees.forEach((current) => {
+      current.responsibleFor.forEach((currentID, index) => {
+        current.responsibleFor[index] = animals.find(iterator => iterator.id === currentID).name;
+      });
+      const fullName = `${current.firstName} ${current.lastName}`;
+      getEmploy[fullName] = current.responsibleFor;
+    });
+  } else {
+    getAnimalsForEmploy(idOrName, getEmploy);
+  } 
+  return getEmploy;
 }
+//console.log(employeeCoverage('Azevado'));
 
 module.exports = {
   entryCalculator,
