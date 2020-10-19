@@ -63,8 +63,43 @@ function entryCalculator(entrants) {
     acc + (entrants[current] * data.prices[current]), 0);
 }
 
-function animalMap(options) {
-  // seu código aqui
+const sortedAnimals = (options, animalsByLocation) => {
+  if (options.sex !== undefined && options.sorted) {
+    animals.forEach(({ location, name, residents }) =>
+      animalsByLocation[location].push({
+        [name]: residents
+        .filter(resident => resident.sex === options.sex)
+        .map(resident => resident.name).sort(),
+      }),
+    );
+  } else {
+    animals.forEach(({ location, name, residents }) =>
+    animalsByLocation[location].push({
+      [name]: residents.map(resident => resident.name).sort() }));
+  }
+};
+
+function animalMap(options = {}) {
+  const animalsByLocation = { NE: [], NW: [], SE: [], SW: [] };
+  if (options.includeNames !== true) {
+    animals.forEach(({ location, name }) => animalsByLocation[location].push(name));
+    return animalsByLocation;
+  }
+  if (options.sorted) {
+    sortedAnimals(options, animalsByLocation);
+  } else if (options.sex !== undefined) {
+    animals.forEach(({ location, name, residents }) =>
+        animalsByLocation[location].push({
+          [name]: residents
+          .filter(resident => resident.sex === options.sex)
+          .map(resident => resident.name),
+        }),
+      );
+  } else {
+    animals.forEach(({ location, name, residents }) =>
+      animalsByLocation[location].push({ [name]: residents.map(resident => resident.name) }));
+  }
+  return animalsByLocation;
 }
 
 function schedule(dayName) {
