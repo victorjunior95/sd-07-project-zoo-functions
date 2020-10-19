@@ -9,22 +9,22 @@ module.exports = {
         {
           name: 'Zena',
           sex: 'female',
-          age: 12
+          age: 12,
         },
         {
           name: 'Maxwell',
           sex: 'male',
-          age: 15
+          age: 15,
         },
         {
           name: 'Faustino',
           sex: 'male',
-          age: 7
+          age: 7,
         },
         {
           name: 'Dee',
           sex: 'female',
-          age: 14
+          age: 14,
         }
       ]
     },
@@ -37,12 +37,12 @@ module.exports = {
         {
           name: 'Shu',
           sex: 'female',
-          age: 19
+          age: 19,
         },
         {
           name: 'Esther',
           sex: 'female',
-          age: 17
+          age: 17,
         }
       ]
     },
@@ -55,17 +55,17 @@ module.exports = {
         {
           name: 'Hiram',
           sex: 'male',
-          age: 4
+          age: 4,
         },
         {
           name: 'Edwardo',
           sex: 'male',
-          age: 4
+          age: 4,
         },
         {
           name: 'Milan',
           sex: 'male',
-          age: 4
+          age: 4,
         },
       ]
     },
@@ -78,22 +78,22 @@ module.exports = {
         {
           name: 'Joe',
           sex: 'male',
-          age: 10
+          age: 10,
         },
         {
           name: 'Tad',
           sex: 'male',
-          age: 12
+          age: 12,
         },
         {
           name: 'Keri',
           sex: 'female',
-          age: 2
+          age: 2,
         },
         {
           name: 'Nicholas',
           sex: 'male',
-          age: 2
+          age: 2,
         },
       ]
     },
@@ -106,12 +106,12 @@ module.exports = {
         {
           name: 'Neville',
           sex: 'male',
-          age: 9
+          age: 9,
         },
         {
           name: 'Lloyd',
           sex: 'male',
-          age: 8
+          age: 8,
         },
         {
           name: 'Mercedes',
@@ -121,7 +121,7 @@ module.exports = {
         {
           name: 'Margherita',
           sex: 'female',
-          age: 10
+          age: 10,
         },
       ]
     },
@@ -134,12 +134,12 @@ module.exports = {
         {
           name: 'Cathey',
           sex: 'female',
-          age: 3
+          age: 3,
         },
         {
           name: 'Annice',
           sex: 'female',
-          age: 2
+          age: 2,
         }
       ]
     },
@@ -152,12 +152,12 @@ module.exports = {
         {
           name: 'Paulette',
           sex: 'female',
-          age: 5
+          age: 5,
         },
         {
           name: 'Bill',
           sex: 'male',
-          age: 6
+          age: 6,
         }
       ]
     },
@@ -170,22 +170,22 @@ module.exports = {
         {
           name: 'Ilana',
           sex: 'female',
-          age: 11
+          age: 11,
         },
         {
           name: 'Orval',
           sex: 'male',
-          age: 15
+          age: 15,
         },
         {
           name: 'Bea',
           sex: 'female',
-          age: 12
+          age: 12,
         },
         {
           name: 'Jefferson',
           sex: 'male',
-          age: 4
+          age: 4,
         },
       ]
     },
@@ -198,32 +198,32 @@ module.exports = {
         {
           name: 'Gracia',
           sex: 'female',
-          age: 11
+          age: 11,
         },
         {
           name: 'Antone',
           sex: 'male',
-          age: 9
+          age: 9,
         },
         {
           name: 'Vicky',
           sex: 'female',
-          age: 12
+          age: 12,
         },
         {
           name: 'Clay',
           sex: 'male',
-          age: 4
+          age: 4,
         },
         {
           name: 'Arron',
           sex: 'male',
-          age: 7
+          age: 7,
         },
         {
           name: 'Bernard',
           sex: 'male',
-          age: 6
+          age: 6,
         }
       ]
     }
@@ -311,11 +311,11 @@ module.exports = {
     'Friday': { open: 10, close: 20 },
     'Saturday': { open: 8, close: 22 },
     'Sunday': { open: 8, close: 20 },
-    'Monday': { open: 0, close: 0 }
+    'Monday': { open: 0, close: 0 },
   },
   prices: {
     'Adult': 49.99,
     'Senior': 24.99,
-    'Child': 20.99
+    'Child': 20.99,
   }
 };

@@ -52,9 +52,6 @@ function entryCalculator(entrants = 0) {
   const sumOfPrices = (Adult * adultPrice) + (Senior * seniorPrice) + (Child * childPrice);
   return sumOfPrices;
 }
-
-}
-
 function animalMap(options) {
   // seu código aqui
 }
