@@ -25,10 +25,15 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(names, age) {
   const nomeEIdade = animals.filter(animal => animal.name === names);
+// Encontra os animais da especice desejada
   const ageAll = nomeEIdade[0].residents.every(animal => animal.age >= age);
+// testa se todos os animais da especie tem a idade minima especificada. 
   return ageAll;
 }
-
+// O método every() testa se todos os elementos do array passam pelo teste implementado pela função fornecida
+// https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/every
+// Consultei o repositorio de Raphael Caputo para criaçao desta funçao
+// https://github.com/tryber/sd-07-project-zoo-functions/blob/809e01e91992eaf1aacf99f4674596212278ebf1/src/zoo.js
 function employeeByName(employeeName) {
   let obj = {};
 
