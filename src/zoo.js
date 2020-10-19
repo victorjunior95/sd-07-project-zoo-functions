@@ -96,8 +96,19 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  // Extract value of a property as array - Ref: https://bityli.com/ZuNyD
+  const employeeById = employees.filter(employee => employee.id === id);
+  const animalsUnderGuard = employeeById.map((speciesId, index) => speciesId.responsibleFor[index]);
+  // console.log(animalsUnderGuard);
+  const findSpecie = animals.filter(animal => animal.id.includes(animalsUnderGuard));
+  const animalsBySpecie = findSpecie.map(element => element.residents);
+  const oldest = animalsBySpecie.map(animal => animal.sort((a, b) => b.age - a.age)[0]);
+  // console.log(oldest);
+  const extracting = oldest.reduce((acc, obj) => [Object.values(obj)]);
+  // console.log(extracting)
+  return [extracting.name, extracting.sex, extracting.age];
 }
+console.log(oldestFromFirstSpecies('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 function increasePrices(percentage) {
   // seu código aqui
