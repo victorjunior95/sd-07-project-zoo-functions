@@ -179,23 +179,23 @@ function entryCalculator(entrants = {}) {
 
 */
 
-const getNames = () => {
-  return animals.reduce((result, item) => {
-    result[item.location] = animals.reduce((valueResult, position) => {
-      if (item.location === position.location) valueResult.push(position.name);
-      return valueResult;
-    }, []);
-    return result;
-  }, {});
-}
+// const getNames = () => {
+//   return animals.reduce((result, item) => {
+//     result[item.location] = animals.reduce((valueResult, position) => {
+//       if (item.location === position.location) valueResult.push(position.name);
+//       return valueResult;
+//     }, []);
+//     return result;
+//   }, {});
+// }
 
-const includesTrue = () => {
-  const names = getNames();
-  const lions = animals.reduce((result, item) => {
-    const { residents } = animals;
-    if(item.name === 'lions') residents.forEach((position) => result.push(position.name));
-    return result;
-  }, []);
+// const includesTrue = () => {
+//   const names = getNames();
+//   const lions = animals.reduce((result, item) => {
+//     const { residents } = animals;
+//     if(item.name === 'lions') residents.forEach((position) => result.push(position.name));
+//     return result;
+//   }, []);
   // const { NE, NW, SE, SW } = names
   // const { residents } = animals;
   // console.log(residents.);
@@ -210,18 +210,18 @@ const includesTrue = () => {
   //   return result;
   // }, {});
   // console.log(expectedResult);
-}
+// }
 
-const haveOptions = (options) => {
-  if (options.includeNames) includesTrue();
-  if (options.sorted) sortedTrue();
-  if (options.sex === 'female') sexFemale();
-  if (options.sex === 'male') sexMale();
-}
+// const haveOptions = (options) => {
+//   if (options.includeNames) includesTrue();
+//   if (options.sorted) sortedTrue();
+//   if (options.sex === 'female') sexFemale();
+//   if (options.sex === 'male') sexMale();
+// }
 
-function animalMap(options) { 
-  if (options === undefined) return getNames();
-  return haveOptions(options);
+function animalMap(options) {
+  // if (options === undefined) return getNames();
+  // return haveOptions(options);
 }
 
 /*
@@ -237,9 +237,9 @@ Se um único dia for passado, retorna somente este dia em um formato legível pa
 const withoutParameters = (hours) => {
   const expectedValues = Object.values(hours);
   const exepectedKeys = Object.keys(hours);
-  
+
   expectedValues.forEach(({ open, close }, index) => {
-    expectedValues[index] = `Open from ${open}am until ${close - 12}pm`
+    expectedValues[index] = `Open from ${open}am until ${close - 12}pm`;
     if (open + close === 0) expectedValues[index] = 'CLOSED';
   });
 
@@ -247,7 +247,7 @@ const withoutParameters = (hours) => {
     result[keys] = expectedValues[index];
     return result;
   }, {});
-}
+};
 
 
 function schedule(dayName) {
