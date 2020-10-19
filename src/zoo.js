@@ -94,8 +94,19 @@ const increasePrices = (percentage) => {
   });
 };
 
+const nameAnimal = id => animals.find(indice => indice.id === id).name;
+
+const fullList = employees.reduce((acumulator, i) => {
+  acumulator[`${i.firstName} ${i.lastName}`] = i.responsibleFor.map(nameAnimal);
+  return acumulator;
+}, {});
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) return fullList;
+  const employee = employees.find(indice => indice.id === idOrName ||
+  indice.firstName === idOrName || indice.lastName === idOrName);
+  const result = Object.keys(fullList).find(indice => indice.includes(employee.firstName));
+  return { [result]: fullList[result] };
 }
 
 module.exports = {
