@@ -230,11 +230,20 @@ function oldestFromFirstSpecies(id) {
   return Object.values(result[0]);
 }
 // console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
-console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
+// console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const { prices } = data;
+  let result = prices;
+
+  for (i in result) {
+    result[i] += (result[i] * percentage) / 100;
+    result[i] = Math.round(result[i] * 100) / 100;
+  }
+
+  return result;
 }
+// console.log(increasePrices(50));
 
 function employeeCoverage(idOrName) {
   // seu código aqui
