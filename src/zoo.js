@@ -116,7 +116,7 @@ function entryCalculator(entrants) {
 
 function SpeciesByRegion() {
   const mapObj = {};
-  data.animals.forEach(currAnimal => {
+  data.animals.forEach((currAnimal) => {
     if (!mapObj[currAnimal.location]) {
       mapObj[currAnimal.location] = [currAnimal.name];
     } else {
@@ -133,7 +133,7 @@ function residentsFromSpecie(specie, sex) {
     namesObj[specie] = specieObj.residents.map(resident => resident.name);
   } else {
     namesObj[specie] = [];
-    specieObj.residents.forEach(resident => {
+    specieObj.residents.forEach((resident) => {
       if (resident.sex === sex) {
         namesObj[specie].push(resident.name);
       }
@@ -142,8 +142,8 @@ function residentsFromSpecie(specie, sex) {
   return namesObj;
 }
 
-function adjustMap (map, sorted, sex) {
-  Object.keys(map).forEach(region => {
+function adjustMap(map, sorted, sex) {
+  Object.keys(map).forEach((region) => {
     const regionSpecies = map[region];
     map[region] = [];
     for (let index = 0; index < regionSpecies.length; index += 1) {
@@ -154,7 +154,7 @@ function adjustMap (map, sorted, sex) {
 }
 
 function animalMap(options) {
- const map = SpeciesByRegion();
+  const map = SpeciesByRegion();
   if (options && options.includeNames) {
     adjustMap(map, options.sorted, options.sex);
   }
