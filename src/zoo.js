@@ -129,7 +129,19 @@ function schedule(dayName) {
 }
 // Consultei o repositorio de Elano para refatoraçao desta funçao.
 // https://github.com/tryber/sd-07-project-zoo-functions/blob/cf21a6980049d60316081f5dca352d1e04a14fee/src/zoo.js
-function oldestFromFirstSpecies(id) {}
+function oldestFromFirstSpecies(id) {
+  const speciesResponsable = employees.find(employee => employee.id === id).responsibleFor[0];
+//encontra pelo find o empregado, e seleciona a primeira especie ( .resposibleFor[0])
+  const animalsResidents = animals.find(animal => animal.id === speciesResponsable).residents
+// Encontra a especie com todos seus residentes 
+  const oldAnimal = animalsResidents.sort(
+    (animalAge, animalAge2) => animalAge2.age - animalAge.age,
+  );
+// Organiza os residentes pela idade
+  return [oldAnimal[0].name, oldAnimal[0].sex, oldAnimal[0].age];
+}
+// retorna os animal mais velho no formato desejado.
+// Consultei o repositorio de Raphael Caputo para criaçao desta funçao.
 
 function increasePrices(percentage) {
   const increase = 1 + (percentage / 100);
