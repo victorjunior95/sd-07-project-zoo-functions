@@ -86,10 +86,36 @@ function entryCalculator(...entrants) { // Rest Parameter
   });
   return acc;
 }
+const obj = { sex: 'female' };
 
 function animalMap(options) {
-  // seu código aqui
+  const animalsLocation = { NE: [], NW: [], SE: [], SW: [] };
+  if (options === undefined || options.includeNames === undefined) {
+    animals.forEach(animal => animalsLocation[animal.location].push(animal.name));
+    return animalsLocation;
+  }
+  if (options.sex !== undefined) {
+    animals.forEach(({ name, location, residents }) => animalsLocation[location]
+      .push({
+        [name]: residents.filter(resident => resident.sex === options.sex)
+          .map(resident => resident.name),
+      }),
+    );
+  } else {
+    animals.forEach(({ name, location, residents }) =>
+      animalsLocation[location]
+        .push({ [name]: residents.map(resident => resident.name) }),
+    );
+  } if (options.sorted) {
+    Object.keys(animalsLocation).forEach(animal =>
+      animalsLocation[animal].forEach(element => element[Object.keys(element)]
+        .sort()),
+    );
+  }
+  return animalsLocation;
 }
+
+console.log(animalMap(obj));
 
 function schedule(dayName) {
   const newObject = {};
@@ -154,9 +180,6 @@ function employeeCoverage(idOrName) {
 
   return newObject;
 }
-
-console.log(employeeCoverage('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
-
 
 module.exports = {
   entryCalculator,

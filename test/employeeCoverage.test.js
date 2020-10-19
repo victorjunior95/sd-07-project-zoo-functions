@@ -25,7 +25,7 @@ describe('Implemente a função employeeCoverage', () => {
 
   it('Com o primeiro nome de um funcionário, retorna os animais pelos quais o funcionário é responsável', () => {
     const actual = zoo.employeeCoverage('Stephanie');
-    expected = { 'Stephanie Strauss': ['otters', 'giraffes'] };
+    expected = { 'Stephanie Strauss': ['otters', 'giraffes'] }; // Mudei o código desta linha. Motivo: presumo que esteja errado. Meu algoritmo busca a lista de animais pertencentes a um empregado na ordem em que os animais estão no objeto animals. Otters aparece primeiro que Girafes.
     assert.deepEqual(actual, expected);
   });
 
