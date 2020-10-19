@@ -15,11 +15,11 @@ function animalsByIds(ids) {
   // seu código aqui
   // aqui
   const output = [];
-  if (ids === null || ids.species === null) {
+  if (ids === null || ids.name === null) {
     return ([]);
   }
   ids.forEach((element) => {
-    output.push(element.species);
+    output.push(element);
   });
   return (output);
 }
