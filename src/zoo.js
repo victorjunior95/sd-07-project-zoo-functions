@@ -120,7 +120,7 @@ function oldestFromFirstSpecies(id) {
   arrayWithData = OldestAnimal(firstAnimal);
   return arrayWithData;
 }
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
+// console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'));
 const twoDecimal = (value, percent) => Math.round(value * percent * 100) / 100;
 function increasePrices(percentage) {
   const { Adult, Senior, Child } = data.prices;
@@ -129,27 +129,30 @@ function increasePrices(percentage) {
   data.prices.Senior = parseFloat(twoDecimal(Senior, percent));
   data.prices.Child = parseFloat(twoDecimal(Child, percent));
 }
-const arrayresponsibleFor = (idAnimal) => {
-  const arraynamesAnimals = [];
-  for (let index = 0; index < animals.length; index += 1) {
-    if (idAnimal[index] === animals[index].id) {
-      arraynamesAnimals.push(animals[index].name);
-    }
-  }
-  return arraynamesAnimals;
-};
 function employeeCoverage(idOrName) {
-  const arrayList = {};
-  if (idOrName === undefined) {
-    employees.forEach(({ firstName, lastName, responsibleFor }) => {
-      arrayList[`${firstName} ${lastName}`] = arrayresponsibleFor(responsibleFor);
-    });
+  const result = Object.fromEntries(data.employees
+    .map(({ firstName, lastName, responsibleFor }) => (
+      [
+        `${firstName} ${lastName}`,
+        responsibleFor
+          .map(animalId => data.animals
+            .find(({ id }) => id === animalId).name),
+      ]
+    )));
+  if (idOrName) {
+    const employee = data.employees
+      .find(({ id, firstName, lastName }) =>
+        idOrName === id
+        || idOrName === firstName
+        || idOrName === lastName);
+
+    return { [`${employee.firstName} ${employee.lastName}`]: result[`${employee.firstName} ${employee.lastName}`] };
   }
-  return arrayList;
+  return result;
 }
-// console.log(arrayresponsibleFor(['0938aa23-f153-4937-9f88-4858b24d6bce',
-// 'e8481c1d-42ea-4610-8e11-1752cfc05a46']));
-// console.log(employeeCoverage());
+
+console.log(employeeCoverage());
+//  console.log(employeeCoverage());
 module.exports = {
   entryCalculator,
   schedule,
