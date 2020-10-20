@@ -29,9 +29,7 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  const animals = { ...personalInfo, ...associatedWith };
-  const result = animals;
-  return result;
+  return animals = { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
@@ -68,7 +66,7 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  Object.entries(prices).forEach(element => {
+  Object.entries(prices).forEach((element) => {
     prices[element[0]] = Math.ceil(element[1] * (percentage + 100)) / 100;
   });
   return prices;
