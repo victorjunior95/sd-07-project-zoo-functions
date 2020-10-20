@@ -148,10 +148,11 @@ function employeeCoverage(idOrName) {
     const employee = employees.find(employeeObject => employeeObject.id === idOrName ||
     employeeObject.firstName === idOrName ||
     employeeObject.lastName === idOrName);
-    // employeesTasks = [[`${employee.firstName} ${employee.lastName}`, getAnimalsById(employee.responsibleFor)],];
+    // employeesTasks = [[`${employee.firstName} ${employee.lastName}`, 
+    // getAnimalsById(employee.responsibleFor)],];
     employeesTasks = [
       [`${employee.firstName} ${employee.lastName}`, getAnimalsById(employee.responsibleFor)],
-    ];  
+    ];
     employeesTasks = Object.fromEntries(employeesTasks);
   }
   return employeesTasks;
