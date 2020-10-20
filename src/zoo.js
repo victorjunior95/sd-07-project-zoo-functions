@@ -113,6 +113,12 @@ function entryCalculator(entrants) {
   return resultado;
 }
 
+let location = {
+  NE: [],
+  NW: [],
+  SE: [],
+  SW: [],
+}
 function animalMap(options) {
   let resultado;
   if (!options) {
@@ -120,13 +126,7 @@ function animalMap(options) {
          return {...acc,
           [specie.location]: [...acc[specie.location], specie.name]
         };
-      },
-      {
-      NE: [],
-      NW: [],
-      SE: [],
-      SW: [],
-    });
+      }, location );
   }
   return resultado;
 }
