@@ -65,17 +65,17 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(species) {
   if (species === undefined) {
     const result = {};
-    const check = (iten, index) => {
+    const check = (item, index) => {
       const animals = data.animals;
-      result[animals[index].name] = iten.residents.length;
+      result[animals[index].name] = item.residents.length;
     };
     data.animals.forEach(check);
     return result;
   }
   let count;
-  const checkAnimals = (iten) => {
-    if (iten.name === species) {
-      count = iten.residents.length;
+  const checkAnimals = (item) => {
+    if (item.name === species) {
+      count = item.residents.length;
     }
   };
   data.animals.forEach(checkAnimals);
@@ -89,10 +89,10 @@ function entryCalculator(entrants) {
     return 0;
   }
   let sum = 0;
-  const checkEntrants = (iten) => {
+  const checkEntrants = (item) => {
     const checkPrices = (people) => {
-      if (people === iten) {
-        sum += entrants[iten] * data.prices[iten];
+      if (people === item) {
+        sum += entrants[item] * data.prices[item];
       }
     };
     Object.keys(data.prices).forEach(checkPrices);
@@ -100,21 +100,59 @@ function entryCalculator(entrants) {
   Object.keys(entrants).forEach(checkEntrants);
   return sum;
 }
-
+const animals = data.animals;
+const everyLocations = () => {
+  const locationsAnimals = {};
+  const every = (animal, index) => {
+    locationsAnimals[animals[index].location] = data.animals.filter(item =>
+      item.location === animal.location).map(item => item.name);
+  };
+  data.animals.forEach(every);
+  return locationsAnimals;
+};
+const everyLocationsEmpty = () => {
+  const locationEmpty = {};
+  const everyEmpty = (animal, index) => {
+    locationEmpty[animals[index].location] = [];
+  };
+  animals.forEach(everyEmpty);
+  return locationEmpty;
+};
+const locationAndNames = (sorted, sex) => {
+  const names = data.animals.reduce((acc, species) => {
+    let residents = species.residents.map(item => item.name);
+    if (sex !== '') residents = species.residents.filter(item => item.sex === sex).map(item => item.name);
+    if (sorted) residents.sort();
+    return {
+      ...acc,
+      [species.location]: [
+        ...acc[species.location],
+        { [species.name]: residents },
+      ],
+    };
+  }, everyLocationsEmpty());
+  return names;
+};
 function animalMap(options) {
-
+  if (!options) {
+    return everyLocations();
+  }
+  const { includeNames = false, sorted = false, sex = '' } = options;
+  if (includeNames) {
+    return locationAndNames(sorted, sex);
+  }
+  return everyLocations();
 }
-
 
 function schedule(dayName) {
   const day = {};
   const everyDays = {};
-  const dates = (iten, index) => {
+  const dates = (item, index) => {
     const datesZoo = Object.keys(data.hours);
-    if (iten.open === 0) {
+    if (item.open === 0) {
       everyDays[datesZoo[index]] = 'CLOSED';
     } else {
-      everyDays[datesZoo[index]] = `Open from ${iten.open}am until ${iten.close - 12}pm`;
+      everyDays[datesZoo[index]] = `Open from ${item.open}am until ${item.close - 12}pm`;
     }
   };
   const infoHours = Object.values(data.hours);
@@ -128,8 +166,8 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   const searchingEmployee = data.employees.find(employee => employee.id === id);
-  const searchingSpecies = data.animals.find(iten =>
-    iten.id === searchingEmployee.responsibleFor[0]);
+  const searchingSpecies = data.animals.find(item =>
+    item.id === searchingEmployee.responsibleFor[0]);
   let result = 0;
   const checkAge = (age) => {
     if (age.age > result) {
@@ -159,10 +197,10 @@ const complete = () => {
   const every = (employe, index) => {
     const fullName = `${employee[index].firstName} ${employee[index].lastName}`;
     listComplete[fullName] = [];
-    employe.responsibleFor.forEach((iten) => {
-      data.animals.forEach((iten1) => {
-        if (iten === iten1.id) {
-          listComplete[fullName].push(iten1.name);
+    employe.responsibleFor.forEach((item) => {
+      data.animals.forEach((item1) => {
+        if (item === item1.id) {
+          listComplete[fullName].push(item1.name);
         }
       });
     });
@@ -175,14 +213,13 @@ const oneEmployee = (idOrName) => {
   const one = {};
   const checkOneEmployee = (employe, index) => {
     const employeeName = employe.responsibleFor;
-    const animals = data.animals;
     const fullName = `${employee[index].firstName} ${employee[index].lastName}`;
     if (fullName.includes(idOrName) || employe.id === idOrName) {
       one[fullName] = [];
-      employeeName.forEach((iten1) => {
-        animals.forEach((iten2) => {
-          if (iten1 === iten2.id) {
-            one[fullName].push(iten2.name);
+      employeeName.forEach((item1) => {
+        animals.forEach((item2) => {
+          if (item1 === item2.id) {
+            one[fullName].push(item2.name);
           }
         });
       });
