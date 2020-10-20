@@ -84,6 +84,23 @@ function animalMapNoArgument(regions, list) {
   return list;
 }
 
+function ifFunction(regions, list, entry) {
+  if (entry.sorted === true) {
+    if (entry.sex === 'male' || entry.sex === 'female') {
+      list = animalMapBySexSorted(regions, list, entry);
+    } else {
+    list = animalMapSorted(regions, list);
+    }
+  }
+  else if (entry.sex === 'male' || entry.sex === 'female') {
+    list = animalMapBySex(regions, list, entry);
+  }
+  else {
+  list = animalMapArgument(regions, list);
+  }
+  return list;
+}
+
 function animalMapArgument(regions, list, entry) {
   regions.forEach((element) => {
     list[element] = (data.animals.filter(item => 
@@ -169,19 +186,7 @@ function animalMap(options) {
     list = animalMapNoArgument(regions, list);
   } 
   else if (options.includeNames === true) {
-    if (options.sorted === true) {
-      if (options.sex === 'male' || options.sex === 'female') {
-        list = animalMapBySexSorted(regions, list, options);
-      } else {
-      list = animalMapSorted(regions, list);
-      }
-    }
-    else if (options.sex === 'male' || options.sex === 'female') {
-      list = animalMapBySex(regions, list, options);
-    }
-    else {
-    list = animalMapArgument(regions, list);
-    }
+    list = ifFunction(regions, list, options);
   } else {
     list = animalMapNoArgument(regions, list);
   }
