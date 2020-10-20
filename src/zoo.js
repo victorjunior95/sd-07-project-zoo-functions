@@ -84,7 +84,7 @@ function entryCalculator(entrants) {
   // }
   for (let i = 0; i < Object.entries(entrants).length; i += 1) {
     if (prices[Object.keys(entrants)[i]]) {
-      value += Object.values(entrants)[i] * prices[Object.keys(entrants)[i]]
+      value += Object.values(entrants)[i] * prices[Object.keys(entrants)[i]];
     }
   }
   return value;
@@ -106,11 +106,10 @@ const namesResidentsLocation = (name, sex) => {
     });
   if (sex) {
     return array;
-  } else {
-    return arrayAll;
   }
+  return arrayAll;
 };
-// console.log(namesResidentsLocation('lions'));
+// console.log(namesResidentsLocation('lions', 'female'));
 
 const nameAnimals = (region, sort = false, sex) => {
   const array = [];
@@ -136,16 +135,16 @@ function animalMap(options) {
   const object = {};
 
   location.forEach(
-    (local) =>
+    local =>
       (object[local] = animals
         .filter(animal => animal.location === local)
-        .map(objectAnimal => objectAnimal.name))
+        .map(objectAnimal => objectAnimal.name)),
   );
 
   if (options !== undefined && options.includeNames !== undefined) {
     location.forEach(
-      (local) =>
-        (object[local] = nameAnimals(local, options.sorted, options.sex))
+      local =>
+        (object[local] = nameAnimals(local, options.sorted, options.sex)),
     );
   }
   return object;
@@ -168,7 +167,7 @@ const dayNameExist = (dayName, result) => {
 function schedule(dayName) {
   const { hours } = data;
   const result = {};
-  for (let i in hours) {
+  for (const i in hours) {
     result[i] = `Open from ${Object.values(hours[i])[0]}am until ${Object.values(hours[i])[1] - 12
       }pm`;
     if (i === 'Monday') {
@@ -189,7 +188,7 @@ function oldestFromFirstSpecies(id) {
     .responsibleFor;
 
   const arrayAnimal = animals.filter(
-    (animal) => animal.id === arrayIdAnimals[0]
+    animal => animal.id === arrayIdAnimals[0]
   );
 
   arrayAnimal[0].residents.forEach((info) => {
@@ -199,7 +198,7 @@ function oldestFromFirstSpecies(id) {
   });
 
   const result = arrayAnimal[0].residents.filter(
-    (info) => info.age === highestAge
+    info => info.age === highestAge,
   );
 
   return Object.values(result[0]);
@@ -211,7 +210,7 @@ function increasePrices(percentage) {
   const { prices } = data;
   const result = prices;
 
-  for (let i in result) {
+  for (const i in result) {
     result[i] += (result[i] * percentage) / 100;
     result[i] = Math.round(result[i] * 100) / 100;
   }
@@ -251,12 +250,10 @@ const firstAndLastName = (idOrName, result) => {
 
 const nameId = (idOrName, result) => {
   const { employees } = data;
-  let name;
+  const name = `${employees.find(employe => employe.id === idOrName)
+    .firstName} ${employees.find(employe => employe.id === idOrName).lastName}`;
 
-  name = `${employees.find(employe => employe.id === idOrName).firstName} ${employees.find(employe => employe.id === idOrName).lastName
-    }`;
-
-  for (let i in result) {
+  for (const i in result) {
     if (i === name) {
       result = { [i]: result[i] };
     }
@@ -277,7 +274,7 @@ const idOrNameExist = (idOrName, result) => {
 
 function employeeCoverage(idOrName) {
   const { employees } = data;
-  let result = {};
+  const result = {};
 
   employees.forEach((employe, index) => {
     result[`${employe.firstName} ${employe.lastName}`] = arraysId(index);
