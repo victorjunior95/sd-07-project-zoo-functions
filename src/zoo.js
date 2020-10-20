@@ -9,18 +9,30 @@ eslint no-unused-vars: [
 ]
 */
 
+
 const data = require('./data');
 // solução apresentada pelo Murillo Wolf - Instrutor Trybe
 function animalsByIds(...ids) {
   return data.animals.filter(animal => ids.includes(animal.id));
 }
+
+// parte do código abaixo foi implmantada usando como referencia: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/every
+
+const { animals } = require('../src/data');
+
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  return animals.find(item => item.name === animal)
+  .residents.every(item => item.age >= age);
 }
 
-function employeeByName(employeeName) {
-  // seu código aqui
+const { employees } = require('../src/data');
+
+function employeeByName(...employeeName) {
+  return employees.filter(emp => employeeName.includes(emp.firstName));
+
 }
+console.log(employeeByName('Nigel'))
+
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
