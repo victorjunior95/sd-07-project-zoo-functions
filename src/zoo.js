@@ -194,7 +194,7 @@ function oldestFromFirstSpecies(id) {
     .responsibleFor;
 
   const arrayAnimal = animals.filter(
-    animal => animal.id === arrayIdAnimals[0]
+    animal => animal.id === arrayIdAnimals[0],
   );
 
   arrayAnimal[0].residents.forEach((info) => {
@@ -214,13 +214,16 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   const { prices } = data;
-  const result = prices;
-
-  for (const i in result) {
-    result[i] += (result[i] * percentage) / 100;
-    result[i] = Math.round(result[i] * 100) / 100;
+  const result = {};
+  // console.log(Object.entries(prices))
+  for (let i = 0; i < Object.entries(prices).length; i += 1) {
+    result[Object.keys(prices)[i]] = Object.values(prices)[i] + (Object.values(prices)[i] * percentage / 100);
+    result[Object.keys(prices)[i]] = Math.round(result[Object.keys(prices)[i]] * 100) / 100;
   }
-
+  // for (const i in result) {
+  //   result[i] += (result[i] * percentage) / 100;
+  //   result[i] = Math.round(result[i] * 100) / 100;
+  // }
   return result;
 }
 // console.log(increasePrices(50));
@@ -240,32 +243,57 @@ const arraysId = (index) => {
 
 const firstAndLastName = (idOrName, result) => {
   let name2;
-  for (let i in result) {
-    // console.log(i);
-    name2 = i.split(' ');
-    // console.log(name2);
+  for (let i = 0; i < Object.entries(result).length; i += 1) {
+    name2 = Object.keys(result)[i].split(' ');
     name2.forEach((names) => {
       // console.log(name);
       if (names === idOrName) {
-        result = { [i]: result[i] };
+        result = { [Object.keys(result)[i]]: result[Object.keys(result)[i]] };
       }
     });
   }
   return result;
 };
+// console.log(firstAndLastName('Wilburn', {
+//     'Nigel Nelson': ['lions', 'tigers'],
+//     'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+//     'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+//     'Wilburn Wishart': ['snakes', 'elephants'],
+//     'Stephanie Strauss': ['giraffes', 'otters'],
+//     'Sharonda Spry': ['otters', 'frogs'],
+//     'Ardith Azevado': ['tigers', 'bears'],
+//     'Emery Elser': ['elephants', 'bears', 'lions']
+//   }))
 
 const nameId = (idOrName, result) => {
   const { employees } = data;
   const name = `${employees.find(employe => employe.id === idOrName)
     .firstName} ${employees.find(employe => employe.id === idOrName).lastName}`;
+  // console.log(name);
 
-  for (const i in result) {
-    if (i === name) {
-      result = { [i]: result[i] };
+  for (let i = 0; i < Object.entries(result).length; i += 1) {
+    if (Object.keys(result)[i] === name) {
+      result = { [name]: result[name] };
     }
   }
+  // for (const i in result) {
+  //   if (i === name) {
+  //     result = { [i]: result[i] };
+  //   }
+  // }
   return result;
 };
+// console.log(nameId('4b40a139-d4dc-4f09-822d-ec25e819a5ad', {
+//   'Nigel Nelson': ['lions', 'tigers'],
+//   'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+//   'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+//   'Wilburn Wishart': ['snakes', 'elephants'],
+//   'Stephanie Strauss': ['giraffes', 'otters'],
+//   'Sharonda Spry': ['otters', 'frogs'],
+//   'Ardith Azevado': ['tigers', 'bears'],
+//   'Emery Elser': ['elephants', 'bears', 'lions']
+// }))
+
 
 const idOrNameExist = (idOrName, result) => {
   const { employees } = data;
