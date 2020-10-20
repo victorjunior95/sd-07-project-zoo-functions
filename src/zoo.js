@@ -24,11 +24,11 @@ const employeeByName = (employeeName) => {
   return data.employees.find(({ firstName, lastName }) =>
     employeeName === firstName || employeeName === lastName);
   // Solução encontrada após tirar dúvida no slack.
-}
+};
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
+const createEmployee = (personalInfo, associatedWith) => {
+  return { ...personalInfo, ...associatedWith }
+};
 
 function isManager(id) {
   // seu código aqui
