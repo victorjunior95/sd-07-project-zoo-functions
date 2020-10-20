@@ -75,22 +75,23 @@ function entryCalculator(entrants) {
   return total;
 }
 
+function residentNamesFilteredBySex(sex, residents) {
+  return residents
+    .filter(resident => resident.sex === sex)
+    .map(resident => resident.name);
+}
+
 function animalMapWithSex(options, obj) {
   if (options.sorted) {
     data.animals.forEach(({ location, name, residents }) =>
       obj[location].push({
-        [name]: residents
-          .filter(resident => resident.sex === options.sex)
-          .map(resident => resident.name)
-          .sort(),
+        [name]: residentNamesFilteredBySex(options.sex, residents).sort(),
       }),
     );
   } else {
     data.animals.forEach(({ location, name, residents }) =>
       obj[location].push({
-        [name]: residents
-          .filter(resident => resident.sex === options.sex)
-          .map(resident => resident.name),
+        [name]: residentNamesFilteredBySex(options.sex, residents),
       }),
     );
   }
