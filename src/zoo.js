@@ -152,12 +152,6 @@ function employeeCoverage(idOrName) {
       [`${employee.firstName} ${employee.lastName}`, getAnimalsById(employee.responsibleFor)],
     ];
     employeesTasks = Object.fromEntries(employeesTasks);
-    /*
-    employeesTasks = [
-      [`${employee.firstName} ${employee.lastName}`, getAnimalsById(employee.responsibleFor)],
-    ];
-    employeesTasks = Object.fromEntries(employeesTasks);
-    */
   }
   return employeesTasks;
 }
