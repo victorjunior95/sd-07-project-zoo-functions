@@ -81,7 +81,6 @@ function entryCalculator(entrants) {
   const keys = Object.keys(entrants);
   let count = 0;
   keys.forEach((age) => {
-    console.log(entrants[age], '-', prices[age]);
     count += entrants[age] * prices[age];
   });
 
