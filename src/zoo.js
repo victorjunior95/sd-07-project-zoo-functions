@@ -29,9 +29,7 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  animals = { ...personalInfo, ...associatedWith };
-  const result = animals;
-  return result;
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
