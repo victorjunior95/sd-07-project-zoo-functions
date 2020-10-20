@@ -10,9 +10,14 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const { animals: [...id] } = data;
+// console.log(id)
 
-function animalsByIds(ids) {
-  
+function animalsByIds(...ids) {
+  if (ids === undefined) return []
+  return id.filter(animalId => ids.includes(animalId.id));
+  // return id.filter(animalId => animalId.id == ids) !! PK NAO FUNCIONA ASSIM? !!
+  // return id.filter(animalId => animalId.id.includes(ids)) !! PK NAO FUNCIONA ASSIM? !!
 }
 
 function animalsOlderThan(animal, age) {
