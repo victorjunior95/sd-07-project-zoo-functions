@@ -40,12 +40,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // if (!species){
-  //   //retorna animais e suas quantidades
-  //   return data.animals.reduce((animalAcc, animalCurrent) => 
-  //   Object.assign);
-  // }
-  // //Com o nome de uma espécie de animal, retorna somente a quantidade
+  
 }
 
 function entryCalculator(entrants) {
