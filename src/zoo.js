@@ -123,14 +123,17 @@ const location = {
 function animalMap(options) {
   let resultado;
   if (!options) {
-    resultado = animals.reduce((acc, specie) => {
-      return {
-        ...acc,
-        [specie.location]: [...acc[specie.location], specie.name],
-      };
-    }, location);
-  }
+    resultado = returnAnimals();
   return resultado;
+}
+
+function returnAnimals(){
+  return animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [...acc[specie.location], specie.name],
+    };
+  }, location);
 }
 
 function schedule(...dayName) {
