@@ -152,8 +152,9 @@ function animalMapBySexSorted(regions, list, entry) {
   array.forEach((element, index) => {
     element.forEach(item => {
       let object = {};
-      object[item] = (((((data.animals.filter(animal => animal.name === item)).map(names => 
-        names.residents))[0]).filter(key => key.sex === entry.sex)).map(final => final.name)).sort();
+      object[item] = (((((data.animals.filter(animal => animal.name === item)).map(names =>
+        names.residents))[0]).filter(key =>
+          key.sex === entry.sex)).map(final => final.name)).sort();
       list2[regions[index]].push(object);
     });
   });
@@ -162,25 +163,29 @@ function animalMapBySexSorted(regions, list, entry) {
 
 function animalMap(options) {
   const regions = ['NE', 'NW', 'SE', 'SW'];
-  const list = {};
+  let list = {};
 
   if (!options) {
-    return animalMapNoArgument(regions, list);
-  }
-
-  if (options.includeNames === true) {
+    list = animalMapNoArgument(regions, list);
+  } 
+  else if (options.includeNames === true) {
     if (options.sorted === true) {
       if (options.sex === 'male' || options.sex === 'female') {
-        return animalMapBySexSorted(regions, list, options);
+        list = animalMapBySexSorted(regions, list, options);
+      } else {
+      list = animalMapSorted(regions, list);
       }
-      return animalMapSorted(regions, list);
     }
-    if (options.sex === 'male' || options.sex === 'female') {
-      return animalMapBySex(regions, list, options);
+    else if (options.sex === 'male' || options.sex === 'female') {
+      list = animalMapBySex(regions, list, options);
     }
-    return animalMapArgument(regions, list);
+    else {
+    list = animalMapArgument(regions, list);
+    }
+  } else {
+    list = animalMapNoArgument(regions, list);
   }
-  return animalMapNoArgument(regions, list);
+  return list;
 }
 
 // console.log(animalMap({ includeNames: true, sex: 'female', sorted: true }));
