@@ -48,9 +48,9 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  if (!options) {
-    //categorizeAnimalsByLocation()
-  }
+  // if (!options) {
+  //   //categorizeAnimalsByLocation()
+  // }
 }
 
 // const objetoInicial = {
@@ -60,17 +60,17 @@ function animalMap(options) {
   // SW: [],
 // }
 
-function categorizeAnimalsByLocation() {
-  // return data.animals.reduce((acc, specie) => {
-  //   return {
-  //     ...acc,
-  //     [specie.location]: [
-  //       ...acc[specie.location],
-  //       specie.name
-  //     ]
-  //   };
-  // }, objetoInicial);
-}
+// function categorizeAnimalsByLocation() {
+//   // return data.animals.reduce((acc, specie) => {
+//   //   return {
+//   //     ...acc,
+//   //     [specie.location]: [
+//   //       ...acc[specie.location],
+//   //       specie.name
+//   //     ]
+//   //   };
+//   // }, objetoInicial);
+// }
 
 function schedule(dayName) {
   // seu código aqui
