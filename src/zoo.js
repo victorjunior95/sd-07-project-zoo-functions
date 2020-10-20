@@ -35,12 +35,17 @@ function isManager(id) {
   return data.employees.some(employee => employee.managers.some(manager => manager === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  return data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
-  // seu código aqui
+  // if (!species){
+  //   //retorna animais e suas quantidades
+  //   return data.animals.reduce((animalAcc, animalCurrent) => 
+  //   Object.assign);
+  // }
+  // //Com o nome de uma espécie de animal, retorna somente a quantidade
 }
 
 function entryCalculator(entrants) {
