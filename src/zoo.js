@@ -78,74 +78,49 @@ const animalList = location =>
   data.animals.filter(animal => animal.location === location).map(animal => animal.name);
 
 const animalListExtended = (location, sorted, sex) => {
-  sorted = (sorted !== undefined) ? sorted : false;
-  sex = (sex !== undefined) ? sex : '';
+  const filteredAnimals = animalList(location).map((specie) => {
+    let animalsNames = data.animals.find(animal => animal.name === specie).residents
+    .filter((resident) => {
+      const needFiltering = sex !== '';
+      return needFiltering ? resident.sex === sex : true;
+    })
+    .map(resident => resident.name);
 
-  let animalTypes = animalList(location);
-  let doido = {}
-  let animalNames = [];
+    if (sorted) animalsNames = animalsNames.sort();
 
-  animalTypes.forEach(specie =>  {
-    animalNames = data.animals.find(animal => animal.name === specie).residents.map(redident => redident.name);
-    if (sorted === true) {
-      animalNames = animalNames.sort()
-    }
-    Object.assign(doido, { [specie]: animalNames });
+    return { [specie]: animalsNames };
   });
-    // console.log(doido)
-    return doido
 
-
+  return filteredAnimals;
 };
 
-  // const options = {
-  //   includeNames: true,
-  //   sorted: false,
-  //   sex: 'male', //'female' or 'male'
-  // }
-
-function animalMap(...options) {
-  let animalLocations = []
-  data.animals.map((animal) => {
-    if (!animalLocations.some(element => element === animal.location)) {
-      animalLocations.push(animal.location)
+const getAnimalLocations = (locations) => {
+  data.animals.forEach((animal) => {
+    if (!locations.some(element => element === animal.location)) {
+      locations.push(animal.location);
     }
   });
+  return locations;
+};
 
-  let animalMapObject = {};
-// ------------------------
-  // console.log(`Op: ${options.length} e typeof ${typeof options}`)
+function animalMap(options = {}) {
+  const { includeNames = false, sorted = false, sex = '' } = options;
 
- if (options.length > 0) {
-  const [{includeNames, sorted, sex}] = options;
-  // console.log(`includeNames: ${includeNames}, sorted: ${sorted}, sex: ${sex}.`)
+  const animalLocations = getAnimalLocations([]);
+
+  const animalMapObject = {};
 
   if (includeNames) {
-    animalLocations.map(location => {
-      let teste = animalListExtended(location, sorted, sex);
-      // console.log(teste)
-      Object.assign(
-        animalMapObject,
-        { [location]: Object.assign(
-          {},
-            teste
-          )
-        }
-      )
-      }
-    );
+    animalLocations.forEach((location) => {
+      animalMapObject[location] = animalListExtended(location, sorted, sex);
+    });
   } else {
-    animalLocations.map(location => {
-      Object.assign(animalMapObject, { [location]: animalList(location)}));
-    }
-      
+    animalLocations.forEach((location) => {
+      animalMapObject[location] = animalList(location);
+    });
   }
- }
-
-  return animalMapObject
+  return animalMapObject;
 }
-
-// console.log(animalMap(options))
 
 const formatHour = value => ((value > 12) ? `${value - 12}pm` : `${value}am`);
 
