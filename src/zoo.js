@@ -51,8 +51,15 @@ function isManager(id) {
   return managerId;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const employeeObjct = {
+    id: id,
+    firstName: firstName,
+    lastName: lastName,
+    managers: managers,
+    responsibleFor: responsibleFor
+  };
+  data.employees.push(employeeObjct);
 }
 
 function animalCount(species) {
