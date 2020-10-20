@@ -52,7 +52,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  // seu código aqui   
+  /*eslint no-trailing-spaces: "error"*/
 }
 function entryCalculator(entrants) {
   // seu código aqui
