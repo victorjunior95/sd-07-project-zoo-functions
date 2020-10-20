@@ -88,7 +88,7 @@ function ifFunction(regions, list, list2, entry) {
   if (entry.sorted === true) {
     list = ifSortedFunction (regions, list, list2, entry);
   }
-  else if (entry.sex === 'male' || entry.sex === 'female') {
+  else if (entry.sex) {
     list = animalMapBySex(regions, list, list2, entry);
   }
   else {
@@ -112,13 +112,16 @@ function createFirstObject(regions, list) {
   return array;
 }
 
+function getAnimalsByRegion(item) {
+  return ((data.animals.filter(animal => animal.name === item)).map(names => 
+    names.residents))[0].map(final => final.name);
+}
 function animalMapArgument(regions, list, list2) {
   const result = createFirstObject(regions, list);
   result.forEach((element, index) => {
     element.forEach(item => {
       let object = {};
-      object[item] = ((data.animals.filter(animal => animal.name === item)).map(names => 
-        names.residents))[0].map(final => final.name);
+      object[item] = getAnimalsByRegion(item);
       list2[regions[index]].push(object);
     });
   });
@@ -130,8 +133,7 @@ function animalMapSorted(regions, list, list2) {
   result.forEach((element, index) => {
     element.forEach(item => {
       let object = {};
-      object[item] = (((data.animals.filter(animal => animal.name === item)).map(names => 
-        names.residents))[0].map(final => final.name)).sort();
+      object[item] = getAnimalsByRegion(item).sort();
       list2[regions[index]].push(object);
     });
   });
