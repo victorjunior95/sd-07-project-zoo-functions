@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require("./data");
+const data = require('./data');
 
 const { animals } = data;
 
@@ -19,9 +19,9 @@ function animalsByIds(...ids) {
 // console.log(animalsByIds())
 
 function animalsOlderThan(animal, age) {
-  const myAnimal = animals.find((animalName) => animalName.name === animal);
+  const myAnimal = animals.find(animalName => animalName.name === animal);
   const compareResult = myAnimal.residents.every(
-    (animalGroup) => animalGroup.age > age
+    animalGroup => animalGroup.age > age,
   );
   return compareResult;
 }
@@ -32,9 +32,9 @@ function employeeByName(employeeName) {
   let object = {};
   if (employeeName) {
     object = employees.filter(
-      (objectEmployer) =>
+      objectEmployer =>
         objectEmployer.firstName === employeeName ||
-        objectEmployer.lastName === employeeName
+        objectEmployer.lastName === employeeName,
     )[0];
   }
   return object;
@@ -59,7 +59,7 @@ function addEmployee(
   firstName,
   lastName,
   managers = [],
-  responsibleFor = []
+  responsibleFor = [],
 ) {
   const { employees } = data;
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
@@ -71,7 +71,7 @@ function addEmployee(
 
 function animalCount(species) {
   const object = {};
-  animals.forEach((animal) => (object[animal.name] = animal.residents.length));
+  animals.forEach(animal => (object[animal.name] = animal.residents.length));
   return species === undefined ? object : object[species];
 }
 // console.log(animalCount('lions'));
@@ -79,13 +79,18 @@ function animalCount(species) {
 function entryCalculator(entrants) {
   const { prices } = data;
   let value = 0;
-  for (let i in entrants) {
-    value += entrants[i] * prices[i];
-  }
+  // for (let i in entrants) {
+  //   value += entrants[i] * prices[i];
+  // }
+  // console.log(Object.entries(entrants));
+  Object.entries(entrants).forEach((entrant, index) => {
+    // console.log(entrant[0]);
+    console.log(Object.entries(prices).forEach((price) => price.includes(entrants[0])))
+  });
   return value;
 }
 // console.log(entryCalculator({}));
-// console.log(entryCalculator({ 'Child': 1, 'Senior': 1 }));
+console.log(entryCalculator({ 'Child': 1, 'Senior': 1 }));
 
 const namesResidentsLocation = (name, sex) => {
   const array = [];
@@ -127,7 +132,7 @@ const nameAnimals = (region, sort = false, sex) => {
 // console.log(nameAnimals('NE'));
 
 function animalMap(options) {
-  const location = ["NE", "NW", "SE", "SW"];
+  const location = ['NE', 'NW', 'SE', 'SW'];
   const object = {};
 
   location.forEach(
@@ -167,8 +172,8 @@ function schedule(dayName) {
     result[i] = `Open from ${Object.values(hours[i])[0]}am until ${
       Object.values(hours[i])[1] - 12
     }pm`;
-    if (i === "Monday") {
-      result[i] = "CLOSED";
+    if (i === 'Monday') {
+      result[i] = 'CLOSED';
     }
   }
   return dayName ? dayNameExist(dayName, result) : result;
@@ -235,7 +240,7 @@ const firstAndLastName = (idOrName, result) => {
   let name2;
   for (let i in result) {
     // console.log(i);
-    name2 = i.split(" ");
+    name2 = i.split(' ');
     // console.log(name2);
     name2.forEach((names) => {
       // console.log(name);
