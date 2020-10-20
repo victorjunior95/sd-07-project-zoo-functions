@@ -75,39 +75,53 @@ function entryCalculator(entrants) {
   return total;
 }
 
+function animalMapWithSex(options, obj) {
+  if (options.sorted) {
+    data.animals.forEach(({ location, name, residents }) =>
+      obj[location].push({
+        [name]: residents
+          .filter(resident => resident.sex === options.sex)
+          .map(resident => resident.name)
+          .sort(),
+      }),
+    );
+  } else {
+    data.animals.forEach(({ location, name, residents }) =>
+      obj[location].push({
+        [name]: residents
+          .filter(resident => resident.sex === options.sex)
+          .map(resident => resident.name),
+      }),
+    );
+  }
+}
+
+function animalMapWithoutSex(options, obj) {
+  if (options.sorted) {
+    data.animals.forEach(({ location, name, residents }) =>
+      obj[location].push({ [name]: residents.map(resident => resident.name).sort() }),
+    );
+  } else {
+    data.animals.forEach(({ location, name, residents }) =>
+      obj[location].push({ [name]: residents.map(resident => resident.name) }),
+    );
+  }
+}
+
+function animalMapIncludeNames(options, obj) {
+  if (options.sex === 'female' || options.sex === 'male') {
+    animalMapWithSex(options, obj);
+  } else {
+    animalMapWithoutSex(options, obj);
+  }
+}
+
 function animalMap(options) {
   const obj = { NE: [], NW: [], SE: [], SW: [] };
   if (options === undefined || options.includeNames !== true) {
     data.animals.forEach(({ location, name }) => obj[location].push(name));
   } else if (options.includeNames === true) {
-    if (options.sorted === true) {
-      if (options.sex === 'female' || options.sex === 'male') {
-        data.animals.forEach(({ location, name, residents }) =>
-          obj[location].push({
-            [name]: residents
-              .filter(resident => resident.sex === options.sex)
-              .map(resident => resident.name)
-              .sort(),
-          }),
-        );
-      } else {
-        data.animals.forEach(({ location, name, residents }) =>
-          obj[location].push({ [name]: residents.map(resident => resident.name).sort() }),
-        );
-      }
-    } else if (options.sex === 'female' || options.sex === 'male') {
-      data.animals.forEach(({ location, name, residents }) =>
-        obj[location].push({
-          [name]: residents
-            .filter(resident => resident.sex === options.sex)
-            .map(resident => resident.name),
-        }),
-      );
-    } else {
-      data.animals.forEach(({ location, name, residents }) =>
-        obj[location].push({ [name]: residents.map(resident => resident.name) }),
-      );
-    }
+    animalMapIncludeNames(options, obj);
   }
   return obj;
 }
