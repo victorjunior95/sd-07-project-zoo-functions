@@ -8,7 +8,6 @@ function animalsByIds(...ids) {
   return ids.map(id => animals.find(animal => animal.id === id));
 }
 
-
 function animalsOlderThan(animal, age) {
   const {
     animals,
@@ -85,8 +84,6 @@ function entryCalculator(entrants) {
   return exit;
 }
 
-
-
 function primeriaOpcao() {
   const {
     animals
@@ -159,7 +156,6 @@ function categorizeAnimalsIncludeNamesSorted() {
   }, objetoInicial)
 }
 
-
 function categorizeAnimalsIncludeNamesSex(sex) {
   console.log('linha 174');
   return data.animals.reduce((acc, specie) => {
@@ -194,11 +190,9 @@ function categorizeAnimalsIncludeNamesSexSorted(sex) {
 }
 
 function animalMap(options) {
-
   if (!options) {
     return categorizeAnimalsByLocation();
   }
-
   const {
     includeNames,
     sex,
@@ -206,19 +200,15 @@ function animalMap(options) {
   } = options;
 
   if (includeNames) {
-
     if (sex) {
       if (sorted) return categorizeAnimalsIncludeNamesSexSorted(sex);
-
       return categorizeAnimalsIncludeNamesSex(sex);
     }
-
     if (sorted) {
       return categorizeAnimalsIncludeNamesSorted();
     }
     return categorizeAnimalsIncludeNames();
   }
-
   if (sex || !options){
     return categorizeAnimalsByLocation();
   }
