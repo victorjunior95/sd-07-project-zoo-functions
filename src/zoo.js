@@ -1,14 +1,3 @@
-/*
-eslint no-unused-vars: [
-  "error",
-  {
-    "args": "none",
-    "vars": "local",
-    "varsIgnorePattern": "data"
-  }
-]
-*/
-
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -227,12 +216,10 @@ function animalMap(options) {
     if (sorted) {
       return categorizeAnimalsIncludeNamesSorted();
     }
-
-
     return categorizeAnimalsIncludeNames();
   }
 
-  if (sex){
+  if (sex || !options){
     return categorizeAnimalsByLocation();
   }
 }
