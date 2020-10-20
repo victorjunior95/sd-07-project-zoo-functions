@@ -45,8 +45,11 @@ const animalCount = species => {
   return data.animals.find(count => count.name === species).residents.length;
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
+const entryCalculator = (entrants) => {
+  if (entrants === undefined || entrants === {}) {
+    return 0;
+  }
+  return Object.entries(entrants).reduce((acc, curr) => acc + (data.prices[curr[0]] * curr[1]), 0);
 }
 
 function animalMap(options) {
