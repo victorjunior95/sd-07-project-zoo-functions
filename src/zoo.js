@@ -113,20 +113,22 @@ function entryCalculator(entrants) {
   return resultado;
 }
 
-let location = {
+const location = {
   NE: [],
   NW: [],
   SE: [],
   SW: [],
-}
+};
+
 function animalMap(options) {
   let resultado;
   if (!options) {
     resultado = animals.reduce((acc, specie) => {
-         return {...acc,
-          [specie.location]: [...acc[specie.location], specie.name]
-        };
-      }, location );
+      return {
+        ...acc,
+        [specie.location]: [...acc[specie.location], specie.name],
+      };
+    }, location);
   }
   return resultado;
 }
