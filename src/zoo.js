@@ -124,7 +124,7 @@ const retrieveFilteredAnimalsByLocation = location =>
 const retrieveAnimalsByLocation = (locations) => {
   const animalsPerLocation = {};
 
-  locations.forEach(location => {
+  locations.forEach((location) => {
     const filteredAnimals = retrieveFilteredAnimalsByLocation(location).map(
       animal => animal.name,
     );
@@ -139,7 +139,7 @@ const retrieveAnimalsByLocation = (locations) => {
 const retrieveAnimalsByLocationWithName = (locations, sorted, sex) => {
   const animalsPerLocation = {};
 
-  locations.forEach(location => {
+  locations.forEach((location) => {
     const filteredAnimals = retrieveFilteredAnimalsByLocation(location).map(
       (animal) => {
         const animalName = animal.name;
@@ -163,12 +163,12 @@ const retrieveAnimalsByLocationWithName = (locations, sorted, sex) => {
   return animalsPerLocation;
 };
 
-function animalMap(options) {
+function animalMap(options = {}) {
   const locations = retrieveAvaiableLocation();
 
-  if (!options || !includeNames) return retrieveAnimalsByLocation(locations);
-
   const { includeNames = false, sorted = false, sex } = options;
+
+  if (!options || !includeNames) return retrieveAnimalsByLocation(locations);
 
   if (includeNames)
     return retrieveAnimalsByLocationWithName(locations, sorted, sex);
