@@ -12,7 +12,11 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  return data.animals.filter(animal => ids.includes(animal.id));
+  if (ids === undefined) {
+    return [];
+  }
+  const animalById = data.animals.filter(animals => ids.includes(animals.id));
+  return animalById;
 }
 
 function animalsOlderThan(animalName, ageAnimal) {
@@ -30,7 +34,8 @@ function employeeByName(...employeeName) {
 
 function createEmployee(personalInfo, associatedWith) {
   return {
-    ...personalInfo, ...associatedWith,
+    ...personalInfo,
+    ...associatedWith,
   };
 }
 
@@ -77,7 +82,7 @@ function entryCalculator(entrants) {
   if (entrants === undefined || count === 0) {
     return 0;
   }
-
+  // desestrutura o obj para trabalhar com os atributos isolados
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
 
   let total = 0;
@@ -105,36 +110,32 @@ function schedule(...dayName) {
   }, {});
 }
 
-const idEmployees = (idEmployee) => {
-  const id = data.employees.filter(emplpoyee => emplpoyee.id === idEmployee);
-  const animalsCare = id.find(element => element).responsibleFor;
-  return animalsCare;
+
+const employeeObj = (idEmployee) => {
+  const getEmployee = data.employees.filter(emplpoyee => emplpoyee.id === idEmployee);
+  const buildAnimalResponse = getEmployee.find(element => element).responsibleFor;
+  return buildAnimalResponse;
 };
-// queria fazer com reduce mas o codeclimate não aprovou ;(
-const getBigger = (array) => {
-  let acc = array[0];
-  array.forEach((element) => {
-    if (acc < element) {
-      acc = element;
-    }
-  });
+
+const getBigger = (acc, curr) => {
+  if (acc < curr) {
+    acc = curr;
+  }
   return acc;
 };
 
-
 function oldestFromFirstSpecies(id) {
   let finalResult;
-  const arrayIds = idEmployees(id);
+  const arrayIds = employeeObj(id);
   const firstIdAnimal = arrayIds[0];
-  const arrayObjAnimals = data.animals.filter(inimalId =>
-    inimalId.id === firstIdAnimal).find(element => element).residents;
+  const arrayObjAnimals = data.animals.filter(inimalId => inimalId.id === firstIdAnimal)
+  .find(element => element).residents;
   const arrayOfAges = arrayObjAnimals.map(item => item.age);
-  const bigger = getBigger(arrayOfAges);
+  const bigger = arrayOfAges.reduce(getBigger);
   const arrayObjResult = arrayObjAnimals.filter(bicho => (bicho.age === bigger));
   arrayObjResult.forEach((element) => {
     finalResult = Object.values(element);
   });
-
   return finalResult;
 }
 
@@ -148,7 +149,7 @@ const everyBody = () => {
   const employees = data.employees;
   employees.forEach((personId) => {
     getNamePersonAndAnimals[`${personId.firstName} ${personId.lastName}`] = personId
-    .responsibleFor.map(animalId => animals.find(element => element.id === animalId).name);
+      .responsibleFor.map(animalId => animals.find(element => element.id === animalId).name);
   });
   return getNamePersonAndAnimals;
 };
@@ -160,7 +161,7 @@ const onlyOne = (idOrName) => {
       .firstName === idOrName || employee
       .lastName === idOrName) {
       addNamePersonAndAnimals[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor
-      .map(animalId => data.animals.find(theAnimal => theAnimal.id === animalId).name);
+        .map(animalId => data.animals.find(theAnimal => theAnimal.id === animalId).name);
     }
   });
   return addNamePersonAndAnimals;
