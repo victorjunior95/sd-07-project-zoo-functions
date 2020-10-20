@@ -10,6 +10,9 @@ eslint no-unused-vars: [
 */
 
 const { animals } = require('./data');
+const { employees } = require('./data');
+const { prices } = require('./data');
+const { hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -23,7 +26,7 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
-  return data.employees.find(n => n.firstName === employeeName || n.lastName === employeeName);
+  return employees.find(n => n.firstName === employeeName || n.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -32,7 +35,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some(element => element.managers.some(director => director === id));
+  return employees.some(element => element.managers.some(director => director === id));
 }
 
 function manager(managers) {
@@ -56,17 +59,17 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
       managers: manager2,
       responsibleFor: responsible2,
     };
-  data.employees.push(employee);
+  employees.push(employee);
 }
 
 function animalCount(species) {
   if (species === undefined) {
     const animalsInZoo = {};
-    data.animals.map(element => (
+    animals.map(element => (
       animalsInZoo[element.name] = element.residents.length));
     return animalsInZoo;
   }
-  const animalsInZoo = data.animals.find(animal => animal.name === species);
+  const animalsInZoo = animals.find(animal => animal.name === species);
   return animalsInZoo.residents.length;
 }
 
@@ -78,9 +81,9 @@ function checkValue(entry) {
 function entryCalculator(entrants) {
   if (entrants === undefined || entrants === {}) return 0;
   let sum = 0;
-  sum = ((data.prices.Adult * checkValue(entrants.Adult)) +
-    (data.prices.Child * checkValue(entrants.Child)) +
-    (data.prices.Senior * checkValue(entrants.Senior)));
+  sum = ((prices.Adult * checkValue(entrants.Adult)) +
+    (prices.Child * checkValue(entrants.Child)) +
+    (prices.Senior * checkValue(entrants.Senior)));
   return sum;
 }
 
@@ -95,7 +98,7 @@ function printHours(day) {
 function schedule(dayName) {
   const hour = {};
   if (dayName === undefined) {
-    Object.entries(data.hours).map((days) => {
+    Object.entries(hours).map((days) => {
       hour[days[0]] = printHours(days);
       if (days[1].open === 0) {
         hour[days[0]] = 'CLOSED';
@@ -104,7 +107,7 @@ function schedule(dayName) {
     });
     return hour;
   }
-  Object.entries(data.hours).map((day) => {
+  Object.entries(hours).map((day) => {
     if (day[0] === dayName && day[1].open !== 0) {
       hour[day[0]] = printHours(day);
     }
@@ -117,27 +120,58 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  const accountable = data.employees.find(employee => employee.id === id);
+  const accountable = employees.find(employee => employee.id === id);
   const animal = animalsByIds(accountable.responsibleFor[0])[0].residents;
   animal.sort((a, b) => b.age - a.age);
   return animal[0];
 }
 
+// function extracted from https://stackoverflow.com/questions/11832914/round-to-at-most-2-decimal-places-only-if-necessary
 function roundToTwo(num) {
   return +(Math.round((num + Number.EPSILON) * 100) / 100);
 }
-//  +(Math.round(num + 'e+2') + 'e-2');
 
 function increasePrices(percentage) {
-  const obj = Object.entries(data.prices).map(price =>
+  const obj = Object.entries(prices).map(price =>
     roundToTwo(price[1] + ((price[1] * percentage) / 100)));
-  data.prices.Adult = obj[0];
-  data.prices.Senior = obj[1];
-  data.prices.Child = obj[2];
+  prices.Adult = obj[0];
+  prices.Senior = obj[1];
+  prices.Child = obj[2];
+}
+
+function recoverAnimal(ids) {
+  return animals.find(animal => animal.id === ids);
+}
+
+function returnEmployeeWithAnimals(work) {
+  const object = {};
+  object[`${work.firstName} ${work.lastName}`] = [];
+  work.responsibleFor.forEach((ids) => {
+    const AnimalId = recoverAnimal(ids);
+    object[`${work.firstName} ${work.lastName}`].push(AnimalId.name);
+  });
+  return object;
+}
+
+function recoverAllEmployeesWithAnimalsResponsibleFor() {
+  const obj = {};
+  employees.map((employee) => {
+    Object.assign(obj, returnEmployeeWithAnimals(employee));
+    return 0;
+  });
+  return obj;
+}
+
+function recoverEmployeeWithAnimalsResponsibleFor(idOrName) {
+  const worker = employees.find(employee =>
+  employee.id === idOrName || employee.firstName === idOrName || employee.lastName === idOrName);
+  return returnEmployeeWithAnimals(worker);
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) return recoverAllEmployeesWithAnimalsResponsibleFor();
+
+  return recoverEmployeeWithAnimalsResponsibleFor(idOrName);
 }
 
 module.exports = {
