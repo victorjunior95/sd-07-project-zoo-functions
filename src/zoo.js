@@ -99,7 +99,6 @@ function categorizeAnimalsByLocation() {
 }
 
 function categorizeAnimalsIncludeNames() {
-  console.log('linha 144')
   return data.animals.reduce((acc, specie) => {
     return {
       ...acc,
@@ -114,7 +113,6 @@ function categorizeAnimalsIncludeNames() {
 }
 
 function categorizeAnimalsIncludeNamesSorted() {
-  console.log('linha 158');
   return data.animals.reduce((acc, specie) => {
     return {
       ...acc,
@@ -129,7 +127,6 @@ function categorizeAnimalsIncludeNamesSorted() {
 }
 
 function categorizeAnimalsIncludeNamesSex(sex) {
-  console.log('linha 174');
   return data.animals.reduce((acc, specie) => {
     return {
       ...acc,
@@ -145,7 +142,6 @@ function categorizeAnimalsIncludeNamesSex(sex) {
 }
 
 function categorizeAnimalsIncludeNamesSexSorted(sex) {
-  console.log('linha 189');
   return data.animals.reduce((acc, specie) => {
     return {
       ...acc,
