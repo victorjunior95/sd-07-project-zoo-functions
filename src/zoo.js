@@ -123,7 +123,7 @@ function oldestFromFirstSpecies(id) {
   const accountable = employees.find(employee => employee.id === id);
   const animal = animalsByIds(accountable.responsibleFor[0])[0].residents;
   animal.sort((a, b) => b.age - a.age);
-  return animal[0];
+  return Object.values(animal[0]);
 }
 
 // function extracted from https://stackoverflow.com/questions/11832914/round-to-at-most-2-decimal-places-only-if-necessary
