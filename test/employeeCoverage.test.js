@@ -25,7 +25,7 @@ describe('Implemente a função employeeCoverage', () => {
 
   it('Com o primeiro nome de um funcionário, retorna os animais pelos quais o funcionário é responsável', () => {
     const actual = zoo.employeeCoverage('Stephanie');
-    expected = { 'Stephanie Strauss': ['giraffes', 'otters'] };
+    expected = { 'Stephanie Strauss': ['otters', 'giraffes'] };
     assert.deepEqual(actual, expected);
   });
 

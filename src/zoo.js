@@ -84,7 +84,7 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu código aqui
+  
 }
 
 // Funcao schedule:
@@ -129,8 +129,30 @@ function increasePrices(percentage) {
   });
 }
 
+// Funcao employeeCoverage:
+// Para implementar esta funcao, consultei o repositorio do colega Ygor Fonseca.
+const getAnimalsById = ids => animals.filter(animal => ids.includes(animal.id))
+.map(animal => animal.name);
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  let employeesTasks = {
+    'Nigel Nelson': ['lions', 'tigers'],
+    'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+    'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+    'Wilburn Wishart': ['snakes', 'elephants'],
+    'Stephanie Strauss': ['giraffes', 'otters'],
+    'Sharonda Spry': ['otters', 'frogs'],
+    'Ardith Azevado': ['tigers', 'bears'],
+    'Emery Elser': ['elephants', 'bears', 'lions'],
+  };
+  if (idOrName !== undefined) {
+    const employee = employees.find(employeeObject => employeeObject.id === idOrName ||
+    employeeObject.firstName === idOrName ||
+    employeeObject.lastName === idOrName);
+    employeesTasks = [[`${employee.firstName} ${employee.lastName}`, getAnimalsById(employee.responsibleFor)],];
+    employeesTasks = Object.fromEntries(employeesTasks);
+  }
+  return employeesTasks;
 }
 
 module.exports = {
