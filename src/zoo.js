@@ -40,15 +40,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  if (species){
-   return data.animals.find(animal.name === species).popularity;
-    
+  if(!species) {
+    return data.animals.reduce((accAnimal, animal) => {
+      accAnimal[animal.name] = animal.residents.length 
+      return accAnimal
+    }, {})
   }
-   objectAnimal = {};
-   const allAnimals = data.animals.map(animal => animal.name);
-   const allAnimalsAcc = data.animals.map(animal => animal.popularity);
-   allAnimals.forEach((animal, index) =>
-   objectAnimal[animal] = allAnimalsAcc[index]);
+  return data.animals.find(animal => animal.name === species).residents.length
 }
 
 function entryCalculator(entrants) {
