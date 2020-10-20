@@ -104,15 +104,21 @@ function oldestFromFirstSpecies(id) {
   const animalsBySpecie = findSpecie.map(element => element.residents);
   const oldest = animalsBySpecie.map(animal => animal.sort((a, b) => b.age - a.age)[0]);
   // console.log(oldest);
-  const extracting = oldest.reduce((acc, obj) => [Object.values(obj)]);
+  const extracting = oldest.reduce((acc, obj) => [...acc, Object.values(obj)]);
   // console.log(extracting)
   return [extracting.name, extracting.sex, extracting.age];
 }
 // console.log(oldestFromFirstSpecies('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const increase = 1 + (percentage / 100);
+  prices.Adult = Math.round(prices.Adult * increase * 100) / 100;
+  prices.Senior = Math.round(prices.Senior * increase * 100) / 100;
+  prices.Child = Math.round(prices.Child * increase * 100) / 100;
+  return prices;
 }
+// console.log(increasePrices(50));
+// console.log(increasePrices(30));
 
 function employeeCoverage(idOrName) {
   // seu código aqui
