@@ -70,7 +70,7 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // Coloque seu código aqui
+  //  seu
 }
 
 function schedule(dayName) {
@@ -116,8 +116,27 @@ function increasePrices(percentage) {
   prices.Child = Math.round(Child * 100) / 100;
 }
 
+function auxEmployeeCoverage(findEmp) {
+  const { animals } = data;
+  return findEmp.responsibleFor.map(animalId => animals.find(({ id }) => id === animalId).name);
+}
+
 function employeeCoverage(idOrName) {
-  // Coloque seu código aqui
+  const { employees } = data;
+  const { animals } = data;
+  let findEmp = {};
+  const newObj = {};
+  if (!idOrName) {
+    employees.forEach((item) => {
+      newObj[`${item.firstName} ${item.lastName}`] = item.responsibleFor.map(animalId => animals.find(({ id }) => id === animalId).name);
+    });
+    return newObj;
+  }
+  findEmp = employees.find(employee => employee.id === idOrName);
+  if (!findEmp) findEmp = employees.find(employee => employee.firstName === idOrName);
+  if (!findEmp) findEmp = employees.find(employee => employee.lastName === idOrName);
+  newObj[`${findEmp.firstName} ${findEmp.lastName}`] = auxEmployeeCoverage(findEmp);
+  return newObj;
 }
 
 module.exports = {
