@@ -76,9 +76,114 @@ function entryCalculator(entrants) {
   return calculatingPrice.reduce((acc, curr) => acc + curr);
 }
 
-function animalMap(options) {
-  // seu código aqui
+function animalMapNoArgument(regions, list) {
+  regions.forEach((element) => {
+    list[element] = (data.animals.filter((item => 
+      item.location === element))).map(item => item.name);
+  });
+  return list;
 }
+
+function animalMapArgument(regions, list, entry) {
+  regions.forEach((element) => {
+    list[element] = (data.animals.filter(item => 
+      item.location === element)).map(item => item.name);
+  });
+  const { NE, NW, SE, SW } = list;
+  const array = [NE, NW, SE, SW];
+  let list2 = {'NE': [], 'NW': [], 'SE': [], 'SW': []};
+  array.forEach((element, index) => {
+    element.forEach(item => {
+      let object = {};
+      object[item] = ((data.animals.filter(animal => animal.name === item)).map(names => 
+        names.residents))[0].map(final => final.name);
+      list2[regions[index]].push(object);
+    });
+  });
+  return list2;
+}
+
+function animalMapSorted(regions, list) {
+  regions.forEach((element) => {
+    list[element] = (data.animals.filter(item => 
+      item.location === element)).map(item => item.name);
+  });
+  const { NE, NW, SE, SW } = list;
+  const array = [NE, NW, SE, SW];
+  let list2 = {'NE': [], 'NW': [], 'SE': [], 'SW': []};
+  array.forEach((element, index) => {
+    element.forEach(item => {
+      let object = {};
+      object[item] = (((data.animals.filter(animal => animal.name === item)).map(names => 
+        names.residents))[0].map(final => final.name)).sort();
+      list2[regions[index]].push(object);
+    });
+  });
+  return list2
+}
+
+function animalMapBySex(regions, list, entry) {
+  regions.forEach((element) => {
+    list[element] = (data.animals.filter(item => 
+      item.location === element)).map(item => item.name);
+  });
+  const { NE, NW, SE, SW } = list;
+  const array = [NE, NW, SE, SW];
+  let list2 = {'NE': [], 'NW': [], 'SE': [], 'SW': []};
+  array.forEach((element, index) => {
+    element.forEach(item => {
+      let object = {};
+      object[item] = ((((data.animals.filter(animal => animal.name === item)).map(names => 
+        names.residents))[0]).filter(key => key.sex === entry.sex)).map(final => final.name);
+      list2[regions[index]].push(object);
+    });
+  });
+  return list2;
+}
+
+function animalMapBySexSorted(regions, list, entry) {
+  regions.forEach((element) => {
+    list[element] = (data.animals.filter(item => 
+      item.location === element)).map(item => item.name);
+  });
+  const { NE, NW, SE, SW } = list;
+  const array = [NE, NW, SE, SW];
+  let list2 = {'NE': [], 'NW': [], 'SE': [], 'SW': []};
+  array.forEach((element, index) => {
+    element.forEach(item => {
+      let object = {};
+      object[item] = (((((data.animals.filter(animal => animal.name === item)).map(names => 
+        names.residents))[0]).filter(key => key.sex === entry.sex)).map(final => final.name)).sort();
+      list2[regions[index]].push(object);
+    });
+  });
+  return list2;
+}
+
+function animalMap(options) {
+  const regions = ['NE', 'NW', 'SE', 'SW'];
+  const list = {};
+
+  if (!options) {
+    return animalMapNoArgument(regions, list);
+  }
+
+  if (options.includeNames === true) {
+    if (options.sorted === true) {
+      if (options.sex === 'male' || options.sex === 'female') {
+        return animalMapBySexSorted(regions, list, options);
+      }
+      return animalMapSorted(regions, list);
+    }
+    if (options.sex === 'male' || options.sex === 'female') {
+      return animalMapBySex(regions, list, options);
+    }
+    return animalMapArgument(regions, list);
+  }
+  return animalMapNoArgument(regions, list);
+}
+
+// console.log(animalMap({ includeNames: true, sex: 'female', sorted: true }));
 
 function listIfNoArgument(week, objImport) {
   const list = {};
@@ -141,9 +246,6 @@ function oldestFromFirstSpecies(id) {
   const { name, sex, age } = oldestAnimal;
   return [name, sex, age];
 }
-
-// const test = oldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1');
-// console.log(test);
 
 function increasePrices(percentage) {
   const mainObject = data.prices;
