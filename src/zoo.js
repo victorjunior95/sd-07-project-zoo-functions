@@ -87,20 +87,18 @@ function animalNames(sortOption) {
         [specie.location]: [
           ...acc[specie.location],
           {
-            [specie.name]: specie.residents
-              .map(resident => resident.name),
+            [specie.name]: specie.residents.map(resident => resident.name),
           },
         ],
       }), inicialObject);
-  };
+  }
   return data.animals.reduce((acc, specie) => (
     {
       ...acc,
       [specie.location]: [
         ...acc[specie.location],
         {
-          [specie.name]: specie.residents
-            .map(resident => resident.name).sort(),
+          [specie.name]: specie.residents.map(resident => resident.name).sort(),
         },
       ],
     }), inicialObject);
@@ -115,12 +113,11 @@ function animalF(sortOption) {
           ...acc[specie.location],
           {
             [specie.name]: specie.residents
-              .filter(resident => resident.sex === 'female')
-              .map(resident => resident.name),
+              .filter(resident => resident.sex === 'female').map(resident => resident.name),
           },
         ],
       }), inicialObject);
-  };
+  }
   return data.animals.reduce((acc, specie) => (
     {
       ...acc,
@@ -128,8 +125,7 @@ function animalF(sortOption) {
         ...acc[specie.location],
         {
           [specie.name]: specie.residents
-            .filter(resident => resident.sex === 'female')
-            .map(resident => resident.name).sort(),
+            .filter(resident => resident.sex === 'female').map(resident => resident.name).sort(),
         },
       ],
     }), inicialObject);
@@ -144,8 +140,7 @@ function animalM(sortOption) {
           ...acc[specie.location],
           {
             [specie.name]: specie.residents
-              .filter(resident => resident.sex === 'male')
-              .map(resident => resident.name),
+              .filter(resident => resident.sex === 'male').map(resident => resident.name),
           },
         ],
       }), inicialObject);
@@ -157,8 +152,7 @@ function animalM(sortOption) {
         ...acc[specie.location],
         {
           [specie.name]: specie.residents
-            .filter(resident => resident.sex === 'male')
-            .map(resident => resident.name).sort(),
+            .filter(resident => resident.sex === 'male').map(resident => resident.name).sort(),
         },
       ],
     }), inicialObject);
