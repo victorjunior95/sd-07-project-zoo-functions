@@ -30,10 +30,13 @@ function animalsOlderThan(animal, age) {
   return animalsAge;
 }
 
-console.log(animalsOlderThan('otters', 7));
-
 function employeeByName(employeeName) {
-  // seu código aqui
+  let employeeObj = {};
+  if (typeof employeeName === 'undefined') {
+    return employeeObj;
+  }
+  employeeObj = data.employees.find(employee => employee.firstName === employeeName || employee.lastName === employeeName);
+  return employeeObj;
 }
 
 function createEmployee(personalInfo, associatedWith) {
