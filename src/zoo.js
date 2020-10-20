@@ -220,12 +220,7 @@ function increasePrices(percentage) {
     result[Object.keys(prices)[index]] = Object.values(prices)[index];
     result[Object.keys(prices)[index]] += (Object.values(prices)[index] * percentage) / 100;
     result[Object.keys(prices)[index]] = Math.round(result[Object.keys(prices)[index]] * 100) / 100;
-  })
-  // console.log(Object.entries(prices))
-  // for (let i = 0; i < Object.entries(prices).length; i += 1) {
-  //   result[Object.keys(prices)[i]] = Object.values(prices)[i] + (Object.values(prices)[i] * percentage / 100);
-  //   result[Object.keys(prices)[i]] = Math.round(result[Object.keys(prices)[i]] * 100) / 100;
-  // }
+  });
   // for (const i in result) {
   //   result[i] += (result[i] * percentage) / 100;
   //   result[i] = Math.round(result[i] * 100) / 100;
@@ -251,12 +246,17 @@ const firstAndLastName = (idOrName, result) => {
   let name2;
   for (let i = 0; i < Object.entries(result).length; i += 1) {
     name2 = Object.keys(result)[i].split(' ');
-    name2.forEach((names) => {
-      // console.log(name);
-      if (names === idOrName) {
+    for (let j = 0; j < name2.length; j += 1) {
+      if (name2[j] === idOrName) {
         result = { [Object.keys(result)[i]]: result[Object.keys(result)[i]] };
       }
-    });
+    }
+    // name2.forEach((names) => {
+    // console.log(name);
+    // if (names === idOrName) {
+    //   result = { [Object.keys(result)[i]]: result[Object.keys(result)[i]] };
+    // }
+    // });
   }
   return result;
 };
