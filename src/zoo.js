@@ -119,7 +119,7 @@ const orderedAnimalsBySex = (animal, sex, sorted) => {
 };
 
 function animalMap(options = {}) {
-  const {includeNames = false, sorted = false, sex} = options;
+  const { includeNames = false, sorted = false, sex } = options;
   const animalReportByRegion = data.animals.reduce((categorized, animal) => {
     if (!options || !includeNames) {
       categorized[animal.location] = animalsInRegion(animal);
