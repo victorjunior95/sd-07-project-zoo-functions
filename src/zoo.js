@@ -66,11 +66,29 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // .
+  // let result;
+  // if (!options || !options.includeNames) {
+  //   result = categorizeAnimalsByLocation();
+  // } else if (options.includeNames && !options.sex) {
+  //   result = !options.sorted ? animalNames() : animalSort();
+  // } else if (options.includeNames && !options.sorted) {
+  //   result = options.sex === 'female' ? animalF() : animalM();
+  // } else if (options.includeNames && options.sorted) {
+  //   result = options.sex === 'female' ? animalFSorted() : animalMSorted();
+  // }
+  // return result;
 }
 
 function schedule(dayName) {
-  // .
+  if (dayName === undefined) {
+    Object.keys(data.hours).forEach((day) => {
+      data.hours[day] =
+      `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
+    });
+    data.hours.Monday = 'CLOSED';
+    return data.hours;
+  }
+  return { [dayName]: data.hours[dayName] };
 }
 
 function oldestFromFirstSpecies(id) {
