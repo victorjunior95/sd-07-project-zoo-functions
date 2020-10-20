@@ -172,12 +172,11 @@ function increasePrices(percentage) {
   });
   return prices;
 }
-// Receive the values ​​of employees
-let funcionarios = JSON.parse(JSON.stringify(employees));
+const funcionarios = JSON.parse(JSON.stringify(employees));
 
 const getAnimalName = (input = {}) => {
   input.responsibleFor.forEach((currentID, index) => {
-    input.responsibleFor[index] = animals.find(crAnimal=> crAnimal.id === currentID).name;
+    input.responsibleFor[index] = animals.find(crAnimal => crAnimal.id === currentID).name;
   });
   return input.responsibleFor;
 };
@@ -193,7 +192,7 @@ const getAnimalsForEmploy = (string, objReturn) => {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
-  let getEmploy = {};
+  const getEmploy = {};
   if (!idOrName) {
     funcionarios.forEach((current) => {
       getAnimalName(current);
@@ -201,7 +200,6 @@ function employeeCoverage(idOrName) {
       getEmploy[fullName] = current.responsibleFor;
     });
   } else {
-    
     getAnimalsForEmploy(idOrName, getEmploy);
   }
   return getEmploy;
