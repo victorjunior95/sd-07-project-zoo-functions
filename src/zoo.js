@@ -179,8 +179,84 @@ function entryCalculator(entrants = {}) {
 
 */
 
-function animalMap(options) {
+const createArrAnimalsForLocation = (arrOfLocation) => {
+  const arrAnimalsFromNE = [];
+  const arrAnimalsFromNW = [];
+  const arrAnimalsFromSE = [];
+  const arrAnimalsFromSW = [];
 
+  animals.forEach(object => {
+    if (object.location === arrOfLocation[0]) arrAnimalsFromNE.push(object.name);
+    if (object.location === arrOfLocation[1]) arrAnimalsFromNW.push(object.name);
+    if (object.location === arrOfLocation[2]) arrAnimalsFromSE.push(object.name);
+    if (object.location === arrOfLocation[3]) arrAnimalsFromSW.push(object.name);
+  });
+
+  return arrNamesForLocation = [arrAnimalsFromNE, arrAnimalsFromNW, arrAnimalsFromSE, arrAnimalsFromSW];
+};
+
+const createArrLocal = () => {
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set (Hamaji);
+
+  let arrOfLocation = new Set();
+  animals.forEach(object => arrOfLocation.add(object.location));
+  return [...arrOfLocation];
+};
+
+const testOne = (arrOfLocation, arrNamesForLocation) => {
+  return arrOfLocation.reduce((result, local, index) => {
+    result[local] = arrNamesForLocation[index];
+    return result;
+  }, {});
+};
+
+const arrForNames = (animal) => {
+  let arrOfObjects = animals.filter((item) => {
+    if (item.name === animal) return item
+  });
+
+  arrOfObjects = arrOfObjects[0];
+  arrOfObjects = arrOfObjects.residents;
+
+  return arrOfObjects.map(item => item.name);
+};
+
+const putInObject = (arrOfNames, arrOfLocation) => {
+  return arrOfLocation.reduce((result, local, index) => {
+    result[local] = arrOfNames[index];
+    return result;
+  }, {});
+}
+
+const functionForIncludeNames = (arrOfLocation, testOne) => {
+  
+  const expectedInArr = arrOfLocation.map((local) => {
+    const animalsForLocation = testOne[local];
+    
+    return animalsForLocation.map((animal) => {
+      const testeObjeto = {};
+      testeObjeto[animal] = arrForNames(animal);
+      return testeObjeto
+    });
+  });
+  return putInObject(expectedInArr, arrOfLocation);
+};
+
+function animalMap(options) {
+  let result;
+
+  const arrOfLocation = createArrLocal();
+  const arrNamesForLocation = createArrAnimalsForLocation(arrOfLocation);
+  
+  if (options === undefined) return testOne(arrOfLocation, arrNamesForLocation);
+  
+  const { includeNames } = options;
+  
+  if (includeNames) {
+    result = functionForIncludeNames(arrOfLocation, testOne(arrOfLocation, arrNamesForLocation));
+  }
+
+  return result;
 }
 
 /*
@@ -268,8 +344,22 @@ function increasePrices(percentage) {
   });
 }
 
+/*
+
+13- Implemente a função employeeCoverage:
+
+Sem parâmetros, retorna uma lista de funcionários e os animais pelos quais eles são responsáveis
+
+Com o id de um funcionário, retorna os animais pelos quais o funcionário é responsável
+
+Com o primeiro nome de um funcionário, retorna os animais pelos quais o funcionário é responsável
+
+Com o último nome de um funcionário, retorna os animais pelos quais o funcionário é responsável
+
+*/
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  
 }
 
 module.exports = {
