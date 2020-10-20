@@ -130,7 +130,7 @@ function returnBySex(sex) {
   return result;
 }
 
-function returnByNames(sorted) {
+function returnByNames() {
   const animals = data.animals;
   const init = initialValue({}, animals);
   return animals.reduce((acc, specie) =>
