@@ -95,21 +95,27 @@ function animalMap(options) {
 
   animalList.forEach((animal) => {
     animalObj[animal[0].location] = animal.map((animalId) => {
+      let residentsReturn = null;
       if (includeNames) {
         if (sorted) {
           if (sex !== undefined) {
-            return ({ [animalId.name]: animalId.residents.filter(resident => resident.sex === sex).
-              map(resident => resident.name).sort() });
+            residentsReturn = ({ [animalId.name]: animalId.residents.filter(resident => resident.sex === sex)
+              .map(resident => resident.name).sort() });
+          } else {
+            residentsReturn = ({ [animalId.name]: animalId.residents.map(resident => resident.name).sort() });
           }
-          return ({ [animalId.name]: animalId.residents.map(resident => resident.name).sort()});
+        } else {
+          if (sex !== undefined) {
+            residentsReturn = ({ [animalId.name]: animalId.residents.filter(resident => resident.sex === sex)
+              .map(resident => resident.name) });
+          } else {
+            residentsReturn = ({ [animalId.name]: animalId.residents.map(resident => resident.name) });
+          }
         }
-        if (sex !== undefined) {
-          return ({ [animalId.name]: animalId.residents.filter(resident => resident.sex === sex).
-            map(resident => resident.name) });
-        }
-        return ({ [animalId.name]: animalId.residents.map(resident => resident.name) });
+      } else {
+        residentsReturn = animalId.name;
       }
-      return animalId.name;
+      return residentsReturn;
     });
   });
   return animalObj;
