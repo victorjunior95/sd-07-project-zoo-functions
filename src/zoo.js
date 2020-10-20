@@ -84,35 +84,7 @@ function entryCalculator(entrants) {
   return exit;
 }
 
-function primeriaOpcao() {
-  const {
-    animals
-  } = data;
-  const exitArry = [];
-
-  animals.forEach((item) => {
-    if (exitArry.indexOf(item.location) === -1) {
-      exitArry[item.location] = [];
-    }
-  });
-
-  Object.keys(exitArry).forEach((item, index) => {
-    animals.filter((elem) => {
-      if (item === elem.location) {
-        exitArry[item].push(elem.name);
-      }
-    })
-  })
-
-  return exitArry;
-}
-
-const objetoInicial = {
-  NE: [],
-  NW: [],
-  SE: [],
-  SW: [],
-}
+const objetoInicial = { NE: [], NW: [], SE: [], SW: [], }
 
 function categorizeAnimalsByLocation() {
   return data.animals.reduce((acc, specie) => {
@@ -193,11 +165,7 @@ function animalMap(options) {
   if (!options) {
     return categorizeAnimalsByLocation();
   }
-  const {
-    includeNames,
-    sex,
-    sorted
-  } = options;
+  const { includeNames, sex, sorted } = options;
 
   if (includeNames) {
     if (sex) {
@@ -209,7 +177,7 @@ function animalMap(options) {
     }
     return categorizeAnimalsIncludeNames();
   }
-  if (sex || !options){
+  if (sex){
     return categorizeAnimalsByLocation();
   }
 }
