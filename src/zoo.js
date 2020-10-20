@@ -113,9 +113,9 @@ function entryCalculator(entrants) {
 
 //-------------------------------------------------------------------------------------
 
-const retrieveAvaiableLocation = () => {
+function retrieveAvaiableLocation() {
   return ['NE', 'NW', 'SE', 'SW'];
-};
+}
 
 const retrieveFilteredAnimalsByLocation = location =>
   animals.filter(animal => animal.location === location);
@@ -170,8 +170,7 @@ function animalMap(options = {}) {
 
   if (!options || !includeNames) return retrieveAnimalsByLocation(locations);
 
-  if (includeNames)
-    return retrieveAnimalsByLocationWithName(locations, sorted, sex);
+  return retrieveAnimalsByLocationWithName(locations, sorted, sex);
 }
 
 //-------------------------------------------------------------------------------------
