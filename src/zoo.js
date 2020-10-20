@@ -28,18 +28,24 @@ function employeeByName(employeeName) {
   if (arguments.length === 0) {
     return {};
   }
-  const employee = data.employees.find((employeeAtual) => {
-    return employeeAtual.firstName === employeeName || employeeAtual.lastName === employeeName;
-  });
+  const employee = data.employees.find(employeeAtual => employeeAtual.firstName === employeeName || employeeAtual.lastName === employeeName);
   return employee;
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const { id, firstName, lastName } = personalInfo;
+  const { managers, responsibleFor } = associatedWith;
+  return {
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
 }
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some((manager) => manager.id != id)
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
