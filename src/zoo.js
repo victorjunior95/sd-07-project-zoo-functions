@@ -28,7 +28,9 @@ function employeeByName(employeeName) {
   if (arguments.length === 0) {
     return {};
   }
-  const employee = data.employees.find(employeeAtual => employeeAtual.firstName === employeeName || employeeAtual.lastName === employeeName);
+  const employee = data.employees.find(employeeAtual => {
+    return employeeAtual.firstName === employeeName || employeeAtual.lastName === employeeName;
+  });
   return employee;
 }
 
@@ -45,7 +47,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some((manager) => manager.id != id)
+  return data.employees.some(manager => manager.id !== id);
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
