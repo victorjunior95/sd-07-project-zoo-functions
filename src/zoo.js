@@ -181,20 +181,20 @@ function increasePrices(percentage) {
 
 function employeeCoverage(...idOrName) {
   // fazendo
-  let resultado;
-  if(idOrName.length === 0){
-    resultado = listaEmployees.reduce((acc,func) => {
-      return {...acc,
-      [func.firstName + " " +func.lastName] : listaAnimal.map(nameAnimal => {
-        if(func.responsibleFor === nameAnimal.id){
-          return nomeAnimal.name
-        }
-      })
-      }
-    })
+  // let resultado;
+  // if(idOrName.length === 0){
+  //   resultado = listaEmployees.reduce((acc,func) => {
+  //     return {...acc,
+  //     [func.firstName + " " +func.lastName] : listaAnimal.map(nameAnimal => {
+  //       if(func.responsibleFor === nameAnimal.id){
+  //         return nomeAnimal.name
+  //       }
+  //     })
+  //     }
+  //   })
     
-  }
-  return resultado
+  // }
+  // return resultado
 }
 
 // console.log(employeeCoverage())
