@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require('./data');
+const data = require("./data");
 
 const { animals } = data;
 
@@ -19,8 +19,10 @@ function animalsByIds(...ids) {
 // console.log(animalsByIds())
 
 function animalsOlderThan(animal, age) {
-  const myAnimal = animals.find(animalName => animalName.name === animal);
-  const compareResult = myAnimal.residents.every(animalGroup => animalGroup.age > age);
+  const myAnimal = animals.find((animalName) => animalName.name === animal);
+  const compareResult = myAnimal.residents.every(
+    (animalGroup) => animalGroup.age > age
+  );
   return compareResult;
 }
 // console.log(animalsOlderThan('otters', 7));
@@ -30,9 +32,10 @@ function employeeByName(employeeName) {
   let object = {};
   if (employeeName) {
     object = employees.filter(
-      objectEmployer =>
+      (objectEmployer) =>
         objectEmployer.firstName === employeeName ||
-        objectEmployer.lastName === employeeName)[0];
+        objectEmployer.lastName === employeeName
+    )[0];
   }
   return object;
 }
@@ -56,7 +59,7 @@ function addEmployee(
   firstName,
   lastName,
   managers = [],
-  responsibleFor = [],
+  responsibleFor = []
 ) {
   const { employees } = data;
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
@@ -68,7 +71,7 @@ function addEmployee(
 
 function animalCount(species) {
   const object = {};
-  animals.forEach(animal => (object[animal.name] = animal.residents.length));
+  animals.forEach((animal) => (object[animal.name] = animal.residents.length));
   return species === undefined ? object : object[species];
 }
 // console.log(animalCount('lions'));
@@ -89,7 +92,7 @@ const namesResidentsLocation = (name, sex) => {
   const arrayAll = [];
 
   animals
-    .find(animal => animal.name === name)
+    .find((animal) => animal.name === name)
     .residents.forEach((info) => {
       arrayAll.push(info.name);
       if (info.sex === sex) {
@@ -109,7 +112,7 @@ const nameAnimals = (region, sort = false, sex) => {
   let object;
 
   animals
-    .filter(animal => animal.location === region)
+    .filter((animal) => animal.location === region)
     .forEach((animal) => {
       object = {};
       object[animal.name] = namesResidentsLocation(animal.name, sex);
@@ -124,19 +127,21 @@ const nameAnimals = (region, sort = false, sex) => {
 // console.log(nameAnimals('NE'));
 
 function animalMap(options) {
-  const location = ['NE', 'NW', 'SE', 'SW'];
+  const location = ["NE", "NW", "SE", "SW"];
   const object = {};
 
   location.forEach(
-    local =>
+    (local) =>
       (object[local] = animals
-        .filter(animal => animal.location === local)
-        .map(objectAnimal => objectAnimal.name)));
+        .filter((animal) => animal.location === local)
+        .map((objectAnimal) => objectAnimal.name))
+  );
 
   if (options !== undefined && options.includeNames !== undefined) {
     location.forEach(
-      local =>
-        (object[local] = nameAnimals(local, options.sorted, options.sex)));
+      (local) =>
+        (object[local] = nameAnimals(local, options.sorted, options.sex))
+    );
   }
   return object;
 }
@@ -159,9 +164,11 @@ function schedule(dayName) {
   const { hours } = data;
   const result = {};
   for (let i in hours) {
-    result[i] = `Open from ${Object.values(hours[i])[0]}am until ${Object.values(hours[i])[1] - 12}pm`;
-    if (i === 'Monday') {
-      result[i] = 'CLOSED';
+    result[i] = `Open from ${Object.values(hours[i])[0]}am until ${
+      Object.values(hours[i])[1] - 12
+    }pm`;
+    if (i === "Monday") {
+      result[i] = "CLOSED";
     }
   }
   return dayName ? dayNameExist(dayName, result) : result;
@@ -174,10 +181,12 @@ function oldestFromFirstSpecies(id) {
 
   let highestAge = 0;
 
-  const arrayIdAnimals = employees.filter(employe => employe.id === id)[0]
+  const arrayIdAnimals = employees.filter((employe) => employe.id === id)[0]
     .responsibleFor;
 
-  const arrayAnimal = animals.filter(animal => animal.id === arrayIdAnimals[0]);
+  const arrayAnimal = animals.filter(
+    (animal) => animal.id === arrayIdAnimals[0]
+  );
 
   arrayAnimal[0].residents.forEach((info) => {
     if (info.age > highestAge) {
@@ -185,7 +194,9 @@ function oldestFromFirstSpecies(id) {
     }
   });
 
-  const result = arrayAnimal[0].residents.filter(info => info.age === highestAge);
+  const result = arrayAnimal[0].residents.filter(
+    (info) => info.age === highestAge
+  );
 
   return Object.values(result[0]);
 }
@@ -210,10 +221,10 @@ const arraysId = (index) => {
 
   const result = [];
 
-  const arrayId = employees.map(employe => employe.responsibleFor);
+  const arrayId = employees.map((employe) => employe.responsibleFor);
 
   arrayId[index].forEach((id) => {
-    result.push(animals.filter(animal => animal.id === id)[0].name);
+    result.push(animals.filter((animal) => animal.id === id)[0].name);
   });
 
   return result;
@@ -224,7 +235,7 @@ const firstAndLastName = (idOrName, result) => {
   let name2;
   for (let i in result) {
     // console.log(i);
-    name2 = i.split(' ');
+    name2 = i.split(" ");
     // console.log(name2);
     name2.forEach((names) => {
       // console.log(name);
@@ -236,28 +247,35 @@ const firstAndLastName = (idOrName, result) => {
   return result;
 };
 
-const idOrNameExist = (idOrName, result) => {
+const nameId = (idOrName, result) => {
   const { employees } = data;
   let name;
 
-  if (employees.find(employe => employe.id === idOrName)) {
-    name = `${employees.find(employe => employe.id === idOrName).firstName
-      } ${employees.find(employe => employe.id === idOrName).lastName}`;
+  name = `${employees.find((employe) => employe.id === idOrName).firstName} ${
+    employees.find((employe) => employe.id === idOrName).lastName
+  }`;
 
-    for (let i in result) {
-      if (i === name) {
-        result = { [i]: result[i] };
-      }
+  for (let i in result) {
+    if (i === name) {
+      result = { [i]: result[i] };
     }
+  }
+  return result;
+};
+
+const idOrNameExist = (idOrName, result) => {
+  const { employees } = data;
+
+  if (employees.find((employe) => employe.id === idOrName)) {
+    result = nameId(idOrName, result);
   }
 
   result = firstAndLastName(idOrName, result);
   return result;
-}
+};
 
 function employeeCoverage(idOrName) {
   const { employees } = data;
-
   let result = {};
 
   employees.forEach((employe, index) => {
