@@ -29,7 +29,7 @@ const employeeByName = (employeeName) => {
 const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
 // Função createEmployee passou no code climate com ajuda do Isaac Batista no slack.
 
-const isManager = (id) => data.employees.some(manager => manager.managers.includes(id));
+const isManager = id => data.employees.some(manager => manager.managers.includes(id));
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
