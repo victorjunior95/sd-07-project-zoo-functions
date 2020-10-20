@@ -8,11 +8,6 @@ eslint no-unused-vars: [
   }
 ]
 */
-<<<<<<< HEAD
-
-=======
->>>>>>> a5bd6dfc13acdfd21c8290b6a3248b5850b6cb1d
-const { employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -21,21 +16,13 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   return data.animals.find(species => species.name === animal)
-<<<<<<< HEAD
     .residents.every(resident => resident.age >= age);
-=======
-  .residents.every(resident => resident.age >= age);
->>>>>>> a5bd6dfc13acdfd21c8290b6a3248b5850b6cb1d
 }
 
 function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
   return employees.find(name => name.firstName === employeeName ||
-<<<<<<< HEAD
     name.lastName === employeeName);
-=======
-  name.lastName === employeeName);
->>>>>>> a5bd6dfc13acdfd21c8290b6a3248b5850b6cb1d
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -45,11 +32,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-<<<<<<< HEAD
   return data.employees.some(employee => employee.managers.some(manager => manager === id));  
-=======
-  return employees.includes(employeId => employeId.managers === id);
->>>>>>> a5bd6dfc13acdfd21c8290b6a3248b5850b6cb1d
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
