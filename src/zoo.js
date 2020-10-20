@@ -76,7 +76,7 @@ function animalCount(species) {
 }
 // console.log(animalCount('lions'));
 
-function entryCalculator(entrants) {
+function entryCalculator(entrants = {}) {
   const { prices } = data;
   let value = 0;
   // for (let i in entrants) {
@@ -89,8 +89,9 @@ function entryCalculator(entrants) {
   }
   return value;
 }
-// console.log(entryCalculator({}));
-// console.log(entryCalculator({ 'Child': 1, 'Senior': 1 }));
+// console.log(entryCalculator());
+// console.log(entryCalculator({ 'Senior': 1 }));
+// console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 
 const namesResidentsLocation = (name, sex) => {
   const array = [];
@@ -214,20 +215,22 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   const { prices } = data;
-  const result = {};
+  // const resultPrices = prices;
+
   Object.entries(prices).forEach((price, index) => {
-    // console.log(price);
-    result[Object.keys(prices)[index]] = Object.values(prices)[index];
-    result[Object.keys(prices)[index]] += (Object.values(prices)[index] * percentage) / 100;
-    result[Object.keys(prices)[index]] = Math.round(result[Object.keys(prices)[index]] * 100) / 100;
+    let value = price[1];
+    value += (price[1] * percentage) / 100;
+    prices[price[0]] = Math.round(value * 100) / 100;
   });
-  // for (const i in result) {
-  //   result[i] += (result[i] * percentage) / 100;
-  //   result[i] = Math.round(result[i] * 100) / 100;
+
+  // for (let i in resultPrices) {
+  //   resultPrices[i] += (resultPrices[i] * percentage) / 100;
+  //   resultPrices[i] = Math.round(resultPrices[i] * 100) / 100;
   // }
-  return result;
+  return prices;
 }
 // console.log(increasePrices(50));
+// console.log(increasePrices(30));
 
 const arraysId = (index) => {
   const { employees } = data;
