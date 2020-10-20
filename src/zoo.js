@@ -9,14 +9,14 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require('./data');
+const { prices, employees, animals } = require('./data');
 
 function animalsByIds(...ids) {
-  return data.animals.filter(animal => ids.includes(animal.id));
+  return animals.filter(animal => ids.includes(animal.id));
 }
 
 function animalsOlderThan(animal, age) {
-  const reduct = data.animals.filter(element => element.name === animal);
+  const reduct = animals.filter(element => element.name === animal);
   return reduct[0].residents.every(newElement => newElement.age >= age);
 }
 
@@ -24,30 +24,35 @@ function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  return data.employees.find(employee => employee.firstName === employeeName
+  return employees.find(employee => employee.firstName === employeeName
     || employee.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  data.animals = { ...personalInfo, ...associatedWith };
-  const result = data.animals;
+  animals = { ...personalInfo, ...associatedWith };
+  const result = animals;
   return result;
 }
 
 function isManager(id) {
-  return data.employees.some(({ managers }) => managers.includes(id));
+  return employees.some(({ managers }) => managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
   // seu código aqui
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(entrants = 0) {
+  if (Object.entries(entrants).length === 0) return 0;
+  const price = prices;
+  let total = 0;
+  Object.keys(entrants).forEach(element => (total += entrants[element] * 
+    price[element]));
+  return total;
 }
 
 function animalMap(options) {
