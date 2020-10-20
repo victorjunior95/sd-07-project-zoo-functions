@@ -10,12 +10,12 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { animals: [...id] } = data;
-// console.log(id)
+
+const { animals } = data;
 
 function animalsByIds(...ids) {
-  if (ids === undefined) return []
-  return id.filter(animalId => ids.includes(animalId.id));
+  if (ids === undefined) return [];
+  return animals.filter(animalId => ids.includes(animalId.id));
   // return id.filter(animalId => animalId.id == ids) !! PK NAO FUNCIONA ASSIM? !!
   // return id.filter(animalId => animalId.id.includes(ids)) !! PK NAO FUNCIONA ASSIM? !!
 }
