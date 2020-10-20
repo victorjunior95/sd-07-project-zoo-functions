@@ -21,12 +21,13 @@ const employeeByName = (employeeName) => {
   if (employeeName === undefined) {
     return {};
   }
-  return data.employees.find(({ firstName, lastName }) => employeeName === firstName || employeeName === lastName);
+  return data.employees.find(({ firstName, lastName }) =>
+    employeeName === firstName || employeeName === lastName);
   // Solução encontrada após tirar dúvida no slack.
 }
 
-const createEmployee = (personalInfo, associatedWith) => {
-
+function createEmployee(personalInfo, associatedWith) {
+  // seu código aqui
 }
 
 function isManager(id) {
