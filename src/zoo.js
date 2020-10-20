@@ -117,11 +117,21 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const responsible = data.employees.find(employee => employee.id === id);
+  const animal = animalsByIds(responsible.responsibleFor[0])[0].residents;
+  animal.sort((a,b) => b.age - a.age);
+  return animal[0];
+}
+
+function roundToTwo(num) {    
+  return +(Math.round(num + "e+2")  + "e-2");
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const obj = Object.entries(data.prices).map(price => price[1] = roundToTwo(price[1] + ((price[1] * percentage)/100)));
+  data.prices.Adult = obj[0];
+  data.prices.Senior = obj[1];
+  data.prices.Child = obj[2];
 }
 
 function employeeCoverage(idOrName) {
