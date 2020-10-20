@@ -62,7 +62,7 @@ function entryCalculator(entrants) {
   if (paying === undefined || paying === []) {
     return 0;
   }
-   
+  
   return (Object.keys(paying).reduce((sum, currentValue) =>
   sum + (entrants[currentValue] * data.prices[currentValue])
 , 0));
