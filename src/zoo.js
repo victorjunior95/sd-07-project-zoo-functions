@@ -29,7 +29,7 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  animals = { ...personalInfo, ...associatedWith };
+  const animals = { ...personalInfo, ...associatedWith };
   const result = animals;
   return result;
 }
@@ -50,7 +50,7 @@ function entryCalculator(entrants = 0) {
   if (Object.entries(entrants).length === 0) return 0;
   const price = prices;
   let total = 0;
-  Object.keys(entrants).forEach(element => (total += entrants[element] * 
+  Object.keys(entrants).forEach(element => (total += entrants[element] *
     price[element]));
   return total;
 }
@@ -68,7 +68,10 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.entries(prices).forEach(element => {
+    prices[element[0]] = Math.ceil(element[1] * (percentage + 100)) / 100;
+  });
+  return prices;
 }
 
 function employeeCoverage(idOrName) {
