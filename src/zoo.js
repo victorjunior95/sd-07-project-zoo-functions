@@ -68,6 +68,49 @@ function entryCalculator(entrants) {
   }, 0);
 }
 
+function retrieveAvailableLocations() {
+  return ['NE', 'NW', 'SW', 'SE'];
+}
+
+function retrieveAnimalsByLocation(locations) {
+  const animalsByLocation = {};
+  const { animals } = data;
+
+  locations.forEach((location) => {
+    const filteredAnimalsByName = animals.filter(animal => animal.location === location)
+    .map(animal => animal.name);
+    animalsByLocation[location] = filteredAnimalsByName;
+  });
+
+  return animalsByLocation;
+}
+
+function retrieveAnimalsNameByLocation(locations, sorted, sex) {
+  const { animals } = data;
+  const animalsNameByLocation = {};
+
+  locations.forEach((location) => {
+    const filteredAnimalsName = animals.filter(animal => animal.location === location)
+    .map((animal) => {
+      const animalName = animal.name;
+      const residents = animal.residents
+      .filter((resident) => {
+        const needFiltering = sex !== undefined;
+        return needFiltering ? resident.sex === sex : true;
+      })
+      .map(resident => resident.name);
+
+      if (sorted) {
+        residents.sort();
+      }
+      return { [animalName]: residents };
+    });
+    animalsNameByLocation[location] = filteredAnimalsName;
+  });
+
+  return animalsNameByLocation;
+}
+
 function animalMap(options) {
   // Resolução a partir do plantão do instrutor Gabriel Oliva
   const locations = retrieveAvailableLocations();
