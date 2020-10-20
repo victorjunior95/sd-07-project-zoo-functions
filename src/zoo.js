@@ -58,8 +58,53 @@ function entryCalculator(entrants) {
     (acumulator += prices[person] * elementPrice), 0);
 }
 
+function animalLocations() {
+  return ['NE', 'NW', 'SW', 'SE'];
+}
+
+const animalReturnLocation = location => animals
+.filter(animal => animal.location === location);
+
+function animalByLocation(locations) {
+  const animalLocation = {};
+  locations.forEach((location) => {
+    const filterAnimal = animalReturnLocation(location)
+        .map(animal => animal.name);
+    if (filterAnimal.length > 0) animalLocation[location] = filterAnimal;
+  });
+  return animalLocation;
+}
+
+function animalsWithName(locations, sorted, sex) {
+  const animalsPerLocation = {};
+
+  locations.forEach((location) => {
+    const filterAnimals = animalReturnLocation(location).map((animal) => {
+      const animalName = animal.name;
+      const residents = animal.residents
+          .filter((resident) => {
+            const needFiltering = sex !== undefined;
+            return needFiltering ? resident.sex === sex : true;
+          })
+          .map(resident => resident.name);
+      if (sorted) residents.sort();
+      return { [animalName]: residents };
+    });
+
+    if (filterAnimals.length !== 0) animalsPerLocation[location] = filterAnimals;
+  });
+
+  return animalsPerLocation;
+}
+
 function animalMap(options) {
-  // seu código aqui
+  const locations = animalLocations();
+  if (!options) return animalByLocation(locations);
+  const { includeNames = false, sorted = false, sex } = options;
+  if (includeNames) {
+    return animalsWithName(locations, sorted, sex);
+  }
+  return animalByLocation(locations);
 }
 
 function calendar() {
