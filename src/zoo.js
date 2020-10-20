@@ -84,7 +84,7 @@ function entryCalculator(entrants) {
   return exit;
 }
 
-const objetoInicial = { NE: [], NW: [], SE: [], SW: [], }
+const objetoInicial = { NE: [], NW: [], SE: [], SW: [] };
 
 function categorizeAnimalsByLocation() {
   return data.animals.reduce((acc, specie) => {
@@ -93,9 +93,9 @@ function categorizeAnimalsByLocation() {
       [specie.location]: [
         ...acc[specie.location],
         specie.name,
-      ]
-    }
-  }, objetoInicial)
+      ],
+    };
+  }, objetoInicial);
 }
 
 function categorizeAnimalsIncludeNames() {
@@ -105,11 +105,11 @@ function categorizeAnimalsIncludeNames() {
       [specie.location]: [
         ...acc[specie.location],
         {
-          [specie.name]: specie.residents.map((resident) => resident.name)
+          [specie.name]: specie.residents.map((resident) => resident.name),
         },
-      ]
-    }
-  }, objetoInicial)
+      ],
+    };
+  }, objetoInicial);
 }
 
 function categorizeAnimalsIncludeNamesSorted() {
@@ -119,11 +119,11 @@ function categorizeAnimalsIncludeNamesSorted() {
       [specie.location]: [
         ...acc[specie.location],
         {
-          [specie.name]: (specie.residents.map((resident) => resident.name)).sort()
+          [specie.name]: specie.residents.map((resident) => resident.name).sort(),
         },
-      ]
-    }
-  }, objetoInicial)
+      ],
+    };
+  }, objetoInicial);
 }
 
 function categorizeAnimalsIncludeNamesSex(sex) {
@@ -133,12 +133,12 @@ function categorizeAnimalsIncludeNamesSex(sex) {
       [specie.location]: [
         ...acc[specie.location],
         {
-          [specie.name]: (specie.residents.filter((resident) => resident.sex === sex))
-            .map((resident) => resident.name)
+          [specie.name]: specie.residents.filter((resident) => resident.sex === sex)
+            .map((resident) => resident.name),
         },
-      ]
-    }
-  }, objetoInicial)
+      ],
+    };
+  }, objetoInicial);
 }
 
 function categorizeAnimalsIncludeNamesSexSorted(sex) {
@@ -148,13 +148,13 @@ function categorizeAnimalsIncludeNamesSexSorted(sex) {
       [specie.location]: [
         ...acc[specie.location],
         {
-          [specie.name]: (specie.residents.filter((resident) => resident.sex === sex))
+          [specie.name]: specie.residents.filter((resident) => resident.sex === sex)
             .map((resident) => resident.name)
-            .sort()
+            .sort(),
         },
-      ]
-    }
-  }, objetoInicial)
+      ],
+    };
+  }, objetoInicial);
 }
 
 function animalMap(options) {
