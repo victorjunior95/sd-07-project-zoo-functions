@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+//const { employees, animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -85,19 +86,32 @@ function entryCalculator(entrants) {
   return (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
 }
 
-const animalZone = zone =>
-  data.animals.filter(animal => animal.location === zone).map(animal => `${animal.name}`);
-
 function animalMap(options) {
   const locations = ['NE', 'NW', 'SE', 'SW'];
   let animalObj = {};
-  if (options === undefined) {
-    const animalsObj = locations.map(zone => ({ [zone]: animalZone(zone) }));
-    animalsObj.forEach((obj) => {
-      animalObj = Object.assign(animalObj, obj);
-      return animalObj;
+  const { includeNames, sorted, sex } = (options === undefined) ? false : options;
+  const animalList = locations.map(zone => data.animals.filter(animal =>
+    animal.location === zone));
+
+  animalList.forEach(animal => {
+    animalObj[animal[0].location] = animal.map(animalId => {
+      if (includeNames) {
+        if (sorted) {
+          if (sex !== undefined) {
+            return ({[animalId.name] : animalId.residents.filter(resident => resident.sex === sex).
+              map(resident => resident.name).sort()});
+          }
+          return ({[animalId.name] : animalId.residents.map(resident => resident.name).sort()});
+        }
+        if (sex !== undefined) {
+          return ({[animalId.name] : animalId.residents.filter(resident => resident.sex === sex).
+            map(resident => resident.name)});
+        }
+        return ({[animalId.name] : animalId.residents.map(resident => resident.name)});
+      }
+      return animalId.name;
     });
-  }
+  });  
   return animalObj;
 }
 
@@ -149,8 +163,10 @@ function employeeCoverage(idOrName) {
   const employeeList = (idOrName === undefined) ? data.employees : [data.employees.find(employ =>
     (employ.firstName === idOrName || employ.lastName === idOrName || employ.id === idOrName))];
   employeeList.forEach(employee =>
-    (employeeObject[`${employee.firstName} ${employee.lastName}`] = data.animals.filter(animal =>
-      employee.responsibleFor.includes(animal.id)).map(animal => animal.name)));
+    (employeeObject[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor
+    .map(responsibilityId => data.animals
+      .find(animal => animal.id === responsibilityId).name)));
+
   return employeeObject;
 }
 
