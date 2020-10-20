@@ -90,11 +90,11 @@ function animalMap(options) {
 }
 
 function transformDay(objectParam) {
-  retorno = {}
-  let dia = Object.entries(objectParam).forEach(elemento => {
-    retorno[elemento[0]] = `Open from ${elemento[1].open}am until ${elemento[1].close-12}pm`
+  const retorno = {};
+  Object.entries(objectParam).forEach((elemento) => {
+    retorno[elemento[0]] = `Open from ${elemento[1].open}am until ${elemento[1].close - 12}pm`;
     if (elemento[1].open - elemento[1].close === 0) {
-      retorno[elemento[0]] = `CLOSED`;
+      retorno[elemento[0]] = 'CLOSED';
     }
   });
   return retorno;
@@ -104,7 +104,7 @@ function schedule(dayName) {
   let response = hours;
   if (dayName !== undefined) {
     response = Object.entries(hours).find(elemento => elemento[0] === dayName);
-    response = {[response[0]] : response[1]};
+    response = { [response[0]]: response[1] };
   }
   response = transformDay(response);
   return response;
