@@ -78,9 +78,16 @@ function schedule(dayName) {
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
-
 function increasePrices(percentage) {
   // seu código aqui
+   catchPrices= data.prices;
+  for (let i in catchPrices){
+  let increase = catchPrices[i]* (percentage / 100);
+  let around = Math.round((catchPrices[i] + increase) * 100) / 100;
+  catchPrices[i]=around;
+  } 
+
+  return catchPrices; 
 }
 
 function employeeCoverage(idOrName) {
