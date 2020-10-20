@@ -185,43 +185,35 @@ const createArrAnimalsForLocation = (arrOfLocation) => {
   const arrAnimalsFromSE = [];
   const arrAnimalsFromSW = [];
 
-  animals.forEach(object => {
+  animals.forEach((object) => {
     if (object.location === arrOfLocation[0]) arrAnimalsFromNE.push(object.name);
     if (object.location === arrOfLocation[1]) arrAnimalsFromNW.push(object.name);
     if (object.location === arrOfLocation[2]) arrAnimalsFromSE.push(object.name);
     if (object.location === arrOfLocation[3]) arrAnimalsFromSW.push(object.name);
   });
 
-  return arrNamesForLocation = [arrAnimalsFromNE, arrAnimalsFromNW, arrAnimalsFromSE, arrAnimalsFromSW];
+  return [arrAnimalsFromNE, arrAnimalsFromNW, arrAnimalsFromSE, arrAnimalsFromSW];
 };
 
 const createArrLocal = () => {
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set (Hamaji);
 
-  let arrOfLocation = new Set();
+  const arrOfLocation = new Set();
   animals.forEach(object => arrOfLocation.add(object.location));
   return [...arrOfLocation];
-};
-
-const testOne = (arrOfLocation, arrNamesForLocation) => {
-  return arrOfLocation.reduce((result, local, index) => {
-    result[local] = arrNamesForLocation[index];
-    return result;
-  }, {});
 };
 
 const getSex = (arrOfObjects, sex) => {
   let sexArr = arrOfObjects.map((animal) => {
     if (animal.sex === sex) return animal;
+    return false;
   });
-  sexArr = sexArr.filter(element => element !== undefined);
+  sexArr = sexArr.filter(element => element);
   return sexArr;
 };
 
 const arrForNames = (animal, sex) => {
-  let arrOfObjects = animals.filter((item) => {
-    if (item.name === animal) return item
-  });
+  let arrOfObjects = animals.filter(item => item.name === animal);
 
   arrOfObjects = arrOfObjects[0];
   arrOfObjects = arrOfObjects.residents;
@@ -229,27 +221,26 @@ const arrForNames = (animal, sex) => {
   return arrOfObjects.map(item => item.name);
 };
 
-const putInObject = (arrOfNames, arrOfLocation) => {
-  return arrOfLocation.reduce((result, local, index) => {
+const initialObject = (arrOfNames, arrOfLocation) => arrOfLocation
+.reduce((result, local, index) => {
     result[local] = arrOfNames[index];
     return result;
   }, {});
-}
 
 const functionForIncludeNames = (arrOfLocation, testOne, sorted, sex) => {
-  
+
   const expectedInArr = arrOfLocation.map((local) => {
     const animalsForLocation = testOne[local];
-    
+
     return animalsForLocation.map((animal) => {
-      const testeObjeto = {};
+      const expectedObject = {};
       const expectedValue = arrForNames(animal, sex);
       if (sorted) expectedValue.sort();
-      testeObjeto[animal] = expectedValue;
-      return testeObjeto;
+      expectedObject[animal] = expectedValue;
+      return expectedObject;
     });
   });
-  return putInObject(expectedInArr, arrOfLocation);
+  return initialObject(expectedInArr, arrOfLocation);
 };
 
 function animalMap(options) {
@@ -257,18 +248,23 @@ function animalMap(options) {
 
   const arrOfLocation = createArrLocal();
   const arrNamesForLocation = createArrAnimalsForLocation(arrOfLocation);
-  
-  if (options === undefined) return testOne(arrOfLocation, arrNamesForLocation);
-  
+
+  if (options === undefined) return initialObject(arrNamesForLocation, arrOfLocation);
+
   const { includeNames } = options;
-  
+
   if (includeNames) {
     const { sorted } = options;
     const { sex } = options;
-    
-    result = functionForIncludeNames(arrOfLocation, testOne(arrOfLocation, arrNamesForLocation), sorted, sex);
+
+    result = functionForIncludeNames(
+      arrOfLocation,
+      initialObject(arrNamesForLocation, arrOfLocation),
+      sorted,
+      sex
+    );
   } else {
-    result = testOne(arrOfLocation, arrNamesForLocation);
+    result = initialObject(arrNamesForLocation, arrOfLocation);
   }
   return result;
 }
