@@ -242,12 +242,12 @@ const arraysId = (index) => {
 };
 // console.log(arraysId())
 
-const conditionName = (name2, indexJ, idOrName, result, indexI, ) => {
+const conditionName = (name2, indexJ, idOrName, result, indexI) => {
   if (name2[indexJ] === idOrName) {
     result = { [Object.keys(result)[indexI]]: result[Object.keys(result)[indexI]] };
   }
   return result;
-}
+};
 
 const firstAndLastName = (idOrName, result) => {
   let name2;
