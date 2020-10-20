@@ -33,7 +33,7 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  if (employeeName !== null && employeeName !== undefined) {
+  if (!employeeName) {
     const employee = data.employees.find(function (person) {
       return person.firstName === employeeName || person.lastName === employeeName;
     }); return employee;
@@ -70,7 +70,7 @@ function addEmployee(...information) {
 }
 
 function animalCount(species) {
-  if (species === null || species === undefined) {
+  if (!species) {
     const animalList = data.animals;
     const objAnimalCount = animalList.reduce(function (acc, it) {
       acc[it.name] = it.residents.length;
@@ -87,12 +87,13 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  if (entrants === null || entrants === undefined || Object.values(entrants).length === 0) {
+  if (!entrants) {
     return 0;
   }
   {
     const { Adult = 0, Child = 0, Senior = 0 } = entrants;
-    const priceTotal = (Adult * data.prices.Adult) + (Child * data.prices.Child) + (Senior * data.prices.Senior);
+    const { prices } = data;
+    const priceTotal = (Adult * prices.Adult) + (Child * prices.Child) + (Senior * prices.Senior);
     return priceTotal;
   }
 }
@@ -103,7 +104,7 @@ function animalMap(options) {
 
 function schedule(dayName) {
   const timeTable = {};
-  if (dayName === null || dayName === undefined || Object.values(dayName).length === 0) {
+  if (!dayName) {
     const days = Object.keys(data.hours);
     days.forEach(function (nameday) {
       if (nameday === 'Monday') {
