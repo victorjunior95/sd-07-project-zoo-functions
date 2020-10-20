@@ -131,7 +131,7 @@ function animalMap(options) {
   //     }
   //   );
   // }
-  return resultado;
+  // return resultado;
 }
 
 function schedule(...dayName) {
