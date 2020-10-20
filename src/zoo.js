@@ -90,20 +90,20 @@ function retrieveAvailableLocations() {
 
 function retrieveAnimalsPerLocation(location) {
   const animalsPerLocation = {};
-  location.forEach((location) => {
+  location.forEach((where) => {
     const filteredAnimals = animals
-    .filter((animal) => animal.location === location)
-    .map((animal) => animal.name);
-    if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+    .filter(animal => animal.location === where)
+    .map(animal => animal.name);
+    if (filteredAnimals.length !== 0) animalsPerLocation[where] = filteredAnimals;
   });
   return animalsPerLocation;
 }
 
 function retrieveAnimalsPerLocationWithName(location, sorted, sex) {
   const animalsPerLocation = {};
-  location.forEach((location) => {
+  location.forEach((where) => {
     const filteredAnimals = animals
-    .filter((animal) => animal.location === location)
+    .filter(animal => animal.location === where)
     .map((animal) => {
       const animalName = animal.name;
       const residents = animal.residents
@@ -111,15 +111,14 @@ function retrieveAnimalsPerLocationWithName(location, sorted, sex) {
         const needFiltering = sex !== undefined;
         if (needFiltering) {
           return resident.sex === sex;
-        } else {
-          return true;
         }
+        return true;
       })
-      .map((resident) => resident.name);
+      .map(resident => resident.name);
       if (sorted) residents.sort();
       return { [animalName]: residents };
     });
-    if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+    if (filteredAnimals.length !== 0) animalsPerLocation[where] = filteredAnimals;
   });
   return animalsPerLocation;
 }
@@ -130,9 +129,8 @@ function animalMap(options) {
   const { includeNames = false, sorted = false, sex } = options;
   if (includeNames) {
     return retrieveAnimalsPerLocationWithName(locations, sorted, sex);
-  } else {
-    return retrieveAnimalsPerLocation(locations);
   }
+  return retrieveAnimalsPerLocation(locations);
 }
 
 
@@ -153,11 +151,13 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   const employeePerId = employees.find(employee => employee.id === id);
-  const animalResponsible = animals.find((animal) => {
-    return animal.id === employeePerId.responsibleFor[0];
-  });
-  const oldestSpecie = animalResponsible.residents.reduce((previous, curr) => {
-    return previous.age < curr.age ? curr : previous;
+  const animalResponsible = animals.find(animal => animal.id === employeePerId.responsibleFor[0]);
+  const oldestSpecie = animalResponsible.residents
+  .reduce((previous, curr) => {
+    if (previous.age < curr.age) {
+      return curr;
+    }
+    return previous;
   });
   return [oldestSpecie.name, oldestSpecie.sex, oldestSpecie.age];
 }
