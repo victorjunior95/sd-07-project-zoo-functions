@@ -114,14 +114,14 @@ function createFirstObject(regions, list) {
 
 function getAnimalsByRegion(item) {
   return ((data.animals.filter(animal => animal.name === item)).map(names => 
-    names.residents))[0].map(final => final.name);
+    names.residents))[0];
 }
 function animalMapArgument(regions, list, list2) {
   const result = createFirstObject(regions, list);
   result.forEach((element, index) => {
     element.forEach(item => {
       let object = {};
-      object[item] = getAnimalsByRegion(item);
+      object[item] = getAnimalsByRegion(item).map(final => final.name);
       list2[regions[index]].push(object);
     });
   });
@@ -133,7 +133,7 @@ function animalMapSorted(regions, list, list2) {
   result.forEach((element, index) => {
     element.forEach(item => {
       let object = {};
-      object[item] = getAnimalsByRegion(item).sort();
+      object[item] = getAnimalsByRegion(item).map(final => final.name).sort();
       list2[regions[index]].push(object);
     });
   });
@@ -141,8 +141,7 @@ function animalMapSorted(regions, list, list2) {
 }
 
 function getAnimalsBySex(item, entry) {
-  return ((((data.animals.filter(animal => animal.name === item)).map(names => 
-    names.residents))[0]).filter(key => key.sex === entry.sex)).map(final => final.name);
+  return ((getAnimalsByRegion(item)).filter(key => key.sex === entry.sex)).map(final => final.name);
 }
 
 function animalMapBySex(regions, list, list2, entry) {
