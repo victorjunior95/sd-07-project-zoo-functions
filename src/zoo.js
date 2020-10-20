@@ -66,29 +66,11 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // const regions = [NE, NW, SE, SW]
-  // const neAnimals = data.animals.filter(animal => animal.location === 'NE');
-  // const nwAnimals = data.animals.filter(animal => animal.location === 'NW');
-  // const seAnimals = data.animals.filter(animal => animal.location === 'SE');
-  // const swAnimals = data.animals.filter(animal => animal.location === 'SW');
-  // if (options === undefined) {
-  //   return {
-  //     NE: neAnimals.map(animal => animal.name),
-  //     NW: nwAnimals.map(animal => animal.name),
-  //     SE: seAnimals.map(animal => animal.name),
-  //     SW: swAnimals.map(animal => animal.name),
-  //   }
-  // }
+  // .
 }
 
 function schedule(dayName) {
-  // Object.keys(data.hours).forEach(day => data.hours[day] =
-  // `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`);
-  // data.hours.Monday = 'CLOSED';
-  // if (dayName === undefined) {
-  //   return data.hours;
-  // }
-  //  return { [dayName]: data.hours[dayName] };
+  // .
 }
 
 function oldestFromFirstSpecies(id) {
