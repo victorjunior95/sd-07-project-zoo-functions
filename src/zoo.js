@@ -210,14 +210,22 @@ const testOne = (arrOfLocation, arrNamesForLocation) => {
   }, {});
 };
 
-const arrForNames = (animal) => {
+const getSex = (arrOfObjects, sex) => {
+  let sexArr = arrOfObjects.map((animal) => {
+    if (animal.sex === sex) return animal;
+  });
+  sexArr = sexArr.filter(element => element !== undefined);
+  return sexArr;
+};
+
+const arrForNames = (animal, sex) => {
   let arrOfObjects = animals.filter((item) => {
     if (item.name === animal) return item
   });
 
   arrOfObjects = arrOfObjects[0];
   arrOfObjects = arrOfObjects.residents;
-
+  if (sex !== undefined) arrOfObjects = getSex(arrOfObjects, sex);
   return arrOfObjects.map(item => item.name);
 };
 
@@ -228,15 +236,17 @@ const putInObject = (arrOfNames, arrOfLocation) => {
   }, {});
 }
 
-const functionForIncludeNames = (arrOfLocation, testOne) => {
+const functionForIncludeNames = (arrOfLocation, testOne, sorted, sex) => {
   
   const expectedInArr = arrOfLocation.map((local) => {
     const animalsForLocation = testOne[local];
     
     return animalsForLocation.map((animal) => {
       const testeObjeto = {};
-      testeObjeto[animal] = arrForNames(animal);
-      return testeObjeto
+      const expectedValue = arrForNames(animal, sex);
+      if (sorted) expectedValue.sort();
+      testeObjeto[animal] = expectedValue;
+      return testeObjeto;
     });
   });
   return putInObject(expectedInArr, arrOfLocation);
@@ -253,9 +263,13 @@ function animalMap(options) {
   const { includeNames } = options;
   
   if (includeNames) {
-    result = functionForIncludeNames(arrOfLocation, testOne(arrOfLocation, arrNamesForLocation));
+    const { sorted } = options;
+    const { sex } = options;
+    
+    result = functionForIncludeNames(arrOfLocation, testOne(arrOfLocation, arrNamesForLocation), sorted, sex);
+  } else {
+    result = testOne(arrOfLocation, arrNamesForLocation);
   }
-
   return result;
 }
 
