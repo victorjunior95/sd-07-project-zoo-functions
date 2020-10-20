@@ -57,23 +57,23 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-
-  // seu código aqui
+  const { prices } = data;
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  const keys = Object.keys(entrants);
+  return keys.reduce((total, key) => {
+    const number = entrants[key];
+    return total + (number * prices[key]);
+  }, 0);
 }
 
 function animalMap(options) {
-
   // seu código aqui
 }
 
 function schedule(dayName) {
-  const { hours } = data;
-  if (dayName === undefined) {
-    const arrHours = Object.entries(hours);
-    arrHours.forEach(modifier);
-    return hours;
-  }
-  return { [dayName]: hours[dayName] };
+
 
   // seu código aqui
 }
