@@ -1,4 +1,4 @@
-const { animals, employees } = require('./data');
+const { animals, employees, hours, prices } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -74,16 +74,56 @@ function animalCount(species) {
   return animals.find(animal => animal.name === species).residents.length;
 }
 
+// Retorna 0 se nenhum argumento for passado
+// Retorna 0 se um objeto vazio for passado
+// Retorna o preço total a ser cobrado dado o número de adultos, crianças e idosos
+
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (entrants !== {} && entrants !== undefined) {
+    const entrantKeys = Object.keys(entrants);
+    return entrantKeys.reduce((acc, curr) => {
+      acc += entrants[curr] * prices[curr];
+      return acc;
+    }, 0);
+  }
+  return 0;
 }
 
 function animalMap(options) {
-  //
+  // if (!options) {
+  //   return animalByLocation(options);
+  // }
 }
 
+// function animalByLocation() {
+  // return animals.reduce((acc, specie) => {
+  // console.log('current: ', specie);
+  // console.log('acumulado: ', acc);
+  //   return {
+  //     ...acc,
+  //     [specie.location]: [
+  //       ...acc[specie.location],
+  //       // specie.name
+  //       {
+  //         [specie.name]: specie.residents.map(resident => resident.name)
+  //       }
+  //     ]
+  //   };
+  // }, {
+  //   NE: [],
+  //   NW: [],
+  //   SE: [],
+  //   SW: []
+  // });
+// }
+
+// console.log(animalMap('lions'));
+
+// Sem parâmetros, retorna um cronograma legível para humanos
+// Se um único dia for passado, retorna somente este dia em um formato legível para humanos
+
 function schedule(dayName) {
-  // seu código aqui
+  return hours;
 }
 
 function oldestFromFirstSpecies(id) {
