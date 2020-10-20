@@ -112,9 +112,18 @@ function oldestFromFirstSpecies(id) {
   return Object.values(res[0]);
 }
 
+function arredondar(num) {
+  return +(Math.round((num + Number.EPSILON) * 100) / 100);
+}
+
 function increasePrices(percentage) {
   // seu código aqui
-
+  const valor = Object.values(prices);
+  const res = [];
+  valor.forEach(i => res.push(arredondar(i + ((i * percentage) / 100))));
+  prices.Adult = res[0];
+  prices.Senior = res[1];
+  prices.Child = res[2];
 }
 
 function employeeCoverage(idOrName) {
