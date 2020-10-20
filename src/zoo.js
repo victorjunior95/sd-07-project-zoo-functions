@@ -122,8 +122,7 @@ const location = {
 
 function returnAnimals() {
   return animals.reduce((acc, specie) => {
-    let resultado; 
-    resultado = {
+    const resultado = {
       ...acc,
       [specie.location]: [...acc[specie.location], specie.name],
     };
