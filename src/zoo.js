@@ -35,7 +35,7 @@ const addEmployee =
   (id, firstName, lastName, managers = [], responsibleFor = []) =>
     data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 
-const animalCount = species => {
+const animalCount = (species) => {
   if (species === undefined) {
     return data.animals.reduce((animal, { name, residents }) => {
       animal[name] = residents.length;
@@ -43,14 +43,14 @@ const animalCount = species => {
     }, {});
   }
   return data.animals.find(count => count.name === species).residents.length;
-}
+};
 
 const entryCalculator = (entrants) => {
   if (entrants === undefined || entrants === {}) {
     return 0;
   }
   return Object.entries(entrants).reduce((acc, curr) => acc + (data.prices[curr[0]] * curr[1]), 0);
-}
+};
 
 function animalMap(options) {
   // seu código aqui
