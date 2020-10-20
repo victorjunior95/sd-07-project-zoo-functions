@@ -83,6 +83,141 @@ function entryCalculator(entrants) {
   return price;
 }
 
+
+function animalsByRegion() {
+  const initialObj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  return animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        specie.name,
+      ],
+    };
+  }, initialObj);
+}
+
+function animalsByRegionWithName() {
+  const initialObj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  return animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        { [specie.name]: specie.residents.map(resident => resident.name) },
+      ],
+    };
+  }, initialObj);
+}
+
+function animalsByRegionWithNameSorted() {
+  const initialObj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  return animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        { [specie.name]: specie.residents.map(resident => resident.name).sort() },
+      ],
+    };
+  }, initialObj);
+}
+
+function malesByRegionWithName() {
+  const initialObj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  return animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        { [specie.name]: specie.residents.filter((resident) => {
+          return resident.sex === 'male';
+        }).map(resident => resident.name) },
+      ],
+    };
+  }, initialObj);
+}
+
+function malesByRegionWithNameSorted() {
+  const initialObj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  return animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        { [specie.name]: specie.residents.filter((resident) => {
+          return resident.sex === 'male';
+        }).map(resident => resident.name).sort() },
+      ],
+    };
+  }, initialObj);
+}
+
+function femalesByRegionWithName() {
+  const initialObj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  return animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        { [specie.name]: specie.residents.filter((resident) => {
+          return resident.sex === 'female';
+        }).map(resident => resident.name) },
+      ],
+    };
+  }, initialObj);
+}
+
+function femalesByRegionWithNameSorted() {
+  const initialObj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  return animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        { [specie.name]: specie.residents.filter((resident) => {
+          return resident.sex === 'female';
+        }).map(resident => resident.name).sort() },
+      ],
+    };
+  }, initialObj);
+}
+
 function animalMap(options) {
   if (!options || !options.includeNames) {
     return animalsByRegion();
@@ -108,140 +243,6 @@ function animalMap(options) {
   return null;
 }
 
-function animalsByRegion () {
-  const initialObj = {
-    NE: [],
-    NW: [],
-    SE: [],
-    SW: [],
-  }
-  return animals.reduce((acc, specie) => {
-    return {
-      ...acc,
-      [specie.location]: [
-        ...acc[specie.location],
-        specie.name
-      ]
-    }
-  }, initialObj)
-}
-
-function animalsByRegionWithName () {
-  const initialObj = {
-    NE: [],
-    NW: [],
-    SE: [],
-    SW: [],
-  }
-  return animals.reduce((acc, specie) => {
-    return {
-      ...acc,
-      [specie.location]: [
-        ...acc[specie.location],
-        {[specie.name]: specie.residents.map(resident => resident.name)}
-      ]
-    }
-  }, initialObj)
-}
-
-function animalsByRegionWithNameSorted () {
-  const initialObj = {
-    NE: [],
-    NW: [],
-    SE: [],
-    SW: [],
-  }
-  return animals.reduce((acc, specie) => {
-    return {
-      ...acc,
-      [specie.location]: [
-        ...acc[specie.location],
-        {[specie.name]: specie.residents.map(resident => resident.name).sort()}
-      ]
-    }
-  }, initialObj)
-}
-
-function malesByRegionWithName () {
-  const initialObj = {
-    NE: [],
-    NW: [],
-    SE: [],
-    SW: [],
-  }
-  return animals.reduce((acc, specie) => {
-    return {
-      ...acc,
-      [specie.location]: [
-        ...acc[specie.location],
-        {[specie.name]: specie.residents.filter((resident) => {
-          return resident.sex === 'male';
-        }).map(resident => resident.name)}
-      ]
-    }
-  }, initialObj)
-}
-
-function malesByRegionWithNameSorted () {
-  const initialObj = {
-    NE: [],
-    NW: [],
-    SE: [],
-    SW: [],
-  }
-  return animals.reduce((acc, specie) => {
-    return {
-      ...acc,
-      [specie.location]: [
-        ...acc[specie.location],
-        {[specie.name]: specie.residents.filter((resident) => {
-          return resident.sex === 'male';
-        }).map(resident => resident.name).sort()}
-      ]
-    }
-  }, initialObj)
-}
-
-function femalesByRegionWithName () {
-  const initialObj = {
-    NE: [],
-    NW: [],
-    SE: [],
-    SW: [],
-  }
-  return animals.reduce((acc, specie) => {
-    return {
-      ...acc,
-      [specie.location]: [
-        ...acc[specie.location],
-        {[specie.name]: specie.residents.filter((resident) => {
-          return resident.sex === 'female';
-        }).map(resident => resident.name)}
-      ]
-    }
-  }, initialObj)
-}
-
-function femalesByRegionWithNameSorted () {
-  const initialObj = {
-    NE: [],
-    NW: [],
-    SE: [],
-    SW: [],
-  }
-  return animals.reduce((acc, specie) => {
-    return {
-      ...acc,
-      [specie.location]: [
-        ...acc[specie.location],
-        {[specie.name]: specie.residents.filter((resident) => {
-          return resident.sex === 'female';
-        }).map(resident => resident.name).sort()}
-      ]
-    }
-  }, initialObj)
-}
-
 function schedule(dayName) {
   const calendar = {};
   Object.keys(hours).forEach((day) => {
@@ -262,10 +263,10 @@ function oldestFromFirstSpecies(id) {
   const animalResponsible = animals.find((animal) => {
     return animal.id === employeePerId.responsibleFor[0];
   });
-  const oldest = animalResponsible.residents.reduce((oldest, curr) => {
-    return oldest.age < curr.age ? curr : oldest;
-  })
-  return [oldest.name, oldest.sex, oldest.age];
+  const oldestSpecie = animalResponsible.residents.reduce((previous, curr) => {
+    return previous.age < curr.age ? curr : previous;
+  });
+  return [oldestSpecie.name, oldestSpecie.sex, oldestSpecie.age];
 }
 
 function increasePrices(percentage) {
