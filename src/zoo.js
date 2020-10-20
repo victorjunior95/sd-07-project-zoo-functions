@@ -15,13 +15,14 @@ const { animals } = data;
 
 function animalsByIds(...ids) {
   if (ids === undefined) return [];
-  return animals.filter(animalId => ids.includes(animalId.id));
+  return animals.filter(animal => ids.includes(animal.id));
   // return id.filter(animalId => animalId.id == ids) !! PK NAO FUNCIONA ASSIM? !!
   // return id.filter(animalId => animalId.id.includes(ids)) !! PK NAO FUNCIONA ASSIM? !!
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const species = animals.find(specie => specie.name === animal);
+  return species.residents.every(animal => animal.age >= age);
 }
 
 function employeeByName(employeeName) {
