@@ -113,45 +113,65 @@ function entryCalculator(entrants) {
 
 //-------------------------------------------------------------------------------------
 
-// const firstOption = () => {
-//   const ne = animals
-//     .filter(element => element.location === 'NE')
-//     .map(element => element.name);
-//   const nw = animals
-//     .filter(element => element.location === 'NW')
-//     .map(element => element.name);
-//   const se = animals
-//     .filter(element => element.location === 'SE')
-//     .map(element => element.name);
-//   const sw = animals
-//     .filter(element => element.location === 'SW')
-//     .map(element => element.name);
-//   const obj = {};
-//   obj.NE = ne;
-//   obj.NW = nw;
-//   obj.SE = se;
-//   obj.SW = sw;
-//   return obj;
-// };
+const retrieveAvaiableLocation = () => {
+  return ['NE', 'NW', 'SE', 'SW'];
+};
 
-function animalMap(objeto) {
-  // if (objeto === undefined) {
-  //   const obj = firstOption();
-  //   return obj;
-  // }
-  // if (Object.keys(objeto).length === 1 && objeto.includeNames === true) {
-  //   const obj = secondOption();
-  //   return obj;
-  // }
-  // if (
-  //   objeto.includeNames === true &&
-  //   objeto.sorted === true &&
-  //   Object.keys(objeto).length === 2
-  // ) {
-  //   const obj = secondOption(true);
-  //   return obj;
-  // }
-  // return 0;
+const retrieveFilteredAnimalsByLocation = location =>
+  animals.filter(animal => animal.location === location);
+
+// prettier-ignore
+const retrieveAnimalsByLocation = (locations) => {
+  const animalsPerLocation = {};
+
+  locations.forEach(location => {
+    const filteredAnimals = retrieveFilteredAnimalsByLocation(location).map(
+      animal => animal.name,
+    );
+
+    animalsPerLocation[location] = filteredAnimals;
+  });
+
+  return animalsPerLocation;
+};
+
+// prettier-ignore
+const retrieveAnimalsByLocationWithName = (locations, sorted, sex) => {
+  const animalsPerLocation = {};
+
+  locations.forEach(location => {
+    const filteredAnimals = retrieveFilteredAnimalsByLocation(location).map(
+      (animal) => {
+        const animalName = animal.name;
+        const residents = animal.residents
+          .filter((resident) => {
+            const needFiltering = sex !== undefined;
+            if (needFiltering) return resident.sex === sex;
+            return true;
+          })
+          .map(resident => resident.name);
+
+        if (sorted) residents.sort();
+
+        return { [animalName]: residents };
+      },
+    );
+
+    animalsPerLocation[location] = filteredAnimals;
+  });
+
+  return animalsPerLocation;
+};
+
+function animalMap(options) {
+  const locations = retrieveAvaiableLocation();
+
+  if (!options || !includeNames) return retrieveAnimalsByLocation(locations);
+
+  const { includeNames = false, sorted = false, sex } = options;
+
+  if (includeNames)
+    return retrieveAnimalsByLocationWithName(locations, sorted, sex);
 }
 
 //-------------------------------------------------------------------------------------
