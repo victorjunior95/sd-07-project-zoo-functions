@@ -9,13 +9,14 @@ eslint no-unused-vars: [
 ]
 */
 
+const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
   // Caso receba nenhum parâmetro, necessário retornar um array vazio
   // Ao receber como parâmetro um único id, retorna os animais com este id
   // Ao receber mais de um id, retorna os animais que têm um desses ids
-  return ids.map(animalsId => data.animals.find(animals => animals.id === animalsId));
+  return ids.map(animalsId => animals.find(animalsById => animalsById.id === animalsId));
 }
 function animalsOlderThan(animal, age) {
   // Ao passar o nome de uma espécie e uma idade, testa se todos os animais
@@ -60,7 +61,16 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // seu código aqui
+  // Sem parâmetros, retorna animais e suas quantidades
+  // Com o nome de uma espécie de animal, retorna somente a quantidade
+  if (!species) {
+    return animals.reduce((acc, animalBySpecie) => {
+      acc[animalBySpecie.name] = animalBySpecie.residents.length;
+      return acc;
+    }, {});
+  }
+
+  return animals.find(({ name }) => name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
