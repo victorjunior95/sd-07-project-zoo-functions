@@ -1,10 +1,10 @@
 /*
 eslint no-unused-vars: [
-  "error",
+  'error',
   {
-    "args": "none",
-    "vars": "local",
-    "varsIgnorePattern": "data"
+    'args': 'none',
+    'vars': 'local',
+    'varsIgnorePattern': 'data'
   }
 ]
 */
@@ -86,8 +86,82 @@ function entryCalculator(entrants) {
   return parseFloat(total.toFixed(2));
 }
 
+const initialValue = (initial, animals) => {
+  animals.forEach((specie) => {
+    initial[specie.location] = [];
+  });
+  return initial;
+};
+
+function returnDefault() {
+  const animals = data.animals;
+  const init = initialValue({}, animals);
+  return animals.reduce(
+    (acc, specie) => ({
+      ...acc,
+      [specie.location]: [...acc[specie.location], specie.name],
+    }
+  ), init);
+}
+
+function defineSex(sex, animal) {
+  const residents = data.animals.map(specie => specie.residents);
+  return residents.some(group =>
+    group.some(resident => resident.name === animal && resident.sex === sex),
+  );
+}
+// soluçaõ de retorno com reduce do Isaac (plantão).
+function returnBySex(sex) {
+  const animals = data.animals;
+  const init = initialValue({}, animals);
+  const result = animals.reduce((acc, specie) =>
+    ({
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        {
+          [specie.name]: specie.residents
+            .map(resident => resident.name)
+            .filter(name => defineSex(sex, name)),
+        },
+      ],
+    }
+  ), init);
+  return result;
+}
+
+function returnByNames(sorted) {
+  const animals = data.animals;
+  const init = initialValue({}, animals);
+  return animals.reduce((acc, specie) =>
+    ({
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        {
+          [specie.name]: specie.residents.map(resident => resident.name),
+        },
+      ],
+    }
+  ), init);
+}
+
 function animalMap(options) {
-  // seu código aqui
+  const optionsList = { ...options };
+  const { includeNames, sex, sorted } = optionsList;
+  let result = {};
+  if (options === undefined || !includeNames) {
+    return returnDefault();
+  }
+  if (includeNames && sex !== undefined) result = returnBySex(sex);
+  else result = returnByNames();
+// solução para ordenação dos nomes do colega Elano Evaristo.
+  if (sorted) {
+    Object.keys(result).forEach(key =>
+      result[key].forEach(value => value[Object.keys(value)].sort()),
+    );
+  }
+  return result;
 }
 
 function schedule(dayName) {
