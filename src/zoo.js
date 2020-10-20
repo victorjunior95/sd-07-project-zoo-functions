@@ -258,16 +258,19 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // const employeePerId = employees.find(employee => employee.id === id);
-  // const animalResponsible = animals.find((animal) => {
-  //   return animal.id === employeePerId.responsibleFor[0];
-  // });
-  // return null;
+  const employeePerId = employees.find(employee => employee.id === id);
+  const animalResponsible = animals.find((animal) => {
+    return animal.id === employeePerId.responsibleFor[0];
+  });
+  const oldest = animalResponsible.residents.reduce((oldest, curr) => {
+    return oldest.age < curr.age ? curr : oldest;
+  })
+  return [oldest.name, oldest.sex, oldest.age];
 }
 
 function increasePrices(percentage) {
   const factor = percentage / 100;
-  prices.Adult = (prices.Adult + (prices.Adult * factor)).toPrecision(4);
+  prices.Adult = (prices.Adult + (prices.Adult * factor)).toFixed(3);
   prices.Senior = (prices.Senior + (prices.Senior * factor)).toPrecision(4);
   prices.Child = (prices.Child + (prices.Child * factor)).toPrecision(4);
 }
