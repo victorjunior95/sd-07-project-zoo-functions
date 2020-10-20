@@ -26,9 +26,8 @@ const employeeByName = (employeeName) => {
   // Solução encontrada após tirar dúvida no slack.
 };
 
-const createEmployee = (personalInfo, associatedWith) => {
-  return { ...personalInfo, ...associatedWith }
-};
+const createEmployee = (personalInfo, associatedWith) => ({ ...personalInfo, ...associatedWith });
+// Função createEmployee passou no code climate com ajuda do Isaac Batista no slack.
 
 function isManager(id) {
   // seu código aqui
