@@ -81,16 +81,20 @@ function entryCalculator(entrants) {
   return total;
 }
 
-function retrieveAvailableLocations() {
-  return ['NE', 'NW', 'SW', 'SE'];
-}
+// Função com as localizações existentes
+const retrieveAvailableLocations = () => ['NE', 'NW', 'SW', 'SE'];
 
+const animalsFilter = (location) => {
+  const { animals } = data;
+  return animals.filter(animal => animal.location === location);
+};
+
+// Função que filtra os animais dada uma localização
 function retrieveAnimalsByLocation(locations) {
   const animalsByLocation = {};
-  const { animals } = data;
 
   locations.forEach((location) => {
-    const filteredAnimalsByName = animals.filter(animal => animal.location === location)
+    const filteredAnimalsByName = animalsFilter(location)
     .map(animal => animal.name);
     animalsByLocation[location] = filteredAnimalsByName;
   });
@@ -98,12 +102,12 @@ function retrieveAnimalsByLocation(locations) {
   return animalsByLocation;
 }
 
+// Função que filtra os nomes dos animais pela sua localização e sexo
 function retrieveAnimalsNameByLocation(locations, sorted, sex) {
-  const { animals } = data;
   const animalsNameByLocation = {};
 
   locations.forEach((location) => {
-    const filteredAnimalsName = animals.filter(animal => animal.location === location)
+    const filteredAnimalsName = animalsFilter(location)
     .map((animal) => {
       const animalName = animal.name;
       const residents = animal.residents
@@ -140,8 +144,28 @@ function animalMap(options) {
   return retrieveAnimalsByLocation(locations);
 }
 
+function legibleScheduleForm (day) {
+  const { hours } = data;
+  if (day === 'Monday'){
+    return 'CLOSED';
+  }
+  
+  return `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+}
+
 function schedule(dayName) {
-  // seu código aqui
+  const { hours } = data;
+  const legibleSchedule = {};
+
+  if (!dayName) {
+    Object.keys(hours).forEach((key) => {
+      legibleSchedule[key] = legibleScheduleForm(key);
+    });
+  } else {
+    legibleSchedule[dayName] = legibleScheduleForm(dayName);
+  }
+
+  return legibleSchedule;
 }
 
 function oldestFromFirstSpecies(id) {
