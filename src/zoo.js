@@ -84,32 +84,41 @@ function animalMapNoArgument(regions, list) {
   return list;
 }
 
-function ifFunction(regions, list, entry) {
+function ifFunction(regions, list, list2, entry) {
   if (entry.sorted === true) {
-    if (entry.sex === 'male' || entry.sex === 'female') {
-      list = animalMapBySexSorted(regions, list, entry);
-    } else {
-    list = animalMapSorted(regions, list);
-    }
+    list = ifSortedFunction (regions, list, list2, entry);
   }
   else if (entry.sex === 'male' || entry.sex === 'female') {
-    list = animalMapBySex(regions, list, entry);
+    list = animalMapBySex(regions, list, list2, entry);
   }
   else {
-  list = animalMapArgument(regions, list);
+  list = animalMapArgument(regions, list, list2);
   }
   return list;
 }
 
-function animalMapArgument(regions, list, entry) {
+function ifSortedFunction(regions, list, list2, entry) {
+  if (entry.sex === 'male' || entry.sex === 'female') {
+    list = animalMapBySexSorted(regions, list, list2, entry);
+  } else {
+  list = animalMapSorted(regions, list, list2);
+  }
+  return list;
+}
+
+function createFirstObject(regions, list) {
   regions.forEach((element) => {
     list[element] = (data.animals.filter(item => 
       item.location === element)).map(item => item.name);
   });
   const { NE, NW, SE, SW } = list;
   const array = [NE, NW, SE, SW];
-  let list2 = {'NE': [], 'NW': [], 'SE': [], 'SW': []};
-  array.forEach((element, index) => {
+  return array;
+}
+
+function animalMapArgument(regions, list, list2) {
+  const result = createFirstObject(regions, list);
+  result.forEach((element, index) => {
     element.forEach(item => {
       let object = {};
       object[item] = ((data.animals.filter(animal => animal.name === item)).map(names => 
@@ -120,15 +129,9 @@ function animalMapArgument(regions, list, entry) {
   return list2;
 }
 
-function animalMapSorted(regions, list) {
-  regions.forEach((element) => {
-    list[element] = (data.animals.filter(item => 
-      item.location === element)).map(item => item.name);
-  });
-  const { NE, NW, SE, SW } = list;
-  const array = [NE, NW, SE, SW];
-  let list2 = {'NE': [], 'NW': [], 'SE': [], 'SW': []};
-  array.forEach((element, index) => {
+function animalMapSorted(regions, list, list2) {
+  const result = createFirstObject(regions, list);
+  result.forEach((element, index) => {
     element.forEach(item => {
       let object = {};
       object[item] = (((data.animals.filter(animal => animal.name === item)).map(names => 
@@ -139,15 +142,9 @@ function animalMapSorted(regions, list) {
   return list2
 }
 
-function animalMapBySex(regions, list, entry) {
-  regions.forEach((element) => {
-    list[element] = (data.animals.filter(item => 
-      item.location === element)).map(item => item.name);
-  });
-  const { NE, NW, SE, SW } = list;
-  const array = [NE, NW, SE, SW];
-  let list2 = {'NE': [], 'NW': [], 'SE': [], 'SW': []};
-  array.forEach((element, index) => {
+function animalMapBySex(regions, list, list2, entry) {
+  const result = createFirstObject(regions, list);
+  result.forEach((element, index) => {
     element.forEach(item => {
       let object = {};
       object[item] = ((((data.animals.filter(animal => animal.name === item)).map(names => 
@@ -158,15 +155,9 @@ function animalMapBySex(regions, list, entry) {
   return list2;
 }
 
-function animalMapBySexSorted(regions, list, entry) {
-  regions.forEach((element) => {
-    list[element] = (data.animals.filter(item => 
-      item.location === element)).map(item => item.name);
-  });
-  const { NE, NW, SE, SW } = list;
-  const array = [NE, NW, SE, SW];
-  let list2 = {'NE': [], 'NW': [], 'SE': [], 'SW': []};
-  array.forEach((element, index) => {
+function animalMapBySexSorted(regions, list, list2, entry) {
+  const result = createFirstObject(regions, list);
+  result.forEach((element, index) => {
     element.forEach(item => {
       let object = {};
       object[item] = (((((data.animals.filter(animal => animal.name === item)).map(names =>
@@ -181,14 +172,15 @@ function animalMapBySexSorted(regions, list, entry) {
 function animalMap(options) {
   const regions = ['NE', 'NW', 'SE', 'SW'];
   let list = {};
+  let list2 = {NE: [], NW: [], SE: [], SW: []};
 
   if (!options) {
     list = animalMapNoArgument(regions, list);
   } 
   else if (options.includeNames === true) {
-    list = ifFunction(regions, list, options);
+    list = ifFunction(regions, list, list2, options);
   } else {
-    list = animalMapNoArgument(regions, list);
+    list = animalMapNoArgument(regions, list2, list);
   }
   return list;
 }
