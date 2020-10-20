@@ -242,14 +242,19 @@ const arraysId = (index) => {
 };
 // console.log(arraysId())
 
+const conditionName = (name2, indexJ, idOrName, result, indexI, ) => {
+  if (name2[indexJ] === idOrName) {
+    result = { [Object.keys(result)[indexI]]: result[Object.keys(result)[indexI]] };
+  }
+  return result;
+}
+
 const firstAndLastName = (idOrName, result) => {
   let name2;
   for (let i = 0; i < Object.entries(result).length; i += 1) {
     name2 = Object.keys(result)[i].split(' ');
     for (let j = 0; j < name2.length; j += 1) {
-      if (name2[j] === idOrName) {
-        result = { [Object.keys(result)[i]]: result[Object.keys(result)[i]] };
-      }
+      result = conditionName(name2, j, idOrName, result, i);
     }
     // name2.forEach((names) => {
     // console.log(name);
