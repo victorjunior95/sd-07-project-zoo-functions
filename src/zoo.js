@@ -52,11 +52,11 @@ function isManager(id) {
   // seu código aqui
   const manager = employees.find(currentEmployee => currentEmployee.managers.includes(id));
   return typeof manager !== 'undefined';
-  
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
+
 }
 
 function animalCount(species) {
