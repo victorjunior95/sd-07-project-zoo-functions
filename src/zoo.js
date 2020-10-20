@@ -107,11 +107,7 @@ function ifSortedFunction(regions, list, list2, entry) {
 }
 
 function createFirstObject(regions, list) {
-  regions.forEach((element) => {
-    list[element] = (data.animals.filter(item => 
-      item.location === element)).map(item => item.name);
-  });
-  const { NE, NW, SE, SW } = list;
+  const { NE, NW, SE, SW } = animalMapNoArgument(regions, list);
   const array = [NE, NW, SE, SW];
   return array;
 }
@@ -142,13 +138,17 @@ function animalMapSorted(regions, list, list2) {
   return list2
 }
 
+function getAnimalsBySex(item, entry) {
+  return ((((data.animals.filter(animal => animal.name === item)).map(names => 
+    names.residents))[0]).filter(key => key.sex === entry.sex)).map(final => final.name);
+}
+
 function animalMapBySex(regions, list, list2, entry) {
   const result = createFirstObject(regions, list);
   result.forEach((element, index) => {
     element.forEach(item => {
       let object = {};
-      object[item] = ((((data.animals.filter(animal => animal.name === item)).map(names => 
-        names.residents))[0]).filter(key => key.sex === entry.sex)).map(final => final.name);
+      object[item] = getAnimalsBySex(item, entry);
       list2[regions[index]].push(object);
     });
   });
@@ -160,9 +160,7 @@ function animalMapBySexSorted(regions, list, list2, entry) {
   result.forEach((element, index) => {
     element.forEach(item => {
       let object = {};
-      object[item] = (((((data.animals.filter(animal => animal.name === item)).map(names =>
-        names.residents))[0]).filter(key =>
-          key.sex === entry.sex)).map(final => final.name)).sort();
+      object[item] = getAnimalsBySex(item, entry).sort();
       list2[regions[index]].push(object);
     });
   });
