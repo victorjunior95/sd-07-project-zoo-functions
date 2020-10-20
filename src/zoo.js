@@ -97,20 +97,11 @@ function animalMap(options) {
     animalObj[animal[0].location] = animal.map((animalId) => {
       let residentsReturn = null;
       if (includeNames) {
+        const residentsList = (sex !== undefined) ? animalId.residents
+          .filter(resident => resident.sex === sex) : animalId.residents;
+        residentsReturn = ({ [animalId.name]: residentsList.map(resident => resident.name) });
         if (sorted) {
-          if (sex !== undefined) {
-            residentsReturn = ({ [animalId.name]: animalId.residents.filter(resident => resident.sex === sex)
-              .map(resident => resident.name).sort() });
-          } else {
-            residentsReturn = ({ [animalId.name]: animalId.residents.map(resident => resident.name).sort() });
-          }
-        } else {
-          if (sex !== undefined) {
-            residentsReturn = ({ [animalId.name]: animalId.residents.filter(resident => resident.sex === sex)
-              .map(resident => resident.name) });
-          } else {
-            residentsReturn = ({ [animalId.name]: animalId.residents.map(resident => resident.name) });
-          }
+          residentsReturn[animalId.name].sort();
         }
       } else {
         residentsReturn = animalId.name;
