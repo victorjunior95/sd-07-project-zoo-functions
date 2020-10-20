@@ -172,12 +172,16 @@ function increasePrices(percentage) {
   });
   return prices;
 }
-const getAnimalName = (input) => {
+// Receive the values ​​of employees
+let funcionarios = JSON.parse(JSON.stringify(employees));
+
+const getAnimalName = (input = {}) => {
   input.responsibleFor.forEach((currentID, index) => {
-    input.responsibleFor[index] = animals.find(iterator => iterator.id === currentID).name;
+    input.responsibleFor[index] = animals.find(crAnimal=> crAnimal.id === currentID).name;
   });
   return input.responsibleFor;
 };
+
 const getAnimalsForEmploy = (string, objReturn) => {
   const employSl = employees.find(cEmploy => cEmploy.id === string ||
     cEmploy.firstName === string || cEmploy.lastName === string);
@@ -189,19 +193,19 @@ const getAnimalsForEmploy = (string, objReturn) => {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
-  const getEmploy = {};
+  let getEmploy = {};
   if (!idOrName) {
-    employees.forEach((current) => {
+    funcionarios.forEach((current) => {
       getAnimalName(current);
       const fullName = `${current.firstName} ${current.lastName}`;
       getEmploy[fullName] = current.responsibleFor;
     });
   } else {
+    
     getAnimalsForEmploy(idOrName, getEmploy);
   }
   return getEmploy;
 }
-// console.log(employeeCoverage('Azevado'));
 
 module.exports = {
   entryCalculator,
