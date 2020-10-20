@@ -69,12 +69,22 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu código aqui
+  // Resolução a partir do plantão do instrutor Gabriel Oliva
+  const locations = retrieveAvailableLocations();
+
+  if (!options) {
+    return retrieveAnimalsByLocation(locations);
+  }
+
+  const { includeNames = false, sorted = false, sex } = options;
+  if (includeNames) {
+    return retrieveAnimalsNameByLocation(locations, sorted, sex);
+  }
+
+  return retrieveAnimalsByLocation(locations);
 }
 
 function schedule(dayName) {
-
-
   // seu código aqui
 }
 
