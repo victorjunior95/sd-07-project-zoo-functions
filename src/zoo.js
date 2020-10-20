@@ -21,7 +21,7 @@ const listaHorario = data.hours;
 
 function animalsByIds(...ids) {
   const IdAnimal = [];
-  if (ids.length === 0) {
+  if (!ids) {
     return IdAnimal;
   }
   for (let item = 0; item < ids.length; item += 1) {
@@ -37,7 +37,7 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  if (employeeName === undefined) {
+  if (!employeeName) {
     return {};
   }
   const employeeResponseName = listaEmployees.find((elemento) => {
@@ -53,12 +53,8 @@ function createEmployee(personalInfo, associatedWith) {
     id: personalInfo.id,
     firstName: personalInfo.firstName,
     lastName: personalInfo.lastName,
-    managers: [associatedWith.managers[0], associatedWith.managers[1]],
-    responsibleFor: [
-      associatedWith.responsibleFor[0],
-      associatedWith.responsibleFor[1],
-      associatedWith.responsibleFor[2],
-    ],
+    managers: [...associatedWith.managers],
+    responsibleFor: [...associatedWith.responsibleFor],
   };
   return newEmployee;
 }
@@ -77,10 +73,10 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  if (managers === undefined) {
+  if (!managers) {
     managers = [];
   }
-  if (responsibleFor === undefined) {
+  if (!responsibleFor) {
     responsibleFor = [];
   }
   const lastEmployee = {
@@ -96,7 +92,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 function animalCount(species) {
   let resultado;
   const Count = {};
-  if (species === undefined) {
+  if (!species) {
     const resulta = listaAnimal.map((elemento) => {
       Count[elemento.name] = elemento.residents.length;
       return Count;
@@ -111,7 +107,7 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   let resultado;
-  if (entrants === undefined || entrants === {}) {
+  if (!entrants || entrants === {}) {
     resultado = 0;
   } else {
     const { Adult = 0, Child = 0, Senior = 0 } = entrants;
@@ -124,7 +120,24 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu código aqui
+  let resultado; 
+  if (!options) {
+    resultado = listaAnimal.reduce(
+      (acc, specie) => {
+        return {
+          ...acc,
+          [specie.location]: [...acc[specie.location], specie.name]
+        };
+      },
+      {
+        NE: [],
+        NW: [],
+        SE: [],
+        SW: [],
+      }
+    );
+  }
+  return resultado;
 }
 
 function schedule(...dayName) {
@@ -141,8 +154,6 @@ function schedule(...dayName) {
   });
   return resultado;
 }
-
-// corrigindo teste
 
 function oldestFromFirstSpecies(id) {
   const employee = listaEmployees
@@ -168,9 +179,36 @@ function increasePrices(percentage) {
   listaPreco.Senior = idoso;
 }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
+function employeeCoverage(...idOrName) {
+  // fazendo
+  let resultado;
+  if(idOrName.length === 0){
+    resultado = listaEmployees.reduce((acc,func) => {
+      return {...acc,
+      [func.firstName + " " +func.lastName] : listaAnimal.map(nameAnimal => {
+        if(func.responsibleFor === nameAnimal.id){
+          return nomeAnimal.name
+        }
+      })
+      }
+    })
+    
+  }
+  return resultado
 }
+
+// console.log(employeeCoverage())
+/*
+'Nigel Nelson': ['lions', 'tigers'],
+'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
+'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
+'Wilburn Wishart': ['snakes', 'elephants'],
+'Stephanie Strauss': ['giraffes', 'otters'],
+'Sharonda Spry': ['otters', 'frogs'],
+'Ardith Azevado': ['tigers', 'bears'],
+'Emery Elser': ['elephants', 'bears', 'lions']
+};
+*/
 
 module.exports = {
   entryCalculator,
