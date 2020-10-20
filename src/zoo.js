@@ -144,12 +144,12 @@ function animalMap(options) {
   return retrieveAnimalsByLocation(locations);
 }
 
-function legibleScheduleForm (day) {
+function legibleScheduleForm(day) {
   const { hours } = data;
-  if (day === 'Monday'){
+  if (day === 'Monday') {
     return 'CLOSED';
   }
-  
+
   return `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
 }
 
