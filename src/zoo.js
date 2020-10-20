@@ -77,7 +77,7 @@ function animalCount(species) {
     const retorno = {};
     animals.forEach(animal => retorno[`${animal.name}`] = `${animal.residents.length}`);
     return retorno;
-  } 
+  }
   return animals.find(animal => animal.name === species).residents.length;
 }
 
