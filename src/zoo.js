@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-//const { employees, animals } = require('./data');
+
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -88,30 +88,30 @@ function entryCalculator(entrants) {
 
 function animalMap(options) {
   const locations = ['NE', 'NW', 'SE', 'SW'];
-  let animalObj = {};
+  const animalObj = {};
   const { includeNames, sorted, sex } = (options === undefined) ? false : options;
   const animalList = locations.map(zone => data.animals.filter(animal =>
     animal.location === zone));
 
-  animalList.forEach(animal => {
-    animalObj[animal[0].location] = animal.map(animalId => {
+  animalList.forEach((animal) => {
+    animalObj[animal[0].location] = animal.map((animalId) => {
       if (includeNames) {
         if (sorted) {
           if (sex !== undefined) {
-            return ({[animalId.name] : animalId.residents.filter(resident => resident.sex === sex).
-              map(resident => resident.name).sort()});
+            return ({ [animalId.name]: animalId.residents.filter(resident => resident.sex === sex).
+              map(resident => resident.name).sort() });
           }
-          return ({[animalId.name] : animalId.residents.map(resident => resident.name).sort()});
+          return ({ [animalId.name]: animalId.residents.map(resident => resident.name).sort()});
         }
         if (sex !== undefined) {
-          return ({[animalId.name] : animalId.residents.filter(resident => resident.sex === sex).
-            map(resident => resident.name)});
+          return ({ [animalId.name]: animalId.residents.filter(resident => resident.sex === sex).
+            map(resident => resident.name) });
         }
-        return ({[animalId.name] : animalId.residents.map(resident => resident.name)});
+        return ({ [animalId.name]: animalId.residents.map(resident => resident.name) });
       }
       return animalId.name;
     });
-  });  
+  });
   return animalObj;
 }
 
