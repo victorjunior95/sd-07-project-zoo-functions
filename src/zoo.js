@@ -9,35 +9,22 @@ eslint no-unused-vars: [
 ]
 */
 
+const { employees } = require('./data');
 const data = require('./data');
 
-// function animalsByIds(...ids) {
-//   return data.animals.filter(animal => ids.includes(animal.id));
-// }
-
 function animalsByIds(...ids) {
-  if (ids.length === 0) { 
-    return ids;
-  } else if (ids.length === 1){
-    return [data.animals.find(animal => animal.id === ids[0])];
-  } else {
-    const result = [];
-     ids.forEach(element => {
-      result.push(data.animals.find(animal => animal.id === element));
-    });
-    return result;
-  }
+  return data.animals.filter(animal => ids.includes(animal.id));
 }
 
 function animalsOlderThan(animal, age) {
   return data.animals.find(species => species.name === animal)
-  .residents.every(resident => resident.age >= age);
+    .residents.every(resident => resident.age >= age);
 }
 
 function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
   return employees.find(name => name.firstName === employeeName ||
-  name.lastName === employeeName);
+    name.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -47,11 +34,11 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return employees.includes(employeId => employeId.managers === id);
+  return data.employees.some(employee => employee.managers.some(manager => manager === id));  
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+  return data.employees.push({id, firstName, lastName, managers, responsibleFor});
 }
 
 function animalCount(species) {
@@ -63,8 +50,31 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu código aqui
+  if (!options) {
+    //retornar
+    categorizeAnimalsByLocation()
+  }
 }
+
+// const objetoInicial = {
+  // NE: [],
+  // NW: [],
+  // SE: [],
+  // SW: [],
+// }
+
+function categorizeAnimalsByLocation() {
+  // return data.animals.reduce((acc, specie) => {
+  //   return {
+  //     ...acc,
+  //     [specie.location]: [
+  //       ...acc[specie.location],
+  //       specie.name
+  //     ]
+  //   };
+  // }, objetoInicial);
+
+};
 
 function schedule(dayName) {
   // seu código aqui
