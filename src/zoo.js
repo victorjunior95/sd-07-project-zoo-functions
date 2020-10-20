@@ -223,12 +223,11 @@ const arrForNames = (animal, sex) => {
 
 const initialObject = (arrOfNames, arrOfLocation) => arrOfLocation
 .reduce((result, local, index) => {
-    result[local] = arrOfNames[index];
-    return result;
-  }, {});
+  result[local] = arrOfNames[index];
+  return result;
+}, {});
 
 const functionForIncludeNames = (arrOfLocation, testOne, sorted, sex) => {
-
   const expectedInArr = arrOfLocation.map((local) => {
     const animalsForLocation = testOne[local];
 
@@ -261,7 +260,7 @@ function animalMap(options) {
       arrOfLocation,
       initialObject(arrNamesForLocation, arrOfLocation),
       sorted,
-      sex
+      sex,
     );
   } else {
     result = initialObject(arrNamesForLocation, arrOfLocation);
@@ -369,7 +368,7 @@ Com o último nome de um funcionário, retorna os animais pelos quais o funcion�
 */
 
 function employeeCoverage(idOrName) {
-  
+  console.log(idOrName);
 }
 
 module.exports = {
