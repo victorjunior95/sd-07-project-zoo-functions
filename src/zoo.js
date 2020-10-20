@@ -118,28 +118,26 @@ const orderedAnimalsBySex = (animal, sex, sorted) => {
   return orderedAnimalsBS;
 };
 
-function animalMap(options) {
+function animalMap(options = {}) {
+  const {includeNames = false, sorted = false, sex} = options;
   const animalReportByRegion = data.animals.reduce((categorized, animal) => {
-    if (options === undefined || options.includeNames === undefined) {
+    if (!options || !includeNames) {
       categorized[animal.location] = animalsInRegion(animal);
-    } else if (!options.sex && !options.sorted) {
+    } else if (!sex && !sorted) {
       categorized[animal.location] = animalsNameInRegion(animal);
     } else {
-      categorized[animal.location] = orderedAnimalsBySex(animal, options.sex, options.sorted);
+      categorized[animal.location] = orderedAnimalsBySex(animal, sex, sorted);
     }
     return categorized;
   }, {});
   return animalReportByRegion;
 }
 
-console.log(animalMap({ includeNames: true, sex: 'male', sorted: true }));
-
 function schedule(dayName) {
   const arrayHours = Object.entries(data.hours);
   return arrayHours.reduce((report, daysHour) => {
     const message = `Open from ${daysHour[1].open}am until ${
-      daysHour[1].close - 12
-    }pm`;
+      daysHour[1].close - 12}pm`;
     if (daysHour[1].open === 0 && dayName === undefined) {
       report[daysHour[0]] = 'CLOSED';
     } else if (daysHour[1].open !== 0 && dayName === undefined) {
