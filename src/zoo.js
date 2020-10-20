@@ -96,8 +96,145 @@ function entryCalculator(entrants) {
   return exit;
 }
 
+
+
+function primeriaOpcao() {
+  const {
+    animals
+  } = data;
+  const exitArry = [];
+
+  animals.forEach((item) => {
+    if (exitArry.indexOf(item.location) === -1) {
+      exitArry[item.location] = [];
+    }
+  });
+
+  Object.keys(exitArry).forEach((item, index) => {
+    animals.filter((elem) => {
+      if (item === elem.location) {
+        exitArry[item].push(elem.name);
+      }
+    })
+  })
+
+  return exitArry;
+}
+
+const objetoInicial = {
+  NE: [],
+  NW: [],
+  SE: [],
+  SW: [],
+}
+
+function categorizeAnimalsByLocation() {
+  return data.animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        specie.name,
+      ]
+    }
+  }, objetoInicial)
+}
+
+function categorizeAnimalsIncludeNames() {
+  console.log('linha 144')
+  return data.animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        {
+          [specie.name]: specie.residents.map((resident) => resident.name)
+        },
+      ]
+    }
+  }, objetoInicial)
+}
+
+function categorizeAnimalsIncludeNamesSorted() {
+  console.log('linha 158');
+  return data.animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        {
+          [specie.name]: (specie.residents.map((resident) => resident.name)).sort()
+        },
+      ]
+    }
+  }, objetoInicial)
+}
+
+
+function categorizeAnimalsIncludeNamesSex(sex) {
+  console.log('linha 174');
+  return data.animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        {
+          [specie.name]: (specie.residents.filter((resident) => resident.sex === sex))
+            .map((resident) => resident.name)
+        },
+      ]
+    }
+  }, objetoInicial)
+}
+
+function categorizeAnimalsIncludeNamesSexSorted(sex) {
+  console.log('linha 189');
+  return data.animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        {
+          [specie.name]: (specie.residents.filter((resident) => resident.sex === sex))
+            .map((resident) => resident.name)
+            .sort()
+        },
+      ]
+    }
+  }, objetoInicial)
+}
+
 function animalMap(options) {
-  // seu código aqui
+
+  if (!options) {
+    return categorizeAnimalsByLocation();
+  }
+
+  const {
+    includeNames,
+    sex,
+    sorted
+  } = options;
+
+  if (includeNames) {
+
+    if (sex) {
+      if (sorted) return categorizeAnimalsIncludeNamesSexSorted(sex);
+
+      return categorizeAnimalsIncludeNamesSex(sex);
+    }
+
+    if (sorted) {
+      return categorizeAnimalsIncludeNamesSorted();
+    }
+
+
+    return categorizeAnimalsIncludeNames();
+  }
+
+  if (sex){
+    return categorizeAnimalsByLocation();
+  }
 }
 
 function checkSpindleUS(hour) {
