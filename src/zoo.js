@@ -12,9 +12,11 @@ eslint no-unused-vars: [
 const { prices } = require('./data');
 const data = require('./data');
 
+const { animals, employees } = data;
+
 function animalsByIds(...ids) {
   // seu código aqui
-  return data.animals.filter(item => ids.includes(item.id));
+  return animals.filter(item => ids.includes(item.id));
 }
 
 function animalsOlderThan(animal, age) {
@@ -28,7 +30,6 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(employeeName) {
   // seu código aqui
-  const { employees } = data;
   const getEmployee = item => item.firstName === employeeName || item.lastName === employeeName;
   const employee = employees.find(getEmployee);
   return (employeeName !== undefined ? employee : {});
@@ -44,21 +45,18 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   // seu código aqui
-  const { employees } = data;
   const manager = employees.some(item => item.managers.includes(id));
   return manager;
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
-  const { employees } = data;
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   return employees.push(newEmployee);
 }
 
 function animalCount(species) {
   // seu código aqui
-  const { animals } = data;
   const getAllAnimals = {};
 
   animals.forEach((animal) => {
@@ -96,16 +94,6 @@ function animalMap(options) {
   // seu código aqui
 }
 
-// const validateSchedule = (array, object, property1, property2) => {
-//   array.forEach((input) => {
-//     if (input === 'Monday') {
-//       object[input] = 'CLOSED';
-//     } else {
-//       object[input] = `Open from ${object[input][property1]}am until ${object[input][property2] - 12}pm`;
-//     }
-//   });
-//   return array;
-// }
 function schedule(dayName) {
   // seu código aqui
   const dailyList = {};
@@ -131,8 +119,6 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
-  const { animals, employees } = data;
-
   const firstAnimalId = employees.find(employee => employee.id === id).responsibleFor[0];
 
   const getAnimal = animals.find(animal => animal.id === firstAnimalId);
@@ -155,70 +141,62 @@ function increasePrices(percentage) {
   });
 }
 
-// Sem parâmetros, retorna uma lista de funcionários e os
-// animais pelos quais eles são responsáveis
-// Com o id de um funcionário, retorna os animais pelos quais
-// o funcionário é responsável
-// Com o primeiro nome de um funcionário, retorna os animais
-// pelos quais o funcionário é responsável
-// Com o último nome de um funcionário, retorna os animais
-// pelos quais o funcionário é responsável
+let name = '';
+let employeesList = {};
+const animalsIds = {};
+const expected = {};
+
+// Função noParameters desenvolvida com a colaboração de Isaac Batista,
+// Daniel Carvalho e André Ferreira:
+const noParameters = (array1, array2) => {
+  function getChange(result, item) {
+    return {
+      ...result,
+      [item[0]]: item[1].map((value) => {
+        let change = '';
+        array2.forEach((animal) => {
+          if (animal[1] === value) change = animal[0];
+        });
+        return change;
+      }),
+    };
+  }
+  employeesList = array1.reduce(getChange, {});
+  return employeesList;
+};
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
-  let listAni = {};
-  let listEmp = {};
-  const { animals, employees } = data;
+  const storage = {};
 
-  // const employeeList = employees.map(employee => `${employee.firstName} ${employee.lastName}`);
-
-  // let animalsIds = employees.map(employee => employee.responsibleFor);
-
-  animals.forEach(animal => {
-    listAni[animal.name] = animal.id;
+  animals.forEach((animal) => {
+    animalsIds[animal.name] = animal.id;
+  });
+  employees.forEach((employee) => {
+    const emp = `${employee.firstName} ${employee.lastName}`;
+    expected[emp] = employee.responsibleFor;
   });
 
-  employees.forEach(employee => {
-    let emp = `${employee.firstName} ${employee.lastName}`;
-    listEmp[emp] = employee.responsibleFor;
-  });
+  const entriesExpected = Object.entries(expected);
+  const entriesAnimals = Object.entries(animalsIds);
+  noParameters(entriesExpected, entriesAnimals);
 
-  const keysAni = Object.keys(listAni);
-  const valuesAni = Object.values(listAni);
-  const valuesEmp = Object.values(listEmp);
+  const getName = (employee) => {
+    const checkId = employee.id === idOrName;
+    const checkFirstName = employee.firstName === idOrName;
+    const checkLastName = employee.lastName === idOrName;
+    return checkId || checkFirstName || checkLastName;
+  };
 
+  const getEmployeeList = () => {
+    const firstName = employees.find(getName).firstName;
+    const lastName = employees.find(getName).lastName;
+    name = `${firstName} ${lastName}`;
+    storage[name] = employeesList[name];
+    return storage;
+  };
 
-  valuesEmp.forEach(array => {
-    array.forEach(id => {
-      keysAni.forEach(key => {
-        valuesAni.forEach(value => {
-          if (value === id) {
-            return id === key
-          }
-        })
-      })
-    })
-  })
-
-  // .reduce((acc, item, index, array) => {
-  //   acc +=
-  // })
-
-  // const animalsName = animalsIds.map(array => {
-  //   animals.forEach((animal => {
-  //     array.forEach(item => {
-  //       if (item == animal.id) {
-  //         item === animal.name;
-  //       }
-  //     })
-  //   }))
-  //   return array;
-  // })
-
-  // list = { ...employeeList, ...animalsIds };
-  console.log(valuesEmp)
-  return listEmp;
+  return idOrName === undefined ? employeesList : getEmployeeList(idOrName);
 }
-console.log(employeeCoverage());
 
 module.exports = {
   entryCalculator,
