@@ -114,24 +114,24 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // let resultado; 
-  // if (!options) {
-  //   resultado = animals.reduce(
-  //     (acc, specie) => {
-  //       return {
-  //         ...acc,
-  //         [specie.location]: [...acc[specie.location], specie.name]
-  //       };
-  //     },
-  //     {
-  //       NE: [],
-  //       NW: [],
-  //       SE: [],
-  //       SW: [],
-  //     }
-  //   );
-  // }
-  // return resultado;
+// let resultado; 
+// if (!options) {
+//   resultado = animals.reduce(
+//     (acc, specie) => {
+//       return {
+//         ...acc,
+//         [specie.location]: [...acc[specie.location], specie.name]
+//       };
+//     },
+//     {
+//       NE: [],
+//       NW: [],
+//       SE: [],
+//       SW: [],
+//     }
+//   );
+// }
+// return resultado;
 }
 
 function schedule(...dayName) {
