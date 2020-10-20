@@ -40,7 +40,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (species){
+   return data.animals.find(animal.name === species).popularity;
+    
+  }
+   objectAnimal = {};
+   const allAnimals = data.animals.map(animal => animal.name);
+   const allAnimalsAcc = data.animals.map(animal => animal.popularity);
+   allAnimals.forEach((animal, index) =>
+   objectAnimal[animal] = allAnimalsAcc[index]);
 }
 
 function entryCalculator(entrants) {
@@ -48,29 +56,8 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // if (!options) {
-  //   //categorizeAnimalsByLocation()
-  // }
+  // seu código aqui
 }
-
-// const objetoInicial = {
-  // NE: [],
-  // NW: [],
-  // SE: [],
-  // SW: [],
-// }
-
-// function categorizeAnimalsByLocation() {
-//   // return data.animals.reduce((acc, specie) => {
-//   //   return {
-//   //     ...acc,
-//   //     [specie.location]: [
-//   //       ...acc[specie.location],
-//   //       specie.name
-//   //     ]
-//   //   };
-//   // }, objetoInicial);
-// }
 
 function schedule(dayName) {
   // seu código aqui
