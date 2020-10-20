@@ -66,11 +66,78 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // la
+  const { prices } = data;
+
+  if (!entrants || entrants.length === 0) {
+    return 0;
+  }
+
+  const { Adult = 0, Child = 0, Senior = 0 } = entrants;
+  const adultPrice = prices.Adult * Adult;
+  const childPrice = prices.Child * Child;
+  const seniorPrice = prices.Senior * Senior;
+  const total = adultPrice + childPrice + seniorPrice;
+
+  return total;
+}
+
+function retrieveAvailableLocations() {
+  return ['NE', 'NW', 'SW', 'SE'];
+}
+
+function retrieveAnimalsByLocation(locations) {
+  const animalsByLocation = {};
+  const { animals } = data;
+
+  locations.forEach((location) => {
+    const filteredAnimalsByName = animals.filter(animal => animal.location === location)
+    .map(animal => animal.name);
+    animalsByLocation[location] = filteredAnimalsByName;
+  });
+
+  return animalsByLocation;
+}
+
+function retrieveAnimalsNameByLocation(locations, sorted, sex) {
+  const { animals } = data;
+  const animalsNameByLocation = {};
+
+  locations.forEach((location) => {
+    const filteredAnimalsName = animals.filter(animal => animal.location === location)
+    .map((animal) => {
+      const animalName = animal.name;
+      const residents = animal.residents
+      .filter((resident) => {
+        const needFiltering = sex !== undefined;
+        return needFiltering ? resident.sex === sex : true;
+      })
+      .map(resident => resident.name);
+
+      if (sorted) {
+        residents.sort();
+      }
+      return { [animalName]: residents };
+    });
+    animalsNameByLocation[location] = filteredAnimalsName;
+  });
+
+  return animalsNameByLocation;
 }
 
 function animalMap(options) {
-  // seu código aqui
+  // Resolução a partir do plantão do instrutor Gabriel Oliva
+  const locations = retrieveAvailableLocations();
+
+  if (!options) {
+    return retrieveAnimalsByLocation(locations);
+  }
+
+  const { includeNames = false, sorted = false, sex } = options;
+  if (includeNames) {
+    return retrieveAnimalsNameByLocation(locations, sorted, sex);
+  }
+
+  return retrieveAnimalsByLocation(locations);
 }
 
 function schedule(dayName) {
