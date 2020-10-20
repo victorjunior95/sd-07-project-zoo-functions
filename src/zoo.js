@@ -76,7 +76,7 @@ function animalCount(species) {
   if (species === undefined) {
     const retorno = {};
     animals.forEach(
-      animal => (retorno[`${animal.name}`] = `${animal.residents.length}`)
+      animal => (retorno[`${animal.name}`] = `${animal.residents.length}`),
     );
     return retorno;
   }
