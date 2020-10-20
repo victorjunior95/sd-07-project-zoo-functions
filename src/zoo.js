@@ -47,36 +47,25 @@ function isManager(id) {
   return cathId;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers=[], responsibleFor=[]) {
   // seu código aqui
+  data.employees.push({id, firstName, lastName, managers, responsibleFor,});
 }
 
 function animalCount(species) {
   /* eslint spaced-comment: ["error", "always"] */
 }
 function entryCalculator(entrants) {
-  // seu código aqui
+  // versao tunada credito ao nosso embaixaTrybe
   const paying = { ...entrants };
 
   if (paying === undefined || paying === []) {
     return 0;
   }
-  let total = 0;
-
-  const { Adult, Child, Senior } = paying;
-  if (Adult !== undefined) {
-    total += Adult * 49.99;
-  }
-
-  if (Child !== undefined) {
-    total += Child * 20.99;
-  }
-
-  if (Senior !== undefined) {
-    total += Senior * 24.99;
-  }
-
-  return total;
+   
+  return (Object.keys(paying).reduce((sum, currentValue) =>
+  sum + (entrants[currentValue] * data.prices[currentValue])
+, 0));
 }
 
 function animalMap(options) {
