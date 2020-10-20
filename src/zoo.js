@@ -1,4 +1,4 @@
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -89,9 +89,28 @@ function animalMap(options) {
   // seu código aqui
 }
 
-function schedule(dayName) {
-  // seu código aqui
+function transformDay(objectParam) {
+  retorno = {}
+  let dia = Object.entries(objectParam).forEach(elemento => {
+    retorno[elemento[0]] = `Open from ${elemento[1].open}am until ${elemento[1].close-12}pm`
+    if (elemento[1].open - elemento[1].close === 0) {
+      retorno[elemento[0]] = `CLOSED`;
+    }
+  });
+  return retorno;
 }
+
+function schedule(dayName) {
+  let response = hours;
+  if (dayName !== undefined) {
+    response = Object.entries(hours).find(elemento => elemento[0] === dayName);
+    response = {[response[0]] : response[1]};
+  }
+  response = transformDay(response);
+  return response;
+}
+
+console.log(schedule('Monday'));
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
