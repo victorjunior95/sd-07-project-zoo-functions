@@ -156,22 +156,28 @@ function animalMap(options) {
 // console.log(animalMap({ sex: 'female' }).NE[0]);
 
 const dayNameExist = (dayName, result) => {
-  for (let i in result) {
-    if (i === dayName) {
-      result = { [i]: result[i] };
+  for (let i = 0; i < Object.entries(result).length; i += 1) {
+    if (Object.keys(result)[i] === dayName) {
+      result = { [dayName]: result[dayName] };
     }
   }
+  // for (let i in result) {
+  //   if (i === dayName) {
+  //     result = { [i]: result[i] };
+  //   }
+  // }
   return result;
 };
 
 function schedule(dayName) {
   const { hours } = data;
+  // console.log(Object.values(hours[Object.keys(hours)[0]]))
   const result = {};
-  for (const i in hours) {
-    result[i] = `Open from ${Object.values(hours[i])[0]}am until ${Object.values(hours[i])[1] - 12
-      }pm`;
-    if (i === 'Monday') {
-      result[i] = 'CLOSED';
+  for (let i = 0; i < Object.entries(hours).length; i += 1) {
+    result[Object.keys(hours)[i]] = `Open from ${Object.values(hours[Object.keys(hours)[i]])[0]}am until ${Object.values(hours[Object.keys(hours)[i]])[1] - 12}pm`;
+
+    if (Object.keys(result)[i] === 'Monday') {
+      result[Object.keys(hours)[i]] = 'CLOSED';
     }
   }
   return dayName ? dayNameExist(dayName, result) : result;
