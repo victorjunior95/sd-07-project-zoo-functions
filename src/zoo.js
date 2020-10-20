@@ -84,23 +84,28 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  if (!options) {
+  if (!options || !options.includeNames) {
     return animalsByRegion();
   }
-  if (options.sorted && options.includeNames && options.sex === undefined) {
+  if (options.sorted && options.includeNames && !options.sex) {
     return animalsByRegionWithNameSorted();
   }
-  if (options.sorted && options.includeNames && options.sex !== undefined) {
-    if (options.sex === 'male') {
-      return malesByRegionWithNameSorted();
-    }
-    if (options.sex === 'female') {
-      return femalesByRegionWithNameSorted();
-    }
+  if (!options.sorted && options.includeNames && options.sex === 'male') {
+    return malesByRegionWithName();
+  }
+  if (!options.sorted && options.includeNames && options.sex === 'female') {
+    return femalesByRegionWithName();
+  }
+  if (options.sorted && options.includeNames && options.sex === 'male') {
+    return malesByRegionWithNameSorted();
+  }
+  if (options.sorted && options.includeNames && options.sex === 'female') {
+    return femalesByRegionWithNameSorted();
   }
   if (options.includeNames) {
     return animalsByRegionWithName();
   }
+  return null;
 }
 
 function animalsByRegion () {
@@ -157,6 +162,26 @@ function animalsByRegionWithNameSorted () {
   }, initialObj)
 }
 
+function malesByRegionWithName () {
+  const initialObj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  }
+  return animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        {[specie.name]: specie.residents.filter((resident) => {
+          return resident.sex === 'male';
+        }).map(resident => resident.name)}
+      ]
+    }
+  }, initialObj)
+}
+
 function malesByRegionWithNameSorted () {
   const initialObj = {
     NE: [],
@@ -169,11 +194,29 @@ function malesByRegionWithNameSorted () {
       ...acc,
       [specie.location]: [
         ...acc[specie.location],
-        {[specie.name]: specie.residents.map((resident) => {
-          if (resident.sex === 'male') {
-            return resident.name;
-          }
-        }).sort()}
+        {[specie.name]: specie.residents.filter((resident) => {
+          return resident.sex === 'male';
+        }).map(resident => resident.name).sort()}
+      ]
+    }
+  }, initialObj)
+}
+
+function femalesByRegionWithName () {
+  const initialObj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  }
+  return animals.reduce((acc, specie) => {
+    return {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        {[specie.name]: specie.residents.filter((resident) => {
+          return resident.sex === 'female';
+        }).map(resident => resident.name)}
       ]
     }
   }, initialObj)
@@ -191,11 +234,9 @@ function femalesByRegionWithNameSorted () {
       ...acc,
       [specie.location]: [
         ...acc[specie.location],
-        {[specie.name]: specie.residents.map((resident) => {
-          if (resident.sex === 'female') {
-            return resident.name;
-          }
-        }).sort()}
+        {[specie.name]: specie.residents.filter((resident) => {
+          return resident.sex === 'female';
+        }).map(resident => resident.name).sort()}
       ]
     }
   }, initialObj)
