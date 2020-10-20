@@ -122,16 +122,18 @@ const location = {
 
 function returnAnimals() {
   return animals.reduce((acc, specie) => {
-    return {
+    let resultado; 
+    resultado = {
       ...acc,
       [specie.location]: [...acc[specie.location], specie.name],
     };
+    return resultado;
   }, location);
 }
 
 function animalMap(options) {
   let resultado;
-  if (!options)   resultado = returnAnimals();
+  if (!options) resultado = returnAnimals();
   return resultado;
 }
 
