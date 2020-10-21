@@ -94,9 +94,14 @@ function entryCalculator(entrants) {
 
 function animalMap(options) {
   // const locations = ['NE', 'NW', 'SE', 'SW'];
-  // if(options === undefined) {
+  // if (options === undefined) {
   //   const retorno = {};
-  //   locations.forEach((location => retorno[location]=animals.filter(animal=>animal.location===location).map(animalName=>animalName.name)));
+  //   locations.forEach(
+  //     (location) =>
+  //       (retorno[location] = animals
+  //         .filter((animal) => animal.location === location)
+  //         .map((animalName) => animalName.name))
+  //   );
   //   return retorno;
   // }
 }
@@ -120,7 +125,7 @@ function schedule(dayName) {
   }
   const objDay = {};
   result = Object.entries(arrayOfReturn).find(
-    (weekDay) => weekDay[0] === dayName
+    weekDay => weekDay[0] === dayName,
   );
   objDay[result[0]] = result[1];
   return objDay;
