@@ -86,14 +86,14 @@ function zooSchedule() {
     const openTime = valuesHours[index].open;
     let closeTime = valuesHours[index].close;
     if (closeTime > timePeriod) closeTime -= timePeriod;
-    let schedule = `Open from ${openTime}am until ${closeTime}pm`;
-    if (days === 'Monday') schedule = 'CLOSED';
-    objectSchedule[days] = schedule;
+    let schedules = `Open from ${openTime}am until ${closeTime}pm`;
+    if (days === 'Monday') schedules = 'CLOSED';
+    objectSchedule[days] = schedules;
   });
   return objectSchedule;
 }
 
-function zooScheduleDayName(dayName){
+function zooScheduleDayName(dayName) {
   const objectSchedule = {};
   const timePeriod = 12;
   const openTime = hours[dayName].open;
