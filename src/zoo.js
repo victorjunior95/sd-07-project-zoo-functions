@@ -20,15 +20,14 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  // let minAge = false;
-  // const animalName = data.animals.find(species => species.name === animal);
-  // animalName.residents.forEach((resident) => {
-  //   if (age > resident.age) {
-  //     minAge = false;
-  //   }
-  // });
-  // console.log(minAge);
-  // return minAge;
+  let minAge = true;
+  const animalName = data.animals.find(species => species.name === animal);
+  animalName.residents.forEach((resident) => {
+    if (resident.age <= age) {
+      minAge = false;
+    }
+  });
+  return minAge;
 }
 
 function employeeByName(employeeName = '') {
@@ -58,19 +57,20 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  
+  const props = [
+    'id',
+    'firstName',
+    'lastName',
+    'managers',
+    'responsibleFor'
+  ];
   const newEmployee = {};
-  // newEmployee[id] = id;
-  // newEmployee[firstName] = firstName;
-  // newEmployee[lastName] = lastName;
-  // newEmployee[managers] = managers;
-  // newEmployee[responsibleFor] = responsibleFor;
-  // const newEmployee = {
-  //   id: id,
-  //   firstName: firstName,
-  //   lastName: lastName,
-  //   managers: managers,
-  //   responsibleFor: responsibleFor
-  // }
+  newEmployee[props[0]] = id;
+  newEmployee[props[1]] = firstName;
+  newEmployee[props[2]] = lastName;
+  newEmployee[props[3]] = managers;
+  newEmployee[props[4]] = responsibleFor;
   data.employees.push(newEmployee);
 }
 
@@ -90,15 +90,39 @@ function animalCount(species = '') {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (!entrants || Object.entries(entrants).length === 0) return 0;
+  let totalPrice = 0;
+  for (const visitor in entrants) {
+    if (data.prices.hasOwnProperty(visitor)) {
+      totalPrice += (data.prices[visitor] * entrants[visitor]);
+    }
+  }
+
+  return totalPrice;
 }
 
 function animalMap(options) {
   // seu código aqui
 }
 
-function schedule(dayName) {
-  // seu código aqui
+function schedule(dayName = '') {
+  const openingHours = {
+    'Tuesday': 'Open from 8am until 6pm',
+    'Wednesday': 'Open from 8am until 6pm',
+    'Thursday': 'Open from 10am until 8pm',
+    'Friday': 'Open from 10am until 8pm',
+    'Saturday': 'Open from 8am until 10pm',
+    'Sunday': 'Open from 8am until 8pm',
+    'Monday': 'CLOSED'
+  }
+
+  if (dayName.length === 0) return openingHours;
+  const openingSchedule = Object.keys(openingHours);
+  const givenDay = openingSchedule.find(day => day === dayName);
+  const result = {
+    [givenDay]: openingHours[givenDay]
+  }
+  return result;
 }
 
 function oldestFromFirstSpecies(id) {
