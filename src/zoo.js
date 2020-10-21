@@ -57,13 +57,12 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  
   const props = [
     'id',
     'firstName',
     'lastName',
     'managers',
-    'responsibleFor'
+    'responsibleFor',
   ];
   const newEmployee = {};
   newEmployee[props[0]] = id;
@@ -107,21 +106,21 @@ function animalMap(options) {
 
 function schedule(dayName = '') {
   const openingHours = {
-    'Tuesday': 'Open from 8am until 6pm',
-    'Wednesday': 'Open from 8am until 6pm',
-    'Thursday': 'Open from 10am until 8pm',
-    'Friday': 'Open from 10am until 8pm',
-    'Saturday': 'Open from 8am until 10pm',
-    'Sunday': 'Open from 8am until 8pm',
-    'Monday': 'CLOSED'
-  }
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED'
+  };
 
   if (dayName.length === 0) return openingHours;
   const openingSchedule = Object.keys(openingHours);
   const givenDay = openingSchedule.find(day => day === dayName);
   const result = {
-    [givenDay]: openingHours[givenDay]
-  }
+    [givenDay]: openingHours[givenDay],
+  };
   return result;
 }
 
