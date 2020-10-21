@@ -109,13 +109,42 @@ function entryCalculator(entrants) {
   return result;
 }
 
-function animalMap(options) {
-  // seu código aqui
+function animalMap() {
 }
 
-function schedule(dayName) {
-  // seu código aqui
+const setHours = (open, close) => {
+  let result;
+  if (close > 12) {
+    close -= 12;
+  }
+  if (open === 0 && close === 0) {
+    result = 'CLOSED';
+  } else {
+    result = `Open from ${open}am until ${close}pm`;
+  }
+  return result;
+};
+
+function schedule(options) {
+  const days = Object.keys(data.hours);
+  const hours = Object.values(data.hours);
+
+  const result = {};
+  if (typeof options === 'undefined') {
+    days.forEach((day, index) => {
+      const hour = setHours(hours[index].open, hours[index].close);
+      result[day] = hour;
+      index += 1;
+    });
+  } else {
+    const hour = setHours(data.hours[options].open, data.hours[options].close);
+    result[options] = hour;
+  }
+  console.log(result);
+  return result;
 }
+
+schedule('Monday');
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
