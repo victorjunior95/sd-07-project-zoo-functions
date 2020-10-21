@@ -124,7 +124,7 @@ function schedule(dayName) {
     return arrayOfReturn;
   }
   const result = {
-    [dayName]:arrayOfReturn[dayName]
+    [dayName]: arrayOfReturn[dayName],
   };
   return result;
 }
