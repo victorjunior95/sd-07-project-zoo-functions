@@ -11,22 +11,23 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+const { animals, employees, hours, prices } = data;
 
 function animalsByIds(...ids) {
-  return data.animals.filter(({ id }) => ids.includes(id));
+  return animals.filter(({ id }) => ids.includes(id));
 }
 
 function animalsOlderThan(animal, age) {
-  return data.animals
+  return animals
     .find(({ name }) => name === animal)
-    .residents
-    .every(resident => resident.age >= age);
+      .residents
+        .every(resident => resident.age >= age);
 }
 
 function employeeByName(employeeName) {
   const employeeFound = {};
   if (employeeName) {
-    return data.employees
+    return employees
       .find(({ firstName, lastName }) => employeeName === firstName || employeeName === lastName);
   }
   return employeeFound;
@@ -43,13 +44,13 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
 }
 
 function isManager(id) {
-  return data.employees
-    .find(({ managers }) =>
-    managers.indexOf(id) >= 0) !== undefined;
+  return employees
+    .find(({ managers }) => managers.indexOf(id) >= 0)
+    !== undefined;
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  data.employees.push(
+  employees.push(
     {
       id,
       firstName,
@@ -62,11 +63,11 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   if (species) {
-    return data.animals
+    return animals
       .find(({ name }) => name === species)
       .residents.length;
   }
-  return data.animals
+  return animals
     .sort((a, b) => a.name > b.name)
     .reduce((acc, { name, residents }) => ({ ...acc, [name]: residents.length }), {});
 }
@@ -79,19 +80,19 @@ function entryCalculator(entries = {}) {
   return 0;
 }
 
-function animalMap({ includeNames = false, sorted = false, sex = '' } = {}) {
-  const result = data.animals
+function animalMap({ includeNames = false, sorted = false, sexParam = '' } = {}) {
+  const result = animals
     .reduce((acc, { location }) => ({ ...acc, [location]: [] }), {});
   if (!includeNames) {
-    data.animals
+    animals
       .forEach(({ name, location }) => result[location].push(name));
   } else {
-    data.animals
+    animals
       .forEach(({ name, location, residents }) => {
         let animalNames = [];
-        if (sex) {
+        if (sexParam) {
           animalNames = residents
-            .filter(resident => resident.sex === sex)
+            .filter(({ sex }) => sex === sexParam)
             .map(resident => resident.name);
         } else {
           animalNames = residents
@@ -108,8 +109,8 @@ function animalMap({ includeNames = false, sorted = false, sex = '' } = {}) {
 
 function schedule(dayName = '') {
   const newSchedule = Object.fromEntries(
-    Object.entries(data.hours).map(([day, { open, close }]) => {
-      if (!open && !close) {
+    Object.entries(hours).map(([day, { open, close }]) => {
+      if (open === close) {
         return [day, 'CLOSED'];
       }
       return [day, `Open from ${open}am until ${close - 12}pm`];
@@ -122,33 +123,34 @@ function schedule(dayName = '') {
 }
 
 function oldestFromFirstSpecies(employeeId) {
-  const animalId = data.employees.find(employee => employee.id === employeeId)
+  const animalId = employees.find(employee => employee.id === employeeId)
     .responsibleFor.shift();
-  return Object.values(data.animals.find(({ id }) => id === animalId).residents
-    .sort((a, b) => b.age - a.age)
-    .shift());
+  return Object.values(animals.find(({ id }) => id === animalId)
+    .residents
+      .sort((a, b) => b.age - a.age)
+      .shift());
 }
 
 function increasePrices(percentage) {
-  Object.keys(data.prices)
+  Object.keys(prices)
     .forEach((price) => {
-      data.prices[price] =
-      Math.ceil((data.prices[price] * (100 + percentage))) / 100;
+      prices[price] =
+      Math.ceil((prices[price] * (100 + percentage))) / 100;
     });
 }
 
 function employeeCoverage(idOrName = '') {
-  const result = Object.fromEntries(data.employees
+  const result = Object.fromEntries(employees
     .map(({ firstName, lastName, responsibleFor }) => (
       [
         `${firstName} ${lastName}`,
         responsibleFor
-          .map(animalId => data.animals
+          .map(animalId => animals
             .find(({ id }) => id === animalId).name),
       ]
     )));
   if (idOrName) {
-    const employee = data.employees
+    const employee = employees
       .find(({ id, firstName, lastName }) =>
         idOrName === id
         || idOrName === firstName
