@@ -115,14 +115,14 @@ const employeeCoverage = (idOrName) => {
   const finalObject = entriesEmployees.reduce((acc, curr) => {
     let animalsForEmployee = [];
     curr[1].forEach((element) => {
-      entriesAnimals.filter((arrAnimal) => {
+      entriesAnimals.forEach((arrAnimal) => {
         if (arrAnimal[1] === element) {
           animalsForEmployee.push(arrAnimal[0]);
         }
-
-        return acc[curr[0]] = animalsForEmployee;
       });
     });
+    acc[curr[0]] = animalsForEmployee;
+
     return acc;
   }, {});
 
