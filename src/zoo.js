@@ -88,8 +88,60 @@ function entryCalculator(entrants) {
   return valueAllEntrants;
 }
 
+function forEachAnimals() {
+  const mapKeysLocation = {};
+  animals.forEach((animal) => {
+    mapKeysLocation[animal.location] = [];
+  });
+  return mapKeysLocation;
+}
+
+function categorizeAnimalsByLocation() {
+  const mapKeysLocation = forEachAnimals();
+  return animals.reduce((acc, specie) => {
+    const localeAnimalWitchName = {
+      ...acc,
+      [specie.location]: [
+        ...acc[specie.location],
+        specie.name,
+      ],
+    };
+    return localeAnimalWitchName;
+  }, {
+    ...mapKeysLocation,
+  });
+}
+
+function analizeAnimalsByLocation(rec) {
+  const animalsCategorized = forEachAnimals();
+  if (rec.includeNames) {
+    const objectForReturn = animals.reduce((acc, specie) => {
+      const arrayFilter = specie.residents.filter(resident => resident.sex === rec.sex || !rec.sex);
+      const residentsNames = arrayFilter.map(resident => resident.name);
+      if (rec.sorted) {
+        residentsNames.sort();
+      }
+      return {
+        ...acc,
+        [specie.location]: [
+          ...acc[specie.location],
+          {
+            [specie.name]: residentsNames,
+          },
+        ],
+      };
+    }, animalsCategorized);
+    return objectForReturn;
+  }
+  return categorizeAnimalsByLocation();
+}
+
 function animalMap(options) {
-  // seu código aqui
+  // Exercício guiado Isaac
+  if (!options) {
+    return categorizeAnimalsByLocation();
+  }
+  return analizeAnimalsByLocation(options);
 }
 
 function schedule(dayName) {
@@ -134,7 +186,6 @@ function oldestFromFirstSpecies(id) {
   ];
   return returnAnimal;
 }
-// console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'))
 
 function increasePrices(percentage) {
   const { Child, Senior, Adult } = prices;
@@ -147,8 +198,9 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  // Código
 }
+// console.log(employeeCoverage());
 
 module.exports = {
   entryCalculator,
