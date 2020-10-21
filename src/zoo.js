@@ -95,7 +95,19 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  // procura a primeira espécie que o funcionário cuida
+  const specieId = employees.find(employee => employee.id === id).responsibleFor[0];
+  // procura os animais residentes daquela espécie
+  const animalsOfSpecie = animals.find(specie => specie.id === specieId);
+  // armazena o animal mais velho daquela espécie
+  let oldestAnimal = animalsOfSpecie.residents[0];
+  animalsOfSpecie.residents.forEach((animal, index) => {
+    if (animal.age > oldestAnimal.age) {
+      oldestAnimal = animalsOfSpecie.residents[index];
+    }
+  });
+  // retorna o nome, sexo e idade do animal mais velho
+  return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
 
 function increasePrices(percentage) {
