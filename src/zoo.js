@@ -38,13 +38,7 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
 }
 
 function isManager(id) {
-  if (employees
-    .find(({ managers }) =>
-      managers
-      .find(managersId => managersId === id) !== undefined)) {
-    return true;
-  }
-  return false;
+  return employees.some(({ managers }) => managers.some(manager => manager === id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
