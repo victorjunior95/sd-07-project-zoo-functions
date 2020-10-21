@@ -95,9 +95,38 @@ function increasePrices(percentage) {
   // seu código aqui
 }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+const employeeCoverage = (idOrName) => {
+  let listAnimals = {};
+  let listEmployees = {};
+  const { animals, employees } = data;
+
+  animals.forEach(({ name, id }) => {
+    listAnimals[name] = id;
+  });
+
+  employees.forEach(({ firstName, lastName, responsibleFor }) => {
+    let emp = `${firstName} ${lastName}`;
+    listEmployees[emp] = responsibleFor;
+  });
+
+  const entriesAnimals = Object.entries(listAnimals);
+  const entriesEmployees = Object.entries(listEmployees);
+
+  const finalObject = entriesEmployees.reduce((acc, curr) => {
+    let animalsForEmployee= [];
+    curr[1].map((element) => {
+      entriesAnimals.filter(arrAnimal => {
+        if (arrAnimal[1] === element) {
+          animalsForEmployee.push(arrAnimal[0]);
+        }
+      })
+    })
+    acc[curr[0]] = animalsForEmployee;
+    return acc;
+  }, {})
+
+  return finalObject;
+};
 
 module.exports = {
   entryCalculator,
