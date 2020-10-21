@@ -87,12 +87,12 @@ function retrieveAvailableLocations() {
   return ['NE', 'E', 'NW', 'SW', 'SE'];
 }
 function retrieveFilteredAnimalByLocation(location) {
-  return animals.filter((animal) => animal.location === location);
+  return animals.filter(animal => animal.location === location);
 }
 function retrieveAnimalsPerLocation(locations) {
   const animalsPerLocation = {};
   locations.forEach((location) => {
-    const filteredAnimals = retrieveFilteredAnimalByLocation(location).map((animal) => animal.name);
+    const filteredAnimals = retrieveFilteredAnimalByLocation(location).map(animal => animal.name);
     if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
   });
   return animalsPerLocation;
@@ -109,10 +109,10 @@ function retrieveAnimalsPerLocationWithName(locations, sorted, sex) {
           // needFiltering ? resident.sex === sex : true; Ternary operator
           if (needFiltering) {
             return resident.sex === sex;
-          } 
+          }
           return true;
         })
-        .map((residents) => residents.name);
+        .map(residents => residents.name);
       if (sorted) residents.sort();
       return { [animalName]: residents };
     });
