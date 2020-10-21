@@ -96,17 +96,16 @@ function animalMap(options) {
 }
 function phrase(keys) {
   if (keys === 'Monday') {
-    return 'CLOSED'
-  } else {
-    return `Open from ${data.hours[keys].open}am until ${data.hours[keys].close - 12}pm`;
+    return 'CLOSED';
   }
+  return `Open from ${data.hours[keys].open}am until ${data.hours[keys].close - 12}pm`;
 }
 
 function schedule(dayName) {
   const object = {};
   if (arguments.length === 0) {
     Object.keys(data.hours).forEach((key) => {
-      object[key] = phrase(key)
+      object[key] = phrase(key);
     });
   } else {
     object[dayName] = phrase(dayName);
