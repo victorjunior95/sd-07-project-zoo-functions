@@ -72,8 +72,7 @@ function animalCount(species) {
 }
 
 function entryCalculator(...entrants) {
-  let resultado;
-  if (!entrants || Object.keys(entrants).length === 0) {
+  if (!entrants || Object.entries(entrants).length === 0) {
     return 0;
   }
   let totalValue = 0;
@@ -95,9 +94,24 @@ function entryCalculator(...entrants) {
 function animalMap(options) {
   // seu código aqui
 }
+function phrase(keys) {
+  if (keys === 'Monday') {
+    return 'CLOSED'
+  } else {
+    return `Open from ${data.hours[keys].open}am until ${data.hours[keys].close - 12}pm`;
+  }
+}
 
 function schedule(dayName) {
-  // seu código aqui
+  const object = {};
+  if (arguments.length === 0) {
+    Object.keys(data.hours).forEach((key) => {
+      object[key] = phrase(key)
+    });
+  } else {
+    object[dayName] = phrase(dayName);
+  }
+  return object;
 }
 
 function oldestFromFirstSpecies(id) {
