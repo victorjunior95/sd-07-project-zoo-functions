@@ -89,7 +89,8 @@ function increasePrices(percentage) {
 }
 
 function getObjectEmployee(idOrName) {
-  return employees.filter(({ id, firstName, lastName }) => id === idOrName || firstName === idOrName || lastName === idOrName);
+  return employees.filter(({ id, firstName, lastName }) =>
+  id === idOrName || firstName === idOrName || lastName === idOrName);
 }
 
 const getListNamesSpecies = (responsibleFor) => {
@@ -100,7 +101,7 @@ const getListNamesSpecies = (responsibleFor) => {
     });
   });
   return listAnimals;
-}
+};
 
 function createObjectAllEmployeeResposibleFor() {
   const objectEmployee = {};
