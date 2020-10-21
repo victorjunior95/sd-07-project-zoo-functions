@@ -33,8 +33,8 @@ function employeeByName(employeeName) {
   );
 }
 
-function createEmployee(personalInfo, associatedWith) {
-  return Object.assign({}, personalInfo, associatedWith);
+function createEmployee({ id, firstName, lastName }, { managers, responsibleFor }) {
+  return { id, firstName, lastName, managers, responsibleFor };
 }
 
 function isManager(id) {
