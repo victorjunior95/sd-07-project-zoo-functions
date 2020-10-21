@@ -112,9 +112,7 @@ function retrieveAnimalsPerLocationWithName(locations, sorted, sex) {
           }
           return true;
         })
-        .map((residents) => {
-          return residents.name;
-        });
+        .map((residents) => { return residents.name });
       if (sorted) residents.sort();
       return { [animalName]: residents };
     });
