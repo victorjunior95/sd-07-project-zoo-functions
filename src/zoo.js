@@ -63,16 +63,16 @@ function animalCount(species) {
   const object = {};
   if (arguments.length === 0) {
     data.animals.map((animal) => {
-      object[animal.name] = animal.residents.length;
+      return object[animal.name] = animal.residents.length;
     });
-    return object
+    return object;
   }
   const animalFinded = data.animals.find(animal => animal.name === species);
-  return animalFinded.residents.length
+  return animalFinded.residents.length;
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  
 }
 
 function animalMap(options) {
