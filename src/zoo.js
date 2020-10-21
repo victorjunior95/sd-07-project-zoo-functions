@@ -88,7 +88,9 @@ function increasePrices(percentage) {
 
 }
 
-const getObjectEmployee = (idOrName) => employees.filter(({ id, firstName, lastName }) => id === idOrName || firstName === idOrName || lastName === idOrName);
+function getObjectEmployee(idOrName) {
+  return employees.filter(({ id, firstName, lastName }) => id === idOrName || firstName === idOrName || lastName === idOrName);
+}
 
 const getListNamesSpecies = (responsibleFor) => {
   const listAnimals = [];
@@ -102,7 +104,7 @@ const getListNamesSpecies = (responsibleFor) => {
 
 function createObjectAllEmployeeResposibleFor() {
   const objectEmployee = {};
-  employees.forEach(({ firstName, lastName, responsibleFor })=> {
+  employees.forEach(({ firstName, lastName, responsibleFor }) => {
     const fullName = `${firstName} ${lastName}`;
     objectEmployee[fullName] = getListNamesSpecies(responsibleFor);
   });
