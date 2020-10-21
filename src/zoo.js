@@ -81,8 +81,27 @@ function entryCalculator(entrants) {
   return 0;
 }
 
+// Código feito com base no plantão de Gabriel Oliva
+function allLocations() {
+  return ['NE', 'NW', 'SE', 'SW'];
+}
+
+function allAnimalsByLocation(locations) {
+  const allAnimals = {};
+  locations.forEach(location => {
+    const filterAnimalsNameByLocation = animals
+      .filter(animal => animal.location === location)
+      .map(animal => animal.name);
+    
+      if (filterAnimalsNameByLocation.length !== 0) allAnimals[location] = filterAnimalsNameByLocation;
+  });
+  return allAnimals;
+}
+
 function animalMap(options) {
-  // seu código aqui
+  const locations = allLocations();
+  if (!options) return allAnimalsByLocation(locations);
+
 }
 
 function schedule(dayName) {
