@@ -92,8 +92,6 @@ function entryCalculator(entrants) {
   return resultado;
 }
 
-const options = { includeNames: true, sex: 'female', sorted: true }
-
 function animalMap(options) {
   const locations = ['NE', 'NW', 'SE', 'SW'];
   if(options === undefined) {
@@ -120,11 +118,14 @@ function schedule(dayName) {
   if (dayName === undefined) {
     return result;
   } else {
-    return result.find(value => value[0] === dayName);
+    const objDay ={};
+    result = (Object.entries(arrayOfReturn)).find(weekDay=>weekDay[0]===dayName);
+    objDay[result[0]]=result[1]
+    return objDay;
   }
 }
 
-console.log(schedule());
+console.log(schedule('Monday'));
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
