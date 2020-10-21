@@ -91,9 +91,9 @@ function retrieveFilteredAnimalByLocation(location) {
 }
 function retrieveAnimalsPerLocation(locations) {
   const animalsPerLocation = {};
-  locations.forEach((location) => { 
+  locations.forEach((location) => {
     const filteredAnimals = retrieveFilteredAnimalByLocation(location).map((animal) => animal.name);
-      if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+    if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
   });
   return animalsPerLocation;
 }
@@ -102,16 +102,15 @@ function retrieveAnimalsPerLocationWithName(locations, sorted, sex) {
   const animalsPerLocation = {};
   locations.forEach((location) => {
     const filteredAnimals = retrieveFilteredAnimalByLocation(location).map((animal) => {
-      const animalName = animal.name
+      const animalName = animal.name;
       const residents = animal.residents
         .filter((resident) => {
           const needFiltering = sex !== undefined;
           // needFiltering ? resident.sex === sex : true; Ternary operator
           if (needFiltering) {
             return resident.sex === sex;
-          } else {
-            return true;
-          }
+          } 
+          return true;
         })
         .map((residents) => residents.name);
       if (sorted) residents.sort();
@@ -133,8 +132,8 @@ function animalMap(options) {
   if (!options) return retrieveAnimalsPerLocation(locations);
   const { includeNames = false, sorted = false, sex } = options;
   if (includeNames) return retrieveAnimalsPerLocationWithName(locations, sorted, sex);
-    return retrieveAnimalsPerLocation(locations);
-} 
+  return retrieveAnimalsPerLocation(locations);
+}
 
 // Funcao schedule:
 // Para implementar esta funcao, consultei o repositorio do colega Ygor Fonseca.
