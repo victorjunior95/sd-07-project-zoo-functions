@@ -104,6 +104,7 @@ function animalMap(options) {
   //   );
   //   return retorno;
   // }
+  // a
 }
 
 function schedule(dayName) {
