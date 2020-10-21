@@ -112,8 +112,22 @@ function schedule(dayName = 0) {
   }
   return UniDay(objectDays(), dayName);
 }
+const oldestEmployeeSearch = (id) => {
+  const employeeSearch = employees.find(element => element.id === id);
+  return employeeSearch;
+};
+const oldestAnimalSearch = (employee) => {
+  const rspSearch = employee.responsibleFor.map(resp => animals.find(animal => animal.id === resp));
+  return rspSearch;
+};
+const oldestUniqueAnimalSearch = (animal) => {
+  const oldestAnimal = animal[0].residents.reduce((big, next) => (next.age > big.age ? next : big));
+  const transformArray = Object.values(oldestAnimal);
+  return transformArray;
+};
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const search = oldestAnimalSearch(oldestEmployeeSearch(id));
+  return oldestUniqueAnimalSearch(search);
 }
 
 function increasePrices(percentage) {
