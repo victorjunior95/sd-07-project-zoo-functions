@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+// const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -69,8 +70,57 @@ function entryCalculator(entrants) {
   return (entrants.Adult * 49.99) + (entrants.Child * 20.99) + (entrants.Senior * 24.99);
 }
 
+function filteredAnimalsByLocation(location) {
+  const { animals } = data;
+  return animals.filter(animal => animal.location === location);
+}
+
+function animalsPerLocationByName(locations, sorted, sex) {
+  const animalPerLocation = {};
+  locations.forEach((location) => {
+    const filteredAnimals = filteredAnimalsByLocation(location).map((animal) => {
+      const animalName = animal.name;
+      const residents = animal.residents.filter((resident) => {
+        const isFilteredSex = sex !== undefined;
+        if (isFilteredSex) {
+          return resident.sex === sex;
+        }
+        return true;
+      })
+    .map(resident => resident.name);
+      if (sorted) residents.sort();
+      return { [animalName]: residents };
+    });
+    if (filteredAnimals.length !== 0) animalPerLocation[location] = filteredAnimals;
+  });
+  return animalPerLocation;
+}
+
+function animalsPerLocation(locations) {
+  const { animals } = data;
+  const animalPerLocation = {};
+  locations.forEach((location) => {
+    const filteredAnimals = animals
+    .filter(animal => animal.location === location)
+    .map(animal => animal.name);
+    animalPerLocation[location] = filteredAnimals;
+    if (filteredAnimals.length !== 0) animalPerLocation[location] = filteredAnimals;
+  });
+  return animalPerLocation;
+}
+
+function availableLocations() {
+  return ['NE', 'NW', 'SE', 'SW'];
+}
+
 function animalMap(options) {
-  //  seu
+  const locations = availableLocations();
+  if (!options) return animalsPerLocation(locations);
+  const { includeNames = false, sorted = false, sex } = options;
+  if (includeNames) {
+    return animalsPerLocationByName(locations, sorted, sex);
+  }
+  return animalsPerLocation(locations);
 }
 
 function schedule(dayName) {
