@@ -21,7 +21,7 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  // usar um filter com animais mais velhos que a idade definida
 }
 
 function employeeByName(employeeName) {
@@ -45,17 +45,9 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-
-  // if (species === []) {
-  //   animals.map(element => {
-  //     let animalsObj = {
-  //       element: element.popularity,
-
-
-  //     }
-  //   })
-  //   )
-  // }
+  if (!species){
+    //criar objeto que retorne name: popularity.
+  }
 }
 
 function entryCalculator(entrants) {
