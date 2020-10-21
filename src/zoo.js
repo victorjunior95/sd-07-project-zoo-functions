@@ -49,7 +49,7 @@ const entryCalculator = (entrants) => {
   if (entrants === undefined || entrants === {}) {
     return 0;
   }
-  return Object.entries(entrants).reduce((acc, curr) => acc + (data.prices[curr[0]] * curr[1]), 0);
+  return Object.entries(entrants).reduce((price, total) => price + (data.prices[total[0]] * total[1]), 0);
 };
 
 function animalMap(options) {
@@ -57,8 +57,22 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
-}
+  const days = {};
+  Object.keys(data.hours).forEach((day) => {
+    if (data.hours[day].open === data.hours[day].close) {
+      days[day] = 'CLOSED';
+    } else {
+      days[day] = `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
+    }
+  });
+  if (dayName !== undefined) {
+    return { [dayName]: days[dayName] };
+  }
+  return days;
+};
+
+console.log(schedule('Tuesday'))
+
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
