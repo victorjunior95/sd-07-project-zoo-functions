@@ -11,10 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals } = data;
-const { employees } = data;
-const { prices } = data;
-const { hours } = data;
+const { animals, employees, prices, hours } = data;
 
 /*
 
@@ -43,9 +40,8 @@ possuem a idade mínima especificada
 */
 
 function animalsOlderThan(animal, age) {
-  const currentAnimal = animals.find(animalsObject => animalsObject.name === animal);
-  const { residents } = currentAnimal;
-  return residents.every(item => item.age > age);
+  return animals.find(animalsObject => animalsObject.name === animal)
+  .residents.every(item => item.age > age);
 }
 
 /*
@@ -343,13 +339,12 @@ duas casas decimais
 */
 
 function increasePrices(percentage) {
-  const arrOfPrices = Object.values(prices);
-  const arrOfType = Object.keys(prices);
-
-  arrOfPrices.forEach((currentPrice, index) => {
-    currentPrice += (currentPrice * percentage) / 100;
-    currentPrice = Math.round(currentPrice * 100) / 100;
-    prices[arrOfType[index]] = currentPrice;
+  const arrTypeAndPrice = Object.entries(prices);
+  
+  arrTypeAndPrice.forEach((typeAndPrice) => {
+    typeAndPrice[1] += (typeAndPrice[1] * percentage) / 100;
+    typeAndPrice[1] = Math.round(typeAndPrice[1] * 100) / 100;
+    prices[typeAndPrice[0]] = typeAndPrice[1];
   });
 }
 
