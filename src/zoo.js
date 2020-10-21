@@ -42,8 +42,9 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
+  const { employees } = data;
+  return employees.some(({ managers }) => managers.some(manager => manager === id));
 }
-
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
@@ -54,7 +55,7 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   const { prices } = data;
-  const returnZero = 0;
+  const returnZero = 0
 
   if (entrants === undefined || Object.keys(entrants).length === 0) {
     return returnZero;
