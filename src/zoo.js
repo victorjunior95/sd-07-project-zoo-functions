@@ -10,6 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const { animals } = require('./data');
 // const { animals, employees } = require('./data');
 
 // troquei o find pelo filter conforme visto no PR https://github.com/tryber/sd-07-project-zoo-functions/blob/b32b8ea4021741b40898532cb96353589bf71e60/src/zoo.js
@@ -21,7 +22,10 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  // usar um filter com animais mais velhos que a idade definida
+  return data.animals.filter(element => animal.includes(element.name))
+    .every(element => {
+      return element.residents.age > age
+    })
 }
 
 function employeeByName(employeeName) {
@@ -55,9 +59,9 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  if (!options) {
-    const noParamater = new Object
-  }
+  // if (!options) {
+  //   const noParamater = new Object
+  // }
 }
 
 function schedule(dayName) {
