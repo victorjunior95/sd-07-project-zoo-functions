@@ -125,11 +125,23 @@ const employeeCoverage = (idOrName) => {
 
     return acc;
   }, {});
+  
+  if (idOrName !== undefined) {
+    const employee = employees.find(({ id, firstName, lastName }) => {
+      return id === idOrName || firstName === idOrName || lastName === idOrName;
+    });
+
+    const { firstName, lastName } = employee;
+    const keyAndValue = `${firstName} ${lastName}`;
+    const employeeFound = { [keyAndValue]: finalObject[keyAndValue] };
+    
+    return employeeFound;
+  }
 
   return finalObject;
 };
 
-// Agradeço a ajuda de @loren-gt, @danwhat e @isaacbatst que deram muitas dicas e
+// Agradeço a ajuda de @loren-gt, @danwhat, @isaacbatst e @mhamaji que deram muitas dicas e
 // mostraram soluções diferentes fazendo com que conseguisse desenvolver a lógica
 // da função employeeCoverage
 
