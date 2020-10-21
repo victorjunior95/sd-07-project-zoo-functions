@@ -10,7 +10,6 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { prices } = require('./data');
 
 function animalsByIds(...ids) {
   // colocamos o spread para que na hora do resultado possamos colocar quantos id quisermos
@@ -66,8 +65,9 @@ function animalCount(species) {
     return data.animals.reduce((acc, curr) => {
       // usamos o reduce, para percorrer todo o array
       acc[curr.name] = curr.residents.length;
-      // guardamos o curr.name de animas no acumulador
-      // igualamos a quantidade de animais de cada e retornamos
+      // criamos um objeto
+      // em que  curr.name de animas é a key
+      // a quanridade de animais é o value
       return acc;
     }, {});
   }
@@ -88,12 +88,111 @@ function entryCalculator(entrants = 0) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   // usamos o destructing para poder criar uma nova variável
   // zeramos o valor de cada um para que caso nãoseja colocado nada ele não cobre o ingresso
-  const value = (prices.Adult * Adult) + (prices.Child * Child) + (prices.Senior * Senior);
+  const value = (data.prices.Adult * Adult) + (data.prices
+    .Child * Child) + (data.prices.Senior * Senior);
   return value;
 }
 
-function animalMap(options) {
+function retrieveAvaliableLocations() {
+  return ['NE', 'NW', 'SW', 'SE'];
 }
+
+function retriveFilteredAnimalsBylocation(location) {
+  return data.animals.filter(animal => animal.location === location);
+}
+
+function retriveAnimalsPerLocation(locations) {
+  const animalsPerLocation = {};
+  // irá prcurar todas as regiões e verificar quais animais pertencem a ela
+  locations.forEach((location) => {
+    const filteredAnimals = retriveFilteredAnimalsBylocation(location)
+    .map(animal => animal.name);
+    // neste momento o filtered animals está retornando um array de objetos
+    // cada array é composto por todos os dados dos animais da mesma região
+    // precisamos transformar o array de objetos em array de strings
+    // para isso usamos o map
+    // com o mapjá retorna um array de strings com o nome dos animais de cada região
+    // falta retornar um objeto com a key nome da região e os values são o que map retorna
+    animalsPerLocation[location] = filteredAnimals;
+    // abrimos no objeto vazio uma chave com a localização
+    // seu value será o array de animais diultrados
+  });
+  return animalsPerLocation;
+}
+
+function retriveAnimalsPerLocationWithName(locations, sorted, sex) {
+  const animalsPerLocation = {};
+
+  locations.forEach((location) => {
+    const filteredAnimals = retriveFilteredAnimalsBylocation(location).map((animal) => {
+      const animalName = animal.name;
+      const residents = animal.residents
+      .filter((resident) => {
+        const needFiltering = sex !== undefined;
+        return needFiltering ? resident.sex === sex : true;
+        // se sex for undefined ele não faz o filtro, caso contrário ele faz
+      })
+      .map(resident => resident.name);
+      // nesse map queremos retornar objetos que tem como key o animal e value seus nomes
+      if (sorted) residents.sort();
+
+      return { [animalName]: residents };
+      // retorna um onjeto, com a key animalName e value residents
+      // neste momento está retornando  oque queremos mas sem o nome das regiões
+    });
+    if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+    // se houver filtered animals ele retorna o objeto
+    // ele tem location de chaves e filtered animals de values
+  });
+
+  return animalsPerLocation;
+}
+// foi seguido o exercício guiado no plantão por Gabriel Oliva
+function animalMap(options) {
+  const locations = retrieveAvaliableLocations();
+  if (!options) return retriveAnimalsPerLocation(locations);
+  // locations são todas as localizações que eu quero filtrar
+  // como as localizações disoniveis conseguimos filtrar as espécies dessa localização
+  const { includeNames = false, sorted = false, sex } = options;
+  // estamos desestruturando a propriedade includeNames do objeto options
+  // se não colocarmos nada do sorted, e ele não for chamado viria como undefined
+  // colocamos sorted = false para resolver isso
+  // poderiamos colocar = true, mas no exercício pede para ordenar somente quando sorted = true
+  if (includeNames) {
+    return retriveAnimalsPerLocationWithName(locations, sorted, sex);
+    // isso é a mesma coisa que includeNames === true
+  } return retriveAnimalsPerLocation(locations);
+}
+
+  /* if (!options) {
+    return categorazeAnimalsBylocation();
+    // colocamos a função aqui e a construimos fora para não haver problemas de complexidade
+  }
+  return categorazeAnimalsBylocation(options);
+}
+
+function categorazeAnimalsBylocation() {
+  return data.animals.reduce((acc, specie) => {
+    return {
+      ...acc, [specie.location]: [...acc[specie.location], specie.name]
+      // keys do object
+      // o spread pega tudo que tem no acumulator e colocando como propriedade do objeto
+      // dessa forma retorna todas as regiões ao invés de somente a última
+      // values do object
+      // o rest pega tudo que tem no acumulador e coloca como value
+      // esolhemos o specie.name para retorne o que queremos
+      // na primeira vez ele pega a primeira especie e coloca dentro do array vazio da sua região
+      // nas vezes seguintes ele vai colocando cada especie em seu respectivo array
+    };
+  }, {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+    // esse é o primeiro valor do acumulator, que é um valor iteravel
+    // depois nossa função começa a preencher esse objeto
+  });
+} */
 
 function schedule(dayName) {
   const weekSchedule = {};
@@ -105,12 +204,13 @@ function schedule(dayName) {
       weekSchedule[workingDays] = 'CLOSED';
     } else {
       weekSchedule[workingDays] = `Open from ${data.hours[workingDays].open}am until ${data.hours[workingDays].close - 12}pm`;
-      // o for each vai atuar e vai retornar um array de terça a domingo nesse formato
+      // o for each vai atuar e vai retornar um objeto de terça a domingo nesse formato
     }
   });
   if (dayName !== undefined) {
     return { [dayName]: weekSchedule[dayName] };
-    // retorna um objeto que contem o dia da semana com a função relativa weekschedule para esse dia
+    // retorna um objeto
+    // contem o dia da semana como key e a função relativa weekschedule para esse dia como value
   }
   return weekSchedule;
 }
@@ -130,7 +230,7 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  const { Adult, Senior, Child } = prices;
+  const { Adult, Senior, Child } = data.prices;
   // usamos o destructing para alterar as keys
   const newAdult = Math.round(Adult * (1 + (percentage / 100)) * 100) / 100;
   // const newAdultRounded = newAdult.toFixed(2);
@@ -138,14 +238,15 @@ function increasePrices(percentage) {
   // const newSeniorRounded = newSenior.toFixed(2);
   const newChild = Math.round(Child * (1 + (percentage / 100)) * 100) / 100;
   // const newChildRounded = newChild.toFixed(2);
-  prices.Adult = newAdult;
-  prices.Senior = newSenior;
-  prices.Child = newChild;
-  return prices;
+  data.prices.Adult = newAdult;
+  data.prices.Senior = newSenior;
+  data.prices.Child = newChild;
+  return data.prices;
 }
 
 function employeeCoverage(idOrName) {
 }
+
 
 module.exports = {
   entryCalculator,
