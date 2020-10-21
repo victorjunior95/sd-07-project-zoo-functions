@@ -113,7 +113,7 @@ const employeeCoverage = (idOrName) => {
   const entriesEmployees = Object.entries(listEmployees);
 
   const finalObject = entriesEmployees.reduce((acc, curr) => {
-    let animalsForEmployee = [];
+    const animalsForEmployee = [];
     curr[1].forEach((element) => {
       entriesAnimals.forEach((arrAnimal) => {
         if (arrAnimal[1] === element) {
