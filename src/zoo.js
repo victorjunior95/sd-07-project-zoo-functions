@@ -41,9 +41,7 @@ function isManager(id) {
   return employees.some(({ managers }) => managers.some(manager => manager === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  if (managers === undefined) managers = [];
-  if (responsibleFor === undefined) responsibleFor = [];
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   employees.push({
     id,
     firstName,
