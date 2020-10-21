@@ -28,8 +28,7 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
   const employee = employees.find(
-    justName => justName.firstName === employeeName || justName.lastName === employeeName,
-  );
+    justName => justName.firstName === employeeName || justName.lastName === employeeName);
   return employee;
 }
 
@@ -42,8 +41,7 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   const manager = employees.some(
-    (justManager, index) => justManager.managers[index] === id,
-  );
+    (justManager, index) => justManager.managers[index] === id);
   return manager;
 }
 
@@ -65,8 +63,8 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
+  // referência: Moisés Santana
   const justObject = animals.reduce((theObject, element) => {
-    // referência: Moisés Santana
     theObject[element.name] = element.residents.length; // colchetes indicam a key
     return theObject; // = para atribuir valor à key
   }, {}); // inicia como um objeto vazio
@@ -87,11 +85,53 @@ function entryCalculator(entrants) {
   return sum;
 }
 
-function animalMap(options) {
-  // seu código aqui
+function animalMapNoParameter() {
+  let theObject = { NE: [], NW: [], SE: [], SW: [] };
+  animals.forEach((element) => {
+    theObject = {
+      ...theObject,
+      [element.location]: [...theObject[element.location], element.name],
+    }; // referência: plantão do Hamaji
+  });
+  return theObject;
 }
-// referência: Thiago Pederzolli
+
+function animalMapWithIncludeNames(locations, sortation, animalSex) {
+  const newObject = {};
+  locations.forEach((element) => {
+    const filteredAnimals = animals
+      .filter(specie => specie.location === element) // filtrar a localização
+      .map((item) => {
+        const animalName = item.name; // pegar o nome da espécie
+        const justResidents = item.residents.filter((filterSex) => {
+          if (animalSex !== undefined) { // só filtra se for passado parâmetro
+            return filterSex.sex === animalSex;
+          }
+          return true;
+        }).map(resident => resident.name);
+        // pegar os nomes dos residentes e devolver em array
+        if (sortation) justResidents.sort();
+        return { [animalName]: justResidents }; // valor da chave
+      });
+    newObject[element] = filteredAnimals;
+      // pra poder alimentar o newObject a cada iteração do forEach
+  });
+  return newObject;
+}
+function animalMap(options) {
+  const justLocations = ['NE', 'NW', 'SE', 'SW'];
+  if (options === undefined) return animalMapNoParameter();
+
+  const { includeNames = false, sorted = false, sex } = options;
+  // desestruturação para evitar repetição
+  if (includeNames) {
+    return animalMapWithIncludeNames(justLocations, sorted, sex);
+  }
+  return animalMapNoParameter();
+}
+
 function schedule(...dayName) {
+  // referência: Thiago Pederzolli
   // usando spread vira array
   if (dayName.length === 0) {
     // se é array tem length
@@ -104,8 +144,12 @@ function schedule(...dayName) {
       // é o último a ser acrescentado
       theObject = { ...theObject, [element]: 'CLOSED' };
     } else {
-      theObject = { ...theObject,
-        [element]: `Open from ${hours[element].open}am until ${hours[element].close - 12}pm` };
+      theObject = {
+        ...theObject,
+        [element]: `Open from ${hours[element].open}am until ${
+          hours[element].close - 12
+        }pm`,
+      };
     } // o spread aqui funciona como += para objeto, para acrescentar e não substituir os valores
   });
   return theObject; // retorno tudo o que estiver nele
@@ -122,9 +166,7 @@ function oldestFromFirstSpecies(id) {
       older = findingAnimal.residents[i].age;
     }
   }
-  const findingTheOne = findingAnimal.residents.find(
-    theOne => theOne.age === older,
-  );
+  const findingTheOne = findingAnimal.residents.find(theOne => theOne.age === older);
   return Object.values(findingTheOne);
 }
 
@@ -143,19 +185,16 @@ function employeeCoverage(idOrName) {
     employees.forEach((element) => {
       theObject = { ...theObject,
         [`${element.firstName} ${element.lastName}`]: element.responsibleFor.map(idNumber =>
-          animals.find(theOne => theOne.id === idNumber).name,
-        ),
-      };
+          animals.find(theOne => theOne.id === idNumber).name) };
     });
     return theObject;
   }
-  const findingEmployee = employees.find(({ id, firstName, lastName }) =>
-      idOrName === id || idOrName === firstName || idOrName === lastName,
-  );
+  const findingEmployee = employees.find(
+    ({ id, firstName, lastName }) =>
+      idOrName === id || idOrName === firstName || idOrName === lastName);
   // encontra o employee e retorna o array de species que é responsável
   const findingSpecieName = findingEmployee.responsibleFor.map(idNumber =>
-    animals.find(theOne => theOne.id === idNumber).name,
-  );
+    animals.find(theOne => theOne.id === idNumber).name);
   return {
     [`${findingEmployee.firstName} ${findingEmployee.lastName}`]: findingSpecieName,
   };
