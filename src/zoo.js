@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees, hours } = data;
+const { animals, employees, hours, prices } = data;
 
 function animalsByIds(...ids) {
   return ids.map(id => animals.find(animal => animal.id === id));
@@ -53,7 +53,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   if (species === undefined) {
-    return animals.reduce((acc, { name, residents }) => ({ ...acc, [`${name}`]: residents.length }), {});
+    return animals
+      .reduce((acc, { name, residents }) =>
+      ({ ...acc, [`${name}`]: residents.length }), {});
   }
   return animals
     .find(({ name }) => name === species)
@@ -61,7 +63,7 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  const { prices } = data;
+  // const { prices } = data;
   if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0;
   }
@@ -191,14 +193,10 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  const { prices } = data;
-  const arrayPrices = Object.entries(prices).map(([key, price]) => {
-    const object = {};
+  Object.entries(prices).forEach(([key, price]) => {
     const newPrice = (price * (1 + (percentage / 100))) + 0.005;
-    object[key] = parseFloat(newPrice.toFixed(2));
-    return object;
+    prices[key] = parseFloat(newPrice.toFixed(2));
   });
-  data.prices = Object.assign({}, ...arrayPrices);
 }
 
 const idToAnimalName = idArray => idArray.map(idAnimal => animals
