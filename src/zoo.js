@@ -95,7 +95,7 @@ function increasePrices(percentage) {
   // seu código aqui
 }
 
-const employeeCoverage = (idOrName) => {
+const objectWithEmployeesNamesAndAnimals = () => {
   const listAnimals = {};
   const listEmployees = {};
   const { animals, employees } = data;
@@ -112,7 +112,7 @@ const employeeCoverage = (idOrName) => {
   const entriesAnimals = Object.entries(listAnimals);
   const entriesEmployees = Object.entries(listEmployees);
 
-  const finalObject = entriesEmployees.reduce((acc, curr) => {
+  const requisito1 = entriesEmployees.reduce((acc, curr) => {
     const animalsForEmployee = [];
     curr[1].forEach((element) => {
       entriesAnimals.forEach((arrAnimal) => {
@@ -125,21 +125,30 @@ const employeeCoverage = (idOrName) => {
 
     return acc;
   }, {});
-  
+
+  return requisito1;
+};
+
+const employeeCoverage = (idOrName) => {
+
+  const finalObject = objectWithEmployeesNamesAndAnimals();
+
   if (idOrName !== undefined) {
-    const employee = employees.find(({ id, firstName, lastName }) => {
+    const employee = data.employees.find(({ id, firstName, lastName }) => {
       return id === idOrName || firstName === idOrName || lastName === idOrName;
     });
 
     const { firstName, lastName } = employee;
     const keyAndValue = `${firstName} ${lastName}`;
     const employeeFound = { [keyAndValue]: finalObject[keyAndValue] };
-    
+
     return employeeFound;
   }
 
   return finalObject;
 };
+
+// console.log(employeeCoverage('Nigel'))
 
 // Agradeço a ajuda de @loren-gt, @danwhat, @isaacbatst e @mhamaji que deram muitas dicas e
 // mostraram soluções diferentes fazendo com que conseguisse desenvolver a lógica
