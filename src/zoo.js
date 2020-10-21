@@ -54,20 +54,6 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   // seu código aqui
-  if (species === undefined) {
-    const AnimalsObj = animals.reduce((allAnimals, animal) => {
-      allAnimals[animal.name] = animal.residents.length;
-      return allAnimals;
-    }, {});
-    return AnimalsObj;
-  }
-  const amountSpecie = data.animals.reduce((residentsLength, animalSelected) => {
-    if (animalSelected.name === species) {
-      residentsLength = (animalSelected.residents).length;
-    }
-    return residentsLength;
-  }, 0);
-  return amountSpecie;
 }
 function entryCalculator(entrants) {
   // versao tunada credito ao nosso embaixaTrybe
