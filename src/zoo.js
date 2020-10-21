@@ -34,12 +34,11 @@ function createEmployee(personalInfo, associatedWith) {
     id: personalInfo.id,
     firstName: personalInfo.firstName,
     lastName: personalInfo.lastName,
-    managers: [
-      associatedWith.managers[0],
-    ],
-    responsibleFor: [
-      associatedWith.responsibleFor[0],
-    ],
+    managers: [associatedWith.managers[0],
+      associatedWith.managers[1]],
+    responsibleFor: [associatedWith.responsibleFor[0],
+      associatedWith.responsibleFor[1],
+      associatedWith.responsibleFor[2]],
   };
   return newEmployee;
 }
@@ -53,10 +52,41 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+  if (managers === undefined) {
+    managers = [];
+  }
+  if (responsibleFor === undefined) {
+    responsibleFor = [];
+  }
+  const employee = {
+    id, firstName, lastName, managers, responsibleFor,
+  };
+  return data.employees.push(employee);
+  // return data.employees.map(add => data.employees.push(employee));
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (species === undefined) {
+    return data.animals.reduce((acummulation, arrayAnimal) =>
+    Object.assign(acummulation, { [arrayAnimal.name]: arrayAnimal.residents.length }),
+    {});
+  } return data.animals.find(residents => residents.name === species).residents.length;
+  // Linha 71 a variável Object.assign foi retirada do projeto do
+  // Luciono.B, antes o processo estava.
+  // V
+  // let family;
+  // const acc = {};
+  // return data.animals.filter(typeAnimal => typeAnimal.name === species)
+  // if (species === undefined) {
+  //   const count =  data.animals.map((type) => {
+  //     acc[type.name] = type.residents.length;
+  //     return acc;
+  //   });
+  //   family = count[0];
+  // } else {
+  //   const count = data.animals.find(type => type.name === species);
+  //   family = count.residents.length;
+  // }
 }
 
 function entryCalculator(entrants) {
