@@ -99,9 +99,9 @@ function zooScheduleDayName(dayName) {
   const openTime = hours[dayName].open;
   let closeTime = hours[dayName].close;
   if (closeTime > timePeriod) closeTime -= timePeriod;
-  let schedule = `Open from ${openTime}am until ${closeTime}pm`;
-  if (dayName === 'Monday') schedule = 'CLOSED';
-  objectSchedule[dayName] = schedule;
+  let openingTime = `Open from ${openTime}am until ${closeTime}pm`;
+  if (dayName === 'Monday') openingTime = 'CLOSED';
+  objectSchedule[dayName] = openingTime;
   return objectSchedule;
 }
 
