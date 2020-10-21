@@ -55,14 +55,14 @@ function animalCount(species) {
   if (species === undefined) {
     const animalQtds = animals.map(({ name, residents }) => {
       const animal = {};
-      animal[name] = residents.reduce(sum => sum + 1, 0);
+      animal[name] = residents.length;
       return animal;
     });
     return Object.assign({}, ...animalQtds);
   }
   return animals
     .find(({ name }) => name === species)
-    .residents.reduce(sum => sum + 1, 0);
+    .residents.length;
 }
 
 function entryCalculator(entrants) {
