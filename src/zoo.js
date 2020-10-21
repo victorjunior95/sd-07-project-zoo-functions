@@ -80,6 +80,7 @@ function animalCount(species) {
       return accumulator; /* Pedir explicação aqui */
     }, {});
   }
+
   return data.animals.find(animalSpecie => animalSpecie.name === species).residents.length;
 }
 
@@ -97,53 +98,73 @@ function entryCalculator(entrants) {
 
 function ifUndefinedFunction(regionAnimals) {
   const newObject = {};
+
   regionAnimals.forEach((region) => {
     const animalsLocation = data.animals.filter(animal => animal.location === region);
+
     const animalsSpecies = animalsLocation.map(specie => specie.name);
+
     return (newObject[region] = animalsSpecies);
   });
+
   return newObject;
 }
 
 function getGender(animalsPerRegion, sex) {
   const getAllAnimals = animalsPerRegion.map(animal => animal.residents);
+
   const getGenderAnimals = animalsPerRegion.map(arrayOfAnimals =>
     arrayOfAnimals.residents);
+
   const getSpecieGender = getGenderAnimals.map(item => item.filter(animal => animal.sex === sex));
+
   return !sex ? getAllAnimals : getSpecieGender;
 }
 
 function ifSorted(animalsPerRegion, sorted, sex) {
   const getCurrentGender = getGender(animalsPerRegion, sex);
+
   let getAnimalsNames = getCurrentGender.map(item => item.map(names => names.name));
+
   if (sorted === true) {
     getAnimalsNames = getAnimalsNames.map(array => array.sort());
   } /* Mestre Oliva e mestre Isaac ensinaram */
+
   return getAnimalsNames;
 }
 
 function ifIncludesNamesFunction(regionAnimals, sex, sorted) {
   const newObject = {};
+
   regionAnimals.forEach((region) => {
     const animalsPerRegion = data.animals.filter(area => area.location === region);
+
     const getAnimals = animalsPerRegion.map(animalSpecie => animalSpecie.name);
+
     const getAnimalsNames = ifSorted(animalsPerRegion, sorted, sex);
+
     const speciesAndNames = getAnimals.reduce((exit, animalName, index) =>
     ([...exit, { [animalName]: getAnimalsNames[index] }]), []);
+
     return (newObject[region] = speciesAndNames);
   });
+
   return newObject;
 }
 
 function animalMap(options) {
   const regionAnimals = ['NE', 'NW', 'SE', 'SW'];
+
   if (!options) {
     return ifUndefinedFunction(regionAnimals);
   }
+
   const { includeNames = false, sorted = false, sex } = options;
+
   if (includeNames === true) {
     return ifIncludesNamesFunction(regionAnimals, sex, sorted);
   }
+
   return ifUndefinedFunction(regionAnimals);
 }
 
@@ -160,7 +181,7 @@ function schedule(dayName) {
   });
 
   return dayName === undefined ? scheduleWeek : {
-    [dayName]: scheduleWeek[dayName]
+    [dayName]: scheduleWeek[dayName],
   };
 }
 
