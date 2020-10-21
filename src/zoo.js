@@ -367,8 +367,40 @@ Com o último nome de um funcionário, retorna os animais pelos quais o funcion�
 
 */
 
+const createExpectedObject = (employee, result) => {
+  const valuesForResult = [];
+
+  employee.responsibleFor.forEach((id) => {
+    const currentAnimal = animals.find(animal => animal.id === id);
+  
+    valuesForResult.push(currentAnimal.name);
+  
+    result[`${employee.firstName} ${employee.lastName}`] = valuesForResult;
+  });
+  return result;
+};
+
+
+const getAllEmployessAndAnimals = () => employees
+.reduce((result, employee) => createExpectedObject(employee, result), {});
+
+const getRealParameter = (idOrName) => {
+  const employee = employees.find((employee) => {
+    if (employee.id === idOrName
+      || employee.firstName === idOrName
+      || employee.lastName === idOrName)
+      return employee;
+  });
+  const result = {};
+  return createExpectedObject(employee, result);
+};
+
+
 function employeeCoverage(idOrName) {
-  console.log(idOrName);
+
+  if(!idOrName) return getAllEmployessAndAnimals();
+
+  return getRealParameter(idOrName);
 }
 
 module.exports = {
