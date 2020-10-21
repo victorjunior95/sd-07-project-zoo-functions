@@ -9,6 +9,8 @@ eslint no-unused-vars: [
 ]
 */
 
+const { animals } = require('./data');
+const { employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -77,16 +79,55 @@ function schedule(dayName) {
   // seu código aqui
 }
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
+function oldestFromFirstSpecies(idEmployee) {
+  let maxValue = 0;
+  let objectEmployee = data.employees.find(({ id }) => id === idEmployee);
+  let objectSpecies = data.animals.find(({ id }) => id === objectEmployee.responsibleFor[0]);
+
+  console.log(resultado);
 }
+
+// oldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1')
 
 function increasePrices(percentage) {
 
 }
 
+const getObjectEmployee = (idOrName) => {
+ return data.employees.filter(({id, firstName, lastName }) => id === idOrName || firstName === idOrName || lastName === idOrName);
+};
+
+const getListNamesSpecies = (responsibleFor) => {
+  const listAnimals = [];
+  responsibleFor.forEach(idAnimal => {
+    animals.forEach(({ id, name }) => {
+      if (idAnimal === id) listAnimals.push(name);
+    })
+  })
+  return listAnimals;
+}
+
+function createObjectAllEmployeeResposibleFor() {
+  const objectEmployee = {};
+  employees.forEach(({ firstName, lastName, responsibleFor })=> {
+    let fullName = `${firstName} ${lastName}`;
+    objectEmployee[fullName] = getListNamesSpecies(responsibleFor);
+  })
+  return objectEmployee;
+}
+
+function createObjectEmployeeResposibleFor({ firstName, lastName, responsibleFor }) {
+  const objectEmployee = {};
+  let fullName = `${firstName} ${lastName}`;
+  objectEmployee[fullName] = getListNamesSpecies(responsibleFor);
+  return objectEmployee;
+}
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) return createObjectAllEmployeeResposibleFor() ;
+  else {
+    const objectEmployee = getObjectEmployee(idOrName);
+    return createObjectEmployeeResposibleFor(...objectEmployee);
+  }
 }
 
 module.exports = {
