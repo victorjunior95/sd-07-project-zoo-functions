@@ -62,7 +62,9 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 function animalCount(species) {
   const object = {};
   if (arguments.length === 0) {
-    data.animals.map(animal => object[animal.name] = animal.residents.length);
+    data.animals.map((animal) => {
+      object[animal.name] = animal.residents.length
+    });
     return object;
   }
   const animalFinded = data.animals.find(animal => animal.name === species);
@@ -71,10 +73,7 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   if (arguments.length === 0) {
-    return 0
-  }
-  if (arguments === {}) {
-    return 0
+    return 0;
   }
 }
 
