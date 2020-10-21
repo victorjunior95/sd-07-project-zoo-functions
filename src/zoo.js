@@ -49,14 +49,15 @@ const entryCalculator = (entrants) => {
   if (entrants === undefined || entrants === {}) {
     return 0;
   }
-  return Object.entries(entrants).reduce((price, total) => price + (data.prices[total[0]] * total[1]), 0);
+  return Object.entries(entrants).reduce((price, total) =>
+    price + (data.prices[total[0]] * total[1]), 0);
 };
 
 function animalMap(options) {
   // seu código aqui
 }
 
-function schedule(dayName) {
+const schedule = (dayName) => {
   const days = {};
   Object.keys(data.hours).forEach((day) => {
     if (data.hours[day].open === data.hours[day].close) {
@@ -70,9 +71,6 @@ function schedule(dayName) {
   }
   return days;
 };
-
-console.log(schedule('Tuesday'))
-
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
