@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees } = require('./data');
+const { animals, employees, hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -92,13 +92,39 @@ function entryCalculator(entrants) {
   return resultado;
 }
 
+const options = { includeNames: true, sex: 'female', sorted: true }
+
 function animalMap(options) {
-  // seu código aqui
-}
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  if(options === undefined) {
+    const retorno = {};
+    locations.forEach((location => retorno[location]=animals.filter(animal=>animal.location===location).map(animalName=>animalName.name)));
+    return retorno;
+  }
+} 
 
 function schedule(dayName) {
-  // seu código aqui
+  const arrayOfReturn = {};
+  const arrayofEntries = Object.entries(hours);
+  // console.log(arrayofEntries);
+  arrayofEntries.forEach((valor) => {
+    if (valor[1].open === valor[1].close) {
+      arrayOfReturn[valor[0]] = 'CLOSED';
+    } else {
+      arrayOfReturn[valor[0]] = `Open from ${valor[1].open}am until ${
+        valor[1].close - 12
+      }pm`;
+    }
+  });
+  let result = arrayOfReturn;
+  if (dayName === undefined) {
+    return result;
+  } else {
+    return result.find(value => value[0] === dayName);
+  }
 }
+
+console.log(schedule());
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
