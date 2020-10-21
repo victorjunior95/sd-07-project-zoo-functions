@@ -10,7 +10,8 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const {animals, employees, hours, prices} = data;
+
+const { animals, employees, hours } = data;
 
 function animalsByIds(...ids) {
   return ids.map(id => animals.find(animal => animal.id === id));
@@ -19,10 +20,7 @@ function animalsByIds(...ids) {
 function animalsOlderThan(name, minimalAge) {
   return animals
     .find(animal => animal.name === name)
-    .residents.reduce(
-      (allIsOlder, { age }) => allIsOlder && age > minimalAge,
-      true,
-    );
+    .residents.every(({ age }) => age > minimalAge);
 }
 
 function employeeByName(employeeName) {
@@ -107,7 +105,6 @@ const listWithNames = ({ name: species, residents }) => {
 };
 
 const generateMapWithoutOptions = (directions, func) => {
-  const { animals } = data;
   const arrayAnimalMap = directions.map((direction) => {
     const object = {};
     object[direction] = animals
@@ -217,11 +214,9 @@ function increasePrices(percentage) {
   data.prices = Object.assign({}, ...arrayPrices);
 }
 
-const idToAnimalName = (idArray) => {
-  return idArray.map(idAnimal => animals
+const idToAnimalName = idArray => idArray.map(idAnimal => animals
     .find(({ id }) => id === idAnimal))
     .map(({ name }) => name);
-};
 
 const responsibleForAssign = (employee) => {
   const { firstName, lastName } = employee;
