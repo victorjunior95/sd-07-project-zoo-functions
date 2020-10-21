@@ -10,16 +10,17 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const {animals, employees, hours, prices} = data;
 
 function animalsByIds(...ids) {
   if (ids.length === 0) {
     return [];
   }
-  return ids.map(id => data.animals.find(animal => animal.id === id));
+  return ids.map(id => animals.find(animal => animal.id === id));
 }
 
 function animalsOlderThan(name, minimalAge) {
-  return data.animals
+  return animals
     .find(animal => animal.name === name)
     .residents.reduce(
       (allIsOlder, { age }) => allIsOlder && age > minimalAge,
@@ -31,7 +32,7 @@ function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  return data.employees.find(
+  return employees.find(
     ({ firstName, lastName }) =>
       firstName === employeeName || lastName === employeeName,
   );
@@ -42,7 +43,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  if (data.employees
+  if (employees
     .find(({ managers }) =>
       managers
       .find(managersId => managersId === id) !== undefined)) {
@@ -54,7 +55,7 @@ function isManager(id) {
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   if (managers === undefined) managers = [];
   if (responsibleFor === undefined) responsibleFor = [];
-  data.employees.push({
+  employees.push({
     id,
     firstName,
     lastName,
@@ -65,14 +66,14 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 
 function animalCount(species) {
   if (species === undefined) {
-    const animalQtds = data.animals.map(({ name, residents }) => {
+    const animalQtds = animals.map(({ name, residents }) => {
       const animal = {};
       animal[name] = residents.reduce(sum => sum + 1, 0);
       return animal;
     });
     return Object.assign({}, ...animalQtds);
   }
-  return data.animals
+  return animals
     .find(({ name }) => name === species)
     .residents.reduce(sum => sum + 1, 0);
 }
@@ -90,7 +91,6 @@ function entryCalculator(entrants) {
 }
 
 const createEmptyAnimalMap = () => {
-  const { animals } = data;
   const emptyAnimalMap = {};
   animals
     .map(({ location }) => location)
@@ -129,7 +129,6 @@ const sortAnimalMap = (arrayAnimalMap) => {
   return arrayAnimalMap;
 };
 const generateMapWithOptions = (directions, func, sex, sorted) => {
-  const { animals } = data;
   const arrayAnimalMap = directions.map((direction) => {
     const object = {};
     let animalsInThisLocation = animals
@@ -187,7 +186,6 @@ const toHumanReadable = ([weekDay, { open, close }]) => {
   return weekDayHumanReadable;
 };
 function schedule(dayName) {
-  const { hours } = data;
   const weekDaysAndHours = Object.entries(hours);
   if (dayName === undefined) {
     const arrayHours = weekDaysAndHours.map(toHumanReadable);
@@ -198,7 +196,6 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  const { employees, animals } = data;
   const { responsibleFor } = employees
     .find(({ id: employeeId }) => employeeId === id);
   const { residents } = animals
@@ -223,9 +220,7 @@ function increasePrices(percentage) {
   data.prices = Object.assign({}, ...arrayPrices);
 }
 
-
 const idToAnimalName = (idArray) => {
-  const { animals } = data;
   return idArray.map(idAnimal => animals
     .find(({ id }) => id === idAnimal))
     .map(({ name }) => name);
@@ -240,7 +235,6 @@ const responsibleForAssign = (employee) => {
 };
 
 function employeeCoverage(idOrName) {
-  const { employees } = data;
   if (idOrName === undefined) {
     const arrayEmployee = employees.map(employee => responsibleForAssign(employee));
     return Object.assign({}, ...arrayEmployee);
