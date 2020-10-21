@@ -60,12 +60,9 @@ function animalCount(species) {
     .find(({ name }) => name === species)
     .residents.length;
 }
-
-
-
 function entryCalculator(entrants) {
   const { prices } = data;
-  const returnZero = 0
+  const returnZero = 0;
 
   if (entrants === undefined || Object.keys(entrants).length === 0) {
     return returnZero;
@@ -75,7 +72,6 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu código aqui
 }
 
 function schedule(dayName) {
