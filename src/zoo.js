@@ -372,33 +372,28 @@ const createExpectedObject = (employee, result) => {
 
   employee.responsibleFor.forEach((id) => {
     const currentAnimal = animals.find(animal => animal.id === id);
-  
+
     valuesForResult.push(currentAnimal.name);
-  
+
     result[`${employee.firstName} ${employee.lastName}`] = valuesForResult;
   });
   return result;
 };
 
-
 const getAllEmployessAndAnimals = () => employees
 .reduce((result, employee) => createExpectedObject(employee, result), {});
 
 const getRealParameter = (idOrName) => {
-  const employee = employees.find((employee) => {
-    if (employee.id === idOrName
-      || employee.firstName === idOrName
-      || employee.lastName === idOrName)
-      return employee;
-  });
+  const employee = employees.find(employee => employee.id === idOrName
+  || employee.firstName === idOrName
+  || employee.lastName === idOrName);
+
   const result = {};
   return createExpectedObject(employee, result);
 };
 
-
 function employeeCoverage(idOrName) {
-
-  if(!idOrName) return getAllEmployessAndAnimals();
+  if (!idOrName) return getAllEmployessAndAnimals();
 
   return getRealParameter(idOrName);
 }
