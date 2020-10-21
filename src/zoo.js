@@ -71,7 +71,8 @@ function entryCalculator(entrants) {
   const childAmountToPay = data.prices.Child * Child;
   const adultAmountToPay = data.prices.Adult * Adult;
   const seniorAmountToPay = data.prices.Senior * Senior;
-  return totalAmountToPay = childAmountToPay + adultAmountToPay + seniorAmountToPay;
+  const totalAmountToPay = childAmountToPay + adultAmountToPay + seniorAmountToPay;
+  return totalAmountToPay;
 }
 
 function animalMap(options) {
