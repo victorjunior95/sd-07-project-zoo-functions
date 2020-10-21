@@ -62,13 +62,12 @@ function entryCalculator(entrants) {
     return sumAcc + currentCalc;
   }, 0);
   return result;
-
 }
 
 function retrieveAvailableLocations() {
   return data.animals
-  .map((animal) => animal.location)
-  .reduce(acc, currentValue => {
+  .map(animal => animal.location)
+  .reduce((acc, currentValue) => {
     const currentValueAlreadyExistsInAcc = currentValue.includes(acc);
     return currentValueAlreadyExistsInAcc ? acc : [...acc, currentValue];
   });
@@ -79,22 +78,17 @@ function retrieveFilteredAnimalsByLocation(location) {
 }
 
 function retrieveAnimalsPerLocation(locations) {
-
   const animalsPerLocation = {};
-
   locations.forEach((location) => {
     const filteredAnimals = retrieveFilteredAnimalsByLocation(location)
       .map(animal => animal.name);
-
     if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
   });
-
   return animalsPerLocation;
 }
 
 function retrieveAnimalsPerLocationsWithName(locations, sorted, sex) {
   const animalsPerLocation = {};
-
   locations.forEach((location) => {
     const filteredAnimals = retrieveFilteredAnimalsByLocation(location)
     .map((animal) => {
@@ -102,30 +96,22 @@ function retrieveAnimalsPerLocationsWithName(locations, sorted, sex) {
       const residents = animal.residents
       .filter((resident) => {
         const needFiltering = sex !== undefined;
-      
         if (needFiltering) {
           return resident.sex === sex;
         } return true;
-      })
-      .map(resident => resident.name);
-
+      }).map(resident => resident.name);
       if (sorted) residents.sort();
-
       return { [animalName]: residents };
     });
-
     if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
-  })
+  });
   return animalsPerLocation;
 }
 // Requisito resolvido em aula ao vivo c/ Oliva
 function animalMap(options) {
   const locations = retrieveAvailableLocations();
-
   if (!options) return retrieveAnimalsPerLocation(locations);
-
   const { includeNames = false, sorted = false, sex } = options;
-
   if (includeNames) {
     return retrieveAnimalsPerLocationsWithName(locations, sorted, sex);
   } return retrieveAnimalsPerLocation(locations);
