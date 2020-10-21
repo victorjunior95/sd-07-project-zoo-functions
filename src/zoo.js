@@ -19,11 +19,13 @@ function animalsByIds(...ids) {
   ));
 }
 
+
 function animalsOlderThan(animal, age) {
   return data.animals.some(specie => specie.name === animal &&
     specie.residents.every(resident => resident.age >= age,
   ));
 }
+
 
 function employeeByName(employeeName) {
   return employeeName === undefined ? {} :
@@ -33,15 +35,18 @@ function employeeByName(employeeName) {
   );
 }
 
+
 function createEmployee(personalInfo, associatedWith) {
   return Object.assign(personalInfo, associatedWith);
 }
+
 
 function isManager(id) {
   return data.employees.some(employee =>
     employee.managers.find(manager => manager === id,
   ));
 }
+
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   return data.employees.push({
@@ -52,6 +57,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     responsibleFor,
   });
 }
+
 
 function getAllAnimalNamesAndQuantity() {
   return data.animals.reduce((acc, current) => {
@@ -68,6 +74,7 @@ function animalCount(species) {
     animal.name === species).residents.length;
 }
 
+
 function entryCalculator(entrants = 0) {
   const price = Object.keys(entrants)
   .map(lifestage => data.prices[lifestage]);
@@ -79,9 +86,11 @@ function entryCalculator(entrants = 0) {
   }, 0);
 }
 
+
 function animalMap(options) {
 
 }
+
 
 function schedule(dayName) {
   const openingHours = {
@@ -104,6 +113,7 @@ function schedule(dayName) {
   return openingDay;
 }
 
+
 const findEmployeeAnimal = id => data.employees
   .find(employee => employee.id === id)
   .responsibleFor.find(element => element);
@@ -120,6 +130,7 @@ function oldestFromFirstSpecies(id) {
   );
 }
 
+
 function increasePrices(percentage) {
   const keys = Object.keys(data.prices);
   const newValues = Object.values(data.prices)
@@ -131,8 +142,9 @@ function increasePrices(percentage) {
   }, {});
 }
 
-function getEmployeesAnimalsNames(teste) {
-  return teste.responsibleFor.map(id =>
+
+function getEmployeesAnimalsNames(employeeId) {
+  return employeeId.responsibleFor.map(id =>
     data.animals
     .find(animal => animal.id === id).name,
   );
@@ -156,7 +168,6 @@ function createObjectEmployeeResponsibleFor(idOrName) {
 
   return { [employeeFullName]: getEmployeesAnimalsNames(employeeById) };
 }
-
 
 function employeeCoverage(idOrName) {
   if (!idOrName) {
