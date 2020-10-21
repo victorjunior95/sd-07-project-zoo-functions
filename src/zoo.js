@@ -160,7 +160,7 @@ function schedule(dayName) {
   });
 
   return dayName === undefined ? scheduleWeek : {
-
+    [dayName]: scheduleWeek[dayName]
   };
 }
 
