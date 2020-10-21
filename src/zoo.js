@@ -11,6 +11,7 @@ eslint no-unused-vars: [
 
 const { animals } = require('./data');
 const { employees } = require('./data');
+const { hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -27,7 +28,7 @@ function includesNames(name, { firstName, lastName }) {
 }
 
 function employeeByName(...employeeName) {
-  const person = data.employees.filter(employee => includesNames(employeeName, employee));
+  const person = employees.filter(employee => includesNames(employeeName, employee));
   if (person.length > 0) return person[0];
   return {};
 }
@@ -75,9 +76,42 @@ function animalMap(options) {
   // seu código aqui
 }
 
-function schedule(dayName) {
-  // seu código aqui
+function zooSchedule() {
+  const objectSchedule = {};
+  const valuesHours = Object.values(hours);
+  const keysHours = Object.keys(hours);
+  const timePeriod = 12;
+
+  keysHours.forEach((days, index) => {
+    const openTime = valuesHours[index].open;
+    let closeTime = valuesHours[index].close;
+    if (closeTime > timePeriod) closeTime -= timePeriod;
+    let schedule = `Open from ${openTime}am until ${closeTime}pm`;
+    if (days === 'Monday') schedule = 'CLOSED';
+    objectSchedule[days] = schedule;
+  });
+  return objectSchedule;
 }
+
+function zooScheduleDayName(dayName){
+  const objectSchedule = {};
+  const timePeriod = 12;
+  const openTime = hours[dayName].open;
+  let closeTime = hours[dayName].close;
+  if (closeTime > timePeriod) closeTime -= timePeriod;
+  let schedule = `Open from ${openTime}am until ${closeTime}pm`;
+  if (dayName === 'Monday') schedule = 'CLOSED';
+  objectSchedule[dayName] = schedule;
+  return objectSchedule;
+}
+
+
+function schedule(dayName) {
+  if (!dayName) return zooSchedule();
+  return zooScheduleDayName(dayName);
+}
+
+schedule('Tuesday');
 
 function oldestFromFirstSpecies(idEmployee) {
 
