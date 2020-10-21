@@ -79,8 +79,21 @@ function animalMap(options) {
   // seu código aqui
 }
 
+const createSpecificSchedule = (scheduleToReturn, dayName) => {
+  if (dayName === 'Monday') {
+    scheduleToReturn[dayName] = 'CLOSED';
+  } else {
+    scheduleToReturn[dayName] = `Open from ${data.hours[dayName].open}am until ${data.hours[dayName].close - 12}pm`;
+  }
+  return scheduleToReturn;
+};
+
+const createSchedule = (scheduleToReturn, day) => createSpecificSchedule(scheduleToReturn, day);
 function schedule(dayName) {
-  // seu código aqui
+  if (dayName === undefined) {
+    return Object.keys(data.hours).reduce(createSchedule, {});
+  }
+  return createSpecificSchedule({}, dayName);
 }
 
 function oldestFromFirstSpecies(id) {
