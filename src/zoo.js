@@ -384,12 +384,12 @@ const getAllEmployessAndAnimals = () => employees
 .reduce((result, employee) => createExpectedObject(employee, result), {});
 
 const getRealParameter = (idOrName) => {
-  const employee = employees.find(employee => employee.id === idOrName
+  const currentObject = employees.find(employee => employee.id === idOrName
   || employee.firstName === idOrName
   || employee.lastName === idOrName);
 
   const result = {};
-  return createExpectedObject(employee, result);
+  return createExpectedObject(currentObject, result);
 };
 
 function employeeCoverage(idOrName) {
