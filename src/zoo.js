@@ -95,8 +95,56 @@ function entryCalculator(entrants) {
     (Senior * data.prices.Senior));
 }
 
-function animalMap(options) {
+function ifUndefinedFunction(regionAnimals) {
+  const newObject = {};
+  regionAnimals.forEach((region) => {
+    const animalsLocation = data.animals.filter(animal => animal.location === region);
+    const animalsSpecies = animalsLocation.map(specie => specie.name);
+    return (newObject[region] = animalsSpecies);
+  });
+  return newObject;
+}
 
+function getGender(animalsPerRegion, sex) {
+  const getAllAnimals = animalsPerRegion.map(animal => animal.residents);
+  const getGenderAnimals = animalsPerRegion.map(arrayOfAnimals =>
+    arrayOfAnimals.residents);
+  const getSpecieGender = getGenderAnimals.map(item => item.filter(animal => animal.sex === sex));
+  return !sex ? getAllAnimals : getSpecieGender;
+}
+
+function ifSorted(animalsPerRegion, sorted, sex) {
+  const getCurrentGender = getGender(animalsPerRegion, sex);
+  let getAnimalsNames = getCurrentGender.map(item => item.map(names => names.name));
+  if (sorted === true) {
+    getAnimalsNames = getAnimalsNames.map(array => array.sort());
+  } /* Mestre Oliva e mestre Isaac ensinaram */
+  return getAnimalsNames;
+}
+
+function ifIncludesNamesFunction(regionAnimals, sex, sorted) {
+  const newObject = {};
+  regionAnimals.forEach((region) => {
+    const animalsPerRegion = data.animals.filter(area => area.location === region);
+    const getAnimals = animalsPerRegion.map(animalSpecie => animalSpecie.name);
+    const getAnimalsNames = ifSorted(animalsPerRegion, sorted, sex);
+    const speciesAndNames = getAnimals.reduce((exit, animalName, index) =>
+    ([...exit, { [animalName]: getAnimalsNames[index] }]), []);
+    return (newObject[region] = speciesAndNames);
+  });
+  return newObject;
+}
+
+function animalMap(options) {
+  const regionAnimals = ['NE', 'NW', 'SE', 'SW'];
+  if (!options) {
+    return ifUndefinedFunction(regionAnimals);
+  }
+  const { includeNames = false, sorted = false, sex } = options;
+  if (includeNames === true) {
+    return ifIncludesNamesFunction(regionAnimals, sex, sorted);
+  }
+  return ifUndefinedFunction(regionAnimals);
 }
 
 function schedule(dayName) {
@@ -111,7 +159,9 @@ function schedule(dayName) {
     }
   });
 
-  return dayName === undefined ? scheduleWeek : { [dayName]: scheduleWeek[dayName] };
+  return dayName === undefined ? scheduleWeek : {
+
+  };
 }
 
 function oldestFromFirstSpecies(id) {
@@ -138,18 +188,18 @@ function employeeCoverage(idOrName) {
   if (!idOrName) {
     /* Array de empregados */
     const getEmployeesArray = data.employees.map(arrayOfEmployees =>
-    `${arrayOfEmployees.firstName} ${arrayOfEmployees.lastName}`);
+      `${arrayOfEmployees.firstName} ${arrayOfEmployees.lastName}`);
 
     /* Array de arrays onde temos os ids dos animais */
     const getEmployeesAnimals = data.employees.map(arrayOfAnimals =>
-    arrayOfAnimals.responsibleFor);
+      arrayOfAnimals.responsibleFor);
 
     /* Novo objeto */
-    const getAnimals2 = getEmployeesAnimals.map(arrayOfAnimals => arrayOfAnimals.map(animalId =>
+    const getAnimals = getEmployeesAnimals.map(arrayOfAnimals => arrayOfAnimals.map(animalId =>
       data.animals.find(specie => specie.id === animalId).name));
 
     const generateFinalObject = getEmployeesArray.reduce((exit, employeeName, index) =>
-      ({ ...exit, [employeeName]: getAnimals2[index] }), {});
+      ({ ...exit, [employeeName]: getAnimals[index] }), {});
 
     return generateFinalObject;
     /* Feito junto ao Johnatas Henrique turma 2, Lugh Walle turma 6 e Sidnei Ramos turma 5 */
@@ -157,13 +207,13 @@ function employeeCoverage(idOrName) {
 
   const selectEmployees = data.employees.find(idName =>
     (idOrName === idName.id ||
-    idOrName === idName.firstName ||
-    idOrName === idName.lastName),
-    );
+      idOrName === idName.firstName ||
+      idOrName === idName.lastName),
+  );
 
   const getAnimalsArray = selectEmployees.responsibleFor.map(
     animalIds =>
-    data.animals.find(animalName => animalIds === animalName.id).name);
+      data.animals.find(animalName => animalIds === animalName.id).name);
 
   return { [`${selectEmployees.firstName} ${selectEmployees.lastName}`]: getAnimalsArray };
 }
