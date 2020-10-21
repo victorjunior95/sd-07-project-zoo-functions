@@ -13,9 +13,6 @@ const data = require('./data');
 const {animals, employees, hours, prices} = data;
 
 function animalsByIds(...ids) {
-  if (ids.length === 0) {
-    return [];
-  }
   return ids.map(id => animals.find(animal => animal.id === id));
 }
 
