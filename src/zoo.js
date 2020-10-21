@@ -37,7 +37,7 @@ function employeeByName(employeeName = '') {
   }
   const clerks = data.employees;
   const clerkFirstName = clerks.find(person => person.firstName === employeeName);
-  const clerkLastName = clerks.find(person => person.lastName === employeeName)
+  const clerkLastName = clerks.find(person => person.lastName === employeeName);
   return clerkFirstName || clerkLastName;
 }
 
