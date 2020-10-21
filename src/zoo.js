@@ -73,7 +73,16 @@ const schedule = (dayName) => {
 };
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const employee = data.employees.find(employeeId => employeeId.id === id).responsibleFor[0];
+  const { residents } = data.animals.find(name => name.id === employee);
+
+  const {
+    name,
+    sex,
+    age,
+  } = residents.reduce((accumulate, animal) => (accumulate.age > animal.age ? accumulate : animal));
+
+  return [name, sex, age];
 }
 
 function increasePrices(percentage) {
