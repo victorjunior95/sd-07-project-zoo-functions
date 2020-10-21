@@ -129,6 +129,10 @@ const employeeCoverage = (idOrName) => {
   return finalObject;
 };
 
+// Agradeço a ajuda de @loren-gt, @danwhat e @isaacbatst que deram muitas dicas e
+// mostraram soluções diferentes fazendo com que conseguisse desenvolver a lógica
+// da função employeeCoverage
+
 module.exports = {
   entryCalculator,
   schedule,
