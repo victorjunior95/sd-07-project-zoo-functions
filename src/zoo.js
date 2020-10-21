@@ -35,13 +35,10 @@ function employeeByName(employeeName = '') {
   if (employeeName.length === 0) {
     return {};
   }
-  const employee = data.employees.find((person) => {
-    return person.firstName === employeeName || person.lastName === employeeName;
-  });
-  // const askedEmployee = data.employees.find(eachEmployee => eachEmployee.firstName === employeeName || eachEmployee.lastName === employeeName);
-
-  
-  return employee;
+  const clerks = data.employees;
+  const clerkFirstName = clerks.find(person => person.firstName === employeeName);
+  const clerkLastName = clerks.find(person => person.lastName === employeeName)
+  return clerkFirstName || clerkLastName;
 }
 
 function createEmployee(personalInfo, associatedWith) {
