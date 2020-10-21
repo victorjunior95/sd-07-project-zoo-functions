@@ -117,11 +117,18 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const entryPrices = Object.entries(prices);
+  const objectValues = entryPrices.map((element) => {
+    const calculated = element[1] + (element[1] * (percentage / 100));
+    const adjust = Math.round(calculated * 100) / 100;
+    return { [element[0]]: adjust };
+  });
+  objectValues.forEach(element => Object.assign(prices, element));
 }
-
+// Agradeço ao Ricardo Alves, que vi em seu código
+// a utilização do Math.round de forma * 100 e me deu uma luz!
 function employeeCoverage(idOrName) {
-  // seu código aqui
+
 }
 
 module.exports = {
