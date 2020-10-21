@@ -9,14 +9,18 @@ eslint no-unused-vars: [
 ]
 */
 
+const { animals } = require('./data');
+const { prices } = require('./data');
+const { hours } = require('./data');
+const { employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  return data.animals.filter((animal, count) => animal.id === ids[count]);
+  return animals.filter((animal, count) => animal.id === ids[count]);
 }
 
 function animalsOlderThan(animal, age) {
-  const selectedAnimal = data.animals.filter(anim => anim.name === animal);
+  const selectedAnimal = animals.filter(anim => anim.name === animal);
   const selectedAnimalContent = selectedAnimal[0].residents;
   return selectedAnimalContent.every(anim => anim.age > age);
 }
@@ -24,7 +28,7 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   const name = employeeName;
   if (name !== undefined) {
-    return data.employees.find(item => item.firstName === name || item.lastName === name);
+    return employees.find(item => item.firstName === name || item.lastName === name);
   }
   return ({});
 }
@@ -34,7 +38,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const getId = (data.employees.map(item => item.managers)).flat();
+  const getId = (employees.map(item => item.managers)).flat();
   return getId.some(item => item === id);
 }
 
@@ -46,14 +50,14 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     managers,
     responsibleFor,
   };
-  return data.employees.push(newEmployee);
+  return employees.push(newEmployee);
 }
 
 function animalCount(species) {
   if (species !== undefined) {
-    return data.animals.find(item => item.name === species).residents.length;
+    return animals.find(item => item.name === species).residents.length;
   }
-  return data.animals.reduce((acc, item) => {
+  return animals.reduce((acc, item) => {
     acc[item.name] = item.residents.length;
     return acc;
   }, {});
@@ -70,27 +74,44 @@ function entryCalculator(entrants) {
   return 0;
 }
 
-// source: https://dicasdejavascript.com.br/javascript-como-remover-valores-repetidos-de-um-array/
-
-function buildAnimalMap() {
-  let keys = data.animals.map(item => item.location);
-  keys = [...new Set(keys)];
-  const buildMap = keys.reduce((acc, key) => {
-    const animal = data.animals.filter(item => item.location === key);
-    acc[key] = animal.map(item => item.name);
-    return acc;
-  }, {});
-  return buildMap;
+function locationOfAnimals() {
+  return ['NE', 'NW', 'SE', 'SW'];
 }
 
+function nameByLocation (locations) {
+  return animals.filter((animal) => animal.location === locations)
+}
+function buildAnimalMapByLocation(locations) {
+  const animalsByLocation = {};
+  locations.forEach(location => {
+    const filteredAnimals = nameByLocation(location).map((item)  => item.name);
+    animalsByLocation[location] = filteredAnimals
+  })
+  return animalsByLocation;
+}
+//subrequisito solucionado após exercício guiado Oliva
+function buildAnimalMapByLocationAndName (locations) {
+  const animalsByLocationAndName = {}
+  locations.forEach(location => {
+    const filteredAnimals = nameByLocation(location).map((item)  => {
+      const names = item.name;
+      const residents = item.residents.map(resident => resident.name)
+      return {[names]: residents }
+    });
+    animalsByLocationAndName[location] = filteredAnimals
+  })
+  return animalsByLocationAndName;
+}
 function animalMap(options) {
-  if (options === undefined) return buildAnimalMap();
+  const locations = locationOfAnimals()
+  if (!options) return buildAnimalMapByLocation(locations);
+  if (options.includeNames === true) return buildAnimalMapByLocationAndName(locations);
 }
 
 function buildSchedule() {
-  const keys = Object.keys(data.hours);
+  const keys = Object.keys(hours);
   const calendar = keys.reduce((acc, key) => {
-    acc[key] = `Open from ${data.hours[key].open}am until ${(data.hours[key].close) - 12}pm`;
+    acc[key] = `Open from ${hours[key].open}am until ${(hours[key].close) - 12}pm`;
     return acc;
   }, {});
   calendar.Monday = 'CLOSED';
@@ -102,17 +123,17 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  const getEmployee = data.employees.find(employee => employee.id === id);
-  const getAnimals = data.animals.find(anim => anim.id === getEmployee.responsibleFor[0]).residents;
+  const getEmployee = employees.find(employee => employee.id === id);
+  const getAnimals = animals.find(anim => anim.id === getEmployee.responsibleFor[0]).residents;
   const oldestAnimal = getAnimals.sort((item1, item2) => item2.age - item1.age)[0];
   return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
 
 function increasePrices(percentage) {
-  const keys = Object.keys(data.prices);
+  const keys = Object.keys(prices);
   keys.forEach((key) => {
-    const newValue = data.prices[key] + (data.prices[key] * (percentage / 100));
-    data.prices[key] = Math.round(newValue * 100) / 100;
+    const newValue = prices[key] + (prices[key] * (percentage / 100));
+    prices[key] = Math.round(newValue * 100) / 100;
   });
 }
 
@@ -133,7 +154,7 @@ function dataEmployee() {
 function employeeCoverage(idOrName) {
   const inf = idOrName;
   if (idOrName === undefined) return dataEmployee();
-  const empl = data.employees.find(e => inf === e.id || inf === e.firstName || inf === e.lastName);
+  const empl = employees.find(e => inf === e.id || inf === e.firstName || inf === e.lastName);
   const key = `${empl.firstName} ${empl.lastName}`;
   return { [key]: dataEmployee()[key] }
   ;
