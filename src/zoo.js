@@ -91,12 +91,12 @@ function animalCount(species = '') {
 function entryCalculator(entrants) {
   if (!entrants || Object.entries(entrants).length === 0) return 0;
   let totalPrice = 0;
-  for (const visitor in entrants) {
-    if (data.prices.hasOwnProperty(visitor)) {
+  const givenEntrants = Object.keys(entrants);
+  givenEntrants.forEach(visitor => {
+    if (data.prices[visitor]) {
       totalPrice += (data.prices[visitor] * entrants[visitor]);
     }
-  }
-
+  });
   return totalPrice;
 }
 
@@ -112,7 +112,7 @@ function schedule(dayName = '') {
     Friday: 'Open from 10am until 8pm',
     Saturday: 'Open from 8am until 10pm',
     Sunday: 'Open from 8am until 8pm',
-    Monday: 'CLOSED'
+    Monday: 'CLOSED',
   };
 
   if (dayName.length === 0) return openingHours;
