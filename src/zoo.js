@@ -53,7 +53,21 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  /* eslint spaced-comment: ["error", "always"] */
+  // seu código aqui
+  if (species === undefined) {
+    const AnimalsObj = animals.reduce((allAnimals, animal) => {
+      allAnimals[animal.name] = animal.residents.length;
+      return allAnimals;
+    }, {});
+    return AnimalsObj;
+  }
+  const amountSpecie = data.animals.reduce((residentsLength, animalSelected) => {
+    if (animalSelected.name === species) {
+      residentsLength = (animalSelected.residents).length;
+    }
+    return residentsLength;
+  }, 0);
+  return amountSpecie;
 }
 function entryCalculator(entrants) {
   // versao tunada credito ao nosso embaixaTrybe
@@ -87,7 +101,6 @@ function increasePrices(percentage) {
     catchPrices[i] = around;
   }
 
-  return catchPrices;
 }
 
 
