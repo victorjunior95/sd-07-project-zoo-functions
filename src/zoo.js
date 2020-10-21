@@ -96,8 +96,8 @@ function increasePrices(percentage) {
 }
 
 const employeeCoverage = (idOrName) => {
-  let listAnimals = {};
-  let listEmployees = {};
+  const listAnimals = {};
+  const listEmployees = {};
   const { animals, employees } = data;
 
   animals.forEach(({ name, id }) => {
@@ -105,25 +105,26 @@ const employeeCoverage = (idOrName) => {
   });
 
   employees.forEach(({ firstName, lastName, responsibleFor }) => {
-    let emp = `${firstName} ${lastName}`;
-    listEmployees[emp] = responsibleFor;
+    const employee = `${firstName} ${lastName}`;
+    listEmployees[employee] = responsibleFor;
   });
 
   const entriesAnimals = Object.entries(listAnimals);
   const entriesEmployees = Object.entries(listEmployees);
 
   const finalObject = entriesEmployees.reduce((acc, curr) => {
-    let animalsForEmployee= [];
-    curr[1].map((element) => {
-      entriesAnimals.filter(arrAnimal => {
+    let animalsForEmployee = [];
+    curr[1].forEach((element) => {
+      entriesAnimals.filter((arrAnimal) => {
         if (arrAnimal[1] === element) {
           animalsForEmployee.push(arrAnimal[0]);
         }
-      })
-    })
-    acc[curr[0]] = animalsForEmployee;
+
+        return acc[curr[0]] = animalsForEmployee;
+      });
+    });
     return acc;
-  }, {})
+  }, {});
 
   return finalObject;
 };
