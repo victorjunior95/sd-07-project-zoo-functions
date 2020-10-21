@@ -12,7 +12,7 @@ eslint no-unused-vars: [
 const data = require('./data');
 // const { animals, employees } = require('./data');
 
-//troquei o find pelo filter conforme visto no PR https://github.com/tryber/sd-07-project-zoo-functions/blob/b32b8ea4021741b40898532cb96353589bf71e60/src/zoo.js
+// troquei o find pelo filter conforme visto no PR https://github.com/tryber/sd-07-project-zoo-functions/blob/b32b8ea4021741b40898532cb96353589bf71e60/src/zoo.js
 function animalsByIds(...ids) {
   if (ids.length === 0) {
     return [];
@@ -45,8 +45,8 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  if (!species){
-    //criar objeto que retorne name: popularity.
+  if (!species) {
+    // criar objeto que retorne name: popularity.
   }
 }
 
@@ -55,7 +55,9 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu código aqui
+  if (!options) {
+    const noParamater = new Object
+  }
 }
 
 function schedule(dayName) {
