@@ -1,3 +1,4 @@
+const { animals } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -65,108 +66,55 @@ function entryCalculator(entrants) {
   return keys.reduce((acc, curr) => (acc += (entrants[curr] * data.prices[curr])), 0);
 }
 
-// animalMap - Seguindo a resolução do plantão de resolução guiada do Isaac
-const inicialObject = { NE: [], NW: [], SE: [], SW: [] };
+// resolução do animalMap guiada pelo Oliva em 20/10/2020
 
-function categorizeAnimalsByLocation() {
-  return data.animals.reduce((acc, specie) => (
-    {
-      ...acc,
-      [specie.location]: [
-        ...acc[specie.location],
-        specie.name,
-      ],
-    }), inicialObject);
+function retrieveAvaiableLocations() {
+  return animals.map(animal => animal.location)
+    .reduce((acc, curr) => {
+      const currInAcc = curr.includes(acc);
+      return currInAcc ? acc : [...acc, curr];
+    });
 }
 
-function animalNames(sortOption) {
-  if (!sortOption) {
-    return data.animals.reduce((acc, specie) => (
-      {
-        ...acc,
-        [specie.location]: [
-          ...acc[specie.location],
-          {
-            [specie.name]: specie.residents.map(resident => resident.name),
-          },
-        ],
-      }), inicialObject);
-  }
-  return data.animals.reduce((acc, specie) => (
-    {
-      ...acc,
-      [specie.location]: [
-        ...acc[specie.location],
-        {
-          [specie.name]: specie.residents.map(resident => resident.name).sort(),
-        },
-      ],
-    }), inicialObject);
+function retrieveFilteredAnimalsByLocation(location) {
+  return animals.filter(animal => animal.location === location);
 }
 
-function animalF(sortOption) {
-  if (!sortOption) {
-    return data.animals.reduce((acc, specie) => (
-      {
-        ...acc,
-        [specie.location]: [
-          ...acc[specie.location],
-          {
-            [specie.name]: specie.residents
-              .filter(resident => resident.sex === 'female').map(resident => resident.name),
-          },
-        ],
-      }), inicialObject);
-  }
-  return data.animals.reduce((acc, specie) => (
-    {
-      ...acc,
-      [specie.location]: [
-        ...acc[specie.location],
-        {
-          [specie.name]: specie.residents
-            .filter(resident => resident.sex === 'female').map(resident => resident.name).sort(),
-        },
-      ],
-    }), inicialObject);
+function retrieveAnimalsByLocation(locations) {
+  const animalsByLocation = {};
+  locations.forEach((location) => {
+    const filteredAnimals = retrieveFilteredAnimalsByLocation(location).map(animal => animal.name);
+    if (filteredAnimals.length !== 0) animalsByLocation[location] = filteredAnimals;
+  });
+  return animalsByLocation;
 }
 
-function animalM(sortOption) {
-  if (!sortOption) {
-    return data.animals.reduce((acc, specie) => (
-      {
-        ...acc,
-        [specie.location]: [
-          ...acc[specie.location],
-          {
-            [specie.name]: specie.residents
-              .filter(resident => resident.sex === 'male').map(resident => resident.name),
-          },
-        ],
-      }), inicialObject);
-  }
-  return data.animals.reduce((acc, specie) => (
-    {
-      ...acc,
-      [specie.location]: [
-        ...acc[specie.location],
-        {
-          [specie.name]: specie.residents
-            .filter(resident => resident.sex === 'male').map(resident => resident.name).sort(),
-        },
-      ],
-    }), inicialObject);
+function retrieveAnimalsByLocationWithName(locations, sorted, sex) {
+  const animalsByLocation = {};
+  locations.forEach((location) => {
+    const filteredAnimals = retrieveFilteredAnimalsByLocation(location).map((animal) => {
+      const animalName = animal.name;
+      const residents = animal.residents
+        .filter((resident) => {
+          const needFiltering = sex !== undefined;
+          return needFiltering ? resident.sex === sex : true;
+        })
+        .map(resident => resident.name);
+      if (sorted) residents.sort();
+      return { [animalName]: residents };
+    });
+    if (filteredAnimals.length !== 0) animalsByLocation[location] = filteredAnimals;
+  });
+  return animalsByLocation;
 }
 
-function animalMap(options) {
-  if (!options || !options.includeNames) {
-    return categorizeAnimalsByLocation();
-  } else if (options.includeNames && !options.sex) {
-    return !options.sorted ? animalNames(false) : animalNames(true);
-  } else if (options.includeNames && !options.sorted) {
-    return options.sex === 'female' ? animalF(false) : animalM(false);
+function animalMap(options = {}) {
+  const locations = retrieveAvaiableLocations();
+  const { includeNames = false, sorted = false, sex } = options;
+  if (includeNames) {
+    return retrieveAnimalsByLocationWithName(locations, sorted, sex);
   }
-  return options.sex === 'female' ? animalF(true) : animalM(true);
+  return retrieveAnimalsByLocation(locations);
 }
 
 function schedule(dayName) {
