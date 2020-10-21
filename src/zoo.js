@@ -63,7 +63,7 @@ function entryCalculator(entrants) {
     return 0;
   }
   return Object.keys(entrants)
-  .reduce((acc, element) => acc + (entrants[element] * data.prices[element]), 0);
+  .reduce((acc, element) => acc + (entrants[element] * prices[element]), 0);
 }
 
 // pequenas funções
