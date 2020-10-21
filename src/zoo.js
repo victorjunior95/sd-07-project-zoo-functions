@@ -31,13 +31,17 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName = '') {
-  const employee = employeeName;
-  const askedEmployee = data.employees.find(eachEmployee => eachEmployee.firstName === employeeName || eachEmployee.lastName === employeeName);
-
-  if (employee.length === 0) {
+  // const employee = employeeName;
+  if (employeeName.length === 0) {
     return {};
   }
-  return askedEmployee;
+  const employee = data.employees.find((person) => {
+    return person.firstName === employeeName || person.lastName === employeeName;
+  });
+  // const askedEmployee = data.employees.find(eachEmployee => eachEmployee.firstName === employeeName || eachEmployee.lastName === employeeName);
+
+  
+  return employee;
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -92,7 +96,7 @@ function entryCalculator(entrants) {
   if (!entrants || Object.entries(entrants).length === 0) return 0;
   let totalPrice = 0;
   const givenEntrants = Object.keys(entrants);
-  givenEntrants.forEach(visitor => {
+  givenEntrants.forEach((visitor) => {
     if (data.prices[visitor]) {
       totalPrice += (data.prices[visitor] * entrants[visitor]);
     }
