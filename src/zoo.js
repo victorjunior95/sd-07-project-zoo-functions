@@ -119,16 +119,13 @@ function schedule(dayName) {
       }pm`;
     }
   });
-  let result = arrayOfReturn;
   if (dayName === undefined) {
-    return result;
+    return arrayOfReturn;
   }
-  const objDay = {};
-  result = Object.entries(arrayOfReturn).find(
-    weekDay => weekDay[0] === dayName,
-  );
-  objDay[result[0]] = result[1];
-  return objDay;
+  const result = {
+    [dayName]:arrayOfReturn[dayName]
+  };
+  return result;
 }
 
 console.log(schedule('Monday'));
