@@ -178,6 +178,7 @@ function increasePrices(percentage) {
 
   Object.keys(prices).map((key) => {
     prices[key] = Math.round((prices[key] * percentageResult) * 100) / 100;
+    return prices;
   });
 }
 
