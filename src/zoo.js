@@ -14,9 +14,11 @@ const data = require('./data');
 const { animals } = data;
 
 function animalsByIds(...ids) {
+  // console.log(ids)
   return animals.filter((animal, index) => animal.id === ids[index]);
 }
 // console.log(animalsByIds())
+console.log(animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce'))
 
 function animalsOlderThan(animal, age) {
   const myAnimal = animals.find(animalName => animalName.name === animal);
