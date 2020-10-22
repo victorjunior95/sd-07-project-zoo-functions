@@ -94,13 +94,31 @@ function entryCalculator(entrants) {
 
 function animalMap(options) {
   // seu código aqui
-
 }
 
+function cronograma(day, emptyObject) {
+  if (day === 'Monday') {
+    emptyObject[day] = 'CLOSED';
+  }
+  if (day !== 'Monday') {
+    emptyObject[day] = `Open from ${data.hours[day].open}am until ${data.hours[day].close - 12}pm`;
+  }
+  return emptyObject;
+}
+
+function diaespecifico(dayName, emptyObject) {
+  cronograma(dayName, emptyObject);
+}
 function schedule(dayName) {
-  // seu código aqui
-
+  const emptyObject = {};
+  if (!dayName) {
+    Object.keys(data.hours).forEach(day => cronograma(day, emptyObject));
+  } else {
+    diaespecifico(dayName, emptyObject);
+  }
+  return emptyObject;
 }
+
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
@@ -125,6 +143,7 @@ function increasePrices(percentage) {
   prices.Senior = res[1];
   prices.Child = res[2];
 }
+
 
 function employeeCoverage(idOrName) {
   // seu código aqui
