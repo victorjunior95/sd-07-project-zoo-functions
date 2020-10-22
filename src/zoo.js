@@ -37,8 +37,14 @@ function isManager(id) {
   return employees.some(employee => employee.managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  employees.push({
+    id: id,
+    firstName: firstName,
+    lastName: lastName,
+    managers: managers,
+    responsibleFor: responsibleFor
+  });
 }
 
 function animalCount(species) {
@@ -134,10 +140,10 @@ function retrieveAnimalsPerLocationWithName(locations, sorted, sex) {
         // -
         // return needFilterSex ? resident.sex === sex : true; !! operador ternario !! alternativa
         // -
-        if (!needFilterSex) { // (se o resultado for true, ele ira entrar no 'if'!)
-         return true;
+        if (needFilterSex) { // (se o resultado for true, ele ira entrar no 'if'!)
+          return resident.sex === sex;
         }
-        return resident.sex === sex;
+        return true;
       }).map(resident => resident.name);
       // -
       if (sorted) residents.sort();
