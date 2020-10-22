@@ -118,7 +118,7 @@ function animalMapWithIncludeNames(locations, sortation, animalSex) {
   });
   return newObject;
 }
-function animalMap(options) {
+function animalMap(options) { // referência: plantão Gabriel Oliva
   const justLocations = ['NE', 'NW', 'SE', 'SW'];
   if (options === undefined) return animalMapNoParameter();
 
