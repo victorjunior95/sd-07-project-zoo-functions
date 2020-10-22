@@ -67,7 +67,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   }
 
   data.employees.push(employeeAdded);
-  return employeeAdded;
+  // return employeeAdded;
 }
 function animalCount(species) {
   // seu código aqui
