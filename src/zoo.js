@@ -100,27 +100,57 @@ function retrieveLocations() {
   return ['NE', 'NW', 'SE', 'SW'];
 }
 
+function retrieveFilteredAnimalsByLocation(location) {
+  return animals.filter((animal) => animal.location === location)
+}
+
 function retrieveAnimalsByLocation(location) {
   const animalsByLocation = {};
 
   location.forEach((location) => {
-    const filteredAnimals = animals
-    .filter((animal) => animal.location === location)
-    .map(animal => animal.name);
-    // if (filteredAnimals.length !== 0)
-    animalsByLocation[location] = filteredAnimals; 
+    const filteredAnimals = retrieveFilteredAnimalsByLocation(location)
+      .map(animal => animal.name);
+    if (filteredAnimals.length !== 0) animalsByLocation[location] = filteredAnimals;
     // console.log(location)
     // console.log(filteredAnimals)
-  })  
+  })
+  return animalsByLocation;
+}
+
+function retrieveAnimalsByLocationWithName(location, sorted) {
+  const animalsByLocation = {};
+
+  location.forEach((location) => {
+    // console.log(location)
+    const filteredAnimals = retrieveFilteredAnimalsByLocation(location).map(animal => {
+      const animalName = animal.name;
+      const residents = animal.residents.map((resitent => resitent.name));
+
+      if (sorted) residents.sort();
+
+      return { [animalName]: residents};
+
+    // console.log(animalName)
+    // console.log(residents)
+    });
+
+    if (filteredAnimals.length !== 0) animalsByLocation[location] = filteredAnimals;
+    
+    console.log(filteredAnimals)
+  })
   return animalsByLocation;
 }
 
 function animalMap(options) {
-  const location = retrieveLocations()
-  if(!options) return retrieveAnimalsByLocation(location);
+  const location = retrieveLocations();
+  if (!options) return retrieveAnimalsByLocation(location);
+  const { includeNames = false, sorted = false } = options;
+  if (includeNames) return retrieveAnimalsByLocationWithName(location, sorted);
 }
-
-console.log(animalMap());
+const options = { includeNames: true, sorted: true };
+// const options = { includeNames: true };
+console.log(animalMap(options));
+// animalMap();
 
 // Sem parâmetros, retorna um cronograma legível para humanos
 // Se um único dia for passado, retorna somente este dia em um formato legível para humanos
