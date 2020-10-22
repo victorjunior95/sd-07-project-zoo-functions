@@ -12,14 +12,15 @@ eslint no-unused-vars: [
 const { animals } = require('./data');
 const { employees } = require('./data');
 const { hours } = require('./data');
+const { prices } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  return data.animals.filter(animal => ids.includes(animal.id));
+  return animals.filter(animal => ids.includes(animal.id));
 }
 
 function animalsOlderThan(animal, ageAnimal) {
-  const { residents } = data.animals.find(({ name }) => name === animal);
+  const { residents } = animals.find(({ name }) => name === animal);
   return residents.every(({ age }) => age >= ageAnimal);
 }
 
@@ -38,18 +39,18 @@ function createEmployee({ id, firstName, lastName }, { managers, responsibleFor 
 }
 
 function isManager(id) {
-  return data.employees.some(({ managers }) => managers.includes(id));
+  return employees.some(({ managers }) => managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
+  employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
-const searchNameEspecies = species => data.animals.find(({ name }) => name === species);
+const searchNameEspecies = species => animals.find(({ name }) => name === species);
 
 const listOfAnimals = () => {
   const speciesZoo = {};
-  data.animals.forEach(({ name, residents }) => {
+  animals.forEach(({ name, residents }) => {
     speciesZoo[name] = residents.length;
   });
   return speciesZoo;
@@ -67,7 +68,7 @@ function entryCalculator(entrants) {
   if (entrants === 0 || entrants === undefined) return 0;
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   const amountOfPeople = [Adult, Senior, Child];
-  const listPrices = Object.values(data.prices);
+  const listPrices = Object.values(prices);
   return amountOfPeople.map((amount, index) => amount * listPrices[index])
   .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 }
@@ -131,16 +132,21 @@ function oldestFromFirstSpecies(idEmployee) {
   return getListAnimalOlder(objectAnimal);
 }
 
-console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
-
-
 function increasePrices(percentage) {
-
+  const keysPrices = Object.keys(prices);
+  keysPrices.forEach(key => {
+    let interest = ((prices[key] * percentage) / 100);
+    interest = parseFloat((Math.round(interest * 100) / 100).toFixed(2));
+    prices[key] += interest;
+    prices[key] = parseFloat((prices[key]).toFixed(2));
+  });
+  console.log(prices);
+  return prices;
 }
 
 function getObjectEmployee(idOrName) {
   return employees.filter(({ id, firstName, lastName }) =>
-  id === idOrName || firstName === idOrName || lastName === idOrName);
+  [id, firstName, lastName].includes(idOrName));
 }
 
 const getListNamesSpecies = (responsibleFor) => {
