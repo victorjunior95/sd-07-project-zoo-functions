@@ -17,8 +17,6 @@ const { employees } = data;
 function animalsByIds(...ids) {
   if (ids === undefined) return [];
   return animals.filter(animal => ids.includes(animal.id));
-  
-  // tentar com foreach
 }
 
 function animalsOlderThan(animal, age) {
@@ -52,9 +50,51 @@ function entryCalculator(entrants) {
 }
 
 function retrieveAvailableLocations() {
-  return ['NE', 'NW', 'SE', 'SW'];
-}
+  // return ['NE', 'NW', 'SE', 'SW']; !! forma mais simples sabendo todas as locations !!
+  /* !! forma mais complicada q a utilizada !!
+  const locations = animals
+  .map(animal => animal.location)
+  .reduce((acc, currentValue) => {
+    const dupLocation = acc.includes(currentValue);
+    
+    // return dupLocation ? acc : [...acc, currentValue]; !! alternativa !!
+    if (dupLocation) {
+      return acc
+    } else {
+      return [...acc, currentValue]
+    }
+  }, []);
+  return locations
+  */
+  /* !! forma mais simpificada da opcao a cima !!
+  return animals
+    .map(animal => animal.location)
+    .reduce((acc, currentValue) => {
+      const dupLocation = acc.includes(currentValue);
 
+      if (!acc.includes(currentValue)) {
+        acc.push(currentValue)
+      }
+      return acc
+    }, []);
+  */
+  
+  /* !! forma alternativa pra opcao de cima !!
+  let locations = [];
+  const dupLocations = animals.map(animal => animal.location);
+  dupLocations.forEach(location => {
+    if (!locations.includes(location)) {
+      locations.push(location)
+    }
+  })
+  return locations;
+  */
+
+  const dupLocations = animals.map(animal => animal.location);
+  const locations = [...new Set(dupLocations)]; // !! const locations = Array.from(new Set(dupLocations)) !! ALTERNATIVA !!
+  return locations;
+}
+animalMap()
 function retrieveFilteredAnimalsByLocation(location) {
   return animals.filter((animal) => animal.location === location);
 }
@@ -65,9 +105,13 @@ function retrieveAnimalsPerLocation(locations) {
   locations.forEach((location) => {
     const filteredAnimals = retrieveFilteredAnimalsByLocation(location)
     .map((animal) => animal.name);
-    // const filteredAnimals = animals.filter(animal => location.includes(animal.location)).map((animal) => animal.name); !! OUTRA ALTERNATIVA !!
+    
+    // !! OUTRA ALTERNATIVA !!
+    // const filteredAnimals = animals.filter(animal => location.includes(animal.location)).map((animal) => animal.name);
 
-    if (filteredAnimals.length !== 0) animalPerLocation[location] = filteredAnimals; // DIFERENTE DE --> animalPerLocation.location = filteredAnimals (.location seria o nome pra todas as keys) !! adicionando ao obj com a key ${location} !!
+    // DIFERENTE DE --> animalPerLocation.location = filteredAnimals 
+    // (.location seria o nome pra todas as keys) !! adicionando ao obj com a key ${location} !!
+    if (filteredAnimals.length !== 0) animalPerLocation[location] = filteredAnimals;
   });
 
   return animalPerLocation;
@@ -80,8 +124,13 @@ function retrieveAnimalsPerLocationWithName (locations, sorted, sex) {
     const filteredAnimals = retrieveFilteredAnimalsByLocation(location).map((animal) => {
       const animalName = animal.name;
       const residents = animal.residents.filter((resident) => {
-        const needFilterSex = sex !==  false // sex === 'male' ||  'female' !! alternativa !! ${needFilterSex} GUARDA UMA BOOLEAN DA COMPARACAO FEITA EM sex !== false (se ${sex} for diferente de 'false', ira mandar pra ${needFilterSex} o resultado 'true')!! 
-        // return needFilterSex ? resident.sex === sex : true; !! operador ternario !!
+        // sex === 'male' ||  'female' !! alternativa !! 
+        // ${needFilterSex} GUARDA UMA BOOLEAN DA COMPARACAO FEITA EM sex !== false 
+        // (se ${sex} for diferente de 'false', ira mandar pra ${needFilterSex} o resultado 'true')!! 
+        const needFilterSex = sex !==  false;
+        
+        // return needFilterSex ? resident.sex === sex : true; !! operador ternario !! alternativa
+
         if (needFilterSex) { // (se o resultado for true, ele ira entrar no 'if'!)
            return resident.sex === sex;
         } else {
@@ -98,12 +147,12 @@ function retrieveAnimalsPerLocationWithName (locations, sorted, sex) {
   return animalsPerLocation;
 }
 
-function animalMap(options) {
+function animalMap(options = {}) {
   const locations = retrieveAvailableLocations();
+  //console.log(options)
+  const { includeNames = false, sorted = false, sex = false } = options; // (se options vier UNDEFINED vai dar erro no destructing de options!)
 
-  if (!options) return retrieveAnimalsPerLocation(locations); // if (false === false) | if (!options === false) roda o codigo
-
-  const { includeNames = false, sorted = false, sex = false } = options;
+  // if (!options) return retrieveAnimalsPerLocation(locations); // if (false === false) | if (!options === false) roda o codigo
 
   if (includeNames) { // if (true === true) | if (options === true) roda o codigo
     return retrieveAnimalsPerLocationWithName(locations, sorted, sex);
