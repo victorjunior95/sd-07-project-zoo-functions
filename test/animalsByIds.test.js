@@ -8,7 +8,7 @@ describe('Implemente a função animalsByIds', () => {
     assert.deepEqual(actual, expected);
   });
 
-  it('Ao receber como parâmetro um único id, retorna os animais com este id', () => {
+  it('Ao receber como parâmetro um único id, retorna um array com a espécie referente à esse id', () => {
     const actual = zoo.animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce');
     const expected = [{
       id: '0938aa23-f153-4937-9f88-4858b24d6bce',
@@ -26,7 +26,7 @@ describe('Implemente a função animalsByIds', () => {
     assert.deepEqual(actual, expected);
   });
 
-  it('Ao receber mais de um id, retorna os animais que têm um desses ids', () => {
+  it('Ao receber mais de um id, retorna um array com as espécies referentes aos ids', () => {
     const actual = zoo.animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'e8481c1d-42ea-4610-8e11-1752cfc05a46');
     const expected = [{
       id: '0938aa23-f153-4937-9f88-4858b24d6bce',
