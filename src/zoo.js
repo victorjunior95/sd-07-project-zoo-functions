@@ -66,7 +66,7 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  
+  // seu código aqui 
 }
 // Orientado pelo showLiva.
 function schedule(dayName) {
@@ -82,10 +82,10 @@ function increasePrices(percentage) {
   //   console.log(array);
   //   console.log(prices[array[0]]);
   //   prices[array[0]] = Math.round(prices[array[0]] * ((percentage / 100) + 1) * 100) / 100});
-  prices.Adult = Math.round(prices.Adult * ((percentage /100) + 1) * 100) / 100;
-  prices.Senior = Math.round(prices.Senior * ((percentage /100) + 1) * 100) / 100;
-  prices.Child = Math.round(prices.Child * ((percentage /100) + 1) * 100) / 100;
-};
+  prices.Adult = Math.round(prices.Adult * ((percentage / 100) + 1) * 100) / 100;
+  prices.Senior = Math.round(prices.Senior * ((percentage / 100) + 1) * 100) / 100;
+  prices.Child = Math.round(prices.Child * ((percentage / 100) + 1) * 100) / 100;
+}
 
 function employeeCoverage(idOrName) {
   // seu código aqui
