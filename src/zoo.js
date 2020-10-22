@@ -89,35 +89,38 @@ function entryCalculator(entrants) {
   return 0;
 }
 
-function animalMap(options) {
-  // if (!options) {
-  //   return animalByLocation(options);
-  // }
+// OPTIONS = OBJETO
+// Quais opções OPTIONS PODE TER?
+// includeNames = bool
+// sorted = bool
+// sex = string
+
+// Sem parâmetros, retorna animais categorizados por localização
+function retrieveLocations() {
+  return ['NE', 'NW', 'SE', 'SW'];
 }
 
-// function animalByLocation() {
-  // return animals.reduce((acc, specie) => {
-  // console.log('current: ', specie);
-  // console.log('acumulado: ', acc);
-  //   return {
-  //     ...acc,
-  //     [specie.location]: [
-  //       ...acc[specie.location],
-  //       // specie.name
-  //       {
-  //         [specie.name]: specie.residents.map(resident => resident.name)
-  //       }
-  //     ]
-  //   };
-  // }, {
-  //   NE: [],
-  //   NW: [],
-  //   SE: [],
-  //   SW: []
-  // });
-// }
+function retrieveAnimalsByLocation(location) {
+  const animalsByLocation = {};
 
-// console.log(animalMap('lions'));
+  location.forEach((location) => {
+    const filteredAnimals = animals
+    .filter((animal) => animal.location === location)
+    .map(animal => animal.name);
+    // if (filteredAnimals.length !== 0)
+    animalsByLocation[location] = filteredAnimals; 
+    // console.log(location)
+    // console.log(filteredAnimals)
+  })  
+  return animalsByLocation;
+}
+
+function animalMap(options) {
+  const location = retrieveLocations()
+  if(!options) return retrieveAnimalsByLocation(location);
+}
+
+console.log(animalMap());
 
 // Sem parâmetros, retorna um cronograma legível para humanos
 // Se um único dia for passado, retorna somente este dia em um formato legível para humanos
