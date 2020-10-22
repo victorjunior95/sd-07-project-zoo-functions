@@ -114,11 +114,11 @@ function getListAnimalOlder({ residents }) {
   let listAnimals = [];
   let maxOlder = 0;
   residents.forEach(({ name, sex, age }) => {
-    if (age >  maxOlder) {
+    if (age > maxOlder) {
       maxOlder = age;
-      listAnimals = [name, sex, age]
+      listAnimals = [name, sex, age];
     }
-  })
+  });
   return listAnimals;
 }
 function getObjectAnimal(responsibleFor) {
@@ -126,7 +126,7 @@ function getObjectAnimal(responsibleFor) {
 }
 
 function oldestFromFirstSpecies(idEmployee) {
-  const objectEmployee = employees.find(({ id }) =>  id === idEmployee);
+  const objectEmployee = employees.find(({ id }) => id === idEmployee);
   const objectAnimal = getObjectAnimal(objectEmployee.responsibleFor);
   return getListAnimalOlder(objectAnimal);
 }
