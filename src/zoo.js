@@ -50,8 +50,17 @@ function isManager(id) {
   return employeeArrays.some(element => element.managers.find(givenId => givenId === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+// Detalhe dos parametros managers e responsible for serem = [] consultado no código do github https://github.com/tryber/sd-07-project-zoo-functions/blob/b32b8ea4021741b40898532cb96353589bf71e60/src/zoo.js
+
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const employeeObj = {
+    id: id,
+    firstName: firstName,
+    lastName: lastName,
+    managers: managers,
+    responsibleFor: responsibleFor
+  };
+  return data.employees.push(employeeObj);
 }
 
 function animalCount(species) {
