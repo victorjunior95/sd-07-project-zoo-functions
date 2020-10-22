@@ -115,7 +115,11 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  
+  Object.keys(data.prices).forEach((ageRange) => {
+    const updatePrice = data.prices[ageRange] + (data
+    .prices[ageRange] * (percentage / 100));
+    data.prices[ageRange] = Math.round(updatePrice * 100) / 100;
+  });
 }
 
 function employeeCoverage(idOrName) {
