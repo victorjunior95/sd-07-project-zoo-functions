@@ -134,11 +134,10 @@ function retrieveAnimalsPerLocationWithName(locations, sorted, sex) {
         // -
         // return needFilterSex ? resident.sex === sex : true; !! operador ternario !! alternativa
         // -
-        if (needFilterSex) { // (se o resultado for true, ele ira entrar no 'if'!)
-          return resident.sex === sex;
-        } else {
-          return true;
+        if (!needFilterSex) { // (se o resultado for true, ele ira entrar no 'if'!)
+         return true;
         }
+        return resident.sex === sex;
       }).map(resident => resident.name);
       // -
       if (sorted) residents.sort();
@@ -157,11 +156,10 @@ function animalMap(options = {}) {
   // if (false === false) | if (!options === false) roda o codigo
   // if (!options) return retrieveAnimalsPerLocation(locations); nao é mais necessario...
 
-  if (includeNames) { // if (true === true) | if (options === true) roda o codigo
-    return retrieveAnimalsPerLocationWithName(locations, sorted, sex);
-  } else {
+  if (!includeNames) { // if (true === true) | if (options === true) roda o codigo
     return retrieveAnimalsPerLocation(locations);
   }
+  return retrieveAnimalsPerLocationWithName(locations, sorted, sex);
 }
 
 function schedule(dayName) {
