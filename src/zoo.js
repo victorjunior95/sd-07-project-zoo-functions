@@ -66,7 +66,7 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu código aqui 
+  // seu código aqui
 }
 // Orientado pelo showLiva.
 function schedule(dayName) {
