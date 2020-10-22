@@ -34,7 +34,8 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   if (!employeeName) return {};
   const names = data.employees.find(
-    name => name.firstName === employeeName || name.lastName === employeeName);
+    name => name.firstName === employeeName || name.lastName === employeeName
+  );
   return names;
 }
 
@@ -73,13 +74,13 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 function animalCount(species) {
   if (!species) {
     const totalNumbers = {};
-    data.animals.forEach((specie) => {
+    data.animals.forEach(specie => {
       totalNumbers[specie.name] = specie.residents.length;
     });
     return totalNumbers;
   }
-  const typesAnimals = data.animals.find(numbers => numbers.name === species);
-  const animalsNumbers = typesAnimals.residents.length;
+  const animalsType = data.animals.find(numbers => numbers.name === species);
+  const animalsNumbers = animalsType.residents.length;
 
   return animalsNumbers;
 }
