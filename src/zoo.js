@@ -28,8 +28,8 @@ function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  return employees.find(({ firstName, lastName }) =>
-  firstName === employeeName || lastName === employeeName);
+  return employees.find(({ id, firstName, lastName }) =>
+  id === employeeName || firstName === employeeName || lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -100,15 +100,11 @@ function schedule(dayName) {
   const sched = Object.fromEntries(
     Object.entries(hours)
     .map(([key, hour]) => {
-      if (key !== 'Monday') {
-        return ([key, `Open from ${hour.open}am until ${hour.close - 12}pm`]);
-      }
+      if (key !== 'Monday') return ([key, `Open from ${hour.open}am until ${hour.close - 12}pm`]);
       return ([key, 'CLOSED']);
     }));
 
-  if (!dayName) {
-    return sched;
-  }
+  if (!dayName) return sched;
   return ({ [dayName]: sched[dayName] });
 }
 
@@ -130,7 +126,23 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
+  const coverage = employees.reduce((acc, employee) => {
+    const employeeKey = `${employee.firstName} ${employee.lastName}`;
 
+    return {
+      ...acc,
+      [employeeKey]: animalsByIds(...employee.responsibleFor).map(element => element.name),
+    };
+  }, {});
+
+  if (!idOrName) {
+    return coverage;
+  }
+
+  const emp = employeeByName(idOrName);
+  return {
+    [`${emp.firstName} ${emp.lastName}`]: animalsByIds(...emp.responsibleFor).map(element => element.name),
+  };
 }
 
 module.exports = {
