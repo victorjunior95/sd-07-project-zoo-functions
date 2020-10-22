@@ -63,6 +63,12 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
+  if (!entrants) return 0;
+  let result = 0;
+  Object.keys(entrants).forEach((typePerson) => {
+    result += entrants[typePerson] * prices[typePerson];
+  });
+  return result;
 }
 
 function animalMap(options) {
