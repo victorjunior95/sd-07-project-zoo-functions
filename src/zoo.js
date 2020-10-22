@@ -65,8 +65,18 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   if (!species) {
-    // criar objeto que retorne name: popularity.
+    let animalsObj = {}
+    data.animals.map(element => {
+      let speciesName = element.name;
+      let animalsCount = element.residents.length;
+      animalsObj = Object.assign(animalsObj, {
+        [speciesName]: animalsCount,
+      })
+      return animalsObj;
+    })
+    return animalsObj
   }
+  return data.animals.find(element => element.name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
