@@ -213,7 +213,7 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   const arrTypeAndPrice = Object.entries(prices);
-  
+
   arrTypeAndPrice.forEach((typeAndPrice) => {
     typeAndPrice[1] += (typeAndPrice[1] * percentage) / 100;
     typeAndPrice[1] = Math.round(typeAndPrice[1] * 100) / 100;
