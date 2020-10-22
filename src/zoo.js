@@ -78,7 +78,6 @@ function entryCalculator(entrants) {
 function animalMap(options) {
   // seu código aqui
 }
-
 const createSpecificSchedule = (scheduleToReturn, dayName) => {
   if (dayName === 'Monday') {
     scheduleToReturn[dayName] = 'CLOSED';
@@ -116,7 +115,7 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  
 }
 
 function employeeCoverage(idOrName) {
