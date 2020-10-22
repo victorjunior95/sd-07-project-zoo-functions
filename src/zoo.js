@@ -134,7 +134,7 @@ function oldestFromFirstSpecies(idEmployee) {
 
 function increasePrices(percentage) {
   const keysPrices = Object.keys(prices);
-  keysPrices.forEach(key => {
+  keysPrices.forEach((key) => {
     let interest = ((prices[key] * percentage) / 100);
     interest = parseFloat((Math.round(interest * 100) / 100).toFixed(2));
     prices[key] += interest;
