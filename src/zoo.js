@@ -1,3 +1,4 @@
+const { animals } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -11,27 +12,32 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-function animalsByIds(ids) {
+
+function animalsByIds(...ids) {
   // seu código aqui
   // aqui
-  const input = ids;
-  const output = [];
-  if (ids === null) {
-    return ([]);
-  }
-  input.forEach((element) => {
-    output.push(element);
+  return animals.filter((animal) => {
+    if (ids.includes(animal.id)) {
+      return true;
+    }
+    return false;
   });
-  return (output);
 }
 
-
-function animalsOlderThan(animal, age) {
+function animalsOlderThan(specie, age) {
   // seu código aqui
+  const selectedAnimals = data.animals.find((animal) => animal.name === specie);
+
+  const residents = selectedAnimals.residents;
+
+  const verify = residents.every((resident) => resident.age >= age);
+
+  return (verify);
 }
 
 function employeeByName(employeeName) {
   // seu código aqui
+  
 }
 
 function createEmployee(personalInfo, associatedWith) {
