@@ -140,18 +140,49 @@ function schedule(options) {
     const hour = setHours(data.hours[options].open, data.hours[options].close);
     result[options] = hour;
   }
-  console.log(result);
   return result;
 }
 
 schedule('Monday');
 
+const oldestAnimal = (listOfAnimals) => {
+  const result = listOfAnimals.reduce((old, age) => {
+    let returning;
+    if (age.age > old.age) {
+      returning = age;
+    } else {
+      returning = old;
+    }
+    return returning;
+  });
+  return result;
+};
+
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  let result;
+  data.employees.forEach((employee) => {
+    if (employee.id === id) {
+      const specie = employee.responsibleFor[0];
+
+      data.animals.forEach((animal) => {
+        if (animal.id === specie) {
+          result = Object.values(oldestAnimal(animal.residents));
+        }
+      });
+    }
+  });
+  return result;
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const keys = Object.keys(data.prices);
+  const values = Object.values(data.prices);
+  values.forEach((price, index) => {
+    const percent = Math.round((price + ((percentage / 100) * (price + 0.01))) * 100) / 100;
+    data.prices[keys[index]] = percent;
+    index += 1;
+  });
+  return data.prices;
 }
 
 function employeeCoverage(idOrName) {
