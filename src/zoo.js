@@ -198,9 +198,23 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // Código
+  const employeesFirstNameAndAnimals = {};
+  const nameAndIdsAnimals = [];
+  animals.forEach((animal) => {
+    nameAndIdsAnimals[animal.id] = animal.name;
+  });
+  const employeeFilterId = employees.filter(
+    employeeItem => employeeItem.id === idOrName
+    || employeeItem.firstName === idOrName
+    || employeeItem.lastName === idOrName
+    || !idOrName,
+  );
+  employeeFilterId.forEach((employee) => {
+    employeesFirstNameAndAnimals[`${employee.firstName} ${employee.lastName}`] = employee.responsibleFor.map(target => nameAndIdsAnimals[target]);
+  });
+  return employeesFirstNameAndAnimals;
 }
-// console.log(employeeCoverage());
+// console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 module.exports = {
   entryCalculator,
