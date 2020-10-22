@@ -19,12 +19,12 @@ function animalsByIds(...ids) {
     return arrayAnimal;
   }
 
-  const animals = ids.map(animal => data.animals.find(element => element.id === animal));
+  const animalsId = ids.map(animal => data.animals.find(element => element.id === animal));
 
-  return animals;
+  return animalsId;
 }
 function animalsOlderThan(animal, age) {
-  const specie = data.animals.find(animals => animals.name === animal);
+  const specie = data.animals.find(animalsName => animals.name === animalsName);
 
   const lifes = specie.residents.every(testAge => testAge.age >= age);
 
@@ -34,8 +34,7 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   if (!employeeName) return {};
   const names = data.employees.find(
-    name => name.firstName === employeeName || name.lastName === employeeName
-  );
+    name => name.firstName === employeeName || name.lastName === employeeName);
   return names;
 }
 
@@ -74,7 +73,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 function animalCount(species) {
   if (!species) {
     const totalNumbers = {};
-    data.animals.forEach(specie => {
+    data.animals.forEach((specie) => {
       totalNumbers[specie.name] = specie.residents.length;
     });
     return totalNumbers;
