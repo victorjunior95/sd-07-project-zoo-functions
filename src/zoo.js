@@ -85,7 +85,7 @@ function entryCalculator(entrants) {
   } else if (Object.keys(entrants).length === 0) {
     return 0;
   }
-    return 0;
+  return 0;
 }
 
 
