@@ -84,8 +84,6 @@ function animalCount(species) {
   return animalsNumbers;
 }
 
-console.log(animalCount());
-
 function entryCalculator(entrants) {
   // seu código aqui
 }
