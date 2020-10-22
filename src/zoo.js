@@ -105,17 +105,33 @@ function zooScheduleDayName(dayName) {
   return objectSchedule;
 }
 
-
 function schedule(dayName) {
   if (!dayName) return zooSchedule();
   return zooScheduleDayName(dayName);
 }
 
-schedule('Tuesday');
+function getListAnimalOlder({ residents }) {
+  let listAnimals = [];
+  let maxOlder = 0;
+  residents.forEach(({ name, sex, age }) => {
+    if (age >  maxOlder) {
+      maxOlder = age;
+      listAnimals = [name, sex, age]
+    }
+  })
+  return listAnimals;
+}
+function getObjectAnimal(responsibleFor) {
+  return animals.find(({ id }) => id === responsibleFor[0]);
+}
 
 function oldestFromFirstSpecies(idEmployee) {
-
+  const objectEmployee = employees.find(({ id }) =>  id === idEmployee);
+  const objectAnimal = getObjectAnimal(objectEmployee.responsibleFor);
+  return getListAnimalOlder(objectAnimal);
 }
+
+console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 
 function increasePrices(percentage) {
