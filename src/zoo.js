@@ -112,10 +112,8 @@ function animalLocation() {
   return ['NE', 'NW', 'SE', 'SW'];
 }
 
-function animalMap(options) {
+function animalMap(options = {}) {
   const locations = animalLocation();
-
-  if (!options) return createsAnimalObjectsWithLocation(locations);
 
   const { includeNames = false, sorted = false, sex } = options;
 
@@ -123,9 +121,6 @@ function animalMap(options) {
 
   return createsAnimalObjectsWithLocation(locations);
 }
-
-const options = { includeNames: true, sex: 'female' };
-console.log(animalMap(options));
 
 function zooSchedule() {
   const objectSchedule = {};
