@@ -84,11 +84,9 @@ function entryCalculator(entrants) {
     return entrantKeys.reduce((acc, curr) => {
       acc += entrants[curr] * prices[curr];
       return acc;
-      console.log(acc);
     }, 0);
   }
   return 0;
-  
 }
 
 // OPTIONS = OBJETO
@@ -177,12 +175,18 @@ function schedule(dayName) {
   }
   return outPut;
 }
-// Passado o id de um funcionário, encontra a primeira espécie de animal gerenciado pelo funcionário, e retorna um array com nome, sexo e idade do animal mais velho dessa espécie
+
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const findAnimal = animals
+    .find(name => name.id === employees
+      .find(emplouyee => emplouyee.id === id)
+      .responsibleFor[0]);
+  const oldestAnimal = findAnimal.residents
+  .reduce((acc, curr) => (acc.age > curr.age ? acc : curr));
+  return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
-console.log(oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992'))
-const teste1 = '01422318-ca2d-46b8-b66c-3e9e188244ed'
+// oldestFromFirstSpecies('9e7d4524-363c-416a-8759-8aa7e50c0992')
+// const teste1 = '01422318-ca2d-46b8-b66c-3e9e188244ed'
 
 function increasePrices(percentage) {
   // seu código aqui
