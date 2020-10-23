@@ -52,7 +52,7 @@ function isManager(id) {
   data.employees.map((grup) =>
     grup.managers.forEach((grupElement) => compareId.push(grupElement))
   );
-  const cathId = compareId.some((grup) => grup === id);
+  const cathId = compareId.some(grup => grup === id);
   return cathId;
 }
 
