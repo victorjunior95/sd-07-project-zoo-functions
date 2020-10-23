@@ -87,7 +87,7 @@ function oldestFromFirstSpecies(id) {
   const employeeId = employees.find(person => person.id === id);
   const specieId = animals.find(specie => specie.id === employeeId.responsibleFor[0]);
   const animalAges = specieId.residents.sort(function (a, b) { return b.age - a.age; });
-  return [animalAges[0].name, animalAges[0].sex, animalAges[0].age] 
+  return [animalAges[0].name, animalAges[0].sex, animalAges[0].age];
 }
 
 function increasePrices(percentage) {
