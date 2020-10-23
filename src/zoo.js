@@ -21,33 +21,86 @@ function animalsOlderThan(animal, age) {
     .residents.every(y => y.age >= age);
   return selecionaAnimal;
 }
-console.log(animalsOlderThan('penguins', 10));
+
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (typeof employeeName !== 'undefined') {
+    const teste = data.employees.some(x => x.firstName === employeeName)
+    if (teste) return data.employees.find(x => x.firstName === employeeName)
+    return data.employees.find(x => x.lastName === employeeName)
+  }
+  return {};
 }
 
+
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return Object.assign(personalInfo, associatedWith)
 }
 
 function isManager(id) {
-  // seu código aqui
+  let teste = false;
+  data.employees.forEach(element => {
+    if (element.managers.includes(id)) teste = true
+  });
+  return teste
+  // return data.employees.some(x => x.managers === id)
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  let novo = {id, firstName, lastName, managers, responsibleFor}
+  data.employees.push(novo)
 }
 
 function animalCount(species) {
-  // seu código aqui
+  const objeto = {};
+  if (typeof species === 'undefined') {
+    data.animals.map((name, residents) => {
+      return objeto[name.name] = name.residents.length
+    })
+    return objeto;
+  }
+  return data.animals.find(x => x.name === species).residents.length
 }
-
 function entryCalculator(entrants) {
-  // seu código aqui
+  let valor = 0;
+  const { prices } = data;
+  if (entrants !== undefined || Object.keys.length === 0) {
+    return Object.entries(entrants).reduce((total, num) => (total + prices[num[0]] * num[1]), 0)
+  }
+  return 0
 }
 
-function animalMap(options) {
-  // seu código aqui
+const localização = () => ({
+  NE : [],
+  NW : [],
+  SE : [],
+  SW : []
+});
+
+
+const animalEmCadaLugar = () => {
+  const animalInMap = localização();
+  data.animals.forEach(x => {
+    animalInMap[x.location].push(x.name)
+  })
+  return animalInMap;
+}
+
+const individuosDeCadaReigaoPorSexo = (dados) => {
+  if (dados.sex === undefined) dados.sex = false;
+  const animalInMap = localização();
+  data.animals.forEach(x => { 
+    const objeto = {};
+    if (dados.sex === false) objeto[x.name] = x.residents.map(residents => residents.name);
+    else objeto[x.name] = x.residents.filter(residents => residents.sex === dados.sex).map(residents => residents.name);
+    if (dados.sorted === true) objeto[x.name].sort();
+    animalInMap[x.location].push(objeto);
+  })
+  return animalInMap
+}
+
+function animalMap(options = {}) {
+  if (options.includeNames === undefined) return animalEmCadaLugar()
+  else return individuosDeCadaReigaoPorSexo(options)
 }
 
 function schedule(dayName) {
