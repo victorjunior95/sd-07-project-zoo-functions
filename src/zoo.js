@@ -118,18 +118,18 @@ function animalMap(options) {
 }
 
 function scheduleString(param) {
-  const result = {}
+  const result = {};
   Object.entries(param).forEach((obj) => {
-    result[obj[0]] = `Open from ${obj[1].open}am until ${obj[1].close -12}pm`;
-    if (obj[1].open === 0) { 
-      result[obj[0]] = `CLOSED`;
+    result[obj[0]] = `Open from ${obj[1].open}am until ${obj[1].close - 12}pm`;
+    if (obj[1].open === 0) {
+      result[obj[0]] = 'CLOSED';
     }
   });
   return result;
 }
 
 function schedule(dayName) {
-  let result = data.hours
+  let result = data.hours;
   if (dayName) {
     result = Object.entries(data.hours).find(elemento => elemento[0] === dayName);
     result = { [result[0]]: result[1] };
@@ -143,7 +143,7 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   return Object.keys(data.prices).forEach(key =>
-    (data.prices[key] = Math.round((data.prices[key] * (percentage / 100 + 1)) * 100) / 100)
+    (data.prices[key] = Math.round((data.prices[key] * ((percentage / 100) + 1)) * 100) / 100),
   );
 }
 
