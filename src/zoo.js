@@ -134,7 +134,7 @@ function schedule(dayName) {
     result = Object.entries(data.hours).find(elemento => elemento[0] === dayName);
     result = { [result[0]]: result[1] };
   }
-  return scheduleString(result)
+  return scheduleString(result);
 }
 
 function oldestFromFirstSpecies(id) {
