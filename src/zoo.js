@@ -115,16 +115,16 @@ function animalLocation() {
 function animalMap(options) {
   const locations = animalLocation();
 
-  if(!options) return createsAnimalObjectsWithLocation(locations);
+  if (!options) return createsAnimalObjectsWithLocation(locations);
 
   const { includeNames = false, sorted = false, sex } = options;
 
-  if(includeNames) return createsAnimalObjectsWithName(locations, sorted, sex);
+  if (includeNames) return createsAnimalObjectsWithName(locations, sorted, sex);
 
   return createsAnimalObjectsWithLocation(locations);
 }
 
-const options = { includeNames: true, sex: 'female' }
+const options = { includeNames: true, sex: 'female' };
 console.log(animalMap(options));
 
 function zooSchedule() {
