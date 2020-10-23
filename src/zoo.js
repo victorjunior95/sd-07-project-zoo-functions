@@ -69,6 +69,7 @@ function entryCalculator(entrants) {
 
 function animalMap(options) {
   // seu código aqui
+  
 }
 
 function schedule(dayName) {
@@ -81,14 +82,12 @@ function oldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   // seu código aqui
   const catchPrices = data.prices;
-  for (const i in catchPrices) {
+  for (i in catchPrices) {
     const increase = catchPrices[i] * (percentage / 100);
     const around = Math.round((catchPrices[i] + increase) * 100) / 100;
     catchPrices[i] = around;
   }
-
 }
-
 
 function employeeCoverage(idOrName) {
   // seu código aqui
