@@ -82,7 +82,7 @@ function entryCalculator(entrants) {
   if (entrants !== {} && entrants !== undefined) {
     const entrantKeys = Object.keys(entrants);
     return entrantKeys.reduce((acc, curr) => {
-      acc += entrants[curr] * prices[curr];
+      acc = entrants[curr] * prices[curr];
       return acc;
     }, 0);
   }
@@ -164,7 +164,16 @@ function animalMap(options) {
 // Se um único dia for passado, retorna somente este dia em um formato legível para humanos
 
 function schedule(dayName) {
-  return hours;
+  const outPut = {};
+  Object.keys(hours).forEach((hora) => {
+    if (hours[hora].open === hours[hora].close) {
+      outPut[hora] = 'CLOSED';
+    } else outPut[hora] = `Open from ${hours[hora].open}am until ${hours[hora].close - 12}pm`;
+  });
+  if (dayName !== undefined) {
+    return { [dayName]: outPut[dayName] };
+  }
+  return outPut;
 }
 
 function oldestFromFirstSpecies(id) {
