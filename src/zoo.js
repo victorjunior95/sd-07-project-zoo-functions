@@ -10,14 +10,14 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const { animals } = require('./data');
+
 // solução apresentada pelo Murillo Wolf - Instrutor Trybe
 function animalsByIds(...ids) {
   return data.animals.filter(animal => ids.includes(animal.id));
 }
 
-// parte do código abaixo foi implmantada usando como referencia: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/every
-
-const { animals } = require('../src/data');
+// parte do código abaixo foi implementado usando como referencia: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/every
 
 function animalsOlderThan(animal, age) {
   return animals
@@ -25,17 +25,34 @@ function animalsOlderThan(animal, age) {
     .residents.every(item => item.age >= age);
 }
 
+const { employees } = require('./data');
 
 function employeeByName(employeeName) {
+  const employeeNameEntries = employeeName;
+  let ShowEmployedName;
+  const showObjectEmployedByFirstName = employees.find(
+    nameFirst => nameFirst.firstName === employeeName);
+  const showObjectEmployedBylastName = employees
+  .find(nameLast => nameLast.lastName === employeeName);
+
+  if (showObjectEmployedByFirstName) {
+    ShowEmployedName = showObjectEmployedByFirstName;
+  }
+  if (showObjectEmployedBylastName) {
+    ShowEmployedName = showObjectEmployedBylastName;
+  }
+  if (!employeeNameEntries) {
+    ShowEmployedName = {};
+  }
+  return ShowEmployedName;
 }
+
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
 
-function isManager(id) {
-  // seu código aqui
-}
+function isManager(id) {}
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
@@ -49,14 +66,73 @@ function entryCalculator(entrants) {
   // seu código aqui
 }
 
-function animalMap(options) {
-  // seu código aqui
+function retrieveAvailablelocation() {
+  return ['NE', 'NW', 'SE', 'SW', 'E', 'N'];
 }
 
+function retriveFilteredAnimalsByLocation(location) {
+  return animals.filter(animal => animal.location === location);
+}
+
+function retriveAnimalsPerLocation(locations) {
+  const animalsPerLocation = {};
+  locations.forEach((location) => {
+    const filteredAnimals = retriveFilteredAnimalsByLocation(location).map(animal => animal.name);
+
+    if (filteredAnimals.length !== 0) {
+      animalsPerLocation[location] = filteredAnimals;
+    }
+  });
+
+  return animalsPerLocation;
+}
+
+function retriveAnimalsPerLocationWithName(locations, sorted, sex) {
+  const animalsPerLocation = {};
+
+  locations.forEach((location) => {
+    const filteredAnimals = retriveFilteredAnimalsByLocation(location).map(
+      (animal) => {
+        const animalName = animal.name;
+        const residents = animal.residents
+          .filter((resident) => {
+            const needFiltering = sex !== undefined;
+
+            if (needFiltering) {
+              return resident.sex === sex;
+            }
+            return true;
+          })
+          .map(resident => resident.name);
+
+        if (sorted) residents.sort();
+
+        return { [animalName]: residents };
+      });
+    if (filteredAnimals.length !== 0) {
+      animalsPerLocation[location] = filteredAnimals;
+    }
+  });
+  return animalsPerLocation;
+}
+
+// solução apresentada pelo Especialista Gabriel Oliva
+
+function animalMap(options) {
+  const locations = retrieveAvailablelocation();
+
+  if (!options) return retriveAnimalsPerLocation(locations);
+
+  const { includeNames = false, sorted = false, sex } = options;
+
+  if (includeNames) {
+    return retriveAnimalsPerLocationWithName(locations, sorted, sex);
+  }
+  return retriveAnimalsPerLocation(locations);
+}
 function schedule(dayName) {
   // seu código aqui
 }
-
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
