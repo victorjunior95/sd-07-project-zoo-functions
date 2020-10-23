@@ -13,6 +13,7 @@ const data = require('./data');
 
 const { animals } = data;
 const { employees } = data;
+const { prices } = data;
 
 function animalsByIds(...ids) {
   if (ids === undefined) return [];
@@ -49,15 +50,46 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species = false) {
   const allAnimalQuantity = {};
-  animals.forEach(animal => allAnimalQuantity[animal.name] = animal.residents.length);
+  animals.forEach(animal => (allAnimalQuantity[animal.name] = animal.residents.length));
   if (!species) {
     return allAnimalQuantity;
   }
-  return animals.find(animal => animal.name === species).residents.length;
+  return animals.find(animal => (animal.name === species)).residents.length;
 }
 
-function entryCalculator(entrants) {
-  // seu código aqui
+function entryCalculator(entrants = {}) {
+  const { Adult = 0, Senior = 0, Child = 0 } = entrants
+  const pricesArr = Object.keys(prices)
+  const entrantsArr = Object.keys(entrants)
+  //const entrantsEntriesArr = Object.entries(entrants)
+  const entrantsArrObj = []
+  const pricesArrObj = []
+  // (faz array de objetos) !!
+  for (const key of pricesArr) {
+    pricesArrObj.push({[key]: prices[key]})
+  }
+  for (const key of entrantsArr) {
+    entrantsArrObj.push({[key]: entrants[key]})
+  }
+  
+  let total = 0
+  const filteredAges = pricesArr.filter(age => entrantsArr.includes(age))
+
+  filteredAges.forEach((age) => {
+    pricesArrObj.forEach((agePrice) => {
+      if (Object.keys(agePrice).includes(age)) {
+        total += prices[age] * entrants[age]
+      }
+    })
+  })
+  /* !! forma mais simples de se fazer mas sem seguranca com o input entrants q recebe a funcao !! ALTERNATIVA !!
+  const total = entrantsArr.reduce((sum, keys) => {
+    console.log(keys)
+    sum += entrants[keys] * prices[keys];
+    return sum;
+  }, 0);
+  */
+  return total
 }
 
 function retrieveAvailableLocations() {
