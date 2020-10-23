@@ -13,27 +13,31 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+const { employees } = data;
+const { animals } = data;
+
 function animalsByIds(...ids) {
   // seu código aqui
-  const { animals } = data;
   const animalids = animals.filter((animal, index) => animal.id === ids[index]);
   return animalids;
 }
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
-  const { animals } = data;
   const animalNameRef = animals.find(animalNameCheck => (animalNameCheck.name === animal));
   const animalAgecheck = animalNameRef.residents.every(ageRef => (ageRef.age > age));
   return animalAgecheck;
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) return {};
+  const nameCheck = employees.find(
+    employeer => (employeer.firstName === employeeName || employeer.lastName === employeeName));
+  return nameCheck;
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 
 function isManager(id) {
