@@ -9,7 +9,6 @@ eslint no-unused-vars: [
 ]
 */
 
-const { hours } = require('./data');
 const data = require('./data');
 
 const { animals, employees, prices } = data;
@@ -85,9 +84,9 @@ function schedule(dayName) {
 // schedule()
 
 function oldestFromFirstSpecies(id) {
-  const employeeId = employees.find((person) => person.id === id);
-  const specieId = animals.find((specie) => specie.id === employeeId.responsibleFor[0]);
-  const animalAges = specieId.residents.sort(function(a, b) {return b.age - a.age;})
+  const employeeId = employees.find(person => person.id === id);
+  const specieId = animals.find(specie => specie.id === employeeId.responsibleFor[0]);
+  const animalAges = specieId.residents.sort(function (a, b) { return b.age - a.age; });
   return animalAges[0];
 }
 
