@@ -51,13 +51,10 @@ function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
 
-
-
 function isManager(id) {
   // const { employees } = require('./data');
   return employees.some(employee => employee.managers.includes(id));
-}  
-
+}
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
