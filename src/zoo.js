@@ -82,7 +82,7 @@ function oldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   // seu código aqui
   const catchPrices = data.prices;
-  for (i in catchPrices) {
+  for (let i in catchPrices) {
     const increase = catchPrices[i] * (percentage / 100);
     const around = Math.round((catchPrices[i] + increase) * 100) / 100;
     catchPrices[i] = around;
