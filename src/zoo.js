@@ -58,38 +58,39 @@ function animalCount(species = false) {
 }
 
 function entryCalculator(entrants = {}) {
-  const { Adult = 0, Senior = 0, Child = 0 } = entrants
-  const pricesArr = Object.keys(prices)
-  const entrantsArr = Object.keys(entrants)
-  //const entrantsEntriesArr = Object.entries(entrants)
-  const entrantsArrObj = []
-  const pricesArrObj = []
+  // (nao é necessario pra esse codigo (now))
+  // const { Adult = 0, Senior = 0, Child = 0 } = entrants
+  const pricesArr = Object.keys(prices);
+  const entrantsArr = Object.keys(entrants);
+  const entrantsArrObj = [];
+  const pricesArrObj = [];
   // (faz array de objetos) !!
   for (const key of pricesArr) {
-    pricesArrObj.push({[key]: prices[key]})
+    pricesArrObj.push({ [key]: prices[key] });
   }
   for (const key of entrantsArr) {
-    entrantsArrObj.push({[key]: entrants[key]})
+    entrantsArrObj.push({ [key]: entrants[key] });
   }
-  
-  let total = 0
-  const filteredAges = pricesArr.filter(age => entrantsArr.includes(age))
+  // -
+  let total = 0;
+  const filteredAges = pricesArr.filter(age => entrantsArr.includes(age));
 
   filteredAges.forEach((age) => {
     pricesArrObj.forEach((agePrice) => {
       if (Object.keys(agePrice).includes(age)) {
-        total += prices[age] * entrants[age]
+        total += prices[age] * entrants[age];
       }
-    })
-  })
-  /* !! forma mais simples de se fazer mas sem seguranca com o input entrants q recebe a funcao !! ALTERNATIVA !!
+    });
+  });
+  /* !! ALTERNATIVA !!
+  !! forma mais simples de se fazer mas sem seguranca com o input entrants q recebe a funcao !!
   const total = entrantsArr.reduce((sum, keys) => {
     console.log(keys)
     sum += entrants[keys] * prices[keys];
     return sum;
   }, 0);
   */
-  return total
+  return total;
 }
 
 function retrieveAvailableLocations() {
