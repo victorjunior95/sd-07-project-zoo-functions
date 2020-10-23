@@ -9,6 +9,8 @@ eslint no-unused-vars: [
 ]
 */
 
+const { animals } = require('./data');
+
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -75,8 +77,61 @@ function entryCalculator(entrants = 0) {
   return total;
 }
 
-function animalMap(options) {
-  // seu código aqui
+// Dicas profª Oliva: O parâmetro da função animalMap é um objeto.
+//  options = {
+//    includeNames: true / false, = boolean
+//    sex: 'female' / 'male', = string
+//    sorted: true / false = boolean
+//  }
+function returnAvalibleLocations() {
+  return ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+}
+
+function returnAnimalsByLocation(locations) {
+  return animals.filter(animal => animal.location === locations);
+}
+
+function returnAnimalPerLocation(locations) {
+  const animalsPerLocation = {};
+  locations.forEach((location) => {
+    const findAnimals = returnAnimalsByLocation(location).map(animal => animal.name);
+    if (findAnimals.length !== 0) {
+      animalsPerLocation[location] = findAnimals;
+    }
+    return findAnimals;
+  });
+  return animalsPerLocation;
+}
+
+function returnAnimalPerLocationWithName(locations, sorted, sex) {
+  const animalsPerLocation = {};
+  locations.forEach((location) => {
+    const filtredAnimal = returnAnimalsByLocation(location).map((animal) => {
+      const animalsName = animal.name;
+      const animalResident = animal.residents
+      .filter((residents) => {
+        if (sex !== undefined) {
+          return residents.sex === sex;
+        }
+        return true;
+      })
+      .map(residents => residents.name);
+      if (sorted) animalResident.sort();
+      return { [animalsName]: animalResident };
+    });
+    if (filtredAnimal.length !== 0) animalsPerLocation[location] = filtredAnimal;
+    return filtredAnimal;
+  });
+  return animalsPerLocation;
+}
+
+function animalMap(options = {}) {
+  const locations = returnAvalibleLocations();
+  const { includeNames = false, sex, sorted = false } = options;
+  if (includeNames) {
+    return returnAnimalPerLocationWithName(locations, sorted, sex);
+  }
+  return returnAnimalPerLocation(locations);
 }
 
 function schedule(dayName) {
@@ -98,7 +153,7 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
-  const { employees, animals } = data;
+  const { employees } = data;
   const firstSpecie = employees.find(element => element.id === id).responsibleFor[0];
   let animalFound = [];
   animals.filter((element) => {
