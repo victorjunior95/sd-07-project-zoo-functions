@@ -73,9 +73,59 @@ function entryCalculator(entrants) {
   .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 }
 
-function animalMap(options) {
-  // seu código aqui
+function filterAnimalLocation(location) {
+  return animals.filter(animal => animal.location === location);
 }
+
+function createsAnimalObjectsWithLocation(locations) {
+  const objectAnimalLocation = {};
+  locations.forEach((locationAnimal) => {
+    const filteredAnimals = filterAnimalLocation(locationAnimal).map(animal => animal.name);
+    objectAnimalLocation[locationAnimal] = filteredAnimals;
+  });
+  return objectAnimalLocation;
+}
+
+function createsAnimalObjectsWithName(locations, sorted, sex) {
+  const objectAnimalName = {};
+  locations.forEach((location) => {
+    const filteredAnimalsName = filterAnimalLocation(location).map((animal) => {
+      const animalName = animal.name;
+      const residents = animal.residents
+      .filter((resident) => {
+        const needFiltering = sex !== undefined;
+        return needFiltering ? resident.sex === sex : true;
+      })
+      .map(resident => resident.name);
+
+      if (sorted) residents.sort();
+
+      return { [animalName]: residents };
+    });
+    objectAnimalName[location] = filteredAnimalsName;
+  });
+
+  return objectAnimalName;
+}
+
+function animalLocation() {
+  return ['NE', 'NW', 'SE', 'SW'];
+}
+
+function animalMap(options) {
+  const locations = animalLocation();
+
+  if(!options) return createsAnimalObjectsWithLocation(locations);
+
+  const { includeNames = false, sorted = false, sex } = options;
+
+  if(includeNames) return createsAnimalObjectsWithName(locations, sorted, sex);
+
+  return createsAnimalObjectsWithLocation(locations);
+}
+
+const options = { includeNames: true, sex: 'female' }
+console.log(animalMap(options));
 
 function zooSchedule() {
   const objectSchedule = {};
@@ -140,7 +190,6 @@ function increasePrices(percentage) {
     prices[key] += interest;
     prices[key] = parseFloat((prices[key]).toFixed(2));
   });
-  console.log(prices);
   return prices;
 }
 
