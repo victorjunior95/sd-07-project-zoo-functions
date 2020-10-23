@@ -43,7 +43,7 @@ function isManager(id) {
 }
 
 function addEmployee(
-  id, firstName, lastName, managers = [], responsibleFor = []) {
+  id, firstName, lastName, managers = [], responsibleFor = [])
   {
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   data.employees.push(newEmployee);
@@ -131,7 +131,6 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-
   // seu código aqui
 }
 
@@ -152,7 +151,6 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-
   // seu código aqui
 }
 
