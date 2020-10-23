@@ -112,6 +112,7 @@ function animalLocation() {
   return ['NE', 'NW', 'SE', 'SW'];
 }
 
+// referência: Grabiel Oliva
 function animalMap(options = {}) {
   const locations = animalLocation();
 
