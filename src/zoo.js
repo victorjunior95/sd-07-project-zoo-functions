@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -109,8 +110,55 @@ function entryCalculator(entrants) {
   return result;
 }
 
-function animalMap() {
+//Sem parâmtros | retorna animais categorizados por localização
+
+//IncludeNames: true | retorna nomes de animais
+
+//Sorted: true | retorna os nomes dos animais ordenados
+//Sex:female/male | retorna nomes dos animais fêmeas/machos
+//Sorted: true && Sex:female/male | retorna nomes dos animais fêmeas/machos ordenados
+
+const isSorted = (newObj, sorted) => {
+  console.log(newObj);
+  if (sorted === true) {
+    newObj.forEach((location) => console.log(location));
+  }
 }
+
+const getLocation = (newObj, animal, includeNames) => {
+  if (includeNames === true) {
+    let animalObj = {};
+    animal.residents.forEach((resident) => {
+      let listOfResidents = [];
+      listOfResidents.push(resident.name);
+      animalObj[animal.name] = listOfResidents;
+    });
+    newObj[animal.location].push(animalObj);
+  } else {
+    newObj[animal.location].push(animal.name);
+  }
+}
+
+function animalMap(includeNames, sorted, sex) {
+  let newObj = {
+    NE: [],
+    NW: [],
+    SE: [],
+    SW: [],
+  };
+  animals.forEach((eachAnimal) => {
+    if (arguments.length === 0) {
+      getLocation(newObj, eachAnimal);
+    } else {
+      getLocation(newObj, eachAnimal, includeNames);
+    }
+  })
+  // console.log(newObj);
+  isSorted(newObj, sorted);
+  return newObj;
+}
+
+animalMap(true);
 
 const setHours = (open, close) => {
   let result;
