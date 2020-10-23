@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { hours } = require('./data');
 const data = require('./data');
 
 const { animals, employees, prices } = data;
@@ -76,11 +77,18 @@ function animalMap(options) {
 }
 // Orientado pelo showLiva.
 function schedule(dayName) {
-  // seu código aqui
+//   const day = Object.values(hours)
+//   .map((day) => day[1])
+//   const status = Object.entries(day).map((status) => status)
+//   console.log(day)
 }
+// schedule()
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const employeeId = employees.find((person) => person.id === id);
+  const specieId = animals.find((specie) => specie.id === employeeId.responsibleFor[0]);
+  const animalAges = specieId.residents.sort(function(a, b) {return b.age - a.age;})
+  return animalAges[0];
 }
 
 function increasePrices(percentage) {
