@@ -87,47 +87,49 @@ function entryCalculator(entrants = {}) {
 
 function retrieveAvailableLocations() {
   return data.animals
-  .map( (animal) => animal.location )
-  .reduce( (acc, currentValue) => {
+  .map(animal => animal.location)
+  .reduce((acc, currentValue) => {
     const currentValueAlreadyExistsInAcc = currentValue.includes(acc);
     return currentValueAlreadyExistsInAcc ? acc : [...acc, currentValue];
   });
 }
 function retrieveFilteredAnimalsByLocation(location) {
-   return data.animals.filter( (animal) => animal.location === location )
+  return data.animals.filter(animal => animal.location === locations);
 }
 function retrieveAnimalsPerLocation(locations) {
-  //Sem parâmetros, retorna animais categorizados por localização
+  // Sem parâmetros, retorna animais categorizados por localização
   const animalsPerLocation = {};
-  locations.forEach( (location) => {
+  locations.forEach(location => {
     const filteredAnimals = retrieveFilteredAnimalsByLocation(location)
-      .map( (animal) => animal.name);
-      if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+      .map(animal => animal.name);
+    if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
   });
   return animalsPerLocation;
 }
-function retrieveAnimalsPerLocationsWithName(locations, sorted, sex){
+function retrieveAnimalsPerLocationsWithName(locations, sorted, sex) {
   const animalsPerLocation = {};
-  locations.forEach( (location) => {
+  locations.forEach(location => {
     const filteredAnimals = retrieveFilteredAnimalsByLocation(location)
-    .map( (animal) => {
+    .map(animal => {
       const animalName = animal.name;
       const residents = animal.residents
-      .filter( (resident) => {
+      .filter(resident => {
         const needFiltering = sex !== undefined;
-        //return needFiltering ? resident.sex === sex : true;
+        // return needFiltering ? resident.sex === sex : true;
+        let retorno;
         if (needFiltering) {
-          return resident.sex === sex;
+          retorno = resident.sex === sex;
         } else {
-          return true;
+          retorno = true;
         }
+        return retorno;
       })
-      .map( (resident) => resident.name );
+      .map(resident => resident.name);
       if (sorted) residents.sort();
       return { [animalName]: residents };
-    })
+    });
     if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
-  })
+  });
   return animalsPerLocation;
 }
 
@@ -135,11 +137,13 @@ function animalMap(options) {
   const locations = retrieveAvailableLocations();
   if (!options) return retrieveAnimalsPerLocation(locations);
   const { includeNames = false, sorted = false, sex } = options;
+  let retorno;
   if (includeNames) {
-    return retrieveAnimalsPerLocationsWithName(locations, sorted, sex);
+    retorno = retrieveAnimalsPerLocationsWithName(locations, sorted, sex);
   } else {
-    return retrieveAnimalsPerLocation(locations);
+    retorno = retrieveAnimalsPerLocation(locations);
   }
+  return retorno;
 }
 
 function transformDay(objectParam) {
@@ -167,15 +171,12 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  let result = {};
-  if (!percentage || percentage === {}) {
-     0;
-  }  else {
-    Object.entries(prices).forEach(price => {
-      result[price[0]] = Math.round(((price[1] * percentage / 100) + price[1])*100)/100;
+  const result = {};
+  if (percentage != undefined) {
+    Object.entries(prices).forEach((price) => {
+      result[price[0]] = Math.round((((price[1] * percentage) / 100) + price[1]) * 100) / 100;
       console.log(result);
     });
-  }
   return result;
 }
 
