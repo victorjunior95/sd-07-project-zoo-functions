@@ -85,15 +85,68 @@ function entryCalculator(entrants = {}) {
   return totalPrice;
 }
 
+function retrieveAvailableLocations() {
+  return data.animals
+  .map( (animal) => animal.location )
+  .reduce( (acc, currentValue) => {
+    const currentValueAlreadyExistsInAcc = currentValue.includes(acc);
+    return currentValueAlreadyExistsInAcc ? acc : [...acc, currentValue];
+  });
+}
+function retrieveFilteredAnimalsByLocation(location) {
+   return data.animals.filter( (animal) => animal.location === location )
+}
+function retrieveAnimalsPerLocation(locations) {
+  //Sem parâmetros, retorna animais categorizados por localização
+  const animalsPerLocation = {};
+  locations.forEach( (location) => {
+    const filteredAnimals = retrieveFilteredAnimalsByLocation(location)
+      .map( (animal) => animal.name);
+      if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+  });
+  return animalsPerLocation;
+}
+function retrieveAnimalsPerLocationsWithName(locations, sorted, sex){
+  const animalsPerLocation = {};
+  locations.forEach( (location) => {
+    const filteredAnimals = retrieveFilteredAnimalsByLocation(location)
+    .map( (animal) => {
+      const animalName = animal.name;
+      const residents = animal.residents
+      .filter( (resident) => {
+        const needFiltering = sex !== undefined;
+        //return needFiltering ? resident.sex === sex : true;
+        if (needFiltering) {
+          return resident.sex === sex;
+        } else {
+          return true;
+        }
+      })
+      .map( (resident) => resident.name );
+      if (sorted) residents.sort();
+      return { [animalName]: residents };
+    })
+    if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+  })
+  return animalsPerLocation;
+}
+
 function animalMap(options) {
-  // seu código aqui
+  const locations = retrieveAvailableLocations();
+  if (!options) return retrieveAnimalsPerLocation(locations);
+  const { includeNames = false, sorted = false, sex } = options;
+  if (includeNames) {
+    return retrieveAnimalsPerLocationsWithName(locations, sorted, sex);
+  } else {
+    return retrieveAnimalsPerLocation(locations);
+  }
 }
 
 function transformDay(objectParam) {
   const retorno = {};
   Object.entries(objectParam).forEach((elemento) => {
     retorno[elemento[0]] = `Open from ${elemento[1].open}am until ${elemento[1].close - 12}pm`;
-    if (elemento[1].open - elemento[1].close === 0) {
+    if (elemento[1].open === 0) {
       retorno[elemento[0]] = 'CLOSED';
     }
   });
@@ -106,19 +159,27 @@ function schedule(dayName) {
     response = Object.entries(hours).find(elemento => elemento[0] === dayName);
     response = { [response[0]]: response[1] };
   }
-  response = transformDay(response);
-  return response;
+  return transformDay(response);
 }
-
-console.log(schedule('Monday'));
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  let result = {};
+  if (!percentage || percentage === {}) {
+     0;
+  }  else {
+    Object.entries(prices).forEach(price => {
+      result[price[0]] = Math.round(((price[1] * percentage / 100) + price[1])*100)/100;
+      console.log(result);
+    });
+  }
+  return result;
 }
+
+console.log(increasePrices(50));
 
 function employeeCoverage(idOrName) {
   // seu código aqui
