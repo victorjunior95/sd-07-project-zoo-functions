@@ -14,11 +14,11 @@ describe('Implemente a função increasePrices', () => {
     assert.deepEqual(data.prices, expected);
 
     zoo.increasePrices(30);
-    expected = {
-      'Adult': 97.49,
-      'Senior': 48.74,
-      'Child': 40.94
-    };
-    assert.deepEqual(data.prices, expected);
+      expected = {
+        'Adult': 97.49,
+        'Senior': 48.74,
+        'Child': 40.94
+      };
+      assert.deepEqual(data.prices, expected);
   });
 });
