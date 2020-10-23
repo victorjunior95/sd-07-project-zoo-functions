@@ -1,4 +1,6 @@
 const { animals } = require('./data');
+const { prices } = require('./data');
+const { employees } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -33,7 +35,7 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(employeeName) {
   if (!employeeName) return {};
-  const names = data.employees.find(
+  const names = employees.find(
     name => name.firstName === employeeName || name.lastName === employeeName);
   return names;
 }
@@ -44,7 +46,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const manager = data.employees.some(managed => managed.managers.includes(id));
+  const manager = employees.some(managed => managed.managers.includes(id));
   return manager;
 }
 
@@ -67,7 +69,7 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     employeeAdded.responsibleFor = responsibleFor;
   }
 
-  data.employees.push(employeeAdded);
+  employees.push(employeeAdded);
 }
 
 function animalCount(species) {
@@ -78,14 +80,32 @@ function animalCount(species) {
     });
     return totalNumbers;
   }
-  const animalsType = data.animals.find(numbers => numbers.name === species);
+  const animalsType = animals.find(numbers => numbers.name === species);
   const animalsNumbers = animalsType.residents.length;
 
   return animalsNumbers;
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (!entrants) return 0;
+
+  if (entrants === {}) return 0;
+
+  let totalPrice = 0;
+
+  if (entrants.Adult) {
+    totalPrice += entrants.Adult * prices.Adult;
+  }
+
+  if (entrants.Senior) {
+    totalPrice += entrants.Senior * prices.Senior;
+  }
+
+  if (entrants.Child) {
+    totalPrice += entrants.Child * prices.Child;
+  }
+
+  return totalPrice;
 }
 
 function animalMap(options) {
