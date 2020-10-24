@@ -90,11 +90,11 @@ function increasePrices(percentage) {
   actualPrices.Adult += ((actualPrices.Adult / 100) * percentage);
   actualPrices.Senior += ((actualPrices.Senior / 100) * percentage);
   actualPrices.Child += ((actualPrices.Child / 100) * percentage);
-  data.prices = {
+  return (data.prices = {
     Adult: `${actualPrices.Adult}`,
     Senior: `${actualPrices.Senior}`,
     Child: `${actualPrices.Child}`,
-  };
+  });
 }
 
 function employeeCoverage(idOrName) {
