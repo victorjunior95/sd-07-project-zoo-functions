@@ -54,13 +54,14 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   // seu código aqui
-  data.employees.push({
+  const newEmployee = {
     id: `${id}`,
     firstName: `${firstName}`,
     lastName: `${lastName}`,
     managers: [...managers],
     responsibleFor: [...responsibleFor],
-  });
+  };
+  data.employees.push(newEmployee);
 }
 
 function animalCount(species) {
@@ -85,6 +86,11 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  const actualPrices = data.prices;
+  actualPrices.Adult += ((actualPrices.Adult / 100) * percentage);
+  actualPrices.Senior += ((actualPrices.Senior / 100) * percentage);
+  actualPrices.Child += ((actualPrices.Child / 100) * percentage);
+  return actualPrices;
 }
 
 function employeeCoverage(idOrName) {
