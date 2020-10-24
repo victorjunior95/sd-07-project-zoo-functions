@@ -38,21 +38,20 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   let teste = false;
   data.employees.forEach((element) => {
-    if (element.managers.includes(id)) teste = true
+    if (element.managers.includes(id)) teste = true;
   });
-  return teste
-
+  return teste;
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  let novo = {id, firstName, lastName, managers, responsibleFor}
-  data.employees.push(novo)
+  const novo = { id, firstName, lastName, managers, responsibleFor };
+  data.employees.push(novo);
 }
 
 function animalCount(species) {
   const objeto = {};
   if (typeof species === 'undefined') {
-    data.animals.map((name, residents) => {
+    data.animals.map((name) => {
       return objeto[name.name] = name.residents.length
     })
     return objeto;
