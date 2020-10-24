@@ -23,25 +23,25 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(employeeName) {
   if (typeof employeeName !== 'undefined') {
-    const teste = data.employees.some(x => x.firstName === employeeName)
-    if (teste) return data.employees.find(x => x.firstName === employeeName)
-    return data.employees.find(x => x.lastName === employeeName)
+    const teste = data.employees.some(x => x.firstName === employeeName);
+    if (teste) return data.employees.find(x => x.firstName === employeeName);
+    return data.employees.find(x => x.lastName === employeeName);
   }
   return {};
 }
 
 
 function createEmployee(personalInfo, associatedWith) {
-  return Object.assign(personalInfo, associatedWith)
+  return Object.assign(personalInfo, associatedWith);
 }
 
 function isManager(id) {
   let teste = false;
   data.employees.forEach(element => {
     if (element.managers.includes(id)) teste = true
+    else teste = false;
   });
   return teste
-  // return data.employees.some(x => x.managers === id)
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -87,7 +87,7 @@ const individuosDeCadaReigaoPorSexo = (dados) => {
 
   const animalInMap = localização();
 
-  data.animals.forEach(x => { 
+  data.animals.forEach(x => {
     const objeto = {};
     if (dados.sex === false) objeto[x.name] = x.residents.map(residents => residents.name);
     else objeto[x.name] = x.residents.filter(residents => residents.sex === dados.sex).map(residents => residents.name);
@@ -158,11 +158,10 @@ const nomePeloNome = (nomeParcial) => {
 function employeeCoverage(idOrName = '') {
   let tabela = {}
   let nomeAlvo = '';
-  
   if (idOrName.length > 30) nomeAlvo = nomePeloId(idOrName);
   if (idOrName.length < 30 && idOrName.length > 0) nomeAlvo = nomePeloNome(idOrName);
-  data.employees.forEach(funcionarios => { 
-    let lista = []
+  data.employees.forEach(funcionarios => {
+    let lista = [];
     let nomeDoFuncionario = `${funcionarios.firstName} ${funcionarios.lastName}`
     funcionarios.responsibleFor.forEach(responsabilidade => {
       let animaisCuidados = data.animals.find(x => x.id === responsabilidade);
