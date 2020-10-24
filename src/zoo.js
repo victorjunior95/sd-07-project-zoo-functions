@@ -52,17 +52,10 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  let animalQuantities = {
-    lions: 4,
-    tigers: 2,
-    bears: 3,
-    penguins: 4,
-    otters: 4,
-    frogs: 2,
-    snakes: 2,
-    elephants: 4,
-    giraffes: 6,
-  };
+  let animalQuantities = {};
+  animals.forEach((animal) => {
+    animalQuantities[animal.name] = animal.residents.length;
+  });
   if (species !== undefined) {
     animalQuantities = animals
       .find(animal => animal.name === species)
@@ -71,6 +64,8 @@ function animalCount(species) {
   }
   return animalQuantities;
 }
+
+console.log(animalCount());
 
 function entryCalculator(entrants = 0) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
