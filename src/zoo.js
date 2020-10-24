@@ -37,8 +37,7 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   if (!employeeName) return {};
   const names = employees.find(
-    name => name.firstName === employeeName || name.lastName === employeeName
-  );
+    name => name.firstName === employeeName || name.lastName === employeeName);
   return names;
 }
 
@@ -77,12 +76,12 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 function animalCount(species) {
   if (!species) {
     const totalNumbers = {};
-    animals.forEach(specie => {
-      totalNumbers[specie.name] = specie.residents.length;
+    animals.forEach(({ name, residents }) => {
+      totalNumbers[name] = residents.length;
     });
     return totalNumbers;
   }
-  const animalsType = animals.find(numbers => numbers.name === species);
+  const animalsType = animals.find(({ name }) => name === species);
   const animalsNumbers = animalsType.residents.length;
 
   return animalsNumbers;
@@ -115,28 +114,30 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  const zooSchedule = Object.keys(hours);
+  const result = {};
 
-  const humanSchedule = {
-    [zooSchedule[0]]: 'teste'
-  };
-  // if(!dayName) {
+  if (!dayName) {
+    const days = Object.keys(hours);
 
-  // }
-  return humanSchedule;
+    days.forEach((day) => {
+      result[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+      if (day === 'Monday') {
+        result[day] = 'CLOSED';
+      }
+    });
+    return result;
+  }
+
+  if (dayName === 'Monday') {
+    result[dayName] = 'CLOSED';
+    return result;
+  }
+
+  result[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
+  return result;
 }
 
-// console.log(
-//   schedule({
-//     Tuesday: { open: 8, close: 18 },
-//     Wednesday: { open: 8, close: 18 },
-//     Thursday: { open: 10, close: 20 },
-//     Friday: { open: 10, close: 20 },
-//     Saturday: { open: 8, close: 22 },
-//     Sunday: { open: 8, close: 20 },
-//     Monday: { open: 0, close: 0 },
-//   })
-// );
+console.log(schedule('Monday'));
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
