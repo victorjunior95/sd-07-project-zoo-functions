@@ -101,12 +101,15 @@ function allAnimalsByLocation(locations) {
   return allAnimals;
 }
 
-function allAnimalsAndResidentsByLocation(locations) {
+function allAnimalsAndResidentsByLocation(locations, sorted) {
   const allAnimalsAndResidents = {};
   locations.forEach(location => {
     const filterAnimalsNameByLocation = filterAllAnimalsByLocation(location).map(animal => {
       const animalName = animal.name;
       const residentsName = animal.residents.map(resident => resident.name);
+
+      if (sorted) residentsName.sort();
+
       return { [animalName]: residentsName };
     });
     if (filterAnimalsNameByLocation.length !== 0) allAnimalsAndResidents[location] = filterAnimalsNameByLocation;
@@ -117,8 +120,8 @@ function allAnimalsAndResidentsByLocation(locations) {
 function animalMap(options) {
   const locations = allLocations();
   if (!options) return allAnimalsByLocation(locations);
-  const { includeNames } = options;
-  if (includeNames) return allAnimalsAndResidentsByLocation(locations);
+  const { includeNames = false, sorted = false } = options;
+  if (includeNames) return allAnimalsAndResidentsByLocation(locations, sorted);
 }
 
 function schedule(dayName) {
