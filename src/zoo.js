@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees } = require('./data');
+const { animals, employees, hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -37,7 +37,6 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // return id === '0e7b460e-acf4-4e17-bcb3-ee472265db83';
   const managersArray = [];
   employees.forEach((employee) => {
     employee.managers.forEach((manager) => {
@@ -119,21 +118,23 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  let scheduleForHuman = {
-    Tuesday: 'Open from 8am until 6pm',
-    Wednesday: 'Open from 8am until 6pm',
-    Thursday: 'Open from 10am until 8pm',
-    Friday: 'Open from 10am until 8pm',
-    Saturday: 'Open from 8am until 10pm',
-    Sunday: 'Open from 8am until 8pm',
-    Monday: 'CLOSED',
-  };
+  let scheduleForHuman = {};
+  const entriesArray = Object.entries(hours);
+  entriesArray.forEach((dayOfWeek) => {
+    if (dayOfWeek[0] === 'Monday') {
+      scheduleForHuman.Monday = 'CLOSED';
+    } else {
+      scheduleForHuman[dayOfWeek[0]] = `Open from ${dayOfWeek[1].open}am until ${dayOfWeek[1].close - 12}pm`;
+    }
+  });
   if (dayName !== undefined) {
     const targetEntrie = [[dayName, scheduleForHuman[dayName]]];
     scheduleForHuman = Object.fromEntries(targetEntrie);
   }
   return scheduleForHuman;
 }
+
+console.log(schedule());
 
 const getTheBiggest = arr => arr.reduce((acc, curr) => {
   if (acc.age > curr.age) {
