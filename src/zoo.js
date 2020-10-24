@@ -132,8 +132,9 @@ const objectWithEmployeesNamesAndAnimals = () => {
 const employeeCoverage = (idOrName) => {
   const finalObject = objectWithEmployeesNamesAndAnimals();
   if (idOrName !== undefined) {
+    const a = idOrName;
     const employee = data.employees
-      .find(({ id, firstName, lastName }) => id === idOrName || firstName === idOrName || lastName === idOrName);
+      .find(({ id, firstName, lastName }) => id === a || firstName === a || lastName === a);
     const { firstName, lastName } = employee;
     const keyAndValue = `${firstName} ${lastName}`;
     const employeeFound = { [keyAndValue]: finalObject[keyAndValue] };
