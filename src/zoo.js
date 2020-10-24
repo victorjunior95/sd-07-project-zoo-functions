@@ -49,7 +49,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 console.log('a');
 function animalCount(species) {
-  const objeto = {};
+  let objeto = {};
   if (typeof species === 'undefined') {
     data.animals.forEach((name) => objeto[name.name] = name.residents.length);
     return objeto;
