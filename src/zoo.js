@@ -65,8 +65,6 @@ function animalCount(species) {
   return animalQuantities;
 }
 
-console.log(animalCount());
-
 function entryCalculator(entrants = 0) {
   const { Adult = 0, Child = 0, Senior = 0 } = entrants;
   const totalPrice = (Adult * 49.99) + (Child * 20.99) + (Senior * 24.99);
@@ -91,12 +89,14 @@ const getAnimalsName = (specie, sorted, sex) => {
 };
 
 function animalMap(options) {
-  const generalMap = [
-    ['NE', ['lions', 'giraffes']],
-    ['NW', ['tigers', 'bears', 'elephants']],
-    ['SE', ['penguins', 'otters']],
-    ['SW', ['frogs', 'snakes']],
-  ];
+  const generalMap = [['NE', []], ['NW', []], ['SE', []], ['SW', []]];
+  generalMap.forEach((region) => {
+    const regionAnimals = animals.filter(specie => specie.location === region[0]);
+    regionAnimals.forEach((animal) => {
+      region[1].push(animal.name);
+    });
+  });
+
   if (options !== undefined) {
     const { includeNames = false, sorted = false, sex } = options;
     if (includeNames) {
