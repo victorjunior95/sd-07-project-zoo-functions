@@ -144,18 +144,23 @@ function increasePrices(percentage) {
   return data.prices
 }
 
+const nomePeloId = (id) => {
+  let x = data.employees.find(funcionario => funcionario.id === id)
+  return `${x.firstName} ${x.lastName}`
+}
+
+const nomePeloNome = (nomeParcial) => {
+  let x = data.employees.find(funcionario => funcionario.firstName === nomeParcial)
+  if (x === undefined) x = data.employees.find(funcionario => funcionario.lastName === nomeParcial)
+  return `${x.firstName} ${x.lastName}`
+}
+
 function employeeCoverage(idOrName = '') {
   let tabela = {}
   let nomeAlvo = '';
-  if (idOrName.length > 30) {
-    let x = data.employees.find(funcionario => funcionario.id === idOrName)
-    nomeAlvo = `${x.firstName} ${x.lastName}`
-  }
-  else if (idOrName.length < 30 && idOrName.length > 0) {
-    let x = data.employees.find(funcionario => funcionario.firstName === idOrName)
-    if (x === undefined) x = data.employees.find(funcionario => funcionario.lastName === idOrName)
-    nomeAlvo = `${x.firstName} ${x.lastName}`
-  }
+  
+  if (idOrName.length > 30) nomeAlvo = nomePeloId(idOrName);
+  if (idOrName.length < 30 && idOrName.length > 0) nomeAlvo = nomePeloNome(idOrName);
   data.employees.forEach(funcionarios => { 
     let lista = []
     let nomeDoFuncionario = `${funcionarios.firstName} ${funcionarios.lastName}`
@@ -170,7 +175,7 @@ function employeeCoverage(idOrName = '') {
   if (idOrName === '') return tabela
   return {[nomeAlvo]: tabela[nomeAlvo]};
 }
-employeeCoverage()
+employeeCoverage('Stephanie')
 module.exports = {
   entryCalculator,
   schedule,
