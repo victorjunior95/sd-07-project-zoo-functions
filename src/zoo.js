@@ -231,8 +231,9 @@ function schedule(dayName = false) {
 
 function oldestFromFirstSpecies(id) {
   // (primeira especie do funcionario/a com o 'id' provido)
-  const firstSpecieId = employees.find(employee => employee.id === id).responsibleFor[0]; 
-  // !! em quanto q esse codigo faz o 'sort'(organiza) colocando o mais velho na primeira posicao do array,
+  const firstSpecieId = employees.find(employee => employee.id === id).responsibleFor[0];
+  // !! em quanto q esse codigo faz o 'sort'(organiza), 
+  // colocando o mais velho na primeira posicao do array,
   const oldestAnimal = animals
   .find(animal => animal.id === firstSpecieId).residents
   .sort((animalA, animalB) => animalB.age - animalA.age);
@@ -244,7 +245,7 @@ function oldestFromFirstSpecies(id) {
     .reduce((prevAnimal, currentAnimal) => {
     if (currentAnimal.age > prevAnimal.age){
       return currentAnimal
-    } 
+    }
     return prevAnimal
   });
   return Object.values(oldestAnimal);
