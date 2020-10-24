@@ -37,9 +37,9 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   let teste = false;
-  data.employees.forEach(element => {
+  data.employees.map(element => {
     if (element.managers.includes(id)) teste = true
-    else teste = false;
+    return teste
   });
   return teste
 }
