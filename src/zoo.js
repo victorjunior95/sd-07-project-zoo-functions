@@ -37,11 +37,11 @@ function createEmployee(personalInfo, associatedWith) {
 
 function isManager(id) {
   let teste = false;
-  data.employees.map(element => {
+  data.employees.forEach((element) => {
     if (element.managers.includes(id)) teste = true
-    return teste
   });
   return teste
+
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
