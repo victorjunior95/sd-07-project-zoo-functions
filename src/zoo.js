@@ -86,7 +86,7 @@ function entryCalculator(entrants = {}) {
   */
   return total;
 }
-entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 })
+
 function retrieveAvailableLocations() {
   // return ['NE', 'NW', 'SE', 'SW']; !! forma mais simples sabendo todas as locations !!
   /* !! forma mais complicada q a utilizada !!
@@ -200,32 +200,32 @@ function animalMap(options = {}) {
   return retrieveAnimalsPerLocationWithName(locations, sorted, sex);
 }
 
-function checkIfMonday(day, schedule) {
+function checkIfMonday(day, schedl) {
   if (day === 'Monday') {
-    schedule[day] = 'CLOSED';
+    schedl[day] = 'CLOSED';
   }
-  return schedule;
+  return schedl;
 }
-function scheduleAllDays(schedule) {
+function scheduleAllDays(schedl) {
   const days = Object.keys(hours);
-  days.forEach((day)=> {
-    schedule[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
-    checkIfMonday(day, schedule);
+  days.forEach((day) => {
+    schedl[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
+    checkIfMonday(day, schedl);
   });
-  return schedule
+  return schedl;
 }
-function scheduleDay(dayName, schedule) {
-  schedule[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
-  checkIfMonday(dayName, schedule);
-  return schedule;
+function scheduleDay(dayName, schedl) {
+  schedl[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
+  checkIfMonday(dayName, schedl);
+  return schedl;
 }
 function schedule(dayName = false) {
   const schedule = {};
-  if (dayName){
-    scheduleDay(dayName, schedule)
+  if (dayName) {
+    scheduleDay(dayName, schedule);
     return schedule;
   }
-  scheduleAllDays(schedule)
+  scheduleAllDays(schedule);
   return schedule;
 }
 
