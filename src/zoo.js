@@ -78,36 +78,91 @@ function locationOfAnimals() {
   return ['NE', 'NW', 'SE', 'SW'];
 }
 
-function nameByLocation (locations) {
-  return animals.filter((animal) => animal.location === locations)
+function nameByLocation(locations) {
+  return animals.filter(animal => animal.location === locations);
 }
-function buildAnimalMapByLocation(locations) {
+function animalMapByLocation(locations) {
   const animalsByLocation = {};
-  locations.forEach(location => {
-    const filteredAnimals = nameByLocation(location).map((item)  => item.name);
-    animalsByLocation[location] = filteredAnimals
-  })
+  locations.forEach((location) => {
+    const filteredAnimals = nameByLocation(location).map(item => item.name);
+    animalsByLocation[location] = filteredAnimals;
+  });
   return animalsByLocation;
 }
-//subrequisito solucionado após exercício guiado Oliva
-function buildAnimalMapByLocationAndName (locations) {
-  const animalsByLocationAndName = {}
-  locations.forEach(location => {
-    const filteredAnimals = nameByLocation(location).map((item)  => {
+// subrequisito solucionado após exercício guiado Oliva
+function animalMapByLocationAndName(locations) {
+  const animalsByLocationAndName = {};
+  locations.forEach((location) => {
+    const filteredAnimals = nameByLocation(location).map((item) => {
       const names = item.name;
-      const residents = item.residents.map(resident => resident.name)
-      return {[names]: residents }
+      const residents = item.residents.map(resident => resident.name);
+      return { [names]: residents };
     });
-    animalsByLocationAndName[location] = filteredAnimals
-  })
+    animalsByLocationAndName[location] = filteredAnimals;
+  });
   return animalsByLocationAndName;
 }
-function animalMap(options) {
-  const locations = locationOfAnimals()
-  if (!options) return buildAnimalMapByLocation(locations);
-  if (options.includeNames === true) return buildAnimalMapByLocationAndName(locations);
+
+function animalMapByLocAndNameSorted(locations) {
+  const animalsByLocationAndNameSorted = {};
+  locations.forEach((location) => {
+    const filteredAnimals = nameByLocation(location).map((item) => {
+      const names = item.name;
+      const residents = item.residents.map(resident => resident.name);
+      residents.sort();
+      return { [names]: residents };
+    });
+    animalsByLocationAndNameSorted[location] = filteredAnimals;
+  });
+  return animalsByLocationAndNameSorted;
 }
 
+function animalMapByLocationNameAndSex(locations, sex) {
+  const animalsByLocationNameAndSex = {};
+  locations.forEach((location) => {
+    const filteredAnimals = nameByLocation(location).map((item) => {
+      const names = item.name;
+      const residents = item.residents
+      .filter(resident => resident.sex === sex)
+      .map(resident => resident.name);
+      return { [names]: residents };
+    });
+    animalsByLocationNameAndSex[location] = filteredAnimals;
+  });
+  return animalsByLocationNameAndSex;
+}
+
+function animalMapByLocationNameSexSorted(locations, sex) {
+  const animalsByLocationNameSexSorted = {};
+  locations.forEach((location) => {
+    const filteredAnimals = nameByLocation(location).map((item) => {
+      const names = item.name;
+      const residents = item.residents
+      .filter(resident => resident.sex === sex)
+      .map(resident => resident.name);
+      residents.sort();
+      return { [names]: residents };
+    });
+    animalsByLocationNameSexSorted[location] = filteredAnimals;
+  });
+  return animalsByLocationNameSexSorted;
+}
+function animalMap(options) {
+  const locations = locationOfAnimals();
+  if (!options) return animalMapByLocation(locations);
+  if (options.includeNames) {
+    if (options.sorted) {
+      if (options.sex === 'female' || options.sex === 'male') {
+        return animalMapByLocationNameSexSorted(locations, options.sex);
+      }
+      return animalMapByLocAndNameSorted(locations);
+    }
+    if (options.sex === 'female' || options.sex === 'male'){
+      return animalMapByLocationNameAndSex(locations, options.sex);
+    }
+  }
+  return animalMapByLocationAndName(locations);
+}
 function buildSchedule() {
   const keys = Object.keys(hours);
   const calendar = keys.reduce((acc, key) => {
