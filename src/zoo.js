@@ -62,15 +62,11 @@ function entryCalculator(entrants = {}) {
   // const { Adult = 0, Senior = 0, Child = 0 } = entrants
   const pricesArr = Object.keys(prices);
   const entrantsArr = Object.keys(entrants);
-  const entrantsArrObj = [];
+  const entrantsArrObj = []; // not needed, mas pk nao ^^
   const pricesArrObj = [];
   // (faz array de objetos) !!
-  for (const key of pricesArr) {
-    pricesArrObj.push({ [key]: prices[key] });
-  }
-  for (const key of entrantsArr) {
-    entrantsArrObj.push({ [key]: entrants[key] });
-  }
+  pricesArr.forEach(key => pricesArrObj.push({ [key]: prices[key] }));
+  entrantsArr.forEach(key => entrantsArrObj.push({ [key]: prices[key] }));
   // -
   let total = 0;
   const filteredAges = pricesArr.filter(age => entrantsArr.includes(age));
@@ -92,7 +88,7 @@ function entryCalculator(entrants = {}) {
   */
   return total;
 }
-
+entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 })
 function retrieveAvailableLocations() {
   // return ['NE', 'NW', 'SE', 'SW']; !! forma mais simples sabendo todas as locations !!
   /* !! forma mais complicada q a utilizada !!
