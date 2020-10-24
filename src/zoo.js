@@ -134,8 +134,6 @@ function schedule(dayName) {
   return scheduleForHuman;
 }
 
-console.log(schedule());
-
 const getTheBiggest = arr => arr.reduce((acc, curr) => {
   if (acc.age > curr.age) {
     return acc;
@@ -166,16 +164,11 @@ const getAnimalsById = ids => animals.filter(animal => ids.includes(animal.id))
   .map(animal => animal.name);
 
 function employeeCoverage(idOrName) {
-  let employeesResponsibility = {
-    'Nigel Nelson': ['lions', 'tigers'],
-    'Burl Bethea': ['lions', 'tigers', 'bears', 'penguins'],
-    'Ola Orloff': ['otters', 'frogs', 'snakes', 'elephants'],
-    'Wilburn Wishart': ['snakes', 'elephants'],
-    'Stephanie Strauss': ['giraffes', 'otters'],
-    'Sharonda Spry': ['otters', 'frogs'],
-    'Ardith Azevado': ['tigers', 'bears'],
-    'Emery Elser': ['elephants', 'bears', 'lions'],
-  };
+  let employeesResponsibility = {};
+  employees.forEach((employee) => {
+    const animalsResponsible = animalsByIds(...employee.responsibleFor).map(animal => animal.name);
+    employeesResponsibility[`${employee.firstName} ${employee.lastName}`] = animalsResponsible;
+  });
   if (idOrName !== undefined) {
     const employee = employees
       .find(employeeObject => employeeObject.id === idOrName ||
@@ -188,6 +181,8 @@ function employeeCoverage(idOrName) {
   }
   return employeesResponsibility;
 }
+
+console.log(employeeCoverage());
 
 module.exports = {
   entryCalculator,
