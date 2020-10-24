@@ -58,8 +58,8 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
     id: `${id}`,
     firstName: `${firstName}`,
     lastName: `${lastName}`,
-    managers: `${managers}`,
-    responsibleFor: `${responsibleFor}`,
+    managers: [...managers],
+    responsibleFor: [...responsibleFor],
   });
 }
 
