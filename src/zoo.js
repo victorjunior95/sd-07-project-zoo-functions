@@ -70,7 +70,12 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu cod...
+  if(!options) return {
+    NE: ['lions', 'giraffes'],
+    NW: ['tigers', 'bears', 'elephants'],
+    SE: ['penguins', 'otters'],
+    SW: ['frogs', 'snakes']
+  };
 }
 
 const daysList = (dayName) => {
