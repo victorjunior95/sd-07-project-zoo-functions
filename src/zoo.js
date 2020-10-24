@@ -47,7 +47,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   const novo = { id, firstName, lastName, managers, responsibleFor };
   data.employees.push(novo);
 }
-
+console.log('a');
 function animalCount(species) {
   const objeto = {};
   if (typeof species === 'undefined') {
