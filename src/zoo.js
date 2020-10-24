@@ -37,7 +37,16 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return id === '0e7b460e-acf4-4e17-bcb3-ee472265db83';
+  // return id === '0e7b460e-acf4-4e17-bcb3-ee472265db83';
+  const managersArray = [];
+  employees.forEach((employee) => {
+    employee.managers.forEach((manager) => {
+      if (!managersArray.includes(manager)) {
+        managersArray.push(manager);
+      }
+    });
+  });
+  return managersArray.includes(id);
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
