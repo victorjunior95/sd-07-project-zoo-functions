@@ -150,9 +150,8 @@ function employeeCoverage(idOrName = '') {
   if (idOrName.length > 30) {
     let x = data.employees.find(funcionario => funcionario.id === idOrName)
     nomeAlvo = `${x.firstName} ${x.lastName}`
-    console.log(nomeAlvo);
   }
-  if (idOrName.length < 30 && idOrName.length > 0) {
+  else if (idOrName.length < 30 && idOrName.length > 0) {
     let x = data.employees.find(funcionario => funcionario.firstName === idOrName)
     if (x === undefined) x = data.employees.find(funcionario => funcionario.lastName === idOrName)
     nomeAlvo = `${x.firstName} ${x.lastName}`
