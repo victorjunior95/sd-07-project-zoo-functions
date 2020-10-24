@@ -90,26 +90,15 @@ function animalMapByLocation(locations) {
   return animalsByLocation;
 }
 // subrequisito solucionado após exercício guiado Oliva
-function animalMapByLocationAndName(locations) {
-  const animalsByLocationAndName = {};
-  locations.forEach((location) => {
-    const filteredAnimals = nameByLocation(location).map((item) => {
-      const names = item.name;
-      const residents = item.residents.map(resident => resident.name);
-      return { [names]: residents };
-    });
-    animalsByLocationAndName[location] = filteredAnimals;
-  });
-  return animalsByLocationAndName;
-}
-
-function animalMapByLocAndNameSorted(locations) {
+function animalMapByLocAndNameSorted(locations, sorted) {
   const animalsByLocationAndNameSorted = {};
   locations.forEach((location) => {
     const filteredAnimals = nameByLocation(location).map((item) => {
       const names = item.name;
       const residents = item.residents.map(resident => resident.name);
-      residents.sort();
+      if (sorted === true) {
+        residents.sort();
+      }
       return { [names]: residents };
     });
     animalsByLocationAndNameSorted[location] = filteredAnimals;
@@ -117,22 +106,7 @@ function animalMapByLocAndNameSorted(locations) {
   return animalsByLocationAndNameSorted;
 }
 
-function animalMapByLocationNameAndSex(locations, sex) {
-  const animalsByLocationNameAndSex = {};
-  locations.forEach((location) => {
-    const filteredAnimals = nameByLocation(location).map((item) => {
-      const names = item.name;
-      const residents = item.residents
-      .filter(resident => resident.sex === sex)
-      .map(resident => resident.name);
-      return { [names]: residents };
-    });
-    animalsByLocationNameAndSex[location] = filteredAnimals;
-  });
-  return animalsByLocationNameAndSex;
-}
-
-function animalMapByLocationNameSexSorted(locations, sex) {
+function animalMapByLocationNameSexSorted(locations, sorted, sex) {
   const animalsByLocationNameSexSorted = {};
   locations.forEach((location) => {
     const filteredAnimals = nameByLocation(location).map((item) => {
@@ -140,29 +114,26 @@ function animalMapByLocationNameSexSorted(locations, sex) {
       const residents = item.residents
       .filter(resident => resident.sex === sex)
       .map(resident => resident.name);
-      residents.sort();
+      if (sorted === true) {
+        residents.sort();
+      }
       return { [names]: residents };
     });
     animalsByLocationNameSexSorted[location] = filteredAnimals;
   });
   return animalsByLocationNameSexSorted;
 }
-function animalMap(options) {
+function animalMap(options = '') {
   const locations = locationOfAnimals();
-  if (!options) return animalMapByLocation(locations);
   if (options.includeNames) {
-    if (options.sorted) {
-      if (options.sex === 'female' || options.sex === 'male') {
-        return animalMapByLocationNameSexSorted(locations, options.sex);
-      }
-      return animalMapByLocAndNameSorted(locations);
+    if (options.sex) {
+      return animalMapByLocationNameSexSorted(locations, options.sorted, options.sex);
     }
-    if (options.sex === 'female' || options.sex === 'male'){
-      return animalMapByLocationNameAndSex(locations, options.sex);
-    }
+    return animalMapByLocAndNameSorted(locations, options.sorted);
   }
-  return animalMapByLocationAndName(locations);
+  return animalMapByLocation(locations);
 }
+
 function buildSchedule() {
   const keys = Object.keys(hours);
   const calendar = keys.reduce((acc, key) => {
