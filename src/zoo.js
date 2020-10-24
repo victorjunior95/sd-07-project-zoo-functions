@@ -220,17 +220,35 @@ function scheduleDay(dayName, schedl) {
   return schedl;
 }
 function schedule(dayName = false) {
-  const schedule = {};
+  const schedl = {};
   if (dayName) {
-    scheduleDay(dayName, schedule);
-    return schedule;
+    scheduleDay(dayName, schedl);
+    return schedl;
   }
-  scheduleAllDays(schedule);
-  return schedule;
+  scheduleAllDays(schedl);
+  return schedl;
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  // (primeira especie do funcionario/a com o 'id' provido)
+  const firstSpecieId = employees.find(employee => employee.id === id).responsibleFor[0]; 
+  // !! em quanto q esse codigo faz o 'sort'(organiza) colocando o mais velho na primeira posicao do array,
+  const oldestAnimal = animals
+  .find(animal => animal.id === firstSpecieId).residents
+  .sort((animalA, animalB) => animalB.age - animalA.age);
+  return Object.values(oldestAnimal[0]);
+  /* esse codigo compara a posicao anterior e a posicao corrente do animal,
+  retornando somente a idade maior !!
+  const oldestAnimal = animals
+  .find(animal => animal.id === firstSpecieId).residents
+    .reduce((prevAnimal, currentAnimal) => {
+    if (currentAnimal.age > prevAnimal.age){
+      return currentAnimal
+    } 
+    return prevAnimal
+  });
+  return Object.values(oldestAnimal);
+  */
 }
 
 function increasePrices(percentage) {
