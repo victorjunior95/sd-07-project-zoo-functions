@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees } = require('./data');
+const { animals, employees, prices } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -32,9 +32,7 @@ function animalsOlderThan(animal, age) {
 
 function employeeByName(employeeName) {
   // seu código aqui
-  if (employeeName === undefined) {
-    return {};
-  }
+  if (!employeeName) return {};
   const functionary = employees.find(name =>
     name.firstName === employeeName || name.lastName === employeeName);
   return functionary;
@@ -72,15 +70,84 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   // seu código aqui
+  const value = {};
+  if (!species) {
+    animals.forEach((animal) => {
+      value[animal.name] = animal.residents.length;
+    });
+    return value;
+  }
+  return animals.find(({ name }) => name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
   // seu código aqui
+  if (!entrants || entrants.length === 0) return 0;
+  const { adult = 0, child = 0, senior = 0 } = entrants;
+  const adultValue = prices.Adult * adult;
+  const childValue = prices.Child * child;
+  const seniorValue = prices.Senior * senior;
+  const totalValue = adultValue + seniorValue + childValue;
+  return totalValue;
 }
 
-function animalMap(options) {
-  // seu código aqui
+function retrieveAvailableLocation() {
+  return ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
 }
+
+function recoverFilteredAnimalsByLocation(location) {
+  return animals.filter(animal => animal.location === location);
+}
+
+function recoverAnimalsByLocation(locations) {
+  const animalByLocation = {};
+
+  locations.forEach((location) => {
+    const filteredAnimals = recoverFilteredAnimalsByLocation(location).map(animal => animal.name);
+    if (filteredAnimals.length !== 0) animalByLocation[location] = filteredAnimals;
+  });
+
+  return animalByLocation;
+}
+
+function recoverAnimalsByLocationWithName(locations, sorted, sex) {
+  const animalsByLocation = {};
+
+  locations.forEach((location) => {
+    const filteredAnimals = recoverFilteredAnimalsByLocation(location).map((animal) => {
+      const animalName = animal.name;
+      const residents = animal.residents
+      .filter((resident) => {
+        const needFiltering = sex !== undefined;
+
+        if (needFiltering) {
+          return resident.sex === sex;
+        }
+        return true;
+      })
+      .map(resident => resident.name);
+      if (sorted) residents.sort();
+      return { [animalName]: residents };
+    });
+
+    if (filteredAnimals.length !== 0) animalsByLocation[location] = filteredAnimals;
+  });
+
+  return animalsByLocation;
+}
+
+function animalMap(options = {}) {
+  // seu código aqui
+  // Todos créditos ao plantão/solução do especialista Oliva.
+  const locations = retrieveAvailableLocation();
+  const { includeNames = false, sorted = false, sex } = options;
+
+  if (includeNames) {
+    return recoverAnimalsByLocationWithName(locations, sorted, sex);
+  }
+  return recoverAnimalsByLocation(locations);
+}
+
 
 function schedule(dayName) {
   // seu código aqui
