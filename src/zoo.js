@@ -117,14 +117,15 @@ const decimalAdjust = (price) => {
 const increasePrices = (percentage) => {
   const entries = Object.entries(data.prices);
   const multiplier = percentage / 100;
-  const newPrices = entries.map(array => {
-    const increasePrice = array[1] += array[1] * multiplier;
+  const newPrices = entries.map((array) => {
+    const increasePrice = array[1] + array[1] * multiplier;
     return increasePrice;
   });
   const newObjectPrices = {};
   newPrices.map((newPrice, i) => {
     const price = newPrice;
-    return newObjectPrices[entries[i][0]] = decimalAdjust(price);
+    newObjectPrices[entries[i][0]] = decimalAdjust(price);
+    return price;
   });
 
   return newObjectPrices;
