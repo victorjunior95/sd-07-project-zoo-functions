@@ -92,8 +92,6 @@ function oldestFromFirstSpecies(id) {
 }
 
 const decimalAdjust = (price) => {
-  price.toFixed(3);
-  price = price.toString();
   price = price.split('');
   const decimalPartString = price[4] + price[5];
   const decimalPartNumber = parseInt(decimalPartString, 10);
@@ -118,17 +116,15 @@ const increasePrices = (percentage) => {
   const entries = Object.entries(data.prices);
   const multiplier = percentage / 100;
   const newPrices = entries.map((array) => {
-    const increasePrice = array[1] + (array[1] * multiplier);
-    return increasePrice;
-  });
-  const newObjectPrices = {};
-  newPrices.map((newPrice, i) => {
-    const price = newPrice;
-    newObjectPrices[entries[i][0]] = decimalAdjust(price);
-    return price;
+    let increasePrice = array[1];
+    increasePrice += array[1] * multiplier;
+    const fixedIncreasePrice = increasePrice.toFixed(3);
+    return fixedIncreasePrice;
   });
 
-  return newObjectPrices;
+  newPrices.forEach((newPrice, i) => {
+    data.prices[entries[i][0]] = decimalAdjust(newPrice);
+  });
 };
 
 const employeesNamesAndAnimals = () => {
