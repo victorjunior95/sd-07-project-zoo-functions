@@ -126,7 +126,39 @@ function schedule(dayName = '') {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  // Checar ID passado com os IDs do ARRAY employees;
+  // Pegar o PRIMEIRO ID de animal do objeto verificado
+  //anteriormente;
+  // Verificar o ID do passo anterior com os IDs do ARRAY
+  //animals;
+  // Retornar o animal mais velho da espécie.
+
+  const clerk = data.employees.find(employee => employee.id === id);
+  const firstSpeciesId = clerk.responsibleFor[0];
+  const kind = data.animals.find(animal => animal.id === firstSpeciesId);
+
+  const oldest = [];
+  for (let index = 0; index < kind.residents.length; index += 1) {
+    // if (index + 1 === kind.residents.length) {
+    //   return oldest
+    // }
+
+    if (!oldest[2] || oldest[2] < kind.residents[index].age) {
+      oldest[0] = `${kind.residents[index].name}`;
+      oldest[1] = `${kind.residents[index].sex}`;
+      oldest[2] = `${kind.residents[index].age}`;
+    }
+  }
+
+  // kind.residents.forEach((resident, index) => {
+  //   // if (resident.age > kind.residents[index + 1].age) {
+  //   //   oldest[0] = [resident];
+  //   // }
+
+  //   console.log(kind.residents[index + 6].age);
+  // });
+
+  return oldest;
 }
 
 function increasePrices(percentage) {
