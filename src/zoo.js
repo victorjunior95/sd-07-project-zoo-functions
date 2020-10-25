@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -138,8 +139,16 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+  const firstSpecies = data.employees.find(employee => employee.id === id).responsibleFor[0];
+  const oldestSpeciesId = data.animals.find(animal => animal.id === firstSpecies).residents
+  .reduce((elementBiggerAge, elementAge) => {
+    if (elementAge.age > elementBiggerAge.age) {
+      return elementAge;
+    }
+    return elementBiggerAge;
+  });
+  return [oldestSpeciesId.name, oldestSpeciesId.sex, oldestSpeciesId.age];
+} 
 
 function increasePrices(percentage) {
   return Object.keys(data.prices).forEach(key =>
