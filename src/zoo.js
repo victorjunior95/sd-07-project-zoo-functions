@@ -262,21 +262,21 @@ function increasePrices(percentage) {
 }
 
 function getSpecies(employee) {
-  const animalNames = employee.responsibleFor.map(
-    animalId => animals.find(animal => animal.id === animalId).name);
-    return animalNames
+  const animalNames = employee.responsibleFor
+  .map(animalId => animals.find(animal => animal.id === animalId).name);
+  return animalNames
 }
-function allKeeperSpecies(){
+function allKeeperSpecies() {
   const keeperSpecies = {};
-    employees.forEach((employee) => {
-      const fullName = `${employee.firstName} ${employee.lastName}`;
-      keeperSpecies[fullName] = getSpecies(employee);
-    });
-    return keeperSpecies;
+  employees.forEach((employee) => {
+    const fullName = `${employee.firstName} ${employee.lastName}`;
+    keeperSpecies[fullName] = getSpecies(employee);
+  });
+  return keeperSpecies;
 }
 function SpeciesResponsibleFor(employee, firstName, lastName) {
   const fullName = `${firstName} ${lastName}`;
-  const keeperSpecies = {}
+  const keeperSpecies = {};
   keeperSpecies[fullName] = getSpecies(employee);
   return keeperSpecies;
 }
@@ -295,23 +295,23 @@ function whichParameter(idOrName) {
         break;
       default:
         //console.log('not this one');
-    } 
+    }
   });
   */
- let keeperSpecies
+  let keeperSpecies;
   employees.forEach((employee) => {
-    if (idOrName.includes(employee.firstName)){
+    if (idOrName.includes(employee.firstName)) {
       keeperSpecies = SpeciesResponsibleFor(employee, employee.firstName, employee.lastName);
-    } else if (idOrName.includes(employee.lastName)){
+    } else if (idOrName.includes(employee.lastName)) {
       keeperSpecies = SpeciesResponsibleFor(employee, employee.firstName, employee.lastName);
-    } else if (idOrName.includes(employee.id)){
+    } else if (idOrName.includes(employee.id)) {
       keeperSpecies = SpeciesResponsibleFor(employee, employee.firstName, employee.lastName);
     }
   });
-  return keeperSpecies
+  return keeperSpecies;
 }
 function employeeCoverage(idOrName = false) {
-  if (idOrName){
+  if (idOrName) {
     return whichParameter(idOrName);
   }
   return allKeeperSpecies();
