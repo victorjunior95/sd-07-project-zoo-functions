@@ -69,13 +69,55 @@ function entryCalculator(entrants) {
   return Object.entries(entrants).reduce((rest, now) => rest + (prices[now[0]] * now[1]), 0);
 }
 
+const returnAvelibleLocation = () => { return ['NE', 'NW', 'SE', 'SW']; }
+
+const returnAnimalsPerLocation = (locations) => {
+  const perLocation = {};
+
+  locations.forEach((locations) => {
+     const filteredAnimal = data.animals.filter((animal) => animal.location === locations)
+     .map((animal) => animal.name);
+  
+     perLocation[locations] = filteredAnimal;
+     });
+  return perLocation;
+};
+
+const returnAnimalsPerLocationWithName = (locations, sorted, sex) => {
+  const perLocation = {};
+
+  locations.forEach((locations) => {
+     const filteredAnimal = data.animals.filter((animal) => animal.location === locations)
+     .map((animal) => {
+       const animalName = animal.name;
+       const residents = animal.residents
+       .filter((residents) => {
+         const filteringSex = sex !== undefined;
+         return filteringSex ? residents.sex === sex : true;
+       })
+       .map((residents) => residents.name);
+
+       if (sorted) residents.sort();
+
+       return { [animalName]: residents };
+     })
+  
+     perLocation[locations] = filteredAnimal;
+     });
+  return perLocation;
+};
+
 function animalMap(options) {
-  if(!options) return {
-    NE: ['lions', 'giraffes'],
-    NW: ['tigers', 'bears', 'elephants'],
-    SE: ['penguins', 'otters'],
-    SW: ['frogs', 'snakes']
-  };
+  const locations = returnAvelibleLocation();
+  if (!options) return returnAnimalsPerLocation(locations);
+
+  const { includeNames = false, sorted = false, sex } = options;
+  if (includeNames) {
+    return returnAnimalsPerLocationWithName(locations, sorted, sex);
+  } else {
+    return returnAnimalsPerLocation(locations);
+  }
+
 }
 
 const daysList = (dayName) => {
