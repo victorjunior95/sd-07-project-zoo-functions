@@ -92,19 +92,19 @@ function oldestFromFirstSpecies(id) {
 }
 
 const decimalAdjust = (price) => {
-  price.toFixed(3)
+  price.toFixed(3);
   price = price.toString();
   price = price.split('');
   const decimalPartString = price[4] + price[5];
-  const decimalPartNumber = parseInt(decimalPartString);
+  const decimalPartNumber = parseInt(decimalPartString, 10);
   const decimalNumber = decimalPartNumber / 10;
   const roundedDecimalNumber = Math.ceil(decimalNumber);
   price.pop();
   price.pop();
   let roundedPrice = '';
   price[4] = roundedDecimalNumber;
-  price.forEach(price => {
-    roundedPrice += price;
+  price.forEach((number) => {
+    roundedPrice += number;
   });
 
   roundedPrice = parseFloat(roundedPrice);
@@ -118,8 +118,10 @@ const increasePrices = (percentage) => {
   const increasePrices = data.prices;
   const entries = Object.entries(increasePrices);
   const multiplier = percentage / 100;
-  const newPrices = entries.map(array => array[1] += array[1] * multiplier);
-  newPrices.map((price, i) => increasePrices[entries[i][0]] = decimalAdjust(price));
+  const newPrices = entries.map((array) => {
+    return array[1] += array[1] * multiplier;
+  });
+  newPrices.forEach((price, i) => increasePrices[entries[i][0]] = decimalAdjust(price));
   return increasePrices;
 };
 
