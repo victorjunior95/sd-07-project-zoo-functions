@@ -110,8 +110,21 @@ function oldestFromFirstSpecies(id) {
   return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
 
+
 function increasePrices(percentage) {
-  // seu código aqui
+  // recupera o preço de cada ingresso
+  const ticketsValues = Object.values(data.prices);
+  // calcula o novo preço de cada ingresso
+  ticketsValues.forEach((value, index) => {
+    const multiplier = (percentage / 100) + 1;
+    const newPercentage = Math.round((value * multiplier) * 100) / 100;
+    ticketsValues[index] = newPercentage;
+  });
+  // atualiza o banco de dados com os novos preços
+  data.prices.Adult = ticketsValues[0];
+  data.prices.Senior = ticketsValues[1];
+  data.prices.Child = ticketsValues[2];
+  return data.prices;
 }
 
 function employeeCoverage(idOrName) {
