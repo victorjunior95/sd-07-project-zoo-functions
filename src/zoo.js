@@ -148,12 +148,12 @@ function increasePrices(percentage) {
 }
 
 const nomePeloId = (id) => {
-  let x = data.employees.find(funcionario => funcionario.id === id)
-  return `${x.firstName} ${x.lastName}`
-}
+  const x = data.employees.find(funcionario => funcionario.id === id);
+  return `${x.firstName} ${x.lastName}`;
+};
 
 const nomePeloNome = (nomeParcial) => {
-  const x = data.employees.find(funcionario => funcionario.firstName === nomeParcial);
+  let x = data.employees.find(funcionario => funcionario.firstName === nomeParcial);
   if (x === undefined) x = data.employees.find(funcionario => funcionario.lastName === nomeParcial);
   return `${x.firstName} ${x.lastName}`;
 };
@@ -175,7 +175,7 @@ function employeeCoverage(idOrName = '') {
   });
   if (idOrName === '') return tabela;
   return { [nomeAlvo]: tabela[nomeAlvo] };
-};
+}
 module.exports = {
   entryCalculator,
   schedule,
