@@ -91,8 +91,10 @@ const individuosDeCadaReigaoPorSexo = (dados) => {
   data.animals.forEach((x) => {
     const objeto = {};
     if (dados.sex === false) objeto[x.name] = x.residents.map(residents => residents.name);
-    else objeto[x.name] = x.residents.filter(residents => residents.sex === dados.sex)
-    .map(residents => residents.name);
+    else {
+      objeto[x.name] = x.residents.filter(residents => residents.sex === dados.sex)
+      .map(residents => residents.name);
+    }
     if (dados.sorted === true) objeto[x.name].sort();
     animalInMap[x.location].push(objeto);
   });
@@ -109,11 +111,8 @@ function schedule(dayName) {
   Object.entries(data.hours).forEach((x) => {
     if (x[1].open === 0 && x[1].close === 0) todasAsHoras[x[0]] = 'CLOSED';
     else todasAsHoras[x[0]] = `Open from ${x[1].open}am until ${x[1].close - 12}pm`;
-
-  })
-  if (dayName !== undefined){
-  todasAsHoras = { [dayName]: `${todasAsHoras[dayName]}`}
-  }
+  });
+  if (dayName !== undefined) todasAsHoras = { [dayName]: `${todasAsHoras[dayName]}`};
   return todasAsHoras;
 }
 const compare = (a, b) => {
