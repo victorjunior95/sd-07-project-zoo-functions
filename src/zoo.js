@@ -52,11 +52,11 @@ function animalCount(species) {
   const { animals } = data;
   const objeto = {};
   if (species === undefined) {
-    animals.forEach(({name, residents}) => {
-      objeto[name] = residents.length
+    animals.forEach(({ name, residents }) => {
+      objeto[name] = residents.length;
     });
     return objeto;
-  };
+  }
   return data.animals.find(x => x.name === species).residents.length;
 }
 
@@ -65,15 +65,15 @@ function entryCalculator(entrants) {
   const { prices } = data;
   if (entrants !== undefined || Object.keys.length === 0) {
     return Object.entries(entrants).reduce((total, num) => (total + (prices[num[0]] * num[1])), 0);
-  };
+  }
   return 0;
 }
 
 const localização = () => ({
-  NE :[],
-  NW :[],
-  SE :[],
-  SW :[],
+  NE: [],
+  NW: [],
+  SE: [],
+  SW: [],
 });
 
 
@@ -81,34 +81,34 @@ const animalEmCadaLugar = () => {
   const animalInMap = localização();
   data.animals.forEach(x => animalInMap[x.location].push(x.name));
   return animalInMap;
-}
+};
 
 const individuosDeCadaReigaoPorSexo = (dados) => {
   if (dados.sex === undefined) dados.sex = false;
 
   const animalInMap = localização();
 
-  data.animals.forEach(x => {
+  data.animals.forEach((x) => {
     const objeto = {};
     if (dados.sex === false) objeto[x.name] = x.residents.map(residents => residents.name);
-    else objeto[x.name] = x.residents.filter(residents => residents.sex === dados.sex).map(residents => residents.name);
+    else objeto[x.name] = x.residents.filter(residents => residents.sex === dados.sex)
+    .map(residents => residents.name);
     if (dados.sorted === true) objeto[x.name].sort();
     animalInMap[x.location].push(objeto);
-
-  })
-  return animalInMap
+  });
+  return animalInMap;
 }
 
 function animalMap(options = {}) {
   if (options.includeNames === undefined) return animalEmCadaLugar();
-  else return individuosDeCadaReigaoPorSexo(options);
+  return individuosDeCadaReigaoPorSexo(options);
 }
 
 function schedule(dayName) {
-  let todasAsHoras = {}
-  Object.entries(data.hours).map(x=>{
-    if (x[1].open === 0 && x[1].close === 0) todasAsHoras[x[0]] = 'CLOSED'
-    else todasAsHoras[x[0]] = `Open from ${x[1].open}am until ${x[1].close - 12}pm`
+  let todasAsHoras = {};
+  Object.entries(data.hours).forEach((x) => {
+    if (x[1].open === 0 && x[1].close === 0) todasAsHoras[x[0]] = 'CLOSED';
+    else todasAsHoras[x[0]] = `Open from ${x[1].open}am until ${x[1].close - 12}pm`;
 
   })
   if (dayName !== undefined){
