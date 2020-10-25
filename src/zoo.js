@@ -91,9 +91,37 @@ function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+const decimalAdjust = (price) => {
+  price.toFixed(3)
+  price = price.toString();
+  price = price.split('');
+  const decimalPartString = price[4] + price[5];
+  const decimalPartNumber = parseInt(decimalPartString);
+  const decimalNumber = decimalPartNumber / 10;
+  const roundedDecimalNumber = Math.ceil(decimalNumber);
+  price.pop();
+  price.pop();
+  let roundedPrice = '';
+  price[4] = roundedDecimalNumber;
+  price.forEach(price => {
+    roundedPrice += price;
+  });
+
+  roundedPrice = parseFloat(roundedPrice);
+  return roundedPrice;
+};
+
+// A função decimalAdjust foi feita a partir do exemplo de ajuste decimal:
+// https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
+
+const increasePrices = (percentage) => {
+  const increasePrices = data.prices;
+  const entries = Object.entries(increasePrices);
+  const multiplier = percentage / 100;
+  const newPrices = entries.map(array => array[1] += array[1] * multiplier);
+  newPrices.map((price, i) => increasePrices[entries[i][0]] = decimalAdjust(price));
+  return increasePrices;
+};
 
 const objectWithEmployeesNamesAndAnimals = () => {
   const listAnimals = {};
@@ -144,8 +172,6 @@ const employeeCoverage = (idOrName) => {
 
   return finalObject;
 };
-
-// console.log(employeeCoverage('Nigel'))
 
 // Agradeço a ajuda de @loren-gt, @danwhat, @isaacbatst e @mhamaji que deram muitas dicas e
 // mostraram soluções diferentes fazendo com que conseguisse desenvolver a lógica
