@@ -14,13 +14,13 @@ const data = require('./data');
 const { animals, employees, prices, hours } = data;
 
 function animalsByIds(...ids) {
-  let response = [];
+  const response = [];
   ids.forEach((id) => {
-    response.push(animals.filter((animal) => animal.id === id)[0]);
+    response.push(animals.filter(animal => animal.id === id)[0]);
   });
   return response;
 }
-animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'e8481c1d-42ea-4610-8e11-1752cfc05a46');
+
 function animalsOlderThan(animal, age) {
   return animals.find(animalElement => animalElement.name === animal)
   .residents.every(residentElement => residentElement.age >= age);
@@ -53,7 +53,7 @@ function isManager(id) {
   const managers = employees.find(employee => employee.managers.includes(id));
   if (managers !== undefined) {
     response = true;
-  } else {
+  } else {console.log(totalPrice
     response = false;
   }
   return response;
@@ -76,7 +76,9 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   let totalPrice = 0;
-  Object.keys(entrants).forEach(entrant => (totalPrice += prices[entrant] * entrants[entrant]));
+  if (entrants) {
+    Object.keys(entrants).forEach(entrant => (totalPrice += prices[entrant] * entrants[entrant]));
+  }
   return totalPrice;
 }
 
