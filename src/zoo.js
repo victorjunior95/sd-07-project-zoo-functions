@@ -13,20 +13,14 @@ const data = require('./data');
 
 const { animals, employees, prices, hours } = data;
 
-function animalsByIds(ids) {
-  let response;
-  if (ids.length > 1) {
-    response = animals.filter((animal, posicao) => animal.id === ids[posicao]);
-  }
-  if (ids.length === 1) {
-    response = [animals.find(animal => animal.id === ids[0])];
-  }
-  if (ids.length === 0) {
-    response = ids;
-  }
+function animalsByIds(...ids) {
+  let response = [];
+  ids.forEach((id) => {
+    response.push(animals.filter((animal) => animal.id === id)[0]);
+  });
   return response;
 }
-
+animalsByIds('0938aa23-f153-4937-9f88-4858b24d6bce', 'e8481c1d-42ea-4610-8e11-1752cfc05a46');
 function animalsOlderThan(animal, age) {
   return animals.find(animalElement => animalElement.name === animal)
   .residents.every(residentElement => residentElement.age >= age);
