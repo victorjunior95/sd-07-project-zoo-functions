@@ -77,9 +77,67 @@ function entryCalculator(...entrants) {
   return total;
 }
 
-function animalMap(options) {
+// Animal map feito via plantão/Luz do oliva
 
+function retrieveAvailableLocations() {
+  return ['N', 'S', 'E', 'W', 'NW', 'NE', 'SE', 'SW'];
 }
+
+function retrieveFilteredAnimalsByLocations(location) {
+  return animals.filter(animal => animal.location === location);
+}
+
+function retrieveAnimalsPerLocation(locations) {
+  const animalsPerLocation = {};
+
+  locations.forEach((location) => {
+    const filteredAnimals = retrieveFilteredAnimalsByLocations(location)
+    .map(animal => animal.name);
+    if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+  });
+  return animalsPerLocation;
+}
+
+function retrieveAnimalsPerLocationWithName(locations, sorted, sex) {
+  const animalsPerLocation = {};
+
+  locations.forEach((location) => {
+    const filteredAnimals = retrieveFilteredAnimalsByLocations(location).map((animal) => {
+      const animalName = animal.name;
+      const residents = animal.residents
+        .filter((resident) => {
+          const needFiltering = sex !== undefined;
+
+          if (needFiltering) {
+            return resident.sex === sex;
+          }
+          return true;
+        })
+        .map(resident => resident.name);
+
+      if (sorted) residents.sort();
+
+      return { [animalName]: residents };
+    });
+    if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+  });
+  return animalsPerLocation;
+}
+
+function animalMap(options) {
+  const locations = retrieveAvailableLocations();
+
+  if (!options) return retrieveAnimalsPerLocation(locations);
+
+  const { includeNames = false, sorted = false, sex } = options;
+
+  if (includeNames) {
+    return retrieveAnimalsPerLocationWithName(locations, sorted, sex);
+  }
+  return retrieveAnimalsPerLocation(locations);
+}
+
+// Fim animal map
 
 function openingHours(dayName) {
   const openingSchedule = {};
@@ -118,7 +176,12 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const animalsByEmployee = {};
+  employees.forEach((employee) => {
+    const { firstName, lastName } = employee;
+    animalsByEmployee[`${firstName} ${lastName}`] = '';
+  });
+  return animalsByEmployee;
 }
 
 module.exports = {
