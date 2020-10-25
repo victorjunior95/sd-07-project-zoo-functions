@@ -60,7 +60,7 @@ function animalCount(species) {
   return data.animals.find(x => x.name === species).residents.length;
 }
 
-console.log(animalCount());
+
 function entryCalculator(entrants) {
   const { prices } = data;
   if (entrants !== undefined || Object.keys.length === 0) {
@@ -99,7 +99,7 @@ const individuosDeCadaReigaoPorSexo = (dados) => {
     animalInMap[x.location].push(objeto);
   });
   return animalInMap;
-}
+};
 
 function animalMap(options = {}) {
   if (options.includeNames === undefined) return animalEmCadaLugar();
@@ -112,35 +112,39 @@ function schedule(dayName) {
     if (x[1].open === 0 && x[1].close === 0) todasAsHoras[x[0]] = 'CLOSED';
     else todasAsHoras[x[0]] = `Open from ${x[1].open}am until ${x[1].close - 12}pm`;
   });
-  if (dayName !== undefined) todasAsHoras = { [dayName]: `${todasAsHoras[dayName]}`};
+  if (dayName !== undefined) todasAsHoras = { [dayName]: `${todasAsHoras[dayName]}` };
   return todasAsHoras;
 }
 const compare = (a, b) => {
-  if (a.age < b.age) return 1
-  if (a.age > b.age) return -1
-    return 0
-}
+  if (a.age < b.age) return 1;
+  if (a.age > b.age) return -1;
+  return 0;
+};
 function oldestFromFirstSpecies(id) {
   const responsavelPor = data.employees.find(x => x.id === id).responsibleFor;
-  const animaisCuidados =[];
-  responsavelPor.forEach(id => {
-    animaisCuidados.push(data.animals.find(animal => animal.id === id));
-  })
-  let conjuntoDeResidentes = [];
-  animaisCuidados.forEach(conjuntos => conjuntos.residents.forEach(x => conjuntoDeResidentes.push(x)));
+  const animaisCuidados = [];
+  responsavelPor.forEach((ids) => {
+    animaisCuidados.push(data.animals.find(animal => animal.id === ids));
+  });
+  const conjuntoDeResidentes = [];
+  animaisCuidados.forEach(conjuntos => conjuntos.residents
+    .forEach(x => conjuntoDeResidentes.push(x)));
   conjuntoDeResidentes.sort(compare);
-  const resposta = [conjuntoDeResidentes[0].name, conjuntoDeResidentes[0].sex, conjuntoDeResidentes[0].age];
-  console.log(resposta);
+  const resposta = [
+    conjuntoDeResidentes[0].name,
+    conjuntoDeResidentes[0].sex, 
+    conjuntoDeResidentes[0].age];
   return resposta;
 }
 
 function increasePrices(percentage) {
   percentage = (percentage / 100) + 1;
-  for(x in data.prices) {
-    data.prices[x] *= percentage;
-    data.prices[x] = Math.round(data.prices[x] * 100) / 100
-    console.log(data.prices[x]);
-  }
+  let lista = Object.keys(data.prices)
+  lista.map((publico) => {
+    data.prices[publico] *= percentage;
+    data.prices[publico] = Math.round(data.prices[publico] * 100) / 100
+    return data.price
+  })
   return data.prices
 }
 
