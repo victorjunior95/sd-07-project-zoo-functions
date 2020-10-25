@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const data = require('./data');
+const data = require ('./data');
 const { animals, employees, prices, hours } = data;
 
 function animalsByIds(ids) {
@@ -64,9 +64,9 @@ function isManager(id) {
   return response;
 }
 
-function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+/* function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   employees.push({ id, firstName, lastName, managers, responsibleFor });
-}
+} */
 
 function animalCount(species) {
   let response = {};
@@ -113,11 +113,11 @@ function oldestFromFirstSpecies(id) {
   const animalId = employees.find(employee => employee.id === id).responsibleFor[0];
   const arrayOfAnimalObj = (animals.find(animal => animal.id === animalId).residents);
   let result = arrayOfAnimalObj.reduce((previousAnimal, actualAnimal) => {
-    if(actualAnimal.age > previousAnimal.age) {
+    if (actualAnimal.age > previousAnimal.age) {
       previousAnimal = actualAnimal;
     }
     return previousAnimal;
-  })
+  });
   result = Object.values(result);
   return result;
 }
@@ -125,13 +125,13 @@ function oldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   percentage /= 100;
   if (percentage) {
-    Object.entries(prices).forEach( ([age, price]) => {
+    Object.entries(prices).forEach(([age, price]) => {
       const addPercent = percentage * price;
       let newPrice = Math.round((price + addPercent) * 100);
       newPrice /= 100;
       prices[age] = newPrice;
     });
-  };
+  }
 }
 
 function employeeCoverage(idOrName) {
