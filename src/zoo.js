@@ -254,17 +254,69 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   const ages = Object.keys(prices);
-  ages.forEach((age)  => {
-    let sum = prices[age] * (percentage / 100);
+  ages.forEach((age) => {
+    const sum = prices[age] * (percentage / 100);
     prices[age] = Math.round((prices[age] + sum) * 100) / 100;
   });
   return prices;
 }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
+function getSpecies(employee) {
+  const animalNames = employee.responsibleFor.map(
+    animalId => animals.find(animal => animal.id === animalId).name);
+    return animalNames
 }
-
+function allKeeperSpecies(){
+  const keeperSpecies = {};
+    employees.forEach((employee) => {
+      const fullName = `${employee.firstName} ${employee.lastName}`;
+      keeperSpecies[fullName] = getSpecies(employee);
+    });
+    return keeperSpecies;
+}
+function SpeciesResponsibleFor(employee, firstName, lastName) {
+  const fullName = `${firstName} ${lastName}`;
+  const keeperSpecies = {}
+  keeperSpecies[fullName] = getSpecies(employee);
+  return keeperSpecies;
+}
+function whichParameter(idOrName) {
+  /* !! alternativa com switch !!
+  employees.forEach((employee) => {
+    switch(idOrName) {
+      case employee.firstName:
+        console.log(employee.firstName);
+        break;
+        case employee.lastName:
+        console.log(employee.lastName);
+        break;
+        case employee.id:
+        console.log(employee.id);
+        break;
+      default:
+        //console.log('not this one');
+    } 
+  });
+  */
+ let keeperSpecies
+  employees.forEach((employee) => {
+    if (idOrName.includes(employee.firstName)){
+      keeperSpecies = SpeciesResponsibleFor(employee, employee.firstName, employee.lastName);
+    } else if (idOrName.includes(employee.lastName)){
+      keeperSpecies = SpeciesResponsibleFor(employee, employee.firstName, employee.lastName);
+    } else if (idOrName.includes(employee.id)){
+      keeperSpecies = SpeciesResponsibleFor(employee, employee.firstName, employee.lastName);
+    }
+  });
+  return keeperSpecies
+}
+function employeeCoverage(idOrName = false) {
+  if (idOrName){
+    return whichParameter(idOrName);
+  }
+  return allKeeperSpecies();
+}
+console.log(employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 module.exports = {
   entryCalculator,
   schedule,
