@@ -118,7 +118,7 @@ const increasePrices = (percentage) => {
   const entries = Object.entries(data.prices);
   const multiplier = percentage / 100;
   const newPrices = entries.map((array) => {
-    const increasePrice = array[1] + array[1] * multiplier;
+    const increasePrice = array[1] + (array[1] * multiplier);
     return increasePrice;
   });
   const newObjectPrices = {};
@@ -131,7 +131,7 @@ const increasePrices = (percentage) => {
   return newObjectPrices;
 };
 
-const objectWithEmployeesNamesAndAnimals = () => {
+const employeesNamesAndAnimals = () => {
   const listAnimals = {};
   const listEmployees = {};
   const { animals, employees } = data;
@@ -148,7 +148,7 @@ const objectWithEmployeesNamesAndAnimals = () => {
   const entriesAnimals = Object.entries(listAnimals);
   const entriesEmployees = Object.entries(listEmployees);
 
-  const requisito1 = entriesEmployees.reduce((acc, curr) => {
+  const employeesNamesAndAnimalsObject = entriesEmployees.reduce((acc, curr) => {
     const animalsForEmployee = [];
     curr[1].forEach((element) => {
       entriesAnimals.forEach((arrAnimal) => {
@@ -162,11 +162,11 @@ const objectWithEmployeesNamesAndAnimals = () => {
     return acc;
   }, {});
 
-  return requisito1;
+  return employeesNamesAndAnimalsObject;
 };
 
 const employeeCoverage = (idOrName) => {
-  const finalObject = objectWithEmployeesNamesAndAnimals();
+  const finalObject = employeesNamesAndAnimals();
   if (idOrName !== undefined) {
     const a = idOrName;
     const employee = data.employees
