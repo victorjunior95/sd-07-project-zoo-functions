@@ -264,7 +264,7 @@ function increasePrices(percentage) {
 function getSpecies(employee) {
   const animalNames = employee.responsibleFor
   .map(animalId => animals.find(animal => animal.id === animalId).name);
-  return animalNames
+  return animalNames;
 }
 function allKeeperSpecies() {
   const keeperSpecies = {};
@@ -302,9 +302,11 @@ function whichParameter(idOrName) {
   employees.forEach((employee) => {
     if (idOrName.includes(employee.firstName)) {
       keeperSpecies = SpeciesResponsibleFor(employee, employee.firstName, employee.lastName);
-    } else if (idOrName.includes(employee.lastName)) {
+    }
+    if (idOrName.includes(employee.lastName)) {
       keeperSpecies = SpeciesResponsibleFor(employee, employee.firstName, employee.lastName);
-    } else if (idOrName.includes(employee.id)) {
+    }
+    if (idOrName.includes(employee.id)) {
       keeperSpecies = SpeciesResponsibleFor(employee, employee.firstName, employee.lastName);
     }
   });
