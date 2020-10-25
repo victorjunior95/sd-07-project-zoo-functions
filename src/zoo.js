@@ -132,20 +132,19 @@ function oldestFromFirstSpecies(id) {
   conjuntoDeResidentes.sort(compare);
   const resposta = [
     conjuntoDeResidentes[0].name,
-    conjuntoDeResidentes[0].sex, 
+    conjuntoDeResidentes[0].sex,
     conjuntoDeResidentes[0].age];
   return resposta;
 }
 
 function increasePrices(percentage) {
   percentage = (percentage / 100) + 1;
-  let lista = Object.keys(data.prices)
-  lista.map((publico) => {
+  const lista = Object.keys(data.prices);
+  return lista.map((publico) => {
     data.prices[publico] *= percentage;
-    data.prices[publico] = Math.round(data.prices[publico] * 100) / 100
-    return data.price
-  })
-  return data.prices
+    data.prices[publico] = Math.round(data.prices[publico] * 100) / 100;
+    return data.price;
+  });
 }
 
 const nomePeloId = (id) => {
@@ -160,17 +159,17 @@ const nomePeloNome = (nomeParcial) => {
 }
 
 function employeeCoverage(idOrName = '') {
-  let tabela = {}
+  let tabela = {};
   let nomeAlvo = '';
   if (idOrName.length > 30) nomeAlvo = nomePeloId(idOrName);
   if (idOrName.length < 30 && idOrName.length > 0) nomeAlvo = nomePeloNome(idOrName);
-  data.employees.forEach(funcionarios => {
-    let lista = [];
-    let nomeDoFuncionario = `${funcionarios.firstName} ${funcionarios.lastName}`
-    funcionarios.responsibleFor.forEach(responsabilidade => {
-      let animaisCuidados = data.animals.find(x => x.id === responsabilidade);
-      tabela[nomeDoFuncionario] = animaisCuidados.name
-      lista.push(animaisCuidados.name)
+  data.employees.forEach((funcionarios) => {
+    const lista = [];
+    const nomeDoFuncionario = `${funcionarios.firstName} ${funcionarios.lastName}`;
+    funcionarios.responsibleFor.forEach((responsabilidade) => {
+      const animaisCuidados = data.animals.find(x => x.id === responsabilidade);
+      tabela[nomeDoFuncionario] = animaisCuidados.name;
+      lista.push(animaisCuidados.name);
     });
     tabela[nomeDoFuncionario] = lista
 
