@@ -153,13 +153,13 @@ const nomePeloId = (id) => {
 }
 
 const nomePeloNome = (nomeParcial) => {
-  let x = data.employees.find(funcionario => funcionario.firstName === nomeParcial)
-  if (x === undefined) x = data.employees.find(funcionario => funcionario.lastName === nomeParcial)
-  return `${x.firstName} ${x.lastName}`
-}
+  const x = data.employees.find(funcionario => funcionario.firstName === nomeParcial);
+  if (x === undefined) x = data.employees.find(funcionario => funcionario.lastName === nomeParcial);
+  return `${x.firstName} ${x.lastName}`;
+};
 
 function employeeCoverage(idOrName = '') {
-  let tabela = {};
+  const tabela = {};
   let nomeAlvo = '';
   if (idOrName.length > 30) nomeAlvo = nomePeloId(idOrName);
   if (idOrName.length < 30 && idOrName.length > 0) nomeAlvo = nomePeloNome(idOrName);
@@ -171,13 +171,11 @@ function employeeCoverage(idOrName = '') {
       tabela[nomeDoFuncionario] = animaisCuidados.name;
       lista.push(animaisCuidados.name);
     });
-    tabela[nomeDoFuncionario] = lista
-
-  })
-  if (idOrName === '') return tabela
-  return {[nomeAlvo]: tabela[nomeAlvo]};
-}
-employeeCoverage('Stephanie')
+    tabela[nomeDoFuncionario] = lista;
+  });
+  if (idOrName === '') return tabela;
+  return { [nomeAlvo]: tabela[nomeAlvo] };
+};
 module.exports = {
   entryCalculator,
   schedule,
