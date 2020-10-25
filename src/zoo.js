@@ -232,7 +232,7 @@ function schedule(dayName = false) {
 function oldestFromFirstSpecies(id) {
   // (primeira especie do funcionario/a com o 'id' provido)
   const firstSpecieId = employees.find(employee => employee.id === id).responsibleFor[0];
-  // !! em quanto q esse codigo faz o 'sort'(organiza), 
+  // !! em quanto q esse codigo faz o 'sort'(organiza),
   // colocando o mais velho na primeira posicao do array,
   const oldestAnimal = animals
   .find(animal => animal.id === firstSpecieId).residents
@@ -253,7 +253,12 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const ages = Object.keys(prices);
+  ages.forEach((age)  => {
+    let sum = prices[age] * (percentage / 100);
+    prices[age] = Math.round((prices[age] + sum) * 100) / 100;
+  });
+  return prices;
 }
 
 function employeeCoverage(idOrName) {
