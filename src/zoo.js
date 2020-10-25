@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -82,12 +82,10 @@ function animalCount(species) {
 
 function entryCalculator(entrants) {
   // seu código aqui
-  if (!entrants || entrants.length === 0) return 0;
-  const { adult = 0, child = 0, senior = 0 } = entrants;
-  const adultValue = prices.Adult * adult;
-  const childValue = prices.Child * child;
-  const seniorValue = prices.Senior * senior;
-  const totalValue = adultValue + seniorValue + childValue;
+  let totalValue = 0;
+  if (entrants) {
+    Object.keys(entrants).forEach(entrant => (totalValue += prices[entrant] * entrants[entrant]));
+  }
   return totalValue;
 }
 
@@ -151,14 +149,29 @@ function animalMap(options = {}) {
 
 function schedule(dayName) {
   // seu código aqui
+  const result = {};
+  const horary = { ...hours };
+  Object.keys(horary).forEach((count) => {
+    if (horary[count].open !== horary[count].close) {
+      result[count] = `Open from ${horary[count].open}am until ${horary[count].close - 12}pm`;
+    } else {
+      result[count] = 'CLOSED';
+    }
+  });
+  if (!dayName) return result;
+  return { [dayName]: result[dayName] };
 }
-
+schedule();
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
 
 function increasePrices(percentage) {
   // seu código aqui
+  Object.entries(prices).forEach((element) => {
+    prices[element[0]] = Math.ceil(element[1] * (percentage + 100)) / 100;
+  });
+  return prices;
 }
 
 function employeeCoverage(idOrName) {
