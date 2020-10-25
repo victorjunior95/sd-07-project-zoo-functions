@@ -47,15 +47,20 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
   const novo = { id, firstName, lastName, managers, responsibleFor };
   data.employees.push(novo);
 }
-console.log('a');
+
 function animalCount(species) {
-  let objeto = {};
-  if (typeof species === 'undefined') {
-    data.animals.forEach((name) => objeto[name.name] = name.residents.length);
+  const { animals } = data;
+  const objeto = {};
+  if (species === undefined) {
+    animals.forEach(({name, residents}) => {
+      objeto[name] = residents.length
+    });
     return objeto;
   };
   return data.animals.find(x => x.name === species).residents.length;
 }
+
+console.log(animalCount());
 function entryCalculator(entrants) {
   const { prices } = data;
   if (entrants !== undefined || Object.keys.length === 0) {
