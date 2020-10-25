@@ -115,13 +115,11 @@ const decimalAdjust = (price) => {
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Math/floor
 
 const increasePrices = (percentage) => {
-  const increasePrices = data.prices;
-  const entries = Object.entries(increasePrices);
+  const entries = Object.entries(data.prices);
   const multiplier = percentage / 100;
-  const newPrices = entries.map((array) => {
-    return array[1] += array[1] * multiplier;
-  });
-  newPrices.forEach((price, i) => increasePrices[entries[i][0]] = decimalAdjust(price));
+  const newPrices = entries.map(array => array[1] += array[1] * multiplier);
+  let increasePrices = {};
+  newPrices.map((price, i) => increasePrices[entries[i][0]] = decimalAdjust(price));
   return increasePrices;
 };
 
