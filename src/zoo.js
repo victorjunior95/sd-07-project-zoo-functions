@@ -51,9 +51,9 @@ function createEmployee(personalInfo, associatedWith) {
 function isManager(id) {
   let response;
   const managers = employees.find(employee => employee.managers.includes(id));
-  if (managers !== undefined) {
+  if (managers) {
     response = true;
-  } else {console.log(totalPrice
+  } else {
     response = false;
   }
   return response;
