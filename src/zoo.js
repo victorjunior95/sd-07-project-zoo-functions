@@ -153,10 +153,12 @@ function oldestFromFirstSpecies(id) {
   return zooArray;
 }
 
-console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
-
 function increasePrices(percentage) {
-  // seu código aqui
+  prices.Adult = Math.round(prices.Adult * (1 + percentage / 100) * 100) / 100;
+  prices.Senior = Math.round(prices.Senior * (1 + percentage / 100) * 100) / 100;
+  prices.Child = Math.round(prices.Child * (1 + percentage / 100) * 100) / 100;
+
+  return prices;
 }
 
 function employeeCoverage(idOrName) {
