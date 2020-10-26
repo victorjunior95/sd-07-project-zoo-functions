@@ -92,9 +92,55 @@ function entryCalculator(entrants) {
   return ticketSum;
 }
 
-function animalMap(options) {
-  // seu código aqui
+function noParameterAnimalmap() {
+  let directionsObject = { NE: [], NW: [], SE: [], SW: [] };
+
+  animals.forEach((animal) => {
+    directionsObject = { ...directionsObject,
+      [animal.location]: [...directionsObject[animal.location], animal.name] };
+  });
+  return directionsObject;
 }
+
+function animalMapWithIncludeNames(locations, sorting, animalSex) {
+  const animalMapObject = {};
+
+  locations.forEach((direction) => {
+    const filterAnimals = animals
+    .filter(specie => specie.location === direction).map((animal) => {
+      const animalName = animal.name;
+
+      const sexAnimals = animal.residents.filter((resident) => {
+        if (animalSex !== undefined) {
+          return resident.sex === animalSex;
+        }
+        return true;
+      }).map(residentSpecie => residentSpecie.name);
+
+      if (sorting) sexAnimals.sort();
+      return { [animalName]: sexAnimals };
+    });
+
+    animalMapObject[direction] = filterAnimals;
+  });
+
+  return animalMapObject;
+}
+
+function animalMap(options) {
+  // função feita seguindo a resolução do requisito por Gabriel Oliva
+  if (!options) return noParameterAnimalmap();
+
+  const directions = ['NE', 'NW', 'SE', 'SW'];
+  const { includeNames = false, sorted = false, sex } = options;
+
+  if (includeNames) {
+    return animalMapWithIncludeNames(directions, sorted, sex);
+  }
+
+  return noParameterAnimalmap();
+}
+
 
 function schedule(...dayName) {
   if (dayName.length === 0) {
