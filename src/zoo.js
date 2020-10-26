@@ -90,7 +90,16 @@ function oldestFromFirstSpecies(id) {
 // Consultei o PR do colega Dilênio (PR: https://github.com/tryber/sd-06-project-zoo-functions/blob/121e00c3c52263fa818dee1b2b501d781a6a5d53/src/zoo.js) pois ao fazer com Find e Reduce não estava conseguindo e declarando as variáveis e retornando array estava um código muito longo.
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const keys = Object.keys(data.prices);
+  const values = Object.values(data.prices);
+
+  keys.map((key, index) => {
+    data.prices[key] = Math.round(values[index] * (1 + (percentage / 100)) * 100) / 100;
+
+    return true;
+  });
+
+  return data.prices;
 }
 
 function employeeCoverage(idOrName) {
