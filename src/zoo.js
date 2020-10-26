@@ -82,10 +82,22 @@ function animalCount(species) {
 function entryCalculator(entrants) {
   if (!entrants) {
     return 0;
-  } else if (Object.keys(entrants).length === 0) {
+  } else if (entrants === {}) {
     return 0;
   }
-  return 0;
+  let valueCount = 0;
+  Object.keys(entrants).map(element => {
+    if (element === 'Adult') {
+      valueCount += (entrants[element] * data.prices['Adult']);
+    } else if (element === 'Senior') {
+      valueCount += (entrants[element] * data.prices['Senior']);
+    }
+    else if (element === 'Child') {
+      valueCount += (entrants[element] * data.prices['Child']);
+    }
+    return valueCount;
+  })
+  return valueCount;
 }
 
 
