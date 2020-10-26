@@ -93,12 +93,12 @@ const formatWorkingHours = (day) => {
 
   const closingTime = day[1].close - 12;
 
-  return `Open ${openingTime}am and close ${closingTime}pm`;
+  return `Open from ${openingTime}am until ${closingTime}pm`;
 };
 function schedule(dayName) {
   // seu código aqui
   const scheduleObject = {};
-  const scheduleEntries = Object.Entries(hours);
+  const scheduleEntries = Object.entries(hours);
   let workingHours;
 
   if (schedule.arguments.length === 0) {
