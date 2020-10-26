@@ -12,10 +12,8 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(ids) {
-  return data.animals
-    .filter(animal => ids
-    .some(id => id === animal.id,
-  ));
+  if (ids.length === 0) return [];
+  return data.animals.filter(animal => ids.some(id => animal.id === id));
 }
 
 function animalsOlderThan(animal, age) {
@@ -68,7 +66,12 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  const arrayEntrants = Object.entries(entrants);
+  if (entrants === undefined || arrayEntrants.length === 0) return 0;
+  return arrayEntants.reduce((totalPayable, entrant) => {
+    totalPayable += entrant[1] * data.prices[entrant[0]];
+    return totalPayable;
+  }, 0);
 }
 
 function animalMap(options) {
