@@ -103,20 +103,46 @@ function entryCalculator(entrants = {}) {
 //   Sw = [],
 // }
 
-function animalMap(options) {
-
-
-  // return data.animals.reduce((acc, specie) => {
-  //   return {
-  //     ...acc,[specie.location]: [
-  //       ...acc[specie.location],
-  //       specie.name
-  //     ]
-  //   };
-  // }, objectInicial);
+function animalMap(options = {}) {
+  const out = { NE: [], NW: [], SE: [], SW: [] };
+  if (options.includeNames !== true) {
+    data.animals.forEach(({ location, name }) => out[location].push(name));
+    return out;
+  }
+  if (options.sex !== undefined) {
+    data.animals.forEach(({ name, location, residents }) =>
+      out[location].push({
+        [name]: residents
+          .filter(resident => resident.sex === options.sex)
+          .map(resident => resident.name),
+      }),
+    );
+  } else {
+    data.animals.forEach(({ name, location, residents }) =>
+      out[location].push({ [name]: residents.map(resident => resident.name) }),
+    );
+  }
+  if (options.sorted) {
+    Object.keys(out).forEach(key =>
+      out[key].forEach(element => element[Object.keys(element)].sort()),
+    );
+  }
+  return out;
 }
 
 function schedule(dayName) {
+  const out = {};
+  Object.keys(data.hours).forEach(function (hour) {
+    if (data.hours[hour].open === data.hours[hour].close) {
+      out[hour] = 'CLOSED';
+    } else {
+      out[hour] = `Open from ${data.hours[hour].open}am until ${data.hours[hour].close - 12}pm`;
+    }
+  });
+  if (dayName !== undefined) {
+    return { [dayName]: out[dayName] };
+  }
+  return out;
 }
 
 // acompanhado pelo Platão com o Isaac esqueci o nome do colega.
