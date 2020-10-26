@@ -60,8 +60,6 @@ function animalCount(species) {
   const specie = animals.find(specieName => specieName.name === species).residents.length;
   return specie;
 }
-// console.log(animalCount('snakes'))
-
 
 function entryCalculator(entrants) {
   if (!entrants || Object.keys(entrants).length === 0) return 0;
@@ -72,9 +70,65 @@ function entryCalculator(entrants) {
   return ticketsBill;
 }
 
-function animalMap(options) {
-  // seu código aqui
+function zooLocations() {
+  return animals
+  .map(specie => specie.location)
+  .filter((item, index, array) => array.indexOf(item) === index);
 }
+
+function zooFilteredByLocations(location) {
+  const filteredByLocation = animals.filter(animal => animal.location === location);
+  return filteredByLocation;
+}
+
+function animalsByLocation(locations) {
+  const speciesByLocation = {};
+  locations.forEach((location) => {
+    const species = zooFilteredByLocations(location)
+    .map(animal => animal.name);
+
+    speciesByLocation[location] = species;
+  });
+
+  return speciesByLocation;
+}
+
+function namedAnimalsByLocation(locations, sorted, sex) {
+  const namedAnimals = {};
+
+  locations.forEach((location) => {
+    const namedAnimalsArray = zooFilteredByLocations(location).map((animal) => {
+      const specieName = animal.name;
+      const animalsNames = animal.residents
+      .filter((specie) => {
+        const sexIsDefined = sex !== undefined;
+        return (sexIsDefined ? specie.sex === sex : true);
+      })
+      .map(animalSpecie => animalSpecie.name);
+      if (sorted) animalsNames.sort();
+
+      return { [specieName]: animalsNames };
+    });
+
+    namedAnimals[location] = namedAnimalsArray;
+  });
+  return namedAnimals;
+}
+
+function animalMap(options) {
+  // Abstração facilitada pela resolução guiada do Gabriel Oliva
+  const locations = zooLocations();
+
+  if (!options) return animalsByLocation(locations);
+
+  const { includeNames = false, sorted = false, sex } = options;
+
+  if (includeNames) {
+    return namedAnimalsByLocation(locations, sorted, sex);
+  }
+  return animalsByLocation(locations);
+}
+
 function legibleSchedule() {
   const objectReturned = {};
   const dias = Object.keys(hours);
