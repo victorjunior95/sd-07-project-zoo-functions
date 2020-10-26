@@ -102,11 +102,54 @@ function entryCalculator(entrants) {
   const total = (Adult * 49.99) + (Child * 20.99) + (Senior * 24.99);
   return total;
 }
+/*-------------*/
+const { animals } = require('./data');
 
-function animalMap(options) {
-  // seu código aqui
+function retrieveAvailableLocation() {
+  return ['NE', 'NW', 'SE', 'SW'];
 }
 
+const retriveFilteredAnimalsByLocation = (location) => {
+  const animalFilter = animals.filter(animal => animal.location === location);
+  return animalFilter;
+};
+function retrieveAnimalsPerLocations(locations) {
+  const animalsPerLocation = {};
+  locations.forEach((location) => {
+    const filteredAnimals = retriveFilteredAnimalsByLocation(location)
+  .map(animal => animal.name);
+    if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+  });
+  return animalsPerLocation;
+}
+function retrieveAnimalsPerLocationWithName(locations, sorted, sex) {
+  const animalsPerLocation = {};
+  locations.forEach((location) => {
+    const filteredAnimals = retriveFilteredAnimalsByLocation(location).map((animal) => {
+      const animalName = animal.name;
+      const residents = animal.residents
+    .filter((resident) => {
+      const needFiltering = sex !== undefined;
+      return needFiltering ? resident.sex === sex : true;
+    }).map(resident => resident.name);
+      if (sorted) residents.sort();
+      return { [animalName]: residents };
+    });
+    if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+  });
+  return animalsPerLocation;
+}
+function animalMap(options) {
+  const locations = retrieveAvailableLocation();
+
+  if (!options) return retrieveAnimalsPerLocations(locations);
+  const { includeNames = false, sorted = false, sex } = options;
+  if (includeNames) {
+    return retrieveAnimalsPerLocationWithName(locations, sorted, sex);
+  }
+  return retrieveAnimalsPerLocations(locations);
+}
+/*-----------------*/
 function schedule(dayName) {
   // seu código aqui
   const daysSchedule = {
