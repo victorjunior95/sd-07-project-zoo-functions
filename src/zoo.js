@@ -66,7 +66,6 @@ function isManager(id) {
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
-
   data.employees.push({
     id,
     firstName,
@@ -89,18 +88,23 @@ function animalCount(inputSpecies = '') {
   const selectedSpecies = data.animals.find(animal => animal.name === inputSpecies);
   return (selectedSpecies.residents.length);
 }
-animalCount('lions');
 
-function entryCalculator(entrants) {
+function entryCalculator(entrants = '') {
   // seu código aqui
-  if (entrants === null || entrants === {}) {
+  if (entrants === '' || entrants === {}) {
     return 0;
   }
-  console.log(entrants.Adult);
-  let totalEntrancesPrice = (entrants.Adult * data.prices.Adult.value);
-  console.log(totalEntrancesPrice);
-  totalEntrancesPrice += (entrants.Senior * data.prices.Senior);
-  totalEntrancesPrice += (entrants.Child * data.prices.Child);
+  let totalEntrancesPrice = 0;
+  if (entrants.Adult > 0) {
+    totalEntrancesPrice += (entrants.Adult * data.prices.Adult);
+  }
+  if (entrants.Senior > 0) {
+    totalEntrancesPrice += (entrants.Senior * data.prices.Senior);
+  }
+  if (entrants.Child > 0) {
+    totalEntrancesPrice += (entrants.Child * data.prices.Child);
+  }
+
   return totalEntrancesPrice;
 }
 
