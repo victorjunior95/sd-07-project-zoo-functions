@@ -69,17 +69,19 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   const receivedId = id;
   const receivedFirstName = firstName;
   const receivedLastName = lastName;
-  const receivedManagers = managers;
-  const receivedResponsibleFor = responsibleFor;
+  const receivedManagers = [];
+  receivedManagers.push(...managers)
+  const receivedResponsibleFor = []
+  receivedResponsibleFor.push(...responsibleFor) ;
 
-  const newEmployee = {
+  data.employees.push({
     id: receivedId,
     firstName: receivedFirstName,
     lastName: receivedLastName,
     managers: receivedManagers,
     responsibleFor: receivedResponsibleFor,
-  };
-  return data.employees.push(newEmployee);
+  });
+
 }
 
 function animalCount(inputSpecies = '') {
