@@ -37,7 +37,11 @@ function employeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  personalInfo.managers = [];
+  personalInfo.responsibleFor = [];
+  associatedWith.managers.forEach(index => personalInfo.managers.push(index));
+  associatedWith.responsibleFor.forEach(index => personalInfo.responsibleFor.push(index));
+  return personalInfo;
 }
 
 function isManager(id) {
