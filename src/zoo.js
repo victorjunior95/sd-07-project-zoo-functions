@@ -75,8 +75,20 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const employeeResponsible = data.employees
+  .filter(element => element.id === id)[0].responsibleFor[0];
+
+  const animalInfo = data.animals
+  .filter(element => element.id === employeeResponsible)[0].residents
+  .sort((a, b) => b.age - a.age)[0];
+  
+  const result = [];
+  result.push(animalInfo.name);
+  result.push(animalInfo.sex);
+  result.push(animalInfo.age);
+  return result;
 }
+// Consultei o PR do colega Dilênio (PR: https://github.com/tryber/sd-06-project-zoo-functions/blob/121e00c3c52263fa818dee1b2b501d781a6a5d53/src/zoo.js) pois ao fazer com Find e Reduce não estava conseguindo e declarando as variáveis e retornando array estava um código muito longo.
 
 function increasePrices(percentage) {
   // seu código aqui
