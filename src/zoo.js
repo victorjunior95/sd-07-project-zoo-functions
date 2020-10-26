@@ -88,11 +88,11 @@ const objetoInicial = {
   NE: [],
   NW: [],
   SE: [],
-  SW: []
+  SW: [],
 };
 
 function categorizeAnimalsByLocation() {
-  console.log('linha 95')
+  console.log('linha 95');
   return data.animals.reduce((acc, specie) => {
     return {
       ...acc,
@@ -105,14 +105,14 @@ function categorizeAnimalsByLocation() {
 }
 
 function categorizeAnimalsIncludeNames() {
-  console.log('linha 105')
+  console.log('linha 105');
   return data.animals.reduce((acc, specie) => {
     return {
       ...acc,
       [specie.location]: [
         ...acc[specie.location],
         {
-          [specie.name]: specie.residents.map((resident) => resident.name),
+          [specie.name]: specie.residents.map(resident => resident.name),
         },
       ],
     };
@@ -134,15 +134,15 @@ function categorizeAnimalsIncludeNames() {
 } */
 
 function categorizeAnimalsIncludeNamesSex(sex) {
-  console.log('linha 137')
+  console.log('linha 137');
   return data.animals.reduce((acc, specie) => {
     return {
       ...acc,
       [specie.location]: [
         ...acc[specie.location],
         {
-          [specie.name]: specie.residents.filter((resident) => resident.sex === sex)
-            .map((resident) => resident.name),
+          [specie.name]: specie.residents.filter(resident => resident.sex === sex)
+            .map(resident => resident.name),
         },
       ],
     };
@@ -156,8 +156,8 @@ function categorizeAnimalsIncludeNamesSexSorted(sex) {
       [specie.location]: [
         ...acc[specie.location],
         {
-          [specie.name]: specie.residents.filter((resident) => resident.sex === sex)
-            .map((resident) => resident.name)
+          [specie.name]: specie.residents.filter(resident => resident.sex === sex)
+            .map(resident => resident.name)
             .sort(),
         },
       ],
@@ -167,17 +167,15 @@ function categorizeAnimalsIncludeNamesSexSorted(sex) {
 
 function animalMap(options) {
   let exitObj;
-  
-
   if (!options) {
     exitObj = categorizeAnimalsByLocation();
-  } else{
+  } else {
     const { includeNames, sex, sorted } = options;
 
     if (includeNames) {
       if (sex) {
       exitObj = categorizeAnimalsIncludeNamesSex(sex);
-      }else{
+      } else {
         exitObj = categorizeAnimalsIncludeNames();
       }
     } else {
