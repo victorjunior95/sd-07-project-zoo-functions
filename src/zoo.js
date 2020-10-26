@@ -170,26 +170,34 @@ function animalMap(options) {
   if (!options) {
     exitObj = categorizeAnimalsByLocation();
   } else {
-    const { includeNames, sex, sorted } = options;
+    const {
+      includeNames,
+      sex,
+      sorted
+    } = options;
 
     if (includeNames) {
       if (sex) {
-      exitObj = categorizeAnimalsIncludeNamesSex(sex);
+        exitObj = categorizeAnimalsIncludeNamesSex(sex);
       } else {
         exitObj = categorizeAnimalsIncludeNames();
       }
     } else {
-    exitObj = categorizeAnimalsByLocation();
+      exitObj = categorizeAnimalsByLocation();
     }
 
-    if (sorted){
+    if (sorted) {
       exitObj = categorizeAnimalsIncludeNamesSexSorted(sex);
     }
   }
 
   return exitObj;
 }
-console.log(animalMap( { includeNames: true, sex: 'female' }))
+console.log(animalMap({
+  includeNames: true,
+  sex: 'female'
+}))
+
 function checkSpindleUS(hour) {
   if (hour > 12) return hour - 12;
   return hour;
