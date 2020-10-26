@@ -110,55 +110,64 @@ function entryCalculator(entrants) {
   return result;
 }
 
-//Sem parâmtros | retorna animais categorizados por localização
-
-//IncludeNames: true | retorna nomes de animais
-
-//Sorted: true | retorna os nomes dos animais ordenados
-//Sex:female/male | retorna nomes dos animais fêmeas/machos
-//Sorted: true && Sex:female/male | retorna nomes dos animais fêmeas/machos ordenados
-
-const isSorted = (newObj, sorted) => {
-  console.log(newObj);
-  if (sorted === true) {
-    newObj.forEach((location) => console.log(location));
-  }
+function retrieveAvailableLocations() {
+  return ['NE', 'E', 'NW', 'SW', 'SE'];
 }
 
-const getLocation = (newObj, animal, includeNames) => {
-  if (includeNames === true) {
-    let animalObj = {};
-    animal.residents.forEach((resident) => {
-      let listOfResidents = [];
-      listOfResidents.push(resident.name);
-      animalObj[animal.name] = listOfResidents;
+function retriveAnimalsPerLocation(locations) {
+  const animalsPerLocation = {};
+
+  locations.forEach((location) => {
+    const filteredAnimals = retrieveFilteredAnimalsByLocation(location).map( (animal) => animal.name);
+
+      if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+  });
+
+  return animalsPerLocation;
+}
+
+function retrieveAnimalsPerLocationWithName(locations, sorted, sex) {
+  const animalsPerLocation = {};
+
+  locations.forEach((location) => {
+    const filteredAnimals = retrieveFilteredAnimalsByLocation(location).map((animal) => {
+      const animalName = animal.name;
+      const residents = animal.residents
+      .filter((resident) => {
+        const needFiltering = sex != undefined;
+        return needFiltering ? resident.sex === sex : true;
+      })
+      .map((resident) => resident.name);
+
+      if (sorted) residents.sort();
+
+      return { [animalName]: residents};
     });
-    newObj[animal.location].push(animalObj);
+
+    if(filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+  })
+
+  return animalsPerLocation;
+}
+
+function retrieveFilteredAnimalsByLocation(location) {
+  return animals
+  .filter((animal) => animal.location === location);
+}
+
+function animalMap(options = {}) {
+  const locations = retrieveAvailableLocations();
+
+  const {includeNames = false, sorted = false, sex} = options;
+  
+  if (includeNames) {
+    return retrieveAnimalsPerLocationWithName(locations, sorted, sex);
   } else {
-    newObj[animal.location].push(animal.name);
+    return retriveAnimalsPerLocation(locations);
   }
 }
 
-function animalMap(includeNames, sorted, sex) {
-  let newObj = {
-    NE: [],
-    NW: [],
-    SE: [],
-    SW: [],
-  };
-  animals.forEach((eachAnimal) => {
-    if (arguments.length === 0) {
-      getLocation(newObj, eachAnimal);
-    } else {
-      getLocation(newObj, eachAnimal, includeNames);
-    }
-  })
-  // console.log(newObj);
-  isSorted(newObj, sorted);
-  return newObj;
-}
-
-animalMap(true);
+console.log(animalMap(true, true, 'male'));
 
 const setHours = (open, close) => {
   let result;
