@@ -64,22 +64,20 @@ function isManager(id) {
   return data.employees.some(employee => employee.managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
   const receivedId = id;
   const receivedFirstName = firstName;
   const receivedLastName = lastName;
-  const receivedManagers = [];
-  receivedManagers.push(...managers);
-  const receivedResponsibleFor = [];
-  receivedResponsibleFor.push(...responsibleFor);
+  const receivedManagers = managers;
+  const receivedResponsibleFor = responsibleFor;
 
   data.employees.push({
-    id: receivedId,
-    firstName: receivedFirstName,
-    lastName: receivedLastName,
-    managers: receivedManagers,
-    responsibleFor: receivedResponsibleFor,
+    receivedId,
+    receivedFirstName,
+    receivedLastName,
+    receivedManagers,
+    receivedResponsibleFor,
   });
 }
 
