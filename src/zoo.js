@@ -124,13 +124,13 @@ function increasePrices(percentage) {
   // seu código aqui
   const actualPrices = data.prices;
   actualPrices.Adult += Math.round((actualPrices.Adult / 100) * percentage);
-  actualPrices.Senior += ((actualPrices.Senior / 100) * percentage);
-  actualPrices.Child += ((actualPrices.Child / 100) * percentage);
-  return (data.prices = {
+  actualPrices.Senior += Math.round((actualPrices.Senior / 100) * percentage);
+  actualPrices.Child += Math.round((actualPrices.Child / 100) * percentage);
+  data.prices = {
     Adult: parseFloat(actualPrices.Adult.toFixed(2)),
     Senior: parseFloat(actualPrices.Senior.toFixed(2)),
     Child: parseFloat(actualPrices.Child.toFixed(2)),
-  });
+  };
 }
 
 function employeeCoverage(idOrName) {
