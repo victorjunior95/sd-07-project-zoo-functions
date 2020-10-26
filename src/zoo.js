@@ -126,9 +126,35 @@ function increasePrices(percentage) {
   data.prices.Child = ticketsValues[2];
   return data.prices;
 }
+// função que mapeia a espécie dos animais que são cuidados pelo funcionário
+function animalName(employee) {
+  const name = employee.responsibleFor.map(animalId => data.animals
+    .find(animal => animal.id === animalId)
+    .name);
+  return name;
+}
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const employeeInfo = {};
+  const employeesList = data.employees;
+  /* caso não receba nenhum parâmetro, retorna o nome de todos os funcionários
+  e as espécies de animais que eles cuidam respectivamente */
+  if (idOrName === undefined) {
+    data.employees.forEach((employee) => {
+      const employeeFullName = `${employee.firstName} ${employee.lastName}`;
+      employeeInfo[employeeFullName] = animalName(employee);
+    });
+    return employeeInfo;
+  }
+  // procura o funcionário pelo id, nome ou sobrenome
+  const employeeData = employeesList.find(employee => employee.id === idOrName) ||
+    employeesList.find(employee => employee.firstName === idOrName) ||
+    employeesList.find(employee => employee.lastName === idOrName);
+  // armazena o nome completo do funcionário pesquisado
+  const employeeFullName = `${employeeData.firstName} ${employeeData.lastName}`;
+  // retorna o nome do funcionário e as espécies de animais que ele cuida
+  employeeInfo[employeeFullName] = animalName(employeeData);
+  return employeeInfo;
 }
 
 module.exports = {
