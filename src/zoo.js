@@ -15,7 +15,7 @@ function animalsByIds(ids) {
   return data.animals
     .filter(animal => ids
     .some(id => id === animal.id,
-    ))
+  ))
 }
 
 function animalsOlderThan(animal, age) {
@@ -49,11 +49,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
     lastName,
     managers,
     responsibleFor,
-  });
+  });r
 }
 
 function animalCount(species) {
-  // seu código aqui
+  if (species === undefined) {
+    return getAllAnimalNamesAndQuantity();
+  }
+  return data.animals.find(animal =>
+    animal.name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
