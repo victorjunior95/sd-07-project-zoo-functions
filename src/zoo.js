@@ -174,9 +174,8 @@ function animalMap(options) {
   } else{
     const { includeNames, sex, sorted } = options;
 
-    if (includeNames) {    
-
-      if (sex) {      
+    if (includeNames) {
+      if (sex) {
       exitObj = categorizeAnimalsIncludeNamesSex(sex);
       }else{
         exitObj = categorizeAnimalsIncludeNames();
@@ -187,8 +186,8 @@ function animalMap(options) {
 
     if (sorted){
       exitObj = categorizeAnimalsIncludeNamesSexSorted(sex);
-    } 
-  } 
+    }
+  }
 
   return exitObj;
 }
