@@ -79,7 +79,7 @@ function schedule(dayName) {
   const days = {};
   Object.keys(hours).map((day) => {
     if (hours[day].open === hours[day].close) {
-      days[day] = 'CLOSED';
+     return days[day] = 'CLOSED';
     } else {
       days[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
     }
