@@ -48,14 +48,14 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 // console.log(addEmployee('39800c14-4b76-454a-858d-2f8d168146a7', 'John', 'Doe'));
 // console.log(employees);
 
-const nameNQntts = {};
-function createObject(item) {
-  nameNQntts[item.name] = item.residents.length;
+function speciesNQuantities() {
+  const nameNQntts = {};
+  animals.forEach(animal => nameNQntts[animal.name] = animal.residents.length);
+  return nameNQntts;
 }
 function animalCount(species) {
-  if (species === undefined) {
-    animals.forEach(createObject);
-    return nameNQntts;
+  if (!species) {
+    return speciesNQuantities();
   }
   const specie = animals.find(specieName => specieName.name === species).residents.length;
   return specie;
@@ -64,23 +64,20 @@ function animalCount(species) {
 
 
 function entryCalculator(entrants) {
-  //  Verify if object is empty - https:// bityli.com/ycBY1
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
 
-  if (entrants === undefined || Object.keys(entrants).length === 0) return 0;
   const { Adult = 0, Senior = 0, Child = 0 } = entrants;
   const ticketsBill = (prices.Adult * Adult) + (prices.Senior * Senior) + (prices.Child * Child);
+
   return ticketsBill;
 }
-// const entrants = { 'Adult': 2, 'Child': 3, 'Senior': 1 };
-//     console.log(entryCalculator(entrants));
 
 function animalMap(options) {
   // seu código aqui
 }
-function schedule(dayName) {
+function legibleSchedule() {
   const objectReturned = {};
   const dias = Object.keys(hours);
-    // console.log(dias);
   dias.forEach((msg) => {
     if (msg !== 'Monday') {
       objectReturned[msg] = `Open from ${hours[msg].open}am until ${hours[msg].close - 12}pm`;
@@ -88,27 +85,24 @@ function schedule(dayName) {
       objectReturned[msg] = 'CLOSED';
     }
   });
-  if (dayName === undefined) {
-    // console.log(teste)
-    return objectReturned;
-  }
-  return { [dayName]: objectReturned[dayName] };
+  return objectReturned;
+}
+function schedule(dayName) {  
+  if (!dayName) return legibleSchedule();
+
+  return { [dayName]: legibleSchedule()[dayName] };
 }
 
 function oldestFromFirstSpecies(id) {
   // Extract value of a property as array - Ref: https://bityli.com/ZuNyD
   const employeeById = employees.filter(employee => employee.id === id);
   const animalsUnderGuard = employeeById.map((speciesId, index) => speciesId.responsibleFor[index]);
-  // console.log(animalsUnderGuard);
   const findSpecie = animals.filter(animal => animal.id.includes(animalsUnderGuard));
   const animalsBySpecie = findSpecie.map(element => element.residents);
   const oldest = animalsBySpecie.map(animal => animal.sort((a, b) => b.age - a.age)[0]);
-  // console.log(oldest);
   const extracting = oldest.reduce((acc, obj) => [...acc, Object.values(obj)]);
-  // console.log(extracting)
   return [extracting.name, extracting.sex, extracting.age];
 }
-// console.log(oldestFromFirstSpecies('0e7b460e-acf4-4e17-bcb3-ee472265db83'));
 
 function increasePrices(percentage) {
   const increase = 1 + (percentage / 100);
@@ -117,8 +111,6 @@ function increasePrices(percentage) {
   prices.Child = Math.round(prices.Child * increase * 100) / 100;
   return prices;
 }
-// console.log(increasePrices(50));
-// console.log(increasePrices(30));
 
 function employeeCoverage(idOrName) {
   // seu código aqui
