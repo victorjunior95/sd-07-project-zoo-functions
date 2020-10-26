@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, prices } = require('./data');
+const { animals, prices, hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -87,7 +87,27 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  // Sem parâmetros, retorna um cronograma legível para humanos
+  // Se um único dia for passado, retorna somente este dia em um formato legível para humanos
+  const arrayOfHours = Object.entries(hours);
+  const daysOpened = arrayOfHours.reduce((acc, daysWeek) => {
+    if (daysWeek[1].open !== 0) {
+      acc[daysWeek[0]] = `Open from ${daysWeek[1].open}am until ${daysWeek[1].close - 12}pm`;
+    }
+    return acc;
+  }, {});
+
+  daysOpened.Monday = 'CLOSED';
+
+  if (!dayName) return daysOpened;
+
+  const oneDay = {};
+  oneDay[dayName] = daysOpened[dayName];
+  return oneDay;
+
+  /** Consultei o repositório do colega Andre F Pires para resolver essa parte.
+    https://github.com/tryber/sd-07-project-zoo-functions/blob/andrefpires-zoo-functions/src/zoo.js
+  */
 }
 
 function oldestFromFirstSpecies(id) {
