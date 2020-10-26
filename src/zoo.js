@@ -37,7 +37,8 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   if (!employeeName) return {};
   const names = employees.find(
-    name => name.firstName === employeeName || name.lastName === employeeName);
+    name => name.firstName === employeeName || name.lastName === employeeName
+  );
   return names;
 }
 
@@ -119,7 +120,7 @@ function schedule(dayName) {
   if (!dayName) {
     const days = Object.keys(hours);
 
-    days.forEach((day) => {
+    days.forEach(day => {
       result[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
       if (day === 'Monday') {
         result[day] = 'CLOSED';
@@ -137,11 +138,23 @@ function schedule(dayName) {
   return result;
 }
 
-console.log(schedule('Monday'));
-
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const employeeId = employees.find(employeesId => employeesId.id === id);
+
+  const animalId = animals.find(animalsId => animalsId.id === employeeId.responsibleFor[0]);
+
+  const animalsList = Object.values(animalId.residents);
+
+  const getMax = (bigger, number) => (bigger.age > number.age ? bigger : number);
+
+  const max = animalsList.reduce(getMax, 0);
+
+  const zooArray = [max.name, max.sex, max.age];
+
+  return zooArray;
 }
+
+console.log(oldestFromFirstSpecies('4b40a139-d4dc-4f09-822d-ec25e819a5ad'));
 
 function increasePrices(percentage) {
   // seu código aqui
