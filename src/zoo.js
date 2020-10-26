@@ -101,8 +101,70 @@ function entryCalculator(entrants) {
   return totalPrice;
 }
 
+function retrieveAvailableLocations() {
+  return data.animals
+  .map(animal => animal.location)
+  .reduce((acc, currentValue) => {
+    const currentValueAlreadyExistsInAcc = currentValue.includes(acc);
+    return currentValueAlreadyExistsInAcc ? acc : [...acc, currentValue];
+  });
+}
+
+
+function retrieveFilteredAnimalsByLocation(location) {
+  return data.animals.filter(animal => animal.location === location);
+}
+
+function retrieveAnimalsPerLocation(locations) {
+  const animalsPerLocation = {};
+  locations.forEach((location) => {
+    const filteredAnimals = retrieveFilteredAnimalsByLocation(location)
+      .map(animal => animal.name);
+    if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+  });
+  return animalsPerLocation;
+}
+
+function retrieveAnimalsPerLocationsWithName(locations, sorted, sex) {
+  const animalsPerLocation = {};
+  locations.forEach((location) => {
+    const filteredAnimals = retrieveFilteredAnimalsByLocation(location)
+    .map((animal) => {
+      const animalName = animal.name;
+      const residents = animal.residents
+      .filter((resident) => {
+        const needFiltering = sex !== undefined;
+        if (needFiltering) {
+          return resident.sex === sex;
+        } return true;
+      }).map(resident => resident.name);
+      if (sorted) residents.sort();
+      return { [animalName]: residents };
+    });
+    if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+  });
+  return animalsPerLocation;
+}
+
+// Resolvido com o Oliva
 function animalMap(options) {
-  // seu código aqui
+  const locations = retrieveAvailableLocations();
+  if (!options) return retrieveAnimalsPerLocation(locations);
+  const { includeNames = false, sorted = false, sex } = options;
+  if (includeNames) {
+    return retrieveAnimalsPerLocationsWithName(locations, sorted, sex);
+  } return retrieveAnimalsPerLocation(locations);
+}
+
+function scheduleString(param) {
+  const result = {};
+  Object.entries(param).forEach((obj) => {
+    result[obj[0]] = `Open from ${obj[1].open}am until ${obj[1].close - 12}pm`;
+    if (obj[1].open === 0) {
+      result[obj[0]] = 'CLOSED';
+    }
+  });
+  return result;
 }
 
 function schedule(dayName = '') {
@@ -142,7 +204,7 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+
 }
 
 function employeeCoverage(idOrName) {
