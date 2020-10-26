@@ -113,8 +113,6 @@ function entryCalculator(entrants) {
   return totalEntrancesPrice;
 }
 
-console.log(entryCalculator({ 'Adult': 1 }));
-
 function animalMap(options) {
   // seu código aqui
 }
