@@ -67,7 +67,7 @@ function entryCalculator(entrants = 0) {
 }
 
 function animalMap(options) {
-  
+  //digite seu código aqui
 }
 
 function schedule(dayName) {
@@ -87,7 +87,6 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  const { employees } = data;
   const firstSpecie = employees.find(element => element.id === id).responsibleFor[0];
   let animalFound = [];
   animals.filter((element) => {
