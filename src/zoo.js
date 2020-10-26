@@ -173,8 +173,35 @@ function increasePrices(percentage) {
   prices.Senior = (Math.round((Senior + (Senior * percentageNumber)) * 100)) / 100;
 }
 
+function allAnimalsByEmployee(employee) {
+  const animalsNamesByEmployees = employee.responsibleFor
+  .map(respId => animals.find(animal => animal.id === respId).name);
+  return animalsNamesByEmployees;
+}
+
+function createObjectOfAllEmployees() {
+  const allEmployeesObject = {};
+  employees.forEach((employee) => {
+    const employeeFullName = `${employee.firstName} ${employee.lastName}`;
+    allEmployeesObject[employeeFullName] = allAnimalsByEmployee(employee);
+  });
+  return allEmployeesObject;
+}
+
+function createObjectOfSelectedEmployee(idOrName) {
+  const selectedEmployeeObject = {};
+  const employeeSelected = employees.find(employee => employee.id === idOrName ||
+  employee.firstName === idOrName || employee.lastName === idOrName);
+  const employeeFullName = `${employeeSelected.firstName} ${employeeSelected.lastName}`;
+  selectedEmployeeObject[employeeFullName] = allAnimalsByEmployee(employeeSelected);
+  return selectedEmployeeObject;
+}
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (!idOrName) {
+    return createObjectOfAllEmployees();
+  }
+  return createObjectOfSelectedEmployee(idOrName);
 }
 
 module.exports = {
