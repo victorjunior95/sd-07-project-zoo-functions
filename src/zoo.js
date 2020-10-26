@@ -50,7 +50,7 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function speciesNQuantities() {
   const nameNQntts = {};
-  animals.forEach(animal => nameNQntts[animal.name] = animal.residents.length);
+  animals.forEach(animal => (nameNQntts[animal.name] = animal.residents.length));
   return nameNQntts;
 }
 function animalCount(species) {
@@ -87,7 +87,7 @@ function legibleSchedule() {
   });
   return objectReturned;
 }
-function schedule(dayName) {  
+function schedule(dayName) {
   if (!dayName) return legibleSchedule();
 
   return { [dayName]: legibleSchedule()[dayName] };
