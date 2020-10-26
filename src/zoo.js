@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { animals } = require('./data');
+// const { animals } = require('./data');
 // const { animals } = require('./data');
 // const { animals, employees } = require('./data');
 
@@ -102,13 +102,7 @@ function entryCalculator(entrants) {
 
 
 function animalMap(options) {
-  // let objReturn = {}
-  // if (!options) {
-  //   objReturn.NE = animals.filter(element => element.location === 'NE').map(element => element.name);
-  //   objReturn.NW = animals.filter(element => element.location === 'NW').map(element => element.name);
-  //   objReturn.SE = animals.filter(element => element.location === 'SW').map(element => element.name);
-  //   objReturn.SW = animals.filter(element => element.location === 'SW').map(element => element.name);
-  // }
+
 }
 
 function schedule(dayName) {
