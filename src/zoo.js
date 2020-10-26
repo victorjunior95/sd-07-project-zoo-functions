@@ -87,9 +87,9 @@ function schedule(dayName) {
   // seu código aqui
 }
 
-const oldestFromFirstSpecies = (id) => {
+const oldestFromFirstSpecies = (idEmployee) => {
   const { animals, employees } = data;
-  const employeeFound = employees.find((employee) => employee.id === id);
+  const employeeFound = employees.find(employee => employee.id === idEmployee);
   const specieFound = animals.find(({ id }) => id === employeeFound.responsibleFor[0]);
   const oldestAge = specieFound.residents.reduce((arr, curr) => {
     if (arr < curr.age) {
@@ -99,7 +99,7 @@ const oldestFromFirstSpecies = (id) => {
   }, 0);
   const animalFound = specieFound.residents.filter(animal => animal.age === oldestAge);
   const valuesAnimalFound = Object.values(animalFound[0]);
-  
+
   return valuesAnimalFound;
 };
 
