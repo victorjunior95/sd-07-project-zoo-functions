@@ -126,10 +126,13 @@ function increasePrices(percentage) {
   actualPrices.Adult += Math.round((actualPrices.Adult / 100) * percentage);
   actualPrices.Senior += Math.round((actualPrices.Senior / 100) * percentage);
   actualPrices.Child += Math.round((actualPrices.Child / 100) * percentage);
+  const adult = parseFloat(actualPrices.Adult.toFixed(2));
+  const senior = parseFloat(actualPrices.Senior.toFixed(2));
+  const child = parseFloat(actualPrices.Child.toFixed(2));
   data.prices = {
-    Adult: parseFloat(actualPrices.Adult.toFixed(2)),
-    Senior: parseFloat(actualPrices.Senior.toFixed(2)),
-    Child: parseFloat(actualPrices.Child.toFixed(2)),
+    adult,
+    senior,
+    child,
   };
 }
 
