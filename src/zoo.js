@@ -88,8 +88,8 @@ function schedule(dayName) {
     return { [dayName]: days[dayName] };
   }
   return days;
-};
-  
+}
+
 function oldestFromFirstSpecies(id) {
   const employeeId = employees.find(person => person.id === id);
   const specieId = animals.find(specie => specie.id === employeeId.responsibleFor[0]);
