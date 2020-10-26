@@ -15,7 +15,7 @@ const data = require('./data');
 function animalsByIds(...ids) {
   if (ids === null) return [];
   const answer = [];
-  ids.forEach(id => answer.push(animals.filter(animal => animal.id === id)));
+  ids.forEach(id => answer.push(animals.filter(animal => animal.id === id)[0]));
   return answer;
 }
 
