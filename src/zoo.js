@@ -71,12 +71,13 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
+  
   let result = data.hours;
   if (dayName) {
-    result = Object.entries(data.hours).find(element => element[0] === dayName);
-    result = {[result[0]]: result[1]};
-    }
-    return scheduleString(result);
+  result = Object.entries(data.hours).find(elemento => elemento[0] === dayName);
+  result = { [result[0]]: result[1] };
+  }
+  return result;
 }
 
 
