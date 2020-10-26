@@ -88,12 +88,12 @@ function entryCalculator(entrants) {
   let valueCount = 0;
   Object.keys(entrants).map((element) => {
     if (element === 'Adult') {
-      valueCount += (entrants[element] * data.prices["Adult"]);
+      valueCount += (entrants[element] * data.prices.Adult);
     } else if (element === 'Senior') {
-      valueCount += (entrants[element] * data.prices["Senior"]);
-    }
+      valueCount += (entrants[element] * data.prices.Senior);
+     }
     else if (element === 'Child') {
-      valueCount += (entrants[element] * data.prices["Child"]);
+      valueCount += (entrants[element] * data.prices.Child);
     }
     return valueCount;
   });
