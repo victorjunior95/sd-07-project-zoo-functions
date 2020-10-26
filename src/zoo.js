@@ -15,7 +15,7 @@ const data = require('./data');
 function animalsByIds(...ids) {
   if (ids === null) return [];
   const answer = [];
-  for (let i of ids) answer.push(animals.filter((animal) => animal.id === i));
+  ids.forEach(id => answer.push(animals.filter(animal => animal.id === id)));
   return answer;
 }
 
@@ -36,7 +36,7 @@ function isManager(id) {
 }
 
 function addEmployee(id, firstName, lastName, managers) {
-  // seu código aqui
+  // seu código aqui (responsibleFor)
 }
 
 function animalCount(species) {
