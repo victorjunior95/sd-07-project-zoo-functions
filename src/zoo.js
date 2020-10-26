@@ -45,14 +45,7 @@ function isManager(id) {
 }
 
 function animalCount(species) {
-  if(!species){
-    
-    return data.animals.reduce((accAnimal, animal) => {
-      accAnimal[animal.name] = animals.residents.length;
-      return accAnimal;
-    },{});
-    return data.animals.find(animal => animal.name === species).residents.length;
-  }
+  // seu codigo aqui
 }
 
 function entryCalculator(entrants) {
