@@ -90,7 +90,7 @@ const increasePrices = (percentage) => {
   Object.entries(data.prices).forEach(([entrance, value]) => {
     data.prices[entrance] = Math.round(value * currentPercentage * 100) / 100;
   });
-}
+};
 
 function employeeCoverage(idOrName) {
   // seu código aqui
