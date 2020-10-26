@@ -84,9 +84,15 @@ function entryCalculator(entrants) {
   return exit;
 }
 
-const objetoInicial = { NE: [], NW: [], SE: [], SW: [] };
+const objetoInicial = {
+  NE: [],
+  NW: [],
+  SE: [],
+  SW: []
+};
 
 function categorizeAnimalsByLocation() {
+  console.log('linha 95')
   return data.animals.reduce((acc, specie) => {
     return {
       ...acc,
@@ -99,6 +105,7 @@ function categorizeAnimalsByLocation() {
 }
 
 function categorizeAnimalsIncludeNames() {
+  console.log('linha 105')
   return data.animals.reduce((acc, specie) => {
     return {
       ...acc,
@@ -112,7 +119,7 @@ function categorizeAnimalsIncludeNames() {
   }, objetoInicial);
 }
 
-function categorizeAnimalsIncludeNamesSorted() {
+/* function categorizeAnimalsIncludeNamesSorted() {
   return data.animals.reduce((acc, specie) => {
     return {
       ...acc,
@@ -124,9 +131,10 @@ function categorizeAnimalsIncludeNamesSorted() {
       ],
     };
   }, objetoInicial);
-}
+} */
 
 function categorizeAnimalsIncludeNamesSex(sex) {
+  console.log('linha 137')
   return data.animals.reduce((acc, specie) => {
     return {
       ...acc,
@@ -158,26 +166,33 @@ function categorizeAnimalsIncludeNamesSexSorted(sex) {
 }
 
 function animalMap(options) {
+  let exitObj;
+  
+
   if (!options) {
-    return categorizeAnimalsByLocation();
-  }
-  const { includeNames, sex, sorted } = options;
+    exitObj = categorizeAnimalsByLocation();
+  } else{
+    const { includeNames, sex, sorted } = options;
 
-  if (includeNames) {
-    if (sex) {
-      if (sorted) return categorizeAnimalsIncludeNamesSexSorted(sex);
-      return categorizeAnimalsIncludeNamesSex(sex);
+    if (includeNames) {    
+
+      if (sex) {      
+      exitObj = categorizeAnimalsIncludeNamesSex(sex);
+      }else{
+        exitObj = categorizeAnimalsIncludeNames();
+      }
+    } else {
+    exitObj = categorizeAnimalsByLocation();
     }
-    if (sorted) {
-      return categorizeAnimalsIncludeNamesSorted();
-    }
-    return categorizeAnimalsIncludeNames();
-  }
-  if (sex){
-    return categorizeAnimalsByLocation();
-  }
+
+    if (sorted){
+      exitObj = categorizeAnimalsIncludeNamesSexSorted(sex);
+    } 
+  } 
+
+  return exitObj;
 }
-
+console.log(animalMap( { includeNames: true, sex: 'female' }))
 function checkSpindleUS(hour) {
   if (hour > 12) return hour - 12;
   return hour;
