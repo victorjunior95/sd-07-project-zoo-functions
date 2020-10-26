@@ -102,11 +102,13 @@ function entryCalculator(entrants) {
 
 
 function animalMap(options) {
-  if (!options) {
-    animals.map((element) => {
-
-    })
-  }
+  // let objReturn = {}
+  // if (!options) {
+  //   objReturn.NE = animals.filter(element => element.location === 'NE').map(element => element.name);
+  //   objReturn.NW = animals.filter(element => element.location === 'NW').map(element => element.name);
+  //   objReturn.SE = animals.filter(element => element.location === 'SW').map(element => element.name);
+  //   objReturn.SW = animals.filter(element => element.location === 'SW').map(element => element.name);
+  // }
 }
 
 function schedule(dayName) {
