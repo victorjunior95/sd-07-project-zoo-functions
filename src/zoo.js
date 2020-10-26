@@ -83,9 +83,23 @@ function animalMap(options) {
   // seu código aqui
 }
 
-function schedule(dayName) {
-  // seu código aqui
-}
+const schedule = (dayName) => {
+  let weekSchedule;
+  const arrHours = Object.entries(data.hours);
+  weekSchedule = arrHours.reduce((acc, day) => {
+    acc[day[0]] = `Open from ${day[1].open}am until ${day[1].close - 12}pm`;
+    return acc;
+  }, {})
+  weekSchedule.Monday = `CLOSED`;
+
+  if (dayName === undefined) {
+    return weekSchedule;
+  } else {
+    const daySchedule = {};
+    daySchedule[dayName] = weekSchedule[dayName];
+    return daySchedule;
+  }
+};
 
 const oldestFromFirstSpecies = (idEmployee) => {
   const { animals, employees } = data;
