@@ -56,7 +56,7 @@ function animalCount(species) {
     animals.forEach(property => (callanimals[property.name] = property.residents.length));
     return callanimals;
   }
-    return animals.find(nameCheck => nameCheck.name === species).residents.length;
+  return animals.find(nameCheck => nameCheck.name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
