@@ -37,8 +37,7 @@ function animalsOlderThan(animal, age) {
 function employeeByName(employeeName) {
   if (!employeeName) return {};
   const names = employees.find(
-    name => name.firstName === employeeName || name.lastName === employeeName
-  );
+    name => name.firstName === employeeName || name.lastName === employeeName);
   return names;
 }
 
@@ -120,7 +119,7 @@ function schedule(dayName) {
   if (!dayName) {
     const days = Object.keys(hours);
 
-    days.forEach(day => {
+    days.forEach((day) => {
       result[day] = `Open from ${hours[day].open}am until ${hours[day].close - 12}pm`;
       if (day === 'Monday') {
         result[day] = 'CLOSED';
