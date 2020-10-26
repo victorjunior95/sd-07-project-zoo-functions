@@ -12,7 +12,7 @@ eslint no-unused-vars: [
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  // Versao Tunada em aula e ingles!!!
+  // Versao Tunada no plantao do wolf!!!
   const compare = data.animals.filter(animal => ids.includes(animal.id));
   return compare;
 }
@@ -104,6 +104,11 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+  const especie = data.employees.find(item => item.id === id).responsibleFor[0];
+  const oldAnimal = data.animals
+  .find(item => item.id === especie).residents
+  .sort((a, b) => b.age - a.age)[0];
+  return Object.values(oldAnimal);
 }
 
 function increasePrices(percentage) {
