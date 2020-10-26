@@ -40,12 +40,13 @@ function isManager(id) {
   return someByManager;
 }
 
-  function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []){
+  function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
     data.employees.push({id, firstName, lastName, managers, responsibleFor});
 }
 
 function animalCount(species) {
   if(!species){
+    
     return data.animals.reduce((accAnimal, animal) => {
       accAnimal[animal.name] = animals.residents.length;
       return accAnimal;
