@@ -82,9 +82,9 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
   return data.employees.push(newEmployee);
 }
 
-function animalCount(inputSpecies) {
+function animalCount(inputSpecies = '') {
   // seu código aqui
-  if (inputSpecies === '' || inputSpecies === null) {
+  if (inputSpecies === '') {
     const speciesAndCount = {};
     data.animals.forEach((element) => {
       speciesAndCount[element.name] = element.residents.length;
@@ -95,6 +95,7 @@ function animalCount(inputSpecies) {
   const selectedSpecies = data.animals.find(animal => animal.name === inputSpecies);
   return (selectedSpecies.residents.length);
 }
+animalCount('lions');
 
 function entryCalculator(entrants) {
   // seu código aqui
