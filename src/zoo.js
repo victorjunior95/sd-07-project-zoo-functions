@@ -173,7 +173,7 @@ function animalMap(options) {
     const {
       includeNames,
       sex,
-      sorted
+      sorted,
     } = options;
 
     if (includeNames) {
@@ -195,8 +195,8 @@ function animalMap(options) {
 }
 console.log(animalMap({
   includeNames: true,
-  sex: 'female'
-}))
+  sex: 'female',
+}));
 
 function checkSpindleUS(hour) {
   if (hour > 12) return hour - 12;
@@ -265,7 +265,7 @@ function increasePrices(percentage) {
   return prices;
 }
 
-function employeeCoverage(idOrName) {
+function employeeCoverage() {
   // seu código aqui
 }
 
