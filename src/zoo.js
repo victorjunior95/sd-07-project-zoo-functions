@@ -57,11 +57,11 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  if (entrants === undefined || entrants === {})return 0;
-  const keys = Object.keys(entrants)
+  if (entrants === undefined || entrants === {}) return 0;
+  const keys = Object.keys(entrants);
   let count = 0;
   keys.forEach((age) => {
-    count += entrants[age] * prices[age]
+    count += entrants[age] * prices[age];
   });
   return count;
 }
