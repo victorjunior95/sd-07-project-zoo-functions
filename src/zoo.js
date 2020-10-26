@@ -156,17 +156,6 @@ function animalMap(options) {
   } return retrieveAnimalsPerLocation(locations);
 }
 
-function scheduleString(param) {
-  const result = {};
-  Object.entries(param).forEach((obj) => {
-    result[obj[0]] = `Open from ${obj[1].open}am until ${obj[1].close - 12}pm`;
-    if (obj[1].open === 0) {
-      result[obj[0]] = 'CLOSED';
-    }
-  });
-  return result;
-}
-
 function schedule(dayName = '') {
   const openingHours = {
     Tuesday: 'Open from 8am until 6pm',
