@@ -74,8 +74,47 @@ function entryCalculator(entrants = 0) {
   return (Adult * 49.99) + (Senior * 24.99) + (Child * 20.99);
 }
 
-function animalMap(options) {
+const filterByLocation = location => data.animals.filter(animal => animal.location === location);
+
+const animalByLocation = () => {
+  const locations = ['NE', 'NW', 'SE', 'SW'];
+  const listByLocation = {};
+  locations.forEach((location) => {
+    listByLocation[location] = filterByLocation(location)
+    .map(species => species.name);
+  });
+  return listByLocation;
+};
+
+const animalIncludeNames = (sex) => {
+  const object = { NE: [], NW: [], SE: [], SW: [] };
+  if (sex !== undefined) {
+    data.animals.forEach(({ name, location, residents }) =>
+      object[location].push({
+        [name]: residents
+          .filter(resident => resident.sex === sex)
+          .map(resident => resident.name),
+      }),
+    );
+  } else {
+    data.animals.forEach(({ name, location, residents }) =>
+      object[location].push({ [name]: residents.map(resident => resident.name) }),
+    );
+  }
+  return object;
+};
+
+function animalMap(options = {}) {
   // seu código aqui
+  const { includeNames, sex, sorted } = options;
+  if (!includeNames || !options) return animalByLocation();
+  const object = animalIncludeNames(sex);
+  if (sorted) {
+    Object.keys(object).forEach(key =>
+      object[key].forEach(element => element[Object.keys(element)].sort()),
+    );
+  }
+  return object;
 }
 
 function schedule(dayName) {
