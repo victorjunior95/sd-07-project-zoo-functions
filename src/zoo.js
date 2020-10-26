@@ -138,9 +138,8 @@ function oldestFromFirstSpecies(id) {
   const oldestAnimal = animalArray.reduce((animalFist, animalSecond) => {
     if (animalSecond.age > animalFist.age) {
       return animalSecond;
-    } else {
-      return animalFist;
     }
+    return animalFist;
   });
   // const {name, sex, age} = oldestAnimal;
   // retorno = [name, sex, age];
