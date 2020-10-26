@@ -32,10 +32,7 @@ function nameEmployee(employee, employeeName) {
 }
 
 function employeeByName(employeeName) {
-  if (employeeName === null) {
-    const empty = {};
-    return empty;
-  }
+  if (employeeName === undefined) return {};
   return employees.find(employee => nameEmployee(employee, employeeName));
 }
 
