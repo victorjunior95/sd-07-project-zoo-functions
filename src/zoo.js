@@ -126,13 +126,13 @@ function schedule(dayName = '') {
   if (dayName === '') {
     return timeTable;
   }
-  const selectedDay = timeTable.key === dayName;
+  const selectedDay = hours.find(element => element.key === dayName);
   if (dayName === 'Monday') {
     return { Monday: 'CLOSED' };
   }
-  return ({ dayName: `Open from ${selectedDay.open}am until ${selectedDay.close}pm` });
+  const saida = `{ ${selectedDay.key}: Open from ${selectedDay.open}am until ${selectedDay.close - 12}pm}`;
+  return (saida);
 }
-console.log(schedule('Monday'));
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
@@ -141,9 +141,9 @@ function oldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   // seu código aqui
   const actualPrices = data.prices;
-  actualPrices.Adult += Math.round((actualPrices.Adult / 100) * percentage);
-  actualPrices.Senior += ((actualPrices.Senior / 100) * percentage);
-  actualPrices.Child += ((actualPrices.Child / 100) * percentage);
+  actualPrices.Adult += Math.round((percentage / 100) * actualPrices.Adult);
+  actualPrices.Senior += Math.round((percentage / 100) * actualPrices.Senior);
+  actualPrices.Child += Math.round((percentage / 100) * actualPrices.Child);
   return (data.prices = {
     Adult: parseFloat(actualPrices.Adult.toFixed(2)),
     Senior: parseFloat(actualPrices.Senior.toFixed(2)),
@@ -151,7 +151,7 @@ function increasePrices(percentage) {
   });
 }
 
-function employeeCoverage(idOrName) {
+function employeeCoverage(idOrNamec = '') {
   // seu código aqui
 }
 
