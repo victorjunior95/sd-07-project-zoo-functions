@@ -69,23 +69,30 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // seu código aqui
+  // fazer por último
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  // complicado
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const animalManagedByEmployeeId = data.employees.find(
+    ({ id: employeeId }) => employeeId === id).responsibleFor[0];
+
+  const findAnimalById = data.animals
+    .find(({ id: animalId }) => animalId === animalManagedByEmployeeId)
+    .residents.sort(({ age: ageA }, { age: ageB }) => ageB - ageA);
+
+  return Object.values(findAnimalById[0]);
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  // complicado
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  // complicado
 }
 
 module.exports = {
