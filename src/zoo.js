@@ -118,14 +118,14 @@ function schedule(dayName) {
     Saturday: 'Open from 8am until 10pm',
     Sunday: 'Open from 8am until 8pm',
     Monday: 'CLOSED',
-  }
+  };
   if (!dayName) {
     return dailySchedule;
   }
   const daySchedule = {};
   daySchedule[dayName] = dailySchedule[dayName];
   return daySchedule;
-};
+}
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
