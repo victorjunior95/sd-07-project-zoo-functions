@@ -54,9 +54,9 @@ function employeeByName(empName = {}) {
   // informações pessoais e gerentes e animais gerenciados.
 
 function createEmployee(personalInfo, associatedWith) {
-  const newEmployee = {}
-  Object.assign(newEmployee, personalInfo, associatedWith )
-  return newEmployee
+  const newEmployee = {};
+  Object.assign(newEmployee, personalInfo, associatedWith);
+  return newEmployee;
 }
 
   // 5- Implemente a função isManager:
@@ -131,8 +131,46 @@ function entryCalculator(entrants = 0) {
   // opção sort: true especificada, retorna somente nomes
   // de animais macho/fêmea com os nomes dos animais ordenados
   // Só retorna informações ordenadas e com sexo se a opção includeNames: true for especificada
+const animalMapLocation = () => {
+  const locations = animals.map(animal => animal.location);
+  const set = new Set(locations);
+  return [...set];
+};
 
-function animalMap(options = 'local') {
+const filteredAnimal = element => animals.filter(animal => animal.location === element);
+const animalMapObject = (location) => {
+  const objReturn = {};
+  location.forEach((element) => {
+    const filtered = filteredAnimal(element).map(anim => anim.name);
+    objReturn[element] = filtered;
+  });
+  return objReturn;
+};
+
+const animalMapObjectName = (location, sort, sex) => {
+  const objReturn = {};
+  location.forEach((element) => {
+    objReturn[element] = [];
+    filteredAnimal(element).map((anim) => {
+      const animalName = anim.name;
+      let animalResidents = anim.residents.map(residents => residents.name);
+      if (sex) {
+        animalResidents = anim.residents.filter(animalSex => animalSex.sex === sex)
+        .map(animalsexName => animalsexName.name);
+      }
+      if (sort) animalResidents = animalResidents.sort();
+      return objReturn[element].push({ [animalName]: animalResidents });
+    });
+  });
+  return objReturn;
+};
+
+
+function animalMap(options = '') {
+  const { includeNames, sorted, sex } = options;
+  const location = animalMapLocation();
+  if (includeNames) return animalMapObjectName(location, sorted, sex);
+  return animalMapObject(location);
 }
 
   // 10- Implemente a função schedule:
