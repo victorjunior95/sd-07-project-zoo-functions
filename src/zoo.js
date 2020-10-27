@@ -174,6 +174,7 @@ function retrieveanimalsBySpecieNames(animalsList) {
         return specieFound.name;
       });
 }
+
 function retrieveDefaultEmployeeCoverage() {
   const employeesAndSpecies = {};
   employees.forEach((employee) => {
