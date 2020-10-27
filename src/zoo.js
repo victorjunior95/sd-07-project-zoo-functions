@@ -16,6 +16,7 @@ const data = require('./data');
 const { employees } = data;
 const { animals } = data;
 const { prices } = data;
+const { hours } = data;
 
 function animalsByIds(...ids) {
   // seu código aqui
@@ -76,16 +77,30 @@ function entryCalculator(entrants) {
     returnvalue += entrants.Senior * Senior;
   }
   return returnvalue;
-  // return (entrants.Adult * Adult) + (entrants.Child * Child) + (entrants.Senior * Senior);
 }
-console.log(entryCalculator({ Senior: 2 }));
-
 function animalMap(options) {
   // seu código aqui
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  let returnvalue = {};
+  const daylist = hours;
+  if (dayName === undefined) {
+    Object.keys(daylist).forEach(property => (
+      returnvalue[property] = `Open from ${hours[property].open}am until ${hours[property].close - 12}pm`
+    ));
+    returnvalue.Monday = 'CLOSED';
+    return returnvalue;
+  }
+  if (dayName === 'Monday') {
+    returnvalue = {};
+    returnvalue.Monday = 'CLOSED';
+  }
+  if (dayName !== 'Monday') {
+    returnvalue = {};
+    returnvalue[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
+  }
+  return returnvalue;
 }
 
 function oldestFromFirstSpecies(id) {
