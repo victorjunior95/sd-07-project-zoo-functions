@@ -87,7 +87,31 @@ function entryCalculator(entrants = {}) {
 }
 
 function animalMap(options = 'vazio') {
-
+  const infos = { NE: ['lions', 'giraffes'],
+    NW: ['tigers', 'bears', 'elephants'],
+    SE: ['penguins', 'otters'],
+    SW: ['frogs', 'snakes'],
+  };
+  const selectedinfos = infos;
+  const regioes = ['NE', 'NW', 'SE', 'SW'];
+  if (options.includeNames === true) {
+    regioes.forEach((regiao) => {
+      selectedinfos[regiao].forEach((elemento) => {
+        const position = selectedinfos[regiao].indexOf(elemento);
+        const especie = selectedinfos[regiao][position];
+        selectedinfos[regiao][position] = { [selectedinfos[regiao][position]]: [] };
+        animals.find(animal => animal.name === especie).residents.forEach((residente) => {
+          if (options.sex) {
+            if (residente.sex === options.sex) {
+              selectedinfos[regiao][position][especie].push(residente.name);
+            }
+          } else { selectedinfos[regiao][position][especie].push(residente.name); }
+        });
+        if (options.sorted === true) { selectedinfos[regiao][position][especie].sort(); }
+      });
+    });
+  }
+  return selectedinfos;
 }
 
 function schedule(dayName = 'vazio') {
