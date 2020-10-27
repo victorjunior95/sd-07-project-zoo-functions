@@ -136,6 +136,18 @@ function schedule(dayName = '') {
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
+  const selectedEmployee = data.employees.find(employee => employee.id === id);
+  const responsibleFor = selectedEmployee.responsibleFor[0];
+  const anims = data.animals.find(animal => animal.id === responsibleFor);
+  let oldestAge = 0;
+  let oldestAnimal;
+  anims.residents.forEach((animal) => {
+    if (animal.age > oldestAge) {
+      oldestAge = animal.age;
+      oldestAnimal = animal;
+    }
+  });
+  return [oldestAnimal.name, oldestAnimal.sex, oldestAnimal.age];
 }
 
 function increasePrices(percentage) {
@@ -153,6 +165,7 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrNamec = '') {
   // seu código aqui
+
 }
 
 module.exports = {
