@@ -105,8 +105,26 @@ function animalMap(options) {
 
 }
 
+// Função abaixo foi refeita diversas vezes.
+// Por fim, cabei adotando o mesmo método que o verificado no PR:
+// https://github.com/tryber/sd-06-project-zoo-functions/blob/07bc894cc64fe2727dee86a4f9ff833063f85635/src/zoo.js
+
 function schedule(dayName) {
-  // seu código aqui
+  const dailySchedule = {
+    Tuesday: 'Open from 8am until 6pm',
+    Wednesday: 'Open from 8am until 6pm',
+    Thursday: 'Open from 10am until 8pm',
+    Friday: 'Open from 10am until 8pm',
+    Saturday: 'Open from 8am until 10pm',
+    Sunday: 'Open from 8am until 8pm',
+    Monday: 'CLOSED'
+  }
+  if (!dayName) {
+    return dailySchedule;
+  }
+  let daySchedule = {};
+  daySchedule[dayName] = dailySchedule[dayName];
+  return daySchedule;
 }
 
 function oldestFromFirstSpecies(id) {
