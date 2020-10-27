@@ -9,12 +9,10 @@ eslint no-unused-vars: [
 ]
 */
 
+const { employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
-  // Caso receba nenhum parâmetro, necessário retornar um array vazio
-  // Ao receber como parâmetro um único id, retorna os animais com este id
-  // Ao receber mais de um id, retorna os animais que têm um desses ids
   // o includes buscar o objeto que eu estou indicando
   const filterAnimals = data.animals.filter(objAnimals => ids.includes(objAnimals.id));
   return filterAnimals;
@@ -22,10 +20,13 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
+  const species = data.animals.find(specie => specie.name === animal);
+  return species.residents.every(resid => resid.age >= age);
 }
 
 function employeeByName(employeeName) {
   // seu código aqui
+
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -33,13 +34,15 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  // o find ele acha o primeiro elemento  e o includes acha o elemente que você deseja.
   const employee = data.employees.find(element => element.managers.includes(id));
   return employee !== undefined;
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
+  const newEmployee = [id, firstName, lastName, managers, responsibleFor];
+  employees.push(newEmployee);
 }
 
 function animalCount(species) {
