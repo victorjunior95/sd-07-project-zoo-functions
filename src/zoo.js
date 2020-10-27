@@ -152,7 +152,14 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  let fullName = data.employees.map(element => {
+    return `${element.firstName} ${element.lastName}`
+  })
+  let idsResponsible = data.employees.map(element => element.responsibleFor);
+  let animalsBySpecies = data.animals.find(element => {
+    element.id === idsResponsible)
+  
+   console.log(animalsBySpecies);
 }
 
 module.exports = {
