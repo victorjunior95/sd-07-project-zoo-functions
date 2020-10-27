@@ -64,7 +64,15 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
+  const count = {};
+  animals.forEach((animal) => {
+    count[animal.name] = animal.residents.length;
+  });
 
+  if (species === undefined) {
+    return count;
+  }
+  return count[species];
 }
 
 
@@ -160,7 +168,21 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // console.log(residentsOffRoll)
+  const EmployeeById = employees
+  .find(employee => employee.id === id);
+
+  const FindFirstSpecieId = EmployeeById.responsibleFor[0];
+
+  const firstSpecieAnimals = animals
+  .find(specie => specie.id === FindFirstSpecieId);
+
+  const ShowOldestAnimal = firstSpecieAnimals.residents
+  .reduce((prevAnimal, currAnimal) => {
+    if (currAnimal.age > prevAnimal.age) return currAnimal;
+    return prevAnimal;
+  });
+
+  return Object.values(ShowOldestAnimal);
 }
 
 
