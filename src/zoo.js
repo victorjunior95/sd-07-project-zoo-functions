@@ -127,9 +127,8 @@ function getAnimalsPerLocationWithName(locations, sorted, sex) {
   return animalsPerLocation;
 }
 
-function animalMap(options) {
+function animalMap(options = {}) {
   const locations = getAvailableLocations();
-  if (!options) return getAnimalsPerLocation(locations);
   const { includeNames = false, sorted = false, sex } = options;
   return includeNames
     ? getAnimalsPerLocationWithName(locations, sorted, sex)
@@ -138,7 +137,18 @@ function animalMap(options) {
 
 
 function schedule(dayName) {
-  // seu código aqui
+  const keys = Object.keys(data.hours);
+  const dayTimes = {};
+  const nameTimes = {};
+  keys.forEach(function (key) {
+    const result = key !== 'Monday' ? dayTimes[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm` : dayTimes[key] = 'CLOSED';
+    return result;
+  });
+  if (!dayName) {
+    return dayTimes;
+  }
+  nameTimes[dayName] = dayTimes[dayName];
+  return nameTimes;
 }
 
 function oldestFromFirstSpecies(id) {
