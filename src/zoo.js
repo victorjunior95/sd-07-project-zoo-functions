@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { animals, employees } = require('./data');
+const { animals, employees, hours } = require('./data');
 
 // solução apresentada pelo Murillo Wolf - Instrutor Trybe
 function animalsByIds(...ids) {
@@ -54,8 +54,8 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // const { employees } = require('./data');
-  return employees.some(employee => employee.managers.includes(id));
+  const isManagerTest = employees.some(employee => employee.managers.includes(id));
+  return isManagerTest;
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -64,12 +64,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // seu código aqui
+
 }
 
+
 function entryCalculator(entrants) {
-  // seu código aqui
 }
+
 
 function retrieveAvailablelocation() {
   return ['NE', 'NW', 'SE', 'SW', 'E', 'N'];
@@ -136,8 +137,21 @@ function animalMap(options) {
   return retriveAnimalsPerLocation(locations);
 }
 function schedule(dayName) {
-  // seu código aqui
+  const weekSchedule = {
+    Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+    Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+    Thursday: `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+    Friday: `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+    Saturday: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+    Sunday: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
+    Monday: 'CLOSED',
+  };
+  if (dayName === undefined) return weekSchedule;
+  return {
+    [dayName]: `${weekSchedule[dayName]}`,
+  };
 }
+
 function oldestFromFirstSpecies(id) {
   // seu código aqui
 }
