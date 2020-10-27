@@ -9,7 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
-const { animals, employees, prices } = require('./data');
+const { animals, employees, prices, hours } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
@@ -91,8 +91,49 @@ function animalMap(options) {
   // seu código aqui
 }
 
+const { Tuesday: { open: openTuesday, close: closeTueasday } } = hours;
+const { Wednesday: { open: openWednesday, close: closeWednesday } } = hours;
+const { Thursday: { open: openThursday, close: closeThursday } } = hours;
+const { Friday: { open: openFriday, close: closeFriday } } = hours;
+const { Saturday: { open: openSaturday, close: closeSaturday } } = hours;
+const { Sunday: { open: openSunday, close: closeSunday } } = hours;
+
+function normalDays() {
+  const days = {};
+  days.Tuesday = `Open from ${openTuesday}am until ${closeTueasday - 12}pm`;
+  days.Wednesday = `Open from ${openWednesday}am until ${closeWednesday - 12}pm`;
+  days.Thursday = `Open from ${openThursday}am until ${closeThursday - 12}pm`;
+  days.Friday = `Open from ${openFriday}am until ${closeFriday - 12}pm`;
+  days.Saturday = `Open from ${openSaturday}am until ${closeSaturday - 12}pm`;
+  days.Sunday = `Open from ${openSunday}am until ${closeSunday - 12}pm`;
+  days.Monday = 'CLOSED';
+  return days;
+}
+
 function schedule(dayName) {
-  // seu código aqui
+  const days = {};
+  if (dayName === undefined) {
+    return normalDays();
+  }
+  switch (dayName) {
+    case 'Tuesday': days.Tuesday = `Open from ${openTuesday}am until ${closeTueasday - 12}pm`;
+      break;
+    case 'Wednesday': days.Wednesday = `Open from ${openWednesday}am until ${closeWednesday - 12}pm`;
+      break;
+    case 'Thursday': days.Thursday = `Open from ${openThursday}am until ${closeThursday - 12}pm`;
+      break;
+    case 'Friday': days.Friday = `Open from ${openFriday}am until ${closeFriday - 12}pm`;
+      break;
+    case 'Saturday': days.Saturday = `Open from ${openSaturday}am until ${closeSaturday - 12}pm`;
+      break;
+    case 'Sunday': days.Sunday = `Open from ${openSunday}am until ${closeSunday - 12}pm`;
+      break;
+    case 'Monday': days.Monday = 'CLOSED';
+      break;
+    default:
+      break;
+  }
+  return days;
 }
 
 function oldestFromFirstSpecies(id) {
