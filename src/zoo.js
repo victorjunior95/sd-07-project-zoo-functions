@@ -128,7 +128,20 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  // - Ao passar uma porcentagem, incrementa todos os preços, arrendondados em duas casas decimais
+  const decimal = (value) => {
+    value = Math.round(value * 100) / 100;
+    return value;
+  };
+  prices.Adult = decimal(prices.Adult + (prices.Adult * (percentage / 100)));
+  prices.Child = decimal(prices.Child + (prices.Child * (percentage / 100)));
+  prices.Senior = decimal(prices.Senior + (prices.Senior * (percentage / 100)));
+
+  /** Consultei o repositório do colega Vanderson Henrique para resolver essa parte.
+    Senti um pouco de dificuldade pra entender pq a função não arredondava de forma
+    correta no meu código, por isso recorri aos colegas, e dessa forma fez sentido pra mim.
+    https://github.com/tryber/sd-07-project-zoo-functions/blob/vanderson-henrique-project-zoo-functions/src/zoo.js
+  */
 }
 
 function employeeCoverage(idOrName) {
