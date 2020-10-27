@@ -1,4 +1,4 @@
-const { animals } = require('./data');
+const { animals, hours } = require('./data');
 /*
 eslint no-unused-vars: [
   "error",
@@ -112,9 +112,27 @@ function animalMap(options) {
   // seu código aqui
 }
 
-function schedule(dayName) {
+function schedule(dayName = '') {
   // seu código aqui
+  const timeTable = {
+    Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
+    Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
+    Thursday: `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
+    Friday: `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
+    Saturday: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
+    Sunday: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
+    Monday: 'CLOSED',
+  };
+  if (dayName === '') {
+    return timeTable;
+  }
+  const selectedDay = timeTable.key === dayName;
+  if (dayName === 'Monday') {
+    return { Monday: 'CLOSED' };
+  }
+  return ({ dayName: `Open from ${selectedDay.open}am until ${selectedDay.close}pm` });
 }
+console.log(schedule('Monday'));
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
@@ -124,16 +142,13 @@ function increasePrices(percentage) {
   // seu código aqui
   const actualPrices = data.prices;
   actualPrices.Adult += Math.round((actualPrices.Adult / 100) * percentage);
-  actualPrices.Senior += Math.round((actualPrices.Senior / 100) * percentage);
-  actualPrices.Child += Math.round((actualPrices.Child / 100) * percentage);
-  const adult = parseFloat(actualPrices.Adult.toFixed(2));
-  const senior = parseFloat(actualPrices.Senior.toFixed(2));
-  const child = parseFloat(actualPrices.Child.toFixed(2));
-  data.prices = {
-    adult,
-    senior,
-    child,
-  };
+  actualPrices.Senior += ((actualPrices.Senior / 100) * percentage);
+  actualPrices.Child += ((actualPrices.Child / 100) * percentage);
+  return (data.prices = {
+    Adult: parseFloat(actualPrices.Adult.toFixed(2)),
+    Senior: parseFloat(actualPrices.Senior.toFixed(2)),
+    Child: parseFloat(actualPrices.Child.toFixed(2)),
+  });
 }
 
 function employeeCoverage(idOrName) {
