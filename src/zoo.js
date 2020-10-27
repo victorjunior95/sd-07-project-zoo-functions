@@ -36,7 +36,7 @@ function isManager(id) {
       }
     });
   });
-  return man; 
+  return man;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
