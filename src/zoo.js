@@ -21,10 +21,14 @@ const data = require('./data');
   }	
 
 
-function animalsOlderThan(animal, age) {
-  // seu código aqui
-}
-
+  function animalsOlderThan(animal, age) {
+    	  return animals.some(
+      (specie) =>
+        specie.name === animal &&
+        specie.residents.every((resident) => resident.age >= age)
+    );
+  }	
+  
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui	  const newEmployee = Object.assign({}, personalInfo, associatedWith);
   return newEmployee;
