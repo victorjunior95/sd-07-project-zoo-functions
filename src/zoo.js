@@ -108,9 +108,10 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const taxes = Object.keys(prices);
+  taxes.forEach(property =>
+    (prices[property] = Math.ceil(prices[property] * (100 + percentage)) / 100));
 }
-
 function employeeCoverage(idOrName) {
   // seu código aqui
 }
