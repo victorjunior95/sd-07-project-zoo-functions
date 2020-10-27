@@ -39,8 +39,9 @@ function isManager(id) {
   return data.employees.some(({ managers }) => managers.some(idManage => id === idManage));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  // erro no teste unitário, a entrada tem que estar zerada.
+  data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
 function animalCount(species) {
