@@ -54,6 +54,9 @@ function employeeByName(empName = {}) {
   // informações pessoais e gerentes e animais gerenciados.
 
 function createEmployee(personalInfo, associatedWith) {
+  const newEmployee = {}
+  Object.assign(newEmployee, personalInfo, associatedWith )
+  return newEmployee
 }
 
   // 5- Implemente a função isManager:
