@@ -9,6 +9,7 @@ eslint no-unused-vars: [
 ]
 */
 
+const { prices } = require('./data');
 const data = require('./data');
 
 const { hours, employees, animals } = data;
@@ -100,7 +101,9 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.keys(prices).forEach((stage) => {
+    prices[stage] = Math.ceil(prices[stage] * (100 + percentage)) / 100;
+  });
 }
 
 function employeeCoverage(idOrName) {
