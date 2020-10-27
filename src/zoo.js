@@ -125,7 +125,7 @@ function oldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   // seu código aqui
   Object.keys(prices).map(
-    category => (prices[category] = Math.round(prices[category] * ((percentage / 100) + 1) * 100) / 100),
+    key => (prices[key] = Math.round(prices[key] * ((percentage / 100) + 1) * 100) / 100),
   );
 }
 
