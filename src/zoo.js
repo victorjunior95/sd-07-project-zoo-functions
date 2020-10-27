@@ -141,14 +141,14 @@ function oldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   // seu código aqui
   const actualPrices = data.prices;
-  actualPrices.Adult += Math.round((percentage / 100) * actualPrices.Adult);
-  actualPrices.Senior += Math.round((percentage / 100) * actualPrices.Senior);
-  actualPrices.Child += Math.round((percentage / 100) * actualPrices.Child);
-  return (data.prices = {
-    Adult: parseFloat(actualPrices.Adult.toFixed(2)),
-    Senior: parseFloat(actualPrices.Senior.toFixed(2)),
-    Child: parseFloat(actualPrices.Child.toFixed(2)),
-  });
+  actualPrices.Adult += Math.round(actualPrices.Adult * percentage).toFixed(2) / 100;
+  actualPrices.Senior += Math.round(actualPrices.Senior * percentage).toFixed(2) / 100;
+  actualPrices.Child += Math.round(actualPrices.Child * percentage).toFixed(2) / 100;
+  data.prices = {
+    Adult: Math.round(actualPrices.Adult * 100) / 100,
+    Senior: Math.round(actualPrices.Senior * 100) / 100,
+    Child: Math.round(actualPrices.Child * 100) / 100,
+  };
 }
 
 function employeeCoverage(idOrNamec = '') {
