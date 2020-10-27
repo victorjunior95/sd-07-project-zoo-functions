@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { animals, employees, hours } = require('./data');
+const { animals, employees, hours, prices } = require('./data');
 
 // solução apresentada pelo Murillo Wolf - Instrutor Trybe
 function animalsByIds(...ids) {
@@ -153,15 +153,49 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  // console.log(residentsOffRoll)
 }
 
+
 function increasePrices(percentage) {
-  // seu código aqui
+  const percentageTax = 1 + (percentage / 100);
+  Object.entries(prices).forEach((entry) => {
+    const [category, price] = entry;
+    const updatedPrice = Math.round((price * percentageTax) * 100) / 100;
+    prices[category] = updatedPrice;
+  });
+  return prices;
+}
+
+function retrieveanimalsBySpecieNames(animalsList) {
+  return animalsList
+      .map((specieId) => {
+        const specieFound = animals.find(animal => animal.id === specieId);
+        return specieFound.name;
+      });
+}
+function retrieveDefaultEmployeeCoverage() {
+  const employeesAndSpecies = {};
+  employees.forEach((employee) => {
+    const fullName = `${employee.firstName} ${employee.lastName}`;
+    const speciesAssisted = retrieveanimalsBySpecieNames(employee.responsibleFor);
+    employeesAndSpecies[fullName] = speciesAssisted;
+  });
+  return employeesAndSpecies;
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (idOrName === undefined) {
+    return retrieveDefaultEmployeeCoverage();
+  }
+  const retrievedEmployee = employees.find(employee => (
+    idOrName === employee.firstName ||
+    idOrName === employee.lastName ||
+    idOrName === employee.id
+  ));
+  const fullName = `${retrievedEmployee.firstName} ${retrievedEmployee.lastName}`;
+  const speciesAssisted = retrieveanimalsBySpecieNames(retrievedEmployee.responsibleFor);
+  return { [fullName]: speciesAssisted };
 }
 
 module.exports = {
