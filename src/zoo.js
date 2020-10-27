@@ -115,9 +115,27 @@ function oldestFromFirstSpecies(id) {
 function increasePrices(percentage) {
   // seu código aqui
 }
-
+// Com ajuda do eric vinicius
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const result = Object.fromEntries(data.employees
+    .map(({ firstName, lastName, responsibleFor }) => (
+      [
+        `${firstName} ${lastName}`,
+        responsibleFor
+          .map(animalId => data.animals
+            .find(({ id }) => id === animalId).name),
+      ]
+    )));
+  if (idOrName) {
+    const employee = data.employees
+      .find(({ id, firstName, lastName }) =>
+        idOrName === id
+        || idOrName === firstName
+        || idOrName === lastName);
+
+    return { [`${employee.firstName} ${employee.lastName}`]: result[`${employee.firstName} ${employee.lastName}`] };
+  }
+  return result;
 }
 
 module.exports = {
