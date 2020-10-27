@@ -16,7 +16,7 @@ function animalsByIds(...ids) {
     return [];
   }
   const animalById = data.animals.filter(
-    (animal, index) => animal.id === ids[index]
+    (animal, index) => animal.id === ids[index],
   );
   return animalById;
 }
@@ -26,10 +26,6 @@ function animalsOlderThan(animal, age) {
 }
 
 function createEmployee(personalInfo, associatedWith) {}
-
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
 
 function isManager(id) {
   // seu código aqui
@@ -73,7 +69,6 @@ module.exports = {
   animalCount,
   animalMap,
   animalsByIds,
-  employeeByName,
   employeeCoverage,
   addEmployee,
   isManager,
