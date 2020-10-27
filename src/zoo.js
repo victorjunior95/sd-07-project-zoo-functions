@@ -10,10 +10,6 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { animals } = require('./data');
-// const { animals } = require('./data');
-// const { animals } = require('./data');
-// const { animals, employees } = require('./data');
 
 // troquei o find pelo filter conforme visto no PR https://github.com/tryber/sd-07-project-zoo-functions/blob/b32b8ea4021741b40898532cb96353589bf71e60/src/zoo.js
 function animalsByIds(...ids) {
@@ -132,15 +128,16 @@ function oldestFromFirstSpecies(id) {
   const responsible = data.employees.find(element => element.id === id);
   const firstAnimalId = responsible.responsibleFor[0];
   const animalSpecies = data.animals.find(element => element.id === firstAnimalId).name;
-  const animalResidents = data.animals.find(element => element.name === animalSpecies).residents.reduce((a, b) => {
-    if (a.age > b.age) {
-      return a;
-    }
-    return b;
-  })
-  return [animalResidents.name, animalResidents.sex, animalResidents.age]
-
-};
+  const animalResidents = data.animals
+    .find(element => element.name === animalSpecies).residents
+    .reduce((a, b) => {
+      if (a.age > b.age) {
+        return a;
+      }
+      return b;
+    });
+  return [animalResidents.name, animalResidents.sex, animalResidents.age];
+}
 
 
 function increasePrices(percentage) {
