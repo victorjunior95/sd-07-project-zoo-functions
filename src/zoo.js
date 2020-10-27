@@ -112,27 +112,22 @@ function animalMap(options) {
   // seu código aqui
 }
 
-function schedule(dayName = '') {
+function schedule(dayName) {
   // seu código aqui
-  const timeTable = {
-    Tuesday: `Open from ${hours.Tuesday.open}am until ${hours.Tuesday.close - 12}pm`,
-    Wednesday: `Open from ${hours.Wednesday.open}am until ${hours.Wednesday.close - 12}pm`,
-    Thursday: `Open from ${hours.Thursday.open}am until ${hours.Thursday.close - 12}pm`,
-    Friday: `Open from ${hours.Friday.open}am until ${hours.Friday.close - 12}pm`,
-    Saturday: `Open from ${hours.Saturday.open}am until ${hours.Saturday.close - 12}pm`,
-    Sunday: `Open from ${hours.Sunday.open}am until ${hours.Sunday.close - 12}pm`,
-    Monday: 'CLOSED',
-  };
-  if (dayName === '') {
-    return timeTable;
+  const output = {};
+  Object.keys(data.hours).forEach(function (hour) {
+    if (data.hours[hour].open === data.hours[hour].close) {
+      output[hour] = 'CLOSED';
+    } else {
+      output[hour] = `Open from ${data.hours[hour].open}am until ${data.hours[hour].close - 12}pm`;
+    }
+  });
+  if (dayName !== undefined) {
+    return { [dayName]: output[dayName] };
   }
-  const selectedDay = hours.find(element => element.key === dayName);
-  if (dayName === 'Monday') {
-    return { Monday: 'CLOSED' };
-  }
-  const saida = `{ ${selectedDay.key}: Open from ${selectedDay.open}am until ${selectedDay.close - 12}pm}`;
-  return (saida);
+  return output;
 }
+console.log(schedule('Tuesday'));
 
 function oldestFromFirstSpecies(id) {
   // seu código aqui
@@ -163,9 +158,8 @@ function increasePrices(percentage) {
   };
 }
 
-function employeeCoverage(idOrNamec = '') {
+function employeeCoverage(idOrNamec) {
   // seu código aqui
-
 }
 
 module.exports = {
