@@ -170,7 +170,27 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
+  const employeeCoverageObject = {};
+  let employeeFilterByPersonal;
 
+  if (!idOrName) {
+    employeeFilterByPersonal = employees;
+  } else {
+    employeeFilterByPersonal = employees.filter((({ id, firstName, lastName }) =>
+      id === idOrName ||
+      firstName === idOrName ||
+      lastName === idOrName));
+  }
+
+  employeeFilterByPersonal.forEach((employee) => {
+    const animalsManager = employee.responsibleFor.map((managedAnimals) => {
+      const findManagedAnimal = animals.find(animal => animal.id === managedAnimals).name;
+      return findManagedAnimal;
+    });
+    employeeCoverageObject[`${employee.firstName} ${employee.lastName}`] = animalsManager;
+  });
+
+  return employeeCoverageObject;
 }
 
 module.exports = {
@@ -189,4 +209,5 @@ module.exports = {
   createEmployee,
 };
 
-// https://github.com/tryber/sd-06-project-zoo-functions/pull/73/files
+// https://github.com/tryber/sd-06-project-zoo-functions/pull/73/files4
+// https://github.com/tryber/sd-06-project-zoo-functions/pull/96/files
