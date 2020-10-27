@@ -15,6 +15,7 @@ const data = require('./data');
 
 const { employees } = data;
 const { animals } = data;
+const { prices } = data;
 
 function animalsByIds(...ids) {
   // seu código aqui
@@ -60,8 +61,24 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  let returnvalue = 0;
+  if (entrants === undefined || entrants === {} || entrants.length === 0) {
+    return 0;
+  }
+  const { Adult, Child, Senior } = prices;
+  if (!entrants.Adult === false) {
+    returnvalue += entrants.Adult * Adult;
+  }
+  if (!entrants.Child === false) {
+    returnvalue += entrants.Child * Child;
+  }
+  if (!entrants.Senior === false) {
+    returnvalue += entrants.Senior * Senior;
+  }
+  return returnvalue;
+  // return (entrants.Adult * Adult) + (entrants.Child * Child) + (entrants.Senior * Senior);
 }
+console.log(entryCalculator({ Senior: 2 }));
 
 function animalMap(options) {
   // seu código aqui
