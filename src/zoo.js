@@ -154,13 +154,30 @@ function increasePrices(percentage) {
 function employeeCoverage(idOrName) {
   let fullName = data.employees.map(element => {
     return `${element.firstName} ${element.lastName}`
+  });
+  let idsResponsible = data.employees.map(element => element.responsibleFor
+    .map(animalIds => data.animals.find(element => element.id === animalIds).name));
+  let employeesAnimals = {};
+  fullName.map((element, round) => {
+    employeesAnimals = Object.assign(employeesAnimals, {
+      [element]: idsResponsible[round],
+    });
+    return employeesAnimals;
   })
-  let idsResponsible = data.employees.map(element => element.responsibleFor);
-  let animalsBySpecies = data.animals.find(element => {
-    element.id === idsResponsible)
-  
-   console.log(animalsBySpecies);
+  if (!idOrName) {
+    return employeesAnimals;
+  } else {
+    let nameById = data.employees.find((element) => element.id === idOrName || element.firstName === idOrName || element.lastName === idOrName);
+    fullName = `${nameById.firstName} ${nameById.lastName}`;
+    console.log(employeesAnimals);
+    const specificEmployee = {
+      [fullName]: employeesAnimals[fullName],
+    };
+    return specificEmployee;
+  }
 }
+
+
 
 module.exports = {
   entryCalculator,
