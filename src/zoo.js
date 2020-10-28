@@ -49,13 +49,11 @@ function entryCalculator(entrants) {
   // seu código aqui
 }
 
-/////////////////////////////////////////
+// function retrieveAvailableLocations() {
+//   return ['NE', 'E', 'NW', 'SW', 'SE'];
+// }
 
-function retrieveAvailableLocations() {
-  return ['NE', 'E', 'NW', 'SW', 'SE'];
-}
-
-function retrieveAnimalsPerLocation(locations) {
+// function retrieveAnimalsPerLocation(locations) {
   // const animalsPerLocation = {};
 
   // locations.forEach((location) => {
@@ -64,7 +62,7 @@ function retrieveAnimalsPerLocation(locations) {
   //   console.log(`Localização: ${location}`);
   //   console.log(filteredAnimals);
   // });
-}
+// }
 
 function animalMap(options) {
   // const locations = retrieveAvailableLocations();
@@ -72,8 +70,6 @@ function animalMap(options) {
   // if (!options)
   //   return retrieveAnimalsPerLocation(locations);
 }
-
-//////////////////////////////////////////
 
 function schedule(dayName) {
   // seu código aqui
