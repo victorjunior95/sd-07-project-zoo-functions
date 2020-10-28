@@ -166,8 +166,7 @@ function employeeCoverage(idOrName) {
     return employeesAnimals;
   }
   const nameById = data.employees
-    .find((par) => par.id === idOrName || par.firstName === idOrName || par.lastName === idOrName
-    );
+    .find(par => par.id === idOrName || par.firstName === idOrName || par.lastName === idOrName);
   fullName = `${nameById.firstName} ${nameById.lastName}`;
   console.log(employeesAnimals);
   const specificEmployee = {
