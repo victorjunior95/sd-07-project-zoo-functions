@@ -152,11 +152,11 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  let fullName = data.employees.map((element) => {
+  let fullName = data.employees.map(element => {
     return `${element.firstName} ${element.lastName}`;
   });
   const idsResponsible = data.employees.map(element => element.responsibleFor
-    .map(animalIds => data.animals.find(data => data.id === animalIds).name));
+    .map(animalIds => data.animals.find(animalData => animalData.id === animalIds).name));
   let employeesAnimals = {};
   fullName.map((element, round) => {
     employeesAnimals = Object.assign(employeesAnimals, {
@@ -167,8 +167,9 @@ function employeeCoverage(idOrName) {
   if (!idOrName) {
     return employeesAnimals;
   }
-  const nameById = data.employees
-    .find(element => element.id === idOrName || element.firstName === idOrName || element.lastName === idOrName);
+  const nameById = data.employees.find(element => {
+    return element.id === idOrName || element.firstName === idOrName || element.lastName === idOrName
+  });
   fullName = `${nameById.firstName} ${nameById.lastName}`;
   console.log(employeesAnimals);
   const specificEmployee = {
