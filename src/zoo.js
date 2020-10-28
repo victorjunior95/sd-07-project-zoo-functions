@@ -50,29 +50,31 @@ function entryCalculator(entrants) {
 }
 
 /////////////////////////////////////////
+
 function retrieveAvailableLocations() {
   return ['NE', 'E', 'NW', 'SW', 'SE'];
 }
 
 function retrieveAnimalsPerLocation(locations) {
-  const animalsPerLocation = {};
+  // const animalsPerLocation = {};
 
-  locations.forEach((location) => {
-    const filteredAnimals = animals
-    .filter((animal) => animal.location === location ).map((animal) => animal.name);
-    console.log(`Localização: ${location}`);
-    console.log(filteredAnimals);
-  });
+  // locations.forEach((location) => {
+  //   const filteredAnimals = animals
+  //   .filter((animal) => animal.location === location ).map((animal) => animal.name);
+  //   console.log(`Localização: ${location}`);
+  //   console.log(filteredAnimals);
+  // });
 }
 
 function animalMap(options) {
-  const locations = retrieveAvailableLocations();
+  // const locations = retrieveAvailableLocations();
 
-  if (!options)
-    return retrieveAnimalsPerLocation(locations);
+  // if (!options)
+  //   return retrieveAnimalsPerLocation(locations);
 }
 
 //////////////////////////////////////////
+
 function schedule(dayName) {
   // seu código aqui
 }
