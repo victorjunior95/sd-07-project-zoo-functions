@@ -14,6 +14,7 @@ const { animals } = require('./data');
 const { employees } = require('./data');
 const { prices } = require('./data');
 
+
 function animalsByIds(...ids) {
   // o includes buscar o objeto que eu estou indicando
   const filterAnimals = data.animals.filter(objAnimals => ids.includes(objAnimals.id));
@@ -92,9 +93,53 @@ function entryCalculator(entrants) {
 
   return ticketSum;
 }
+function noParameterAnimalmap() {
+  let directionsObject = { NE: [], NW: [], SE: [], SW: [] };
+
+  animals.forEach((animal) => {
+    directionsObject = { ...directionsObject,
+      [animal.location]: [...directionsObject[animal.location], animal.name] };
+  });
+  return directionsObject;
+}
+
+function animalMapWithIncludeNames(locations, sorting, animalSex) {
+  const animalMapObject = {};
+
+  locations.forEach((direction) => {
+    const filterAnimals = animals
+    .filter(specie => specie.location === direction).map((animal) => {
+      const animalName = animal.name;
+
+      const sexAnimals = animal.residents.filter((resident) => {
+        if (animalSex !== undefined) {
+          return resident.sex === animalSex;
+        }
+        return true;
+      }).map(residentSpecie => residentSpecie.name);
+
+      if (sorting) sexAnimals.sort();
+      return { [animalName]: sexAnimals };
+    });
+
+    animalMapObject[direction] = filterAnimals;
+  });
+
+  return animalMapObject;
+}
 
 function animalMap(options) {
   // seu código aqui
+  if (!options) return noParameterAnimalmap();
+
+  const directions = ['NE', 'NW', 'SE', 'SW'];
+  const { includeNames = false, sorted = false, sex } = options;
+
+  if (includeNames) {
+    return animalMapWithIncludeNames(directions, sorted, sex);
+  }
+
+  return noParameterAnimalmap();
 }
 
 function schedule(dayName) {
