@@ -47,7 +47,8 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
-  // seu código aqui
+  const rage = data.animals.filter(element => element.name === species);
+  return rage[0].residents.length;
 }
 
 function entryCalculator(entrants) {
@@ -68,6 +69,7 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+
 }
 
 function employeeCoverage(idOrName) {
