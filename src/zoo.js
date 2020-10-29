@@ -9,16 +9,17 @@ eslint no-unused-vars: [
 ]
 */
 
+// const { animals } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
   if (ids.length === 0) {
     return [];
   }
-  let find = [];
-  ids.forEach((id) => {
-    data.animals.find((element) => {
-      if (element.id === id) {
+  const find = [];
+  ids.forEach((e) => {
+    data.animals.filter((element) => {
+      if(element.id === e) {
         find.push(element);
       }
     });
