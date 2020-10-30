@@ -26,7 +26,9 @@ function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
-  return data.employees.find(element => element.firstName === employeeName || element.lastName === employeeName);
+  return data.employees.find(element => {(
+    element.firstName === employeeName || element.lastName === employeeName)
+  });
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -89,8 +91,13 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
+  const newPrices = {};
+  Object.entries(data.prices).forEach((element) => {
+    newPrices[element.key] = element.key, newPrices[element.value] = element.value * percentage / 100;
+  });
+  return newPrices;
 }
+console.log(increasePrices(10));
 
 function employeeCoverage(idOrName) {
   // seu código aqui
