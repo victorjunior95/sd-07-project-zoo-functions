@@ -31,15 +31,7 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  let man = false;
-  data.employees.forEach((employee) => {
-    employee.managers.forEach((manager) => {
-      if (manager === id) {
-        man = true;
-      }
-    });
-  });
-  return man;
+  return data.employees.some(element => element.managers.some(person => person === id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -47,6 +39,11 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 }
 
 function animalCount(species) {
+  if (species === undefined) {
+    const count = {};
+    data.animals.forEach(element => count[element.name] = element.residents.length);
+    return count;
+  }
   const rage = data.animals.filter(element => element.name === species);
   return rage[0].residents.length;
 }
