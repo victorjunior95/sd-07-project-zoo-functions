@@ -23,8 +23,7 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
- 
-
+  // seu código aqui
 }
 
 
@@ -80,7 +79,7 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-
+  // seu código aqui
 }
 
 function oldestFromFirstSpecies(id) {
@@ -88,9 +87,8 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
- 
+  // seu código aqui
 }
-
 
 function employeeCoverage(idOrName) {
   // seu código aqui
