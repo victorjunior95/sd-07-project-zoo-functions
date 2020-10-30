@@ -23,8 +23,10 @@ function animalsOlderThan(animal, age) {
 }
 
 function employeeByName(employeeName) {
-  // seu código aqui
+ 
+
 }
+
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
@@ -55,22 +57,21 @@ function entryCalculator(entrants) {
     return 0;
   }
   let total = 0;
-  for (const index in Object.keys(entrants)) {
-    let person = Object.keys(entrants)[index];
-    switch (person) {
+  Object.entries(entrants).forEach((element) => {
+    switch (element[0]) {
       case 'Adult':
-        total += 49.99 * Object.values(entrants)[index];
+        total += 49.99 * element[1];
         break;
       case 'Senior':
-        total += 24.99 * Object.values(entrants)[index];
+        total += 24.99 * element[1];
         break;
       case 'Child':
-        total += 20.99 * Object.values(entrants)[index];
+        total += 20.99 * element[1];
         break;
       default:
         break;
     }
-  }
+  });
   return total;
 }
 
@@ -87,9 +88,9 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
-
+ 
 }
+
 
 function employeeCoverage(idOrName) {
   // seu código aqui
