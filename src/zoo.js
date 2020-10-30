@@ -22,13 +22,11 @@ function animalsOlderThan(animal, age) {
   return result;
 }
 
-function employeeByName(employeeName) {
-  if (employeeName === undefined) {
+function employeeByName(empName) {
+  if (empName === undefined) {
     return {};
   }
-  return data.employees.find(element => {(
-    element.firstName === employeeName || element.lastName === employeeName)
-  });
+  return data.employees.find(name => name.firstName === empName || name.lastName === empName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -91,13 +89,13 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  const newPrices = {};
-  Object.entries(data.prices).forEach((element) => {
-    newPrices[element.key] = element.key, newPrices[element.value] = element.value * percentage / 100;
-  });
-  return newPrices;
+  // const newPrices = {};
+  // Object.entries(data.prices).forEach((element) => {
+  //   newPrices[element.key] = element.key, newPrices[element.value] = (element.value * percentage) / 100;
+  // });
+  // return newPrices;
 }
-console.log(increasePrices(10));
+// console.log(increasePrices(10));
 
 function employeeCoverage(idOrName) {
   // seu código aqui
