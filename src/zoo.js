@@ -55,23 +55,25 @@ function entryCalculator(entrants) {
     return 0;
   }
   let total = 0;
-  for (let index in Object.keys(entrants)) {
-    switch (Object.keys(entrants)[index]) {
+  for (const index in Object.keys(entrants)) {
+    let person = Object.keys(entrants)[index];
+    switch (person) {
       case 'Adult':
         total += 49.99 * Object.values(entrants)[index];
         break;
       case 'Senior':
         total += 24.99 * Object.values(entrants)[index];
         break;
-      case "Child":
+      case 'Child':
         total += 20.99 * Object.values(entrants)[index];
         break;
+      default:
+        break;
     }
-  };
+  }
   return total;
 }
 
-console.log(entryCalculator({ 'Adult': 2, 'Child': 3, 'Senior': 1 }));
 function animalMap(options) {
   // seu código aqui
 }
