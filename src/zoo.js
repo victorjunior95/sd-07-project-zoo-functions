@@ -152,9 +152,35 @@ function increasePrices(percentage) {
   prices.Child = (Math.round((childPrice + (childPrice * (percentage / 100))) * 100)) / 100;
 }
 
+const mapThenFind = arr => arr.map(index2 => animals.find(animal => animal.id === index2).name);
+
+const namesEmployee = employees.map(employee => `${employee.firstName} ${employee.lastName}`);
+const teste = employees.map(employee => employee.responsibleFor);
+const animalsTeste2 = teste.map(index => mapThenFind(index));
+let nameWithAnimals = {};
+namesEmployee.forEach((name, index) => (nameWithAnimals[name] = animalsTeste2[index]));
+
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (idOrName === undefined) {
+    return nameWithAnimals;
+  }
+  const isFirstName = name => name === idOrName;
+  const isLastName = name => name === idOrName;
+  const isID = name => name === idOrName;
+
+  const findEmployee = employees.find(employee => (
+    isFirstName(employee.firstName) ||
+    isID(employee.id) ||
+    isLastName(employee.lastName)
+  ));
+  const employeeFullName = `${findEmployee.firstName} ${findEmployee.lastName}`;
+  let animalIDs = findEmployee.responsibleFor;
+  animalIDs = animalIDs.map(id => animals.find(animal => animal.id === id).name);
+  nameWithAnimals = {};
+  nameWithAnimals[employeeFullName] = animalIDs;
+  return nameWithAnimals;
 }
+
 
 module.exports = {
   entryCalculator,
