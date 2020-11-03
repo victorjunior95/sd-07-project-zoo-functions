@@ -13,14 +13,19 @@ const data = require('./data');
 const { prices, employees, animals } = require('./data');
 
 function animalsByIds(...ids) {
-  const find = ids.map(id => data.animals.find(element => element.id === id));
+  const find = ids.map(id => animals.find(element => element.id === id));
   return find;
 }
 
 function animalsOlderThan(animal, age) {
-  const found = data.animals.find(element => element.name === animal);
+  const found = animals.find(element => element.name === animal);
   const result = found.residents.every(element => element.age > age);
   return result;
+}
+
+function findEmployee(id) {
+  const res = employees.find(e => e.firstName === id || e.lastName === id || e.id === id);
+  return res;
 }
 
 function employeeByName(empName) {
@@ -30,7 +35,6 @@ function employeeByName(empName) {
   return findEmployee(empName);
 }
 
-console.log(employeeByName('Emery'));
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
@@ -46,12 +50,12 @@ function addEmployee(id, firstName, lastName, managers, responsibleFor) {
 function animalCount(species) {
   if (species === undefined) {
     const count = {};
-    data.animals.forEach((element) => {
+    animals.forEach((element) => {
       count[element.name] = element.residents.length;
     });
     return count;
   }
-  const rage = data.animals.filter(element => element.name === species);
+  const rage = animals.filter(element => element.name === species);
   return rage[0].residents.length;
 }
 
@@ -96,28 +100,19 @@ function increasePrices(percentage) {
   });
 }
 
-function findEmployee(nameOrId) {
-  const result = employees.find((element) => {
-    return element.firstName === nameOrId || element.lastName === nameOrId || element.id === nameOrId;
-  });
-  return result;
-}
-
 function nameOfAnimalsById(id) {
-  const result = animals.filter(element => element.id === id);
+  const result = animals.find(element => element.id === id);
   return result.name;
 }
 
-function employeeCoverage(idOrName) { //expected = { 'Stephanie Strauss': ['giraffes', 'otters'] };
+function employeeCoverage(idOrName) {
   const employee = findEmployee(idOrName);
-  const fullname = `${employee.firstName} ${employee.lastName}`;
-  let workWith = [];
   employee.responsibleFor.forEach(element => {
     console.log(nameOfAnimalsById(element));
   });
 }
-employeeCoverage('Azevado');
 
+employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
 module.exports = {
   entryCalculator,
   schedule,
