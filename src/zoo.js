@@ -106,13 +106,29 @@ function nameOfAnimalsById(id) {
 }
 
 function employeeCoverage(idOrName) {
+  if (idOrName === undefined) {
+    const allEmployees = {};
+    employees.forEach((element) => {
+      const animalsName = [];
+      element.responsibleFor.forEach((el) => {
+        animalsName.push(nameOfAnimalsById(el));
+        const fullName = `${element.firstName} ${element.lastName}`;
+        allEmployees[fullName] = animalsName;
+      });
+    });
+    return allEmployees;
+  }
   const employee = findEmployee(idOrName);
-  employee.responsibleFor.forEach(element => {
-    console.log(nameOfAnimalsById(element));
+  const fullName = `${employee.firstName} ${employee.lastName}`;
+  const animalsName = [];
+  employee.responsibleFor.forEach((element) => {
+    animalsName.push(nameOfAnimalsById(element));
   });
+  const result = {};
+  result[fullName] = animalsName;
+  return result;
 }
 
-employeeCoverage('4b40a139-d4dc-4f09-822d-ec25e819a5ad');
 module.exports = {
   entryCalculator,
   schedule,
