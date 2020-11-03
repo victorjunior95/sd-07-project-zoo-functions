@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { prices } = require('./data');
+const { prices, employees, animals } = require('./data');
 
 function animalsByIds(...ids) {
   const find = ids.map(id => data.animals.find(element => element.id === id));
@@ -27,15 +27,16 @@ function employeeByName(empName) {
   if (empName === undefined) {
     return {};
   }
-  return data.employees.find(name => name.firstName === empName || name.lastName === empName);
+  return findEmployee(empName);
 }
 
+console.log(employeeByName('Emery'));
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
 
 function isManager(id) {
-  return data.employees.some(element => element.managers.some(person => person === id));
+  return employees.some(element => element.managers.some(person => person === id));
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
@@ -95,9 +96,27 @@ function increasePrices(percentage) {
   });
 }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
+function findEmployee(nameOrId) {
+  const result = employees.find((element) => {
+    return element.firstName === nameOrId || element.lastName === nameOrId || element.id === nameOrId;
+  });
+  return result;
 }
+
+function nameOfAnimalsById(id) {
+  const result = animals.filter(element => element.id === id);
+  return result.name;
+}
+
+function employeeCoverage(idOrName) { //expected = { 'Stephanie Strauss': ['giraffes', 'otters'] };
+  const employee = findEmployee(idOrName);
+  const fullname = `${employee.firstName} ${employee.lastName}`;
+  let workWith = [];
+  employee.responsibleFor.forEach(element => {
+    console.log(nameOfAnimalsById(element));
+  });
+}
+employeeCoverage('Azevado');
 
 module.exports = {
   entryCalculator,
