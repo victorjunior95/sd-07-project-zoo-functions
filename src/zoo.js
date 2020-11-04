@@ -156,6 +156,12 @@ function animalMap(options = {}) {
 //     };
 //   }, objetoInicial);
 // }
+function ampm(hour) {
+  if (hour > 12) {
+    return (`${hour - 12}pm`);
+  }
+  return (`${hour}am`);
+}
 
 function schedule(dayName = false) {
 // seu código aqui
@@ -185,6 +191,9 @@ function oldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   // seu código aqui
+  Object.keys(data.prices).map(
+    key => (data.prices[key] = Math.round(data.prices[key] * ((percentage / 100) + 1) * 100) / 100),
+  );
 }
 
 function employeeCoverage(idOrName) {
