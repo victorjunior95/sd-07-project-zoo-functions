@@ -31,7 +31,7 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 
 5. Adicione as mudanças ao _stage_ do Git e faça um `commit`
   * Verifique que as mudanças ainda não estão no _stage_
-    * Exemplo: `git status` (deve aparecer listada a pasta _joaozinho_ em vermelho)
+    * Exemplo: `git status` (deve ap11arecer listada a pasta _joaozinho_ em vermelho)
   * Adicione o novo arquivo ao _stage_ do Git
       * Exemplo:
         * `git add .` (adicionando todas as mudanças - _que estavam em vermelho_ - ao stage do Git)
