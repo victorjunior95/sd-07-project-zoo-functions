@@ -10,14 +10,15 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
+const { employees, animals, prices, hours } = require('./data');
 
 // a "especie" não é o nome, é o objeto todo ?!
 function animalsByIds(...ids) {
-  return data.animals.filter(({ id }) => ids.includes(id)); 
+  return data.animals.filter(({ id }) => ids.includes(id));
 }
 
 // Tentar novamente mudar o nome da entrada do Age
-function animalsOlderThan(animal, ages) { 
+function animalsOlderThan(animal, ages) {
   return data.animals
     .find(({ name }) => name === animal)
     .residents.every(({ age: animalAge }) => animalAge >= ages);
@@ -31,7 +32,7 @@ function employeeByName(employeeName) {
 }
 
 // Essa é tão fácil quanto aberto era o enunciado
-function createEmployee(personalInfo, associatedWith) { 
+function createEmployee(personalInfo, associatedWith) {
   return {
     ...personalInfo,
     ...associatedWith,
@@ -71,19 +72,67 @@ function entryCalculator(entrants) {
   return totalAdult + totalSenior + totalChild;
 }
 
-function animalMap(options) {
-  const locations = retrieveAvailableLocations();
-  if (!options) return retrieveAnimalsPerLocations(locations);
-}
-
-function retrieveAvailableLocations () {
+function retrieveAvailableLocations() {
   return ['N', 'S', 'E', 'W', 'NE', 'NW', 'SW', 'SE'];
 }
 
-function retrieveAnimalsPerLocations () {
+function retrieveAnimalsPerLocations(locations) {
+  const animalsPerLocation = {};
 
+  locations.forEach((location) => {
+    const filteredAnimals = animals.filter(animal => animal.location === location);
+    const animalsName = filteredAnimals.map(animal => animal.name);
+
+    if (animalsName.length !== 0) {
+      animalsPerLocation[location] = animalsName;
+    }
+  });
+
+  return animalsPerLocation;
 }
 
+function retrieveAnimalsPerLocationsWithName(locations, sorted, sex) {
+  const animalsPerLocation = {};
+
+  locations.forEach((location) => {
+    const filteredAnimals = animals
+    .filter(animal => animal.location === location)
+    .map((animal) => {
+      const animalName = animal.name;
+      const resident = animal.residents
+      .filter((resident) => {
+        const needFiltering = sex !== undefined;
+        return needFiltering ? resident.sex === sex : true
+        // if (needFiltering) {
+        //   return resident.sex === sex;
+        // } else {
+        //   return true;
+        // }
+      })
+      .map(residents => residents.name);
+
+      if (sorted) resident.sort(); 
+
+      return { [animalName]: resident };
+    });
+    if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
+    return filteredAnimals;
+  })
+
+  return animalsPerLocation;
+}
+
+function animalMap(options) {
+  const locations = retrieveAvailableLocations();
+  if (!options) return retrieveAnimalsPerLocations(locations);
+  const { includeNames = false, sorted = false, sex } = options;
+  if (includeNames) {
+    return retrieveAnimalsPerLocationsWithName(locations, sorted, sex);
+  } else {
+    return retrieveAnimalsPerLocations(locations);
+  }
+
+}
 
 function schedule(dayName) {
   const hours = Object.keys(data.hours);
@@ -112,7 +161,9 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // complicado
+  Object.keys(prices).map(
+    key => (prices[key] = Math.round(prices[key] * ((percentage / 100) + 1) * 100) / 100),
+  );
 }
 
 function employeeCoverage(idOrName) {
