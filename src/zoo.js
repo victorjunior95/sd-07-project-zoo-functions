@@ -11,14 +11,16 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+// a "especie" não é o nome, é o objeto todo ?!
 function animalsByIds(...ids) {
-  return data.animals.filter(({ id }) => ids.includes(id));
+  return data.animals.filter(({ id }) => ids.includes(id)); 
 }
 
-function animalsOlderThan(animal, age) {
+// Tentar novamente mudar o nome da entrada do Age
+function animalsOlderThan(animal, age) { 
   return data.animals
     .find(({ name }) => name === animal)
-    .residents.every(({ age: ageRes }) => ageRes >= age);
+    .residents.every(({ age: animalAge }) => animalAge >= age);
 }
 
 function employeeByName(employeeName) {
@@ -28,7 +30,8 @@ function employeeByName(employeeName) {
   );
 }
 
-function createEmployee(personalInfo, associatedWith) {
+// Essa é tão fácil quanto aberto era o enunciado
+function createEmployee(personalInfo, associatedWith) { 
   return {
     ...personalInfo,
     ...associatedWith,
@@ -36,11 +39,11 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some(({ managers }) => managers.some(idManage => id === idManage));
+  return data.employees.some(employeeId => employeeId.managers.includes(id));
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
-  // erro no teste unitário, a entrada tem que estar zerada.
+  // erro no teste unitário que a entrada tem que estar zerada?
   data.employees.push({ id, firstName, lastName, managers, responsibleFor });
 }
 
@@ -72,8 +75,25 @@ function animalMap(options) {
   // fazer por último
 }
 
+const hours = require('./data');
+
 function schedule(dayName) {
-  // complicado
+  const days = Object.keys(hours);
+  const completedSchedule = {};
+
+  days.forEach((day) => {
+    if (day !== 'Monday') {
+      completedSchedule[day] = `Open from ${hours[day].open}am until ${
+        hours[day].close - 12
+      }pm`;
+    } else {
+      completedSchedule[day] = 'CLOSED';
+    }
+  });
+
+  return dayName
+    ? { [dayName]: completedSchedule[dayName] }
+    : completedSchedule;
 }
 
 function oldestFromFirstSpecies(id) {
