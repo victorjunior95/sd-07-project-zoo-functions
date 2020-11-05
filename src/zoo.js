@@ -17,10 +17,10 @@ function animalsByIds(...ids) {
 }
 
 // Tentar novamente mudar o nome da entrada do Age
-function animalsOlderThan(animal, age) { 
+function animalsOlderThan(animal, ages) { 
   return data.animals
     .find(({ name }) => name === animal)
-    .residents.every(({ age: animalAge }) => animalAge >= age);
+    .residents.every(({ age: animalAge }) => animalAge >= ages);
 }
 
 function employeeByName(employeeName) {
@@ -72,22 +72,32 @@ function entryCalculator(entrants) {
 }
 
 function animalMap(options) {
-  // fazer por último
+  const locations = retrieveAvailableLocations();
+  if (!options) return retrieveAnimalsPerLocations(locations);
 }
 
+function retrieveAvailableLocations () {
+  return ['N', 'S', 'E', 'W', 'NE', 'NW', 'SW', 'SE'];
+}
+
+function retrieveAnimalsPerLocations () {
+
+}
+
+
 function schedule(dayName) {
-  const keys = Object.keys(data.hours);
-  const dayTimes = {};
-  const nameTimes = {};
-  keys.forEach(function (key) {
-    const result = key !== 'Monday' ? dayTimes[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm` : dayTimes[key] = 'CLOSED';
+  const hours = Object.keys(data.hours);
+  const dayTime = {};
+  const nameTime = {};
+  hours.forEach(function (key) {
+    const result = key !== 'Monday' ? dayTime[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm` : dayTime[key] = 'CLOSED';
     return result;
   });
   if (!dayName) {
-    return dayTimes;
+    return dayTime;
   }
-  nameTimes[dayName] = dayTimes[dayName];
-  return nameTimes;
+  nameTime[dayName] = dayTime[dayName];
+  return nameTime;
 }
 
 function oldestFromFirstSpecies(id) {
