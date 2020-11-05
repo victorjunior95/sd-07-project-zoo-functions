@@ -10,7 +10,7 @@ eslint no-unused-vars: [
 */
 
 const data = require('./data');
-const { employees, animals, prices, hours } = require('./data');
+const { animals, prices } = require('./data');
 
 // a "especie" não é o nome, é o objeto todo ?!
 function animalsByIds(...ids) {
@@ -99,10 +99,10 @@ function retrieveAnimalsPerLocationsWithName(locations, sorted, sex) {
     .filter(animal => animal.location === location)
     .map((animal) => {
       const animalName = animal.name;
-      const resident = animal.residents
+      const res = animal.residents
       .filter((resident) => {
         const needFiltering = sex !== undefined;
-        return needFiltering ? resident.sex === sex : true
+        return needFiltering ? resident.sex === sex : true;
         // if (needFiltering) {
         //   return resident.sex === sex;
         // } else {
@@ -111,13 +111,13 @@ function retrieveAnimalsPerLocationsWithName(locations, sorted, sex) {
       })
       .map(residents => residents.name);
 
-      if (sorted) resident.sort(); 
+      if (sorted) res.sort();
 
-      return { [animalName]: resident };
+      return { [animalName]: res };
     });
     if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
     return filteredAnimals;
-  })
+  });
 
   return animalsPerLocation;
 }
@@ -128,10 +128,8 @@ function animalMap(options) {
   const { includeNames = false, sorted = false, sex } = options;
   if (includeNames) {
     return retrieveAnimalsPerLocationsWithName(locations, sorted, sex);
-  } else {
-    return retrieveAnimalsPerLocations(locations);
   }
-
+  return retrieveAnimalsPerLocations(locations);
 }
 
 function schedule(dayName) {
