@@ -75,25 +75,19 @@ function animalMap(options) {
   // fazer por último
 }
 
-const hours = require('./data');
-
 function schedule(dayName) {
-  const days = Object.keys(hours);
-  const completedSchedule = {};
-
-  days.forEach((day) => {
-    if (day !== 'Monday') {
-      completedSchedule[day] = `Open from ${hours[day].open}am until ${
-        hours[day].close - 12
-      }pm`;
-    } else {
-      completedSchedule[day] = 'CLOSED';
-    }
+  const keys = Object.keys(data.hours);
+  const dayTimes = {};
+  const nameTimes = {};
+  keys.forEach(function (key) {
+    const result = key !== 'Monday' ? dayTimes[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm` : dayTimes[key] = 'CLOSED';
+    return result;
   });
-
-  return dayName
-    ? { [dayName]: completedSchedule[dayName] }
-    : completedSchedule;
+  if (!dayName) {
+    return dayTimes;
+  }
+  nameTimes[dayName] = dayTimes[dayName];
+  return nameTimes;
 }
 
 function oldestFromFirstSpecies(id) {
