@@ -43,7 +43,8 @@ function animalCount(species) {
 }
 
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (!entrants || Object.entries(entrants).length === 0) return 0;
+  return Object.keys(entrants).reduce((ac, cur) => ac + (entrants[cur] * data.prices[cur]),0);
 }
 
 // function retrieveAvailableLocations() {
