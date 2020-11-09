@@ -76,18 +76,18 @@ function animalMap(options) {
 }
 
 function schedule(dayName) {
-  const open = Object.assign({}, data.hours);
-  Object.keys(open).forEach((key) => {
-    const init = open[key].init;
-    const end = open[key].end;
+  const openingTime = Object.assign({}, data.hours);
+  Object.keys(openingTime).forEach((el) => {
+    const start = openingTime[el].open;
+    const end = openingTime[el].close;
 
-    if (init === 0 || end === 0) open[key] = 'CLOSED';
-    else open[key] = `Doors openen from ${init}am to ${end - 12}pm`;
+    if (start === 0 || end === 0) openingTime[el] = 'CLOSED';
+    else openingTime[el] = `Open from ${start}am until ${end - 12}pm`;
   });
-  if (!dayName) return open;
+  if (!dayName) return openingTime;
 
   return {
-    [dayName]: open[dayName],
+    [dayName]: openingTime[dayName],
   };
 }
 
@@ -109,16 +109,7 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
-  const obj = {};
-  if (idOrName === undefined) {
-    data.employees.forEach((emp) => {
-      Object.assign(obj, returnObjEmployee(emp));
-    });
-  } else {
-    const objEmp = findByIdOrName(idOrName);
-    Object.assign(obj, returnObjEmployee(objEmp));
-  }
-  return obj;
+
 }
 
 module.exports = {
