@@ -109,7 +109,16 @@ function increasePrices(percentage) {
 
 function employeeCoverage(idOrName) {
   // seu código aqui
-
+  const obj = {};
+  if (idOrName === undefined) {
+    data.employees.forEach((emp) => {
+      Object.assign(obj, returnObjEmployee(emp));
+    });
+  } else {
+    const objEmp = findByIdOrName(idOrName);
+    Object.assign(obj, returnObjEmployee(objEmp));
+  }
+  return obj;
 }
 
 module.exports = {
