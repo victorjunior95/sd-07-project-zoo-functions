@@ -53,21 +53,6 @@ function entryCalculator(entrants) {
   return Object.keys(entrants).reduce((ac, cur) => ac + (entrants[cur] * data.prices[cur]), 0);
 }
 
-// function retrieveAvailableLocations() {
-//   return ['NE', 'E', 'NW', 'SW', 'SE'];
-// }
-
-// function retrieveAnimalsPerLocation(locations) {
-  // const animalsPerLocation = {};
-
-  // locations.forEach((location) => {
-  //   const filteredAnimals = animals
-  //   .filter((animal) => animal.location === location ).map((animal) => animal.name);
-  //   console.log(`Localização: ${location}`);
-  //   console.log(filteredAnimals);
-  // });
-// }
-
 function animalMap(options) {
   // const locations = retrieveAvailableLocations();
 
@@ -108,8 +93,29 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  function search(el) {
+    return el.map(id => data.animals.find(ele => ele.id === id).name);
+  }
 
+  function findEmp(inf) {
+    const empObj = data.employees.find(emp =>
+      emp.id === inf ||
+      emp.firstName === inf ||
+      emp.lastName === inf,
+      );
+    return empObj;
+  }
+  const result = data.employees.reduce((acc, { firstName, lastName, responsibleFor }) => {
+    acc[`${firstName} ${lastName}`] = search(responsibleFor);
+    return acc;
+  }, {});
+
+  if (!idOrName) return result;
+
+  const empInf = {};
+  const { firstName, lastName, responsibleFor } = findEmp(idOrName);
+  empInf[`${firstName} ${lastName}`] = search(responsibleFor);
+  return empInf;
 }
 
 module.exports = {
