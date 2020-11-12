@@ -52,7 +52,9 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  // seu código aqui
+  const validateId = employees.some(employee => employee.managers
+    .find(idAtual => idAtual === id));
+  return validateId;
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
