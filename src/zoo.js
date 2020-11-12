@@ -158,9 +158,9 @@ function schedule(dayName) {
 
 function oldestFromFirstSpecies(id) {
   let convertToArray;
-  data.employees.forEach((employee) => {
-    if (employee.id === id) {
-      const oldestAnimal = employee.responsibleFor[0];
+  data.employees.forEach((atualEmployee) => {
+    if (atualEmployee.id === id) {
+      const oldestAnimal = atualEmployee.responsibleFor[0];
       data.animals.forEach((atualAnimal) => {
         if (atualAnimal.id === oldestAnimal) {
           convertToArray = Object.values(
@@ -183,8 +183,29 @@ function increasePrices(percentage) {
 }
 
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  const listOfEmployees = {};
+  data.employees.forEach((employee) => {
+    const fullName = `${employee.firstName} ${employee.lastName}`;
+    const allAnimals = employee.responsibleFor.map(
+      id => data.animals.find(animal => animal.id === id).name,
+    );
+    listOfEmployees[fullName] = allAnimals;
+  });
+  if (typeof idOrName === 'undefined') return listOfEmployees;
+  const employee = data.employees.find(
+    employeeInfo =>
+      employeeInfo.id === idOrName ||
+      employeeInfo.firstName === idOrName ||
+      employeeInfo.lastName === idOrName,
+  );
+  return {
+    [`${employee.firstName} ${employee.lastName}`]: listOfEmployees[
+      `${employee.firstName} ${employee.lastName}`
+    ],
+  };
 }
+
+employeeCoverage();
 
 module.exports = {
   entryCalculator,
