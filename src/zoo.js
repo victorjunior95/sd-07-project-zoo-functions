@@ -141,7 +141,12 @@ function schedule(dayName) {
   const dayTimes = {};
   const nameTimes = {};
   keys.forEach(function (key) {
-    const result = key !== 'Monday' ? dayTimes[key] = `Open from ${data.hours[key].open}am until ${data.hours[key].close - 12}pm` : dayTimes[key] = 'CLOSED';
+    const result =
+      key !== 'Monday'
+        ? (dayTimes[key] = `Open from ${data.hours[key].open}am until ${
+            data.hours[key].close - 12
+          }pm`)
+        : (dayTimes[key] = 'CLOSED');
     return result;
   });
   if (!dayName) {
@@ -152,7 +157,20 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  let convertToArray;
+  data.employees.forEach((employee) => {
+    if (employee.id === id) {
+      const oldestAnimal = employee.responsibleFor[0];
+      data.animals.forEach((atualAnimal) => {
+        if (atualAnimal.id === oldestAnimal) {
+          convertToArray = Object.values(
+            atualAnimal.residents.reduce((acc, cur) => (cur.age > acc.age ? cur : acc)),
+          );
+        }
+      });
+    }
+  });
+  return convertToArray;
 }
 
 function increasePrices(percentage) {
