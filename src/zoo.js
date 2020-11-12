@@ -14,7 +14,7 @@ const data = require('./data');
 const { animals } = data; // object destructuring [, employees, prices, hours]
 
 function animalsByIds(...ids) {
-  return ids.map( idFind => animals.find ( animal  =>  animal.id  ===  idFind ) );
+  return ids.map(idFind => animals.find(animal => animal.id === idFind));
 }
 
 function animalsOlderThan(animal, age) {
