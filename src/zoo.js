@@ -24,15 +24,15 @@ function animalsOlderThan(animal, age) {
   return getAnimal;
 }
 
+function validateEmployeeName(employee, employeeName) {
+  return (employee.firstName === employeeName) || (employee.lastName === employeeName);
+}
+
 function employeeByName(employeeName) {
   const noParams = {};
   if (!employeeName) return (noParams);
 
-  function validateEmployeeName(employee) {
-    return (employee.firstName === employeeName) || (employee.lastName === employeeName);
-  }
-
-  const getEmployee = employees.find(employee => validateEmployeeName(employee));
+  const getEmployee = employees.find(employee => validateEmployeeName(employee, employeeName));
   return getEmployee;
 }
 
