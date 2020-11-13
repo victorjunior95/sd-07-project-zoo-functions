@@ -52,7 +52,11 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function animalCount(species) {
-  // seu código aqui
+  // Sem parâmetros, retorna um OBJECT animais e suas quantidades
+  if (!species) return (animals.reduce((acc, object) => 
+    Object.assign(acc, { [object.name]: object.residents.length}), {}));
+  // Com o nome de uma espécie de animal, retorna somente a quantidade
+  return animals.find(({name}) => name === species).residents.length;
 }
 
 function entryCalculator(entrants) {
