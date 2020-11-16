@@ -1,66 +1,132 @@
-/*
-eslint no-unused-vars: [
-  "error",
-  {
-    "args": "none",
-    "vars": "local",
-    "varsIgnorePattern": "data"
-  }
-]
-*/
-
 const data = require('./data');
 
 function animalsByIds(ids) {
-  // seu código aqui
+  const findMap = ids.map(id => animals.find(element => element.id === id));
+  return findMap;
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const animalsOlder = animals.find(element => element.name === animal);
+  const final
+  Result = animalsOrder.residents.every(element => element.age > age);
+  return finalResult;
 }
 
-function employeeByName(employeeName) {
-  // seu código aqui
-}
 
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+function findEmployee(id) {
+  const res = employees.find(e => e.firstName === id || e.lastName === id || e.id === id);
+  return res;
+}
+function employeeByName(empName) {
+  if (empName === undefined) {
+    return {};
+  }
+  return findEmployee(empName);
 }
 
 function isManager(id) {
-  // seu código aqui
+  return employees.some(element => element.managers.some(person => person === id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const employee = { id, firstName, lastName, managers, responsibleFor };
+  employees.push(employee);
 }
-
 function animalCount(species) {
-  // seu código aqui
+  if (species === undefined) {
+    const count = {};
+    animals.forEach((element) => {
+      count[element.name] = element.residents.length;
+    });
+    return count;
+  }
+  const rage = animals.filter(element => element.name === species);
+  return rage[0].residents.length;
 }
-
 function entryCalculator(entrants) {
-  // seu código aqui
+  if (entrants === undefined || Object.keys(entrants).length === 0) {
+    return 0;
+  }
+  let total = 0;
+  Object.entries(entrants).forEach((element) => {
+    switch (element[0]) {
+      case 'Adult':
+        total += 49.99 * element[1];
+        break;
+      case 'Senior':
+        total += 24.99 * element[1];
+        break;
+      case 'Child':
+        total += 20.99 * element[1];
+        break;
+      default:
+        break;
+    }
+  });
+  return total;
 }
-
 function animalMap(options) {
-  // seu código aqui
+
 }
 
 function schedule(dayName) {
-  // seu código aqui
+  const resultWithDayName = {};
+  const resultComplete = {};
+  resultComplete.Sunday = `Open from ${hours.Sunday.open}am until 8pm`;
+  resultComplete.Monday = 'CLOSED';
+  resultComplete.Tuesday = `Open from ${hours.Tuesday.open}am until 6pm`;
+  resultComplete.Wednesday = `Open from ${hours.Wednesday.open}am until 6pm`;
+  resultComplete.Thursday = `Open from ${hours.Thursday.open}am until 8pm`;
+  resultComplete.Friday = `Open from ${hours.Friday.open}am until 8pm`;
+  resultComplete.Saturday = `Open from ${hours.Saturday.open}am until 10pm`;
+  if (dayName === undefined) {
+    return resultComplete;
+  }
+  resultWithDayName[dayName] = resultComplete[dayName];
+  return resultWithDayName;
 }
-
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
+  const employee = findEmployee(id);
+  const AniGroup = animals.find(element => element.id === employee.responsibleFor[0]);
+  let result = Anigroup.residents[0];
+  group.residents.forEach((resident) => {
+    if (resident.age > result.age) {
+      result = resident;
+    }
+  });
+  return Object.values(result);
 }
-
 function increasePrices(percentage) {
-  // seu código aqui
+  Object.keys(prices).forEach((element) => {
+    prices[element] = Math.round((prices[element] * (1 + (percentage / 100))) * 100) / 100;
+  });
 }
-
+function nameOfAnimalsById(id) {
+  const result = animals.find(element => element.id === id);
+  return result.name;
+}
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (idOrName === undefined) {
+    const allEmployees = {};
+    employees.forEach((element) => {
+      const animals = [];
+      element.responsibleFor.forEach((el) => {
+        animals.push(nameOfAnimalsById(el));
+        const fullName = `${element.firstName} ${element.lastName}`;
+        allEmployees[fullName] = animals;
+      });
+    });
+    return allEmployees;
+  }
+  const employee = findEmployee(idOrName);
+  const fullName = `${employee.firstName} ${employee.lastName}`;
+  const animals = [];
+  employee.responsibleFor.forEach((element) => {
+    animals.push(nameOfAnimalsById(element));
+  });
+  const result = {};
+  result[fullName] = animals;
+  return result;
 }
 
 module.exports = {
