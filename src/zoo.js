@@ -5,13 +5,6 @@ function animalsByIds(ids) {
   return findMap;
 }
 
-function animalsOlderThan(animal, age) {
-  const animalsOlder = animals.find(element => element.name === animal);
-  const final
-  return finalResult;
-}
-
-
 function findEmployee(id) {
   const res = employees.find(e => e.firstName === id || e.lastName === id || e.id === id);
   return res;
@@ -36,7 +29,7 @@ function animalCount(species) {
     const count = {};
     animals.forEach((element) => {
       count[element.name] = element.residents.length;
-    });git statu
+    });
     return count;
   }
   const rage = animals.filter(element => element.name === species);
