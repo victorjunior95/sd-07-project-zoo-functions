@@ -149,9 +149,38 @@ function increasePrices(percentage) {
   return prices;
 }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
+function employeeAndAnimalsObject() {
+  const obj = {};
+  employees.forEach((employee) => {
+    obj[`${employee.firstName} ${employee.lastName}`] =
+    employee.responsibleFor.map(currentId =>
+      animals.find(specie => specie.id === currentId).name);
+  });
+  return obj;
 }
+
+function employeeCoverage(idOrName) {
+  const employeeAndAnimals = employeeAndAnimalsObject();
+  if (!idOrName) return employeeAndAnimals;
+
+  // (167 - 178) = referência do Elano da nossa Turma 07.
+  const selected = employees.filter(employee =>
+    employee.id === idOrName ||
+    employee.firstName === idOrName ||
+    employee.lastName === idOrName,
+  );
+
+  const responsibles = selected[0].responsibleFor.map(currentId =>
+    animals.find(specie => specie.id === currentId).name);
+
+  const result = {
+    [`${selected[0].firstName} ${selected[0].lastName}`]: responsibles,
+  };
+
+  return result;
+}
+
+// console.log(employeeCoverage('Azevado'));
 
 module.exports = {
   entryCalculator,
