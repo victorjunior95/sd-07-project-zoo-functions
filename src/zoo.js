@@ -195,7 +195,6 @@ function employeeCoverage(idOrName) {
 }
 
 
-
 module.exports = {
   entryCalculator,
   schedule,
