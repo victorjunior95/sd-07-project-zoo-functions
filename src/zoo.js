@@ -14,53 +14,53 @@ const { animals, employees, prices, hours } = require('./data');
 
 
 function animalsByIds(...ids) {
-   // seu código aqui
+  // seu código aqui
   if (ids.length === 0) return [];
   return animals.filter((animal, index) => animal.id === ids[index]);
-}	
+}
 
 
-	function animalsOlderThan(animal, age) {
+function animalsOlderThan(animal, age) {
   // seu código aqui
   const result = animals.find(element => element.name === animal);
   return result.residents.every(element => element.age >= age);
-}	
+}
 
 
-	function employeeByName(employeeName = '') {
+function employeeByName(employeeName = '') {
   // seu código aqui
   if (employeeName === '') return {};
   return employees.find(element =>
     element.firstName === employeeName || element.lastName === employeeName);
-}	
+}
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
   return Object.assign(personalInfo, associatedWith);
-}	
+}
 
 
 function isManager(id) {
   // seu código aqui
   return employees.some(element => element.managers.includes(id));
-}	
+}
 
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
   // seu código aqui
   return employees.push({ id, firstName, lastName, managers, responsibleFor });
-}	
+}
 
 
 function animalCount(species) {
- // seu código aqui
+  // seu código aqui
   const obj = {};
   if (!species) {
     animals.forEach(element => (obj[element.name] = element.residents.length));
     return obj;
   }
   return animals.find(element => element.name === species).residents.length;
-}	
+}
 
 
 function entryCalculator(entrants) {
@@ -108,7 +108,7 @@ function retrieveAnimals(locations, sorted, sex) {
     animalsByLocationWithName[location] = animalLocation;
   });
   return animalsByLocationWithName;
-}	
+}
 
 
 function animalMap(options) {
@@ -121,11 +121,11 @@ function animalMap(options) {
   if (!includeNames) return retrieveAnimalsByLocation(locations);
 
   return retrieveAnimals(locations, sorted, sex);
-}	
+}
 
 
 function schedule(dayName) {
- // seu código aqui
+  // seu código aqui
   const obj = {};
   const days = Object.keys(hours);
   const scheduleValue = Object.values(hours);
@@ -140,7 +140,7 @@ function schedule(dayName) {
     return obj;
   }
   return { [dayName]: obj[dayName] };
-}	
+}
 
 
 function oldestFromFirstSpecies(id) {
@@ -156,7 +156,7 @@ function oldestFromFirstSpecies(id) {
     return acc;
   });
   return Object.values(olderAnimal);
-}	
+}
 
 
 function increasePrices(percentage) {
@@ -166,7 +166,7 @@ function increasePrices(percentage) {
   prices.Senior = Math.round(prices.Senior * aliquot * 100) / 100;
   prices.Child = Math.round(prices.Child * aliquot * 100) / 100;
   return prices;
-}	
+}
 
 
 function employeeCoverage(idOrName) {
@@ -192,7 +192,7 @@ function employeeCoverage(idOrName) {
     element.lastName === idOrName);
   const fullName = `${employeeData.firstName} ${employeeData.lastName}`;
   return { [fullName]: fullList[fullName] };
-}	
+}
 
 
 
