@@ -37,7 +37,7 @@ function animalCount(species) {
     const count = {};
     animals.forEach((element) => {
       count[element.name] = element.residents.length;
-    });
+    });git statu
     return count;
   }
   const rage = animals.filter(element => element.name === species);
