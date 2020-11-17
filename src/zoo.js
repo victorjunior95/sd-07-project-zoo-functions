@@ -11,57 +11,67 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
+const { animals, employees, hours, prices } = data;
+  // seu código aqui
+
 function animalsByIds(...ids) {
-  if (ids.length === 0) {
-    return [];
-  }
-  const animalById = data.animals.filter(
-    (animal, index) => animal.id === ids[index],
-  );
-  return animalById;
+  if (ids === undefined) return [];
+  return animals.filter(animal => ids.includes(animal.id));
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  const species = animals.find(specie => specie.name === animal);
+  return species.residents.every(residentsAnimal => residentsAnimal.age >= age);
 }
 
-function createEmployee(personalInfo, associatedWith) {}
+function employeeByName(employeeName) {
+  
+  if (employeeName === undefined) return {};
+  return employees.find(emp => emp.firstName === employeeName || emp.lastName === employeeName);
+}
+
+function createEmployee(personalInfo, associatedWith) {
+  return { ...personalInfo, ...associatedWith };
+}
 
 function isManager(id) {
-  // seu código aqui
+  return employees.some(employee => employee.managers.includes(id));
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
+//   // seu código aqui
+// }
 
-function animalCount(species) {
-  // seu código aqui
-}
+// function addEmployee(id, firstName, lastName, managers, responsibleFor) {
+//   // seu código aqui
+// }
 
-function entryCalculator(entrants) {
-  // seu código aqui
-}
+// function animalCount(species) {
+//   // seu código aqui
+// }
 
-function animalMap(options) {
-  // seu código aqui
-}
+// function entryCalculator(entrants) {
+//   // seu código aqui
+// }
 
-function schedule(dayName) {
-  // seu código aqui
-}
+// function animalMap(options) {
+//   // seu código aqui
+// }
 
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
+// function schedule(dayName) {
+//   // seu código aqui
+// }
 
-function increasePrices(percentage) {
-  // seu código aqui
-}
+// function oldestFromFirstSpecies(id) {
+//   // seu código aqui
+// }
 
-function employeeCoverage(idOrName) {
-  // seu código aqui
-}
+// function increasePrices(percentage) {
+//   // seu código aqui
+// }
+
+// function employeeCoverage(idOrName) {
+//   // seu código aqui
+// }
 
 module.exports = {
   entryCalculator,
