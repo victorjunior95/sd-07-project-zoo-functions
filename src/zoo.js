@@ -8,7 +8,6 @@ function animalsByIds(ids) {
 function animalsOlderThan(animal, age) {
   const animalsOlder = animals.find(element => element.name === animal);
   const final
-Result = animalsOrder.residents.every( a => element.age > age);
   return finalResult;
 }
 
