@@ -1,4 +1,4 @@
-const data = require('./data');
+const { animals, employees, hours, prices } = require('./data');
 
 function animalsByIds(ids) {
   const findMap = ids.map(id => animals.find(element => element.id === id));
@@ -6,8 +6,8 @@ function animalsByIds(ids) {
 }
 
 function findEmployee(id) {
-  const res = employees.find(e => e.firstName === id || e.lastName === id || e.id === id);
-  return res;
+  const resulted = employees.find(e => e.firstName === id || e.lastName === id || e.id === id);
+  return resulted;
 }
 function employeeByName(empName) {
   if (empName === undefined) {
