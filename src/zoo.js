@@ -1,5 +1,3 @@
-
-
 const data = require('./data');
 
 function animalsByIds(ids) {
@@ -14,6 +12,7 @@ function employeeByName(employeeName) {
   if (employeeName === undefined) {
     return {};
   }
+}
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
 }
