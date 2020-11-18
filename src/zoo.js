@@ -60,7 +60,6 @@ function entryCalculator(entrants) {
 function animalMap(options) {
 
 }
-
 function schedule(dayName) {
   const resultWithDayName = {};
   const resultComplete = {};
