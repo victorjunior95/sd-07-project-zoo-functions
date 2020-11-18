@@ -1,11 +1,8 @@
-const data = require('./data');
+const {animals, age, species, entrants,} = require('./data');
 
 function animalsByIds(ids) {
   const findMap = ids.map(id => animals.find(element => element.id === id));
   return findMap;
-}
-function animalsOlderThan(animal, age) {
-  // seu código aqui
 }
 
 function employeeByName(employeeName) {
@@ -13,45 +10,33 @@ function employeeByName(employeeName) {
     return {};
   }
 }
-function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
-}
 
 function isManager(id) {
   return employees.some(element => element.managers.some(person => person === id));
 }
 
-
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
-}
-
-function animalCount(species) {
-  // seu código aqui
-}
-
-function entryCalculator(entrants) {
-  // seu código aqui
-}
-
-function animalMap(options) {
-  // seu código aqui
-}
-
-function schedule(dayName) {
-  // seu código aqui
-}
-
-function oldestFromFirstSpecies(id) {
-  // seu código aqui
-}
-
-function increasePrices(percentage) {
-  // seu código aqui
-}
-
 function employeeCoverage(idOrName) {
-  // seu código aqui
+  if (idOrName === undefined) {
+    const allEmployees = {};
+    employees.forEach((element) => {
+      const animals = [];
+      element.responsibleFor.forEach((el) => {
+        animals.push(nameOfAnimalsById(el));
+        const fullName = `${element.firstName} ${element.lastName}`;
+        allEmployees[fullName] = animals;
+      });
+    });
+    return allEmployees;
+  }
+  const employee = findEmployee(idOrName);
+  const fullName = `${employee.firstName} ${employee.lastName}`;
+  const animals = [];
+  employee.responsibleFor.forEach((element) => {
+    animals.push(nameOfAnimalsById(element));
+  });
+  const result = {};
+  result[fullName] = animals;
+  return result;
 }
 
 module.exports = {
