@@ -57,9 +57,7 @@ function entryCalculator(entrants) {
   });
   return total;
 }
-function animalMap(options) {
 
-}
 function schedule(dayName) {
   const resultWithDayName = {};
   const resultComplete = {};
@@ -78,8 +76,8 @@ function schedule(dayName) {
 }
 function oldestFromFirstSpecies(id) {
   const employee = findEmployee(id);
-  const AniGroup = animals.find(element => element.id === employee.responsibleFor[0]);
-  let result = Anigroup.residents[0];
+  const AnimailGroup = animals.find(element => element.id === employee.responsibleFor[0]);
+  let result = Animalgroup.residents[0];
   group.residents.forEach((resident) => {
     if (resident.age > result.age) {
       result = resident;
