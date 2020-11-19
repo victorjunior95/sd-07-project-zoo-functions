@@ -11,7 +11,7 @@ eslint no-unused-vars: [
 
 const data = require('./data');
 
-const { animals, employees, prices } = data; // , hours
+const { animals, employees, hours, prices } = data;
 
 function animalsByIds(...ids) {
   return ids.map(idFind => animals.find(animal => animal.id === idFind));
@@ -72,7 +72,7 @@ function entryCalculator(entrants = 0) {
 
 function namesBySpecieByLocation(speciesByLocation, sorted, sex) {
   const namesBySpecie = {}; // { NE: [ { lions: [Array] }, { giraffes: [Array] } ], NW: ...}
-  Object.keys(speciesByLocation).forEach((item) => {
+  Object.keys(speciesByLocation).forEach((item) => { // ['NE', 'NW' ...]
     const animalsByLocation = animals
       .filter(specie => specie.location === item); // [{lions}, {giraffes}]
     const arrayNamesBySpecie = animalsByLocation.map((specie) => {
@@ -117,29 +117,36 @@ function animalMap(options) {
   if (includeNames) {
     return namesBySpecieByLocation(speciesByLocation, sorted, sex);
   }
-  animals.forEach(({ name, location }) => speciesByLocation[location].push(name));
-  // { NE: ['lions', 'giraffes'], NW: ...}
-
   // 'Só retorna informações ordenadas e com sexo se a opção `includeNames: true` for especificada'
+  animals.forEach(({ name, location }) => speciesByLocation[location].push(name));
+
   return speciesByLocation;
 }
 
 function schedule(dayName) {
   // 'Sem parâmetros, retorna um cronograma legível para humanos'
-  // if(!dayName) { ({ [Object.keys(hours)]: `Open`})
-  // }
-  //     'Tuesday': 'Open from 8am until 6pm',
-  //     'Wednesday': 'Open from 8am until 6pm',
-  //     'Thursday': 'Open from 10am until 8pm',
-  //     'Friday': 'Open from 10am until 8pm',
-  //     'Saturday': 'Open from 8am until 10pm',
-  //     'Sunday': 'Open from 8am until 8pm',
-  //     'Monday': 'CLOSED'
-  // if (!species) {
-  //   return animals.reduce((acc, object) =>
-  //     Object.assign(acc, { [object.name]: object.residents.length }), {});
-  // }
+  const scheduleReadable = {};
+
+  if (!dayName) {
+    Object.keys(hours).forEach((day) => { // ['Tuesday', 'Wednesday' ...]
+      const { open, close } = hours[day]; // Tuesday.open & Tuesday.close
+      if (open === 0) {
+        scheduleReadable[day] = 'CLOSED';
+      } else {
+        const scheduleOfDay = `Open from ${open}am until ${close - 12}pm`;
+        scheduleReadable[day] = scheduleOfDay;
+      }
+    });
+    return scheduleReadable;
+  }
+
   // 'Se um único dia for passado, retorna somente este dia em um formato legível para humanos'
+  if (dayName === 'Monday') {
+    scheduleReadable[dayName] = 'CLOSED';
+    return scheduleReadable;
+  }
+  scheduleReadable[dayName] = `Open from ${hours[dayName].open}am until ${hours[dayName].close - 12}pm`;
+  return scheduleReadable;
 }
 
 function oldestFromFirstSpecies(id) {
