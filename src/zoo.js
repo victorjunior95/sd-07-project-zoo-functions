@@ -72,9 +72,8 @@ function entryCalculator(entrants = 0) {
 
 function animalMap(options) {
   const speciesByLocation = {};
-  animals.forEach(({ location }) => speciesByLocation[location] = [] );
+  animals.forEach(({ location }) => speciesByLocation[location] = []);
   // { NE: [], NW: [], SE: [], SW: [] }
-  
   // 'Sem parâmetros, retorna animais categorizados por localização'
   // { NE: ['lions', 'giraffes'], NW: ...}
   if (!options) {
@@ -88,8 +87,7 @@ function animalMap(options) {
   // 'Com a opção `includeNames: true`, retorna nomes de animais'
   // { NE: [{ 'lions': ['Zena', 'Maxwell' ...]} ...], NW: ... }
   if (includeNames) {
-    const namesBySpecie = {}; // { NE: [ { lions: [?Array?] }, { giraffes: [Array] } ], NW: ...}
-    
+    const namesBySpecie = {}; // { NE: [ { lions: [?Array?] }, { giraffes: [Array] } ], NW: ...}  
     for (location in speciesByLocation) {
     // location -> CHAVE (NE, NW ...)
     // speciesByLocation[location] -> VALUE (lions, giraffes / tigers, bears / ...)
@@ -123,7 +121,7 @@ function animalMap(options) {
 function schedule(dayName) {
   // 'Sem parâmetros, retorna um cronograma legível para humanos'
   // if(!dayName) { ({ [Object.keys(hours)]: `Open`})
-  // } 
+  // }
   //     'Tuesday': 'Open from 8am until 6pm',
   //     'Wednesday': 'Open from 8am until 6pm',
   //     'Thursday': 'Open from 10am until 8pm',
