@@ -70,9 +70,37 @@ function entryCalculator(entrants = 0) {
   return totalValue;
 }
 
+function namesBySpecieByLocation(speciesByLocation, sorted, sex) {
+  const namesBySpecie = {}; // { NE: [ { lions: [Array] }, { giraffes: [Array] } ], NW: ...}
+  Object.keys(speciesByLocation).forEach((item) => {
+    const animalsByLocation = animals
+      .filter(specie => specie.location === item); // [{lions}, {giraffes}]
+    const arrayNamesBySpecie = animalsByLocation.map((specie) => {
+      const nameOfSpecie = specie.name; // lions
+      const residentsBySpecie = specie.residents // [{1o lion}, {2o lion} ...]
+        // 'Com a opção `sex: female/male` especificada, retorna nomes de animais conforme o sexo'
+        .filter((animal) => {
+          const sexIsDefined = sex !== undefined;
+          return (sexIsDefined ? animal.sex === sex : true);
+        })
+        .map(animal => animal.name); // ['Zena', 'Maxwell' ...]
+      // 'Com a opção `sorted: true`, retorna nomes de animais ordenados'
+      /* 'Com a opção `sex: \'female\'ou \'male\'` especificada e
+      a opção `sort: true`, retorna os nomes dos animais ordenados conforme o sexo macho/fêmea' */
+      if (sorted) residentsBySpecie.sort(); // ['Dee', 'Faustino' ...]
+      return { [nameOfSpecie]: residentsBySpecie }; // { 'lions': ['Zena', 'Maxwell' ...] }
+    });
+    namesBySpecie[item] = arrayNamesBySpecie;
+  });
+  return namesBySpecie;
+}
+
 function animalMap(options) {
   const speciesByLocation = {};
-  animals.forEach(({ location }) => speciesByLocation[location] = []);
+  animals.forEach(({ location }) => {
+    speciesByLocation[location] = [];
+    return speciesByLocation[location];
+  });
   // { NE: [], NW: [], SE: [], SW: [] }
   // 'Sem parâmetros, retorna animais categorizados por localização'
   // { NE: ['lions', 'giraffes'], NW: ...}
@@ -87,36 +115,14 @@ function animalMap(options) {
   // 'Com a opção `includeNames: true`, retorna nomes de animais'
   // { NE: [{ 'lions': ['Zena', 'Maxwell' ...]} ...], NW: ... }
   if (includeNames) {
-    const namesBySpecie = {}; // { NE: [ { lions: [?Array?] }, { giraffes: [Array] } ], NW: ...}  
-    for (location in speciesByLocation) {
-    // location -> CHAVE (NE, NW ...)
-    // speciesByLocation[location] -> VALUE (lions, giraffes / tigers, bears / ...)
-      const animalsByLocation = animals
-        .filter(specie => specie.location === location); // [{lions}, {giraffes}]
-      const arrayNamesBySpecie = animalsByLocation.map(specie => {
-        const nameOfSpecie = specie.name; // lions
-        const residentsBySpecie = specie.residents // [{1o lion}, {2o lion} ...]
-          // 'Com a opção `sex: \'female\'` ou `sex: \'male\'` especificada, retorna somente nomes de animais macho/fêmea'
-          .filter(animal => {
-            const sexIsDefined = sex !== undefined;
-            return (sexIsDefined ? animal.sex === sex : true);
-          })
-          .map(animal => animal.name); // ['Zena', 'Maxwell' ...]
-        // 'Com a opção `sorted: true`, retorna nomes de animais ordenados'
-        /* 'Com a opção `sex: \'female\'ou \'male\'` especificada e
-        a opção `sort: true`, retorna os nomes dos animais ordenados conforme o sexo macho/fêmea' */
-        if (sorted) residentsBySpecie.sort(); // ['Dee', 'Faustino' ...]
-        return { [nameOfSpecie]: residentsBySpecie }; // { 'lions': ['Zena', 'Maxwell' ...] }
-      });
-      namesBySpecie[location] = arrayNamesBySpecie;
-    }
-    return namesBySpecie;
-    // console.log(namesBySpecie['NE']);
+    return namesBySpecieByLocation(speciesByLocation, sorted, sex);
   }
+  animals.forEach(({ name, location }) => speciesByLocation[location].push(name));
+  // { NE: ['lions', 'giraffes'], NW: ...}
+
   // 'Só retorna informações ordenadas e com sexo se a opção `includeNames: true` for especificada'
   return speciesByLocation;
 }
-// console.log(animalMap({ sex: 'female' })['NE'][0]);
 
 function schedule(dayName) {
   // 'Sem parâmetros, retorna um cronograma legível para humanos'
