@@ -105,15 +105,15 @@ function increasePrices(percentage) {
     key => (prices[key] = Math.round(prices[key] * ((percentage / 100) + 1) * 100) / 100),
   );
 }
- 
+
 function employeeCoverage(idOrName) {
   const job = {};
   if (idOrName === undefined) {
-    let listOfAnimals = [];
+    const listOfAnimals = [];
     data.employees.forEach((atualJob) => {
       const response = atualJob.responsibleFor;
-      listaDeAnimais = listAnimals(response);
-      job [`${atualJob.firstName} ${atualJob.lastName}`] = listOfAnimals;
+      list = list(response);
+      job[`${atualJob.firstName} ${atualJob.lastName}`] = listOfAnimals;
     });
   } else {
     let list = [];
@@ -123,7 +123,7 @@ function employeeCoverage(idOrName) {
       return Atual.id === idOrName || Atual.firstName === idOrName || Atual.lastName === idOrName;
     }).responsibleFor;
     list = list(responsavelPor);
-    job [`${nomeSobrenome}`] = list;
+    job[`${nomeSobrenome}`] = list;
   }
   return job;
 }
