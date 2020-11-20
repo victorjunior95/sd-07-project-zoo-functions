@@ -128,7 +128,7 @@ function animalMap(options) {
 
   if (includeNames) {
     return retrieveAnimalsPerLocationWithNAme(locations, sorted, sex);
-  } 
+} 
   return retrieveAnimalsPerLocation(locations);
 }
 
