@@ -109,8 +109,8 @@ function increasePrices(percentage) {
 function listAnimals(responsavelPor) {
   const listaDeAnimais = [];
   responsavelPor.forEach((idAtual) => {
-  const animalNome = animals.find(animalAtual => animalAtual.id === idAtual).name;
-  listaDeAnimais.push(animalNome);
+    const animalNome = animals.find(animalAtual => animalAtual.id === idAtual).name;
+    listaDeAnimais.push(animalNome);
   });
   return listaDeAnimais;
 }
