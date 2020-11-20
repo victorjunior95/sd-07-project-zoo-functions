@@ -1,4 +1,5 @@
 const { animals, employees, hours, prices } = require('./data');
+const data = require('./data');
 
 function animalsByIds(ids) {
   const findMap = ids.map(id => animals.find(element => element.id === id));
@@ -6,9 +7,10 @@ function animalsByIds(ids) {
 }
 
 function findEmployee(id) {
-  const resulted = employees.find(e => e.firstName === id || e.lastName === id || e.id === id);
+  const resulted = employees.find(element => element.firstName === id || element.lastName === id || element.id === id);
   return resulted;
 }
+
 function employeeByName(empName) {
   if (empName === undefined) {
     return {};
@@ -36,6 +38,7 @@ function animalCount(species) {
   const rage = animals.filter(element => element.name === species);
   return rage[0].residents.length;
 }
+
 function entryCalculator(entrants) {
   if (entrants === undefined || Object.keys(entrants).length === 0) {
     return 0;
@@ -75,6 +78,7 @@ function schedule(dayName) {
   resultWithDayName[dayName] = resultComplete[dayName];
   return resultWithDayName;
 }
+
 function oldestFromFirstSpecies(id) {
   const employee = findEmployee(id);
   const AnimailGroup = animals.find(element => element.id === employee.responsibleFor[0]);
@@ -86,15 +90,18 @@ function oldestFromFirstSpecies(id) {
   });
   return Object.values(result);
 }
+
 function increasePrices(percentage) {
   Object.keys(prices).forEach((element) => {
     prices[element] = Math.round((prices[element] * (1 + (percentage / 100))) * 100) / 100;
   });
 }
+
 function nameOfAnimalsById(id) {
   const result = animals.find(element => element.id === id);
   return result.name;
 }
+
 function employeeCoverage(idOrName) {
   if (idOrName === undefined) {
     const allEmployees = {};
@@ -120,11 +127,13 @@ function employeeCoverage(idOrName) {
 }
 
 function animalsOlderThan(animal, age) {
-  // seu código aqui
+  return animals
+  .find(animalName => animalName.name === animal)
+  .residents.every(resident => resident.age > age);
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  return { ...personalInfo, ...associatedWith };
 }
 function animalMap(options) {
   // seu código aqui
