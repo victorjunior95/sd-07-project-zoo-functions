@@ -122,7 +122,7 @@ function employeeCoverage(idOrName) {
       nomeSobrenome = `${Atual.firstName} ${Atual.lastName}`;
       return Atual.id === idOrName || Atual.firstName === idOrName || Atual.lastName === idOrName;
     }).responsibleFor;
-    const list = list(responsavelPor);
+    const list = listAnimals(response);
     job[`${nomeSobrenome}`] = list;
   }
   return job;
