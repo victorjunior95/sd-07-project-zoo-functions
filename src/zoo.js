@@ -106,6 +106,15 @@ function increasePrices(percentage) {
   );
 }
 
+function listAnimals(responsavelPor) {
+  const listaDeAnimais = [];
+  responsavelPor.forEach((idAtual) => {
+  const animalNome = animals.find(animalAtual => animalAtual.id === idAtual).name;
+  listaDeAnimais.push(animalNome);
+  });
+  return listaDeAnimais;
+}
+
 function employeeCoverage(idOrName) {
   const empregadoAnimais = {};
   if (idOrName === undefined) {
@@ -127,8 +136,6 @@ function employeeCoverage(idOrName) {
   }
   return empregadoAnimais;
 }
-
-
 
 module.exports = {
   entryCalculator,
