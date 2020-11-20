@@ -109,7 +109,7 @@ function increasePrices(percentage) {
 function employeeCoverage(idOrName) {
   const job = {};
   if (idOrName === undefined) {
-    const listOfAnimals = [];
+    const list = [];
     data.employees.forEach((atualJob) => {
       const response = atualJob.responsibleFor;
       list = list(response);
