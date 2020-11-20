@@ -103,8 +103,8 @@ function increasePrices(percentage) {
   // seu código aqui
   Object.keys(prices).map(
     key => (prices[key] = Math.round(prices[key] * ((percentage / 100) + 1) * 100) / 100),
- };
-}
+  );
+};
 
 function employeeCoverage(idOrName) {
     // seu código aqui
@@ -125,4 +125,3 @@ module.exports = {
     increasePrices,
     createEmployee,
   };
-  
