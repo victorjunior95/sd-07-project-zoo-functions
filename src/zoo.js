@@ -105,28 +105,29 @@ function increasePrices(percentage) {
     key => (prices[key] = Math.round(prices[key] * ((percentage / 100) + 1) * 100) / 100),
   );
 }
-
+ 
 function employeeCoverage(idOrName) {
-  const joobs = {};
+  const job = {};
   if (idOrName === undefined) {
-    let listOfAnimal = [];
-    data.employees.forEach((joobs) => {
-      const responsavelPor = empregadoAtual.responsibleFor;
-      listaDeAnimais = listAnimals(responsavelPor);
-      empregadoAnimais[`${empregadoAtual.firstName} ${empregadoAtual.lastName}`] = listaDeAnimais;
+    let listOfAnimals = [];
+    data.employees.forEach((atualJob) => {
+      const response = atualJob.responsibleFor;
+      listaDeAnimais = listAnimals(response);
+      job [`${atualJob.firstName} ${atualJob.lastName}`] = listOfAnimals;
     });
   } else {
-    let listOfAnimals = [];
-    let nameLastName = '';
-    const response = data.employees.find((Atual) => {
-      nameLastName = `${Atual.firstName} ${Atual.lastName}`;
+    let list = [];
+    let nomeSobrenome = '';
+    const responsavelPor = data.employees.find((Atual) => {
+      nomeSobrenome = `${Atual.firstName} ${Atual.lastName}`;
       return Atual.id === idOrName || Atual.firstName === idOrName || Atual.lastName === idOrName;
     }).responsibleFor;
-    listOfAnimal = listAnimals(response);
-    jobAnimals[`${nameLastName}`] = listOfAnimals;
+    list = list(responsavelPor);
+    job [`${nomeSobrenome}`] = list;
   }
-  return JobAnimals;
+  return job;
 }
+
 
 module.exports = {
   entryCalculator,
