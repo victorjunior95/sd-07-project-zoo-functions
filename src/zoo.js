@@ -20,14 +20,15 @@ function animalsByIds(...ids) {
 
 function animalsOlderThan(animal, age) {
   const species = animals.find(specie => specie.name === animal);
-  return species.residents.every(residentsAnimal => residentsAnimal.age >= age,
+  return species.residents.every(
+    (residentsAnimal) => residentsAnimal.age >= age
   );
 }
 
 function employeeByName(employeeName) {
   if (employeeName === undefined) return {};
   return employees.find(
-    emp => emp.firstName === employeeName || emp.lastName === employeeName,
+    (emp) => emp.firstName === employeeName || emp.lastName === employeeName
   );
 }
 
@@ -44,7 +45,7 @@ function addEmployee(
   firstName,
   lastName,
   managers = [],
-  responsibleFor = [],
+  responsibleFor = []
 ) {
   const newEmployee = { id, firstName, lastName, managers, responsibleFor };
   data.employees.push(newEmployee);
@@ -69,7 +70,7 @@ function entryCalculator(entrants) {
   const totalSum = Object.keys(entrants);
   return totalSum.reduce(
     (acc, crrValue) => (acc += prices[crrValue] * entrants[crrValue]),
-    0,
+    0
   );
 }
 
@@ -86,7 +87,7 @@ function retrieveAnimalsPerLocation(locations) {
 
   locations.forEach((location) => {
     const filteredAnimals = retrieveAnimalsByLocation(location).map(
-      animal => animal.name,
+      (animal) => animal.name
     );
 
     animalsPerLocation[location] = filteredAnimals;
@@ -113,7 +114,7 @@ function retrieveAnimalsPerLocationWithNAme(locations, sorted, sex) {
         if (sorted) residents.sort();
 
         return { [animalName]: residents };
-      },
+      }
     );
     animalsPerlocation[location] = filteredAnimals;
   });
@@ -128,7 +129,8 @@ function animalMap(options) {
 
   if (includeNames) {
     return retrieveAnimalsPerLocationWithNAme(locations, sorted, sex);
-} 
+  }
+
   return retrieveAnimalsPerLocation(locations);
 }
 
