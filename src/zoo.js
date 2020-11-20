@@ -104,24 +104,24 @@ function increasePrices(percentage) {
   Object.keys(prices).map(
     key => (prices[key] = Math.round(prices[key] * ((percentage / 100) + 1) * 100) / 100),
   );
-};
+}
 
 function employeeCoverage(idOrName) {
     // seu código aqui
 }
 
 module.exports = {
-    entryCalculator,
-    schedule,
-    animalCount,
-    animalMap,
-    animalsByIds,
-    employeeByName,
-    employeeCoverage,
-    addEmployee,
-    isManager,
-    animalsOlderThan,
-    oldestFromFirstSpecies,
-    increasePrices,
-    createEmployee,
-  };
+  entryCalculator,
+  schedule,
+  animalCount,
+  animalMap,
+  animalsByIds,
+  employeeByName,
+  employeeCoverage,
+  addEmployee,
+  isManager,
+  animalsOlderThan,
+  oldestFromFirstSpecies,
+  increasePrices,
+  createEmployee,
+};
