@@ -109,10 +109,10 @@ function increasePrices(percentage) {
 function employeeCoverage(idOrName) {
   const job = {};
   if (idOrName === undefined) {
-    const list = [];
+    const listOfAnimals = [];
     data.employees.forEach((atualJob) => {
       const response = atualJob.responsibleFor;
-      list = list(response);
+      list = listAnimals(response);
       job[`${atualJob.firstName} ${atualJob.lastName}`] = listOfAnimals;
     });
   } else {
@@ -122,7 +122,7 @@ function employeeCoverage(idOrName) {
       nomeSobrenome = `${Atual.firstName} ${Atual.lastName}`;
       return Atual.id === idOrName || Atual.firstName === idOrName || Atual.lastName === idOrName;
     }).responsibleFor;
-    list = list(responsavelPor);
+    const list = list(responsavelPor);
     job[`${nomeSobrenome}`] = list;
   }
   return job;
