@@ -1,13 +1,3 @@
-/*
-eslint no-unused-vars: [
-  "error",
-  {
-    "args": "none",
-    "vars": "local",
-    "varsIgnorePattern": "data"
-  }
-]
-*/
 const data = require('./data');
 const { employees, animals, prices, hours } = require('./data');
 
@@ -17,12 +7,13 @@ function animalsByIds(...ids) {
 }
 
 function animalsOlderThan(animal, age) {
-  const filteredAnimalByName = animals.filter(currentAnimal => currentAnimal.name === animal);
-  return filteredAnimalByName[0].residents.every(resident => resident.age > age);
+  const filteredAnimals = animals.filter(currentAnimal => currentAnimal.name === animal);
+  return filteredAnimals[0].residents.every(resident => resident.age > age);
 }
 
 function employeeByName(employeeName) {
-  if (typeof employeeName === 'undefined') return {};
+  if (typeof employeeName === 'undefined') 
+  return {};
   return employees.find(currentEmployee =>
     currentEmployee.firstName === employeeName || currentEmployee.lastName === employeeName);
 }
@@ -34,8 +25,8 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  const manager = employees.find(currentEmployee => currentEmployee.managers.includes(id));
-  return typeof manager !== 'undefined';
+  const isManager = employees.find(currentEmployee => currentEmployee.managers.includes(id));
+  return typeof isManager !== 'undefined';
 }
 
 function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
@@ -45,37 +36,36 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 
 function animalCount(species) {
   if (species === undefined) {
-    const namesSpecies = {};
+    const Species = {};
     animals.forEach((animal) => {
-      namesSpecies[animal.name] = animal.residents.length;
+      Species[animal.name] = animal.residents.length;
     });
-    return namesSpecies;
+    return Species;
   }
-  const findAnimal = animals.find(animal => animal.name === species);
-  return findAnimal.residents.length;
+  const findByAnimal = animals.find(animal => animal.name === species);
+  return findByAnimal.residents.length;
 }
 
 function entryCalculator(entrants) {
   if (entrants === undefined || entrants === {}) return 0;
   const keys = Object.keys(entrants);
-  let count = 0;
+  let counter = 0;
   keys.forEach((age) => {
-    count += entrants[age] * prices[age];
+    counter += entrants[age] * prices[age];
   });
   return count;
 }
 
 function animalMap(options) {
-  // seu código aqui
 }
 
 function schedule(dayName) {
-  const result = {};
+  const resultDay = {};
   Object.keys(hours).forEach(function (hour) {
     if (hours[hour].open === hours[hour].close) {
-      result[hour] = 'CLOSED';
+      resultDay[hour] = 'CLOSED';
     } else {
-      result[hour] = `Open from ${hours[hour].open}am until ${hours[hour].close - 12}pm`;
+      resultDay[hour] = `Open from ${hours[hour].open}am until ${hours[hour].close - 12}pm`;
     }
   });
   if (dayName !== undefined) {
@@ -85,12 +75,11 @@ function schedule(dayName) {
 }
 
 function oldestFromFirstSpecies(id) {
-  // seu código aqui
-  const findItem = employees.find(func => func.id === id);
-  const findSpecie = animals.find(animal => animal.id === findItem.responsibleFor[0]);
+  const find = employees.find(element => element.id === id);
+  const findEspecie = animals.find(animal => animal.id === find.responsibleFor[0]);
   let result = [];
   let mostOlderAnimal = 0;
-  findSpecie.residents.forEach((resident) => {
+  findEspecie.residents.forEach((resident) => {
     if (resident.age > mostOlderAnimal) {
       mostOlderAnimal = resident.age;
       result = [resident.name, resident.sex, resident.age];
@@ -100,7 +89,6 @@ function oldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
-  // seu código aqui
   Object.keys(prices).map(
     key => (prices[key] = Math.round(prices[key] * ((percentage / 100) + 1) * 100) / 100),
   );
