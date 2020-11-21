@@ -87,7 +87,7 @@ function retrieveAnimalsPerLocation(locations) {
 
   locations.forEach((location) => {
     const filteredAnimals = retrieveAnimalsByLocation(location).map(
-      animal => animal.name
+      animal => animal.name,
     );
 
     animalsPerLocation[location] = filteredAnimals;
