@@ -16,7 +16,7 @@ function animalsByIds(ids) {
   // seu código aqui
 
 }
-//console.log(data.animals);
+// console.log(data.animals);
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
@@ -52,17 +52,18 @@ function retrieveAvailableLocations() {
 }
 
 function retrieveFilteredAnimalsByLocation(location) {
-  return animals.filter((animal) => animal.location === location)
+  return animals.filter(animal => animal.location === location);
 }
 
 function retrieveAnimalsPerLocation(locations) {
   const animalsPerLocation = {};
 
   locations.forEach((location) => {
-    const filteredAnimals = retrieveFilteredAnimalsByLocation(location).map((animal) => animal.name);
+    const filteredAnimals = retrieveFilteredAnimalsByLocation(location)
+      .map(animal => animal.name);
 
     if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
-  })
+  });
 
   return animalsPerLocation;
 }
@@ -77,22 +78,23 @@ function retrieveAnimalsPerLocationWithNames(locations, sorted, sex) {
         .filter((resident) => {
           const needFiltering = sex !== undefined;
           // return needFiltering ? resident.sex === sex : true;
-          if (needFiltering){
+          if (needFiltering) {
             return resident.sex === sex;
           }
-          else {
+
+          else{
             return true;
           }
         })
-        .map((resident) => resident.name);
+        .map(resident => resident.name);
 
       if (sorted) residents.sort();
 
-      return { [animalName]: residents }
+      return { [animalName]: residents };
     });
 
     if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
-  })
+  });
   return animalsPerLocation;
 }
 
@@ -103,9 +105,10 @@ function animalMap(options = {}) {
 
   const { includeNames = false, sorted = false, sex } = options;
 
-  if (includeNames){ 
+  if(includeNames) { 
     return retrieveAnimalsPerLocationWithNames(locations, sorted, sex);
   }
+  
   else {
     return retrieveAnimalsPerLocation(locations);
   }
