@@ -78,11 +78,9 @@ function retrieveAnimalsPerLocationWithNames(locations, sorted, sex) {
         .filter((resident) => {
           const needFiltering = sex !== undefined;
           // return needFiltering ? resident.sex === sex : true;
-          if (needFiltering) {
-            return resident.sex === sex;
-          }
+          if (needFiltering) return resident.sex === sex;
 
-          else{
+          else {
             return true;
           }
         })
@@ -105,10 +103,8 @@ function animalMap(options = {}) {
 
   const { includeNames = false, sorted = false, sex } = options;
 
-  if(includeNames) { 
-    return retrieveAnimalsPerLocationWithNames(locations, sorted, sex);
-  }
-  
+  if(includeNames) return retrieveAnimalsPerLocationWithNames(locations, sorted, sex);
+
   else {
     return retrieveAnimalsPerLocation(locations);
   }
