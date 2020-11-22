@@ -79,10 +79,7 @@ function retrieveAnimalsPerLocationWithNames(locations, sorted, sex) {
           const needFiltering = sex !== undefined;
           // return needFiltering ? resident.sex === sex : true;
           if (needFiltering) return resident.sex === sex;
-
-          else {
-            return true;
-          }
+          return true;
         })
         .map(resident => resident.name);
 
@@ -103,11 +100,8 @@ function animalMap(options = {}) {
 
   const { includeNames = false, sorted = false, sex } = options;
 
-  if(includeNames) return retrieveAnimalsPerLocationWithNames(locations, sorted, sex);
-
-  else {
-    return retrieveAnimalsPerLocation(locations);
-  }
+  if (includeNames) return retrieveAnimalsPerLocationWithNames(locations, sorted, sex);
+  return retrieveAnimalsPerLocation(locations);
 }
 
 function schedule(dayName) {
