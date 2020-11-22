@@ -96,10 +96,10 @@ function retrieveAnimalsPerLocationWithNames(locations, sorted, sex) {
   return animalsPerLocation;
 }
 
-function animalMap(options) {
+function animalMap(options = {}) {
   const locations = retrieveAvailableLocations();
 
-  if (!options) return retrieveAnimalsPerLocation(locations);
+  // if (!options) return retrieveAnimalsPerLocation(locations);
 
   const { includeNames = false, sorted = false, sex } = options;
 
