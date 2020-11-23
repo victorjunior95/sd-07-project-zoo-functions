@@ -23,8 +23,8 @@ function animalsByIds(ids) {
 
 function animalsOlderThan(animal, age) {
   // seu código aqui
-  const minimun = age;
-  const animalsList = animals.filter(type => type.residents === animal);
+  // const minimun = age;
+  // const animalsList = animals.filter(type => type.residents === animal);
 }
 
 function employeeByName(employeeName) {
