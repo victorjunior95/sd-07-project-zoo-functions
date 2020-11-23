@@ -15,8 +15,7 @@ const data = require('./data');
 function animalsByIds(ids) {
   if (!ids) return [];
 
-  const idsArray = () => Array.from(ids);
-  
+  // const idsArray = () => Array.from(ids);
   const list = animals.filter(animal => animal.id === ids);
 
   return list;
@@ -26,12 +25,6 @@ function animalsOlderThan(animal, age) {
   // seu código aqui
   const minimun = age;
   const animalsList = animals.filter(type => type.residents === animal);
-  const compareAgeAnimals = animalsList
-    .every((resident) => {
-      return resident.age > minimun;
-    });
-  
-  return compareAgeAnimals;
 }
 
 function employeeByName(employeeName) {
