@@ -9,10 +9,12 @@ eslint no-unused-vars: [
 ]
 */
 const data = require('./data');
+const { animals } = data;
 
 function animalsByIds(ids) {
-  const animals = [];
-  ids.forEach(id => animals.push(animals.find(animal => animal.id === id)));
+  const animalss = [];
+  ids.forEach(id => animalss.push(animals.find(animal => animal.id === id)));
+  return animalss;
 }
 
 function animalsOlderThan(animal, age) {
