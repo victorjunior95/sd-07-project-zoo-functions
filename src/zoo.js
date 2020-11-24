@@ -9,7 +9,6 @@ eslint no-unused-vars: [
 ]
 */
 const data = require('./data');
-const { animals } = data;
 
 function animalsByIds(ids) {
   const animals = [];
