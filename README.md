@@ -106,8 +106,8 @@ Antes de começar analise o arquivo `src/data.js`, para ver os dados que serão 
 
 ### 1- Implemente a função animalsByIds:
   - Caso receba nenhum parâmetro, necessário retornar um array vazio
-  - Ao receber como parâmetro um único id, retorna os animais com este id
-  - Ao receber mais de um id, retorna os animais que têm um desses ids
+  - Ao receber como parâmetro um único id, retorna um array com a espécie referente à esse id
+  - Ao receber mais de um id, retorna um array com as espécies referentes aos ids
 
 ### 2- Implemente a função animalsOlderThan:
   - Ao passar o nome de uma espécie e uma idade, testa se todos os animais desta
