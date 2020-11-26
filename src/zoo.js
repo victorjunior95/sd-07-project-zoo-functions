@@ -47,21 +47,22 @@ function retrieveAvailableLocations() {
 }
 
 function retrieveFilteredAnimalsByLocation(location) {
-  return animals.filter((animal) => animal.location === location)
+  return animals.filter(animal => animal.location === location);
 }
 
 function retrieveAnimalsPerLocation(locations) {
   const animalsPerLocation = {};
 
   locations.forEach((location) => {
-    const filteredAnimals = retrieveFilteredAnimalsByLocation(location).map((animal) => animal.name);
-      if (filteredAnimals.length !==0)animalsPerLocation[location] = filteredAnimals;
+    const filteredAnimals = retrieveFilteredAnimalsByLocation(location)
+    .map(animal => animal.name);
+    if (filteredAnimals.length !==0)animalsPerLocation[ location ] = filteredAnimals;
   });
 
   return animalsPerLocation;
 }
 
-function retrieveAnimalsPerLocationWithName(locations, sorted, sex){
+function retrieveAnimalsPerLocationWithName(locations, sorted, sex) {
   const animalsPerLocation = {};
 
   locations.forEach((location) => {
@@ -70,23 +71,23 @@ function retrieveAnimalsPerLocationWithName(locations, sorted, sex){
       const residents = animal.residents
         .filter((resident) => {
           const needFiltering = sex !== undefined;
-          //return needFiltering ? resident.sex === sex : true;
-          if (needFiltering){
+          // return needFiltering ? resident.sex === sex : true;
+          if (needFiltering) {
             return resident.sex === sex;
           } else {
             return true;
           }
-       })
+         })
 
-        .map((resident) => resident.name);
+        .map(resident => resident.name);
 
       if (sorted) residents.sort();
 
       return { [animalName]: residents };
     });
 
-    if (filteredAnimals.length !==0) animalsPerLocation[location] = filteredAnimals;
-  })
+    if (filteredAnimals.length !==0) animalsPerLocation[ location ] = filteredAnimals;
+  });
 
   return animalsPerLocation;
 }
@@ -101,9 +102,9 @@ function animalMap(options) {
   if (includeNames) {
     return retrieveAnimalsPerLocationWithName(locations, sorted, sex);
   } else {
-      return retrieveAnimalsPerLocation(locations);
+    return retrieveAnimalsPerLocation(locations);
   }
-}
+} //código feito em conjunto com o oliva em aula
 
 function schedule(dayName) {
   // seu código aqui
