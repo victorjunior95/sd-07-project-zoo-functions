@@ -74,9 +74,9 @@ function retrieveAnimalsPerLocationWithName(locations, sorted, sex) {
           // return needFiltering ? resident.sex === sex : true;
           if (needFiltering) {
             return resident.sex === sex;
-          } else {
-            return true;
           }
+          return true;
+
         })
 
         .map(resident => resident.name);
@@ -86,7 +86,7 @@ function retrieveAnimalsPerLocationWithName(locations, sorted, sex) {
       return { [animalName]: residents };
     });
 
-    if (filteredAnimals.length !==0 ) animalsPerLocation[location] = filteredAnimals;
+    if (filteredAnimals.length!==0) animalsPerLocation[location] = filteredAnimals;
   });
 
   return animalsPerLocation;
@@ -101,9 +101,9 @@ function animalMap(options) {
 
   if (includeNames) {
     return retrieveAnimalsPerLocationWithName(locations, sorted, sex);
-  } else {
-    return retrieveAnimalsPerLocation(locations);
   }
+  return retrieveAnimalsPerLocation(locations);
+
 } // código feito em conjunto com o oliva em aula
 
 function schedule(dayName) {
