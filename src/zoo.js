@@ -76,9 +76,7 @@ function retrieveAnimalsPerLocationWithName(locations, sorted, sex) {
             return resident.sex === sex;
           }
           return true;
-
         })
-
         .map(resident => resident.name);
 
       if (sorted) residents.sort();
@@ -86,7 +84,7 @@ function retrieveAnimalsPerLocationWithName(locations, sorted, sex) {
       return { [animalName]: residents };
     });
 
-    if (filteredAnimals.length!==0) animalsPerLocation[location] = filteredAnimals;
+    if (filteredAnimals.length !== 0) animalsPerLocation[location] = filteredAnimals;
   });
 
   return animalsPerLocation;
@@ -103,8 +101,8 @@ function animalMap(options) {
     return retrieveAnimalsPerLocationWithName(locations, sorted, sex);
   }
   return retrieveAnimalsPerLocation(locations);
-
-} // código feito em conjunto com o oliva em aula
+}
+// código feito em conjunto com o oliva em aula
 
 function schedule(dayName) {
   // seu código aqui
