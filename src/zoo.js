@@ -13,14 +13,12 @@ const { animals, employees } = require('./data');
 const data = require('./data');
 
 function animalsByIds(...ids) {
- 
   const list = animals.filter(animal => ids.includes(animal.id));
   
   return list;
 }
 
 function animalsOlderThan(animal, age) {
-  
   const animalsList = animals
     .find(type => type.name === animal).residents
     .every(idad => idad.age >= age);
@@ -28,18 +26,16 @@ function animalsOlderThan(animal, age) {
   return animalsList;
 }
 
-console.log(animalsOlderThan('penguins', 3));
-
 function employeeByName(employeeName) {
   // seu código aqui
-  if (!employeeName) return {};
+  // if (!employeeName) return {};
 
-  const fullName = employees.filter(employees => employees.firstName === employeeName);
-  return(fullName);
-
+  // const fullName = employees.filter(employees => employees.firstName === employeeName);
+  
+  // return(fullName);
 }
 
-//console.log(employeeByName('Emery'));
+// console.log(employeeByName('Emery'));
 
 function createEmployee(personalInfo, associatedWith) {
   // seu código aqui
